@@ -1,0 +1,16 @@
+# Same exclusions as the Drive sync (tools/drive-sync/sync.ps1)
+node_modules/
+__pycache__/
+.claude/
+desktop.ini
+~$*
+*.tmp
+
+# Regenerable model-rebuild outputs: ICBHI clips and training caches
+model-rebuild/export/
+model-rebuild/history-run1/
+model-rebuild/work/
+model-rebuild/work-3s/
+
+# Empty clone of the HF_Lung_V1 dataset repo (its own .git, no data)
+HF_Lung_V1/

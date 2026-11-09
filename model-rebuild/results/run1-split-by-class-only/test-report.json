@@ -1,0 +1,142 @@
+{
+ "evaluated": "2026-11-09 19:17",
+ "partition": "test",
+ "epoch": 5,
+ "patients": 36,
+ "window_level": {
+  "n": 3355,
+  "accuracy": 0.24798807749627422,
+  "balanced_accuracy": 0.22127442925593024,
+  "macro_f1": 0.20863110597201598,
+  "majority_class_baseline": 0.5180327868852459,
+  "per_class": [
+   {
+    "label": "Crackles",
+    "support": 827,
+    "precision": 0.2670863309352518,
+    "recall": 0.3591293833131802,
+    "specificity": 0.6776107594936709,
+    "f1": 0.3063434760185663
+   },
+   {
+    "label": "Healthy",
+    "support": 1738,
+    "precision": 0.45161290322580644,
+    "recall": 0.24165707710011508,
+    "specificity": 0.6846011131725418,
+    "f1": 0.3148425787106447
+   },
+   {
+    "label": "Wheezing",
+    "support": 429,
+    "precision": 0.10833333333333334,
+    "recall": 0.18181818181818182,
+    "specificity": 0.7805878332194122,
+    "f1": 0.13577023498694518
+   },
+   {
+    "label": "Wheezing with Crackles",
+    "support": 361,
+    "precision": 0.06239460370994941,
+    "recall": 0.10249307479224377,
+    "specificity": 0.8142952571810287,
+    "f1": 0.07756813417190775
+   }
+  ],
+  "confusion_matrix": [
+   [
+    297,
+    249,
+    109,
+    172
+   ],
+   [
+    579,
+    420,
+    467,
+    272
+   ],
+   [
+    166,
+    73,
+    78,
+    112
+   ],
+   [
+    70,
+    188,
+    66,
+    37
+   ]
+  ],
+  "confusion_rows_are": "true label"
+ },
+ "cycle_level": {
+  "n": 994,
+  "accuracy": 0.23742454728370221,
+  "balanced_accuracy": 0.22314228755834595,
+  "macro_f1": 0.20121843924411384,
+  "majority_class_baseline": 0.5513078470824949,
+  "per_class": [
+   {
+    "label": "Crackles",
+    "support": 234,
+    "precision": 0.2682926829268293,
+    "recall": 0.37606837606837606,
+    "specificity": 0.6842105263157895,
+    "f1": 0.31316725978647686
+   },
+   {
+    "label": "Healthy",
+    "support": 548,
+    "precision": 0.4628099173553719,
+    "recall": 0.20437956204379562,
+    "specificity": 0.7085201793721974,
+    "f1": 0.28354430379746837
+   },
+   {
+    "label": "Wheezing",
+    "support": 132,
+    "precision": 0.10646387832699619,
+    "recall": 0.21212121212121213,
+    "specificity": 0.7273781902552204,
+    "f1": 0.14177215189873418
+   },
+   {
+    "label": "Wheezing with Crackles",
+    "support": 80,
+    "precision": 0.049689440993788817,
+    "recall": 0.1,
+    "specificity": 0.8326039387308534,
+    "f1": 0.06639004149377593
+   }
+  ],
+  "confusion_matrix": [
+   [
+    88,
+    66,
+    33,
+    47
+   ],
+   [
+    178,
+    112,
+    182,
+    76
+   ],
+   [
+    50,
+    24,
+    28,
+    30
+   ],
+   [
+    12,
+    40,
+    20,
+    8
+   ]
+  ],
+  "confusion_rows_are": "true label"
+ }
+}

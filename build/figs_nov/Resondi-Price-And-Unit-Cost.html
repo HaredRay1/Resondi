@@ -1,0 +1,65 @@
+<!doctype html><meta charset="utf-8"><style>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');</style><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#FFF5F9;font-family:'Poppins',sans-serif;color:#2A1A22}
+.wrap{width:1920px;padding:50px 56px 44px}
+h1{font-size:46px;font-weight:700;margin-bottom:8px}
+.sub0{font-size:22px;color:#9E8892;margin-bottom:34px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.panel{background:#fff;border:2px solid #EBD3DE;border-radius:22px;padding:30px 34px 26px}
+h2{font-size:27px;font-weight:700;margin-bottom:4px}
+.lead{font-size:19px;color:#9E8892;margin-bottom:20px}
+table{width:100%;border-collapse:collapse}
+td{padding:11px 0;font-size:21px;vertical-align:top}
+td.amt{text-align:right;font-weight:600;white-space:nowrap;padding-left:18px}
+.n{display:block;font-size:17px;color:#9E8892;line-height:1.3;margin-top:3px}
+tr.bom td{border-top:none}
+tr.sub td{border-top:2px solid #EBD3DE;font-weight:700;color:#8E2A52;padding-top:14px}
+tr.tot td{border-top:3px solid #8E2A52;font-weight:700;color:#E91E76;font-size:26px;padding-top:16px}
+.plus{color:#9E8892;margin-right:8px}
+.price{display:flex;gap:26px;margin-bottom:22px}
+.pc{flex:1;background:#FFF5F9;border-radius:16px;padding:18px 20px}
+.pc b{display:block;font-size:40px;font-weight:700;color:#E91E76;line-height:1.05}
+.pc span{font-size:18px;color:#9E8892}
+.vols{display:flex;gap:16px;margin-top:20px}
+.v{flex:1;background:#FFF5F9;border-radius:14px;padding:14px 16px;text-align:center}
+.v b{display:block;font-size:28px;font-weight:700;color:#8E2A52}
+.v span{font-size:17px;color:#9E8892}
+.foot{margin-top:28px;font-size:20px;line-height:1.5}
+.foot b{color:#8E2A52}
+.flag{margin-top:14px;padding:16px 20px;background:#fff;border-left:6px solid #E91E76;
+      border-radius:10px;font-size:19px;line-height:1.45}
+</style><div class="wrap">
+<h1>Price and unit cost</h1>
+<div class="sub0">The cost build-up now traces to the 30 October bill of materials.
+Prices and margins are unchanged.</div>
+
+<div class="grid">
+  <div class="panel">
+    <h2>What a buyer pays</h2>
+    <div class="lead">Per health facility</div>
+    <div class="price">
+      <div class="pc"><b>&#8369;8,000</b><span>per device, one time</span></div>
+      <div class="pc"><b>&#8369;1,500</b><span>per facility, per month</span></div>
+    </div>
+    <table>
+      <tr><td class="lab">Device margin on the first unit<span class="n">&#8369;8,000 price less &#8369;4,000 fully loaded cost</span></td><td class="amt">&#8369;4,000</td></tr>
+      <tr><td class="lab">Monthly contribution<span class="n">&#8369;1,500 less &#8369;350 cloud and &#8369;250 service reserve</span></td><td class="amt">&#8369;900</td></tr>
+      <tr class="sub"><td class="lab">First-year value of one facility</td><td class="amt">&#8369;14,800</td></tr>
+    </table>
+    <div class="vols"><div class="v"><b>&#8369;4,000</b><span>1 unit</span></div><div class="v"><b>&#8369;3,000</b><span>100 units</span></div><div class="v"><b>&#8369;2,500</b><span>500 units</span></div></div>
+    <div class="lead" style="margin:12px 0 0;text-align:center">Fully loaded cost at volume</div>
+  </div>
+
+  <div class="panel">
+    <h2>What a unit costs to build</h2>
+    <div class="lead">Production unit, once the design is frozen</div>
+    <table><tr class="bom"><td class="lab">Bill of materials, one unit — confirmed<span class=n>ESP32, MEMS microphone, OLED, MicroSD and card, battery, PCB, PLA enclosure, chest piece, switches and fixings</span></td><td class="amt">&#8369;2,735</td></tr><tr class=""><td class="lab"><span class="plus">+</span>Battery protection, charging, and production allowance<span class=n>Excluded from the bill of materials by its own note, plus the connectors, strain relief, enclosure finish and spares a saleable unit needs beyond a prototype</span></td><td class="amt">&#8369;665</td></tr><tr class="sub"><td class="lab">Components, production unit<span class=n>Once the design is frozen</span></td><td class="amt">&#8369;3,400</td></tr><tr class=""><td class="lab"><span class="plus">+</span>Assembly, calibration, functional test, packaging</td><td class="amt">&#8369;600</td></tr><tr class="tot"><td class="lab">Fully loaded unit cost<span class=n>What the ₱8,000 price is set against</span></td><td class="amt">&#8369;4,000</td></tr></table>
+  </div>
+</div>
+
+<div class="flag"><b>Why the bridge line exists.</b> &#8369;2,735 is the confirmed cost of the parts in the prototype. The bill of materials states that the battery protection and charging circuit are not included in that total, and a unit built to sell also needs connectors, strain relief, a finished enclosure and a spares allowance. Those sit in the &#8369;665 line. Confirm the battery protection and charging portion: if it is materially above &#8369;300, the &#8369;4,000 fully loaded figure needs revisiting before the &#8369;8,000 price does.</div>
+
+<div class="foot">Schools pay a separate <b>&#8369;30,000 annual teaching licence</b>, &#8369;25,800 after
+platform cost. The device is profitable from the first production unit, so the subscription is a
+second margin stream rather than cover for a hardware loss.</div>
+</div>

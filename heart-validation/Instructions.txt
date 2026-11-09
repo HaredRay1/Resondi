@@ -1,0 +1,25 @@
+Heart Sound Label Review: Instructions for the Reviewing Cardiologist
+
+Thank you for helping the Resondi team, Puerto Princesa City National Science High School. We are building a smart stethoscope that will, in a later version, flag whether a heart murmur is present and when it occurs. Before training it, we want a cardiologist to check the labels in the public dataset we plan to use.
+
+What is in this folder
+
+recordings: 25 heart sound recordings, named S01 to S25, from the CirCor DigiScope Phonocardiogram Dataset (Oliveira et al., 2022). They come from children and adolescents in Brazil, recorded with an electronic stethoscope at the aortic (AV), pulmonic (PV), tricuspid (TV) or mitral (MV) area. Each is between 7 and 32 seconds long.
+
+Answer-Sheet.xlsx (also as a Google Sheet): one row per recording, with its site and age group.
+
+What we ask
+
+Please listen to each recording, ideally with good headphones, and fill in the answer sheet: whether the recording is usable, whether you hear a murmur, its timing, its grade if you would give one, and how confident you are. Use the comments for anything else. It should take about 30 to 40 minutes.
+
+The recordings are deliberately in mixed order and the dataset's own labels are not shown, so that your answers are an independent check. Please do not look the recordings up in the dataset.
+
+What your answers are used for
+
+We will compare your labels with the dataset's labels and report how often they agree. This checks the labels we intend to train on. It is not a test of you, and it does not validate any device or software as a diagnostic tool.
+
+About the data
+
+The dataset is publicly available on PhysioNet under the Open Data Commons Attribution License v1.0 and contains no names or other direct identifiers.
+
+Reference: Oliveira, J., Renna, F., Costa, P. D., Nogueira, M., Oliveira, C., Ferreira, C., Jorge, A., Mattos, S., Hatem, T., Tavares, T., Elola, A., Rad, A. B., Sameni, R., Clifford, G. D., & Coimbra, M. T. (2022). The CirCor DigiScope dataset: From murmur detection to murmur classification. IEEE Journal of Biomedical and Health Informatics, 26(6), 2524–2535. https://doi.org/10.1109/JBHI.2021.3137048

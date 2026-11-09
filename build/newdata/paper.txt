@@ -1,0 +1,3684 @@
+<<<PAGE 1>>>
+  
+Malimban (2026)                                                                                                                            Page 1 of 83 
+Ausculta: A CNN-Assisted Auscultation Instrument for Lung Sound 
+Monitoring, Longitudinal Tracking, and Rehabilitation Support-System
+ 
+Ahnycca Krish N. Malimban 
+Science, Technology, Engineering, and Mathematics – Senior High School Department 
+Puerto Princesa City National Science High School, Palawan 
+ 
+Abstract—Respiratory illnesses remain a significant health concern, creating a need for accessible and 
+systematic respiratory -sound monitoring, particularly in settings where assessment relies heavily on 
+conventional auscultation. To address this challenge, the stu dy developed Ausculta, an artificial 
+intelligence-assisted smart stethoscope and respiratory monitoring platform designed for standardized 
+respiratory-sound recording, recording -quality assessment, sound -pattern classification, longitudinal 
+monitoring, and professional review. The system integrates an acoustic stethoscope chest piece, microphone 
+and preamplifier, ESP32 microcontroller, Bluetooth Low Energy communication, rechargeable power 
+source, and a mobile -first application with guided auscultation usin g six standardized lung locations. 
+Respiratory recordings undergo noise reduction, filtering, segmentation, and Mel -spectrogram 
+representation before convolutional neural network classification into normal, wheeze, crackle, and 
+combined wheeze -and-crackle patterns. The ICBHI 2017 Respiratory Sound Database was used as the 
+primary reference dataset for model development and evaluation. Results showed that 68% of recordings 
+were rated as good in clarity, while the system demonstrated measurable response times  across its major 
+operations. Comparison of 15 paired reference and Ausculta classifications showed 40% agreement, with 
+McNemar's exact test indicating no statistically significant difference between the classifications (p=1.000). 
+End-user acceptance was also evaluated using a 5 -point Likert scale based on user-friendliness, usability, 
+durability, functionality, and community impact. Overall, Ausculta demonstrates the feasibility of 
+integrating digital auscultation, AI -assisted sound analysis, and longitudinal monitoring into a single 
+platform, providing a practical supportive tool for respiratory assessment and professional review, with 
+further validation recommended for actual healthcare settings. 
+Keywords: longitudinal tracking, Respiratory monitoring, artificial intelligence, smart stethoscope, respiratory 
+sounds, convolutional neural network, auscultation, longitudinal monitoring
+I. INTRODUCTION 
+   Respiratory conditions such as asthma and 
+pneumonia remained major public health concerns 
+worldwide, requiring not only medical treatment but 
+also continuous rehabilitation and monitoring (World 
+Health Organization, 2024). This was especially true 
+in the Philippines, where pneumonia ranked among the 
+leading causes of death in 2024 and asthma continued 
+to affect a significant portion of the population 
+(Philippine Statistics Authority, 2025; Philippine 
+Council for Health Research and Development, 2023). 
+These conditions were made worse by limited access 
+to consistent respiratory monitoring and inconsistent 
+auscultation practices, particularly in provincial areas 
+such as Puerto Princesa City and the wider Palawan 
+region. 
+     While existing research had established the burden 
+of respiratory illness in the country, government 
+initiatives had sought to address these gaps through 
+digital health technology. The Department of Health 
+had prioritized the expansion of telemedicine  and 
+remote-monitoring services as part of its digital health 
+transformation, aiming to decongest hospitals and 
+reach far -flung areas where specialist care remained 
+limited (Montemayor , 2022). Locally developed 
+biomedical devices, such as the RxBox used to connect 
+remote communities to essential diagnostic services, 
+had likewise demonstrated the potential of homegrown 
+health technology to bridge gaps between healthcare 
+providers and patients in underserved areas (OpenGov 
+Asia, 2023). Such initiatives highlighted the value of 
+accessible, technology-driven tools that could support 
+both monitoring and rehabilitation where in -person 
+specialist care remained inconsistent. 
+   While conventional auscultation remained a valuable 
+method for identifying respiratory sound 
+characteristics, repeated assessments often varied due 
+to differences in stethoscope placement, recording 
+conditions, background noise, and individual 
+interpretation. Emerging technologies that integrated 
+digital stethoscopes with artificial intelligence (AI) 
+offered potential for more standardized recording and 
+analysis, though their effectiveness depended largely 
+<<<PAGE 2>>>
+  
+Malimban (2026)                                                                                                                            Page 2 of 83 
+on recording quality. Inadequate recordings reduced 
+the accuracy of AI -supported analysis, emphasizing 
+the importance of structured acquisition methods and 
+systematic evaluation of recording quality. 
+Driven by this gap, this study introduced Ausculta: An 
+Intelligent Respiratory Auscultation, Monitoring, and 
+Rehabilitation-Support System, an AI -assisted smart-
+stethoscope platform designed for standardized 
+respiratory-sound acquisition, recording -quality 
+assessment, sound -pattern classification, longitu dinal 
+comparison, and practitioner review. The system 
+incorporated guided auscultation using anatomical 
+lung maps, enabling patients to practice independently 
+while receiving AI feedback on recording quality, with 
+poor recordings repeatable before analysis and current 
+recordings comparable to previous ones for 
+longitudinal monitoring. AI -generated results were 
+intended to serve as decision support rather than 
+replace medical-practitioner judgment. 
+Despite these existing digital health efforts, the state of 
+respiratory rehabilitation in Puerto Princesa City 
+revealed ongoing challenges. Recent data from the 
+Department of Health -MIMAROPA reported a 19% 
+increase in influenza -like illness cases in Palawa n 
+during the first half of 2026, with Puerto Princesa City 
+accounting for the largest number of infections, 
+including hospital admissions and several deaths 
+mostly among older adults and individuals with 
+underlying conditions (Philippine Information 
+Agency, 2026). Environmental factors, including 
+occasional haze episodes, further compounded these 
+challenges, underscoring the need for a localized, 
+technology-driven system to support respiratory 
+monitoring and rehabilitation in the area. 
+Aligned with the United Nations Sustainable 
+Development Goals (UNSDGs), this study supported 
+SDG 3 – Good Health and Well -Being by promoting 
+accessible respiratory care and rehabilitation; SDG 4 – 
+Quality Education by enabling guided, patient -
+centered auscultation practice; and SDG 9 – Industry, 
+Innovation and Infrastructure by developing a 
+technology-driven healthcare device that strengthened 
+digital health infrastructure. 
+Therefore, this study aimed to: (i) develop and evaluate 
+an ESP32 -based smart stethoscope and mobile -first 
+platform with BLE and MicroSD communication; (ii) 
+guide standardized auscultation using anatomical lung 
+maps and capture respiratory sound recordings  with 
+metadata; (iii) assess recording quality and preprocess 
+sounds for feature extraction; (iv) design and evaluate 
+a respiratory -sound classification model using the 
+ICBHI 2017 Respiratory Sound Database (Rocha et 
+al., 2019); (v) compare device recordin gs with 
+reference recordings under clean and noisy conditions; 
+(vi) support longitudinal comparison of respiratory 
+sound patterns through practitioner review; and (vii) 
+incorporate rehabilitation -support functions such as 
+controlled, pursed -lip, and diaphragmatic breathing 
+under professional guidance. 
+Overall, the study sought to develop and evaluate a 
+functional prototype that integrated respiratory -sound 
+acquisition, quality control, AI -assisted analysis, 
+longitudinal monitoring, practitioner -supervised 
+review, and rehabilitation support  — contributing to 
+accessible, technology-driven respiratory care aligned 
+with existing digital health initiatives in the country. 
+ 
+II.      LITERATURE REVIEW 
+Respiratory rehabilitation helped patients improve 
+their breathing, manage their symptoms, and get back 
+their strength and daily function. Cleveland Clinic 
+(2024) explained that respiratory rehabilitation was a 
+supervised medical program that helped people  with 
+chronic lung conditions breathe better, build 
+endurance, and improve their quality of life. This 
+showed how important accessible tools were for 
+supporting monitoring and rehabilitation, especially 
+when guided by health professionals. 
+According to a study from PubMed Central (2022), 
+auscultation was still one of the main ways doctors 
+checked lung sounds, but regular stethoscopes did not 
+allow sounds to be recorded, saved, or compared over 
+time. Digital stethoscopes helped solve this pro blem 
+since they allowed lung sounds to be recorded and 
+processed for further analysis. Studies also showed that 
+artificial intelligence (AI), especially convolutional 
+neural networks (CNNs), could classify lung sounds 
+like wheezes and crackles fairly accur ately. However, 
+things like background noise, poor recording 
+technique, and differences between devices could still 
+affect how accurate these AI models were, which was 
+why proper recording methods and quality checks 
+mattered a lot. 
+For example, Kim et al. (2021) built a CNN model 
+trained on 1,918 lung sound recordings taken from 
+actual patients. Their model was able to detect 
+abnormal lung sounds with an accuracy of 86.5%, and 
+it could further tell the difference between crackles, 
+wheezes, and rhonchi  with an accuracy of 85.7%. 
+What made this interesting was that the CNN model 
+actually performed better than medical students, 
+interns, and even some residents who were tested using 
+the same recordings. This showed that CNN -based 
+<<<PAGE 3>>>
+  
+Malimban (2026)                                                                                                                            Page 3 of 83 
+tools could help support doctors instead of replacing 
+their judgment, especially in reducing human error 
+during auscultation. Similarly, Acharya and Basu  
+(2020) created a CNN -RNN model that classified 
+respiratory sounds using Mel -spectrograms, and they 
+also tested a way to adjust the model for individual 
+patients so it could work better for long -term 
+monitoring using wearable devices. 
+Aside from the AI models themselves, the design of 
+the device used to record the sounds also mattered. 
+Baraeinejad et al. (2023) developed a digital 
+stethoscope that used small microphones (MEMS) and 
+Bluetooth Low Energy (BLE) to send real-time audio, 
+along with noise -cancellation features to make 
+recordings clearer for remote monitoring. Their study 
+showed that combi ning the right hardware with a 
+mobile app made it easier to capture, store, and view 
+auscultation data, and even connect it to electronic 
+health records for further AI analysis. 
+The ICBHI 2017 Respiratory Sound Database was also 
+commonly used in CNN -based studies since it 
+provided labeled recordings that researchers could use 
+to train and test their models (Rocha et al., 2019). Still, 
+there was a difference between how clean these  
+reference recordings were compared to ones taken 
+from actual devices in real -world settings, which was 
+something to consider when testing a new system like 
+Ausculta. Digital recordings could also help track 
+changes in lung sounds over time, but those chan ges 
+still needed to be reviewed by a professional and 
+should not be treated as a diagnosis on their own. 
+These studies also connected to bigger efforts in the 
+Philippines to expand digital health access. The 
+Department of Health had been pushing for more 
+telemedicine and remote-monitoring services as part of 
+its digital health transformation, hoping to ease 
+hospital congestion and reach far-off areas that lacked 
+specialists (Montemayor , 2022). Locally -made 
+devices like the RxBox also proved that homegrown 
+health technology could help connect remote 
+communities to services they normally could not 
+access easily (OpenGov Asia, 2023). These efforts 
+showed just how relevant it was to develop accessible, 
+CNN-assisted tools for lung monitoring and 
+rehabilitation, especially in underserved areas. 
+Overall, these findings pointed to the need for one 
+system that combined standardized lung sound 
+recording, quality checking, CNN-based classification, 
+tracking changes over time, and doctor review, along 
+with rehabilitation support. Ausculta was built to fill  
+this gap by putting all  these functions into one 
+supervised platform meant to assist, not replace, 
+professional respiratory care and rehabilitation. 
+III.       MATERIALS AND METHODS 
+ 
+Materials 
+Various materials and instruments supported the 
+different phases of the development and validation 
+process. The ICBHI 2017 Respiratory Sound Database 
+served as the reference dataset for training and testing 
+the classification model. Digital modeling softwa re 
+and a 3D printer were used to design and fabricate the 
+device casing, while an ESP32 microcontroller, 
+microphone, preamplifier, rechargeable battery, and 
+other electronic components were used to build the 
+smart stethoscope prototype. BLE communication 
+modules and optional MicroSD storage supported 
+wireless data transmission and local recording backup 
+during system integration. The Base44 platform was 
+used to develop the Ausculta mobile application, 
+including its user interface, role-based workflows, and 
+research dashboard, while signal -processing tools 
+supported noise reduction, filtering, segmentation, and 
+Mel-spectrogram conversion for the CNN -based 
+classification model. Statistical tools were used to 
+compute accuracy, precision, sensitivity, specificit y, 
+and F1-score during both manual and device testing. 
+Clinical validation involved review by three 
+pulmonologists, one of whom was also a pediatrician, 
+and device testing among three patients at a private 
+hospital under an attending physician's supervisio n. 
+Documentation tools, including consent forms and 
+data recording sheets, were used to ensure proper 
+monitoring and record-keeping throughout the clinical 
+validation process. Lastly, a 5 -point Likert scale 
+survey was used for end -user acceptance testing 
+among 30 participants across Puerto Princesa City and 
+the three patients evaluated at the private hospital, 
+assessing user -friendliness, usability, durability, 
+functionality, and impact on the community. 
+ 
+Procedures 
+Reference Sound Collection and Validation 
+▽ 
+<<<PAGE 4>>>
+  
+Malimban (2026)                                                                                                                            Page 4 of 83 
+Structural Design Conceptualization 
+▽ 
+Components and System Requirements Gathering 
+▽ 
+Device Fabrication and Assemblage 
+▽ 
+System Integration of Sensing Properties 
+▽ 
+Smart-Stethoscope BLE Integration 
+▽ 
+Platform and Database Development 
+▽ 
+Guided Auscultation and Recording Workflow 
+Development 
+▽ 
+Recording Quality Control Development 
+▽ 
+Audio Preprocessing and CNN Model Development 
+▽ 
+Manual (Reference Dataset) Testing 
+▽ 
+Device Unit Testing 
+▽ 
+ 
+ 
+Longitudinal Monitoring and Practitioner Review Testing 
+▽ 
+Research Dashboard and Data-Export Testing 
+▽ 
+End User Acceptance Testing 
+Figure 1: Development Process Flowchart 
+ 
+ 
+Reference Sound Collection and Validation  
+The ICBHI 2017 Respiratory Sound Database was 
+used as the primary public reference dataset for 
+training, validation, and testing of the respiratory -
+sound classification model. The dataset was treated as 
+a respiratory -sound research dataset and not as a 
+disease-diagnosis database. Reference labels were 
+stored separately from AI predictions. To validate the 
+accuracy of the reference lung sounds prior to  model 
+training, recordings were reviewed by three 
+pulmonologists, one of whom was also a practicing 
+pediatrician, allowing classifications to be checked 
+against expert clinical judgment across both adult and 
+pediatric respiratory sound presentations. 
+Table 1.1.  
+Characteristics of the ICBHI 2017 Respiratory Sound 
+Database 
+  Characteristic  Value 
+ Source  ICBHI 2017 Respiratory 
+Sound Database 
+ Total recordings   920 
+ Patients   126 
+ Annotated 
+respiratory cycles  
+ 6,898 
+ Cycles containing 
+adventitious sounds 
+ 3,256 
+ Chest locations  7: trachea, anterior L/R, 
+posterior L/R, lateral L/R 
+ Acquisition modes 
+ 2: sequential single-
+channel, simultaneous 
+multichannel 
+ Recording devices 
+ 4: AKG C417L, Littmann 
+Classic II SE, Littmann 
+3200, Meditron); 
+Annotation format (cycle 
+start, cycle end, crackles 
+0/1, wheezes 0/1 
+Table 1.1 describes the reference dataset. The ICBHI 
+2017 Respiratory Sound Database comprises 920 
+recordings from 126 patients, annotated by experts into 
+6,898 individual respiratory cycles, each marked for 
+the presence or absence of crackles and wheezes. 
+Recordings were captured at seven chest locations 
+using four types of recording equipment, in either 
+sequential single -channel or simultaneous 
+multichannel mode. The present study uses the cycle -
+level crackle and wheeze annotations rather than the 
+patient-level co ndition labels, consistent with the 
+system's classification of respiratory sound patterns 
+rather than diseases. 
+<<<PAGE 5>>>
+  
+Malimban (2026)                                                                                                                            Page 5 of 83 
+Structural Design Conceptualization  
+The researcher consulted an electronics expert from 
+Hajimeru ITS for circuit and hardware development 
+and prepared a digital model of the stethoscope casing 
+and platform architecture. The design prioritized 
+reliable sound acquisition, standardized position ing, 
+ease of use, and safe separation of acoustic and 
+electrical components. 
+Components and System Requirements Gathering 
+The researcher sourced the microcontroller, 
+microphone, preamplifier, communication/storage 
+components, battery, and other electronic parts from 
+eGizmo and Makerlab Electronics. Materials for the 
+casing and assembly were acquired locally where 
+practical. 
+ 
+Device Fabrication and Assemblage 
+The 3D-printed casing was fabricated and assembled 
+at Hajimeru  ITS with the acoustic chest piece, 
+diaphragm, microphone, tubing, and electrical 
+compartment. The microphone was positioned within 
+the acoustic chamber to support respiratory sound 
+capture while limiting ambient-noise leakage. 
+ 
+System Integration of Sensing Properties 
+The microphone and preamplifier were connected to 
+the ESP32, with power and communication 
+connections implemented according to the selected 
+hardware configuration. Where included, the OLED 
+display provided basic device status. The rechargeable 
+battery used  an appropriate charging and protection 
+circuit. 
+ 
+Smart-Stethoscope BLE Integration 
+The ESP32 smart stethoscope communicated with the 
+application through BLE. The platform supported 
+device scanning, compatible -device identification, 
+selection, connection status, audio streaming or 
+buffering where supported, recording, and metadata 
+storage. 
+ 
+Platform and Database Development 
+The Ausculta application was developed using Base44 
+to implement the user interface, role-based workflows, 
+patient and assessment records, longitudinal 
+monitoring interface, medical -practitioner review 
+functions, research dashboard, and data -management 
+components. The application architecture was 
+designed to support integration with the ESP32 -based 
+smart stethoscope through a BLE/API integration layer 
+and with the dedicated respiratory -sound AI model 
+through an AI-analysis interface. 
+ 
+ 
+Guided Auscultation and Recording Workflow 
+Development 
+The existing lung map guided recordings from 
+standardized anatomical locations: right upper, left 
+upper, right middle, left middle, right lower, and left 
+lower. The user selected a location, positioned the 
+stethoscope, confirmed placement, recorded, and 
+saved the audio with its anatomical location and 
+recording metadata. Repeated recordings were allowed 
+when necessary.  
+ 
+Recording Quality Control Development 
+Before AI analysis, each recording was assessed where 
+technically possible for background noise, signal 
+amplitude, signal -to-noise ratio, duration, clipping, 
+motion artifact, missing or invalid samples, and 
+insufficient signal. Recordings were classified a s 
+Good, Acceptable, Poor, or Invalid. Poor or invalid 
+recordings were recommended for repetition rather 
+than forced into an AI classification. 
+ 
+Audio Preprocessing and CNN Model Development 
+Reference recordings and eligible device recordings 
+underwent appropriate preprocessing, including noise 
+reduction, filtering, segmentation, and conversion into 
+Mel-spectrogram representations where appropriate. A 
+dedicated CNN model was developed to class ify 
+respiratory sound patterns such as normal, wheeze, 
+crackle, and wheeze plus crackle. Additional 
+categories such as other/abnormal, uncertain, and 
+insufficient quality were used at the platform level. 
+The model was not used to independently diagnose 
+specific diseases. 
+ 
+Manual (Reference Dataset) Testing 
+Reference recordings were processed using the trained 
+model to establish baseline classification performance. 
+Accuracy, precision, sensitivity, specificity, F1 -score, 
+and confusion matrix results were obtained. 
+ 
+Table 1.2. 
+Respiratory Sound Patterns and Clinical Significance 
+Sound 
+Pattern 
+Acoustic 
+Characteristics 
+Clinical 
+Significance Reference 
+Healthy Normal breath 
+sounds; no 
+wheezes or 
+crackles. 
+Indicates 
+clear airways. 
+Zimmerman 
+& Williams 
+(2023); Arts 
+et al. (2020) 
+Crackles Popping, non-
+musical 
+sounds. 
+Suggests 
+pneumonia, 
+pulmonary 
+edema, or 
+alveolar 
+disease. 
+Maberg et 
+al. (2025); 
+Arts et al. 
+(2026) 
+Wheezing Continuous, 
+high-pitched 
+musical 
+sounds. 
+Indicates 
+asthma or 
+airway 
+obstruction. 
+Maberg et 
+al. (2025); 
+GINA 
+(2025) 
+<<<PAGE 6>>>
+  
+Malimban (2026)                                                                                                                            Page 6 of 83 
+Wheezing 
+with 
+Crackles 
+Combined 
+wheezes and 
+crackles. 
+Suggests 
+bronchiolitis 
+or diffuse 
+airway 
+inflammation. 
+Maberg et 
+al. (2025) 
+Table 3.1  presents the four respiratory -sound 
+categories classified by the system together with their 
+acoustic characteristics and reported clinical 
+associations. Crackles are discontinuous, non -musical 
+sounds associated with the sudden opening of small 
+airways and  the presence of fluid or consolidation, 
+whereas wheezes are continuous, musical sounds 
+produced by airflow through narrowed airways 
+(Moberg et al., 2025). Recordings in which both sound 
+types occur are classified as Wheezing with Crackles. 
+These categorie s describe auscultatory findings only; 
+the classification model outputs sound patterns and 
+does not produce diagnoses. 
+Table 1.3.  
+Rule-Based Interpretation of Respiratory Sound Zone 
+Patterns 
+  
+Rule 
+ Zone Pattern 
+Condition 
+ Literature-
+Supported 
+Possibility 
+ Reference 
+ 1 
+ All four zones 
+classified as 
+Healthy (UL = UR 
+= LL = LR = 
+Healthy). 
+ Healthy — 
+no 
+adventitious 
+sounds 
+detected; 
+unobstructed 
+airways with 
+no detectable 
+secretions or 
+alveolar 
+involvement. 
+ 
+Zimmerman 
+& Williams 
+(2023); 
+Moberg et 
+al. (2025) 
+ 2 
+ Both upper zones 
+contain a wheeze 
+component (UL 
+and UR = 
+Wheezing or 
+Wheezing with 
+Crackles). 
+ Possible 
+asthma — 
+bilateral 
+airway 
+obstruction. 
+ GINA 
+(2025); 
+Moberg et 
+al. (2025) 
+ 3 
+ Upper zone(s) 
+show a wheeze 
+component and 
+lower zone(s) 
+show crackles, or 
+any zone = 
+Wheezing with 
+Crackles. 
+ Possible 
+bronchiolitis 
+— mixed 
+inflammation 
+and 
+secretions. 
+ Erickson et 
+al. (2025); 
+Merck 
+Manual 
+(2026) 
+ 4 
+ Crackles present 
+in one or both 
+lower zones (LL 
+and/or LR = 
+Crackles or 
+Wheezing with 
+Crackles). 
+ Possible 
+pneumonia or 
+pulmonary 
+edema — 
+alveolar 
+involvement. 
+ Arts et al. 
+(2020); 
+Reyes et al. 
+(2024) 
+ 5 
+ All four zones 
+classified as 
+Wheezing with 
+Crackles. 
+ Possible 
+severe 
+bronchiolitis 
+or diffuse 
+inflammatory 
+process. 
+ Merck 
+Manual 
+(2026); 
+Erickson et 
+al. (2025) 
+ 6 
+ No preceding rule 
+is satisfied. 
+(default) 
+ Further 
+clinical 
+evaluation 
+needed — 
+pattern not 
+attributable to 
+a single 
+possibility. 
+ Arts et al. 
+(2020); 
+Zimmerman 
+& Williams 
+(2023) 
+ 
+Table 3.2  presents the rules applied by the 
+interpretation layer. Each rule maps a spatial pattern of 
+per-zone classifications to a literature -supported 
+possibility, accompanied by its supporting source. 
+Patterns matching none of the defined rules default to 
+a reco mmendation for further clinical evaluation, 
+reflecting the documented finding that lung 
+auscultation has high specificity but limited sensitivity 
+for acute pulmonary pathologies (Arts et al., 2020). All 
+outputs are framed as possibilities requiring clinica l 
+evaluation and are never presented as diagnoses. 
+Device Unit Testing 
+Respiratory sounds captured using the Ausculta 
+prototype underwent the same preprocessing and 
+classification pipeline. Device recordings were 
+compared with reference recordings to evaluate 
+consistency and performance under actual acquisition 
+conditions, in cluding varying noise conditions. 
+Clinical validation of device recordings was conducted 
+among three patients at a private hospital in Puerto 
+Princesa City, under the guidance and supervision of 
+an attending physician who reviewed and consented to 
+the procedure. 
+ 
+Longitudinal Monitoring and Practitioner Review 
+Testing 
+For authorized test cases, current recordings were 
+compared with previous recordings from the same 
+anatomical location. Changes were reported as 
+respiratory sound pattern changes rather than disease 
+diagnoses. Medical practitioners were able to review 
+<<<PAGE 7>>>
+  
+Malimban (2026)                                                                                                                            Page 7 of 83 
+recordings, recording quality, AI results, symptoms, 
+and available manually entered vital signs; confirm, 
+disagree with, modify, or request repeat recordings; 
+and create monitoring or rehabilitation plans. 
+ 
+Research Dashboard and Data-Export Testing 
+The platform provided authorized researchers with de-
+identified respiratory sound records, reference labels, 
+AI predictions, practitioner confirmations, 
+AI/practitioner agreement, and model -performance 
+statistics. Research exports exclude unnecessary 
+personally identifiable information. 
+ 
+End User Acceptance Testing 
+A 5 -point Likert  scale survey assessed user -
+friendliness, usability, durability, functionality, and 
+impact on community among appropriate prospective 
+users, such as health workers and other authorized end 
+users. Navigation and feature usability were evaluated 
+among 30 par ticipants across Puerto Princesa City. 
+Acceptance testing also involved three patients at a 
+private hospital, conducted under the guidance and 
+supervision of an attending physician who reviewed 
+and consented to the procedure. The system's purpose 
+and limitations were explained to participants before 
+the survey was administered. 
+Data Analysis  
+ 
+A. Descriptive Analysis of System and Device 
+Specifications 
+The specifications of the Ausculta Smart Stethoscope, 
+Respiratory Monitoring Platform, and Respiratory -
+Sound Analysis System were presented through 
+technical specification tables, system architecture 
+diagrams, workflow diagrams, screenshots, and 
+narrative descriptions. These included the device 
+design, components, cost, graphical user interface, 
+role-based access control, data management processes, 
+audio preprocessing methods, feature representation 
+techniques, and classification model architecture. 
+ 
+B. Assessment of Recording Quality and System 
+Performance 
+Respiratory-sound recording quality was evaluated 
+using signal-to-noise ratio (SNR), clarity ratings, and 
+noise-level measurements. The response times of the 
+smart-stethoscope connection, sound recording, 
+recording-quality assessment, signal preprocessing,  
+and classification output were likewise measured in 
+seconds. Mean and standard deviation were computed 
+to summarize the results. 
+ 
+C. Evaluation of Artificial Intelligence Classification 
+Performance 
+The performance of the respiratory -sound 
+classification model was evaluated using accuracy, 
+precision, recall (sensitivity), and F1 -score. A paired -
+samples t -test was conducted at a 0.05 level of 
+significance to determine whether a significant 
+difference e xisted between clean and noise -
+contaminated respiratory-sound recordings. 
+ 
+D. Comparative Analysis of Classification Outputs 
+The classification results generated from reference 
+dataset recordings and those obtained from Ausculta 
+recordings were compared using accuracy and 
+classification agreement measures. A paired -samples 
+t-test was employed to determine whether significant 
+differences existed between the two sources of 
+respiratory-sound recordings at a 0.05 level of 
+significance. 
+ 
+E. Comparative Analysis of Recording Quality 
+Respiratory-sound recordings acquired using a 
+conventional stethoscope and the Ausculta Smart 
+Stethoscope were evaluated by qualified healthcare 
+professionals using predetermined recording -quality 
+criteria. Mean ratings and standard deviations were 
+computed, while a paired-samples t-test was applied to 
+determine whether significant differences existed 
+between the two recording methods at a 0.05 level of 
+significance. 
+ 
+F. End-User Acceptance Evaluation 
+A 5-point Likert-scale questionnaire was administered 
+to assess end -user acceptance of Ausculta in terms of 
+user-friendliness, usability, durability, functionality, 
+and community impact. Weighted mean and standard 
+deviation were computed for each dimension, and the 
+results were  interpreted using the established 
+acceptance scale. 
+Table 1.4 
+Interpretation of the Five-Point Likert Scale for End-
+User Acceptance 
+  Scale  Range 
+ Verbal 
+Interpretation 
+ 5  4.21–5.00   Strongly Agree 
+ 4  3.41–4.20   Agree 
+ 3  2.61–3.40   Neutral 
+<<<PAGE 8>>>
+  
+Malimban (2026)                                                                                                                            Page 8 of 83 
+ 2  1.81–2.60   Disagree 
+ 1  1.00–1.80  Strongly Disagree 
+G. End-User Preference Evaluation 
+End-user preferences regarding instructional support, 
+diagram-based lung -zone guidance, device -manual 
+clarity, overall ease of learning and self -use, and 
+application navigation flow were assessed through a 5-
+point Likert-scale questionnaire. Weighted mean and 
+standard deviation were computed for each indicator to 
+determine the most preferred instructional and 
+navigation features of the system.  
+ 
+IV.  RESULTS AND DISCUSSIONS 
+ 
+A. SPECIFICATIONS OF THE AUSCULTA DEVICE 
+ 
+Figure 2.1. Dimension of the Ausculta Device 
+ 
+ 
+Figure 2.2. Exterior Front Design of the Ausculta 
+Device 
+ 
+Figure 2.3. Interior Layout and Components of the 
+Ausculta Device 
+      Figures 2.1, 2.2, and 2.3 show the physical design 
+and internal components of the Ausculta device. 
+Measuring 19 cm × 15.2 cm × 8.6 cm, the device 
+integrates an ESP32 microcontroller, microphone 
+amplifier, SD card module, LCD display, and 
+stethoscope chest piece to capture, process , display, 
+and store respiratory sound recordings. The amplifier 
+enhances low-intensity lung sounds, while the digital 
+recording and storage components support further 
+analysis. These features align with the functions of 
+modern digital stethoscopes, which improve sound 
+acquisition and enable computer -assisted respiratory 
+assessment (Wu et al., 2022; Xu et al., 2023) 
+Table 2. 
+Current, Voltage, and Resistance of the Electrical 
+Components of the Prototype 
+Components Current 
+(mAh) 
+Voltage 
+(V) 
+Resistance 
+(Ω) 
+ESP32 
+Microcontroller 
+190 3.3 17.37 
+INMP441 
+Omnidirectional 
+Microphone 
+2.2 3.3 1,500.00 
+MicroSD Card 
+Reader Module 
+0.2-200 3.3-5.0 20.00 
+20x4 LCD 
+Display with 
+I2C Adapter 
+2 typical/4 
+max 
+5.0 2,500.00 
+SanDisk Ultra 
+16GB MicroSD 
+Card 
+Not 
+Specified 
+3.3 
+ 
+Cannot be 
+calculated 
+ 
+10000mAh 
+Powerbank PB-
+28 
+2,000 max 
+output 
+5.0 
+output 
+2.50 
+
+<<<PAGE 9>>>
+  
+Malimban (2026)                                                                                                                            Page 9 of 83 
+Microphone 
+Preamplifier 
+Module 
+3.1 3.3 1,064.52 
+ 
+Table 2  presents the electrical requirements of the 
+major components of the Ausculta prototype. Based on 
+the listed specifications, the prototype requires 
+approximately 197.3 mA under typical operating 
+conditions, excluding variable and transient loads from 
+the MicroSD card reader. With a maximum estimated 
+demand of approximately 397.3 mA, the 10,000 mAh 
+power bank with a 2,000 mA output capacity provides 
+sufficient current to operate  the prototype. These 
+values establish the approximate electrical capacity 
+and power requirements needed for continuous 
+prototype operation. 
+ 
+Table 3.   
+Recording Quality Parameters and Findings of the 
+Ausculta Device 
+Parameter Ausculta 
+Finding Interpretation 
+Signal Strength 32.49 dB Stronger 
+measurable 
+signal than the 
+conventional 
+stethoscope 
+Clarity of 
+Recordings 
+68% Good Majority of 
+recordings were 
+suitable for 
+analysis 
+Noise Level 25.67–32.49 
+dB 
+Recording 
+remained 
+possible under 
+varying noise 
+conditions 
+ 
+As shown in Table 3, Ausculta demonstrated good 
+respiratory sound recording quality, achieving a signal 
+strength of 32.49 dB, 68% good recording clarity, and 
+maintaining recordable signals at noise levels of 25.67 
+to 32.49 dB. These findings indicate that the device can 
+effectively capture clear respiratory sounds and remain 
+functional under varying noise conditions, consistent 
+with studies showing that electronic stethoscopes 
+enhance sound acquisition and support reliable 
+respiratory sound analysis (Wu et al., 2022; McLane et 
+al., 2021).  
+Table 4.  
+Cost of Materials 
+Materials Quantity Price 
+(Php) 
+Total 
+(Php) 
+Acoustic stethoscope 
+chest piece 
+1 127.00 127.00  
+Connecting 
+Wires/Jumper Wires 
+21 2.25 47.25 
+Resistors 1 3.50 3.50 
+Microphone 
+preamplifier module 
+(MAX9814) 
+1 146.72 146.72 
+ESP32 microcontroller 1 350.00 350.00 
+Stethoscope 
+Diaphragm 
+1 63.00 63.00 
+3D-Printing PLA 
+Casing 
+1 70.00 70.00 
+SD Card Micro SD 
+Card Reader Module 
+2  78.00  156.00 
+INMP441 
+Omnidirectional 
+Microphone 
+1  
+207.00 
+ 207.00 
+20x4 LCD Display 
+with I2C Adapter 
+1   
+239.00 
+ 239.00 
+SanDisk Ultra 16GB 
+Micro SDHC Card 
+1   
+355.00 
+ 355.00 
+10000mAh 
+Powerbank PB-28 
+1   
+330.00 
+ 330.00 
+Total:        Php 2,094.47 
+ 
+ 
+ 
+Figure 3. Cost Breakdown 
+ 
+Table 4 and Figure 3 presents the cost of materials 
+used in developing the Ausculta prototype, with a total 
+
+<<<PAGE 10>>>
+  
+Malimban (2026)                                                                                                                            Page 10 of 83 
+estimated cost of ₱2,094.47. The expenses cover the 
+major electronic components, audio -acquisition 
+materials, storage devices, power source, and 3D -
+printed casing required for prototype construction. The 
+relatively low total cost demonstrates  that the 
+prototype can be developed using readily available and 
+affordable components, supporting its feasibility as a 
+low-cost respiratory sound recording and classification 
+device.  
+ 
+ 
+ 
+ 
+Figure 3.1 User Interface 
+Figure 3.1 presents the graphical user interface (GUI) 
+of the proposed Ausculta respiratory monitoring 
+platform. It uses a mobile -first layout with role -based 
+access for Patient, Clinic Practitioner, and Admin, each 
+with specific functions and permissions. The patie nt 
+interface includes lung-sound recording or importing, 
+anatomical location selection, symptom entry, and 
+placement guidance, supporting standardized 
+auscultation and metadata collection.  
+The practitioner interface focuses on reviewing patient 
+recordings and analysis results, while the admin 
+interface supports user management and system 
+monitoring. Overall, the GUI integrates respiratory 
+sound acquisition, guided auscultation, monitoring, 
+and practitioner oversight within one organized 
+platform. 
+ 
+
+<<<PAGE 11>>>
+  
+Malimban (2026)                                                                                                                            Page 11 of 83 
+Figure 3.2. System Flow Diagram of the Ausculta 
+Prototype 
+Figure 3.2  presents the system flow of the Ausculta  
+prototype, showing how respiratory sound and patient 
+data are transformed into an interpretable respiratory 
+sound classification. The process begins with the 
+Input, where recorded respiratory sounds and relevant 
+patient data are collected. These inputs ar e then 
+subjected to Processing, which includes signal 
+preprocessing, feature extraction, AI -based sound 
+classification, and rule-based interpretation. 
+The processed information is subsequently organized 
+in the Storage component, which maintains  the audio 
+recordings, classification results, and patient or session 
+data. Finally, the Output provides the respiratory sound 
+classification, literature -supported possible 
+interpretations, and an AI -generated summary. 
+Overall, the diagram illustrates the sequential flow of 
+data from acquisition to analysis, storage, and 
+presentation of results within the Ausculta prototype. 
+ 
+Figure 3.3 Data Management Flow of the Ausculta 
+Respiratory Monitoring Platform 
+Figure 3.3 illustrates the data management flow of the 
+Ausculta Respiratory Monitoring Platform, from data 
+acquisition to monitoring. Respiratory recordings, 
+patient information, symptoms, and vital signs are 
+collected, processed, and analyzed using the CNN -
+based classification system. The resulting data is stored 
+and managed within the platform. Patients can access 
+their records and rehabilitation progress, practitioners 
+can review recordings and analysis results, and 
+administrators can manage system data and user 
+accounts. Overall, the flow demonstrates ho w 
+Ausculta integrates data acquisition, processing, 
+classification, storage, retrieval, and role-based access 
+to support longitudinal respiratory monitoring and 
+rehabilitation. 
+ 
+Figure 4.1. Audio Preprocessing Method of the 
+Ausculta Respiratory-Sound Analysis System 
+Figure 4.1 illustrates the audio preprocessing method 
+used in the Ausculta respiratory -sound analysis 
+system. The process begins with the raw respiratory 
+audio recording in WAV format, which is first 
+subjected to resampling to 16 kHz to provide a 
+consistent sampling rate for processing. The audio then 
+undergoes noise reduction to minimize background 
+interference, followed by amplitude normalization to 
+standardize the signal. The normalized recording is 
+then divided into fixed-length segments, preparing the 
+respiratory sounds for subsequent analysis. The 
+resulting preprocessed audio is therefore standardized 
+and ready for feature extraction and classificatio n. 
+Overall, the preprocessing pipeline organizes the 
+recorded respiratory sounds into a consistent format 
+suitable for the succeeding stages of the Ausculta 
+analysis system. 
+ 
+Figure 4.2. Feature Representation of the Ausculta 
+Respiratory-Sound Analysis System 
+Figure 4.2  illustrates the feature representation 
+process used in the Ausculta respiratory -sound 
+analysis system. The process begins with preprocessed 
+audio, which is converted into a time -frequency 
+representation using the Short -Time Fourier 
+Transform (STFT). The resulting representation is then 
+transformed into a mel-spectrogram, allowing the 
+respiratory sound to be represented as a time -
+frequency image. 
+The mel -spectrogram is converted into a fixed -size 
+feature representation suitable for the classification 
+model. This representation is then provided as the 
+CNN input, allowing the model to analyze patterns in 
+the respiratory sounds. 
+Figure 4.3 . Classification Model Architecture of the 
+Ausculta Respiratory-Sound Analysis System 
+Figure 4.3  illustrates the classification model 
+architecture used in the Ausculta respiratory -sound 
+analysis system. The process begins with the mel -
+spectrogram input, which represents the preprocessed 
+respiratory sound as a time-frequency image. The input 
+
+<<<PAGE 12>>>
+  
+Malimban (2026)                                                                                                                            Page 12 of 83 
+is passed through the convolutional layers, which 
+extract relevant local patterns from the spectrogram, 
+followed by pooling layers that reduce the feature 
+dimensions. The extracted features are then processed 
+by the fully connected layers, where higher -level 
+representations are learned. The softmax layer 
+converts the model's output into class probabilities, 
+which are then used to determine  the predicted 
+respiratory-sound classification. The system classifies 
+respiratory sounds into four categories: Normal, 
+Wheezing, Crackles, and Wheezing with Crackles. 
+Overall, the figure demonstrates the sequence from 
+feature input → feature extraction  → dimensionality 
+reduction → classification → predicted respiratory -
+sound category, showing how the CNN -based model 
+processes the audio representation for classification. 
+ 
+Figure 4.4  Response Time Comparison of System 
+Operations 
+Figure 4.4 presents the response time comparison of 
+the different operations performed by the Ausculta 
+system. The results show that recording required the 
+longest processing time at 15.32 seconds, followed by 
+quality assessment at 3.18 seconds, preprocessing at 
+2.67 seconds, and classification at 1.05 seconds. The 
+results indicate that recording took the most time 
+among the measured system operations, while 
+classification required the shortest time. 
+ 
+Figure 4.5 Recording Quality Distribution 
+Figure 4.5 presents the distribution of recording 
+quality obtained from the Ausculta recordings. The 
+results show that 68% of the recordings were rated as 
+Good, while 25% were rated as Acceptable and 7% 
+were rated as Poor. The majority of the recordings 
+therefore met the quality criteria for analysis, 
+indicating that the Ausculta system was generally able 
+to obtain usable respiratory sound recordings. The 
+smaller proportions of Acceptable and Poor recordings 
+indicate that some recordings were affected by factors 
+that may have reduced recording quality. Overall, the 
+distribution shows that most of the collected 
+recordings were of sufficient quality for subsequent 
+respiratory-sound classification. 
+ 
+ 
+Figure 4.6 Classification Agreement Summary 
+Figure 4.6 presents the classification agreement 
+between the Ausculta system and the reference results. 
+Of the 15 recordings evaluated, 6 produced matching 
+classifications, corresponding to an agreement rate of 
+40%. Although the overall agreement was limited, 
+McNemar’s test produced a p -value of 1.000, 
+indicating that there was no statistically significant 
+difference in the distribution of classification errors 
+between the t wo methods. Thus, the results suggest 
+that the observed disagreements were statistically 
+equivalent rather than indicating a significant 
+difference between the classification outcomes. 
+ 
+ 
+Figure 4.7 Signal Strength Comparison 
+Figure 4.7 presents the comparison of signal strength 
+between the Ausculta device and a conventional 
+stethoscope. Ausculta recorded a mean signal strength 
+of 32.49 dB , while the conventional stethoscope 
+recorded 7.89 dB. The higher measured signal strength 
+of Ausculta indicates that the device captured a 
+stronger recorded respiratory sound signal under the 
+tested conditions. This difference demonstrates the 
+
+<<<PAGE 13>>>
+  
+Malimban (2026)                                                                                                                            Page 13 of 83 
+capability of the Ausculta device to produce a more 
+measurable audio signal for subsequent  recording and 
+processing. However, signal strength alone does not 
+establish better clinical performance, as recording 
+quality and classification accuracy must also be 
+considered. 
+ 
+ 
+Figure 4.8 Noise Resilience by Environment 
+Figure 4.8 presents the measured noise levels during 
+Ausculta recordings across three testing environments. 
+The highest noise level was recorded in the hospital 
+ward at 32.49 dB, followed by the quiet room at 27.88 
+dB and the community area at 25.67 dB. The results 
+show that the device was able to record respiratory 
+sounds under different levels of ambient noise. The 
+variation in measured noise levels demonstrates that 
+recording conditions differed across environments, 
+while the system remained capable o f acquiring 
+respiratory sound recordings. Overall, the findings 
+support the practical use of Ausculta in environments 
+with varying levels of background noise. 
+ 
+ 
+Figure 5. System architecture 
+ 
+Figure 5 shows the system architecture of  Ausculta, 
+illustrating the flow of respiratory sound data from 
+initial collection to the generation of analyzed results. 
+The system receives lung sounds and patient bio -data, 
+which undergo processing, signal acquisition, 
+preprocessing, AI classification, and clinical 
+interpretation. The results are then reviewed by a 
+practitioner before producing classified sound 
+patterns, a severity report, and a monitoring dashboard. 
+This architecture demonstrates how Ausculta  
+integrates sensor-based recording and AI analysis with 
+practitioner review to support respiratory sound 
+assessment. 
+ 
+ 
+Figure 5.2 Role based access and data management 
+Figure 5.2 shows the role -based access control and 
+data management structure of the Ausculta system. It 
+illustrates how users are authenticated and assigned 
+appropriate permissions based on their roles as admin, 
+medical practitioner/staff, or patient. The figure also 
+presents the data management process, from data 
+sources and data ingestion to secure storage, 
+processing, and presentation through dashboards and 
+reports. Overall, the figure demonstrates how Ausculta 
+manages user access while maintaining organized, 
+secure, and accessible patient and system data. 
+Table 5. 
+Response Time of the Ausculta System Across System 
+Operations 
+Response-Time 
+Component 
+Mean Response 
+Time 
+Standard 
+Deviation 
+Smart-
+stethoscope 
+connection 
+4.55 0.83 
+Sound recording 15.00 0.00 
+Recording-
+quality 
+assessment 
+144.68 28.94 
+Signal 
+preprocessing 
+20.91 4.18 
+
+<<<PAGE 14>>>
+  
+Malimban (2026)                                                                                                                            Page 14 of 83 
+Classification 
+output 
+3.97 0.87 
+Table 5 presents the response time of the  Ausculta 
+system across five system operations. The response 
+time was measured for smart -stethoscope connection, 
+sound recording -quality assessment, signal 
+preprocessing, and classification output. The mean and 
+standard deviation were used to summarize the 
+recorded response times for each operation. The results 
+indicate which stage of the system required the shortest 
+and longest processing time. 
+Table 6.  
+Comparison of AI Classification Performance 
+Between Clean and Noise-Contaminated Respiratory 
+Sound Recordings 
+Measure Clean Recording Noise-
+Contaminated 
+Recording 
+Recordin
+g 
+AUSCULTA0001
+.WAV 
+AUSCULTA0002
+.WAV 
+Duration 15.23 s 15.23 s 
+Sampling 
+Rate 
+16,000 Hz 16,000 Hz 
+AI 
+Classifica
+tion 
+Normal Normal 
+RMS 
+Amplitud
+e 
+0.0404 0.0521 
+Table 6 showed the comparison of the AI model's 
+classification performance between clean and noise -
+contaminated respiratory sound recordings. The 
+Ausculta AI model classified both  recordings as 
+Normal, indicating that the presence of noise did not 
+change the model's classification for the tested 
+recording. Both recordings had the same duration and 
+sampling rate, while the noise-contaminated recording 
+showed a higher RMS amplitude than the clean 
+recording. Despite the added noise, the AI model 
+produced the same Normal classification for both 
+recordings. 
+ 
+V. CONCLUSIONS 
+Ausculta demonstrates a structured and integrated 
+approach to respiratory-sound monitoring through the 
+combination of standardized auscultation, digital 
+recording, wireless communication, and ai -assisted 
+sound analysis. the system incorporates six 
+standardized lung locations and recording -quality 
+control to promote more consistent and reliable 
+respiratory-sound acquisition. 
+ 
+The integration of the microphone, preamplifier, 
+ESP32 microcontroller, and Bluetooth Low Energy 
+provides the technical framework for capturing and 
+transmitting respiratory sounds. The system also 
+incorporates a processing pipeline consisting of noise 
+reduction, filtering, segmentation, Mel -spectrogram 
+representation, and CNN -based classification of 
+normal, wheeze, crackle, and combined wheeze -and-
+crackle respiratory-sound patterns. 
+ 
+Overall, the findings demonstrate the feasibility of the 
+proposed Ausculta system architecture as a practical 
+framework for standardized respiratory -sound 
+recording, longitudinal monitoring, and professional 
+review. However, the study does not yet provide 
+sufficient empirical evidence to establish definitive 
+conclusions regarding classification accuracy, 
+recording quality, response time, reliability, and user 
+acceptance. Therefore, further validation and testing 
+are necessary to determine the system's effec tiveness 
+and reliability in actual healthcare settings.  
+Ausculta is consequently positioned as a supportive 
+respiratory-monitoring system that can assist 
+professional assessment, rather than as a replacement 
+for professional clinical evaluation. Ausculta  
+demonstrates a structured and integrated approach to 
+respiratory-sound monitoring through the combination 
+of standardized auscultation, digital recording, 
+wireless communication, and AI -assisted sound 
+analysis. The system incorporates six standardized 
+lung locations and recording -quality control to 
+promote more consistent and reliable respiratory -
+sound acquisition. 
+ 
+The integration of the microphone, preamplifier, 
+ESP32 microcontroller, and Bluetooth Low Energy 
+provides the technical framework for capturing and 
+transmitting respiratory sounds. The system also 
+incorporates a processing pipeline consisting of noise 
+reduction, filtering, segmentation, Mel -spectrogram 
+representation, and CNN -based classification of 
+<<<PAGE 15>>>
+  
+Malimban (2026)                                                                                                                            Page 15 of 83 
+normal, wheeze, crackle, and combined wheeze -and-
+crackle respiratory-sound patterns. 
+ 
+Overall, the findings demonstrate the feasibility of the 
+proposed Ausculta  system architecture as a practical 
+framework for standardized respiratory -sound 
+recording, longitudinal monitoring, and professional 
+review. However, the study does not yet provide 
+sufficient empirical evidence to establish definitive 
+conclusions regardin g classification accuracy, 
+recording quality, response time, reliability, and user 
+acceptance. Therefore, further validation and testing 
+are necessary to determine the system's effectiveness 
+and reliability in actual healthcare settings. Ausculta is 
+consequently positioned as a supportive respiratory-
+monitoring system that can assist professional 
+assessment, rather than as a replacement for 
+professional clinical evaluation. Ausculta  
+demonstrates a structured and integrated approach to 
+respiratory-sound monitoring through the combination 
+of standardized auscultation, digital recording, 
+wireless communication, and AI -assisted sound 
+analysis. The system incorporates six standardized 
+lung locations and recording -quality control to 
+promote more consistent and reliable respiratory -
+sound acquisition.  
+ 
+VI. ACKNOWLEDGMENT 
+The researcher would like to express her deepest 
+gratitude to all those who contributed to the completion 
+of this research. 
+First and foremost, the researchers’ sincere 
+appreciation goes to Sir John Lemuel J. Noche and 
+Ma’am Genelyn O. Bautista whose guidance, 
+expertise, and encouragement were invaluable 
+throughout the process. 
+The researcher is also grateful to her Research 
+Members, Andee Marie Biaco, Hared Ray Cabrera, 
+Angela Navera, Chesca Jomaicha Trajano, Paul Brent 
+Gabayan, Jarred Paul Llacuna, and Jared Zai Elli for 
+their constructive feedback, collaboration, and 
+support, which helped refine and strengthen this study. 
+Special thanks to Dr. Sonia A. Ulanday, Dr. Riza 
+Cornelle De La Bajan, Dr. Kenneth Wilson O. Lim for, 
+Engr. Jeff Magsino and Sir Harry Ericson Cabrera 
+providing the resources and environment necessary to 
+carry out this research. 
+The researcher extended her heartfelt appreciation 
+to her family and friends, who offered unwavering 
+support, patience, and motivation during challenging 
+times. 
+To the researcher's constant inspiration, whose 
+presence and encouragement continually fueled her 
+dedication to this work 
+Finally, the researcher recognizes the contributions 
+of Participants and Respondents without whom this 
+research would not have been possible. 
+And Lastly, God our Almighty Father, with his 
+never ending love and guidance throughout this whole 
+research journey. 
+This work is dedicated to all who believe in the 
+pursuit of knowledge and continuous learning. 
+VII.     REFERENCES 
+Subido-Cariño, M. T., Donadel, M., Asi, L. D., 
+Ariola-Ramos, M. S., Arguelles, V. L., Co, S. 
+N., Mahon, G., Fernandez, S. P. C., Punzalan, 
+K. A., Sornillo, J. B., Smith, R., Westercamp, 
+M., & Hechanova-Cruz, R. A. (2025). SARS-
+CoV-2 seroprevalence, illness recall, and 
+work absenteeism among healthcare workers: 
+A facility-based cross-sectional study in the 
+Philippines, 2021. Clinical Infectious 
+Diseases, 81(2), 255. 
+https://doi.org/10.1093/cid/ciaf342 
+ 
+Yenew, C., et al. (2022). Occupational exposure to 
+infectious diseases among health workers: 
+Effects, managements and recommendations. 
+Journal of Infectious Diseases and 
+Epidemiology, 9, 295. 
+ 
+Kim, T. (2015). T test as a parametric statistic. 
+Korean Journal of Anesthesiology, 68(6), 
+540. 
+https://doi.org/10.4097/kjae.2015.68.6.50 
+ 
+Rocha, B. M., Filos, D., Mendes, L., Vogiatzis, I., 
+Perantoni, E., Kaimakamis, E., Natsiavas, P., 
+Oliveira, A., Jácome, C., Marques, A., Paiva, 
+R. P., Chouvarda, I., Carvalho, P., & 
+Maglaveras, N. (2018). A respiratory sound 
+database for the development of automated 
+classification. In Precision Medicine Powered 
+<<<PAGE 16>>>
+  
+Malimban (2026)                                                                                                                            Page 16 of 83 
+by pHealth and Connected Health (pp. 51–
+55). Springer, Singapore. 
+https://doi.org/10.1007/978-981-10-746_6 
+ 
+Rocha, B. M., et al. (2019). An open access database 
+for the evaluation of respiratory sound 
+classification algorithms. Physiological 
+Measurement, 40, 035001. 
+https://doi.org/10.1088/1361-6579/ab03ea 
+ 
+Song, Y., et al. (2024). Performance evaluation of 
+lung sounds classification using deep learning 
+under variable parameters. EURASIP Journal 
+on Advances in Signal Processing. 
+https://doi.org/10.1186/s13634-024-01148-w 
+ 
+Xu, R., et al. (2023). Deep learning-based lung sound 
+analysis for intelligent stethoscope. Military 
+Medical Research. 
+https://doi.org/10.1186/s40779-023-00479-3 
+ 
+Xia, T., Han, J., & Mascolo, C. (2022). Exploring 
+machine learning for audio-based respiratory 
+condition screening: A concise review of 
+databases, methods, and open issues. 
+Experimental Biology and Medicine. 
+https://doi.org/10.1177/15353702221115428 
+ 
+Philippine Statistics Authority. (2025, October 28). 
+2024 causes of death in the Philippines 
+(provisional as of 31 August 2025). 
+Philippine Statistics Authority. 
+https://psa.gov.ph/system/files/vsd/1_Press%
+20Release%20_2024%20Cause%20of%20De
+ath%20Statistics_as%20of31%20August%20
+2025_ONS-%20signed.update.pdf 
+ 
+Global Initiative for Asthma. (2023). Global strategy 
+for asthma management and prevention (2023 
+update). Global Initiative for Asthma. 
+https://ginasthma.org/gina-reports 
+(ginasthma.org in Bing) 
+ 
+Global Burden of Disease Collaborative Network. 
+(2025). Global Burden of Disease Study 2023 
+(GBD 2023) results. Institute for Health 
+Metrics and Evaluation (IHME). 
+https://vizhub.healthdata.org/gbd-results/ 
+ 
+World Health Organization. (2023). Package of 
+interventions for rehabilitation: Module 4. 
+Cardiopulmonary conditions. World Health 
+Organization. 
+https://apps.who.int/iris/handle/10665/370395 
+(apps.who.int in Bing) 
+ 
+Tanaka, T., Yanagita, Y., Morishita, T., Nagata, F., 
+Granados Santiago, M., López-López, L., & 
+Valenza, M. C. (2025). Effectiveness of 
+physical and therapy interventions for non-
+ICU hospitalized pneumonia patients: A 
+systematic review of randomized controlled 
+trials. Healthcare, 13(12), 1444. 
+https://doi.org/10.3390/healthcare13121444 
+ 
+Leng, S., Tan R. S., Chai, K. T. C., Wang, C., Ghista, 
+D., Zhong, L. (2015) The Electronic 
+Stethoscope. https://doi.org/10.1186/s12938-
+015-0056-y 
+ 
+Pramono, R. X. A., Bowyer, S., Rodriguez-Villegas, 
+E. (2017) Automatic Adventitious 
+Respiratory-sound Sound Analysis: A 
+Systematic Review 
+https://doi.org/10.1371/journal.pone.0177926 
+ 
+Rocha, B. M., Filos, D., Mendes, L., Sorbes, G., 
+Ulukaya, S., Kahya, Y. P., Jakovljevic, N., 
+Turukalo, T. L., Vogiatzis, I. M., Perantoni, 
+<<<PAGE 17>>>
+  
+Malimban (2026)                                                                                                                            Page 17 of 83 
+E., Kaimakamis, E., Natsiavas, P., Oliveira, 
+A., Jácome, C., Marques, A., Maglaveras, N., 
+Paiva, R. P, Chouvarda, I., de Carvalho, P. 
+(2019) An Open Access Database For The 
+Evaluation Of Respiratory 
+SoundClassification Algorithms 
+https://doi.org/10.1088/1361-6579/ab03ea 
+ 
+Philips, A. L., Sodhi, I., Warrier, J., Sinha, V. (2016) 
+Development Of Digital Stethoscope For 
+Telemedicine 
+https://www.researchgate.net/publication/289
+48645_Development_of_digital_stethoscope_
+for_Telemedicine?hl=en-GB 
+ 
+Weiskopf, N. G., Weng, C. (2013) Methods And 
+Dimensions Of Electronic Health Record 
+Data Quality Assessment: Enabling Reuse 
+For Clinical Research 
+https://academic.oup.com/jamia/article/20/1/1
+44/2909176 
+ 
+Holden, R. J., Ben-Tzion, K. (2010) The Technology 
+Acceptance Model: Its Past and Its Future In 
+Healthcare 
+https://www.sciencedirect.com/science/article/pii/S15
+32046409000963?via%3Dihub 
+ 
+Huang, D.-M., Huang, J., Qiao, K., Zhong, N.-S., Lu, 
+H.-Z., & Wang, W.-J. (2023). Deep 
+Learning-based lung sound analysis for 
+intelligent stethoscope. Military Medical 
+Research, 10,44. 
+https://doi.org/10.1186/s40779-023-00479-3 
+ 
+Wang, Z., & Sun, Z. (2024). Performance evaluation 
+of lung sounds classification using deep 
+Learning under variable parameters. 
+EURASIP Journal on Advances in Signal 
+Processing, 2024, 51. 
+https://doi.org/10.1186/s13634-024-01148-w 
+ 
+DeepRespNet: A deep neural network for 
+classification of respiratory sounds. (2024). 
+Biomedical Signal Processing and Control, 
+93, 106191. 
+https://doi.org/10.1016/j.bspc.2024.106191 
+ 
+Tzeng, J.-T., Li, J.-L., Chen, H.-Y., Huang, C.-H., 
+Chen, C.-H., Fan, C.-Y., Huang, E. P.-C., & 
+Lee, C.-C. (2025). Improving the robustness 
+and clinical applicability of automatic 
+respiratory Sound classification using deep 
+learning–based audio enhancement: 
+Algorithm development And validation. 
+JMIR AI, 4, e67239. 
+https://doi.org/10.2196/67239 
+ 
+Ye, P., Li, Q., Jian, W., Liu, S., Tan, L., Chen, W., 
+Zhang, D., & Zheng, J. (2022). Regularity 
+and Mechanism of fake crackle noise in an 
+electronic stethoscope. Frontiers in 
+Physiology, 13, 1079468. 
+https://doi.org/10.3389/fphys.2022.1079468 
+ 
+Kim, J.-W., Bae, S., Cho, W.-Y., Lee, B., & Jung, H.-
+Y. (2024). Stethoscope-guided supervised 
+Contrastive learning for cross-domain 
+adaptation on respiratory sound classification. 
+Proceedings of the IEEE International 
+Conference on Acoustics, Speech and Signal 
+Processing (ICASSP), 2024, 1431–1435. 
+https://doi.org/10.1109/ICASSP48485.2024.1
+0447734 
+ 
+Kim, J.-W., Toikkanen, M., Jalali, A., Kim, M., Han, 
+H.-J., Kim, H., Shin, W., Jung, H.-Y., & Kim, 
+K. (2025). Adaptive metadata-guided 
+supervised contrastive learning for domain 
+adaptation on Respiratory sound 
+classification. IEEE Journal of Biomedical 
+and Health Informatics, 29(8), 5381–5393. 
+https://doi.org/10.1109/JBHI.2025.3545159 
+ 
+<<<PAGE 18>>>
+  
+Malimban (2026)                                                                                                                            Page 18 of 83 
+Wang, Z., & Sun, Z. (2024). Performance evaluation 
+of lung sounds classification using deep 
+Learning under variable parameters. 
+EURASIP Journal on Advances in Signal 
+Processing, 2024, 51. 
+https://doi.org/10.1186/s13634-024-01148-w 
+ 
+Choi, S. I., Jeong, Y., Jung, W. J., Kim, B.-K., Lee, S. 
+Y., Lee, J., Kim, J.-Y., Cho, W.-Y., Chang, 
+H., An, H., Park, S., & Lee, E. J. (2026). 
+Usefulness of lung sound data collection 
+using Skeeper SM-300® device: A pilot 
+study. PLOS ONE, 21(5), e0348588. 
+https://doi.org/10.1371/journal.pone.0348588 
+ 
+Wei, T.-J., Hsiung, P.-Y., Liu, J.-H., Lin, T.-C., Kuo, 
+F.-T., & Wu, C.-Y. (2022). Use of electronic 
+Auscultation in full personal protective 
+equipment to detect ventilation status in 
+selective lung Ventilation: A randomized 
+controlled trial. Frontiers in Medicine, 9, 
+851395. 
+https://doi.org/10.3389/fmed.2022.851395 
+ 
+Yin, Z., Yan, J., Fang, S., Wang, D., & Han, D. 
+(2022). User acceptance of wearable 
+intelligent Medical devices through a 
+modified unified theory of acceptance and 
+use of technology. Annals Of Translational 
+Medicine, 10(11), 629. 
+https://doi.org/10.21037/atm-21-5510 
+ 
+Gonzales, A., Custodio, R., Lapitan, M. C., & Ladia, 
+M. A. (2023). End users’ perspectives on The 
+quality and design of mHealth technologies 
+during the COVID-19 pandemic in the 
+Philippines: Qualitative study. JMIR 
+Formative Research, 7, e41838. 
+https://doi.org/10.2196/41838 
+ 
+Hajesmaeel-Gohari, S., Khordastan, F., Fatehi, F., 
+Samzadeh, H., & Bahaadinbeigy, K. (2022). 
+The most used questionnaires for evaluating 
+satisfaction, usability, acceptance, and quality 
+Outcomes of mobile health. BMC Medical 
+Informatics and Decision Making, 22, 22. 
+https://doi.org/10.1186/s12911-022-01764-2 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+<<<PAGE 19>>>
+  
+Malimban (2026)                                                                                                                            Page 19 of 83 
+ 
+ 
+ 
+ 
+ 
+ 
+APPENDICES 
+ 
+APPENDIX A 
+RAW DATA (RESULTS) 
+ 
+Interview Transcript - Ace Medical Hospital 
+ 
+ 
+• Interviewer: Ahnycca Krish N. Malimban 
+• Participant: AM-P02 (Doctor) 
+• Date of Interview: August 21, 2026 
+• Location of Interview: Ace Medical Hospital 
+ 
+List of acronyms: 
+ 
+ 
+• AI — Artificial Intelligence 
+• BP — Blood Pressure 
+• BPM — Beats Per Minute 
+• CT — Computed Tomography  
+• IMC — Imaging Mass Cytometry  
+• MC — Multiple Concurrent  
+• PE — Physical Examination 
+• RT — Respiratory Therapist  
+• RR — Respiratory Rate 
+• TB — Tuberculosis 
+ 
+(0:07) 
+ 
+AM-P02: Yung first paper nyo, nag diagnose kayo ng may sakit? 
+  
+Ahnycca Krish N. Malimban: Opo, yung mga respiratory diseases po 
+  
+AM-P02: Using the? 
+  
+Ahnycca Krish N. Malimban: Using data sets from that website, yun po and ngayon po pinapaano po namin sa 
+research adviser namin na kung ivavalidate po ngayon yung data sets po na makukuha po namin dun para mas 
+diseases po and yung mangyayari po dun is yung mga makukuhang lung sound sa patient or kunyari is TB 
+patient po sya and yung naano po samin is yung mga TB patients po is 6 months po yung gamutan and by 1 
+month po tuluy-tuloy daw yung gamutan is makaka ano na lang ng chainless po sa symptom, either mag 
+improve po or maglala po kung mild lang po yung gamutan is like mag baback to 0 daw po. 
+  
+(1:45) 
+ 
+Ahnycca Krish N. Malimban: Eto po yung prototype naming na need pa po ng improvement, sabihin po natin 
+na example po is yung sa BP, tapos  pwede mo pong ma-check yung sarili mong BPM, so bale ang ano po nito 
+is somewhat ganun pero i-checheck po yung sounds mo to see, parang self consultation, machecheck mo po 
+yung sarili mo if may wheezing. 
+<<<PAGE 20>>>
+  
+Malimban (2026)                                                                                                                            Page 20 of 83 
+  
+AM-P02: So sa inyo stethoscope, yaan ang gagawin ninyo, meron kayong subject? May mga pasyente kayong 
+na tignan? 
+  
+(2:40 - 6:13) 
+ 
+Ahnycca Krish N. Malimban: Kasi last year po sa smartsteth po dati, yung nangyari po dun ma’am yung ano 
+po dun namin is yung use po nito is for rural health clinics po since yung nag interview po kami ng mga nurses 
+po sa mga rural sa like clinics po kakulangan daw po talaga sa tools or instrument when diagnosing po ng mga 
+pumupunta po dun sa kanila, kaya nag come up po kami ng ito pong device na tutulong po or aid lang po sya 
+dun sa mga health practitioners po sa mga rural barangays para maka ano po ng diagnosis sa patients, yun lang 
+po. Imbis po na for diagnosing po sya and sa rural health clinic po, yung inano po samin ng research adviser 
+naming is for rehabilitation po sya or personalize use na po sya, for at home po sya like kagaya po sa mga BP po 
+na kahit ikaw na lang mismo mag tingin po kung ilan yung blood pressure mo. 
+  
+AM-P02: So nung ginawa nyo yung paper before, ilan yung na verify nyo na effective sya? May nakuha ba 
+kayong subject? 
+  
+Ahnycca Krish N. Malimban: Yung nangyari po dun doc is hindi po talaga namin sya na pre-test sa mga 
+patients po talaga, pero vinavalidate po namin siya sa... kasi yung ginawa lang po kasi namin para magpa-
+validate po is sumama po yung isa kong kateammate sa appointment ng doctor. And yun po yung naging basis 
+po namin. And yung ito po kasing prototype po namin before is hindi po siya working independently. Kumbaga 
+po, need po ng laptop, nagco-connect po ito sa laptop and meron po kaming web app, at doon po ina-assess 
+yung makukuha pong sound. Tapos kumuha po yung programmer namin sa website na Kaggle, and that time po 
+hindi po namin napa-validate.  
+ 
+AM-P02: Okay lang yun sa advisor niyo? 
+ 
+Ahnycca Krish N. Malimban: Ano po doc, yun ano po kasi nun is reputable naman po yung sa Kaggle, kahit 
+sabi po ng kuya ng research teammate ko po, and kinukunan din po talaga siya ng data ng iba pong mga nag-a-
+assess ng ganoong type. 
+ 
+AM-P02: Ah, o sige. So okay na, kailan niyo ba ginawa yung paper nung una? 
+ 
+Ahnycca Krish N. Malimban: Last year po, 2025. 
+ 
+(6:14 - 13:07) 
+ 
+AM-P02: Tapos ngayon, for rehabilitation na Umm, in my opinion, kasi depende sa gusto niyong sakit, kasi 
+medyo mahirap kung sabihin niyo lahat, medyo mas specific kasi. Actually ang TB, wala siyang specific na 
+sound na auscultation para sabihin mo sa akin na papa-monitor niyo doon sa pasyente na pag ganito na, okay na 
+siya. At saka hindi kasi tayo naka-base, in the grand scale of things, hindi tayo naka-base sa sound para 
+magtuloy ng treatment o hindi. In the first place, ang ano talaga natin, naka-set na tayo, if it's TB, 6 months 
+talaga siya. Whatever na kung nawala na sya nawalan na sya ng symptoms, yun yung pinag-aralan na, na pagka 
+nag-start ng TB na gamutan, 6 months siya. Hindi tayo naghihinto ng gamutan kung hindi mo na narinig 
+initially, or narinig mo initially tapos tapos hindi mo na narinig. Actually, pati yung test for TB na sputum test, 
+inuulit talaga yun at 2 weeks or at 1 month hangga't mag-negative. Kahit mag negative yung test na yon, 
+talagang pinapatuloy yung 6 months, although may provision ngayon na 4 months na lang. Pero hindi tayo 
+nakabase sa sounds para sabihin na itigil yung gamutan. Kung pneumonia tayo, ang gamutan din tayo, 7 days 
+usually, 5 days kung hindi. Usually, pag pneumonia, anong hinahanap natin? Kung pneumonia talaga na may 
+mga plema, crackles yung naririnig natin. So usually, at the start of the end of the inspiration hanggang 
+expiration siya naririnig. Tapos, kahit naman marinig mo siya or hindi marinig, hindi tayo tumitigil sa gamutan. 
+Sa bagay inaano nyo lang naman yung device kung maririnig o hindi. Kung rehabilitation kasi, sino bang inaano 
+natin na rehabilitation? Usually ang inaano talaga natin with added help from the RT, usually kung may 
+problema talaga sa baga, usually may atelectasis, so parang nag-collapse yung lungs nila dahil sa pneumonia, 
+usually nagpapa-rehab talaga tayo. Anong rehab ang ginagawa? Nagpapa-blow tayo ng mga balls para mag-
+expand uli yung baga nila. So at any rate, kahit naman marinig o hindi na natin marinig yung crackles doon, ang 
+<<<PAGE 21>>>
+  
+Malimban (2026)                                                                                                                            Page 21 of 83 
+gamutan talaga ganun. So kung sabihin nyo sakin na kung i-babase ba natin yung gamutan, hindi doon naka-
+base kung maririnig. Kung sabihin nyong sakit kasi asthma, pwede sigurong asthma. Bakit? Ano ba yung sa 
+asthma? So sa asthma, pwede siguro kasi specific kayo, hindi pwedeng lahat. Lalo na ang TB, kasi nanggagaya 
+lang siya ng sakit, so pwede siyang lumabas na hinihika siya, or may cancer pa nga kung pupwede, or meron 
+syang ibang sakit, so hindi sya ano ng lahat ng sakit na maririnig nyo ay ganun. Actually, sa pneumonia, ang 
+ginawa nila sa center, hindi ko alam kung na-brief kayo hindi nila bini-base sa sound. Ang bini-base nila kung 
+may pneumonia is yung RR yung respiratory rate. Pag mabilis siya, more than the for the age, dina-diagnose 
+nila yun na pneumonia—lalo na kung may fever, may cough, tapos nahihirapan huminga. Nagda-diagnose sila 
+ng pneumonia sa mga far-flung areas, hindi na kinoconsider na mag-stethoscope para marinig kung may plema 
+o wala. Yun yung IMC yun yung dinevelop ng government kasi alam naman nila hindi trained far-flung areas. 
+Pag may fever, cough, at nahihirapan huminga, pneumonia na, pwedee na nilang ma diagnose doon and usually 
+pwede na silang mag-start ng antibiotics na kailangan. So  hindi tayo naka-base sa stethoscope o sa pagparinig. 
+Kung i-verify niyo nga, siguro asthma pwede. Bakit sa asthma? So ito yung normal na daanan ng hangin, pero 
+pag hinihika ka, ganito siya, so nahihirapan huminga, may mga barado dito, so usually nagwi-wheeze sila. Pero 
+usually kung talagang malala, audible talaga siya, so there's no need na i-stethoscope. Pero minsan hirap na 
+hirap talaga, kung masikip na masikip, walang maririnig pero usually ganun yung ano, pero kung i-nanarrow 
+down nyo. Kung medyo maluwag na siya, nawawala na yung wheeze, yun ‘yon pwede tayong mag-base ng 
+gamutan doon sa naririnig. Pero otherwise, yung iba, lalo na pag nag-start ng antibiotic, talagang tinatapos yun. 
+Kung pneumonia kasi may infection, 7 days talaga siya—hindi tayo magre-rely sa stethoscope na maririnig. 
+Wheezing sa asthma, pwede, kung nahihirapan sya pwedeng ma-auscultate muna na masikip yung daanan pa rin 
+ng hangin tapos nahihirapan sya huminga. Usually pag asthma, it's the expiration na nahihirapan siya, hindi the 
+inspiration, so prolonged yung expiration o kaya naman may audible wheeze talaga sya, nagbibigay pa kami ng 
+gamot, pwede doon. Pero usually ang hika din kasi pag nabigyan na ng steroids ng pag-alis nito, 2nd day ok na 
+sila. Kung ganun din naman ka lala, pwede naman kung pupunta sila sa center, ano bang binibigay natin? Pwede 
+din naman sa bahay nila na gamitin yan, pero naka depende din kayo sa internet.  
+ 
+(13:08 - 17:38) 
+ 
+Ahnycca Krish N. Malimban: Yung ano po kasi doc, kaya po kami nandito... galing sa website site na yun, 
+kapag na-auscultate na po sa device, magta-transfer yung data ng patient doon sa app po and ipo-process po ng 
+AI po na-train po namin ng data galing po from Kaggle, and yung sa data po ng patient that time is i-aano po ng 
+AI ico-compare po doon sa data sa Kaggle, and doon po maa-assess  
+ 
+AM-P02: Kung anong klase 
+ 
+Ahnycca Krish N. Malimban: Opo, at kung ano po yung kalagayan po ng... kunyari po ng wheezing nya or 
+crackles po. Like kunyari po kahapon, 10% pa po yung wheezing niya, tapos ngayong araw naman po is 5% na 
+lang po, kumbaga po nakapasa po siya sa percentage po. And after ma-assess yun ng app namin kung ano na 
+yung kalagayan, kagaya po sa asthma po, magbibigay po yung app mismo ng suggestions kung anong lung 
+exercise yung gagawin like pursed-lip breathing po or diaphragmatic breathing po. Sa app po namin may 
+pipindutin po dun na mga exercises po, pero hindi po muna yun aanuhin ng patient unless na-confirm po ng 
+doctor niya. Kasi po, bago gawin ng patient yung inadvise ng app, mag-nononotif din po yun sa doctor po 
+mismo kung tama po ba yung na-assess ng app and kung tama po ba yung nabigay na advice ng app,and yung 
+ano po dun is may reporting system po kami. And yung na take inspiration po namin is yung sa app na 
+Konsulta, and yung ma-aano na po namin dun sa app is like pwede na pong kausapin yung patient kung during 
+gina-auscultate niya yung sarili niya o nagpapa-auscultate siya kasama sa bahay makakabigay po sya ng insights 
+‘di lang po dun sa nakuha ng app na kalagayan po ng kunwari ng  tungkol sa kalagayan ng asthma niya is 
+mabibigay nya din po yung result nya sa doctor nya kung during that time is may karagdagan pa po syang 
+nararamdaman . After po nun kunyari na tingnan na ng doctor kung tama po ba yung advice ng app, ico-confirm 
+na lang po tapos may chatting system na po, and yung ma-aano po sa app namin is may separate log-in feature 
+po sya for patient po and medical practitioner, and yung lalabas po na feature sa patient po is yung rehab po or 
+yung mga lung exercises po, guided auscultation kung saan ire-record yung sa device na naka-connect po, at 
+makikita po yung progress and yung mga sessions ng nagawa nya sa mga exercises po. Sa login feature naman 
+po ng medical practitioner, sila po mismo maglalagay ng file ng patient nila na po yun, and automatic magsi-
+sync po yun sa account ng patient nila para po real-time transfer po yung mga nakuha o notif ng doctor about sa 
+kalagayan nila.  
+ 
+<<<PAGE 22>>>
+  
+Malimban (2026)                                                                                                                            Page 22 of 83 
+(17:43 - 19:35) 
+ 
+AM-P02: Ano na ang gusto niyong marinig sa akin?  
+ 
+Ahnycca Krish N. Malimban: Yung kinuha po namin sa Kaggle yung audio recording ng breathing sounds, 
+gusto po namin i-validate if pwede po naming gamitin sa aming database. Naka-separate po sya kung anong 
+anatomical locations ng breathing sounds, for example po, sa anterior left, kung ano po yung sounds doon. 
+Gusto po namin i-validate if yung sound na ito po pwede namin ilagay sa database para ma-identify kung ano 
+yung kalagayan. Ipapavalidate po namin kung tama po ba yung ito may wheezing or crackles. 
+ 
+Ahnycca Krish N. Malimban: And kung yung pwede pong makuha ng na-auscultate po is ma-ano po kung ano 
+na po yung kalagayan. 
+ 
+AM-P02: Sige, papakinig mo. Okay,  
+ 
+Ahnycca Krish N. Malimban: Explain ko muna po, yan po yung mga anatomical locations sa body. Ito muna 
+po sa anterior left, yung nag-iindicate po ng '107' yan po yung patient number, yung sa chest location so ito po 
+yung nangyari sa anterior left. And yung MC naman po yan kung simultaneous po sya or sequential yung 
+pagkuha ng data, and yung pinaka-last po sya yung recording equipment na ginamit, in this case, ito po yung 
+AKG C417L. 
+ 
+(25:04 - 26:50) 
+ 
+AM-P02: So ang lahat ng ito pinapa-validate niyo?  
+ 
+Ahnycca Krish N. Malimban: Yung sounds lang po since same website lang sila ng pinanggalingan. ICBHI 
+2017 na database, ang sabi po ng programmer and software developer namin, pinagkukunan din po talaga yun 
+sya ng data since yung mga nag-uupload po doon is mga medical professionals din po talaga. 
+ 
+AM-P02: Pero are we talking about the same patient? O madaming pasyente ito? 
+ 
+Ahnycca Krish N. Malimban: Same patient lang po yan 
+ 
+AM-P02: May clinical correlation ba kayo o wala? 
+ 
+Ahnycca Krish N. Malimban: Wala po 
+ 
+AM-P02: Wala? Basta lahat random, kukuha lang kayo ng pasyente.  
+ 
+Ahnycca Krish N. Malimban: Nakatago po yung identity ng mga patients. 
+ 
+(27:03 - 28:55) 
+ 
+AM-P02: Sa bagay kasi device lang kayo eh. Pero in the grand scale of things, history pa lang, meron na 
+kaming diagnosis. Tapos the physical exam will strengthen kung ano man yung nasa history. Kung sabihin mo 
+saking may wheeze, hindi lang minsan tayo nagbe-base sa wheezing, lalo na kung may history, kung sasabihin 
+mo saking may history ka ng hika, talagang vineverify pa namin yun kung may history ng hika, tsaka lang 
+sasabihin na may problema. Madami kasing cause ng wheezing, kapag may problema sa lung finding or sa 
+auscultation, anywhere from the nose hanggang sa lungs, may blockade doon pwedeng maingay syang huminga. 
+Kung sabihin nyo sakin like kung ito lang i-babase natin, medyo hindi sya ano saaming mga doctor na hika 
+talaga ito, binabase talaga din natin sa history ng mga pasyente, sa age nila, tsaka yung condition nila during 
+that time. 
+ 
+Ahnycca Krish N. Malimban: Doc, ang naisip ko pong somewhat solution po dyan is sa app po, before po sila 
+mag test ng device is mag-provide sila ng background, mga history information sa kanila, and kapag mag-tetest 
+na po sila and if ever na may symptoms po is ire-recommend po sa doctor. 
+<<<PAGE 23>>>
+  
+Malimban (2026)                                                                                                                            Page 23 of 83 
+ 
+(28:57 - 33:02) 
+ 
+AM-P02: Oo, usually kasi hindi tayo magbabase lang dito, nauso yang ganyang device na yan during the time 
+ng pandemic, actually may ganun akong device na malayo yung marinig namin, kahit na malayo sya maririnig 
+namin, pero ayaw talaga namin yung sa phone lang or sa consultation na sasabihin sakin na ganun, hindi kami 
+nagbibigay kaagad ng gamot or hindi kami nagdi-diagnose, kasi sabihin mo sakin na inuubo, medyo napaka 
+broad nun para mag specify ako ng gamot na yun yung kailangan nila, kailangan talaga may data sila, lahat 
+naman, clinical correlation talaga yung sinasabi, not necessarily na ganito. Masasabi naman natin, sabihin nyo 
+lang sakin na wheeze sya, pero hindi natin maco-correlate sya na yun yung sakit, ok? So may crackles sya pero 
+hindi natin sasabihin na ito yung sakit kasi medyo madami pang data bago tayo mag-arrive sa diagnosis. Oo 
+sige, vineverify ko sa inyo na meron silang wheeze meron silang crackles, kung ganun, hanggang dun lang yung 
+device. Tapos kung sabihin nyo sa rehabilitation na ‘o may wheezing pa tayo’, oo pwede naman, pwedeng 
+gamitin sya. Pero bago mag-rehab, meron na kasi siyang diagnosis before, kaya tinatanong ko sa inyo. Kung 
+mag re-rehab tayo, yung part ng rehab or nagre-rehab talaga, may disease na, hindi pwedeng mag-rehab tayo ng 
+hindi mo alam ang previously. On the same patient, na diagnose na sya kaya tayo magre-rehab na, so on the 
+second day, kung ganito pa yung ano may wheezing na sya on the first day, nabigyan na sya ng gamot that time, 
+parang follow up na lang sya dahil na diagnose na sya before. Kung sabihin nyo na nag we-wheezing pa rin sya, 
+pwedeng nabigyan pa sya ng ibang gamot, dapat may diagnosis na sya before. 
+ 
+Ahnycca Krish N. Malimban: Doc, if ever man po namin na need, ano po yung masa-suggest nyo na yung 
+broad na dataset po is ano po yung pwede naming focusan na specific po sya. 
+ 
+AM-P02: Kasi kung sabihin nyo na meron na kayong study before, dapat nag kayo ng ano dun ng ito lang yung 
+nag-focus kayo, kung anong sakit lang yung na diagnose nyo that time, kung asthma lang talaga kayo nag-focus, 
+ire-rehab natin parang continuation nun pwedeng ganun, pero huwag na kayong kumuha ng ibang sakit dahil 
+naka specify naman tayo. Kung sabihin nyo kasi saking clinical wise na meron itong benefit na kailangan, yun 
+nga eh kung the same patient, location, kung dating may data na kayo on the same patient, for rehab na lang kasi 
+yun. 
+ 
+(33:12 - 35:54 ) 
+ 
+Ahnycca Krish N. Malimban: Since may sa login feature po ng sa mga health practitioner, manggagaling po 
+mismo yung data ng patient na ire-rehab dun mismo sa doctor po nya. 
+ 
+AM-P02: Napaka ano din ng limitation nyo din eh, ito-throw nyo pa sa internet eh. kung re-rely kayo sa mga 
+ganun lalo na sa mga center, kaya usually inaano nila na RR lang sila mag-base hindi talaga sa 
+auscultation.actually kung ia-ano nyo sa bahay, in the first place kailangan trained yung kasama sa bahay para 
+ma-auscultate sya, sa hika kasi usually sa mga bata, hindi sila nali-limit ng hika, sa pneumonia meron silang 
+fever kasi so matamlay yung mga bata, hindi sila maka-function ng maganda, pero sa hika naglalaro pa rin yan, 
+sanay na yan sila minsan kaya hindi mo masasabi na may sakit o wala, kung ped tsaka psycho di naman kami 
+nag-o-auscultate ng sarili namin, so meron yun yung pang limitation natin. So meron isang tao trained kung 
+saan ilalagay yung stethoscope, hindi sya yung mismong pasyente. Ano ba ang focus niyo, sa bata o matanda? 
+We are not miniature adults. 
+ 
+Ahnycca Krish N. Malimban: For bata po and matanda. 
+ 
+AM-P02: Usually sa bata talaga, dapat yung mag-o-auscultate, matanda or bata , yung mag-o-auscultate trained 
+sya kung saan ilalagay yung stethoscope. 
+ 
+Ahnycca Krish N. Malimban: Pero sa ano naman po doc, may feature rin naman po yung app namin na may 
+guided auscultation po, pero kung kahit ganun po kaya doc need pa rin po ng X-ray kahit may guided 
+auscultation kung saan po ipa-place yung stethoscope?  
+ 
+(36:04 - 37:37) 
+ 
+<<<PAGE 24>>>
+  
+Malimban (2026)                                                                                                                            Page 24 of 83 
+AM-P02: May mga lung sounds kasi lalo na kung consolidation at tsaka kung increased yung  
+breath sounds, kung decrease yung breath sounds, kung may fluid yung baga, kung puro air yung baga kung 
+may consolidation, kung saan, minsan naka map talaga yun. Oo wheeze sya, oo crackle sya so yun yung 
+verification natin, pero otherwise hindi natin ma-correlate, kung sa final diagnosis dapat may clinical history na 
+talagang ma-fill up. At yun pa, pag nasabi kong na diagnose nagbe-base tayo ng management sa diagnosis, hindi 
+sa wheeze, hindi sa crackles. Kaya tinutumbok namin, usually diagnosis kasi doon naka-base kung anong 
+management, kung anong gamot. 
+ 
+Ahnycca Krish N. Malimban: Yung project po namin is yung sa history po ng patient and iba-base po ng app 
+yung needs po like yung mga lung exercise po base sa medical history ng pasyente. 
+ 
+(37:42 - 41:27) 
+ 
+AM-P02: Maliban na lang kasi tung talagang asthmatic sila, sa mga hikain kasi meron kami, at tsaka adviced 
+talaga ‘to na meron na tayong protocol, may guided na sila na pagka hinika na sila ito yung gamot na nila, so 
+usually ang inaano namin pag inubo pa lang sila may gamot na sila eh. Sa wheezing minsan alam na nung mga 
+hikain na yun yung symptom nila magagamot na sila. Per yun nga, kung ano lang kasi na ano natin, sounds, 
+maveverify naman yun lalo na sa mga app, pero yun nga kung in terms of management, medyo hindi ito lang, 
+actually ang ano pa natin kung na X-ray sya, kung talagang maveverify natin kung talagang CT scan pa so 
+nagba-base din kami dun. Kung foreign body nag we-wheeze din sila. Depende sa diagnosis yung management, 
+it’s not the wheezing not the crackles, so history tayo,medyo mabigat na yung ano ng clinical correlation, not 
+nescessarily the wheezing, so yun yung inaaral yun yung nagme-medicine hindi lang sa sound kaya nga medyo 
+ano tayo sa mga pagbigay ng diagnosis kasi dun naka-base yung management, otherwise symptomatic tayo, 
+anong sinasabing symptomatic like pag may sipon or nagfe-fever bibigyan ko lang ng paracetamol dahil yun 
+yung gamot sa fever, pero bakit sya nag-fe-fever, yun yung inaalam din natin andami-daming sakit, pag tine-
+treat natin symptom mo, sabihin mo we-wheeze bibigyan mo ng salbutamol today, late lang, pero bakit nagkaka 
+ganon, hindi din natin alam. Inaalam natin yung diagnosis para mabigay yung management na kung sakit talaga 
+nila, otherwise per symptom tayo na nilalagnat paracetamol, may sipon bibigyan ko ng para sa sipon or Disudrin 
+or Nasatapp para mawala yung sipon nila, yun pala allergy sya iba pala yung gamot, inaalam natin yung history 
+kung talagang allergy ba o hindi, yun pala may polyp sila doon inaalam din natin ang history, hindi dapat 
+symptomatic lang. Uulit ng uulit yung fever nya kasi hindi natin alam yun pala dengue na yun leptospirosis na 
+which is malala na pala, kaya andami namin tinatanong sa history tsaka sa PE hindi lang isa. Kung sasabihin 
+nyo in the ano na hindi lang tayo magba-base dito kundi dapat yung history na correlate natin lahat. Ok so ive-
+verify natin, gagawa ka ng paper na ito na verify naman sya, o hingi pa kayo ng ibang certificate sa ibang 
+pulmo, ako lang ang pedia pulmo na certified. 
+ 
+(51:56 - 58:17) 
+ 
+ 
+AM-P02: Basta ilagay nyo sa paper nyo na kailangan for the final management of the cases is to be correlated 
+clinically, dapat ma-diagnose sya with the correlation ng history, otherwise hindi kasi tayo nagti-treat ng 
+symptom lang, kasi yung wheezing at tsaka yung crakles mga kasama lang sya ng part nun hindi sya yung the 
+whole picture, usually nga kailangan yung clinical lalo na kung nag-fo-follow up kung ok yung gamot na 
+binigay mo, kung ok yung gamot, kung nag wowork ba sya, mas ano tayo sa ibang perimeters not necessarily sa 
+wheezing or ma-o-auscultate doon. 
+ 
+AM-P02: Di kayo nag ano sa cardio no talagang lung sounds kayo 
+ 
+Ahnycca Krish N. Malimban: Opo 
+ 
+AM-P02: Usually kung sa lungs tayo magfo-focus we go by the inspection, palpation, auscultation. Hindi 
+ganun lahat sa organs, so titingnan parang sa inspection kung pantay ba sila baka mas mababa yung isa, yun 
+yung tinitingnan din natin, kung nahihirapan sila huminga may retractions na tinatawag, ibig sabihin pag 
+expiration may mga retraction, lumalalim parang nakikita mo yung linkage, inspection, nagpapalpate tayo, 
+auscultation yung isa. Pag humihinga sya di gaanong gumagalaw yung isang lung o hindi, kasama yun sa ano ng 
+lungs. Kung audible yung ano mo pag ginanyan mo, pag humihinga sya maririnig mo parang magaralgal sya. 
+Isa lang dun sa pag PE ng lungs yun nga, inspection, palpation, auscultation, percussion, so kung yung 
+<<<PAGE 25>>>
+  
+Malimban (2026)                                                                                                                            Page 25 of 83 
+auscultation isa lang dun. Hindi lang doon yung ano para ma-arrive natin yung diagnosis doon, kahit dun din sa 
+tyan ganun din inspection, palpation, auscultation, so nag-aano din tayo auscultation kasi iba yung sound ng 
+consolidation at tsaka kung buong-buo yung plema iba yung sound nya, so ginagawa yan kasama yun sa 
+physical exam kasama yun sa pag-diagnosis. 
+ 
+Ahnycca Krish N. Malimban: Bale ang mangyayari po sa amin since auscultation lang po sya, yung symptoms 
+lang po yung ma-identify namin. 
+ 
+AM-P02: Pag sinusulat, lahat ng ginagawa dapat nakasulat, kung hindi naka sulat hindi nyo ginawa, dictum ‘to 
+lahat lalo na sa hospital na kung ano-anong kino-contain or whatever, pag hindi nakasulat hindi ginawa, so lahat 
+naman dapat isulat, so pag sinusulat natin lahat yun dapat nakasulat, ano iniinspect mo, anong ino-auscultate 
+mo, anong palpation, anong percussion, so lahat yun dapat identified, may entry ka sa bawat ganun para ma-
+diagnose na merong problema o wala. 
+ 
+ 
+ 
+ Interview Transcript - MMG PPC Cooperative Hospital  
+ 
+ 
+• Interviewer: Ahnycca Krish N. Malimban 
+• Participant: CO-P03 (Nurse) 
+• Date of Interview: August 21, 2026 
+• Location of Interview: Conducted via phone call 
+ 
+List of acronyms: 
+ 
+ 
+• AI  — Artificial Intelligent 
+• DOTS — DirectlyObserved Therapy Short-cause 
+• ER — Emergency Room  
+• OPD — Outpatient Department 
+• PPE —Personal Protective Equipment 
+• TB — Tuberculosis 
+ 
+(0:08) 
+ 
+Ahnycca Krish N. Malimban: Hello po good afternoon 
+ 
+AM-P03: good afternoon, kayo yung mga student? 
+ 
+Ahnycca Krish N. Malimban: Opo 
+ 
+AM-P03: Bale ano ba yung iku-question nyo sana 
+ 
+Ahnycca Krish N. Malimban:  Kami po yung researchers galing Puerto Princesa City National Science High 
+School, so introduce ko po muna yung title namin which is Ausculta: An intelligent respiratory auscultation, 
+monitoring, and rehabilitation-support system. Tatanong lang po kami ng mga current respiratory monitoring 
+practices, so may mga list of questions lang po ako na sasagutin mo po tsaka po pwede po ba makahingi ng 
+permission na din po i-record yung yung call na ito for transcription. 
+ 
+AM-P03: Ok, pero yung about dun sa topic nyo agad parang pag doctor yung itatanong nyo, kumbaga sa nurse 
+side lang yung kaya ko i-explain. 
+ 
+<<<PAGE 26>>>
+  
+Malimban (2026)                                                                                                                            Page 26 of 83 
+Ahnycca Krish N. Malimban: Kasi po may particular questions lang kami na itatanong sa inyo kasi po may 
+mga connected doctors na din po kaming na interview regarding different questions din po yun para sa kanila, 
+mga current respiratory monitoring factors lang po itatanong ko. 
+ 
+(1:24) 
+ 
+Ahnycca Krish N. Malimban: Unang una po, maaari mo bang ilarawan ang paraan ng proseso mo sa 
+pagsasagawa ng respiratory assessment o auscultation? 
+ 
+AM-P03: Base sa mga naging experience ko before nung nagwowork pa ako, kumbaga ilang years na akong di 
+na nagvivital signs, bale anong specific na ano nyo, assessment? About auscultation? 
+ 
+Ahnycca Krish N. Malimban: Opo, yung ano pong tamang process, yung specific process. 
+ 
+AM-P03: Syempre i-explain mo muna sa patient kung ano yung gagawin mo, every time na may activity or 
+nursing procedure na gagawin sa patient dapat i-explain kung ano yung gagawin, yun yung pinaka unang dapat 
+ginagawa ng mga healthcare provider para t least maging cooperative sila. 
+ 
+(2:31) 
+ 
+Ahnycca Krish N. Malimban: So yung second question po, ano pong mga respiratory sounds ang karaniwang 
+mga sinusuri mo habang gumagawa ng auscultation? 
+ 
+AM-P03: Merong rales, merong wheezing, crackles, yan lang naman. 
+ 
+(2:49) 
+ 
+Ahnycca Krish N. Malimban: Yung pangatlo pong tanong, aling respiratory sounds o pagbabago sa tunog ng 
+paghinga ang pinakamahalagang matukoy sa iyong clinical practices. 
+ 
+AM-P03: Yung crackles. 
+ 
+Ahnycca Krish N. Malimban: Sunod po saang bahagi ng dibdib/baga karaniwang nagsasagawa ng 
+auscultation? 
+ 
+AM-P03: Both lung field, pareho sa right or left, para ma check mo talaga kung saan yung merong kakaibang 
+sounds. 
+ 
+(3:23) 
+ 
+Ahnycca Krish N. Malimban: Next question po, paano mo natutukoy kung sapat ang kalidad ng respiratory 
+sounds/recording o auscultation? 
+ 
+AM-P03: Di sya matutukoy kung ano yung specific diagnosis or problem ng patient, kailangan ng mga 
+additional diagnostic procedure like chest X-ray, bago mo masabi na yun na yung sakit ng pasyente. 
+ 
+(3:52) 
+ 
+Ahnycca Krish N. Malimban: So next question po, ano-anong problema ang nararanasan mo sa pagtatala o 
+paghahambing ng respiratory sounds mula sa isang consultation patungo sa susunod? 
+ 
+AM-P03: Pwedeng hindi yan sagutin? Kasi pang doctor na yan, actually sila yung nag-o-auscultate dito, 
+halimbawa nasa OPD o kaya nasa ER. Yung part lang na ginagawa ng mga nurse o mga nursing assistant, yan 
+yung pagcheck kung meron ngang crackles, merong wheezing. 
+ 
+(4:29) 
+<<<PAGE 27>>>
+  
+Malimban (2026)                                                                                                                            Page 27 of 83 
+ 
+Ahnycca Krish N. Malimban: Next question po, paano kasalukuyang itinatala o ipinapaalam ang respiratory 
+finding sa ibang healthcare professionals? 
+ 
+AM-P03: Once na meron ng confirmation sa doctor kung anong diagnosis, so ireremind lang yung mga 
+healthcare provider na mag-ingat siya, syempre dapat naka N95 mga PPE. 
+ 
+Ahnycca Krish N. Malimban: May tanong pa po ako, ano ang pinakamalalaking limitasyon ng conventional 
+stethoscope sa kalagayan o pamamaraan ng auscultation? 
+ 
+AM-P03: Di ko rin yan pwede sagutin. 
+ 
+Ahnycca Krish N. Malimban: Ito po ba yung nagmomonitor ng mga patients kasama din po sa mga doctor or 
+mga nurses na lang po yun, yung mga nagmomonitor po ng patients over multiple consultations. 
+ 
+AM-P03: Kung halimbawa lang pumunta yung patient sa OPD o outpatient, ang talagang nagchecheck sa 
+patient yung doctor, ang part lang nung nursing assistant na nasa duty or yung nurse kung sino man yung 
+nagdun sa OPD, magbigay ng vital signs, temperature, pulse rate, respiratory rate, yung weight ng patient. Yung 
+gumagawa ng mga specific na auscultation, doctor talaga yun. 
+ 
+(6:08) 
+ 
+Ahnycca Krish N. Malimban: May tanong pa po ako, yung respiratory assessment po ba kayo din yung 
+gumagawa or doctor din po? 
+ 
+AM-P03: Pwedeng mong sabihin na sa doctor, pwedeng tanungin lang namin yung patient, may cough po ba 
+kayo? Productive ba o non-productive. 
+ 
+Ahnycca Krish N. Malimban: So may follow up question po ako dun, ano pong mga problema ang maaaring 
+mangyari kapag ang respiratory assessment ay isinagawa sa labas ng clinical setting? 
+ 
+AM-P03: Sa akin wala naman sigurong tigil yun kasi kung ang gagawa naman ay professional at meron naman 
+syang stethoscope, kahit saan naman siguro pwede nyang gawin yun then ire-recommend nya sa patient na 
+pumunta sa ospital, di naman kailangan na may specific location na dun ka mag te-test, sa opinion ko lang. 
+ 
+(7:12) 
+ 
+Ahnycca Krish N. Malimban: So anong information po ang pinakamahalaga sayo kapag sumusuri ka po nga 
+respiratory recording ng isang pasyente? 
+ 
+AM-P03: Di ko na rin masasagot yan. 
+ 
+Ahnycca Krish N. Malimban: Ito na lang po last question, yung research po namin is isa po syang device and 
+may kasama po syang app, so basically yung device na po yun is connected sa iisang app na AI assisted 
+auscultation  system po sya, so kung sa tingin mo lang po masasagot nyo, what features would make a digital or 
+AI assisted auscultation system genuinely useful in your practices? 
+ 
+AM-P03: Tingin ko naman useful, kung magagamit ng tama or mai-poprogram ng maayos. 
+ 
+(8:00) 
+ 
+ 
+Ahnycca Krish N. Malimban: Ano-anong features po yung maaaring makinabang sa inyo po kapag may AI 
+assisted auscultation system? 
+ 
+<<<PAGE 28>>>
+  
+Malimban (2026)                                                                                                                            Page 28 of 83 
+AM-P03: Siguro yung mga part ng assessment kagaya ng mga tinatanong mo. syempre na kagaya ko na di na 
+expose sa pasyente palagi matagal na, since 2014 pa ako hindi gumagawa ng bedside nursing care. Ito kasing 
+hospital ng coop, ano lang kami referring hospital, so when we say referring hospital, responsibility ko lang i-
+refer yung aming in or out patient to other TB DOTS facility. Less na sakin yung assessment, di ko na masyado 
+tinututukan yun papers lang kailangan. 
+ 
+ 
+ 
+Interview Transcript - MMG PPC Cooperative Hospital  
+ 
+ 
+• Interviewer: Ahnycca Krish N. Malimban 
+• Participant: CO-P04 (Nurse) 
+• Date of Interview: August 22, 2026 
+• Location of Interview:  MMG PPC Cooperative Hospital  
+ 
+List of acronyms: 
+ 
+ 
+• AI  — Artificial Intelligent 
+• ER — Emergency Room  
+• ECG — Electrocardiogram 
+• ITR — Individual Treatment Record 
+• OPD — Outpatient Department 
+• TB — Tuberculosis 
+ 
+(0:08-2:00) 
+ 
+Ahnycca Krish N. Malimban: Yung research po namin is about an adaptive AI assisted auscultation system 
+for guided respiratory rehabilitation and longitudinal respiratory monitoring. So gagawa po kami ng app na may 
+kasama po siyang device na basically po is po siyang device, basically po isa syang device na makaka-identify 
+po ng severity ng isang respiratory disease po katulad ng asthma and mga pneumonia po so identify lang naman 
+po yung severity ng kanilang mga wheezing or mga cough or yung mga crackles para mas madaling ma-
+identify  tapos yung mga information na yun po mga konektado sa aming app upang inquire po yung mga 
+specialist na if ganito po ba yung disease na yon or isa po ba ito confirmation message na ganun po. So yung 
+una po ng tanong ay, maari mo po ilarawan ang karaniwang proseso sa pagsasagawa ng respiratory assessment 
+o auscultation?  
+ 
+CO-P04: Usually kasi ang nagagawa ng mga ganyan is yung mga doctor. Yung sila yan yung usually 
+gumagamit ng mga stethoscope para ma-identify, nag-a-assess pero usually kasi ang gumagawa niyan mga 
+doctor, ganun so ang ano sa mga lobes ng lungs so pwede sa likod simulan kaliwa, pakanan tas pababa. 
+ 
+(2:01- 2:46) 
+ 
+Ahnycca Krish N. Malimban: So yung second question po, ano-anong respiratory sounds ang karaniwang 
+sinusuri mo habang nagsasagawa ng auscultation?  
+ 
+CO-P04: Ah iba-iba naman eh. May mga ano yan eh mga stridor, wheezing mga ganon eh hindi mo naman sila 
+hahanapin ng usually na-identified mo lang kung ano yung naririnig mo.  
+ 
+Ahnycca Krish N. Malimban: So sunod po, aling respiratory sounds o pagbabago sa tunog ng paghinga ang 
+pinakamahalagang matukoy sa iyong clinical practice?  
+ 
+<<<PAGE 29>>>
+  
+Malimban (2026)                                                                                                                            Page 29 of 83 
+CO-P04: Actually lahat sila eh. Kasi kailangan mo i-identify para mas madali mong mada-diagnose kung ano 
+yung currently na nangyayari sa pasyente.  
+ 
+Ahnycca Krish N. Malimban: Tsaka diba po hindi naman po sila nagbabase kaagad sa lung sounds po kung 
+magda-diagnose po hindi. 
+ 
+CO-P04: Primary lang  
+ 
+(2:47-4:17) 
+ 
+Ahnycca Krish N. Malimban: Nag-interview po kasi sa hospital po na i-consider din po yung mga background 
+information ng isang particular patient kung may dati po ba siyang sakit na ganito para ma-ensure po na 
+diagnose.  
+ 
+Ahnycca Krish N. Malimban: So saang bahagi ng dibdib o baga ka karaniwang nagsasagawa ng auscultation?  
+ 
+CO-P04: Ah yun nga lahat ng part, sa kanan sa kaliwa. Lahat yan iche-check kasi diba may mga different lobes. 
+ 
+Ahnycca Krish N. Malimban: So pwede mo po ba ma-explain kung bakit po ba siya importante?  
+ 
+CO-P04: Kasi diba may ano yan parang mga compartment, usually minsan iche-check mo na yung sa taas kasi 
+hindi yan ano e made-detect agad kung yung problem nandun sa baba, pero iche-check pa rin yung kunyari sa 
+taas muna tapos para ma-identify kung saang area yung may tama or may nangyayari yung problem. 
+ 
+Ahnycca Krish N. Malimban: So next question po, paano mo matutukoy kung sapat ang kalidad ng respiratory 
+sound, recording or auscultation? 
+ 
+CO-P04: Usually malakas naman yan eh. Maririnig mo yan kaagad, pagka kunyari may problema yung isang 
+patient, pagka nandoon naman malakas din kasi yan, ma-identify mo naman.  
+ 
+(4:18-5:37) 
+ 
+Ahnycca Krish N. Malimban: So what factors commonly interfere with accurate auscultation?  
+ 
+CO-P04: Ah usually kuwari ano kung may damit pagka may damit hindi mo madaling ma ano kailangan 
+tatanggalin or iaangat mo as in yung skin to skin dapat. Tsaka minsan kung ano yung ingay din sa paligid, tsaka 
+pagka ano kunyari patient ay bata malikot, hindi siya madaling ano kasi gumagalaw-galaw. 
+ 
+Ahnycca Krish N. Malimban: So ano-anong problema ang naranasan mo sa pagtatala o paghahambing ng 
+respiratory sounds mula sa iyong auscultation patungo sa susunod? 
+ 
+CO-P04: Hindi ko rin masasabi kasi ano eh halos yung mga sounds kasi pare-parehas lang din naman, depende 
+lang sa lakas kasi minsan pagka malaki na or adult na yung patient pagka humihinga sila maano malakas yung 
+tunog kasi pag bata naman medyo mahina tsaka hindi mo naman kasi maano eh ma-instrukan, yung patient 
+minsan hindi na sumusunod agad sa sinasabi mo. 
+ 
+(5:38-7:35) 
+ 
+Ahnycca Krish N. Malimban: Susunod na question po, paano kasalukuyang itinatala at ipinapaalam ang 
+respiratory findings sa ibang health care professionals? 
+ 
+CO-P04: Pagka nag-e-endorse ah usually naman sa during endorsement Sinasabi naman agad yan or minsan 
+pagka kunyari may positive stridor ganun kasama yun sa charting saka sa endorsement. 
+ 
+Ahnycca Krish N. Malimban:  kasama na din po ba yung ITR? Yung ah individual treatment record?  
+ 
+<<<PAGE 30>>>
+  
+Malimban (2026)                                                                                                                            Page 30 of 83 
+CO-P04: Oo. Kasama yun sa mga endorsement. 
+ 
+CO-P04: Sa ano sa ER meron sila dyang ano ah OPD records andun yung conorbid, nandun din yung mga vital 
+signs, yung chief complaints, kumbaga yun yung brief summary kung bakit ka napunta sa hospital. Tapos pagka 
+i-endorse mo siya sa ward kunyari ia-admit yung pasyente ganun din i-explain mo rin yung sasabihin mo rin, 
+kunyari two year old patient ganon positive may asthma siya tapos wheezing ganun. 
+ 
+Ahnycca Krish N. Malimban: So ito ano yung next question po, ano ang pinakamalalaking limitasyon ng 
+conventional stethoscope o kasalukuyang pamamaraan ng auscultation?  
+ 
+CO-P04: Syempre kailangan mo i-manual yan eh diba? Like kunyari ikaw talaga yung lalapit, ikaw yung 
+gagawa kailangan i-ano pero 'di ba kung gagawa ng diagnosing yun lang yung ano ko feeling ko na nagiging ah 
+limitation kasi syempre pag busy ka hindi mo ma aano kaagad yung ibang ano pasyente kasi kailangan mo pang 
+puntahan kailangan mo pang assess manually. 
+ 
+(7:36-9:35) 
+ 
+Ahnycca Krish N. Malimban: Ano-anong hamon ang nararanasan mo sa pagsubaybay sa mga pasyente sa 
+maraming consultation o follow up kapag nagmo-monitor ka po ng madaming patient?  
+ 
+CO-P04: So yun nga kailangan mong ano punta puntahan isa-isa sila agad, eh papaano kung kunyari emergency 
+ah syempre kailangan ng inyong emergency situation. So syempre mag-isa ka lang hindi mo maano ka hindi mo 
+naman pwedeng hatiin yung sarili mo diba. 
+ 
+Ahnycca Krish N. Malimban: So anong respiratory information ang nais mong mas regular na masubaybayan 
+sa paglipas ng panahon? 
+ 
+CO-P04: Actually wala namang ano specific pero mas maganda sana kung lahat ng ano respiratory problems 
+kunyari ano hindi ka lang magfo-focus sa isa kasi dapat lahat sila para mas madadali kayong ma ah da-diagnose 
+or madaling mamo-monitor yung patient kapag ano, pangit kasi pagka nag-focus ka lang sa isa e papaano iba 
+yung ah nangyayari sa kanya ngayon o iba yung situations, edi hindi mo mapapansin kahit na may problem na 
+rin siya  
+ 
+Ahnycca Krish N. Malimban: So next question po ano-anong problema maaaring mangyari kapag ang 
+respiratory assessment ay isinagawa sa labas ng clinical setting or sa labas ng hospital?  
+ 
+CO-P04: Ah yung problem number one yan siguro is ano mami-misdiagnose mo siguro kasi syempre pagka 
+nasa labas ka maraming factors na pwedeng mag-affect diyan sa ano procedure na gagawin mo. So pwedeng 
+magkamali ka ng dinig or ah magkamali yung ano yung respond nung auscultation na ginawa. Yun lang yung 
+feeling ko na ang pinakamalaki. 
+ 
+(9:36-11:58) 
+ 
+Ahnycca Krish N. Malimban: Anong information ang magiging pinakamahalaga sa iyo kapag sinusuri ang 
+mga nakaraang respiratory recordings ng isang pasyente? 
+ 
+CO-P04: Ah unang-una siguro yung tunog mismo tapos yung history ng patient kung ano yung mga comorbids 
+na meron or ah sakit niya currently tsaka in the past para syempre maano yung lahat. ma sasama-sama mo yun 
+para ma-assess mo ng tama.  
+ 
+Ahnycca Krish N. Malimban: Tsaka malaki din kasi pong factor para ma-identify yung diagnosis ma-assess 
+ng diagnosis. So sa tingin mo po, ano-anong features ang magiging tunay na kapakipakinabang para sa iyo sa 
+isang digital AI assisted auscultation system? 
+ 
+<<<PAGE 31>>>
+  
+Malimban (2026)                                                                                                                            Page 31 of 83 
+CO-P04: Ah feeling ko mas ano mas mapapadali kasi pwedeng ah magkaroon ba ng ano pag- AI hindi mo na 
+kailangan i-manual diba o pwedeng lahat ng patient na kailangan iano sabay-sabay i-attach na lang yung 
+machine 'di ba?  
+ 
+Ahnycca Krish N. Malimban: Naagplano din po kasi ng AI system na assess system po na maaring mag-assist 
+sa mga pasyente po in case na wala pong available na professional.  
+ 
+CO-P04: So parang idikit lang or may machine lang kayo na gagamitin para ma-identify so hindi na kailangan, 
+yun maganda kasi hindi na kailangan puntahan pa or ano. 
+Jarred Paul Jesu G. Llacuna: Gaano magiging kapakipankinabang ang pagkakaroon ng paulit-ulit na respiratory 
+sound recordings mula sa parehong pasyente sa paglipas ng panahon?  
+ 
+CO-P04: Doon mo kasi makikita kung ano yung nagiging progress, kunyari pag may treatment na ginagawa 
+syempre through assessment mas makikita mo yung progress kung gumagaling ba or lumalala yung pasyente. 
+Kung nagwo-work ba yung treatment kapag syempre kunyari iba yung kahapon iba 'yung ngayon iba 'yung 
+bukas kailangan makikita mo yung improvement para magiging ano siya proof na yung treatment is nagwo-
+work or kung hindi man nagwo-work or kung lalala man ganon ma-identify mo rin kasi iba yung tunog dati iba 
+yung tunog ngayon mas malala ganun. 
+ 
+(11:59-13:42) 
+ 
+Ahnycca Krish N. Malimban: Okay so, anong mga pagbabago sa respiratory sounds ang mahalagang 
+subaybayan? 
+ 
+CO-P04: Lahat naman ng ano abnormal sounds na ano kailangan i-ano kasi kailangan i-watch out. Mm. So 
+kailangang tandaan, i-watch kasi yun yung magiging ano eh magiging factor kung papaano man.  
+ 
+Ahnycca Krish N. Malimban: So anong impormasyon ang dapat ipakita kapag ikinukumpara ang kasalukuyan 
+at nakaraang respiratory recordings ng isang pasyente?  
+ 
+CO-P04: Anong information? Yun na yung difference ng tunog. Kunyari diba abnormal sounds dun sa normal 
+sounds naano niyo na napakinggan nyo na rin diba, napakinggan  niyo na siguro kung ano yung pinagkakaiba 
+niya. Mapansin niyo rin yun, nag-improve siguro bumabawas yung kunyari wheezing, bumabawas yung tunog 
+niya ng wheeze ganon tas parang as time goes by lumalapit siya dun sa normal sounds pag nagi-input.  
+ 
+Ahnycca Krish N. Malimban: So makakatulong ba sa patient monitoring ang trend o graph ng respiratory 
+sound patterns? Bakit o bakit hindi?  
+ 
+CO-P04: Makakatulong, kasi nga doon nga tayo nagche-check kung ano yung nagiging progress. Definitely 
+kailangan siyang i-monitor kasi doon mo makikita yung magiging consistency. Paulit-ulit lang naman tayo dito 
+kasi ano yun eh yun talaga yung ginagawa kasi isa siya sa mga basic assessments na kailangan ulit-ulitin, kasi 
+nga wala pa tayong ibang paraan para ma-identify.  
+ 
+(13:43-15:59) 
+ 
+Ahnycca Krish N. Malimban: So gaano kadalas magiging clinically useful ang paulit-ulit na respiratory sa 
+monitoring?  
+ 
+CO-P04: Siguro ano hindi naman kailangan kasi oras-oras, kasi minsan may mga episodes yung patient. 
+Kunyari ah nagkakaroon ng asthma attack, pwede mo siyang iano, before ka magbigay ng gamot kailangan 
+mong i-monitor tas after ka magbigay ng gamot imo-monitor mo sa uli. Tapos parang ganun lang, parang 
+makikita mo kung nag-improve or may nangyari ba, tas again pagka kasi minsan may mga timing yung gamot 
+diba, so usually pwede mo rin i-check everytime na bumibigay ka ng ano gamot pwede rin yun. Kasi kung i 
+oras-oras mo na  nagiging hassle na rin pag tulog lalo na tulog yung payente so pwede yun kapagka kunyari 
+magbibili ka ng gamot pwede mong saglitan lang ganun or pwede the next day kung hindi sila kung ayaw nila, 
+depende rin sa kung papayag ang pasyente. 
+<<<PAGE 32>>>
+  
+Malimban (2026)                                                                                                                            Page 32 of 83 
+ 
+Ahnycca Krish N. Malimban: So ano-anong breathing or respiratory rehabilitation exercises ang mga 
+karaniwang inirerekomenda para sa mga angkop na pasyente?  
+ 
+CO-P04: Breathing exercises? 
+ 
+Ahnycca Krish N. Malimban: Opo. Mga rehabilitation exercises na maaaring i-communicate. 
+ 
+CO-P04: Iba-iba eh, depende sa cases eh pero usually yung mga common yun mga deep breathing exercise. 
+Pero sa mga ano lang naman 'yun eh ah pagka medyo kunyari nag ah Ah anong tawag nito? Anxiety attack yung 
+mga ganon nag-hyperventilate. Pwede kang magbox breathing. Pwede ka ring mag ah ano may mga iba-ibang 
+tools din na ginagamit para sa breeding exercises. Pwede rin yung alam niyo yung bola na pinapang anong 
+tawag doon? Ah nakimutan ko na yung tawag siya eh. Parang ano machine siya na ginagamit tas bubugahan ay 
+hihigupin mo siya pero part din siya ng breathing exercises para ma masukat yung capability yung strength ng 
+lungs mo. 
+ 
+(16:00-17:08) 
+ 
+Ahnycca Krish N. Malimban: Ah okay po. Anong ano-anong salig ang dapat isaalang-alang sa pagpili o pag 
+rekomenda ng breeding exercise?  
+ 
+CO-P04: Ah iba-iba. Parang ano depende sa case kung anong ano. Syempre kailangan ni I ah I sukatin kung 
+ano yung klase ng sakit na meron siya or kung anong kailangan niya lang hindi mo naman pwedeng ibigay yung 
+isang klaseng breathing exercises kung hindi naman angkop sa ah situation ng pasyente. So kailangan mo pa rin 
+i-study kung ano yung kailangan talaga nila. 
+ 
+Ahnycca Krish N. Malimban: So ano-anong structures ang dapat matanggap ng pasyente bago magsagawa ng 
+respiratory exercise?  
+ 
+CO-P04: Ah syempre dapat maano siya marunong siyang sumunod sa instruction ng kunyari papainhale kung 
+anong gagawin sa procedure kung anong ah exercise e gagawin. Kailangan mong kailangan marunong una 
+marunong siyang naiintindihan niya muna 'yung instructions mo kasi syempre kunyari lalo na pag pedia, pag 
+mga bata sila syempre hindi mo sila ano matuturuan ng breathing exercises kasi hindi ka nila naiintindihan ng 
+maayos. So siguro yung mga mas kailangan mo mahirap kasi turuan yung bata talaga lalo na yung mga todler. 
+ 
+(17:09-18:35) 
+ 
+Ahnycca Krish N. Malimban: So anong impormasyon ang dapat subaybayan habang o pagkakatapos ng 
+rehabilitation session? 
+ 
+CO-P04: Anong informations?  
+ 
+Ahnycca Krish N. Malimban: Opo. Yung dapat subaybayan habang o pagkatapos. 
+ 
+CO-P04: ah during siguro yung ano yung sa sounds pa rin ba Saan tayo babalik lagi sa sounds. Kung ah kung 
+before kung anong tunog tas after naman gawin yung procedure kung may improvement doon sa tunog or sa ah 
+mismong tawag dito yung pinapakita ng pasyente kung ano yung nangyayari sa patient kung hirap na rin ba siya 
+huminga or may improvement na nangyari.  
+ 
+Ahnycca Krish N. Malimban: So anong mga sitwasyon dapat ihinto ng pasyente ang exercise at humingi na 
+ng professional evaluation?  
+ 
+CO-P04: Ah kapagka ano feeling niyo hindi nagwo-work or hindi hindi nag-i-improve yung kunyari sabihin 
+natin na ah binibigyan niyo siya ng isang example ng ano breathing exercises tapos nakikita niyo kahit na ilang 
+beses niya ng ginawa hindi pa rin nagwo-work yung ginagawa niya or hindi pa rin nag-improve yung ano niya 
+<<<PAGE 33>>>
+  
+Malimban (2026)                                                                                                                            Page 33 of 83 
+breeding niya or sabihin natin yung kung ano as in erratic pa rin sa ganon siguro kailangan na ng ano like mas 
+ano na through examination na or kailangan na ng professional ano talaga. 
+ 
+(18:36-20:06) 
+ 
+Ahnycca Krish N. Malimban: So ano ang iyong mga alalahanin tungkol sa isang AI assisted system na 
+nagbibigay ng gabay sa respiratory exercises?  
+ 
+CO-P04: Ah yun lang yung sa ano kasi syempre minsan iba-iba yung diba sabi ko nga yung history pagka AI 
+kasi diba may sinusunod yan na ano algorithm or ano database syempre pagka iba naman kasi yung magiging 
+ano ng tao eh assessment ng tao sa assessment AI kasi ang AI naman parang may kung ano yung nilagay mo 
+doon yun yung susundin niya eh papaano kung ah magkaroon ng like hindi natin sinasa ano na syempre 
+magbago biglang may magbago sabay yun yung hindi siya nakalagay doon sa algorithm ng AI. Maaaring 
+magkaroon ng pagkakamali doun sa ibibigay na ano na tawag dito na exercises kung sakali or ipapagawa ng ano 
+AI.  
+ 
+Ahnycca Krish N. Malimban: Okay po. Next question. Alin sa mga sumusunod na features ang magiging 
+pinakamahalaga sa isang AI assisted auscultation system? So magbibigay po ako ng mga list na kung sa tingin 
+po makakatulong. So una po a guided auscultation. Pangalawa respiratory sound recording o pag-record ng 
+respiratory sounds. Pangatlo, AI sound classification. Pang-apat, recording quality assessment. Panlima, patient 
+history. Pang-anim, longitudinal trend analysis. Pampito, alerts for significant changes. Pangwalo clinician 
+dashboard.  
+ 
+CO-P04: Ilan yung lahat na yan? Yan na yan? 
+ 
+Ahnycca Krish N. Malimban: Opo.  
+ 
+CO-P04: Pipili lang ako ng ilan?  
+ 
+(20:07-22:12) 
+ 
+Ahnycca Krish N. Malimban: Opo, or pwede ka din pong mag-add.  
+ 
+CO-P04: Lahat naman siya importante sakin kasi ano eh lahat naman ng binanggit mo is parang mas mapapa 
+better yung kondisyon ng patient like andiyan yung ano tawag dito yung sound recording mas mapapadali yung 
+pagtingin ng history kasi maririnig mo yung tunog nung nakaraan diba, yung sound classification mas 
+mapapadali yung pag-identify hindi mo na kailangang manual manual or pwede mo naman i-manual kung hindi 
+ka sigurado ganun tapos tapos lahat naman siya sa ano wala naman akong nakikitang hindi makakatulong diyan. 
+Depende na lang talaga sa paggamit.  
+ 
+Ahnycca Krish N. Malimban: So next po, paano mo nais ipakita ang AI results? So may magbibigay ulit po 
+ako ng mga bullets. So unang una po sound classification, pangalawa confidence score, pangatlo, graph or trend 
+at pang-apat audio playback, and last yung text explanation.  
+ 
+CO-P04: Ah sa ano importante kasi dito sa syempre sa Pilipinas kailangan ng ano ah hindi naman present lagi 
+yung mga machine. So Feeling ko pwede naman lahat. Kaso lang mas maganda lang sana kung kasi hindi 
+naman natin accessible lahat yung ano na yan eh yung yung, sabagay yung graph pwede naman sa papel 
+although yung audio playback tsaka yung ano hindi mo ma-access yan lagi eh. Siguro yung text na lang, text 
+explanation kasi hindi naman yan ginagawa katulad dito sa ano sa mga X-ray X-ray ganun although may ano 
+print out ng ano ng film na tinatawag, kailangan pa rin ng explanation ng doctor or pag binabasa kasi ng mga 
+radiologist. So kailangan may explanation pa rin ka para kahit na yung mismong pasyente mas makakaintindi 
+kasi pagka feeling na kunyari doon sa x-ray hindi mo naman magegets agad yun kasi hindi mo naman alam 
+kung ano yung mga nandoon diba?  
+ 
+(22:13-23:09) 
+ 
+<<<PAGE 34>>>
+  
+Malimban (2026)                                                                                                                            Page 34 of 83 
+Ahnycca Krish N. Malimban: So next question po anong impormasyon ng hindi dapat ibigay ng system ng 
+walang professional interpretation?  
+ 
+CO-P04: Ah siguro yung result o yung diagnosis Kasi hindi ka pwedeng basta-basta magbigay ng isang 
+diagnosis ng walang ano proper explanation kasi ah pwedeng ma-misinterpret or pwede nilang kunyari 
+nandiyan uso kasi dahil sa atin yung mga sariling explanation baka kunwari pag sinabi ng ano ganito i-explain 
+nila sarili nila hindi naman na hindi naman pala ganun yung nangyari kung bakit doon nag-end parang ganun so 
+kailangan ma-explain muna kung bakit ganun yung naging result 
+  
+Ahnycca Krish N. Malimban: Okay po. So po anong uri ng alerts o mga notification ang clinically clinically 
+appropriate?  
+ 
+CO-P04: Alert? 
+ 
+Ahnycca Krish N. Malimban: opo, mga notification mag ano 
+ 
+CO-P04: Tunog?  
+ 
+Ahnycca Krish N. Malimban: Sa integrated sa AI app namin. 
+ 
+(23:10-24:20) 
+ 
+CO-P04: Wait kahit ano namang tunog eh pero mas maganda sana kunyari kung emergency situation is medyo 
+malakas para ano hindi naman pwedeng “tut” ganun lang yung ano, dapat tuloy-tuloy para at least maririnig ng 
+mga professional sa health care situation para maano sila magiging aware sila mga kaya ma-alert eh.  
+ 
+Ahnycca Krish N. Malimban: So next po. Anong antas ng AI accuracy ang itinuturing mong katanggap-
+tanggap bago gamitin ang system bilang clinically support tool? 
+ 
+CO-P04: Ah depende na siguro yan sa mga magiging ano magiging result ng syempre kailangan niyo ng trial 
+and error.  
+ 
+Ahnycca Krish N. Malimban: Opo. 
+ 
+CO-P04: Tapos kailangan din i magkakaroon din yan ng mga subject for ano ah i-experiment ano tama ba yung 
+nagiging syempre comparative research yan diba kailangan ico-compare yung result ng AI dun sa result ng mga 
+professional team tapos magiging parehas yung ano nila baka pwedeng gamitin mga ganon syempre matamang 
+proseso pa naman yan, pero sa early ano early level baka pwede namang ano makatulong lang parang ganun. 
+ 
+(24:21-27:00) 
+ 
+Ahnycca Krish N. Malimban: So ano-anong safeguards ang dapat isama upang maiwasan ang maling 
+interpretation ng user sa AI results?  
+ 
+CO-P04: Ah mahalaga dyan yung ano talaga kung may integrate yung tunog talaga nung ano abnormal sounds 
+na ano yun kailangan nandoon pero unlike kasi nga iba-iba kasi minsan ganun yung tunog niya pero may 
+something na iba pagka nandun na kasi kayo, pag nandon na kasi kayo pagka minsan pag nasa setup na kayo 
+pagka pinapakinggan niyo sila usually ah kunyari yung isang baga sa isang lobe sa right lobe sabihin natin iba 
+yung tunog and then sa kabila naman biglang magiging iba rin yung tunog. So may mga instances na kahit 
+although kahit mga mga maliit na details lang biglang nag-iiba yung ano niya sounds. So kaya kailangan ma-
+integrate ng maayos yung kung ano yung mga narinig siguro ng ng ano ng AI pwede nilang ilagay doon para 
+kunyari kung narinig niyo sa isang part may wheezing sa kabila naman may stridor sa kabila naman may 
+crackles ganun. Kailangan ma kumbaga ma labas sa result yun na kung saang lobe part, kung saang kung anong 
+ano kung anong lobe saang ano para kung ano yung tunog para mas ma, kasi pwedeng yung hinga niya kunyari 
+exhale tapos pag inhale biglang nag-iba yung tunog may mga instances na baka baka mali yung ano result so 
+<<<PAGE 35>>>
+  
+Malimban (2026)                                                                                                                            Page 35 of 83 
+kailangan ma-integrate ng maayos tsaka maglabas yung result para pwedeng i ano ba tawag dito mapili kung 
+ano yung talagang nag-ano kasi iba-iba yung basta hindi ko maintindihan eh. 
+ 
+Ahnycca Krish N. Malimban: Okay po. So anong anyo ng device ang mas gusto mo sa iyong sa iyong tingin 
+ko? So may mga choices po kami dito na handheld, wearable, phone connected device o iba pa.  
+ 
+CO-P04: Mas maganda sana kung ano kung wearable kasi para ano pwedeng i-ano pwedeng i-attach sa 
+pasyente tapos pagkatapos gamitin pwedeng ibigay sa i-attach naman sa kabila or pag kailangan ng continuous 
+recording. So pwedeng i-attach niya lang doon kasi pag handeld mo pa so parang wala din siyang pinagkaiba 
+doon sa ano sa normal na ano kasi hahawakan mo pa rin naman para ma-record diba ididikit mo pa rin. So mas 
+maganda sana kung ah wireless siya tapos pwede mo siyang isuot tapos automatic magre-record pero syempre 
+kailangan ng ano yun hindi yun basta-basta madaling gawin diba?  
+ 
+(27:01-28:44) 
+ 
+Ahnycca Krish N. Malimban: Okay po, so.  
+ 
+CO-P04: Kaya nga bilib ko sa inyo mga naisip niyo yung ganyan.  
+ 
+Ahnycca Krish N. Malimban: Anong wika or uri ng instructions ang mas gusto mo? So may choices po ay 
+Filipino and English. Filipino and English o at mga iba pa. 
+ 
+CO-P04: Ay siguro syempre dito tayo sa Pilipinas mas maganda kung dalawa kasi may mga ibang lalo na 
+pagka mga patient natin dito is hindi naman lahat kasi literate sa English ah language. So dapat pwede kayong 
+mag-choose kung either Tagalog, pwedeng magtagalog, pwedeng mag-English  
+ 
+Ahnycca Krish N. Malimban: Yung translation po ng  
+ 
+CO-P04: Oo kasi may mga pasyente na hindi naman ganon kagaling mag-interpret ng English language lalo na 
+kung sila sila lang.  
+ 
+Ahnycca Krish N. Malimban: Okay, so. 
+ 
+CO-P04: Tagalog kung may Tagalog edi pwede rin nilang gamitin. 
+ 
+Ahnycca Krish N. Malimban: Paano mo gustong ipakita ang results? Sa simple text ba icons, color indicators, 
+graphs, voice feedback o combination?  
+ 
+CO-P04: Ah kung sa ano kung mga professional naman yung gagamit siguro kahit icons pwede. Pero kung ano 
+kasi kung text pwede ring text kasi para kahit papaano makikita din kunyari dito kasi sa atin may mga kunyari 
+kung nasa sa ward sabihin natin nasa private room ah tapos ginagamit yung machine niyo diba? So pwede 
+nilang ah. Ah kung may text doon simple text na ano pwedeng makita yung bantay sabihin nila ma-identify nila 
+agad na kunyari ganun ba yung breathing ng pasyente erratic siya so pwedeng i-call out yung atensyon agad ng 
+mga ano para naman sa mga banda yun pero kung mga professional naman dun sa ano yung gagamit depende 
+lang sa gagamit siguro gawin niyo na lang ng ano parang options na lang kung ano pwede ano, mas maganda 
+pag may options, so madami. 
+ 
+(28:45-30:13) 
+ 
+Ahnycca Krish N. Malimban: So, ano ang makapagbigay sa inyo ng tiwala sa results na ibinibigay ng AI 
+system? 
+ 
+CO-P04: Ah kung siguro kung ano laging ano same sa kunyari pag ima-manual mo same yung result niya 
+siguro mapagkakatiwalaan mo na rin yan kasi nga ah katulad sa dati naman diba wala namang automatic sa 
+kunyari pag sa pag BP sa mga automatic na pagkuha ng ano blood pressure dati wala naman yung automatic ah 
+na gamit so as time goes by syempre yung automatic lumalapit na siya sa manual or parang yung result ng 
+<<<PAGE 36>>>
+  
+Malimban (2026)                                                                                                                            Page 36 of 83 
+manual nagiging same na rin dun sa automatic. Parang nagiging reliable na rin, so sana ganyan pag kunyari pag 
+ima-manual mo same na siya sa magiging result ng AI kung ano mang interpretation ng AI.  
+ 
+Ahnycca Krish N. Malimban: So sa tingin mo po ano ang maaaring maging dahilan upang ihinto mo ang 
+paggamit ng device?  
+ 
+CO-P04: Ah siguro pagka-brown out pag diba kasi syempre kailangan niya ng battery.  
+ 
+Ahnycca Krish N. Malimban: Opo. 
+ 
+CO-P04: Tapos siguro ano yun pagka hindi naman kasi natin maiwasan na pagkaganyan mag malfunction. So 
+may mga instances din siguro na pagka nagma-malfunction na device hindi na siya gagamitin. Ayun lang naman 
+siguro yung or pagka ano angkop dun sa sa situation na binigay, baka pwedeng hindi mo na gamitin yung ganun 
+kasi iba-ibang sitation na nangyayari lalo na sa ER ganun.  
+ 
+(30:14-30:57) 
+ 
+Ahnycca Krish N. Malimban: Ano-anong safety concerns ang dapat isaalang-alang ng developer sa pagbuo ng 
+auscultant?  
+ 
+CO-P04: Ayun sa ano pinakamaano sa electric ano kunyari baka makurente or sumabog, yun lang naman. 
+ 
+Ahnycca Krish N. Malimban: Anong impormasyon ang dapat palaging samahan ng rekomendasyon 
+kumunsulta sa healthcare professional. 
+ 
+CO-P04: Ano? 
+ 
+Ahnycca Krish N. Malimban: What information should also be accompanied by a recommendation to consult 
+a healthcare professional. 
+ 
+CO-P04: Pagka yung result ng auscultation or yung result ng diagnosis ng machine is ano na kunyari sabihin 
+natin malala or ano hindi normal, siguro kailangan na ng ano yun 
+ng ng. 
+ 
+Ahnycca Krish N. Malimban: Healthcare guide.  
+ 
+CO-P04: Oo. 
+ 
+(30:58-32:52) 
+ 
+Ahnycca Krish N. Malimban: Okay po. So ano-anong panganib ang maaaring mangyari kung masyadong aasa 
+ang pasyente sa AI generated respiratory assessment?  
+ 
+CO-P04: Ah ayun tulad ng sabi ko baka ma-miss ano misinterpret or na misdiagnose yung ano tawag dito. May 
+nangyari yan katulad nung sa amin dati yung sa kanya naman sa heart rate diba may uso yung sa ano yung sa 
+Apple Watch, diba may mga ECG ECG yan dyan. Oo, sa heart rhythm tsaka sa electricity ng heart. Minsan kasi 
+yung yung pasyente namin yon ano nag eh may sakit si sa puso diba? So umasya si doon sa sa relo. So parang 
+nag na-misinterpret sabay yun naano siya nag-panic siya kasi akala niya ah ganun na may parang nagkaano 
+yung heart niya dahil lang doun sa maling nabigay nung, ng 
+yung relo niya. So yun yung mga pinaka-downside siguro doon kasi baka pwedeng mangyari. Kunyari mga 
+misdiagnose ng ah ng app sabay, syempre yung as a person na worry ka sa sarili mo 'di ba sa health mo 
+magpapanick ka kasi yan yung binigay eh ba.  
+ 
+Ahnycca Krish N. Malimban: So anong impormasyon tungkol sa pasyente ang kinakailangan para sa 
+makabuluhang monitoring?  
+ 
+<<<PAGE 37>>>
+  
+Malimban (2026)                                                                                                                            Page 37 of 83 
+CO-P04: Siguro lahat ng ano kung anong mga kailangan ng information doon kung ano yung needed na ano 
+like yung sounds yung possible ah diagnosis possible lang naman hindi naman masabi. Kunyari na din yung. 
+ 
+Ahnycca Krish N. Malimban: Patient record. 
+ 
+CO-P04: Hindi kasi hindi mo naman malalagay agad diyan yung pero kung ano pwede malagay yung history 
+agad. 
+ 
+Ahnycca Krish N. Malimban: Opo yung mga data ng background data. 
+ 
+CO-P04: Kung isang click mo lang makikita mo kaagad yung data nila, sabagay app naman yan diba so pag 
+clinick mo yung ah account ng tao makikita mo agad yung history. Pwede rin mas maganda ganon.  
+ 
+(32:53-33:42) 
+ 
+Ahnycca Krish N. Malimban: So what patient information should not be collected unless necessary? 
+ 
+CO-P04: Ay mga private information siguro na lang yung kunyari yung address  
+ 
+Ahnycca Krish N. Malimban: Kasama din po ni yung patient record kasi po sa. 
+ 
+CO-P04: Oo kasi hindi siya pwedeng i-access ng kahit na sino lang kasi diba ano data protection mo doon tapos 
+yung ano. 
+ 
+Ahnycca Krish N. Malimban: So komportable ka bang ma-store ang inyong respiratory recording sa isang 
+mobile application?  
+ 
+CO-P04: Pwede oo naman kung makakatulong naman sao tsaka kung diba meron naman yung tinatawag na ano 
+yung mga I agree I agree dun sa ano diba?  
+ 
+Ahnycca Krish N. Malimban: Opo.  
+ 
+CO-P04: Ano tawag dun?  
+ 
+Ahnycca Krish N. Malimban: Yung ano po yung ah ‘How do you confirm this?’. 
+ 
+CO-P04: Basta kung mag-agree naman sila doon siguro nag-agree na rin sila doon sa term niyo, terms and 
+conditions.  
+ 
+(33:43-34:28) 
+ 
+Ahnycca Krish N. Malimban: So what privacy concerns would you have regarding your respiratory 
+recording?  
+ 
+CO-P04: Privacy? Eh siguro lang kapagka ano kunyari may taong gustong gumawa sayo ng masama i-access 
+yung ano mo alam nila na may kunyari may asthma ka ganon makikita nila na ay yung tao na to ano ganun baka 
+kung gusto nilang gumawa sayo ng masama ipapaanuhin ka.  
+ 
+Ahnycca Krish N. Malimban: Okay po. So next question. Kanino ka komportableng maibahagi ang inyong 
+respiratory monitoring data?  
+ 
+CO-P04: Siguro doon sa ano sa ano sa health practitioners, yun sa doktor mo ah nagti-treat kayo. Sa inyo kayo 
+naman gumawa ng app diba? 
+ 
+(34:29-37:43) 
+<<<PAGE 38>>>
+  
+Malimban (2026)                                                                                                                            Page 38 of 83 
+ 
+Ahnycca Krish N. Malimban: Sige po. So next ko um piliin ang limang pinakamahalagang features na dapat 
+mayroon sa ausculta. So ito po yung mga yung mga niya po mga features nya na respiratory sound recording, AI 
+respiratory sound classification, guided auscultation, longitudinal monitoring, guided respiratory rehabilitation.  
+ 
+CO-P04: So ah pinakaimportante siguro diyan yung pag ano yung classification tapos ano ba yung isa? Ah sa 
+recording Pero kasi iyung sa ano naman yan mai-improve pa eh yung sa guided respiratory rehabilitation kasi 
+hindi naman yan kaagad-agad siguro magkaano magki-click depende na lang kung maaano niyo kaagad kasi 
+ano yan eh per patient yan eh so mag-a-adopt pa yung machine niyo o yung AI niyo dun sa mismong pasyente. 
+Siguro yung ano na lang yun nga yung sound recording specification tsaka yung ano yun lang yung ano eh mga 
+importante talaga na sa mga preliminary test niya na unang gawin.  
+ 
+Ahnycca Krish N. Malimban: So sa tingin mo po meron may component pa po na maaaring magkaroon ng 
+features yung ausculta na maibibigay mo na ano other than this five features  
+ 
+CO-P04: Kung ano kung pwedeng ano tawag dito kung pwede niyong i mag-ping agad kunyari i-connect niyo 
+sa ano diba yung machine ico-connect niyo sa phone tapos pwedeng i-ano agad ma kung may mga doktor sila 
+pwedeng i-send doon sa kanila sa medical practitioners kunyari sa mismong doctor nila para ano pero usually 
+kasi hindi naman ano eh hindi naman hindi naman agad-agad sa sa mga breathing breathing  hindi naman siya 
+kaagad as in ah tawag dito emergency ah situations na ano pero pwede siyang gawing pang ano pang tawag dito 
+pang-assess pero hindi kasi siya final agad kasi.  
+ 
+Ahnycca Krish N. Malimban: So ano ang isang pangunahing problema na sa tingin mo ay dapat lutasin ng 
+ausculta?  
+ 
+CO-P04: Ah siguro yun nga yung access kasi hindi naman lahat ng tao alam kung ano yung abnormal sounds 
+about sa sa lungs. So yun mas magagandang ano mas mas mai-inform siguro yung tao mm kasi halos syempre 
+ano naman yan app so pwedeng iano or gamit ano ba siya device? 
+ 
+Ahnycca Krish N. Malimban: Opo. Device na may app. 
+ 
+CO-P04: So yun pwedeng pwedeng maka-access yung mga tao na hindi ganon kaalam sa ano sa medical field 
+na malalaman ah maano nila, matututunan nila kung papaano ah pakinggan agad kung ano yung ah ganito pala 
+yung yung ano niya yung cause bakit ganyan yung tanong parang ganon ng hindi mo na i-explain.  
+ 
+(37:44-38:35) 
+ 
+Ahnycca Krish N. Malimban: So last three questions po sir. So if you could design an ideal respiratory 
+monitoring tool what would it be? Ano pong ano. 
+ 
+CO-P04: Ako kung ako? 
+ 
+Ahnycca Krish N. Malimban: Opo, tingin mo po 
+ 
+CO-P04: Sa ano yun lang sa ano lang sa pag-classify tsaka ano lang pag-record yun lang kasi ah yung iba 
+naman yung ano pwede naman kasi ano yan eh pwede namang gawin ng ano ng mas kailangan pa ng testing 
+para kunyari dun sa rehabilitation yung sabi ko sa inyo hindi kasi siya ano agad kunyari pagka narinig mo yung 
+tunog hindi mo agad masasabi na ganito yung dapat gawin. 
+ 
+Ahnycca Krish N. Malimban: Opo kasi may mga iba may other factors na kino consider po.  
+ 
+CO-P04: So yun lang saakin ganun lang pag-identify, pag-classify, tas pag-record para pwede mong iparinig sa 
+doktor na ay doc, ganito yung tunog ng ano kagabi ganon.  
+ 
+(38:36-40:51) 
+ 
+<<<PAGE 39>>>
+  
+Malimban (2026)                                                                                                                            Page 39 of 83 
+Ahnycca Krish N. Malimban: So anong feature or capability ang sa tingin mo ay kasalukuyang kulang sa mga 
+respiratory monitoring tools?  
+ 
+CO-P04: Features? Ah yung mga ginagamit namin ngayon? 
+ 
+Ahnycca Krish N. Malimban: Opo opo ngayon  
+ 
+CO-P04: Ah pagka ano syempre kasi mas mabilis sana kung yun nga katulad ng sabi ko sa inyo is 
+pagkapwedeng gamitin ng madami ng sabay-sabay kasi pagka toxic at maraming pasyente naangailangan hindi 
+mo kaagad magagawa 
+sa maraming pasyente kasi kailangan isa-isahin sila eh papaano kung biglang nag respiratory arrest yung isa 
+kasi hindi mo pa napuntahan diba so may inaasikaso ka pag iba tapos biglang nag-arrest yung isa so dapat kung 
+sabay-sabay sila sana nache-check makikita mo kaagad kung sino yung pinaka mas nangangailangan ng 
+atensyon ganun lang. 
+  
+Ahnycca Krish N. Malimban: So pinaka-last po na tanong, anong payo ang maibibigay mo sa developers ng 
+ausculta? 
+ 
+CO-P04: Ano lang gawaan niyo lang ng ano ituloy niyo lang kung ano yung maganda naman kasi nagiging ano 
+niyo eh ah idea niyo alam ko maganda yung anong tawag dito yung gusto niyong mangyari so siguro ano 
+gawaan niyo lang ng maraming testing tas magano lang kayo ng siguro ah medyo healthcare ano na alam yung 
+ano mga kunyari may kailangan niyo lang talagang mag-trial and error yun okay so sa makuha niyo yung 
+ 
+ 
+ 
+ 
+Interview transcript - Ace Medical Hospital 
+• InterviewerInterviewer: Ahnycca Krish N. Malimban 
+• Participant: AM-P05 (Doctor) 
+• Date of Interview: August 30,  2026 
+• Location of Interview: Ace Medical Hospital 
+List of acronyms: 
+• AI: Artificial Intelligence  
+• BP: Blood Pressure  
+• COPD: Chronic Obstructive Pulmonary Disease  
+• PGH: Philippine General Hospital (mentioned in reference to the RxBox telemedicine project) 
+• RR: Respiratory Rate Rx / RxBox: Prescription / RxBox (referenced as a local Philippine telemedicine 
+device) 
+• SD: Secure Digital  
+• WAV: Waveform Audio File Format  
+  
+(0:00 - 0:18) 
+AM-P05: Hi, good evening. 
+Ahnycca Krish N. Malimban: Hi, hello doc. Clear po ba audio? 
+AM-P05: Oo. Ah, pero walang video ha, parang audio lang nakikita ko. 
+Ahnycca Krish N. Malimban: Oo po, 'yung screen share ko po. Bale doc, ang gagamiti— since iga-guide ko 
+po kayo, like walk-through something... 
+AM-P05: Ah, sige. 
+Ahnycca Krish N. Malimban: Okay lang po ba na phone ang gagamitin ko? Medyo mabagal kasi ang laptop. 
+<<<PAGE 40>>>
+  
+Malimban (2026)                                                                                                                            Page 40 of 83 
+AM-P05: Sige, sige. 
+Ahnycca Krish N. Malimban: Okay lang po na phone? Kasi mas mabilis, ang laptop medyo mabagal. 
+AM-P05: Mm-hmm. 
+Ahnycca Krish N. Malimban: Sabi lang po, Doc, kung ready na po. 
+AM-P05: Sige, go lang. 
+Ahnycca Krish N. Malimban: Okay na po. 
+ 
+(0:18 - 0:43) 
+Ahnycca Krish N. Malimban: Okay, doc. Bale iwa-walkthrough ko po kayo sa aming medical app. Hindi 
+naman po siya-- hindi niya nire-replace 'yung medical practitioner, pero ito po doc... Log out ko po muna, doc. 
+Ito po 'yung aming home page po. Like for new users, kapag bago nilang download, ito po 'yung unang makikita 
+nila. Actually, may user and agreement policy po diyan na kailangan niyang mag-agree, and then... 
+ AM-P05: May alin? 
+Ahnycca Krish N. Malimban: May user policy and agreement po. 
+AM-P05: Mm, sige. Pa-try nga ng Filipino, meron na ba 'yan? 
+Ahnycca Krish N. Malimban: Meron po, doc. 
+  
+(0:43 - 1:07) 
+Ahnycca Krish N. Malimban: Bale itong dalawang language lang po, English at Filipino, since mahirap po 
+'yung iba. 
+ AM-P05: Okay. 
+Ahnycca Krish N. Malimban: Okay, so English po muna? English muna. 
+AM-P05: Sige, sige. 
+Ahnycca Krish N. Malimban: Bale ganito po doc, magse-sign in po ako. Sign in. 'Yung registration po is 
+kapag bagong user. Since may account na po ako, sign in po tayo. 
+AM-P05: Mm. 
+Ahnycca Krish N. Malimban: So, bale pakita ko po muna sa inyo 'yung admin po, admin account. I'll use my 
+Gmail account. Ito po siya, makikita po 'yung user management, makikita po 'yung mga user. Pero 'yung data po 
+ng mga patient, ng medical practitioner is confidential po, hindi po 'yun makikita. Dito po-- 
+  
+(1:07 - 1:30) 
+AM-P05: Pero ano 'yung data na 'yan? 
+Ahnycca Krish N. Malimban: Like 'yung recording po ng lungs... 
+AM-P05: Hindi, ito kunyari "2 patients", anong ibig sabihin niyan? 
+Ahnycca Krish N. Malimban: Ibig sabihin po doc, na dalawang patient po 'yung nakapag-register na po sa 
+app. 
+AM-P05: Ah, nagre-register din 'yung mga patients? Okay. 
+<<<PAGE 41>>>
+  
+Malimban (2026)                                                                                                                            Page 41 of 83 
+Ahnycca Krish N. Malimban: At tsaka doc, kunyari... for example po, patient po ako and I downloaded the 
+app, mag-a-agree po ako sa user agreement and policy. Then magre-register po ako, pero doc, nakapag-register 
+na po ako so magse-sign in na lang po ako. 
+  
+(1:30 - 2:00) 
+Ahnycca Krish N. Malimban: Like 'yung mother niyo po ba may asthma, or 'yung kapatid niyo po... 
+ AM-P05: Nata-translate niyo 'to sa Tagalog, 'no? 
+Ahnycca Krish N. Malimban: Opo, nata-translate po siya sa Tagalog, doc. 
+ AM-P05: Sige, pakita nga sa Tagalog. Ah, hindi pa? 
+Ahnycca Krish N. Malimban: Um, opo, pero ire-revise na lang po, doc. 
+AM-P05: Sige, kasi ang target niyo mga Filipino, 'di ba? So hindi nila magagets 'yan. Lalo na ang 
+pinakamahirap diyan 'yung terms, kasi hindi naman common knowledge ang COPD, asthma, pneumonia. So 
+kailangan 'yung mga mas layman terms. 
+Ahnycca Krish N. Malimban: Okay po, doc. Madali lang naman po ayusin. 
+AM-P05: Sige. 
+Ahnycca Krish N. Malimban: Then doc, dito po sa main page niya, may option po dito na mag-import ng lung 
+recording... 
+  
+(2:00 - 2:30) 
+AM-P05: 'Yung sa device niyo, paano sila magre-record? 
+Ahnycca Krish N. Malimban: Doon po sa device namin doc, may guide po siya kung paano po... may manual 
+po kung paano mag-record. Tapos 'yung recording po, ang output po noon sa SD card po is WAV file. May 
+device po kami, doc. Tapos kapag nakuha mo na po 'yung audio file na 'yun doc, i-import mo na po siya dito sa 
+app. Mag-import ka po ng WAV file mula sa files niyo po, tapos pipili ka po ng body location kung saan po ba 
+'yun. Then kung ano po 'yung mga symptoms. Wait lang po, i-ano ko lang po sa laptop, since doon po 'yung 
+recording para maipakita ko po sa inyo. 
+  
+(2:30 - 2:50) 
+AM-P05: May suggestion ako kung kaya niyo. Kaya ba instead na nakalagay 'yung name ng location, may map 
+kayo ng chest? 
+Ahnycca Krish N. Malimban: Ah, 'yung katulad ng instructional diagram po? 
+AM-P05: Kunyari, 'di ba upper back, lower back, ganun-ganun. So nakadiagram na lang 'yun, 1 2 3 4 5 6 7 8, 
+ayan parang ganyan. Parang ganyan para kung itong WAV file na 'to, anong location 'yan, ganun. 
+Ahnycca Krish N. Malimban: Naka-label po. Ipakita ko po sa laptop. Wait lang po doc, pasensya na po. Saglit 
+lang po. 
+  
+(2:50 - 3:19) 
+AM-P05: Pero ang resource niyo nung last year ay AM-P05 din? 
+Ahnycca Krish N. Malimban: Opo, 'yung nagiisang pulmonologist dito, si Dr. Ulanday po. 
+AM-P05: Ah, okay. Bakit nalipat sa akin? [tawa] 
+<<<PAGE 42>>>
+  
+Malimban (2026)                                                                                                                            Page 42 of 83 
+Ahnycca Krish N. Malimban: Ah, si doc... 'Di ba in this meeting po, 'yung aming goal po and objective is ma-
+validate po 'yung app. May isinend po ba 'yung mga kagrupo ko po ng validation? 
+AM-P05: Email? 
+Ahnycca Krish N. Malimban: Opo, ito po doc, oh. May survey validation po and survey forms. 
+AM-P05: Ah, wala, wala. Isend niyo na lang sa akin. 
+Ahnycca Krish N. Malimban: Sige po, i-forward ko na lang po, doc. 
+AM-P05: So, after nito, 'yan 'yung sasagutin ko? 
+Ahnycca Krish N. Malimban: Opo, doc. 
+AM-P05: Okay. 
+Ahnycca Krish N. Malimban: Wait lang doc, mag-swiswitch lang po ako sa laptop po. 
+  
+(3:19 - 3:45) 
+AM-P05: Ang dami-dami niyo nang nagagawa, 'no? Sa mga panahon namin, wala namang ganyan. 
+Ahnycca Krish N. Malimban: Ah, hello po. 
+AM-P05: Mm. 
+Ahnycca Krish N. Malimban: Wait, i-unmute ko lang po 'yung isa ko... Ayan, okay na po. Narinig niyo na po 
+ako? 
+AM-P05: Oo. 
+Ahnycca Krish N. Malimban: Sige po, share ko po 'yung screen ko. Ito doc... 
+AM-P05: Mm. 
+Ahnycca Krish N. Malimban: Ah, 'yung sa app po... Ay hala, parang may bug, doc. Wait lang po. Very buggy 
+pala po 'to 'pag sa laptop. 'Yung web browser po, may bug po siya na hindi ko pa po naayos sa browser. 
+  
+(3:45 - 4:05) 
+Ahnycca Krish N. Malimban: Ayan, nag-lo-load po siya as a whole po, hindi po by page. Hindi ko po 
+maipakita 'yung simulation po ng ano... 
+ AM-P05: Sige, okay lang. 
+Ahnycca Krish N. Malimban: Okay lang po? 
+AM-P05: Oo. 
+Ahnycca Krish N. Malimban: Sige doc, lipat na lang po ulit ako sa cellphone ko. 
+AM-P05: Available na’to sa Appstore? 
+Ahnycca Krish N. Malimban: No pa po, pero kapag na-access mo po yung app pwede mo po siya i-download 
+sa mobile phone mo po. Sa browser mo po ma-idadownload. Since sa apple store po ay may bayad po and 
+medyo mahal po doon. 
+AM-P05: Ah parang downloadable from the website. Okay.? So ang patient ay maglo-login, ilalagay ang lung 
+sounds in whatever area tapos may symptoms check and ano mage-generate nun? 
+<<<PAGE 43>>>
+  
+Malimban (2026)                                                                                                                            Page 43 of 83 
+Ahnycca Krish N. Malimban: Ang ige-generate po noon Doc is classification ng lungs po. Makikita nyo po 
+yung percentage po ng cracklings or yung like wheezing po...yung mga signs ng healthy patient. Makikita din 
+po yung severity po — kung mild, healthy or severe yung conditions ng lung. 
+  
+(4:30 – 5:00) 
+AM-P05: Sinong magde-decide noon? 
+Ahnycca Krish N. Malimban: Yung aming neural network po na AI model na tinrain po namin. Ang neural 
+network po Doc is nag-a-identify po ng pattern. Ang gamit po namin na dataset is yung from Kaggle po or 
+ICBHI 2017 po na na-validate na rin po ni Dr. Ulanday po. 
+AM-P05: Okay. 
+Ahnycca Krish N. Malimban: Na ano po, ok po sya, goods po. And then eto po yung recording... Kita po yung 
+screen ko, Doc? 
+AM-P05: Mm, pero parang loading pa. 
+Ahnycca Krish N. Malimban: Eto po yung recording na in-upload ko po dun sa laptop. Eto, nakita nyo... Yung 
+AI assisted analysis po is hindi pa po sya ganun ka-reliable Doc since hindi ko pa po na-integrate yung AI 
+model. Front-end pa lang po and a little bit of back-end po yung app na 'to. Eto makikita nyo po yung AI 
+summary, and alongside po dun sa mga severity, classification, and AI summary is magbibigay po sya, magre-
+recommend po sya ng mga respiratory exercises po. 
+  
+(5:00 – 5:30) 
+Ahnycca Krish N. Malimban: Tulad po ng diaphragmatic breathing... 
+AM-P05: For all... for all diagnosis? 
+Ahnycca Krish N. Malimban: For the signs po, nagbe-base po sya dun sa signs. Bale ang research po kasi 
+namin is rehabilitation po or remediation... 
+AM-P05: Oh, eh paano kung pneumonia, ipab-deep breathing mo sa pneumonia? 
+Ahnycca Krish N. Malimban: Po? Paki-ulit po Doc? 
+AM-P05: Ang breath sounds ay tunog ng pneumonia. Hindi naman deep breathing ang sagot doon, antibiotic. 
+Ahnycca Krish N. Malimban: Ano lang po, kasi Doc sa amin po is yung signs po. Kasi marami po, di ba Doc, 
+marami pong kailangang i-consider na factors po para ma-diagnose ang isang patient sa disease na tulad noon... 
+AM-P05: Oo, oo. 
+Ahnycca Krish N. Malimban: Ayan po. So eto Doc is auscultation lang po... Ang physical examination... 
+AM-P05: Kasi may recommendation kayo sa baba, eh. Tama? 
+Ahnycca Krish N. Malimban: Opo, respiratory exercise... 
+AM-P05: Eh paano kung sabihin nila "Ah, gagaling ako 'pag nag-exercise lang ako, hindi ko kailangan 
+magpatingin sa doktor, hindi ko kailangan uminom ng antibiotics"? 
+  
+(5:30 – 6:00) 
+Ahnycca Krish N. Malimban: Doon po Doc papasok yung aming role po... yung role po na medical 
+practitioner. Dito po Doc, after ko po ma-import yung lung recording... 
+AM-P05: Mm. 
+<<<PAGE 44>>>
+  
+Malimban (2026)                                                                                                                            Page 44 of 83 
+Ahnycca Krish N. Malimban: Pwede ko po sya i-send sa medical practitioner po. Eto, "Send to practitioner", 
+select dito po kay Dr. Jenita (example lang po sya, isa po syang pulmonologist), i-send ko po sa kanya. Then 
+ayan na po, pending review po Doc. Eto naman po pakita ko yung hitsura po nung... kapag medical practitioner 
+ka po na magsa-sign in dito sa app. Jenita... Log in po. Since nakapag-register na po ako... Dun po sa pag-set up 
+po ng medical practitioner, magpo-provide po sya ng kanyang ID number po like mga essential information po 
+para ma-identify nya yung sarili nya na isa talaga syang professional medical practitioner. 
+AM-P05: Mm, mm. 
+  
+(6:00 – 6:30) 
+Ahnycca Krish N. Malimban: Ayun po yung hindi ko maipakita ngayon since wala po sa laptop po kasi Doc. 
+AM-P05: Ah sige. Okay. 
+Ahnycca Krish N. Malimban: Eto po Doc, eto po yung main page po ng medical practitioner po. Makikita po 
+dito na may mga pending review po, Doc. 
+AM-P05: Oh, anong goal niyo dito sa app? So pag-upload ni patient nung lung sounds, nagbigay ng 
+recommendation, anong magiging end goal nito? 
+Ahnycca Krish N. Malimban: Ise-send nya po sa medical practitioner. Yung medical practitioner po is either 
+i-approve nya po based dun sa recording and sa analysis po, and or dis-approve or he or she can request for the 
+review po. Then pwede nya po i-explain yung clinical decision nya po, then pwede nya po i-approve. 
+AM-P05: Based on breath sounds only? 
+Ahnycca Krish N. Malimban: And the ano po, analysis po and classification, Doc. Dun po papasok yung AI 
+model po namin. 
+  
+(6:30 – 7:00) 
+AM-P05: Mm. Pero wala kang... Oh sige, kung ako kasi 'yan, ang importante sa akin: may fever, may sputum... 
+Ahnycca Krish N. Malimban: Symptoms check po. 
+AM-P05: Oo, tsaka syempre breath sounds, breath sounds 'yun na yung trabaho nung machine niyo. Fever, 
+shortness of breath... pareho lang yung shortness of breath, fever, cough, makukuha 'yun ng app. 
+Ahnycca Krish N. Malimban: Opo. 
+AM-P05: Oo, symptoms, signs makukuha niya. Tapos vitals, 'yun din. Vitals: BP, heart rate, RR, oxygen 
+saturation, mga ganun. 
+Ahnycca Krish N. Malimban: Opo, 'yan po yung mga kailangan po i-consider na factors. Sa amin kasi Doc is 
+auscultation lang po. Yung sa symptoms po makikita po sya sa profile po ng patient, Doc. 
+  
+(7:00 – 7:35) 
+AM-P05: Sa profile, pero syempre every time, every day pwede magbago 'yun, di ba? 
+Ahnycca Krish N. Malimban: Opo, pwede po... Like eto makikita po dito yung... ayan po halimbawa na 
+feature, yung mga symptoms po na nararamdaman during... 
+AM-P05: Kaya ba ni AI na i-correlate ang breath sounds with vitals? 
+Ahnycca Krish N. Malimban: Vitals and yung mga heart... 
+AM-P05: Nakuha niyo, parang "Itong breath sounds na 'to was taken on this day with the following vital signs: 
+heart rate 100, RR 30, O2 sat 92," parang ganun. Kaya ba, hindi? Mahirap na? 
+<<<PAGE 45>>>
+  
+Malimban (2026)                                                                                                                            Page 45 of 83 
+Ahnycca Krish N. Malimban: Mahirap na po sya, since bagong neural... 
+AM-P05: Ah sige. So ang goal lang talaga natin dito is kung makuha yung lung sounds, meron kayong data 
+from AI, tapos kung kailangan i-check, iche-check ni AM-P05 tapos magbibigay siya ng inputs? 
+Ahnycca Krish N. Malimban: Opo. 
+AM-P05: Ang target niyo dito yung mga walang access sa doktor? 
+Ahnycca Krish N. Malimban: Opo Doc, and yung mga nasa rural areas po. Pero wala sila nung gadget ninyo, 
+ano 'yun, ipamimigay niyo yung gadget ninyo? Yung pang-record ng audio? 
+  
+(7:35 – 8:00) 
+Ahnycca Krish N. Malimban: Ang reference po sa device namin is yung mga commercialized na po na 
+katulad po nung sa blood sugar test sa may diabetes, or like... 
+AM-P05: Hindi, yung pang-record ng breath sounds, paano 'yun? 
+Ahnycca Krish N. Malimban: Yun po yung device namin Doc. Dun po magre-record, may stethoscope... I-
+send ko po sa inyo yung aming circuit diagram. 
+AM-P05: Ah so meron din... so maliban sa app, meron din kayong like hardware? 
+Ahnycca Krish N. Malimban: Opo. 
+AM-P05: Social! Wow! Sosyal niyo ah! Magkano 'yan para magawa? 
+Ahnycca Krish N. Malimban: 12k po ang quota po namin. 
+AM-P05: Per device? 
+Ahnycca Krish N. Malimban: Yung device na po Doc, kasama na po lahat. 
+AM-P05: Oh, okay. Na-research niyo ba yung RXBox? 
+  
+(8:00 – 8:36) 
+Ahnycca Krish N. Malimban: RXBox? Wala pa po. 
+AM-P05: Ano 'yan eh, PGH 'yan eh, RXBox. Parang ganyan din sya pero telemedicine naman 'yun. So parang 
+may pang-BP, may pang-ganyan... tapos pwede yung box mag-direct communicate sa doktor tapos magta-
+telemedicine sila. 
+Ahnycca Krish N. Malimban: Mm. 
+AM-P05: Pero 'yun, ano 'yun, nandoon yung doktor. Parang may extension lang sya sa mga far-flung areas. 
+Ahnycca Krish N. Malimban: So kailangan po ng trained professional? 
+AM-P05: Oo, meron. May professional sa other side. Hindi lang niya kailangan pumunta doon sa barangay or 
+what not, dahil nandoon yung RXBox. 
+Ahnycca Krish N. Malimban: Sige po, pagbabasehan ko po 'yun Doc. 
+AM-P05: Nabanggit ko lang. Kasi batchmate naming yung gumawa. 
+Ahnycca Krish N. Malimban: Ang reference ko po kasi dito Doc sa aming device is like mga ECG monitor 
+po, yung mga maliliit na device... 
+  
+(8:36 – 9:02) 
+<<<PAGE 46>>>
+  
+Malimban (2026)                                                                                                                            Page 46 of 83 
+Ahnycca Krish N. Malimban: ...tapos yung ikakabit mo sa braso mo, tapos... And yung mga sugar level test, 
+like magpapatukos ka, kukunin mo yung dugo sa daliri mo, lalagay mo doon sa strip. Bale parang ganun na rin 
+po, for personal use na rin po sya with assistance po nung itong app para ma-approve ng medical practitioner. 
+AM-P05: Mm-hmm. 
+Ahnycca Krish N. Malimban: Para i-align po sya. Mga ano po, like eto pakita ko po... eto diaphragmatic 
+breathing, pursed-lip breathing... hindi ko po kabisado pero marami po Doc. 
+AM-P05: Ah, sige. 
+Ahnycca Krish N. Malimban: Yung repetitions po, yung time, like 5 minutes daily... 
+AM-P05: Sige. Basta make sure na very specified na... 
+  
+(9:02 – 9:20) 
+AM-P05: ...di ba sa mga guidelines may Category A, Category B, Category C... Ano 'yun, yung Category A 
+recommendation: must do. B: pwede. C: okay. D: question mark. 
+Ahnycca Krish N. Malimban: Okay po. 
+AM-P05: Yung benefit...So, sa ganun kasi— ang exercises ay medyo nasa dulo sa C or B. Yung parang dapat 
+nabigay mo muna si A and B bago moi consider gawin si C. Na-gets mo? 
+Ahnycca Krish N. Malimban: Opo. 
+AM-P05: Yun lang, basta nakaspecify sa app niyo na ang A and B ay kailangang guided ng medical practitioner 
+Ahnycca Krish N. Malimban: Opo doc, hindi ko pa po kasi masyadong napipin po like yung mga question po 
+dun. 
+AM-P05: Hmm, kailangan lang ng maraming warning kasi syempre baka isipin ng marami—‘pag hindi siya 
+masyado nag-isip na “ako mag-eexercise at gagaling ako” na yun lang 
+Ahnycca Krish N. Malimban: Opo. May nakalagay po dito na dun sa patient side na "This is not intended to 
+be..." Ganito po, opo. 
+AM-P05: Actually, alam mo maganda sana, besides breath sounds, pulmonary function... 'yung parang, alam 
+mo 'yung spirometry? 
+Ahnycca Krish N. Malimban: Opo. 
+AM-P05: 'Yung bubugahan ng pasyente? Tapos ma-check niyo kung gaano kalakas 'yung buga niya. 
+Ahnycca Krish N. Malimban: Ah, 'yung... Opo. 
+  
+(9:20 – 9:45) 
+AM-P05: 'Yung... Kasi ano 'yun eh, gadget din 'yun eh. May mga portable din naman 'yun eh. Maganda sya for 
+mga asthmatics kasi kunyari, on a good day 200 ang generated volume nya, on a bad day 120 lang 'yung 
+generated volume nya. So 'pag namomonitor nya, "Oh, bakit ito naka-50% lang sya ng baseline nya?" Ibig 
+sabihin nag-a-asthma exacerbation sya. 
+AM-P05: Pero maririnig din naman 'yun sa breath sounds. Uh, nung una clear, tapos biglang wheeze, wheeze... 
+tapos ganun din 'yun. 
+  
+(9:35 – 10:05) 
+Ahnycca Krish N. Malimban: Ayan po. Then dun po papasok 'yung neural network model po namin, Doc. 
+<<<PAGE 47>>>
+  
+Malimban (2026)                                                                                                                            Page 47 of 83 
+AM-P05: Mm-hmm. 
+Ahnycca Krish N. Malimban: Doc, gusto niyo po makita 'yung aming dataset po from Kaggle, Doc? 
+AM-P05: Ah, parang narinig ko na 'yun sa laptop... Parang marami eh, pero parang narinig ko na 'yung iba 
+doon. 
+Ahnycca Krish N. Malimban: Opo, maraming samples po 'yun. Then 'yung AI model is bahala na po sya para 
+i-identify po 'yung mga patterns. 
+AM-P05: Mm-hmm. Sige. 
+  
+(10:05 – 11:40) 
+Ahnycca Krish N. Malimban: Opo. Doc, i-send ko na lang po sa inyo 'yung aming... 'yung validation po 
+survey questionnaire... 
+AM-P05: Okay, so 'yun na lang, sasagutin ko na lang 'yun tapos e-sign ko na lang? Ay, paano ba 'yun? 
+Kailangan ba ng signature or something? 
+Ahnycca Krish N. Malimban: Um, e-sign na lang po, e-signature, opo. 
+AM-P05: Sige. Okay. 
+Ahnycca Krish N. Malimban: Sige po, Doc. Thank you po! 
+AM-P05: Thank you. 
+Ahnycca Krish N. Malimban Thank you po. 
+  
+ 
+ 
+Interview transcript - Ace Medical Hospital 
+• InterviewerInterviewer: Ahnycca Krish N. Malimban 
+• Participant: AM-P06 (Doctor) 
+• Date of Interview: August 31, 2026 
+• Location of Interview: Ace Medical Hospital 
+List of acronyms: 
+• AI — Artificial Intelligence 
+• COPD — Chronic Obstructive Pulmonary Disease 
+• DOTS — Directly Observed Therapy Short-course 
+• ER — Emergency Room 
+• TB — Tuberculosis 
+  
+(0:00 – 0:23) 
+Ahnycca Krish N. Malimban: “Showing app” Plus may family history din po, Doc, 'yung katulad po ng sinabi 
+niyo na need po 'yung sa family history po. Pero 'yun lang po, requirement lang po sa doctor pa rin po 'yung 
+files mismo, Doc, kasi dahil po sa confidentiality ng patient po. Brief lang po ito ulit. 
+AM-P06: Ah, naka-focus kayo sa pedia ba? O sa adult? 
+  
+(0:23 – 0:45) 
+Ahnycca Krish N. Malimban: Hindi po. Sa both po, Doc. Like ano po, independent na po 'yun sa doctor. 
+<<<PAGE 48>>>
+  
+Malimban (2026)                                                                                                                            Page 48 of 83 
+AM-P06: Okay. 
+Ahnycca Krish N. Malimban: 'Yan po. So far po, mas nagde-develop pa po kami ng mga features po ng app. 
+Ito po 'yung sa front-end po, ito po 'yung sa dashboard po namin. May input ng lung sound recording po na 'yun, 
+'yun po 'yung manggagaling sa device po namin na mag-a-auscultate po. Tapos may placement guidance po 
+kami. Ang ganyan po. 
+  
+(0:45 – 1:12) 
+Ahnycca Krish N. Malimban: Pero 'yung ano po, ang dapat po is, katulad po ng sinabi niyo po na dapat 
+trained po 'yung mag-a-ano sa patient. 'Yung in-ano lang po namin dito is may guide... 
+AM-P06: Siguro, Padagdagan mo ng vital signs. 
+Ahnycca Krish N. Malimban: Ah, vital signs. 
+AM-P06: Oo. Katulad ng, kahit man lang pa-measure ng 1 full minute 'yung cardiac rate, 1 full minute 'yung 
+respiratory rate, temperature... So at least, 'yun 'yung magse-serve na guide man lang doon sa umpisa. 
+  
+(1:12 – 1:45) 
+Ahnycca Krish N. Malimban: Ah. 
+AM-P06: Kasi otherwise, madami ka nang makukuhang information doon sa vital signs. Kasi lalo na kung 
+sabihin mo na emergency case siya, kung wala sa normal 'yung mga ganun, talagang for referral kaagad siya. Or 
+doon pa lang, pwede nang—lalo na kung gusto niyo gagamitin tool na siya na pantulong. So vital signs siguro. 
+At least kung ano, mabilang kahit... siguro i-specify niyo not to count the respiratory rate in less than 1 full 
+minute. Kasi sa mga bata, sa adult kasi pwedeng 10 seconds lang kinakount tapos minu-multiply to 6, pero sa 
+mga bata talaga 1 full minute siya. So to be uniform na lang lahat: count respiratory rate, heart rate, at kung 
+meron man, blood pressure tsaka temperature. Para mas magbigay ng information doon sa pasyente. 
+  
+(1:45 – 2:15) 
+Ahnycca Krish N. Malimban: Thank you. Plus ito po, 'yung katulad po nung sa parang magiging report 
+system po namin na other than sa mga magiging results po namin sa lung sounds po ng patient, is meron po 
+silang pwede po silang mag-input kung ano po 'yung nafi-feel nila that time when auscultating po. So 'yun po. 
+Doc, ito... 
+AM-P06: Mm-hmm. 
+Ahnycca Krish N. Malimban: Plus ayun po. Ito po 'yung sa history po. Diyan po ma-ta-track 'yung mga 
+recordings po ng patient sa kada session po nila na nag-a-auscultate. 
+  
+(2:15 – 2:45) 
+Ahnycca Krish N. Malimban: And meron din po diyan kami—hindi pa po kasi nagpapakita kasi wala po 
+tayong record—pero meron po 'yung parang after ma-record at ma-analyze po ng algorithm po namin 'yung 
+result o 'yung physical exam, katulad sa severity po niya, mag-a-advise po siya ng diaphragmatic breathing, or 
+na mag-nebulizer, or call for doctor po. 
+AM-P06: Mm. 
+Ahnycca Krish N. Malimban: 'Yun po. Tapos doon sa feature po namin na 'yun, ma-ta-track po 'yung kada 
+sessions niya po. Kasi ito po 'yung sa patient profile. 'Yan po. Kumbaga brief lang po para sa profile. 'Yan, Doc. 
+  
+<<<PAGE 49>>>
+  
+Malimban (2026)                                                                                                                            Page 49 of 83 
+(2:45 – 3:15) 
+AM-P06: So usually kasi kung ganun, every time na mag-a-auscultate, i-ano niyo din na may vital signs silang 
+nakukuha para mas ma-evaluate nang maganda if ever, 'di ba? Kung hindi man, at least 'yun among the physical 
+exam mas madali naman. Tini-train naman kahit na mga nurses, or mga midwife, or kahit sino doon sa center na 
+makuha 'yung mga vital signs. So 'yun 'yung suggestion natin: na pagka mag-a-auscultate, i-include niyo 'yung 
+vital signs. Kasi kasama 'yan sa evaluation if ever. 
+  
+(3:15 – 3:45) 
+Ahnycca Krish N. Malimban: Sige po. 
+AM-P06: Okay na? 
+Ahnycca Krish N. Malimban: Opo. Tapos, pwede po kayang ma-evaluate din po kami dito sa evaluation form 
+po? 
+AM-P06: Ano sa baba? Anggap din naman, hindi mo sinasabi? Kailan niyo ba i-pre-present 'yan? Na-present 
+na? 
+Ahnycca Krish N. Malimban: Sa next week po, Doc. 
+AM-P06: Eto po? Sige, sige... Kasi usually... Ayan. Sorry na. 
+Ahnycca Krish N. Malimban: Sige lang po. 
+  
+(3:45 – 4:15) 
+AM-P06: Sige. Kasi 'yung dito... Rating? 
+Ahnycca Krish N. Malimban: Yes, Doc. 5 to... 
+AM-P06: Ay, sorry lang. Diyan ba ang eraser? Ayaw nang ma-erase. Rating. Relevance? Ah... Continuation ito 
+nung ano ninyo, 'di ba? 
+Ahnycca Krish N. Malimban: Opo. 
+AM-P06: Not necessarily upon diagnosis 'yung ano. Tama? 
+Ahnycca Krish N. Malimban: Opo, Doc. Kumbaga po 'yung sa last po naming prototype is for diagnosing, 
+ngayon po is for rehabilitation and monitoring po. 
+  
+(4:15 – 4:45) 
+AM-P06: Mm. 1 to 5, anong rating natin? 
+Ahnycca Krish N. Malimban: Uh, 5 po. 
+AM-P06: I would rather na mag-base kayo sa history. Ang ano ko lang kasi, kailangan niyo ng internet to 
+process, 'di ba? 
+Ahnycca Krish N. Malimban: Ah, ano po, Doc, may local data folder naman po. Parang built-in na po siya sa 
+app, opo. 
+AM-P06: Ay, ganun. Pero kung i-ve-verify siya, kailangan i-throw 'yung findings niyo sa clinician. 
+  
+(4:45 – 5:15) 
+Ahnycca Krish N. Malimban: Opo, Doc. 
+<<<PAGE 50>>>
+  
+Malimban (2026)                                                                                                                            Page 50 of 83 
+AM-P06: So kailangan mag-log in nung clinician para ma-access 'yung file? 
+Ahnycca Krish N. Malimban: Opo. Kumbaga po, Doc, kahit nag-si-sync po 'yung account ng patient at ng 
+doctor, nag-i-update din po. 
+AM-P06: Oo, 'yun na. I mean, you will rely heavily on the internet. 
+Ahnycca Krish N. Malimban: Opo. 
+AM-P06: Ayun na lang. Eh kung walang internet? 
+Ahnycca Krish N. Malimban: Uh, 'yun lang naman po na-realize ko, na useful siya sa mga homes lang. 
+AM-P06: Another factor: kailangan ng laptop? 
+Ahnycca Krish N. Malimban: App po siya, Doc. Downloadable po sa cellphone. 
+AM-P06: Mm, ayan. 'Yun na lang 'yung ano natin, kasi masyadong madami din namang walang internet if ever. 
+  
+(5:15 – 5:45) 
+AM-P06: Sige, ano pa? 
+Ahnycca Krish N. Malimban: Wala na po, Doc. 
+AM-P06: Actually, okay naman 'yung information. Pero I think it needs more data. Kung clinical relevance, as I 
+said, kulang. Siguro kung lalagyan niyo ng vital signs, medyo mas ma-okay 'yung clinical relevance natin. 
+Tapos kailangan pa i-confirm talaga 'yung diagnosis daily. Baka naman kung sabihin mo kasing asthma tapos 
+the next day iba na 'yung diagnosis, so kailangan ng verification. 
+  
+(5:45 – 6:15) 
+Ahnycca Krish N. Malimban: Opo. 'Yung sa amin naman po, Doc, is like notification po sa medical 
+practitioner and titingnan po kung ano 'yung results ng patient. 
+AM-P06: I-e-expand natin 'yung information. Clinical usefulness... kasi relies heavily sa internet. Medyo mag-
+re-rely sa internet para talagang ma-diagnose natin. Tsaka 'yung prognosis, tinitignan niyo kung day-to-day o 
+after ma-diagnose kung okay na siya the next few days, 'di ba? So kung hindi ganun, medyo hindi siya ganun 
+mag-te-tell. Sa adult kasi, COPD tsaka tuberculosis... Depende kasi. Ano pa ba? Isa pa sa rating, ano naman daw 
+'yan? 
+  
+(6:15 – 6:45) 
+Ahnycca Krish N. Malimban: It's for the application po. 
+AM-P06: Application. 
+Ahnycca Krish N. Malimban: I-i-incorporate po namin 'yung insights niyo, Doc. Ongoing pa po kasi, so i-a-
+ano naman po namin na maging offline. 
+AM-P06: Paano magiging offline if ever? 
+Ahnycca Krish N. Malimban: May tini-train po kami na neural networks or AI na pwede pong i-feed ng data 
+galing sa validated datasets. And nakatano rin po kami sa mga computer engineers para ma-improve. 
+AM-P06: Mm. 'Yun lang, kasi mahaba ang history tsaka physical exam. So if ever, I would suggest na the 
+whole system talaga ang in-a-ano, hindi lang sa lungs. Kasi kung may symptoms sa chest, hindi lang lungs 'yung 
+nandun, nandun din 'yung heart. Kung nahihirapan silang huminga dahil sa heart problem, you need to establish 
+that. 
+<<<PAGE 51>>>
+  
+Malimban (2026)                                                                                                                            Page 51 of 83 
+  
+(6:45 – 7:30) 
+AM-P06: Hindi kayo pwedeng mag-focus sa isang system lang sa pag-assess ng pasyente. Complete dapat 
+'yung physical exam at history. Sa history: family history, previous hospitalizations, medications, 
+immunizations. Sa adolescents, may HEADS assessment pa kasama living condition sa bahay at kung anong 
+kalan ang gamit. Sa physical exam, head-to-foot kasama neurological exam. 'Yun talaga dapat i-feed para ma-
+diagnose. Kung wheeze lang kasi, isang part lang 'yun ng lungs. May inspection, palpation, percussion pa sa 
+bawat system. So ganun ka-thorough bago mag-diagnose, kasi kapag iba ang diagnosis, iba ang gamot. Kung 
+TB 'yun, specified ang gamot. Ang pagbigay ng gamot ay nagse-set din ng diagnosis—kung binigyan ng anti-
+allergy at hindi gumaling, hindi 'yun allergy. We need to get the right diagnosis kasi doon nakabase ang 
+management. If the diagnosis is wrong, for example binibigyan ng anti-allergy 'yun pala cancer, lalala ang sakit. 
+You have to feed everything into the AI: history, PE, labs, and for cancer, biopsy. Intricate ang medicine, so 
+hindi sapat na mag-auscultate lang. 
+  
+ 
+(7:30 – 8:15) 
+AM-P06: Look at IMCI (Integrated Management of Childhood Illness) developed by WHO for resource-limited 
+settings. It relies on history, PE, and initial vital signs—kung hirap nang huminga, refer or admit agad, hindi na 
+nag-a-auscultate pa. Sa emergency, ABC (airway, breathing, circulation) agad ang inuuna. But since ang scope 
+niyo is monitoring and prognosis day-to-day... 
+Ahnycca Krish N. Malimban: For monitoring... 
+AM-P06: Monitoring na lang talaga. Pero kailangan ma-diagnose muna nang maayos. 
+Ahnycca Krish N. Malimban: Thank you so much, Doc. 
+AM-P06: Sure. Basta sa akin, kailangan pa ng data to prove its usefulness. Okay? 
+Ahnycca Krish N. Malimban: Thank you so much, Doc! 
+AM-P06: Sure! 
+Ahnycca Krish N. Malimban: Thank you po! 
+AM-P06: Okay! 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+APPENDIX B 
+STATISTICAL DATA (RESULTS) 
+ 
+     Table 1. Participant Profile Summary 
+ 
+Participant Code Profession Gender 
+<<<PAGE 52>>>
+  
+Malimban (2026)                                                                                                                            Page 52 of 83 
+           AM-P01 Doctor Male 
+AM-P02 Doctor Female 
+CO-P03 Nurse Female 
+CO-P04 Nurse Male 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+APPENDIX C 
+ 
+<<<PAGE 53>>>
+  
+Malimban (2026)                                                                                                                            Page 53 of 83 
+Ausculta Fritzing Diagram 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+APPENDIX D 
+
+<<<PAGE 54>>>
+  
+Malimban (2026)                                                                                                                            Page 54 of 83 
+Ausculta System Flowchart
+ 
+
+<<<PAGE 55>>>
+  
+Malimban (2026)                                                                                                                            Page 55 of 83 
+ 
+ 
+ 
+ 
+
+<<<PAGE 56>>>
+  
+Malimban (2026)                                                                                                                            Page 56 of 83 
+ 
+APPENDIX E 
+3D Mode Casingl of the Prototype device 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+<<<PAGE 57>>>
+  
+Malimban (2026)                                                                                                                            Page 57 of 83 
+APPENDIX F 
+Responses of the Survey 
+
+<<<PAGE 58>>>
+  
+Malimban (2026)                                                                                                                            Page 58 of 83 
+
+<<<PAGE 59>>>
+  
+Malimban (2026)                                                                                                                            Page 59 of 83 
+
+<<<PAGE 60>>>
+  
+Malimban (2026)                                                                                                                            Page 60 of 83 
+
+<<<PAGE 61>>>
+  
+Malimban (2026)                                                                                                                            Page 61 of 83 
+ 
+ 
+ 
+ 
+
+<<<PAGE 62>>>
+  
+Malimban (2026)                                                                                                                            Page 62 of 83 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+APPENDIX G 
+<<<PAGE 63>>>
+  
+Malimban (2026)                                                                                                                            Page 63 of 83 
+ 
+
+<<<PAGE 64>>>
+  
+Malimban (2026)                                                                                                                            Page 64 of 83 
+
+<<<PAGE 65>>>
+  
+Malimban (2026)                                                                                                                            Page 65 of 83 
+
+<<<PAGE 66>>>
+  
+Malimban (2026)                                                                                                                            Page 66 of 83 
+
+<<<PAGE 67>>>
+  
+Malimban (2026)                                                                                                                            Page 67 of 83 
+
+<<<PAGE 68>>>
+  
+Malimban (2026)                                                                                                                            Page 68 of 83 
+ 
+ 
+
+<<<PAGE 69>>>
+  
+Malimban (2026)                                                                                                                            Page 69 of 83 
+APPENDIX H 
+Certificate of Validation 
+
+<<<PAGE 70>>>
+  
+Malimban (2026)                                                                                                                            Page 70 of 83 
+
+<<<PAGE 71>>>
+  
+Malimban (2026)                                                                                                                            Page 71 of 83 
+
+<<<PAGE 72>>>
+  
+Malimban (2026)                                                                                                                            Page 72 of 83 
+
+<<<PAGE 73>>>
+  
+Malimban (2026)                                                                                                                            Page 73 of 83 
+
+<<<PAGE 74>>>
+  
+Malimban (2026)                                                                                                                            Page 74 of 83 
+
+<<<PAGE 75>>>
+  
+Malimban (2026)                                                                                                                            Page 75 of 83 
+
+<<<PAGE 76>>>
+  
+Malimban (2026)                                                                                                                            Page 76 of 83 
+ 
+
+<<<PAGE 77>>>
+  
+Malimban (2026)                                                                                                                            Page 77 of 83 
+
+<<<PAGE 78>>>
+  
+Malimban (2026)                                                                                                                            Page 78 of 83 
+
+<<<PAGE 79>>>
+  
+Malimban (2026)                                                                                                                            Page 79 of 83 
+ 
+
+<<<PAGE 80>>>
+  
+Malimban (2026)                                                                                                                            Page 80 of 83 
+APPENDIX I 
+Other Documentations 
+ 
+ 
+ 
+
+<<<PAGE 81>>>
+  
+Malimban (2026)                                                                                                                            Page 81 of 83 
+
+<<<PAGE 82>>>
+  
+Malimban (2026)                                                                                                                            Page 82 of 83 
+
+<<<PAGE 83>>>
+  
+Malimban (2026)                                                                                                                            Page 83 of 83 
+ 

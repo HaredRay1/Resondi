@@ -1,0 +1,10 @@
+VALID CATEGORY NAMES — type these EXACTLY in both columns
+(copy-paste rather than retype; a single spelling difference
+ creates a false disagreement in the analysis)
+
+Healthy
+Possible asthma
+Possible bronchiolitis
+Possible pneumonia or pulmonary edema
+Possible severe bronchiolitis
+Further evaluation needed

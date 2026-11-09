@@ -1,0 +1,619 @@
+<title>Resondi Training Runbook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+/* Lab-notebook layout: a numbered protocol down the left, a run log that fills as you go. */
+:root{
+  --bg:#FBFAFB; --surface:#FFFFFF; --ink:#1C1419; --ink-2:#5E5259; --ink-3:#938A8F;
+  --line:#E7E2E4; --line-2:#D6CED1;
+  --accent:#C01A5F; --accent-soft:#FDEFF5; --accent-line:#F2C3D7;
+  --warn:#9A5B00; --warn-soft:#FFF6E6; --warn-line:#F0DCB4;
+  --good:#1F6B4D; --good-soft:#EAF5F0;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141013; --surface:#1D181B; --ink:#F2EDEF; --ink-2:#B6AAB0; --ink-3:#847880;
+  --line:#2E272B; --line-2:#3D353A;
+  --accent:#FF6AA3; --accent-soft:#2A1521; --accent-line:#4A2335;
+  --warn:#E8B45F; --warn-soft:#2A2114; --warn-line:#473718;
+  --good:#6ED3A6; --good-soft:#16271F;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#141013; --surface:#1D181B; --ink:#F2EDEF; --ink-2:#B6AAB0; --ink-3:#847880;
+  --line:#2E272B; --line-2:#3D353A;
+  --accent:#FF6AA3; --accent-soft:#2A1521; --accent-line:#4A2335;
+  --warn:#E8B45F; --warn-soft:#2A2114; --warn-line:#473718;
+  --good:#6ED3A6; --good-soft:#16271F;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:0 56px;line-height:1.5}
+.wrap{max-width:860px;margin:0 auto}
+
+header{padding-block:40px 24px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);font-weight:600}
+h1{font-size:clamp(27px,5vw,38px);line-height:1.1;margin:8px 0 10px;font-weight:700;
+  letter-spacing:-.02em;text-wrap:balance}
+.lede{color:var(--ink-2);font-size:16px;max-width:60ch;margin:0}
+
+.bar{display:flex;align-items:center;gap:12px;margin-top:22px;flex-wrap:wrap}
+.track{flex:1;min-width:140px;height:7px;background:var(--line);border-radius:4px;overflow:hidden}
+.fill{height:100%;background:var(--accent);width:0;transition:width .35s ease}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.sync{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+
+.callout{border:1px solid var(--warn-line);background:var(--warn-soft);border-radius:10px;
+  padding:14px 16px;margin:22px 0;font-size:14.5px;color:var(--ink)}
+.callout b{color:var(--warn)}
+.callout.hard{border-color:var(--accent-line);background:var(--accent-soft)}
+.callout.hard b{color:var(--accent)}
+
+.phase{margin-top:38px}
+.phase-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;
+  border-bottom:1px solid var(--line-2)}
+.pnum{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent);
+  letter-spacing:.08em}
+.phase-head h2{font-size:20px;margin:0;font-weight:600;letter-spacing:-.01em;flex:1;min-width:0}
+.pcount{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.phase-note{color:var(--ink-2);font-size:14.5px;margin:12px 0 4px}
+
+ol.steps{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:2px}
+li.step{border-bottom:1px solid var(--line);padding:13px 0}
+li.step:last-child{border-bottom:none}
+.row{display:flex;gap:12px;align-items:flex-start}
+.row input[type=checkbox]{appearance:none;width:19px;height:19px;flex:none;margin-top:2px;
+  border:1.5px solid var(--line-2);border-radius:5px;background:var(--surface);cursor:pointer;
+  position:relative;transition:background .15s,border-color .15s}
+.row input[type=checkbox]:checked{background:var(--accent);border-color:var(--accent)}
+.row input[type=checkbox]:checked::after{content:"";position:absolute;left:5.5px;top:2px;
+  width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)}
+.row input[type=checkbox]:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.body{flex:1;min-width:0}
+.title{font-weight:500;font-size:15.5px}
+li.step.done .title{color:var(--ink-3);text-decoration:line-through;
+  text-decoration-color:var(--line-2)}
+.detail{color:var(--ink-2);font-size:14px;margin-top:5px}
+.detail code{font-family:var(--mono);font-size:12.5px;background:var(--line);
+  padding:1px 5px;border-radius:4px}
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;
+  text-transform:uppercase;padding:2.5px 7px;border-radius:4px;margin-left:8px;
+  vertical-align:1px;font-weight:600}
+.tag.stop{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line)}
+.tag.dec{background:var(--warn-soft);color:var(--warn);border:1px solid var(--warn-line)}
+.app{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.07em;text-transform:uppercase;font-weight:600;padding:3px 8px;border-radius:5px;
+  background:var(--line);color:var(--ink-2);margin-bottom:6px;white-space:nowrap}
+.app::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ink-3);flex:none}
+.app[data-a="Edge Impulse"]{background:var(--accent-soft);color:var(--accent)}
+.app[data-a="Edge Impulse"]::before{background:var(--accent)}
+.app[data-a="PowerShell"]{background:#1B2A4A14;color:#2C4E8A}
+.app[data-a="PowerShell"]::before{background:#2C4E8A}
+kbd{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line-2);border-bottom-width:2px;
+  border-radius:4px;padding:1px 5px;background:var(--bg);color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .app[data-a="PowerShell"]{
+  background:#5C8CD618;color:#8FB4E8}
+  :root:not([data-theme="light"]) .app[data-a="PowerShell"]::before{background:#8FB4E8}}
+:root[data-theme="dark"] .app[data-a="PowerShell"]{background:#5C8CD618;color:#8FB4E8}
+:root[data-theme="dark"] .app[data-a="PowerShell"]::before{background:#8FB4E8}
+
+.cmd{position:relative;margin-top:9px;border:1px solid var(--line-2);border-radius:8px;
+  background:var(--surface);overflow:hidden}
+.cmd pre{margin:0;padding:11px 46px 11px 13px;overflow-x:auto;font-family:var(--mono);
+  font-size:12.5px;line-height:1.65;color:var(--ink)}
+.copy{position:absolute;top:7px;right:7px;border:1px solid var(--line-2);background:var(--bg);
+  color:var(--ink-2);font-family:var(--mono);font-size:10.5px;padding:3px 8px;border-radius:5px;
+  cursor:pointer}
+.copy:hover{border-color:var(--accent);color:var(--accent)}
+
+.log{margin-top:44px;border:1px solid var(--line-2);border-radius:12px;background:var(--surface);
+  padding:20px 18px}
+.log h2{font-size:18px;margin:0 0 4px;font-weight:600}
+.log .sub{color:var(--ink-2);font-size:14px;margin:0 0 16px}
+.runs{display:flex;flex-direction:column;gap:14px}
+.run{border:1px solid var(--line);border-radius:9px;padding:14px}
+.run-head{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-bottom:4px}
+.rid{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--accent)}
+.rname{font-weight:600;font-size:15px}
+.rwhat{color:var(--ink-3);font-size:13px;flex:1;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:9px;margin-top:11px}
+.f label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:3px}
+.f input{width:100%;border:1px solid var(--line-2);border-radius:6px;background:var(--bg);
+  color:var(--ink);padding:7px 8px;font-family:var(--mono);font-size:13px;
+  font-variant-numeric:tabular-nums}
+.f input:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+.verdict{margin-top:10px;font-size:13.5px;padding:8px 11px;border-radius:7px;display:none}
+.verdict.show{display:block}
+.verdict.ok{background:var(--good-soft);color:var(--good)}
+.verdict.bad{background:var(--warn-soft);color:var(--warn)}
+.notes{width:100%;margin-top:9px;border:1px solid var(--line-2);border-radius:6px;
+  background:var(--bg);color:var(--ink);padding:8px 9px;font-family:var(--sans);font-size:13.5px;
+  resize:vertical;min-height:40px}
+.notes:focus{outline:2px solid var(--accent);outline-offset:-1px}
+
+.cmp{margin-top:18px;overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:430px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:600}
+td{font-variant-numeric:tabular-nums}
+td.m{font-family:var(--mono);font-size:13px}
+.empty{color:var(--ink-3);font-size:13.5px;font-style:italic;padding:10px 0}
+
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+  color:var(--ink-3);font-size:13px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Resondi · Lung sound classifier</div>
+  <h1>Training Runbook</h1>
+  <p class="lede">Fix the leaking split, establish an honest baseline, then add the Taiwanese
+  corpus — in that order, so every number means something. Every step says which app you are in and which button to press. Tick as you go; the log keeps
+  your results.</p>
+  <div class="bar">
+    <div class="track"><div class="fill" id="fill"></div></div>
+    <span class="count" id="count">0 / 0</span>
+    <span class="sync" id="sync">connecting…</span>
+  </div>
+</header>
+
+<div class="callout hard">
+  <b>Order is not optional.</b> Adding HF_Lung_V1 before the re-split makes the leak worse and
+  the result unreadable — you would not know whether a change came from the new data or from
+  fixing the split. Phase 1 produces the only baseline Phase 2 can be measured against.
+</div>
+
+<div class="callout">
+  <b>Button labels move.</b> Edge Impulse changes its interface between releases. Where a label
+  below does not match what you see, the step still describes the right thing to do — send a
+  screenshot and I will correct the wording.
+</div>
+
+<div id="phases"></div>
+
+<section class="log">
+  <h2>Run log</h2>
+  <p class="sub">Enter each run as it finishes. Recall is per class, as a percentage.
+  The comparison table fills itself.</p>
+  <div class="runs" id="runs"></div>
+  <div class="cmp">
+    <table>
+      <thead><tr><th>Run</th><th>Trained on</th><th>Accuracy</th><th>vs baseline</th>
+      <th>Wheeze recall</th></tr></thead>
+      <tbody id="cmp"><tr><td colspan="5" class="empty">No runs recorded yet.</td></tr></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>
+  Majority-class baseline is <strong>53%</strong> (Healthy), not 25% chance — compare every
+  accuracy against that. Scripts: <code>rebuild_dataset.py</code>, <code>merge_corpora.py</code>.
+</footer>
+</div>
+
+<script>
+const PHASES = [
+ {
+  "n": "Phase 0",
+  "t": "Set up, once",
+  "note": "Twenty minutes. You need a terminal, the Edge Impulse CLI, and a fresh project.",
+  "steps": [
+   {
+    "id": "p0a",
+    "app": "PowerShell",
+    "t": "Open PowerShell in your Resondi folder",
+    "d": "Open <strong>File Explorer</strong> → go to <code>C:\\Users\\Hared\\Downloads\\Resondi</code> → click the address bar, type <code>powershell</code>, press <kbd>Enter</kbd>. A blue window opens already in that folder."
+   },
+   {
+    "id": "p0b",
+    "app": "PowerShell",
+    "t": "Check Python is there, then install the three packages",
+    "d": "If <code>python --version</code> prints nothing, install Python from python.org first and tick <strong>“Add python.exe to PATH”</strong> during setup.",
+    "cmd": "python --version\npip install numpy scipy soundfile"
+   },
+   {
+    "id": "p0c",
+    "app": "PowerShell",
+    "t": "Install the Edge Impulse CLI",
+    "d": "Needs Node.js from nodejs.org (LTS version). After installing Node, close and reopen PowerShell. <strong>Run the first line before the second</strong> — Windows blocks npm's script by default, and without it you get <em>npm.ps1 cannot be loaded because running scripts is disabled</em>. <code>CurrentUser</code> scope needs no administrator rights. Test with <code>edge-impulse-uploader --help</code>.",
+    "cmd": "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned\nnpm install -g edge-impulse-cli"
+   },
+   {
+    "id": "p0c2",
+    "app": "PowerShell",
+    "t": "If the policy change is refused, call the .cmd wrappers instead",
+    "d": "On a managed or school laptop, Group Policy can override <code>Set-ExecutionPolicy</code>. Nothing is broken — npm also installs <code>.cmd</code> versions that PowerShell will run, so append <code>.cmd</code> to every npm-installed command. You would then use <code>edge-impulse-uploader.cmd</code> everywhere below too. <strong>Or skip the CLI entirely</strong>: every upload step has a browser route through the Edge Impulse Studio, which needs no Node and no policy change.",
+    "cmd": "npm.cmd install -g edge-impulse-cli\nedge-impulse-uploader.cmd --help"
+   },
+   {
+    "id": "p0d",
+    "app": "Browser",
+    "t": "Download and extract ICBHI 2017",
+    "d": "From <strong>bhichallenge.med.auth.gr</strong>. Extract so every <code>.wav</code> sits beside its <code>.txt</code> in one folder. If <code>ICBHI_challenge_train_test.txt</code> is in there, the script uses the official patient split and your numbers become comparable to published work."
+   },
+   {
+    "id": "p0e",
+    "app": "Edge Impulse",
+    "t": "Create a brand new project",
+    "tag": [
+     "stop",
+     "do not reuse"
+    ],
+    "d": "Go to <strong>studio.edgeimpulse.com</strong> → sign in → top-left project dropdown → <strong>+ Create new project</strong> → name it <code>Resondi-RunA-patientwise</code> → <strong>Create new project</strong>. Keep the old project untouched: you need its numbers for comparison, and its data is exactly what you are replacing."
+   }
+  ]
+ },
+ {
+  "n": "Phase 1",
+  "t": "Fix the leak, and get Run A",
+  "note": "This produces the baseline. Nothing after it is measurable without this number.",
+  "steps": [
+   {
+    "id": "p1a",
+    "app": "PowerShell",
+    "t": "Rebuild the dataset, patient-disjoint",
+    "d": "Partitions the 126 patients first, then cuts one clip per annotated respiratory cycle, no overlap. Takes a few minutes — it resamples every file to 16 kHz.",
+    "cmd": "cd C:\\Users\\Hared\\Downloads\\Resondi\npython build\\newdata\\rebuild_dataset.py C:\\path\\to\\icbhi"
+   },
+   {
+    "id": "p1b",
+    "app": "PowerShell",
+    "t": "Read the last line: “patients in BOTH partitions: 0”",
+    "tag": [
+     "stop",
+     "must be 0"
+    ],
+    "d": "The script asserts this and crashes rather than finish if it fails. If you see a crash here, stop — do not upload anything."
+   },
+   {
+    "id": "p1c",
+    "app": "PowerShell",
+    "t": "Write down the class distribution it printed",
+    "d": "Expect roughly 53% Healthy, 27% Crackle, 13% Wheeze, 7% Both. <strong>That 53% is your majority-class baseline</strong> — the number any accuracy has to beat before it means anything."
+   },
+   {
+    "id": "p1d",
+    "app": "Edge Impulse",
+    "t": "Upload the training data — eight uploads, one per class per category",
+    "d": "Left sidebar → <strong>Data acquisition</strong> → <strong>Add data</strong> button (top right) → <strong>Upload data</strong>. In the panel: <em>Select files</em> → open <code>resondi_dataset\\training\\Healthy</code> → <kbd>Ctrl</kbd>+<kbd>A</kbd> → Open. Then set <strong>Upload into category: Training</strong>, <strong>Label: Enter label</strong> → type <code>Healthy</code> → <strong>Upload data</strong>. Repeat for Crackle, Wheeze, Both."
+   },
+   {
+    "id": "p1e",
+    "app": "Edge Impulse",
+    "t": "Upload the testing data the same way",
+    "d": "Same panel, but open <code>resondi_dataset\\testing\\&lt;class&gt;</code> and set <strong>Upload into category: Testing</strong>. Four more uploads. Getting this wrong is the single thing that would undo the whole re-split."
+   },
+   {
+    "id": "p1f",
+    "app": "PowerShell",
+    "t": "Or upload from the terminal instead",
+    "d": "Faster if the browser struggles with thousands of files. PowerShell does not expand <code>*.wav</code> the way bash does, so this passes the file list explicitly.",
+    "cmd": "cd resondi_dataset\nforeach ($cat in \"training\",\"testing\") {\n  foreach ($lab in \"Healthy\",\"Crackle\",\"Wheeze\",\"Both\") {\n    $f = (Get-ChildItem \"$cat\\$lab\" -Filter *.wav).FullName\n    edge-impulse-uploader --category $cat --label $lab @f\n  }\n}"
+   },
+   {
+    "id": "p1g",
+    "app": "Edge Impulse",
+    "t": "Never touch “Perform train / test split”",
+    "tag": [
+     "stop",
+     "destructive"
+    ],
+    "d": "It lives on <strong>Dashboard</strong>, at the bottom, under <strong>Danger zone</strong>. One click reshuffles every clip and destroys the patient partition. Leave it alone now and after every later upload."
+   },
+   {
+    "id": "p1h",
+    "app": "Edge Impulse",
+    "t": "Set the window size and increase equal",
+    "d": "Left sidebar → <strong>Impulse #1</strong> → <strong>Create impulse</strong>. In the <em>Time series data</em> block set <strong>Window size 5000</strong> ms, <strong>Window increase 5000</strong> ms, <strong>Frequency 16000</strong> Hz. Increase must equal size — anything smaller re-creates overlap inside each clip. Click <strong>Save Impulse</strong>."
+   },
+   {
+    "id": "p1i",
+    "app": "Edge Impulse",
+    "t": "Generate the MFCC features",
+    "d": "Left sidebar → <strong>Impulse #1 → MFCC</strong> → leave the parameters as they are → <strong>Save parameters</strong> → the page moves to <em>Generate features</em> → <strong>Generate features</strong>. Takes a while on this much audio."
+   },
+   {
+    "id": "p1j",
+    "app": "Edge Impulse",
+    "t": "Set the metadata key, if your uploader attached one",
+    "d": "Left sidebar → <strong>Impulse #1 → Classifier</strong> → scroll to the bottom → expand <strong>Advanced training settings</strong> → <strong>Validation set size</strong> 20% → <strong>Split train/validation set on metadata key</strong> → type <code>patient</code>. If the field is empty because no metadata was attached, skip it. Your <em>test</em> set is already patient-disjoint from how you uploaded it, so the headline number stays honest — validation leakage only weakens model selection."
+   },
+   {
+    "id": "p1k",
+    "app": "Edge Impulse",
+    "t": "Train, and screenshot the confusion matrix",
+    "d": "Same <strong>Classifier</strong> page → <strong>Save &amp; train</strong> (bottom). When it finishes, the right-hand panel shows accuracy, loss, and the confusion matrix. Screenshot it — accuracy alone will not tell you what happened."
+   },
+   {
+    "id": "p1l",
+    "app": "Edge Impulse",
+    "t": "Score the held-out test set",
+    "d": "Left sidebar → <strong>Model testing</strong> → <strong>Classify all</strong>. <em>This</em> is the number you report, not the validation accuracy on the Classifier page."
+   },
+   {
+    "id": "p1m",
+    "app": "This page",
+    "t": "Record Run A in the log below",
+    "d": "Expect roughly 45–60%. A fall from the old 83% is the correct outcome — that number was inflated by the leak."
+   }
+  ]
+ },
+ {
+  "n": "Phase 2",
+  "t": "Add HF_Lung_V1, and get Run C",
+  "note": "9,765 recordings, about 279 subjects, Taiwan, CC BY 4.0. Free, and East Asian rather than European.",
+  "steps": [
+   {
+    "id": "p2a",
+    "app": "PowerShell",
+    "t": "Clone the corpus",
+    "d": "Needs Git from git-scm.com. About 10 GB — check your disk first. Read its README for the attribution the licence requires.",
+    "cmd": "cd C:\\Users\\Hared\\Downloads\ngit clone https://github.com/techsupportHF/HF_Lung_V1.git"
+   },
+   {
+    "id": "p2b",
+    "app": "PowerShell",
+    "t": "Inspect the label format before trusting the parser",
+    "tag": [
+     "stop",
+     "verify"
+    ],
+    "d": "Prints real label lines from your copy, whether each one parsed, and every event token with the class it maps to.",
+    "cmd": "cd C:\\Users\\Hared\\Downloads\\Resondi\npython build\\newdata\\merge_corpora.py --inspect C:\\Users\\Hared\\Downloads\\HF_Lung_V1"
+   },
+   {
+    "id": "p2c",
+    "app": "Text editor",
+    "t": "Fix the parser if anything failed",
+    "d": "Stop if you see <code>parsed: False</code> on any line, or <code>** UNKNOWN **</code> beside a token. Open <code>merge_corpora.py</code> in Notepad or VS Code and adjust <code>HF_LINE</code> or <code>EVENT_MAP</code> near the top, then inspect again."
+   },
+   {
+    "id": "p2d",
+    "app": "Text editor",
+    "t": "Decide what happens to stridor and rhonchi",
+    "tag": [
+     "dec",
+     "your call"
+    ],
+    "d": "They are continuous adventitious sounds with no slot in your four classes. In <code>merge_corpora.py</code>, <code>CAS_POLICY = \"drop\"</code> discards them — cleaner classes, less data, and the default. <code>\"wheeze\"</code> folds them in — more data, but you are then claiming a wheeze detector that fires on rhonchi. <strong>State the choice in the paper either way.</strong>"
+   },
+   {
+    "id": "p2e",
+    "app": "PowerShell",
+    "t": "Merge the two corpora",
+    "d": "ICBHI keeps the test set, fixed. HF_Lung goes to training, minus a 20% block of its own patients held back as <code>hf_holdout</code>.",
+    "cmd": "python build\\newdata\\merge_corpora.py --icbhi C:\\path\\to\\icbhi --hflung C:\\Users\\Hared\\Downloads\\HF_Lung_V1 --out merged_dataset"
+   },
+   {
+    "id": "p2f",
+    "app": "PowerShell",
+    "t": "Confirm “patients crossing a partition: 0” again",
+    "tag": [
+     "stop",
+     "must be 0"
+    ],
+    "d": "Patient IDs are namespaced <code>icbhi_…</code> and <code>hf_…</code> so the two numbering schemes cannot collide into one group."
+   },
+   {
+    "id": "p2g",
+    "app": "PowerShell",
+    "t": "Check the size against your Edge Impulse plan",
+    "d": "HF_Lung is about seven times the audio of ICBHI. If it exceeds the free tier: apply for the <strong>education / research plan</strong> first (free, you qualify, apply now rather than at the wall), or subsample <strong>by patient, never by clip</strong> — random clips would reintroduce the leak you just fixed.",
+    "cmd": "(Get-ChildItem merged_dataset\\training -Recurse -Filter *.wav).Count\n\"{0:N0} MB\" -f ((Get-ChildItem merged_dataset -Recurse | Measure-Object Length -Sum).Sum / 1MB)"
+   },
+   {
+    "id": "p2h",
+    "app": "Edge Impulse",
+    "t": "Create a second project for Run C",
+    "d": "Project dropdown → <strong>+ Create new project</strong> → <code>Resondi-RunC-plusHFLung</code>. Keeping runs in separate projects is what lets you reopen Run A's confusion matrix later."
+   },
+   {
+    "id": "p2i",
+    "app": "Edge Impulse",
+    "t": "Upload training and testing, holding back the holdout",
+    "d": "Same eight uploads as Phase 1, from <code>merged_dataset\\</code>. Leave <code>hf_holdout\\</code> on disk — if you upload it now it lands in training by accident.",
+    "cmd": "cd merged_dataset\nforeach ($cat in \"training\",\"testing\") {\n  foreach ($lab in \"Healthy\",\"Crackle\",\"Wheeze\",\"Both\") {\n    $f = (Get-ChildItem \"$cat\\$lab\" -Filter *.wav).FullName\n    edge-impulse-uploader --category $cat --label $lab @f\n  }\n}"
+   },
+   {
+    "id": "p2j",
+    "app": "Edge Impulse",
+    "t": "Set the impulse identically to Run A",
+    "d": "Window 5000, increase 5000, 16000 Hz, MFCC with the same parameters. If the impulse changes between runs you are no longer measuring the data, you are measuring the impulse."
+   },
+   {
+    "id": "p2k",
+    "app": "Edge Impulse",
+    "t": "Train, then Model testing → Classify all",
+    "d": "Accuracy may barely move. <strong>Look at Wheeze recall in the confusion matrix</strong> — MFCCs discard the pitch that defines a wheeze, and HF_Lung is rich in continuous adventitious sounds, so that is where a change should show first."
+   },
+   {
+    "id": "p2l",
+    "app": "Edge Impulse",
+    "t": "Score the holdout separately",
+    "d": "<strong>Data acquisition → Add data → Upload data</strong>, pick <code>hf_holdout\\&lt;class&gt;</code>, category <strong>Testing</strong>. Then <strong>Model testing → Classify all</strong> again and record that figure on its own line as East Asian external validation. Never fold it into the primary comparison."
+   }
+  ]
+ },
+ {
+  "n": "Phase 3",
+  "t": "Compare, and write it up",
+  "note": "The part that turns two numbers into a finding.",
+  "steps": [
+   {
+    "id": "p3a",
+    "app": "jamovi",
+    "t": "Run McNemar between Run A and Run C",
+    "d": "Export both models' predictions on the same test set (<strong>Model testing</strong> → the <strong>⋮</strong> menu → export). In jamovi: <strong>Frequencies → Paired Samples (McNemar test)</strong>, rows = Run A correct (1/0), columns = Run C correct (1/0). <strong>This is the one place in the project McNemar belongs</strong> — it is wrong for agreement against reference labels and right here."
+   },
+   {
+    "id": "p3b",
+    "app": "This page",
+    "t": "Compare per-class recall, not just accuracy",
+    "d": "A run that moves accuracy two points but lifts Wheeze recall fifteen is a success, and only the per-class table shows it."
+   },
+   {
+    "id": "p3c",
+    "app": "Word / VS Code",
+    "t": "Update the five places that carry model numbers",
+    "d": "Concept note §VIII model paragraph · <code>09-Resondi-Model-Statistics-Summary.docx</code> · IMRaD results section · deck slide 11 · the classification answers in the Judge Q&amp;A."
+   },
+   {
+    "id": "p3d",
+    "app": "Base44",
+    "t": "Update the DISPLAY dict if class names changed",
+    "d": "Open the Resondi app in the Base44 editor and search for <code>DISPLAY</code>. The interpretation rule layer keys off the same names, so search for <code>Asthma</code> and <code>Bronchiolitis</code> too.",
+    "cmd": "const DISPLAY = {\n  Wheeze:  'High Pitched Wheezing',\n  Both:    'Wheezing With Crackles',\n  Crackle: 'Crackles',\n  Healthy: 'Healthy (Soft)',\n};"
+   }
+  ]
+ }
+];
+
+const RUNS = [
+ {id:"A", name:"Baseline", what:"ICBHI only · MFCC + CNN · patient-disjoint"},
+ {id:"B", name:"Fusion", what:"ICBHI only · three-branch fusion (optional)"},
+ {id:"C", name:"Plus Taiwan", what:"ICBHI + HF_Lung_V1"},
+ {id:"H", name:"HF holdout", what:"Scored on held-out HF_Lung patients — reported separately"},
+];
+const FIELDS = [["acc","Accuracy %"],["healthy","Healthy %"],["crackle","Crackle %"],
+                ["wheeze","Wheeze %"],["both","Both %"]];
+const BASELINE = 53;
+
+let db=null, steps={}, runs={};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function allSteps(){return PHASES.flatMap(p=>p.steps.map(s=>s.id));}
+
+function renderPhases(){
+  $("#phases").innerHTML = PHASES.map(p=>{
+    const done=p.steps.filter(s=>steps[s.id]).length;
+    return `<section class="phase"><div class="phase-head">
+      <span class="pnum">${esc(p.n)}</span><h2>${esc(p.t)}</h2>
+      <span class="pcount">${done}/${p.steps.length}</span></div>
+      <p class="phase-note">${esc(p.note)}</p>
+      <ol class="steps">${p.steps.map(s=>{
+        const on=!!steps[s.id];
+        const tag=s.tag?`<span class="tag ${s.tag[0]}">${esc(s.tag[1])}</span>`:"";
+        const cmd=s.cmd?`<div class="cmd"><button class="copy" data-cmd="${esc(s.cmd)}">copy</button><pre>${esc(s.cmd)}</pre></div>`:"";
+        const app=s.app?`<div><span class="app" data-a="${esc(s.app)}">${esc(s.app)}</span></div>`:"";
+        return `<li class="step${on?" done":""}"><div class="row">
+          <input type="checkbox" id="${s.id}" ${on?"checked":""} aria-label="${esc(s.t)}">
+          <div class="body">${app}<div class="title">${esc(s.t)}${tag}</div>
+          ${s.d?`<div class="detail">${s.d}</div>`:""}${cmd}</div></div></li>`;
+      }).join("")}</ol></section>`;
+  }).join("");
+  const ids=allSteps(), done=ids.filter(i=>steps[i]).length;
+  $("#fill").style.width=(done/ids.length*100)+"%";
+  $("#count").textContent=`${done} / ${ids.length}`;
+}
+
+function verdict(r){
+  const a=parseFloat(r.acc);
+  if(!isFinite(a)) return null;
+  if(a<BASELINE) return ["bad",`Below the ${BASELINE}% majority-class baseline — the model is not yet beating "always say Healthy".`];
+  if(a<BASELINE+5) return ["bad",`Only ${(a-BASELINE).toFixed(1)} points above the ${BASELINE}% baseline. Check per-class recall before claiming anything.`];
+  return ["ok",`${(a-BASELINE).toFixed(1)} points above the ${BASELINE}% majority-class baseline.`];
+}
+
+function renderRuns(){
+  $("#runs").innerHTML = RUNS.map(r=>{
+    const v=runs[r.id]||{}, vd=verdict(v);
+    return `<div class="run"><div class="run-head"><span class="rid">RUN ${esc(r.id)}</span>
+      <span class="rname">${esc(r.name)}</span><span class="rwhat">${esc(r.what)}</span></div>
+      <div class="grid">${FIELDS.map(([k,l])=>`<div class="f"><label for="${r.id}-${k}">${esc(l)}</label>
+        <input id="${r.id}-${k}" data-run="${r.id}" data-k="${k}" inputmode="decimal"
+        placeholder="—" value="${esc(v[k]??"")}"></div>`).join("")}</div>
+      <textarea class="notes" data-run="${r.id}" data-k="notes"
+        placeholder="What changed, what you noticed in the confusion matrix…">${esc(v.notes??"")}</textarea>
+      <div class="verdict ${vd?vd[0]:""} ${vd?"show":""}">${vd?esc(vd[1]):""}</div></div>`;
+  }).join("");
+  const rows=RUNS.filter(r=>isFinite(parseFloat((runs[r.id]||{}).acc)));
+  const base=parseFloat((runs.A||{}).acc);
+  $("#cmp").innerHTML = rows.length ? rows.map(r=>{
+    const v=runs[r.id], a=parseFloat(v.acc);
+    const d=(r.id!=="A"&&isFinite(base))?(a-base>=0?"+":"")+(a-base).toFixed(1)+" pts":"—";
+    return `<tr><td class="m">Run ${esc(r.id)}</td><td>${esc(r.what)}</td>
+      <td class="m">${a.toFixed(1)}%</td><td class="m">${esc(d)}</td>
+      <td class="m">${isFinite(parseFloat(v.wheeze))?parseFloat(v.wheeze).toFixed(1)+"%":"—"}</td></tr>`;
+  }).join("") : `<tr><td colspan="5" class="empty">No runs recorded yet.</td></tr>`;
+}
+
+// ── persistence ────────────────────────────────────────────────────────
+let saveTimer=null;
+function save(kind){
+  if(!db) return;
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(async()=>{
+    try{
+      if(kind==="steps") await db.doc("progress/steps").set({...steps});
+      else await db.doc("progress/runs").set({...runs});
+      $("#sync").textContent="saved";
+    }catch(e){ $("#sync").textContent="not saved"; }
+  },450);
+}
+
+document.addEventListener("change",e=>{
+  const cb=e.target.closest('input[type=checkbox]');
+  if(cb){ steps[cb.id]=cb.checked; renderPhases(); save("steps"); }
+});
+document.addEventListener("input",e=>{
+  const f=e.target.closest("[data-run]");
+  if(!f) return;
+  const id=f.dataset.run;
+  runs[id]={...(runs[id]||{}),[f.dataset.k]:f.value};
+  const card=f.closest(".run"), vd=verdict(runs[id]), box=card.querySelector(".verdict");
+  box.className="verdict"+(vd?` ${vd[0]} show`:"");
+  box.textContent=vd?vd[1]:"";
+  renderRuns_cmpOnly(); save("runs");
+});
+function renderRuns_cmpOnly(){
+  const rows=RUNS.filter(r=>isFinite(parseFloat((runs[r.id]||{}).acc)));
+  const base=parseFloat((runs.A||{}).acc);
+  $("#cmp").innerHTML = rows.length ? rows.map(r=>{
+    const v=runs[r.id], a=parseFloat(v.acc);
+    const d=(r.id!=="A"&&isFinite(base))?(a-base>=0?"+":"")+(a-base).toFixed(1)+" pts":"—";
+    return `<tr><td class="m">Run ${esc(r.id)}</td><td>${esc(r.what)}</td>
+      <td class="m">${a.toFixed(1)}%</td><td class="m">${esc(d)}</td>
+      <td class="m">${isFinite(parseFloat(v.wheeze))?parseFloat(v.wheeze).toFixed(1)+"%":"—"}</td></tr>`;
+  }).join("") : `<tr><td colspan="5" class="empty">No runs recorded yet.</td></tr>`;
+}
+document.addEventListener("click",async e=>{
+  const b=e.target.closest(".copy"); if(!b) return;
+  try{ await navigator.clipboard.writeText(b.dataset.cmd); b.textContent="copied";
+       setTimeout(()=>b.textContent="copy",1400); }
+  catch(_){ const r=document.createRange(); r.selectNodeContents(b.parentNode.querySelector("pre"));
+       const s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent="selected";
+       setTimeout(()=>b.textContent="copy",1400); }
+});
+
+renderPhases(); renderRuns();
+
+(async()=>{
+  const timer=setTimeout(()=>{ if(!db) $("#sync").textContent="local only"; },10000);
+  try{
+    db=await claude.use("db");
+    clearTimeout(timer);
+    if(!db){ $("#sync").textContent="local only"; return; }
+    db.doc("progress/steps").onSnapshot(d=>{
+      const v=d&&d.data?d.data():null;
+      if(v){ steps={...v}; renderPhases(); }
+      $("#sync").textContent="synced";
+    },()=>{ $("#sync").textContent="local only"; });
+    db.doc("progress/runs").onSnapshot(d=>{
+      const v=d&&d.data?d.data():null;
+      if(v && document.activeElement?.dataset?.run===undefined){ runs={...v}; renderRuns(); }
+      else if(v){ runs={...v}; renderRuns_cmpOnly(); }
+    },()=>{});
+  }catch(_){ clearTimeout(timer); $("#sync").textContent="local only"; }
+})();
+</script>

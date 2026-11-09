@@ -1,0 +1,72 @@
+[0:00-0:20] HOOK
+AHNYCCA: Listen. This is a breath.
+HARED: And this is a breath that sounds different.
+JARRED: The moment the exam ends, both are gone. Poof. Walang resibo.
+ALL: Resondi saves it, sorts it, analyzes it, and keeps the receipts.
+
+[0:20-0:45] THE PROBLEM
+AHNYCCA: Per the PSA, pneumonia ranked fourth among causes of death in 2024. Roughly 47,000.
+HARED: That is exactly what a stethoscope hears. Then forgets. In a barangay, nobody reviews what the midwife heard.
+JARRED: And pulmonary rehab reaches only 2.7 percent of COPD patients worldwide.
+AHNYCCA: Respiratory disease is not only a hospital problem. It is a monitoring problem.
+ALL: Hearing is not enough.
+
+[0:45-1:10] REVEAL + SOLUTION
+HARED: So we built RESONDI.
+JARRED: A CNN-assisted auscultation instrument for lung sound monitoring, longitudinal tracking, and rehabilitation support.
+AHNYCCA: An AI-assisted smart stethoscope with Bluetooth and microSD, paired with a mobile app.
+HARED: We gave the stethoscope a brain.
+ALL: Capture. Sort. Analyze. Review.
+
+[1:10-1:30] WHY THE METHOD MATTERS
+JARRED: Unaided auscultation is a weak test alone. Thirty-seven percent pooled sensitivity across thirty-four studies.
+AHNYCCA: Everyone listens in a different place and describes it differently.
+ALL: Better methods. Sharper listening.
+
+[1:30-2:00] LIVE DEMO: CAPTURE
+HARED: The app walks you to each of six standardized lung locations and tags the recording.
+AHNYCCA: Right and left. Upper, middle, lower. Same place, every visit.
+JARRED: Before anything is analyzed, the recording is graded: good, acceptable, poor, or invalid.
+HARED: Poor ones get repeated, not classified.
+
+[2:00-2:25] PROCESS + ANALYZE
+AHNYCCA: Real environments are not silent. The signal is resampled, denoised, and normalized.
+JARRED: Then converted into a mel-spectrogram. Something we hear, we can now see.
+HARED: That spectrogram goes into a convolutional network trained on ICBHI 2017: 920 recordings, 126 patients.
+AHNYCCA: It sorts sounds into four categories. Normal. Wheezing. Crackles. Wheezing with crackles.
+JARRED: Not diseases. Sound patterns. The practitioner makes the diagnosis.
+
+[2:25-3:15] RESULTS AND DISCUSSION
+AHNYCCA: So what did we find?
+HARED: Sixty-eight percent of recordings were good, twenty-five acceptable, seven poor.
+AHNYCCA: We recorded across three environments, including the noisiest, and it still captured.
+JARRED: Six of fifteen recordings agreed with the reference. Forty percent.
+AHNYCCA: And fifteen is far too few to call that a rate. The interval runs from twenty to sixty-four percent.
+HARED: Which is why we are not claiming a number yet. Hindi pa po siya magic.
+JARRED: Classification takes about four seconds. Quality assessment is our bottleneck, and fixing it is first on the list.
+AHNYCCA: These results show the potential and the limits of a prototype.
+ALL: Resondi does not replace the clinician. It supports respiratory monitoring.
+
+[3:15-3:45] REVIEW + REHABILITATION
+HARED: Practitioners get one dashboard, patients another.
+JARRED: The practitioner has the last word. Confirm, modify, or repeat.
+AHNYCCA: And beyond listening, Resondi guides breathing exercises and builds a rehabilitation record.
+HARED: A respiratory assessment is a snapshot. Rehabilitation is a movie.
+ALL: Resondi connects those snapshots.
+
+[3:45-4:10] VALIDATION + WHO BENEFITS
+HARED: Reference recordings were reviewed by three pulmonologists, one of them also a pediatrician.
+JARRED: Midwives and health workers in far barangays get a second set of ears.
+AHNYCCA: Nursing and medical schools can teach from real sounds.
+JARRED: Supporting SDG 3, Good Health and Well-being, SDG 4, Quality Education, and SDG 9, Industry, Innovation and Infrastructure.
+
+[4:10-5:00] CLOSE
+ALL: We are Team Wheezards from Puerto Princesa City National Science High School.
+AHNYCCA: I'm Ahnycca Malimban.
+HARED: Hared Cabrera.
+JARRED: And Jarred Llacuna.
+HARED: Yes, Wheezards. Wizards na marunong makinig sa wheeze.
+AHNYCCA: Because every breath carries information.
+HARED: It doesn't just listen to the lungs.
+JARRED: It listens to recovery.
+ALL: Resondi. Hear smarter. Breathe better.

@@ -1,0 +1,105 @@
+RESONDI — 4:30 PITCH (PSC XI, 3 presenters, cut from the team's 8-minute script)
+Target: under 5:00. Timings below assume 150 words a minute plus the breath sounds, the demo moment and the closing music: about 4:40 in all.
+The two lines marked <<CUT IF LONG>> take about 12 seconds out, to roughly 4:30. Time it against a stopwatch; nerves slow delivery, they never speed it.
+Each section ends with the deck slide it belongs to; the deck's speaker notes are built from this file.
+A = Ahnycca   H = Hared   J = Jarred
+
+[0:00-0:21] HOOK
+[Lights dim. Breath sound. Device in hand, not yet named.]
+A: Listen. [breath] This is a breath.
+H: [second breath, different] And this is a breath that sounds different.
+J: The moment the exam ends, both are gone. Poof. Walang resibo.
+ALL: Resondi saves it, sorts it, analyzes it, and keeps the receipts.
+SLIDE 1 — Title only. Let the sound carry it.
+
+[0:21-0:34] THE PROBLEM
+H: In a barangay health station, nobody reviews what the midwife heard. There is nothing to review.
+A: Respiratory disease here is not only a hospital problem. It is a monitoring problem.
+SLIDE 2 — Walang resibo. There is nothing to review.
+
+[0:34-0:47] THE SCALE
+A: Per the Philippine Statistics Authority, pneumonia ranked fourth among causes of death in 2024. Forty-seven thousand, two hundred sixty people.
+H: That is exactly what a stethoscope hears. Then forgets.
+SLIDE 3 — 134,074 and 47,260; PSA registered deaths 2024.
+
+[0:47-1:02] THE ROOT CAUSE
+J: Arts and colleagues pooled thirty-four studies: thirty-seven percent sensitivity, most of it lost to variation in how people listen.
+H: And pulmonary rehabilitation reaches only two point seven percent of COPD patients worldwide.   <<CUT IF LONG>>
+ALL: Hearing is not enough.
+SLIDE 4 — 63 in 100, 0 sound, 2.7%.
+
+[1:02-1:12] SDG PRIORITY
+J: Our priority is SDG 3, Good Health and Well-being, supported by SDG 4, Quality Education, and SDG 9, Industry, Innovation and Infrastructure.
+SLIDE 5 — SDG 3 with targets; SDG 4 and 9 supporting.
+
+[1:12-1:22] TARGET MARKET
+H: Over thirty thousand public health facilities listen to chests every day.
+J: We start in MIMAROPA: fifty facilities and fifteen nursing and medical schools.
+SLIDE 6 — 30,022 / ~3,500 + schools / 50 + 15.
+
+[1:22-1:34] THE SOLUTION
+H: So we built RESONDI.
+A: An AI-assisted smart stethoscope that serves its own Wi-Fi and saves to microSD, paired with a mobile-first app. [hold up device]
+H: We gave the stethoscope a brain.
+ALL: Capture. Sort. Analyze. Review.
+SLIDE 7 — Record, organise, analyse, confirm.
+
+[1:34-2:03] GUIDED ACQUISITION
+A: The app walks you to each of seven standardized sites. The trachea first, then right and left: upper chest, side, lower back. [place device]
+J: You select the location, confirm placement, and record. The app tags it. You never type where it came from.
+A: Same place, same way, every visit.
+H: And before anything is analyzed, the recording is graded. Poor ones get repeated, not classified.
+SLIDE 8 — App screens: lung map, placement, quality grade.
+
+[2:03-2:21] THE MODEL
+J: Every recording becomes MFCCs, thirteen numbers that describe the shape of the sound. A convolutional neural network sorts it into four patterns: normal, wheezing, crackles, or both.
+A: What the practitioner sees is a sound pattern, not a diagnosis.
+ALL: The practitioner makes the diagnosis.
+SLIDE 9 — How the AI works.
+
+[2:21-2:39] RESULTS
+H: Forty-five decibels against thirty-two for a conventional stethoscope. Decibels are logarithmic, so that is about four and a half times the amplitude.
+J: Sixty-eight percent of recordings rated good, across three real settings.
+A: And twenty-seven respondents rated acceptance three point nine five out of five.
+SLIDE 10 — +13 dB, 68%, 3.95 / 5.
+
+[2:39-3:05] THE HONEST NUMBER
+J: Six of fifteen recordings agreed with the reference labels. Forty percent.
+A: Hindi pa po siya magic.
+H: Fifteen recordings is far too few to call that a rate. And we audited our own training split: our corpus scores are inflated. The forty percent is the only clean number we have.
+A: So we are not claiming a number. We are reporting a baseline.
+SLIDE 11 — 6 of 15, why the gap, the funded fix.
+
+[3:05-3:23] BUSINESS MODEL
+J: How does it pay for itself? An eight-thousand-peso device, half of it margin from the first unit. A fifteen-hundred-peso monthly platform fee per facility. And a thirty-thousand-peso yearly licence for schools, who come first, because a teaching tool needs no clinical registration.
+SLIDE 12 — ₱8,000 / ₱1,500 / ₱30,000.
+
+[3:23-3:35] WHY WE WIN
+H: An electronic stethoscope here costs at least thirty thousand pesos, and none we reviewed guides a lung exam.
+A: Hardware can be copied. A library of confirmed Philippine recordings cannot.
+SLIDE 13 — Comparison table.
+
+[3:35-3:44] ROADMAP
+J: Six gated phases over eighteen months. First sales in month fifteen. The seed comes back from operations by month thirty-five.   <<CUT IF LONG>>
+SLIDE 14 — Phases and cumulative contribution.
+
+[3:44-4:03] THE ASK
+H: We are asking for five hundred thousand pesos, mostly for clinical validation and AI development, so the model is retrained on the patients it will actually hear.
+J: And three partners: two RHU pilot sites in Palawan, a hospital for validation, and incubation with FDA guidance.
+SLIDE 15 — ₱500,000 and three partners.
+
+[4:03-4:22] THE FOUNDERS
+ALL: We are Team Wheezards from Puerto Princesa City National Science High School.
+A: I'm Ahnycca Malimban, CEO.
+H: Hared Cabrera, CTO.
+J: And Jarred Paul Llacuna, COO, with our mentor, [mentor's name].
+H: Yes, Wheezards. Wizards na marunong makinig sa wheeze.
+SLIDE 16 — The founders.
+
+[4:22-4:41] CLOSE
+["Every Breath You Take" fades in softly under the closing lines. One final breath over the last beat.]
+A: Because every breath carries information.
+H: It doesn't just listen to the lungs.
+J: It listens to recovery.
+ALL: Resondi. Hear smarter. Breathe better.
+SLIDE 17 — Closing slide. Leave it on screen during Q&A.

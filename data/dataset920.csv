@@ -1,0 +1,921 @@
+recording,patient,zone,equipment,total_cycles,crackle_cycles,wheeze_cycles,both_cycles,abnormal_cycles,abnormal_sound_percent,sound_category
+101_1b1_Al_sc_Meditron,101,Al,Meditron,12,0,0,0,0,0.0,Healthy
+101_1b1_Pr_sc_Meditron,101,Pr,Meditron,11,0,0,0,0,0.0,Healthy
+102_1b1_Ar_sc_Meditron,102,Ar,Meditron,13,0,0,0,0,0.0,Healthy
+103_2b2_Ar_mc_LittC2SE,103,Ar,LittC2SE,6,0,4,0,4,66.7,Wheezing
+104_1b1_Al_sc_Litt3200,104,Al,Litt3200,6,0,0,0,0,0.0,Healthy
+104_1b1_Ar_sc_Litt3200,104,Ar,Litt3200,14,0,10,0,10,71.4,Wheezing
+104_1b1_Ll_sc_Litt3200,104,Ll,Litt3200,7,1,0,0,1,14.3,Crackles
+104_1b1_Lr_sc_Litt3200,104,Lr,Litt3200,5,0,0,0,0,0.0,Healthy
+104_1b1_Pl_sc_Litt3200,104,Pl,Litt3200,13,0,0,0,0,0.0,Healthy
+104_1b1_Pr_sc_Litt3200,104,Pr,Litt3200,10,0,0,0,0,0.0,Healthy
+105_1b1_Tc_sc_Meditron,105,Tc,Meditron,8,0,0,0,0,0.0,Healthy
+106_2b1_Pl_mc_LittC2SE,106,Pl,LittC2SE,9,8,0,0,8,88.9,Crackles
+106_2b1_Pr_mc_LittC2SE,106,Pr,LittC2SE,9,0,7,0,7,77.8,Wheezing
+107_2b3_Al_mc_AKGC417L,107,Al,AKGC417L,8,7,0,0,7,87.5,Crackles
+107_2b3_Ar_mc_AKGC417L,107,Ar,AKGC417L,8,1,0,7,8,100.0,Wheezing with Crackles
+107_2b3_Ll_mc_AKGC417L,107,Ll,AKGC417L,8,8,0,0,8,100.0,Crackles
+107_2b3_Lr_mc_AKGC417L,107,Lr,AKGC417L,8,7,0,0,7,87.5,Crackles
+107_2b3_Pl_mc_AKGC417L,107,Pl,AKGC417L,8,0,0,0,0,0.0,Healthy
+107_2b3_Pr_mc_AKGC417L,107,Pr,AKGC417L,8,3,0,3,6,75.0,Wheezing with Crackles
+107_2b3_Tc_mc_AKGC417L,107,Tc,AKGC417L,8,2,0,0,2,25.0,Crackles
+107_2b4_Al_mc_AKGC417L,107,Al,AKGC417L,8,6,1,1,8,100.0,Crackles
+107_2b4_Ar_mc_AKGC417L,107,Ar,AKGC417L,8,8,0,0,8,100.0,Crackles
+107_2b4_Ll_mc_AKGC417L,107,Ll,AKGC417L,8,8,0,0,8,100.0,Crackles
+107_2b4_Lr_mc_AKGC417L,107,Lr,AKGC417L,8,8,0,0,8,100.0,Crackles
+107_2b4_Pl_mc_AKGC417L,107,Pl,AKGC417L,8,3,0,0,3,37.5,Crackles
+107_2b4_Pr_mc_AKGC417L,107,Pr,AKGC417L,8,8,0,0,8,100.0,Crackles
+107_2b4_Tc_mc_AKGC417L,107,Tc,AKGC417L,8,0,0,0,0,0.0,Healthy
+107_2b5_Al_mc_AKGC417L,107,Al,AKGC417L,8,7,0,0,7,87.5,Crackles
+107_2b5_Ar_mc_AKGC417L,107,Ar,AKGC417L,8,2,1,1,4,50.0,Crackles
+107_2b5_Ll_mc_AKGC417L,107,Ll,AKGC417L,8,6,0,0,6,75.0,Crackles
+107_2b5_Lr_mc_AKGC417L,107,Lr,AKGC417L,8,7,0,0,7,87.5,Crackles
+107_2b5_Pl_mc_AKGC417L,107,Pl,AKGC417L,8,0,0,0,0,0.0,Healthy
+107_2b5_Pr_mc_AKGC417L,107,Pr,AKGC417L,8,4,0,1,5,62.5,Crackles
+107_2b5_Tc_mc_AKGC417L,107,Tc,AKGC417L,8,2,0,0,2,25.0,Crackles
+107_3p2_Al_mc_AKGC417L,107,Al,AKGC417L,9,6,0,3,9,100.0,Crackles
+107_3p2_Ar_mc_AKGC417L,107,Ar,AKGC417L,9,0,5,4,9,100.0,Wheezing
+107_3p2_Ll_mc_AKGC417L,107,Ll,AKGC417L,9,9,0,0,9,100.0,Crackles
+107_3p2_Lr_mc_AKGC417L,107,Lr,AKGC417L,9,3,5,1,9,100.0,Wheezing
+107_3p2_Pl_mc_AKGC417L,107,Pl,AKGC417L,9,9,0,0,9,100.0,Crackles
+107_3p2_Pr_mc_AKGC417L,107,Pr,AKGC417L,9,4,0,5,9,100.0,Wheezing with Crackles
+107_3p2_Tc_mc_AKGC417L,107,Tc,AKGC417L,9,0,2,6,8,88.9,Wheezing with Crackles
+108_1b1_Al_sc_Meditron,108,Al,Meditron,8,0,0,0,0,0.0,Healthy
+109_1b1_Al_sc_Litt3200,109,Al,Litt3200,9,0,0,0,0,0.0,Healthy
+109_1b1_Ar_sc_Litt3200,109,Ar,Litt3200,10,0,0,0,0,0.0,Healthy
+109_1b1_Ll_sc_Litt3200,109,Ll,Litt3200,8,7,0,0,7,87.5,Crackles
+109_1b1_Lr_sc_Litt3200,109,Lr,Litt3200,8,8,0,0,8,100.0,Crackles
+109_1b1_Pl_sc_Litt3200,109,Pl,Litt3200,9,0,0,0,0,0.0,Healthy
+109_1b1_Pr_sc_Litt3200,109,Pr,Litt3200,17,0,0,0,0,0.0,Healthy
+110_1b1_Pr_sc_Meditron,110,Pr,Meditron,15,2,0,0,2,13.3,Crackles
+110_1p1_Al_sc_Meditron,110,Al,Meditron,7,3,0,3,6,85.7,Wheezing with Crackles
+110_1p1_Ll_sc_Meditron,110,Ll,Meditron,7,0,3,0,3,42.9,Wheezing
+110_1p1_Lr_sc_Meditron,110,Lr,Meditron,7,7,0,0,7,100.0,Crackles
+110_1p1_Pr_sc_Meditron,110,Pr,Meditron,16,0,0,0,0,0.0,Healthy
+111_1b2_Tc_sc_Meditron,111,Tc,Meditron,8,0,0,0,0,0.0,Healthy
+111_1b3_Tc_sc_Meditron,111,Tc,Meditron,9,0,0,0,0,0.0,Healthy
+112_1b1_Ar_sc_Meditron,112,Ar,Meditron,17,1,0,0,1,5.9,Crackles
+112_1b1_Lr_sc_Meditron,112,Lr,Meditron,12,3,6,2,11,91.7,Wheezing
+112_1p1_Ll_sc_Litt3200,112,Ll,Litt3200,10,0,5,0,5,50.0,Wheezing
+112_1p1_Pl_sc_Litt3200,112,Pl,Litt3200,9,1,3,4,8,88.9,Wheezing with Crackles
+112_1p1_Pr_sc_Litt3200,112,Pr,Litt3200,9,0,8,0,8,88.9,Wheezing
+113_1b1_Al_sc_Litt3200,113,Al,Litt3200,7,0,0,0,0,0.0,Healthy
+113_1b1_Ar_sc_Litt3200,113,Ar,Litt3200,8,0,0,0,0,0.0,Healthy
+113_1b1_Ll_sc_Litt3200,113,Ll,Litt3200,11,0,0,0,0,0.0,Healthy
+113_1b1_Lr_sc_Litt3200,113,Lr,Litt3200,7,0,0,0,0,0.0,Healthy
+113_1b1_Pl_sc_Litt3200,113,Pl,Litt3200,8,0,0,0,0,0.0,Healthy
+113_1b1_Pr_sc_Litt3200,113,Pr,Litt3200,9,0,0,0,0,0.0,Healthy
+114_1b4_Al_mc_AKGC417L,114,Al,AKGC417L,7,2,1,4,7,100.0,Wheezing with Crackles
+114_1b4_Ar_mc_AKGC417L,114,Ar,AKGC417L,7,1,1,4,6,85.7,Wheezing with Crackles
+114_1b4_Lr_mc_AKGC417L,114,Lr,AKGC417L,7,2,0,5,7,100.0,Wheezing with Crackles
+114_1b4_Pl_mc_AKGC417L,114,Pl,AKGC417L,7,2,0,5,7,100.0,Wheezing with Crackles
+114_1b4_Pr_mc_AKGC417L,114,Pr,AKGC417L,7,2,1,4,7,100.0,Wheezing with Crackles
+115_1b1_Ar_sc_Meditron,115,Ar,Meditron,24,0,1,0,1,4.2,Wheezing
+116_1b2_Pl_sc_Meditron,116,Pl,Meditron,4,0,2,0,2,50.0,Wheezing
+116_1b2_Tc_sc_Meditron,116,Tc,Meditron,4,0,0,0,0,0.0,Healthy
+117_1b2_Tc_mc_LittC2SE,117,Tc,LittC2SE,7,0,0,0,0,0.0,Healthy
+117_1b3_Tc_mc_LittC2SE,117,Tc,LittC2SE,5,0,5,0,5,100.0,Wheezing
+118_1b1_Al_sc_Litt3200,118,Al,Litt3200,9,0,7,0,7,77.8,Wheezing
+118_1b1_Ar_sc_Litt3200,118,Ar,Litt3200,9,0,8,0,8,88.9,Wheezing
+118_1b1_Ll_sc_Litt3200,118,Ll,Litt3200,5,0,2,0,2,40.0,Wheezing
+118_1b1_Lr_sc_Litt3200,118,Lr,Litt3200,7,0,5,0,5,71.4,Wheezing
+118_1b1_Pl_sc_Litt3200,118,Pl,Litt3200,5,0,0,0,0,0.0,Healthy
+118_1b1_Pr_sc_Litt3200,118,Pr,Litt3200,5,0,3,0,3,60.0,Wheezing
+119_1b1_Ar_sc_Meditron,119,Ar,Meditron,9,0,0,0,0,0.0,Healthy
+120_1b1_Al_sc_Meditron,120,Al,Meditron,19,0,0,0,0,0.0,Healthy
+120_1b1_Ar_sc_Meditron,120,Ar,Meditron,20,0,0,0,0,0.0,Healthy
+120_1b1_Lr_sc_Meditron,120,Lr,Meditron,33,0,0,0,0,0.0,Healthy
+120_1b1_Pl_sc_Meditron,120,Pl,Meditron,30,14,0,0,14,46.7,Crackles
+120_1b1_Pr_sc_Meditron,120,Pr,Meditron,21,1,0,0,1,4.8,Crackles
+121_1b1_Tc_sc_Meditron,121,Tc,Meditron,6,0,0,0,0,0.0,Healthy
+121_1p1_Tc_sc_Meditron,121,Tc,Meditron,8,0,0,0,0,0.0,Healthy
+122_2b1_Al_mc_LittC2SE,122,Al,LittC2SE,6,0,2,0,2,33.3,Wheezing
+122_2b1_Ar_mc_LittC2SE,122,Ar,LittC2SE,6,0,1,0,1,16.7,Wheezing
+122_2b1_Tc_mc_LittC2SE,122,Tc,LittC2SE,6,0,5,0,5,83.3,Wheezing
+122_2b2_Al_mc_LittC2SE,122,Al,LittC2SE,6,0,0,0,0,0.0,Healthy
+122_2b2_Ar_mc_LittC2SE,122,Ar,LittC2SE,7,0,0,0,0,0.0,Healthy
+122_2b2_Tc_mc_LittC2SE,122,Tc,LittC2SE,6,0,5,0,5,83.3,Wheezing
+122_2b3_Al_mc_LittC2SE,122,Al,LittC2SE,5,0,1,0,1,20.0,Wheezing
+122_2b3_Ar_mc_LittC2SE,122,Ar,LittC2SE,5,0,1,0,1,20.0,Wheezing
+122_2b3_Tc_mc_LittC2SE,122,Tc,LittC2SE,5,0,0,0,0,0.0,Healthy
+123_1b1_Al_sc_Meditron,123,Al,Meditron,8,0,0,0,0,0.0,Healthy
+124_1b1_Al_sc_Litt3200,124,Al,Litt3200,8,0,6,1,7,87.5,Wheezing
+124_1b1_Ar_sc_Litt3200,124,Ar,Litt3200,7,0,6,0,6,85.7,Wheezing
+124_1b1_Ll_sc_Litt3200,124,Ll,Litt3200,10,0,0,0,0,0.0,Healthy
+124_1b1_Lr_sc_Litt3200,124,Lr,Litt3200,10,0,0,0,0,0.0,Healthy
+124_1b1_Pl_sc_Litt3200,124,Pl,Litt3200,7,0,1,1,2,28.6,Wheezing with Crackles
+124_1b1_Pr_sc_Litt3200,124,Pr,Litt3200,6,0,0,0,0,0.0,Healthy
+125_1b1_Tc_sc_Meditron,125,Tc,Meditron,6,2,0,0,2,33.3,Crackles
+126_1b1_Al_sc_Meditron,126,Al,Meditron,11,0,0,0,0,0.0,Healthy
+127_1b1_Ar_sc_Meditron,127,Ar,Meditron,10,3,0,0,3,30.0,Crackles
+128_1b3_Tc_mc_LittC2SE,128,Tc,LittC2SE,5,3,0,0,3,60.0,Crackles
+129_1b1_Ar_sc_Meditron,129,Ar,Meditron,9,5,0,0,5,55.6,Crackles
+130_1p2_Al_mc_AKGC417L,130,Al,AKGC417L,7,1,1,2,4,57.1,Wheezing with Crackles
+130_1p2_Ar_mc_AKGC417L,130,Ar,AKGC417L,7,3,0,4,7,100.0,Wheezing with Crackles
+130_1p2_Ll_mc_AKGC417L,130,Ll,AKGC417L,7,0,0,7,7,100.0,Wheezing with Crackles
+130_1p2_Lr_mc_AKGC417L,130,Lr,AKGC417L,7,4,0,3,7,100.0,Crackles
+130_1p2_Pl_mc_AKGC417L,130,Pl,AKGC417L,7,3,0,4,7,100.0,Wheezing with Crackles
+130_1p2_Pr_mc_AKGC417L,130,Pr,AKGC417L,7,2,0,3,5,71.4,Wheezing with Crackles
+130_1p2_Tc_mc_AKGC417L,130,Tc,AKGC417L,7,3,0,4,7,100.0,Wheezing with Crackles
+130_1p3_Al_mc_AKGC417L,130,Al,AKGC417L,6,0,0,5,5,83.3,Wheezing with Crackles
+130_1p3_Ar_mc_AKGC417L,130,Ar,AKGC417L,6,1,2,3,6,100.0,Wheezing with Crackles
+130_1p3_Ll_mc_AKGC417L,130,Ll,AKGC417L,6,0,4,1,5,83.3,Wheezing
+130_1p3_Lr_mc_AKGC417L,130,Lr,AKGC417L,6,0,3,0,3,50.0,Wheezing
+130_1p3_Pl_mc_AKGC417L,130,Pl,AKGC417L,6,0,5,0,5,83.3,Wheezing
+130_1p3_Pr_mc_AKGC417L,130,Pr,AKGC417L,6,0,2,0,2,33.3,Wheezing
+130_1p3_Tc_mc_AKGC417L,130,Tc,AKGC417L,6,0,5,0,5,83.3,Wheezing
+130_1p4_Al_mc_AKGC417L,130,Al,AKGC417L,7,0,7,0,7,100.0,Wheezing
+130_1p4_Ar_mc_AKGC417L,130,Ar,AKGC417L,7,0,5,0,5,71.4,Wheezing
+130_1p4_Ll_mc_AKGC417L,130,Ll,AKGC417L,7,0,7,0,7,100.0,Wheezing
+130_1p4_Lr_mc_AKGC417L,130,Lr,AKGC417L,7,0,5,0,5,71.4,Wheezing
+130_1p4_Pl_mc_AKGC417L,130,Pl,AKGC417L,7,0,6,0,6,85.7,Wheezing
+130_1p4_Pr_mc_AKGC417L,130,Pr,AKGC417L,7,0,0,0,0,0.0,Healthy
+130_1p4_Tc_mc_AKGC417L,130,Tc,AKGC417L,8,0,7,0,7,87.5,Wheezing
+130_2b2_Al_mc_AKGC417L,130,Al,AKGC417L,8,8,0,0,8,100.0,Crackles
+130_2b2_Ar_mc_AKGC417L,130,Ar,AKGC417L,8,6,0,0,6,75.0,Crackles
+130_2b2_Ll_mc_AKGC417L,130,Ll,AKGC417L,8,8,0,0,8,100.0,Crackles
+130_2b2_Lr_mc_AKGC417L,130,Lr,AKGC417L,8,8,0,0,8,100.0,Crackles
+130_2b2_Pl_mc_AKGC417L,130,Pl,AKGC417L,8,8,0,0,8,100.0,Crackles
+130_2b2_Pr_mc_AKGC417L,130,Pr,AKGC417L,8,8,0,0,8,100.0,Crackles
+130_2b2_Tc_mc_AKGC417L,130,Tc,AKGC417L,8,0,0,0,0,0.0,Healthy
+130_2b3_Al_mc_AKGC417L,130,Al,AKGC417L,9,8,0,0,8,88.9,Crackles
+130_2b3_Ar_mc_AKGC417L,130,Ar,AKGC417L,9,8,0,0,8,88.9,Crackles
+130_2b3_Ll_mc_AKGC417L,130,Ll,AKGC417L,9,9,0,0,9,100.0,Crackles
+130_2b3_Lr_mc_AKGC417L,130,Lr,AKGC417L,9,8,0,0,8,88.9,Crackles
+130_2b3_Pl_mc_AKGC417L,130,Pl,AKGC417L,9,9,0,0,9,100.0,Crackles
+130_2b3_Pr_mc_AKGC417L,130,Pr,AKGC417L,9,9,0,0,9,100.0,Crackles
+130_2b3_Tc_mc_AKGC417L,130,Tc,AKGC417L,9,0,0,0,0,0.0,Healthy
+130_2b4_Al_mc_AKGC417L,130,Al,AKGC417L,9,8,0,0,8,88.9,Crackles
+130_2b4_Ar_mc_AKGC417L,130,Ar,AKGC417L,9,9,0,0,9,100.0,Crackles
+130_2b4_Ll_mc_AKGC417L,130,Ll,AKGC417L,9,8,0,0,8,88.9,Crackles
+130_2b4_Lr_mc_AKGC417L,130,Lr,AKGC417L,9,8,0,0,8,88.9,Crackles
+130_2b4_Pl_mc_AKGC417L,130,Pl,AKGC417L,9,6,1,0,7,77.8,Crackles
+130_2p3_Pl_mc_AKGC417L,130,Pl,AKGC417L,10,10,0,0,10,100.0,Crackles
+130_2p5_Al_mc_AKGC417L,130,Al,AKGC417L,11,10,0,1,11,100.0,Crackles
+130_2p5_Ar_mc_AKGC417L,130,Ar,AKGC417L,11,10,0,0,10,90.9,Crackles
+130_2p5_Lr_mc_AKGC417L,130,Lr,AKGC417L,11,9,0,0,9,81.8,Crackles
+130_2p5_Pl_mc_AKGC417L,130,Pl,AKGC417L,11,9,0,2,11,100.0,Crackles
+130_2p5_Pr_mc_AKGC417L,130,Pr,AKGC417L,11,10,0,1,11,100.0,Crackles
+130_2p5_Tc_mc_AKGC417L,130,Tc,AKGC417L,11,7,0,1,8,72.7,Crackles
+130_3b3_Ll_mc_AKGC417L,130,Ll,AKGC417L,6,5,0,0,5,83.3,Crackles
+130_3b4_Al_mc_AKGC417L,130,Al,AKGC417L,5,0,0,0,0,0.0,Healthy
+130_3b4_Ar_mc_AKGC417L,130,Ar,AKGC417L,5,0,0,0,0,0.0,Healthy
+130_3b4_Lr_mc_AKGC417L,130,Lr,AKGC417L,5,5,0,0,5,100.0,Crackles
+130_3b4_Pl_mc_AKGC417L,130,Pl,AKGC417L,5,5,0,0,5,100.0,Crackles
+130_3b4_Pr_mc_AKGC417L,130,Pr,AKGC417L,5,5,0,0,5,100.0,Crackles
+130_3p2_Al_mc_AKGC417L,130,Al,AKGC417L,7,7,0,0,7,100.0,Crackles
+130_3p2_Ar_mc_AKGC417L,130,Ar,AKGC417L,7,3,0,0,3,42.9,Crackles
+130_3p2_Pl_mc_AKGC417L,130,Pl,AKGC417L,7,7,0,0,7,100.0,Crackles
+130_3p2_Pr_mc_AKGC417L,130,Pr,AKGC417L,7,7,0,0,7,100.0,Crackles
+130_3p2_Tc_mc_AKGC417L,130,Tc,AKGC417L,7,7,0,0,7,100.0,Crackles
+130_3p3_Al_mc_AKGC417L,130,Al,AKGC417L,7,6,0,1,7,100.0,Crackles
+130_3p3_Pl_mc_AKGC417L,130,Pl,AKGC417L,7,6,0,1,7,100.0,Crackles
+130_3p3_Pr_mc_AKGC417L,130,Pr,AKGC417L,7,6,0,1,7,100.0,Crackles
+130_3p3_Tc_mc_AKGC417L,130,Tc,AKGC417L,7,5,0,1,6,85.7,Crackles
+130_3p4_Al_mc_AKGC417L,130,Al,AKGC417L,8,4,0,2,6,75.0,Crackles
+130_3p4_Pl_mc_AKGC417L,130,Pl,AKGC417L,8,5,0,3,8,100.0,Crackles
+130_3p4_Pr_mc_AKGC417L,130,Pr,AKGC417L,8,6,0,2,8,100.0,Crackles
+130_3p4_Tc_mc_AKGC417L,130,Tc,AKGC417L,8,3,0,5,8,100.0,Wheezing with Crackles
+131_1b1_Al_sc_Meditron,131,Al,Meditron,11,0,2,0,2,18.2,Wheezing
+132_2b1_Lr_mc_LittC2SE,132,Lr,LittC2SE,9,8,0,0,8,88.9,Crackles
+132_2b2_Lr_mc_LittC2SE,132,Lr,LittC2SE,10,9,0,0,9,90.0,Crackles
+133_2p2_Al_mc_AKGC417L,133,Al,AKGC417L,9,2,0,0,2,22.2,Crackles
+133_2p2_Ar_mc_AKGC417L,133,Ar,AKGC417L,9,0,0,0,0,0.0,Healthy
+133_2p2_Pl_mc_AKGC417L,133,Pl,AKGC417L,9,8,0,0,8,88.9,Crackles
+133_2p2_Tc_mc_AKGC417L,133,Tc,AKGC417L,9,2,0,0,2,22.2,Crackles
+133_2p3_Al_mc_AKGC417L,133,Al,AKGC417L,8,0,0,0,0,0.0,Healthy
+133_2p3_Ar_mc_AKGC417L,133,Ar,AKGC417L,8,0,0,0,0,0.0,Healthy
+133_2p3_Pl_mc_AKGC417L,133,Pl,AKGC417L,8,6,0,0,6,75.0,Crackles
+133_2p3_Pr_mc_AKGC417L,133,Pr,AKGC417L,8,1,0,0,1,12.5,Crackles
+133_2p3_Tc_mc_AKGC417L,133,Tc,AKGC417L,8,2,0,0,2,25.0,Crackles
+133_2p4_Al_mc_AKGC417L,133,Al,AKGC417L,8,0,2,0,2,25.0,Wheezing
+133_2p4_Ar_mc_AKGC417L,133,Ar,AKGC417L,8,1,0,0,1,12.5,Crackles
+133_2p4_Pl_mc_AKGC417L,133,Pl,AKGC417L,8,8,0,0,8,100.0,Crackles
+133_2p4_Pr_mc_AKGC417L,133,Pr,AKGC417L,8,1,0,0,1,12.5,Crackles
+133_2p4_Tc_mc_AKGC417L,133,Tc,AKGC417L,8,1,2,0,3,37.5,Wheezing
+133_3p2_Al_mc_AKGC417L,133,Al,AKGC417L,8,0,6,0,6,75.0,Wheezing
+133_3p2_Ar_mc_AKGC417L,133,Ar,AKGC417L,8,0,6,0,6,75.0,Wheezing
+133_3p2_Pl_mc_AKGC417L,133,Pl,AKGC417L,8,0,4,1,5,62.5,Wheezing
+133_3p2_Pr_mc_AKGC417L,133,Pr,AKGC417L,8,0,6,2,8,100.0,Wheezing
+133_3p4_Tc_mc_AKGC417L,133,Tc,AKGC417L,8,0,6,0,6,75.0,Wheezing
+134_2b1_Al_mc_LittC2SE,134,Al,LittC2SE,5,0,0,0,0,0.0,Healthy
+134_2b1_Ar_mc_LittC2SE,134,Ar,LittC2SE,5,0,0,0,0,0.0,Healthy
+134_2b2_Al_mc_LittC2SE,134,Al,LittC2SE,7,0,0,0,0,0.0,Healthy
+134_2b2_Ar_mc_LittC2SE,134,Ar,LittC2SE,7,0,0,0,0,0.0,Healthy
+134_2b3_Ar_mc_LittC2SE,134,Ar,LittC2SE,6,0,1,0,1,16.7,Wheezing
+135_2b1_Al_mc_LittC2SE,135,Al,LittC2SE,9,0,0,0,0,0.0,Healthy
+135_2b1_Ar_mc_LittC2SE,135,Ar,LittC2SE,9,0,0,0,0,0.0,Healthy
+135_2b1_Pl_mc_LittC2SE,135,Pl,LittC2SE,9,5,0,0,5,55.6,Crackles
+135_2b1_Tc_mc_LittC2SE,135,Tc,LittC2SE,9,0,0,0,0,0.0,Healthy
+135_2b2_Al_mc_LittC2SE,135,Al,LittC2SE,8,0,0,0,0,0.0,Healthy
+135_2b2_Ar_mc_LittC2SE,135,Ar,LittC2SE,8,0,0,0,0,0.0,Healthy
+135_2b2_Pl_mc_LittC2SE,135,Pl,LittC2SE,7,0,0,0,0,0.0,Healthy
+135_2b2_Tc_mc_LittC2SE,135,Tc,LittC2SE,8,0,0,0,0,0.0,Healthy
+135_2b3_Al_mc_LittC2SE,135,Al,LittC2SE,9,0,0,0,0,0.0,Healthy
+135_2b3_Ar_mc_LittC2SE,135,Ar,LittC2SE,9,0,0,0,0,0.0,Healthy
+135_2b3_Pl_mc_LittC2SE,135,Pl,LittC2SE,9,0,0,0,0,0.0,Healthy
+135_2b3_Pr_mc_LittC2SE,135,Pr,LittC2SE,9,0,0,0,0,0.0,Healthy
+135_2b3_Tc_mc_LittC2SE,135,Tc,LittC2SE,9,0,0,0,0,0.0,Healthy
+136_1b1_Ar_sc_Meditron,136,Ar,Meditron,9,0,0,0,0,0.0,Healthy
+137_1b1_Ar_sc_Meditron,137,Ar,Meditron,8,0,0,0,0,0.0,Healthy
+137_1b1_Ll_sc_Meditron,137,Ll,Meditron,9,0,0,0,0,0.0,Healthy
+138_1p2_Al_mc_AKGC417L,138,Al,AKGC417L,5,4,1,0,5,100.0,Crackles
+138_1p2_Ar_mc_AKGC417L,138,Ar,AKGC417L,5,2,0,0,2,40.0,Crackles
+138_1p2_Ll_mc_AKGC417L,138,Ll,AKGC417L,5,5,0,0,5,100.0,Crackles
+138_1p2_Lr_mc_AKGC417L,138,Lr,AKGC417L,5,4,0,1,5,100.0,Crackles
+138_1p2_Pl_mc_AKGC417L,138,Pl,AKGC417L,5,4,0,1,5,100.0,Crackles
+138_1p2_Pr_mc_AKGC417L,138,Pr,AKGC417L,5,3,0,2,5,100.0,Crackles
+138_1p2_Tc_mc_AKGC417L,138,Tc,AKGC417L,5,0,1,0,1,20.0,Wheezing
+138_1p3_Al_mc_AKGC417L,138,Al,AKGC417L,5,0,0,0,0,0.0,Healthy
+138_1p3_Ar_mc_AKGC417L,138,Ar,AKGC417L,5,5,0,0,5,100.0,Crackles
+138_1p3_Ll_mc_AKGC417L,138,Ll,AKGC417L,5,5,0,0,5,100.0,Crackles
+138_1p3_Lr_mc_AKGC417L,138,Lr,AKGC417L,5,5,0,0,5,100.0,Crackles
+138_1p3_Pl_mc_AKGC417L,138,Pl,AKGC417L,5,4,1,0,5,100.0,Crackles
+138_1p3_Pr_mc_AKGC417L,138,Pr,AKGC417L,5,5,0,0,5,100.0,Crackles
+138_1p3_Tc_mc_AKGC417L,138,Tc,AKGC417L,5,2,1,0,3,60.0,Crackles
+138_1p4_Ar_mc_AKGC417L,138,Ar,AKGC417L,5,4,0,0,4,80.0,Crackles
+138_1p4_Ll_mc_AKGC417L,138,Ll,AKGC417L,5,4,0,0,4,80.0,Crackles
+138_1p4_Lr_mc_AKGC417L,138,Lr,AKGC417L,5,5,0,0,5,100.0,Crackles
+138_1p4_Pl_mc_AKGC417L,138,Pl,AKGC417L,5,3,0,1,4,80.0,Crackles
+138_1p4_Pr_mc_AKGC417L,138,Pr,AKGC417L,5,5,0,0,5,100.0,Crackles
+138_1p4_Tc_mc_AKGC417L,138,Tc,AKGC417L,5,0,0,0,0,0.0,Healthy
+138_2p2_Al_mc_AKGC417L,138,Al,AKGC417L,7,7,0,0,7,100.0,Crackles
+138_2p2_Ar_mc_AKGC417L,138,Ar,AKGC417L,7,4,0,2,6,85.7,Crackles
+138_2p2_Ll_mc_AKGC417L,138,Ll,AKGC417L,7,1,0,0,1,14.3,Crackles
+138_2p2_Lr_mc_AKGC417L,138,Lr,AKGC417L,7,5,0,0,5,71.4,Crackles
+138_2p2_Pl_mc_AKGC417L,138,Pl,AKGC417L,7,6,0,0,6,85.7,Crackles
+138_2p2_Pr_mc_AKGC417L,138,Pr,AKGC417L,7,5,0,2,7,100.0,Crackles
+138_2p2_Tc_mc_AKGC417L,138,Tc,AKGC417L,7,3,0,0,3,42.9,Crackles
+139_1b1_Al_sc_Litt3200,139,Al,Litt3200,10,0,0,0,0,0.0,Healthy
+139_1b1_Ar_sc_Litt3200,139,Ar,Litt3200,9,0,0,0,0,0.0,Healthy
+139_1b1_Ll_sc_Litt3200,139,Ll,Litt3200,8,0,0,1,1,12.5,Wheezing with Crackles
+139_1b1_Lr_sc_Litt3200,139,Lr,Litt3200,6,3,0,0,3,50.0,Crackles
+139_1b1_Pl_sc_Litt3200,139,Pl,Litt3200,6,0,3,0,3,50.0,Wheezing
+139_1b1_Pr_sc_Litt3200,139,Pr,Litt3200,7,0,4,0,4,57.1,Wheezing
+140_2b2_Ll_mc_LittC2SE,140,Ll,LittC2SE,11,1,0,0,1,9.1,Crackles
+140_2b2_Tc_mc_LittC2SE,140,Tc,LittC2SE,10,1,0,0,1,10.0,Crackles
+140_2b3_Ll_mc_LittC2SE,140,Ll,LittC2SE,9,0,3,0,3,33.3,Wheezing
+140_2b3_Tc_mc_LittC2SE,140,Tc,LittC2SE,10,0,6,0,6,60.0,Wheezing
+141_1b1_Pr_mc_LittC2SE,141,Pr,LittC2SE,5,0,3,1,4,80.0,Wheezing
+141_1b2_Ar_mc_LittC2SE,141,Ar,LittC2SE,6,0,2,1,3,50.0,Wheezing
+141_1b2_Lr_mc_LittC2SE,141,Lr,LittC2SE,5,0,4,0,4,80.0,Wheezing
+141_1b2_Pr_mc_LittC2SE,141,Pr,LittC2SE,6,0,2,3,5,83.3,Wheezing with Crackles
+141_1b2_Tc_mc_LittC2SE,141,Tc,LittC2SE,5,0,0,0,0,0.0,Healthy
+141_1b3_Al_mc_LittC2SE,141,Al,LittC2SE,5,0,4,0,4,80.0,Wheezing
+141_1b3_Ar_mc_LittC2SE,141,Ar,LittC2SE,5,0,3,0,3,60.0,Wheezing
+141_1b3_Pr_mc_LittC2SE,141,Pr,LittC2SE,6,0,0,6,6,100.0,Wheezing with Crackles
+142_1b1_Pl_mc_LittC2SE,142,Pl,LittC2SE,9,9,0,0,9,100.0,Crackles
+143_1b1_Al_sc_Meditron,143,Al,Meditron,18,0,0,0,0,0.0,Healthy
+144_1b1_Al_sc_Meditron,144,Al,Meditron,10,0,0,0,0,0.0,Healthy
+144_1b1_Tc_sc_Meditron,144,Tc,Meditron,10,0,0,0,0,0.0,Healthy
+145_2b2_Al_mc_AKGC417L,145,Al,AKGC417L,5,0,0,0,0,0.0,Healthy
+145_2b2_Ar_mc_AKGC417L,145,Ar,AKGC417L,5,3,0,0,3,60.0,Crackles
+145_2b2_Lr_mc_AKGC417L,145,Lr,AKGC417L,5,0,0,0,0,0.0,Healthy
+145_2b2_Pr_mc_AKGC417L,145,Pr,AKGC417L,5,0,0,0,0,0.0,Healthy
+145_3b2_Ar_mc_AKGC417L,145,Ar,AKGC417L,6,0,0,0,0,0.0,Healthy
+145_3b2_Lr_mc_AKGC417L,145,Lr,AKGC417L,6,6,0,0,6,100.0,Crackles
+145_3b4_Pl_mc_AKGC417L,145,Pl,AKGC417L,5,0,0,0,0,0.0,Healthy
+146_2b2_Pl_mc_AKGC417L,146,Pl,AKGC417L,5,0,0,3,3,60.0,Wheezing with Crackles
+146_2b4_Al_mc_AKGC417L,146,Al,AKGC417L,6,0,0,0,0,0.0,Healthy
+146_2b4_Ar_mc_AKGC417L,146,Ar,AKGC417L,6,0,0,0,0,0.0,Healthy
+146_2b4_Ll_mc_AKGC417L,146,Ll,AKGC417L,6,0,0,0,0,0.0,Healthy
+146_2b4_Lr_mc_AKGC417L,146,Lr,AKGC417L,6,0,0,0,0,0.0,Healthy
+146_2b4_Pr_mc_AKGC417L,146,Pr,AKGC417L,6,0,0,0,0,0.0,Healthy
+146_8p3_Al_mc_AKGC417L,146,Al,AKGC417L,9,0,0,0,0,0.0,Healthy
+146_8p3_Ar_mc_AKGC417L,146,Ar,AKGC417L,9,6,0,0,6,66.7,Crackles
+146_8p3_Lr_mc_AKGC417L,146,Lr,AKGC417L,9,0,8,0,8,88.9,Wheezing
+146_8p3_Pl_mc_AKGC417L,146,Pl,AKGC417L,9,0,0,0,0,0.0,Healthy
+146_8p3_Pr_mc_AKGC417L,146,Pr,AKGC417L,9,0,0,0,0,0.0,Healthy
+147_1b2_Tc_mc_AKGC417L,147,Tc,AKGC417L,12,0,4,0,4,33.3,Wheezing
+147_1b3_Tc_mc_AKGC417L,147,Tc,AKGC417L,11,2,0,0,2,18.2,Crackles
+147_1b4_Tc_mc_AKGC417L,147,Tc,AKGC417L,15,0,10,0,10,66.7,Wheezing
+147_2b2_Al_mc_AKGC417L,147,Al,AKGC417L,5,0,3,0,3,60.0,Wheezing
+147_2b2_Ar_mc_AKGC417L,147,Ar,AKGC417L,5,0,3,0,3,60.0,Wheezing
+147_2b2_Pl_mc_AKGC417L,147,Pl,AKGC417L,5,0,3,0,3,60.0,Wheezing
+147_2b3_Al_mc_AKGC417L,147,Al,AKGC417L,5,0,2,0,2,40.0,Wheezing
+147_2b3_Ar_mc_AKGC417L,147,Ar,AKGC417L,5,0,1,0,1,20.0,Wheezing
+147_2b3_Ll_mc_AKGC417L,147,Ll,AKGC417L,5,0,0,0,0,0.0,Healthy
+147_2b3_Lr_mc_AKGC417L,147,Lr,AKGC417L,5,0,0,0,0,0.0,Healthy
+147_2b3_Pl_mc_AKGC417L,147,Pl,AKGC417L,5,0,4,0,4,80.0,Wheezing
+147_2b4_Al_mc_AKGC417L,147,Al,AKGC417L,5,0,0,0,0,0.0,Healthy
+147_2b4_Ar_mc_AKGC417L,147,Ar,AKGC417L,5,0,0,0,0,0.0,Healthy
+147_2b4_Ll_mc_AKGC417L,147,Ll,AKGC417L,5,0,0,0,0,0.0,Healthy
+147_2b4_Lr_mc_AKGC417L,147,Lr,AKGC417L,5,0,0,0,0,0.0,Healthy
+147_2b4_Pl_mc_AKGC417L,147,Pl,AKGC417L,5,0,1,0,1,20.0,Wheezing
+148_1b1_Al_sc_Meditron,148,Al,Meditron,11,0,0,0,0,0.0,Healthy
+149_1b1_Al_sc_Meditron,149,Al,Meditron,18,1,12,2,15,83.3,Wheezing
+149_1b1_Lr_sc_Meditron,149,Lr,Meditron,16,2,0,0,2,12.5,Crackles
+149_1b1_Pl_sc_Meditron,149,Pl,Meditron,17,1,6,0,7,41.2,Wheezing
+150_1b2_Al_sc_Meditron,150,Al,Meditron,17,9,1,0,10,58.8,Crackles
+151_2p2_Al_mc_AKGC417L,151,Al,AKGC417L,6,1,2,2,5,83.3,Wheezing with Crackles
+151_2p2_Ar_mc_AKGC417L,151,Ar,AKGC417L,6,0,0,0,0,0.0,Healthy
+151_2p2_Ll_mc_AKGC417L,151,Ll,AKGC417L,6,2,1,3,6,100.0,Wheezing with Crackles
+151_2p2_Lr_mc_AKGC417L,151,Lr,AKGC417L,6,1,1,0,2,33.3,Crackles
+151_2p2_Pl_mc_AKGC417L,151,Pl,AKGC417L,6,0,4,0,4,66.7,Wheezing
+151_2p2_Pr_mc_AKGC417L,151,Pr,AKGC417L,6,0,1,0,1,16.7,Wheezing
+151_2p2_Tc_mc_AKGC417L,151,Tc,AKGC417L,6,0,2,0,2,33.3,Wheezing
+151_2p3_Al_mc_AKGC417L,151,Al,AKGC417L,6,0,1,3,4,66.7,Wheezing with Crackles
+151_2p3_Ar_mc_AKGC417L,151,Ar,AKGC417L,6,4,2,0,6,100.0,Crackles
+151_2p3_Ll_mc_AKGC417L,151,Ll,AKGC417L,6,0,4,2,6,100.0,Wheezing
+151_2p3_Lr_mc_AKGC417L,151,Lr,AKGC417L,6,0,0,0,0,0.0,Healthy
+151_2p3_Pl_mc_AKGC417L,151,Pl,AKGC417L,6,0,5,0,5,83.3,Wheezing
+151_2p3_Pr_mc_AKGC417L,151,Pr,AKGC417L,6,0,0,0,0,0.0,Healthy
+151_2p3_Tc_mc_AKGC417L,151,Tc,AKGC417L,6,0,2,0,2,33.3,Wheezing
+151_2p4_Al_mc_AKGC417L,151,Al,AKGC417L,6,2,1,0,3,50.0,Crackles
+151_2p4_Ar_mc_AKGC417L,151,Ar,AKGC417L,6,1,2,0,3,50.0,Wheezing
+151_2p4_Ll_mc_AKGC417L,151,Ll,AKGC417L,6,1,1,4,6,100.0,Wheezing with Crackles
+151_2p4_Lr_mc_AKGC417L,151,Lr,AKGC417L,6,0,1,0,1,16.7,Wheezing
+151_2p4_Pl_mc_AKGC417L,151,Pl,AKGC417L,6,0,1,4,5,83.3,Wheezing with Crackles
+151_2p4_Pr_mc_AKGC417L,151,Pr,AKGC417L,6,0,1,0,1,16.7,Wheezing
+151_2p4_Tc_mc_AKGC417L,151,Tc,AKGC417L,6,0,3,0,3,50.0,Wheezing
+151_3p2_Al_mc_AKGC417L,151,Al,AKGC417L,6,4,0,1,5,83.3,Crackles
+151_3p2_Ar_mc_AKGC417L,151,Ar,AKGC417L,6,4,0,1,5,83.3,Crackles
+151_3p2_Lr_mc_AKGC417L,151,Lr,AKGC417L,6,0,2,1,3,50.0,Wheezing
+151_3p2_Pl_mc_AKGC417L,151,Pl,AKGC417L,6,5,0,1,6,100.0,Crackles
+151_3p2_Pr_mc_AKGC417L,151,Pr,AKGC417L,6,0,0,2,2,33.3,Wheezing with Crackles
+151_3p2_Tc_mc_AKGC417L,151,Tc,AKGC417L,6,0,1,0,1,16.7,Wheezing
+151_3p3_Ll_mc_AKGC417L,151,Ll,AKGC417L,6,3,0,2,5,83.3,Crackles
+152_1b1_Al_sc_Meditron,152,Al,Meditron,7,0,0,0,0,0.0,Healthy
+153_1b1_Al_sc_Meditron,153,Al,Meditron,9,0,0,0,0,0.0,Healthy
+154_1b3_Al_mc_AKGC417L,154,Al,AKGC417L,12,9,0,0,9,75.0,Crackles
+154_1b3_Ar_mc_AKGC417L,154,Ar,AKGC417L,12,1,0,0,1,8.3,Crackles
+154_1b3_Ll_mc_AKGC417L,154,Ll,AKGC417L,12,11,0,0,11,91.7,Crackles
+154_1b3_Lr_mc_AKGC417L,154,Lr,AKGC417L,12,2,0,0,2,16.7,Crackles
+154_1b3_Pl_mc_AKGC417L,154,Pl,AKGC417L,12,10,0,0,10,83.3,Crackles
+154_1b3_Pr_mc_AKGC417L,154,Pr,AKGC417L,12,8,0,0,8,66.7,Crackles
+154_1b3_Tc_mc_AKGC417L,154,Tc,AKGC417L,12,0,0,0,0,0.0,Healthy
+154_2b4_Al_mc_AKGC417L,154,Al,AKGC417L,7,5,0,0,5,71.4,Crackles
+154_2b4_Ar_mc_AKGC417L,154,Ar,AKGC417L,7,2,0,0,2,28.6,Crackles
+154_2b4_Ll_mc_AKGC417L,154,Ll,AKGC417L,7,7,0,0,7,100.0,Crackles
+154_2b4_Lr_mc_AKGC417L,154,Lr,AKGC417L,7,7,0,0,7,100.0,Crackles
+154_2b4_Pl_mc_AKGC417L,154,Pl,AKGC417L,7,7,0,0,7,100.0,Crackles
+154_2b4_Pr_mc_AKGC417L,154,Pr,AKGC417L,7,2,0,0,2,28.6,Crackles
+154_2b4_Tc_mc_AKGC417L,154,Tc,AKGC417L,7,0,0,0,0,0.0,Healthy
+154_3b3_Al_mc_AKGC417L,154,Al,AKGC417L,5,2,0,0,2,40.0,Crackles
+154_3b3_Ar_mc_AKGC417L,154,Ar,AKGC417L,5,4,0,0,4,80.0,Crackles
+154_3b3_Ll_mc_AKGC417L,154,Ll,AKGC417L,5,4,0,0,4,80.0,Crackles
+154_4b4_Al_mc_AKGC417L,154,Al,AKGC417L,10,7,0,1,8,80.0,Crackles
+154_4b4_Ar_mc_AKGC417L,154,Ar,AKGC417L,10,7,0,0,7,70.0,Crackles
+154_4b4_Ll_mc_AKGC417L,154,Ll,AKGC417L,10,0,0,0,0,0.0,Healthy
+154_4b4_Lr_mc_AKGC417L,154,Lr,AKGC417L,10,9,0,0,9,90.0,Crackles
+154_4b4_Pl_mc_AKGC417L,154,Pl,AKGC417L,10,5,0,0,5,50.0,Crackles
+154_4b4_Pr_mc_AKGC417L,154,Pr,AKGC417L,10,2,0,0,2,20.0,Crackles
+155_2b1_Al_mc_LittC2SE,155,Al,LittC2SE,6,0,0,0,0,0.0,Healthy
+156_2b3_Al_mc_AKGC417L,156,Al,AKGC417L,6,1,0,5,6,100.0,Wheezing with Crackles
+156_2b3_Ar_mc_AKGC417L,156,Ar,AKGC417L,6,3,1,1,5,83.3,Crackles
+156_2b3_Ll_mc_AKGC417L,156,Ll,AKGC417L,6,0,0,6,6,100.0,Wheezing with Crackles
+156_2b3_Lr_mc_AKGC417L,156,Lr,AKGC417L,6,3,0,3,6,100.0,Wheezing with Crackles
+156_2b3_Pl_mc_AKGC417L,156,Pl,AKGC417L,6,1,0,5,6,100.0,Wheezing with Crackles
+156_2b3_Pr_mc_AKGC417L,156,Pr,AKGC417L,6,6,0,0,6,100.0,Crackles
+156_5b3_Al_mc_AKGC417L,156,Al,AKGC417L,9,0,1,8,9,100.0,Wheezing with Crackles
+156_5b3_Ar_mc_AKGC417L,156,Ar,AKGC417L,9,0,2,7,9,100.0,Wheezing with Crackles
+156_5b3_Ll_mc_AKGC417L,156,Ll,AKGC417L,9,7,0,2,9,100.0,Crackles
+156_5b3_Lr_mc_AKGC417L,156,Lr,AKGC417L,9,1,0,8,9,100.0,Wheezing with Crackles
+156_5b3_Pl_mc_AKGC417L,156,Pl,AKGC417L,9,2,0,7,9,100.0,Wheezing with Crackles
+156_5b3_Pr_mc_AKGC417L,156,Pr,AKGC417L,9,0,0,9,9,100.0,Wheezing with Crackles
+156_8b3_Al_mc_AKGC417L,156,Al,AKGC417L,8,0,3,4,7,87.5,Wheezing with Crackles
+156_8b3_Ar_mc_AKGC417L,156,Ar,AKGC417L,8,1,6,0,7,87.5,Wheezing
+156_8b3_Ll_mc_AKGC417L,156,Ll,AKGC417L,8,1,0,7,8,100.0,Wheezing with Crackles
+156_8b3_Lr_mc_AKGC417L,156,Lr,AKGC417L,8,0,1,0,1,12.5,Wheezing
+156_8b3_Pl_mc_AKGC417L,156,Pl,AKGC417L,8,2,1,5,8,100.0,Wheezing with Crackles
+157_1b1_Al_sc_Meditron,157,Al,Meditron,15,2,0,0,2,13.3,Crackles
+157_1b1_Ar_sc_Meditron,157,Ar,Meditron,12,0,0,0,0,0.0,Healthy
+157_1b1_Lr_sc_Meditron,157,Lr,Meditron,9,7,0,0,7,77.8,Crackles
+157_1b1_Pl_sc_Meditron,157,Pl,Meditron,13,4,0,0,4,30.8,Crackles
+157_1b1_Pr_sc_Meditron,157,Pr,Meditron,15,10,0,0,10,66.7,Crackles
+158_1b3_Ar_mc_LittC2SE,158,Ar,LittC2SE,11,6,0,0,6,54.5,Crackles
+158_1p2_Al_mc_AKGC417L,158,Al,AKGC417L,8,0,0,3,3,37.5,Wheezing with Crackles
+158_1p2_Ar_mc_AKGC417L,158,Ar,AKGC417L,8,0,0,3,3,37.5,Wheezing with Crackles
+158_1p2_Ll_mc_AKGC417L,158,Ll,AKGC417L,8,5,0,1,6,75.0,Crackles
+158_1p2_Lr_mc_AKGC417L,158,Lr,AKGC417L,8,0,1,4,5,62.5,Wheezing with Crackles
+158_1p2_Pl_mc_AKGC417L,158,Pl,AKGC417L,8,1,2,3,6,75.0,Wheezing with Crackles
+158_1p2_Pr_mc_AKGC417L,158,Pr,AKGC417L,8,2,1,4,7,87.5,Wheezing with Crackles
+158_1p2_Tc_mc_AKGC417L,158,Tc,AKGC417L,8,2,0,0,2,25.0,Crackles
+158_1p3_Al_mc_AKGC417L,158,Al,AKGC417L,9,1,3,4,8,88.9,Wheezing with Crackles
+158_1p3_Ar_mc_AKGC417L,158,Ar,AKGC417L,9,0,4,4,8,88.9,Wheezing with Crackles
+158_1p3_Ll_mc_AKGC417L,158,Ll,AKGC417L,9,1,5,2,8,88.9,Wheezing
+158_1p3_Lr_mc_AKGC417L,158,Lr,AKGC417L,9,0,5,4,9,100.0,Wheezing
+158_1p3_Pl_mc_AKGC417L,158,Pl,AKGC417L,9,0,5,3,8,88.9,Wheezing
+158_1p3_Pr_mc_AKGC417L,158,Pr,AKGC417L,9,0,6,3,9,100.0,Wheezing
+158_1p3_Tc_mc_AKGC417L,158,Tc,AKGC417L,9,0,7,0,7,77.8,Wheezing
+158_1p4_Al_mc_AKGC417L,158,Al,AKGC417L,9,3,0,3,6,66.7,Wheezing with Crackles
+158_1p4_Ar_mc_AKGC417L,158,Ar,AKGC417L,9,6,0,1,7,77.8,Crackles
+158_1p4_Lr_mc_AKGC417L,158,Lr,AKGC417L,9,0,4,5,9,100.0,Wheezing with Crackles
+158_1p4_Pl_mc_AKGC417L,158,Pl,AKGC417L,9,3,1,3,7,77.8,Wheezing with Crackles
+158_1p4_Pr_mc_AKGC417L,158,Pr,AKGC417L,9,0,2,7,9,100.0,Wheezing with Crackles
+158_1p4_Tc_mc_AKGC417L,158,Tc,AKGC417L,9,4,0,0,4,44.4,Crackles
+158_2p2_Ar_mc_AKGC417L,158,Ar,AKGC417L,9,5,1,2,8,88.9,Crackles
+158_2p3_Lr_mc_AKGC417L,158,Lr,AKGC417L,12,7,0,5,12,100.0,Crackles
+158_2p3_Tc_mc_AKGC417L,158,Tc,AKGC417L,12,0,10,2,12,100.0,Wheezing
+159_1b1_Al_sc_Meditron,159,Al,Meditron,12,0,1,0,1,8.3,Wheezing
+159_1b1_Ar_sc_Meditron,159,Ar,Meditron,9,0,0,0,0,0.0,Healthy
+159_1b1_Ll_sc_Meditron,159,Ll,Meditron,12,0,0,0,0,0.0,Healthy
+159_1b1_Pr_sc_Meditron,159,Pr,Meditron,9,0,0,0,0,0.0,Healthy
+160_1b2_Al_mc_AKGC417L,160,Al,AKGC417L,2,0,0,2,2,100.0,Wheezing with Crackles
+160_1b2_Ar_mc_AKGC417L,160,Ar,AKGC417L,2,0,2,0,2,100.0,Wheezing
+160_1b2_Lr_mc_AKGC417L,160,Lr,AKGC417L,2,1,1,0,2,100.0,Crackles
+160_1b2_Pl_mc_AKGC417L,160,Pl,AKGC417L,2,0,2,0,2,100.0,Wheezing
+160_1b2_Pr_mc_AKGC417L,160,Pr,AKGC417L,2,0,1,1,2,100.0,Wheezing with Crackles
+160_1b2_Tc_mc_AKGC417L,160,Tc,AKGC417L,2,0,1,0,1,50.0,Wheezing
+160_1b3_Al_mc_AKGC417L,160,Al,AKGC417L,5,0,3,1,4,80.0,Wheezing
+160_1b3_Ar_mc_AKGC417L,160,Ar,AKGC417L,5,0,4,0,4,80.0,Wheezing
+160_1b3_Lr_mc_AKGC417L,160,Lr,AKGC417L,5,0,4,0,4,80.0,Wheezing
+160_1b3_Pl_mc_AKGC417L,160,Pl,AKGC417L,5,0,2,2,4,80.0,Wheezing with Crackles
+160_1b3_Pr_mc_AKGC417L,160,Pr,AKGC417L,5,1,0,4,5,100.0,Wheezing with Crackles
+160_1b3_Tc_mc_AKGC417L,160,Tc,AKGC417L,5,0,3,0,3,60.0,Wheezing
+160_1b4_Al_mc_AKGC417L,160,Al,AKGC417L,4,0,0,4,4,100.0,Wheezing with Crackles
+160_1b4_Ar_mc_AKGC417L,160,Ar,AKGC417L,4,0,2,2,4,100.0,Wheezing with Crackles
+160_1b4_Lr_mc_AKGC417L,160,Lr,AKGC417L,4,0,4,0,4,100.0,Wheezing
+160_1b4_Pl_mc_AKGC417L,160,Pl,AKGC417L,4,0,3,1,4,100.0,Wheezing
+160_1b4_Pr_mc_AKGC417L,160,Pr,AKGC417L,4,2,0,2,4,100.0,Wheezing with Crackles
+160_1b4_Tc_mc_AKGC417L,160,Tc,AKGC417L,4,0,4,0,4,100.0,Wheezing
+160_2b3_Lr_mc_AKGC417L,160,Lr,AKGC417L,7,1,0,0,1,14.3,Crackles
+160_2b4_Ar_mc_AKGC417L,160,Ar,AKGC417L,7,7,0,0,7,100.0,Crackles
+160_2b4_Pl_mc_AKGC417L,160,Pl,AKGC417L,7,7,0,0,7,100.0,Crackles
+160_2b4_Pr_mc_AKGC417L,160,Pr,AKGC417L,7,7,0,0,7,100.0,Crackles
+160_2b4_Tc_mc_AKGC417L,160,Tc,AKGC417L,7,0,0,0,0,0.0,Healthy
+161_1b1_Al_sc_Meditron,161,Al,Meditron,9,2,2,2,6,66.7,Wheezing with Crackles
+161_1b1_Pl_sc_Meditron,161,Pl,Meditron,10,0,7,0,7,70.0,Wheezing
+162_1b2_Al_mc_AKGC417L,162,Al,AKGC417L,3,0,0,0,0,0.0,Healthy
+162_1b2_Ar_mc_AKGC417L,162,Ar,AKGC417L,3,0,0,1,1,33.3,Wheezing with Crackles
+162_1b2_Ll_mc_AKGC417L,162,Ll,AKGC417L,3,0,0,0,0,0.0,Healthy
+162_1b2_Lr_mc_AKGC417L,162,Lr,AKGC417L,3,0,0,0,0,0.0,Healthy
+162_1b2_Pl_mc_AKGC417L,162,Pl,AKGC417L,3,0,0,0,0,0.0,Healthy
+162_1b2_Pr_mc_AKGC417L,162,Pr,AKGC417L,3,0,0,0,0,0.0,Healthy
+162_1b2_Tc_mc_AKGC417L,162,Tc,AKGC417L,3,3,0,0,3,100.0,Crackles
+162_2b2_Al_mc_AKGC417L,162,Al,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b2_Ar_mc_AKGC417L,162,Ar,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b2_Pl_mc_AKGC417L,162,Pl,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b2_Pr_mc_AKGC417L,162,Pr,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b2_Tc_mc_AKGC417L,162,Tc,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b3_Al_mc_AKGC417L,162,Al,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b3_Ar_mc_AKGC417L,162,Ar,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b3_Lr_mc_AKGC417L,162,Lr,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b3_Pl_mc_AKGC417L,162,Pl,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b3_Pr_mc_AKGC417L,162,Pr,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b3_Tc_mc_AKGC417L,162,Tc,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b4_Al_mc_AKGC417L,162,Al,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b4_Ar_mc_AKGC417L,162,Ar,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b4_Lr_mc_AKGC417L,162,Lr,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b4_Pl_mc_AKGC417L,162,Pl,AKGC417L,4,0,0,0,0,0.0,Healthy
+162_2b4_Pr_mc_AKGC417L,162,Pr,AKGC417L,4,0,1,0,1,25.0,Wheezing
+162_2b4_Tc_mc_AKGC417L,162,Tc,AKGC417L,4,3,0,0,3,75.0,Crackles
+163_2b2_Al_mc_AKGC417L,163,Al,AKGC417L,5,0,0,0,0,0.0,Healthy
+163_2b2_Ar_mc_AKGC417L,163,Ar,AKGC417L,5,0,0,0,0,0.0,Healthy
+163_2b2_Ll_mc_AKGC417L,163,Ll,AKGC417L,5,2,0,0,2,40.0,Crackles
+163_2b2_Lr_mc_AKGC417L,163,Lr,AKGC417L,5,3,0,0,3,60.0,Crackles
+163_2b2_Pl_mc_AKGC417L,163,Pl,AKGC417L,5,2,0,0,2,40.0,Crackles
+163_2b2_Pr_mc_AKGC417L,163,Pr,AKGC417L,5,0,0,0,0,0.0,Healthy
+163_2b2_Tc_mc_AKGC417L,163,Tc,AKGC417L,5,0,0,0,0,0.0,Healthy
+163_8b3_Al_mc_AKGC417L,163,Al,AKGC417L,6,0,0,0,0,0.0,Healthy
+163_8b3_Ar_mc_AKGC417L,163,Ar,AKGC417L,6,0,0,0,0,0.0,Healthy
+163_8b3_Ll_mc_AKGC417L,163,Ll,AKGC417L,6,0,0,0,0,0.0,Healthy
+163_8b3_Lr_mc_AKGC417L,163,Lr,AKGC417L,6,0,0,0,0,0.0,Healthy
+163_8b3_Pl_mc_AKGC417L,163,Pl,AKGC417L,6,0,0,0,0,0.0,Healthy
+163_8b3_Pr_mc_AKGC417L,163,Pr,AKGC417L,6,0,0,0,0,0.0,Healthy
+164_1b1_Ll_sc_Meditron,164,Ll,Meditron,10,1,3,0,4,40.0,Wheezing
+165_1b1_Ar_sc_Meditron,165,Ar,Meditron,7,2,0,0,2,28.6,Crackles
+165_1b1_Pl_sc_Meditron,165,Pl,Meditron,8,0,0,0,0,0.0,Healthy
+165_1b1_Pr_sc_Meditron,165,Pr,Meditron,8,1,1,0,2,25.0,Crackles
+166_1p1_Al_sc_Meditron,166,Al,Meditron,17,5,0,0,5,29.4,Crackles
+166_1p1_Ar_sc_Meditron,166,Ar,Meditron,25,0,0,0,0,0.0,Healthy
+166_1p1_Ll_sc_Meditron,166,Ll,Meditron,25,16,0,0,16,64.0,Crackles
+166_1p1_Pl_sc_Meditron,166,Pl,Meditron,24,7,0,0,7,29.2,Crackles
+166_1p1_Pr_sc_Meditron,166,Pr,Meditron,24,0,3,0,3,12.5,Wheezing
+167_1b1_Al_sc_Meditron,167,Al,Meditron,13,0,0,0,0,0.0,Healthy
+167_1b1_Pr_sc_Meditron,167,Pr,Meditron,15,0,8,0,8,53.3,Wheezing
+168_1b1_Al_sc_Meditron,168,Al,Meditron,7,0,0,0,0,0.0,Healthy
+169_1b1_Lr_sc_Meditron,169,Lr,Meditron,7,5,0,0,5,71.4,Crackles
+169_1b2_Ll_sc_Meditron,169,Ll,Meditron,7,6,0,0,6,85.7,Crackles
+170_1b2_Al_mc_AKGC417L,170,Al,AKGC417L,5,0,0,0,0,0.0,Healthy
+170_1b2_Ar_mc_AKGC417L,170,Ar,AKGC417L,5,0,0,0,0,0.0,Healthy
+170_1b2_Lr_mc_AKGC417L,170,Lr,AKGC417L,5,0,0,0,0,0.0,Healthy
+170_1b2_Pl_mc_AKGC417L,170,Pl,AKGC417L,5,4,0,0,4,80.0,Crackles
+170_1b2_Pr_mc_AKGC417L,170,Pr,AKGC417L,5,0,0,0,0,0.0,Healthy
+170_1b2_Tc_mc_AKGC417L,170,Tc,AKGC417L,5,0,0,0,0,0.0,Healthy
+170_1b3_Al_mc_AKGC417L,170,Al,AKGC417L,6,0,0,0,0,0.0,Healthy
+170_1b3_Ar_mc_AKGC417L,170,Ar,AKGC417L,6,0,0,0,0,0.0,Healthy
+170_1b3_Ll_mc_AKGC417L,170,Ll,AKGC417L,6,0,0,0,0,0.0,Healthy
+170_1b3_Lr_mc_AKGC417L,170,Lr,AKGC417L,6,1,0,0,1,16.7,Crackles
+170_1b3_Pl_mc_AKGC417L,170,Pl,AKGC417L,6,6,0,0,6,100.0,Crackles
+170_1b3_Pr_mc_AKGC417L,170,Pr,AKGC417L,6,1,0,0,1,16.7,Crackles
+170_1b3_Tc_mc_AKGC417L,170,Tc,AKGC417L,6,0,0,0,0,0.0,Healthy
+170_1b4_Al_mc_AKGC417L,170,Al,AKGC417L,6,0,0,0,0,0.0,Healthy
+170_1b4_Ar_mc_AKGC417L,170,Ar,AKGC417L,6,1,1,4,6,100.0,Wheezing with Crackles
+170_1b4_Lr_mc_AKGC417L,170,Lr,AKGC417L,6,0,0,0,0,0.0,Healthy
+170_1b4_Pl_mc_AKGC417L,170,Pl,AKGC417L,6,6,0,0,6,100.0,Crackles
+170_1b4_Pr_mc_AKGC417L,170,Pr,AKGC417L,6,2,0,0,2,33.3,Crackles
+170_1b4_Tc_mc_AKGC417L,170,Tc,AKGC417L,6,0,0,0,0,0.0,Healthy
+170_2b2_Al_mc_AKGC417L,170,Al,AKGC417L,7,0,0,0,0,0.0,Healthy
+170_2b2_Ar_mc_AKGC417L,170,Ar,AKGC417L,7,3,0,0,3,42.9,Crackles
+170_2b2_Lr_mc_AKGC417L,170,Lr,AKGC417L,7,0,0,0,0,0.0,Healthy
+170_2b2_Pl_mc_AKGC417L,170,Pl,AKGC417L,7,0,0,0,0,0.0,Healthy
+170_2b2_Pr_mc_AKGC417L,170,Pr,AKGC417L,7,0,0,0,0,0.0,Healthy
+170_2b2_Tc_mc_AKGC417L,170,Tc,AKGC417L,7,0,1,0,1,14.3,Wheezing
+171_1b1_Al_sc_Meditron,171,Al,Meditron,9,0,0,0,0,0.0,Healthy
+172_1b3_Al_mc_AKGC417L,172,Al,AKGC417L,7,1,0,0,1,14.3,Crackles
+172_1b3_Ar_mc_AKGC417L,172,Ar,AKGC417L,7,0,0,0,0,0.0,Healthy
+172_1b3_Ll_mc_AKGC417L,172,Ll,AKGC417L,7,6,0,0,6,85.7,Crackles
+172_1b3_Lr_mc_AKGC417L,172,Lr,AKGC417L,7,0,0,0,0,0.0,Healthy
+172_1b3_Pl_mc_AKGC417L,172,Pl,AKGC417L,7,3,0,0,3,42.9,Crackles
+172_1b3_Pr_mc_AKGC417L,172,Pr,AKGC417L,7,7,0,0,7,100.0,Crackles
+172_1b3_Tc_mc_AKGC417L,172,Tc,AKGC417L,7,1,0,0,1,14.3,Crackles
+172_1b4_Al_mc_AKGC417L,172,Al,AKGC417L,6,2,3,0,5,83.3,Wheezing
+172_1b4_Ar_mc_AKGC417L,172,Ar,AKGC417L,6,0,3,1,4,66.7,Wheezing
+172_1b4_Ll_mc_AKGC417L,172,Ll,AKGC417L,6,1,1,2,4,66.7,Wheezing with Crackles
+172_1b4_Lr_mc_AKGC417L,172,Lr,AKGC417L,6,0,4,0,4,66.7,Wheezing
+172_1b4_Pl_mc_AKGC417L,172,Pl,AKGC417L,6,1,3,1,5,83.3,Wheezing
+172_1b4_Pr_mc_AKGC417L,172,Pr,AKGC417L,6,0,3,0,3,50.0,Wheezing
+172_1b4_Tc_mc_AKGC417L,172,Tc,AKGC417L,6,0,1,2,3,50.0,Wheezing with Crackles
+172_1b5_Al_mc_AKGC417L,172,Al,AKGC417L,7,1,1,0,2,28.6,Crackles
+172_1b5_Ar_mc_AKGC417L,172,Ar,AKGC417L,7,0,1,0,1,14.3,Wheezing
+172_1b5_Ll_mc_AKGC417L,172,Ll,AKGC417L,7,3,1,0,4,57.1,Crackles
+172_1b5_Lr_mc_AKGC417L,172,Lr,AKGC417L,7,2,1,0,3,42.9,Crackles
+172_1b5_Pl_mc_AKGC417L,172,Pl,AKGC417L,7,3,1,1,5,71.4,Crackles
+172_1b5_Pr_mc_AKGC417L,172,Pr,AKGC417L,7,1,2,0,3,42.9,Wheezing
+172_1b5_Tc_mc_AKGC417L,172,Tc,AKGC417L,7,0,0,1,1,14.3,Wheezing with Crackles
+172_2b5_Al_mc_AKGC417L,172,Al,AKGC417L,6,5,0,1,6,100.0,Crackles
+172_2b5_Ar_mc_AKGC417L,172,Ar,AKGC417L,6,0,2,0,2,33.3,Wheezing
+172_2b5_Lr_mc_AKGC417L,172,Lr,AKGC417L,6,1,1,0,2,33.3,Crackles
+172_2b5_Pl_mc_AKGC417L,172,Pl,AKGC417L,6,3,1,0,4,66.7,Crackles
+172_2b5_Pr_mc_AKGC417L,172,Pr,AKGC417L,6,1,0,1,2,33.3,Wheezing with Crackles
+172_2b5_Tc_mc_AKGC417L,172,Tc,AKGC417L,6,0,1,0,1,16.7,Wheezing
+173_1b1_Al_sc_Meditron,173,Al,Meditron,13,5,0,0,5,38.5,Crackles
+174_1p2_Ar_mc_AKGC417L,174,Ar,AKGC417L,5,1,1,0,2,40.0,Crackles
+174_1p2_Ll_mc_AKGC417L,174,Ll,AKGC417L,5,4,1,0,5,100.0,Crackles
+174_1p2_Lr_mc_AKGC417L,174,Lr,AKGC417L,5,4,1,0,5,100.0,Crackles
+174_1p2_Pl_mc_AKGC417L,174,Pl,AKGC417L,5,4,1,0,5,100.0,Crackles
+174_1p2_Pr_mc_AKGC417L,174,Pr,AKGC417L,5,4,1,0,5,100.0,Crackles
+174_1p2_Tc_mc_AKGC417L,174,Tc,AKGC417L,5,4,0,0,4,80.0,Crackles
+174_1p3_Ar_mc_AKGC417L,174,Ar,AKGC417L,5,5,0,0,5,100.0,Crackles
+174_1p3_Ll_mc_AKGC417L,174,Ll,AKGC417L,5,5,0,0,5,100.0,Crackles
+174_1p3_Lr_mc_AKGC417L,174,Lr,AKGC417L,5,5,0,0,5,100.0,Crackles
+174_1p3_Pl_mc_AKGC417L,174,Pl,AKGC417L,5,5,0,0,5,100.0,Crackles
+174_1p3_Pr_mc_AKGC417L,174,Pr,AKGC417L,5,3,0,2,5,100.0,Crackles
+174_1p3_Tc_mc_AKGC417L,174,Tc,AKGC417L,5,3,0,0,3,60.0,Crackles
+174_1p4_Ar_mc_AKGC417L,174,Ar,AKGC417L,5,3,0,0,3,60.0,Crackles
+174_1p4_Ll_mc_AKGC417L,174,Ll,AKGC417L,5,4,0,0,4,80.0,Crackles
+174_1p4_Lr_mc_AKGC417L,174,Lr,AKGC417L,5,4,0,0,4,80.0,Crackles
+174_1p4_Pl_mc_AKGC417L,174,Pl,AKGC417L,5,5,0,0,5,100.0,Crackles
+174_1p4_Pr_mc_AKGC417L,174,Pr,AKGC417L,5,5,0,0,5,100.0,Crackles
+174_1p4_Tc_mc_AKGC417L,174,Tc,AKGC417L,5,3,0,0,3,60.0,Crackles
+174_2p3_Al_mc_AKGC417L,174,Al,AKGC417L,4,1,0,0,1,25.0,Crackles
+174_2p3_Ar_mc_AKGC417L,174,Ar,AKGC417L,4,4,0,0,4,100.0,Crackles
+174_2p3_Pl_mc_AKGC417L,174,Pl,AKGC417L,4,4,0,0,4,100.0,Crackles
+174_2p3_Pr_mc_AKGC417L,174,Pr,AKGC417L,4,4,0,0,4,100.0,Crackles
+174_2p3_Tc_mc_AKGC417L,174,Tc,AKGC417L,4,3,0,0,3,75.0,Crackles
+175_1b1_Al_sc_Litt3200,175,Al,Litt3200,4,0,1,3,4,100.0,Wheezing with Crackles
+175_1b1_Ar_sc_Litt3200,175,Ar,Litt3200,3,0,2,0,2,66.7,Wheezing
+175_1b1_Ll_sc_Litt3200,175,Ll,Litt3200,4,0,2,1,3,75.0,Wheezing
+175_1b1_Lr_sc_Litt3200,175,Lr,Litt3200,4,0,2,1,3,75.0,Wheezing
+175_1b1_Pl_sc_Litt3200,175,Pl,Litt3200,4,0,4,0,4,100.0,Wheezing
+175_1b1_Pr_sc_Litt3200,175,Pr,Litt3200,4,0,3,0,3,75.0,Wheezing
+176_1b3_Al_mc_AKGC417L,176,Al,AKGC417L,6,5,0,0,5,83.3,Crackles
+176_1b3_Ar_mc_AKGC417L,176,Ar,AKGC417L,6,6,0,0,6,100.0,Crackles
+176_1b3_Ll_mc_AKGC417L,176,Ll,AKGC417L,6,5,0,0,5,83.3,Crackles
+176_1b3_Lr_mc_AKGC417L,176,Lr,AKGC417L,6,5,0,0,5,83.3,Crackles
+176_1b3_Pl_mc_AKGC417L,176,Pl,AKGC417L,6,5,0,0,5,83.3,Crackles
+176_1b3_Pr_mc_AKGC417L,176,Pr,AKGC417L,6,5,0,0,5,83.3,Crackles
+176_1b3_Tc_mc_AKGC417L,176,Tc,AKGC417L,6,6,0,0,6,100.0,Crackles
+176_1b4_Al_mc_AKGC417L,176,Al,AKGC417L,6,5,0,0,5,83.3,Crackles
+176_1b4_Ar_mc_AKGC417L,176,Ar,AKGC417L,6,6,0,0,6,100.0,Crackles
+176_1b4_Ll_mc_AKGC417L,176,Ll,AKGC417L,6,6,0,0,6,100.0,Crackles
+176_1b4_Lr_mc_AKGC417L,176,Lr,AKGC417L,6,6,0,0,6,100.0,Crackles
+176_1b4_Pl_mc_AKGC417L,176,Pl,AKGC417L,6,6,0,0,6,100.0,Crackles
+176_1b4_Pr_mc_AKGC417L,176,Pr,AKGC417L,6,6,0,0,6,100.0,Crackles
+176_1b4_Tc_mc_AKGC417L,176,Tc,AKGC417L,6,5,0,0,5,83.3,Crackles
+176_2b3_Al_mc_AKGC417L,176,Al,AKGC417L,7,6,0,0,6,85.7,Crackles
+176_2b3_Ar_mc_AKGC417L,176,Ar,AKGC417L,7,6,0,0,6,85.7,Crackles
+176_2b3_Ll_mc_AKGC417L,176,Ll,AKGC417L,7,7,0,0,7,100.0,Crackles
+176_2b3_Lr_mc_AKGC417L,176,Lr,AKGC417L,7,6,0,0,6,85.7,Crackles
+176_2b3_Pl_mc_AKGC417L,176,Pl,AKGC417L,7,7,0,0,7,100.0,Crackles
+176_2b3_Pr_mc_AKGC417L,176,Pr,AKGC417L,7,6,0,0,6,85.7,Crackles
+176_2b3_Tc_mc_AKGC417L,176,Tc,AKGC417L,7,7,0,0,7,100.0,Crackles
+177_1b2_Al_mc_AKGC417L,177,Al,AKGC417L,4,4,0,0,4,100.0,Crackles
+177_1b2_Ar_mc_AKGC417L,177,Ar,AKGC417L,4,2,0,0,2,50.0,Crackles
+177_1b2_Lr_mc_AKGC417L,177,Lr,AKGC417L,4,2,0,0,2,50.0,Crackles
+177_1b2_Pl_mc_AKGC417L,177,Pl,AKGC417L,4,4,0,0,4,100.0,Crackles
+177_1b2_Pr_mc_AKGC417L,177,Pr,AKGC417L,4,1,3,0,4,100.0,Wheezing
+177_1b2_Tc_mc_AKGC417L,177,Tc,AKGC417L,4,0,0,0,0,0.0,Healthy
+177_1b4_Al_mc_AKGC417L,177,Al,AKGC417L,5,5,0,0,5,100.0,Crackles
+177_1b4_Ar_mc_AKGC417L,177,Ar,AKGC417L,5,0,0,0,0,0.0,Healthy
+177_1b4_Lr_mc_AKGC417L,177,Lr,AKGC417L,5,0,0,0,0,0.0,Healthy
+177_1b4_Pl_mc_AKGC417L,177,Pl,AKGC417L,5,5,0,0,5,100.0,Crackles
+177_1b4_Pr_mc_AKGC417L,177,Pr,AKGC417L,5,0,3,2,5,100.0,Wheezing
+177_1b4_Tc_mc_AKGC417L,177,Tc,AKGC417L,5,0,0,0,0,0.0,Healthy
+177_2b4_Al_mc_AKGC417L,177,Al,AKGC417L,5,3,0,0,3,60.0,Crackles
+177_2b4_Lr_mc_AKGC417L,177,Lr,AKGC417L,5,4,0,0,4,80.0,Crackles
+177_2b4_Pl_mc_AKGC417L,177,Pl,AKGC417L,5,5,0,0,5,100.0,Crackles
+177_2b4_Pr_mc_AKGC417L,177,Pr,AKGC417L,5,5,0,0,5,100.0,Crackles
+177_2b4_Tc_mc_AKGC417L,177,Tc,AKGC417L,5,0,0,0,0,0.0,Healthy
+178_1b2_Al_mc_AKGC417L,178,Al,AKGC417L,12,0,6,0,6,50.0,Wheezing
+178_1b2_Ar_mc_AKGC417L,178,Ar,AKGC417L,12,2,5,1,8,66.7,Wheezing
+178_1b2_Lr_mc_AKGC417L,178,Lr,AKGC417L,12,5,3,3,11,91.7,Crackles
+178_1b2_Pl_mc_AKGC417L,178,Pl,AKGC417L,12,12,0,0,12,100.0,Crackles
+178_1b2_Pr_mc_AKGC417L,178,Pr,AKGC417L,12,0,5,1,6,50.0,Wheezing
+178_1b2_Tc_mc_AKGC417L,178,Tc,AKGC417L,12,0,5,0,5,41.7,Wheezing
+178_1b3_Al_mc_AKGC417L,178,Al,AKGC417L,5,0,1,2,3,60.0,Wheezing with Crackles
+178_1b3_Ar_mc_AKGC417L,178,Ar,AKGC417L,5,4,0,1,5,100.0,Crackles
+178_1b3_Lr_mc_AKGC417L,178,Lr,AKGC417L,5,0,0,0,0,0.0,Healthy
+178_1b3_Pl_mc_AKGC417L,178,Pl,AKGC417L,5,0,0,0,0,0.0,Healthy
+178_1b3_Pr_mc_AKGC417L,178,Pr,AKGC417L,5,0,0,0,0,0.0,Healthy
+178_1b3_Tc_mc_AKGC417L,178,Tc,AKGC417L,5,1,0,0,1,20.0,Crackles
+178_1b6_Al_mc_AKGC417L,178,Al,AKGC417L,8,0,0,0,0,0.0,Healthy
+178_1b6_Ar_mc_AKGC417L,178,Ar,AKGC417L,8,8,0,0,8,100.0,Crackles
+178_1b6_Ll_mc_AKGC417L,178,Ll,AKGC417L,8,0,8,0,8,100.0,Wheezing
+178_1b6_Lr_mc_AKGC417L,178,Lr,AKGC417L,8,0,0,0,0,0.0,Healthy
+178_1b6_Pl_mc_AKGC417L,178,Pl,AKGC417L,8,0,0,0,0,0.0,Healthy
+178_1b6_Pr_mc_AKGC417L,178,Pr,AKGC417L,8,0,2,0,2,25.0,Wheezing
+178_1b6_Tc_mc_AKGC417L,178,Tc,AKGC417L,8,0,0,0,0,0.0,Healthy
+178_2b2_Al_mc_AKGC417L,178,Al,AKGC417L,10,7,0,0,7,70.0,Crackles
+178_2b2_Ar_mc_AKGC417L,178,Ar,AKGC417L,10,6,0,0,6,60.0,Crackles
+178_2b2_Lr_mc_AKGC417L,178,Lr,AKGC417L,10,0,0,0,0,0.0,Healthy
+178_2b2_Pr_mc_AKGC417L,178,Pr,AKGC417L,10,0,0,0,0,0.0,Healthy
+178_2b2_Tc_mc_AKGC417L,178,Tc,AKGC417L,10,0,0,0,0,0.0,Healthy
+179_1b1_Al_sc_Meditron,179,Al,Meditron,8,2,0,1,3,37.5,Crackles
+179_1b1_Tc_sc_Meditron,179,Tc,Meditron,7,2,1,0,3,42.9,Crackles
+180_1b4_Al_mc_AKGC417L,180,Al,AKGC417L,6,0,1,5,6,100.0,Wheezing with Crackles
+180_1b4_Ar_mc_AKGC417L,180,Ar,AKGC417L,6,1,0,5,6,100.0,Wheezing with Crackles
+180_1b4_Lr_mc_AKGC417L,180,Lr,AKGC417L,6,1,0,5,6,100.0,Wheezing with Crackles
+180_1b4_Pl_mc_AKGC417L,180,Pl,AKGC417L,6,1,0,5,6,100.0,Wheezing with Crackles
+180_1b4_Pr_mc_AKGC417L,180,Pr,AKGC417L,6,1,0,5,6,100.0,Wheezing with Crackles
+181_1b1_Ar_mc_LittC2SE,181,Ar,LittC2SE,4,0,0,0,0,0.0,Healthy
+181_1b1_Tc_mc_LittC2SE,181,Tc,LittC2SE,4,0,0,0,0,0.0,Healthy
+181_1b2_Ar_mc_LittC2SE,181,Ar,LittC2SE,4,2,0,0,2,50.0,Crackles
+181_1b3_Tc_mc_LittC2SE,181,Tc,LittC2SE,5,0,0,0,0,0.0,Healthy
+182_1b1_Tc_sc_Meditron,182,Tc,Meditron,7,5,0,0,5,71.4,Crackles
+183_1b1_Pl_sc_Meditron,183,Pl,Meditron,4,2,0,0,2,50.0,Crackles
+183_1b1_Tc_sc_Meditron,183,Tc,Meditron,4,0,0,0,0,0.0,Healthy
+184_1b1_Ar_sc_Meditron,184,Ar,Meditron,8,0,0,0,0,0.0,Healthy
+185_1b1_Al_sc_Litt3200,185,Al,Litt3200,7,0,0,0,0,0.0,Healthy
+185_1b1_Ar_sc_Litt3200,185,Ar,Litt3200,11,0,0,0,0,0.0,Healthy
+185_1b1_Ll_sc_Litt3200,185,Ll,Litt3200,10,0,1,0,1,10.0,Wheezing
+185_1b1_Lr_sc_Litt3200,185,Lr,Litt3200,7,0,0,0,0,0.0,Healthy
+185_1b1_Pl_sc_Litt3200,185,Pl,Litt3200,9,0,0,0,0,0.0,Healthy
+185_1b1_Pr_sc_Litt3200,185,Pr,Litt3200,11,0,0,0,0,0.0,Healthy
+186_2b2_Al_mc_AKGC417L,186,Al,AKGC417L,5,0,1,0,1,20.0,Wheezing
+186_2b2_Ar_mc_AKGC417L,186,Ar,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b2_Lr_mc_AKGC417L,186,Lr,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b2_Pl_mc_AKGC417L,186,Pl,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b2_Pr_mc_AKGC417L,186,Pr,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b2_Tc_mc_AKGC417L,186,Tc,AKGC417L,5,0,0,0,0,0.0,Healthy
+186_2b3_Al_mc_AKGC417L,186,Al,AKGC417L,5,1,0,0,1,20.0,Crackles
+186_2b3_Ar_mc_AKGC417L,186,Ar,AKGC417L,5,4,0,0,4,80.0,Crackles
+186_2b3_Lr_mc_AKGC417L,186,Lr,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b3_Pl_mc_AKGC417L,186,Pl,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b3_Pr_mc_AKGC417L,186,Pr,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b3_Tc_mc_AKGC417L,186,Tc,AKGC417L,5,0,1,0,1,20.0,Wheezing
+186_2b4_Al_mc_AKGC417L,186,Al,AKGC417L,5,4,0,0,4,80.0,Crackles
+186_2b4_Ar_mc_AKGC417L,186,Ar,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b4_Lr_mc_AKGC417L,186,Lr,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b4_Pl_mc_AKGC417L,186,Pl,AKGC417L,5,4,0,0,4,80.0,Crackles
+186_2b4_Pr_mc_AKGC417L,186,Pr,AKGC417L,5,5,0,0,5,100.0,Crackles
+186_2b4_Tc_mc_AKGC417L,186,Tc,AKGC417L,5,0,0,0,0,0.0,Healthy
+186_3b3_Al_mc_AKGC417L,186,Al,AKGC417L,6,1,0,0,1,16.7,Crackles
+186_3b3_Ar_mc_AKGC417L,186,Ar,AKGC417L,6,3,0,0,3,50.0,Crackles
+186_3b3_Lr_mc_AKGC417L,186,Lr,AKGC417L,6,1,0,0,1,16.7,Crackles
+186_3b3_Pl_mc_AKGC417L,186,Pl,AKGC417L,6,6,0,0,6,100.0,Crackles
+186_3b3_Pr_mc_AKGC417L,186,Pr,AKGC417L,6,0,0,0,0,0.0,Healthy
+186_3b3_Tc_mc_AKGC417L,186,Tc,AKGC417L,6,0,0,0,0,0.0,Healthy
+187_1b1_Ll_sc_Meditron,187,Ll,Meditron,17,0,0,0,0,0.0,Healthy
+188_1b1_Al_sc_Meditron,188,Al,Meditron,15,0,0,0,0,0.0,Healthy
+188_1b1_Ar_sc_Meditron,188,Ar,Meditron,17,0,0,0,0,0.0,Healthy
+188_1b1_Pl_sc_Meditron,188,Pl,Meditron,14,0,0,0,0,0.0,Healthy
+188_1b1_Tc_sc_Meditron,188,Tc,Meditron,16,0,0,0,0,0.0,Healthy
+189_1b2_Lr_mc_LittC2SE,189,Lr,LittC2SE,5,2,0,0,2,40.0,Crackles
+190_1b1_Tc_sc_Meditron,190,Tc,Meditron,4,0,0,0,0,0.0,Healthy
+191_2b1_Pl_mc_LittC2SE,191,Pl,LittC2SE,8,0,0,0,0,0.0,Healthy
+191_2b1_Pr_mc_LittC2SE,191,Pr,LittC2SE,8,0,0,0,0,0.0,Healthy
+191_2b2_Tc_mc_LittC2SE,191,Tc,LittC2SE,8,0,0,0,0,0.0,Healthy
+192_2b1_Al_mc_LittC2SE,192,Al,LittC2SE,8,0,6,1,7,87.5,Wheezing
+192_2b1_Ar_mc_LittC2SE,192,Ar,LittC2SE,8,0,7,0,7,87.5,Wheezing
+192_2b2_Al_mc_LittC2SE,192,Al,LittC2SE,8,0,6,2,8,100.0,Wheezing
+192_2b2_Ar_mc_LittC2SE,192,Ar,LittC2SE,8,0,7,0,7,87.5,Wheezing
+192_2b3_Al_mc_LittC2SE,192,Al,LittC2SE,7,1,6,0,7,100.0,Wheezing
+192_2b3_Ar_mc_LittC2SE,192,Ar,LittC2SE,7,0,6,0,6,85.7,Wheezing
+193_1b2_Al_mc_AKGC417L,193,Al,AKGC417L,12,0,11,0,11,91.7,Wheezing
+193_1b2_Ar_mc_AKGC417L,193,Ar,AKGC417L,12,0,11,0,11,91.7,Wheezing
+193_1b2_Ll_mc_AKGC417L,193,Ll,AKGC417L,12,0,0,0,0,0.0,Healthy
+193_1b2_Pl_mc_AKGC417L,193,Pl,AKGC417L,12,0,12,0,12,100.0,Wheezing
+193_1b2_Pr_mc_AKGC417L,193,Pr,AKGC417L,12,0,12,0,12,100.0,Wheezing
+193_1b2_Tc_mc_AKGC417L,193,Tc,AKGC417L,12,0,9,0,9,75.0,Wheezing
+193_1b4_Lr_mc_AKGC417L,193,Lr,AKGC417L,10,0,10,0,10,100.0,Wheezing
+193_7b3_Al_mc_AKGC417L,193,Al,AKGC417L,8,0,0,0,0,0.0,Healthy
+193_7b3_Ar_mc_AKGC417L,193,Ar,AKGC417L,8,6,0,0,6,75.0,Crackles
+193_7b3_Ll_mc_AKGC417L,193,Ll,AKGC417L,8,1,0,0,1,12.5,Crackles
+193_7b3_Lr_mc_AKGC417L,193,Lr,AKGC417L,8,8,0,0,8,100.0,Crackles
+193_7b3_Pl_mc_AKGC417L,193,Pl,AKGC417L,8,8,0,0,8,100.0,Crackles
+193_7b3_Pr_mc_AKGC417L,193,Pr,AKGC417L,8,0,0,0,0,0.0,Healthy
+193_7b3_Tc_mc_AKGC417L,193,Tc,AKGC417L,8,5,0,0,5,62.5,Crackles
+194_1b1_Lr_sc_Meditron,194,Lr,Meditron,9,0,0,0,0,0.0,Healthy
+194_1b1_Pr_sc_Meditron,194,Pr,Meditron,9,0,0,0,0,0.0,Healthy
+195_1b1_Al_sc_Litt3200,195,Al,Litt3200,12,0,5,0,5,41.7,Wheezing
+195_1b1_Ar_sc_Litt3200,195,Ar,Litt3200,17,0,2,0,2,11.8,Wheezing
+195_1b1_Ll_sc_Litt3200,195,Ll,Litt3200,11,3,2,3,8,72.7,Wheezing with Crackles
+195_1b1_Lr_sc_Litt3200,195,Lr,Litt3200,9,2,5,2,9,100.0,Wheezing
+195_1b1_Pl_sc_Litt3200,195,Pl,Litt3200,9,0,7,0,7,77.8,Wheezing
+195_1b1_Pr_sc_Litt3200,195,Pr,Litt3200,17,0,2,0,2,11.8,Wheezing
+196_1b1_Pr_sc_Meditron,196,Pr,Meditron,6,0,0,0,0,0.0,Healthy
+197_1b1_Al_sc_Meditron,197,Al,Meditron,3,0,0,0,0,0.0,Healthy
+197_1b1_Tc_sc_Meditron,197,Tc,Meditron,5,1,1,0,2,40.0,Crackles
+198_1b5_Al_mc_AKGC417L,198,Al,AKGC417L,7,0,6,0,6,85.7,Wheezing
+198_1b5_Ar_mc_AKGC417L,198,Ar,AKGC417L,7,0,6,0,6,85.7,Wheezing
+198_1b5_Ll_mc_AKGC417L,198,Ll,AKGC417L,7,0,5,0,5,71.4,Wheezing
+198_1b5_Lr_mc_AKGC417L,198,Lr,AKGC417L,7,0,6,0,6,85.7,Wheezing
+198_1b5_Pl_mc_AKGC417L,198,Pl,AKGC417L,7,0,6,0,6,85.7,Wheezing
+198_1b5_Pr_mc_AKGC417L,198,Pr,AKGC417L,7,0,6,0,6,85.7,Wheezing
+198_1b5_Tc_mc_AKGC417L,198,Tc,AKGC417L,7,0,6,0,6,85.7,Wheezing
+198_6p1_Al_mc_AKGC417L,198,Al,AKGC417L,7,0,0,0,0,0.0,Healthy
+198_6p1_Ar_mc_AKGC417L,198,Ar,AKGC417L,6,6,0,0,6,100.0,Crackles
+198_6p1_Ll_mc_AKGC417L,198,Ll,AKGC417L,7,1,0,0,1,14.3,Crackles
+198_6p1_Lr_mc_AKGC417L,198,Lr,AKGC417L,7,7,0,0,7,100.0,Crackles
+198_6p1_Pl_mc_AKGC417L,198,Pl,AKGC417L,7,6,0,0,6,85.7,Crackles
+198_6p1_Pr_mc_AKGC417L,198,Pr,AKGC417L,7,5,0,0,5,71.4,Crackles
+198_6p1_Tc_mc_AKGC417L,198,Tc,AKGC417L,8,3,0,0,3,37.5,Crackles
+199_2b1_Ll_mc_LittC2SE,199,Ll,LittC2SE,9,4,0,0,4,44.4,Crackles
+199_2b3_Ll_mc_LittC2SE,199,Ll,LittC2SE,9,8,0,0,8,88.9,Crackles
+200_2p2_Al_mc_AKGC417L,200,Al,AKGC417L,5,0,0,0,0,0.0,Healthy
+200_2p2_Ar_mc_AKGC417L,200,Ar,AKGC417L,5,0,0,0,0,0.0,Healthy
+200_2p2_Lr_mc_AKGC417L,200,Lr,AKGC417L,5,0,0,0,0,0.0,Healthy
+200_2p2_Pl_mc_AKGC417L,200,Pl,AKGC417L,5,0,0,0,0,0.0,Healthy
+200_2p2_Pr_mc_AKGC417L,200,Pr,AKGC417L,5,1,0,0,1,20.0,Crackles
+200_2p2_Tc_mc_AKGC417L,200,Tc,AKGC417L,5,4,0,0,4,80.0,Crackles
+200_2p3_Al_mc_AKGC417L,200,Al,AKGC417L,3,0,0,0,0,0.0,Healthy
+200_2p3_Ar_mc_AKGC417L,200,Ar,AKGC417L,3,0,0,0,0,0.0,Healthy
+200_2p3_Lr_mc_AKGC417L,200,Lr,AKGC417L,3,0,0,0,0,0.0,Healthy
+200_2p3_Pl_mc_AKGC417L,200,Pl,AKGC417L,3,1,0,0,1,33.3,Crackles
+200_2p3_Pr_mc_AKGC417L,200,Pr,AKGC417L,3,0,0,0,0,0.0,Healthy
+200_2p3_Tc_mc_AKGC417L,200,Tc,AKGC417L,3,2,0,0,2,66.7,Crackles
+200_2p4_Al_mc_AKGC417L,200,Al,AKGC417L,5,0,0,0,0,0.0,Healthy
+200_2p4_Ar_mc_AKGC417L,200,Ar,AKGC417L,5,0,0,0,0,0.0,Healthy
+200_2p4_Lr_mc_AKGC417L,200,Lr,AKGC417L,5,0,0,0,0,0.0,Healthy
+200_2p4_Pl_mc_AKGC417L,200,Pl,AKGC417L,5,1,0,0,1,20.0,Crackles
+200_2p4_Pr_mc_AKGC417L,200,Pr,AKGC417L,5,1,0,0,1,20.0,Crackles
+200_2p4_Tc_mc_AKGC417L,200,Tc,AKGC417L,5,0,0,0,0,0.0,Healthy
+200_3p4_Al_mc_AKGC417L,200,Al,AKGC417L,4,0,0,0,0,0.0,Healthy
+200_3p4_Ar_mc_AKGC417L,200,Ar,AKGC417L,4,0,0,0,0,0.0,Healthy
+200_3p4_Pl_mc_AKGC417L,200,Pl,AKGC417L,4,0,0,0,0,0.0,Healthy
+200_3p4_Pr_mc_AKGC417L,200,Pr,AKGC417L,4,0,0,0,0,0.0,Healthy
+200_3p4_Tc_mc_AKGC417L,200,Tc,AKGC417L,4,1,0,0,1,25.0,Crackles
+201_1b1_Al_sc_Meditron,201,Al,Meditron,7,1,2,2,5,71.4,Wheezing with Crackles
+201_1b1_Ar_sc_Meditron,201,Ar,Meditron,7,0,6,0,6,85.7,Wheezing
+201_1b2_Al_sc_Meditron,201,Al,Meditron,7,0,1,5,6,85.7,Wheezing with Crackles
+201_1b2_Ar_sc_Meditron,201,Ar,Meditron,7,0,5,1,6,85.7,Wheezing
+201_1b3_Al_sc_Meditron,201,Al,Meditron,6,0,4,2,6,100.0,Wheezing
+201_1b3_Ar_sc_Meditron,201,Ar,Meditron,7,0,7,0,7,100.0,Wheezing
+202_1b1_Ar_sc_Meditron,202,Ar,Meditron,10,0,0,0,0,0.0,Healthy
+203_1p2_Al_mc_AKGC417L,203,Al,AKGC417L,10,8,0,1,9,90.0,Crackles
+203_1p2_Ar_mc_AKGC417L,203,Ar,AKGC417L,10,10,0,0,10,100.0,Crackles
+203_1p2_Lr_mc_AKGC417L,203,Lr,AKGC417L,10,4,0,5,9,90.0,Wheezing with Crackles
+203_1p2_Pl_mc_AKGC417L,203,Pl,AKGC417L,10,8,0,0,8,80.0,Crackles
+203_1p2_Pr_mc_AKGC417L,203,Pr,AKGC417L,10,2,0,0,2,20.0,Crackles
+203_1p2_Tc_mc_AKGC417L,203,Tc,AKGC417L,10,0,2,0,2,20.0,Wheezing
+203_1p3_Al_mc_AKGC417L,203,Al,AKGC417L,10,8,0,0,8,80.0,Crackles
+203_1p3_Ar_mc_AKGC417L,203,Ar,AKGC417L,10,9,0,1,10,100.0,Crackles
+203_1p3_Pl_mc_AKGC417L,203,Pl,AKGC417L,10,9,0,0,9,90.0,Crackles
+203_1p3_Pr_mc_AKGC417L,203,Pr,AKGC417L,10,6,0,1,7,70.0,Crackles
+203_1p3_Tc_mc_AKGC417L,203,Tc,AKGC417L,10,0,1,0,1,10.0,Wheezing
+203_1p4_Al_mc_AKGC417L,203,Al,AKGC417L,9,3,0,0,3,33.3,Crackles
+203_1p4_Ar_mc_AKGC417L,203,Ar,AKGC417L,9,7,0,0,7,77.8,Crackles
+203_1p4_Pl_mc_AKGC417L,203,Pl,AKGC417L,9,7,0,1,8,88.9,Crackles
+203_1p4_Pr_mc_AKGC417L,203,Pr,AKGC417L,9,2,0,0,2,22.2,Crackles
+203_1p4_Tc_mc_AKGC417L,203,Tc,AKGC417L,9,3,0,1,4,44.4,Crackles
+203_2p3_Al_mc_AKGC417L,203,Al,AKGC417L,6,0,0,0,0,0.0,Healthy
+203_2p3_Ar_mc_AKGC417L,203,Ar,AKGC417L,6,5,0,0,5,83.3,Crackles
+203_2p3_Pl_mc_AKGC417L,203,Pl,AKGC417L,6,1,0,0,1,16.7,Crackles
+203_2p3_Pr_mc_AKGC417L,203,Pr,AKGC417L,6,2,0,0,2,33.3,Crackles
+203_2p3_Tc_mc_AKGC417L,203,Tc,AKGC417L,6,0,0,0,0,0.0,Healthy
+204_2b5_Al_mc_AKGC417L,204,Al,AKGC417L,7,0,4,0,4,57.1,Wheezing
+204_2b5_Ar_mc_AKGC417L,204,Ar,AKGC417L,7,0,2,0,2,28.6,Wheezing
+204_2b5_Ll_mc_AKGC417L,204,Ll,AKGC417L,7,0,0,0,0,0.0,Healthy
+204_7p5_Al_mc_AKGC417L,204,Al,AKGC417L,7,0,0,0,0,0.0,Healthy
+204_7p5_Ar_mc_AKGC417L,204,Ar,AKGC417L,7,0,0,0,0,0.0,Healthy
+204_7p5_Ll_mc_AKGC417L,204,Ll,AKGC417L,7,0,0,0,0,0.0,Healthy
+204_7p5_Lr_mc_AKGC417L,204,Lr,AKGC417L,7,0,0,0,0,0.0,Healthy
+204_7p5_Pr_mc_AKGC417L,204,Pr,AKGC417L,7,0,0,0,0,0.0,Healthy
+204_7p5_Tc_mc_AKGC417L,204,Tc,AKGC417L,7,0,0,0,0,0.0,Healthy
+205_1b3_Al_mc_AKGC417L,205,Al,AKGC417L,6,1,0,0,1,16.7,Crackles
+205_1b3_Ar_mc_AKGC417L,205,Ar,AKGC417L,6,6,0,0,6,100.0,Crackles
+205_1b3_Ll_mc_AKGC417L,205,Ll,AKGC417L,6,5,0,0,5,83.3,Crackles
+205_1b3_Lr_mc_AKGC417L,205,Lr,AKGC417L,6,2,0,0,2,33.3,Crackles
+205_1b3_Pl_mc_AKGC417L,205,Pl,AKGC417L,6,4,0,0,4,66.7,Crackles
+205_1b3_Pr_mc_AKGC417L,205,Pr,AKGC417L,6,4,0,0,4,66.7,Crackles
+205_2b2_Pr_mc_AKGC417L,205,Pr,AKGC417L,5,0,0,0,0,0.0,Healthy
+205_2b3_Al_mc_AKGC417L,205,Al,AKGC417L,5,2,0,0,2,40.0,Crackles
+205_2b3_Ar_mc_AKGC417L,205,Ar,AKGC417L,5,4,0,0,4,80.0,Crackles
+205_2b3_Ll_mc_AKGC417L,205,Ll,AKGC417L,5,3,0,0,3,60.0,Crackles
+205_2b4_Pl_mc_AKGC417L,205,Pl,AKGC417L,5,5,0,0,5,100.0,Crackles
+205_3b4_Al_mc_AKGC417L,205,Al,AKGC417L,4,4,0,0,4,100.0,Crackles
+205_3b4_Ar_mc_AKGC417L,205,Ar,AKGC417L,4,1,0,0,1,25.0,Crackles
+205_3b4_Pl_mc_AKGC417L,205,Pl,AKGC417L,4,2,0,0,2,50.0,Crackles
+205_3b4_Pr_mc_AKGC417L,205,Pr,AKGC417L,4,0,0,0,0,0.0,Healthy
+205_4b2_Al_mc_AKGC417L,205,Al,AKGC417L,5,5,0,0,5,100.0,Crackles
+205_4b2_Ar_mc_AKGC417L,205,Ar,AKGC417L,5,4,0,0,4,80.0,Crackles
+205_4b2_Lr_mc_AKGC417L,205,Lr,AKGC417L,5,1,0,0,1,20.0,Crackles
+205_4b2_Pl_mc_AKGC417L,205,Pl,AKGC417L,5,0,0,0,0,0.0,Healthy
+205_4b2_Pr_mc_AKGC417L,205,Pr,AKGC417L,5,4,0,0,4,80.0,Crackles
+206_1b1_Ar_sc_Meditron,206,Ar,Meditron,11,0,6,1,7,63.6,Wheezing
+206_1b1_Lr_sc_Meditron,206,Lr,Meditron,8,0,7,0,7,87.5,Wheezing
+206_1b1_Pl_sc_Meditron,206,Pl,Meditron,8,0,8,0,8,100.0,Wheezing
+207_2b2_Al_mc_AKGC417L,207,Al,AKGC417L,6,0,0,0,0,0.0,Healthy
+207_2b2_Ar_mc_AKGC417L,207,Ar,AKGC417L,6,0,0,0,0,0.0,Healthy
+207_2b2_Pl_mc_AKGC417L,207,Pl,AKGC417L,6,2,0,0,2,33.3,Crackles
+207_2b2_Pr_mc_AKGC417L,207,Pr,AKGC417L,6,0,0,0,0,0.0,Healthy
+207_2b2_Tc_mc_AKGC417L,207,Tc,AKGC417L,6,0,0,0,0,0.0,Healthy
+207_2b3_Al_mc_AKGC417L,207,Al,AKGC417L,6,2,0,0,2,33.3,Crackles
+207_2b3_Ar_mc_AKGC417L,207,Ar,AKGC417L,6,1,0,0,1,16.7,Crackles
+207_2b3_Pl_mc_AKGC417L,207,Pl,AKGC417L,6,2,0,0,2,33.3,Crackles
+207_2b3_Pr_mc_AKGC417L,207,Pr,AKGC417L,6,0,0,0,0,0.0,Healthy
+207_2b3_Tc_mc_AKGC417L,207,Tc,AKGC417L,6,0,0,0,0,0.0,Healthy
+207_2b4_Al_mc_AKGC417L,207,Al,AKGC417L,5,4,0,0,4,80.0,Crackles
+207_2b4_Ar_mc_AKGC417L,207,Ar,AKGC417L,5,5,0,0,5,100.0,Crackles
+207_2b4_Pl_mc_AKGC417L,207,Pl,AKGC417L,5,3,0,0,3,60.0,Crackles
+207_2b4_Pr_mc_AKGC417L,207,Pr,AKGC417L,5,3,0,0,3,60.0,Crackles
+207_2b4_Tc_mc_AKGC417L,207,Tc,AKGC417L,5,0,1,0,1,20.0,Wheezing
+207_3b2_Al_mc_AKGC417L,207,Al,AKGC417L,9,0,0,0,0,0.0,Healthy
+207_3b2_Ar_mc_AKGC417L,207,Ar,AKGC417L,9,0,0,0,0,0.0,Healthy
+207_3b2_Lr_mc_AKGC417L,207,Lr,AKGC417L,9,0,0,0,0,0.0,Healthy
+207_3b2_Pl_mc_AKGC417L,207,Pl,AKGC417L,9,0,0,0,0,0.0,Healthy
+207_3b2_Pr_mc_AKGC417L,207,Pr,AKGC417L,9,0,0,0,0,0.0,Healthy
+207_3b2_Tc_mc_AKGC417L,207,Tc,AKGC417L,9,0,0,0,0,0.0,Healthy
+208_1b1_Ll_sc_Meditron,208,Ll,Meditron,13,0,0,0,0,0.0,Healthy
+209_1b1_Tc_sc_Meditron,209,Tc,Meditron,4,0,0,0,0,0.0,Healthy
+210_1b1_Al_sc_Meditron,210,Al,Meditron,18,1,0,0,1,5.6,Crackles
+210_1b1_Ar_sc_Meditron,210,Ar,Meditron,13,1,0,0,1,7.7,Crackles
+211_1p2_Ar_mc_AKGC417L,211,Ar,AKGC417L,13,0,0,0,0,0.0,Healthy
+211_1p2_Pl_mc_AKGC417L,211,Pl,AKGC417L,13,5,4,4,13,100.0,Crackles
+211_1p2_Pr_mc_AKGC417L,211,Pr,AKGC417L,13,0,0,0,0,0.0,Healthy
+211_1p3_Ar_mc_AKGC417L,211,Ar,AKGC417L,14,0,0,0,0,0.0,Healthy
+211_1p5_Ar_mc_AKGC417L,211,Ar,AKGC417L,14,0,0,0,0,0.0,Healthy
+211_2p2_Tc_mc_AKGC417L,211,Tc,AKGC417L,13,0,0,0,0,0.0,Healthy
+211_2p3_Tc_mc_AKGC417L,211,Tc,AKGC417L,16,0,0,0,0,0.0,Healthy
+211_2p4_Tc_mc_AKGC417L,211,Tc,AKGC417L,15,0,0,0,0,0.0,Healthy
+212_2b2_Tc_mc_LittC2SE,212,Tc,LittC2SE,7,2,0,0,2,28.6,Crackles
+213_1p2_Al_mc_AKGC417L,213,Al,AKGC417L,6,0,0,0,0,0.0,Healthy
+213_1p2_Ar_mc_AKGC417L,213,Ar,AKGC417L,6,0,0,0,0,0.0,Healthy
+213_1p2_Lr_mc_AKGC417L,213,Lr,AKGC417L,6,0,0,0,0,0.0,Healthy
+213_1p2_Pl_mc_AKGC417L,213,Pl,AKGC417L,6,3,0,0,3,50.0,Crackles
+213_1p2_Pr_mc_AKGC417L,213,Pr,AKGC417L,6,4,0,0,4,66.7,Crackles
+213_1p2_Tc_mc_AKGC417L,213,Tc,AKGC417L,6,0,0,0,0,0.0,Healthy
+213_1p3_Al_mc_AKGC417L,213,Al,AKGC417L,7,0,0,0,0,0.0,Healthy
+213_1p3_Ar_mc_AKGC417L,213,Ar,AKGC417L,7,0,0,0,0,0.0,Healthy
+213_1p3_Pl_mc_AKGC417L,213,Pl,AKGC417L,7,0,0,0,0,0.0,Healthy
+213_1p3_Pr_mc_AKGC417L,213,Pr,AKGC417L,7,0,0,0,0,0.0,Healthy
+213_1p5_Al_mc_AKGC417L,213,Al,AKGC417L,6,0,0,0,0,0.0,Healthy
+213_1p5_Ar_mc_AKGC417L,213,Ar,AKGC417L,6,0,0,0,0,0.0,Healthy
+213_1p5_Pl_mc_AKGC417L,213,Pl,AKGC417L,6,1,0,0,1,16.7,Crackles
+213_1p5_Pr_mc_AKGC417L,213,Pr,AKGC417L,6,2,0,0,2,33.3,Crackles
+213_1p5_Tc_mc_AKGC417L,213,Tc,AKGC417L,6,0,0,0,0,0.0,Healthy
+213_2p2_Al_mc_AKGC417L,213,Al,AKGC417L,7,0,0,0,0,0.0,Healthy
+213_2p2_Ar_mc_AKGC417L,213,Ar,AKGC417L,7,1,0,0,1,14.3,Crackles
+213_2p2_Pl_mc_AKGC417L,213,Pl,AKGC417L,7,5,0,0,5,71.4,Crackles
+213_2p2_Pr_mc_AKGC417L,213,Pr,AKGC417L,7,2,0,0,2,28.6,Crackles
+213_2p2_Tc_mc_AKGC417L,213,Tc,AKGC417L,7,0,0,0,0,0.0,Healthy
+214_1b1_Ar_sc_Meditron,214,Ar,Meditron,7,0,0,0,0,0.0,Healthy
+215_1b2_Ar_sc_Meditron,215,Ar,Meditron,5,0,4,0,4,80.0,Wheezing
+215_1b3_Tc_sc_Meditron,215,Tc,Meditron,6,0,0,0,0,0.0,Healthy
+216_1b1_Al_sc_Meditron,216,Al,Meditron,12,4,0,0,4,33.3,Crackles
+216_1b1_Pl_sc_Meditron,216,Pl,Meditron,10,0,8,0,8,80.0,Wheezing
+217_1b1_Tc_sc_Meditron,217,Tc,Meditron,11,0,0,0,0,0.0,Healthy
+218_1b1_Al_sc_Meditron,218,Al,Meditron,15,4,1,5,10,66.7,Wheezing with Crackles
+218_1b1_Ar_sc_Meditron,218,Ar,Meditron,16,2,1,11,14,87.5,Wheezing with Crackles
+218_1b1_Lr_sc_Meditron,218,Lr,Meditron,19,11,2,4,17,89.5,Crackles
+218_1b1_Pl_sc_Meditron,218,Pl,Meditron,18,9,3,4,16,88.9,Crackles
+218_1b1_Pr_sc_Meditron,218,Pr,Meditron,18,3,2,11,16,88.9,Wheezing with Crackles
+218_1p1_Ar_sc_Litt3200,218,Ar,Litt3200,6,0,3,0,3,50.0,Wheezing
+218_1p1_Pl_sc_Litt3200,218,Pl,Litt3200,8,2,0,4,6,75.0,Wheezing with Crackles
+218_1p1_Pr_sc_Litt3200,218,Pr,Litt3200,7,2,0,4,6,85.7,Wheezing with Crackles
+219_2b1_Ar_mc_LittC2SE,219,Ar,LittC2SE,5,0,0,0,0,0.0,Healthy
+219_2b1_Tc_mc_LittC2SE,219,Tc,LittC2SE,5,0,0,0,0,0.0,Healthy
+219_2b2_Ar_mc_LittC2SE,219,Ar,LittC2SE,5,1,0,0,1,20.0,Crackles
+219_2b2_Tc_mc_LittC2SE,219,Tc,LittC2SE,6,0,0,0,0,0.0,Healthy
+219_2b3_Tc_mc_LittC2SE,219,Tc,LittC2SE,5,0,0,0,0,0.0,Healthy
+220_1b1_Tc_mc_LittC2SE,220,Tc,LittC2SE,7,2,0,0,2,28.6,Crackles
+220_1b2_Al_mc_LittC2SE,220,Al,LittC2SE,7,0,0,0,0,0.0,Healthy
+221_2b1_Al_mc_LittC2SE,221,Al,LittC2SE,5,0,1,4,5,100.0,Wheezing with Crackles
+221_2b1_Ar_mc_LittC2SE,221,Ar,LittC2SE,5,0,2,3,5,100.0,Wheezing with Crackles
+221_2b1_Lr_mc_LittC2SE,221,Lr,LittC2SE,5,0,1,4,5,100.0,Wheezing with Crackles
+221_2b1_Pl_mc_LittC2SE,221,Pl,LittC2SE,5,0,5,0,5,100.0,Wheezing
+221_2b2_Al_mc_LittC2SE,221,Al,LittC2SE,6,0,5,0,5,83.3,Wheezing
+221_2b2_Ar_mc_LittC2SE,221,Ar,LittC2SE,6,0,1,4,5,83.3,Wheezing with Crackles
+221_2b2_Lr_mc_LittC2SE,221,Lr,LittC2SE,5,0,0,4,4,80.0,Wheezing with Crackles
+221_2b2_Pl_mc_LittC2SE,221,Pl,LittC2SE,6,0,5,0,5,83.3,Wheezing
+221_2b3_Al_mc_LittC2SE,221,Al,LittC2SE,5,0,5,0,5,100.0,Wheezing
+221_2b3_Ar_mc_LittC2SE,221,Ar,LittC2SE,5,0,1,4,5,100.0,Wheezing with Crackles
+221_2b3_Lr_mc_LittC2SE,221,Lr,LittC2SE,5,0,1,4,5,100.0,Wheezing with Crackles
+221_2b3_Pr_mc_LittC2SE,221,Pr,LittC2SE,5,0,2,3,5,100.0,Wheezing with Crackles
+222_1b1_Ar_sc_Meditron,222,Ar,Meditron,10,0,0,0,0,0.0,Healthy
+222_1b1_Lr_sc_Meditron,222,Lr,Meditron,20,13,0,0,13,65.0,Crackles
+222_1b1_Pr_sc_Meditron,222,Pr,Meditron,15,0,8,0,8,53.3,Wheezing
+223_1b1_Al_sc_Meditron,223,Al,Meditron,10,0,0,0,0,0.0,Healthy
+223_1b1_Ar_sc_Meditron,223,Ar,Meditron,10,0,10,0,10,100.0,Wheezing
+223_1b1_Ll_sc_Meditron,223,Ll,Meditron,10,9,0,0,9,90.0,Crackles
+223_1b1_Lr_sc_Meditron,223,Lr,Meditron,10,10,0,0,10,100.0,Crackles
+223_1b1_Pl_sc_Meditron,223,Pl,Meditron,11,0,0,0,0,0.0,Healthy
+223_1b1_Pr_sc_Meditron,223,Pr,Meditron,10,0,3,0,3,30.0,Wheezing
+224_1b1_Tc_sc_Meditron,224,Tc,Meditron,7,0,0,0,0,0.0,Healthy
+224_1b2_Al_sc_Meditron,224,Al,Meditron,7,0,0,0,0,0.0,Healthy
+225_1b1_Pl_sc_Meditron,225,Pl,Meditron,14,0,0,0,0,0.0,Healthy
+226_1b1_Al_sc_Meditron,226,Al,Meditron,10,2,0,0,2,20.0,Crackles
+226_1b1_Ll_sc_Meditron,226,Ll,Meditron,10,6,0,0,6,60.0,Crackles
+226_1b1_Pl_sc_LittC2SE,226,Pl,LittC2SE,11,5,0,0,5,45.5,Crackles

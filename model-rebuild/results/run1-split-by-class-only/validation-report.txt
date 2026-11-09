@@ -1,0 +1,40 @@
+Resondi lung sound model, validation partition, evaluated 2026-11-09 18:17
+Model epoch 5. Patients in this partition: 35 (none of them used in training).
+
+Window level (1 s windows)
+==========================
+items: 3576
+accuracy: 0.331   (always guessing the commonest class scores 0.501)
+balanced accuracy: 0.364   macro F1: 0.306
+
+class                    support  precision  recall  specif.     F1
+Crackles                     916      0.384   0.599    0.669  0.468
+Healthy                     1790      0.616   0.202    0.873  0.304
+Wheezing                     523      0.165   0.250    0.783  0.199
+Wheezing with Crackles       347      0.183   0.403    0.806  0.251
+
+confusion matrix (rows = true, columns = predicted)
+                            Crackles     Healthy    Wheezing  Wheezing w
+Crackles                         549         128         123         116
+Healthy                          619         362         449         360
+Wheezing                         176          65         131         151
+Wheezing with Crackles            85          33          89         140
+
+Cycle level (windows of one breathing cycle averaged)
+=====================================================
+items: 992
+accuracy: 0.310   (always guessing the commonest class scores 0.550)
+balanced accuracy: 0.383   macro F1: 0.296
+
+class                    support  precision  recall  specif.     F1
+Crackles                     234      0.396   0.628    0.704  0.486
+Healthy                      546      0.633   0.161    0.886  0.257
+Wheezing                     135      0.128   0.274    0.707  0.175
+Wheezing with Crackles        77      0.186   0.468    0.827  0.266
+
+confusion matrix (rows = true, columns = predicted)
+                            Crackles     Healthy    Wheezing  Wheezing w
+Crackles                         147          29          46          12
+Healthy                          176          88         181         101
+Wheezing                          38          15          37          45
+Wheezing with Crackles            10           7          24          36

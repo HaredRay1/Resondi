@@ -1,0 +1,136 @@
+RESONDI — 8:00 LONG VERSION (lung only, 3 presenters)
+For a 5-10 minute slot only. PSC XI allows 3-5 minutes: use pitch_4m30.txt there.
+Speech as written is 1,193 words = 7:57 at pitch pace. With sound cues, the live
+demo and pauses it lands around 8:30-9:00 - inside the window with margin.
+Lines marked <<CUT IF LONG>> remove ~70 words and bring it to roughly 8:00.
+Run it once against a timer before deciding; nerves slow delivery, they never speed it.
+A = Ahnycca   H = Hared   J = Jarred
+
+[0:00-0:25] HOOK
+[Lights dim. Breath sound. Device in hand, not yet named.]
+A: Listen. [breath] This is a breath.
+H: [second breath, different] And this is a breath that sounds different.
+J: The moment the exam ends, both are gone. Poof. Walang resibo.
+A: No recording. No second opinion. Nothing to compare next month.   <<CUT IF LONG>>
+ALL: Resondi saves it, sorts it, analyzes it, and keeps the receipts.
+SLIDE 1 — Title only. Let the sound carry it.
+
+[0:25-1:05] THE PROBLEM
+A: Per the Philippine Statistics Authority, pneumonia ranked fourth among causes of death in 2024. Forty-seven thousand, two hundred sixty people.
+H: That is exactly what a stethoscope hears. Then forgets.
+J: And in the first half of 2026, DOH-MIMAROPA reported a nineteen percent rise in influenza-like illness in Palawan. Puerto Princesa had the most.   <<CUT IF LONG>>
+H: In a barangay health station, nobody reviews what the midwife heard. There is nothing to review.
+J: And pulmonary rehabilitation reaches only two point seven percent of COPD patients worldwide.
+A: Respiratory disease here is not only a hospital problem. It is a monitoring problem.
+ALL: Hearing is not enough.
+SLIDE 2 — 47,260 (6.7%), PSA registered deaths 2024. Then 2.7% alone on a dark slide.
+
+[1:05-1:50] THE RESEARCH GAP
+J: AI can already do this. Kim and colleagues trained a CNN on nineteen hundred lung recordings: eighty-six percent accuracy, beating medical students and interns on the same audio.
+A: So why isn't it everywhere?
+J: Because those numbers come from clean research recordings, collected by researchers, with research equipment.
+H: Put that model in a barangay health station and three things change. Background noise. Where the chest piece lands. Who is holding it.
+A: Arts and colleagues pooled thirty-four studies: thirty-seven percent sensitivity, most of it lost to variation in how people listen.
+J: The gap is not a better classifier.
+ALL: It is controlling what the classifier is given.
+SLIDE 3 — 37% sensitivity vs 89% specificity, Arts et al. 2020. Below: "the same site, the same way, every visit."
+
+[1:50-2:30] THE SOLUTION
+H: So we built RESONDI.
+J: A CNN-assisted auscultation instrument for lung sound monitoring, longitudinal tracking, and rehabilitation support.
+A: An AI-assisted smart stethoscope with Bluetooth and microSD, paired with a mobile-first app. [hold up device]
+H: We gave the stethoscope a brain.
+A: An acoustic chest piece, a microphone and preamplifier, an ESP32, Bluetooth Low Energy, and microSD, in a 3D-printed casing.
+J: Component cost: two thousand seven hundred thirty-five pesos. An electronic stethoscope here costs at least thirty thousand.
+H: The microphone choice is deliberate. Its response is consistent between units, so a recording today compares to one next month.   <<CUT IF LONG>>
+ALL: Capture. Sort. Analyze. Review.
+SLIDE 4 — Device render with labels. Cost comparison.
+
+[2:30-3:15] GUIDED ACQUISITION AND QUALITY CONTROL
+H: This is the part that closes the gap. [place device]
+A: The app walks you to each of seven standardized sites. The trachea first, then right and left: upper chest, side, lower back.
+J: You select the location, confirm placement, and record. The app tags it. You never type where it came from.
+A: Same place, same way, every visit. That is what makes two recordings comparable.
+H: Then, before anything is analyzed, the recording is graded on noise, amplitude, signal-to-noise ratio, clipping and motion artifact.
+J: Good, acceptable, poor, or invalid. Poor ones get repeated, not classified.
+A: Most systems analyze whatever they are given. We check first.
+SLIDE 5 — Seven-site lung map. Quality grading screen.
+
+[3:15-4:00] PROCESSING AND THE MODEL
+A: Real environments are not silent. [play noisy recording]
+H: Every recording is resampled to sixteen kilohertz, denoised, normalized, and segmented.
+J: Then reduced to MFCCs, thirteen numbers that describe the shape of the sound, frame by frame. [MFCC map enlarges]
+ALL: Something we hear, we can now see.
+A: Those numbers go into a convolutional neural network, trained on the ICBHI 2017 database: nine hundred twenty recordings, one hundred twenty-six patients, almost seven thousand annotated breathing cycles.
+J: It returns one of four categories. Normal. High-pitched wheezing. Crackles. Wheezing with crackles.
+A: What the practitioner sees is a sound pattern, not a diagnosis.
+ALL: The practitioner makes the diagnosis.
+SLIDE 6 — Preprocessing chain, then model architecture.
+
+[4:00-4:30] INTERPRETATION LAYER
+J: Above the model sits a rule layer. It reads the pattern across zones and maps it to a possibility supported by literature, with the citation attached.
+H: All four zones healthy. Both upper zones wheezing. Crackles in the lower zones. Each returns a possibility, never a diagnosis.
+A: And when the pattern matches no rule, it says so and recommends clinical evaluation.
+H: We would rather the system admit uncertainty than invent a finding.   <<CUT IF LONG>>
+SLIDE 7 — The six rules, with sources.
+
+[4:30-5:30] RESULTS
+A: So what did we find?
+H: [Recording Quality] Sixty-eight percent of recordings were good. Twenty-five acceptable. Seven poor.
+J: [Noise] Twenty-four decibels in a quiet room. Thirty-five in a hospital ward. Forty-two in a community area. It captured in all three.
+H: [Signal] Forty-five decibels against thirty-two for a conventional stethoscope. Decibels are logarithmic, so that is about four and a half times the amplitude.
+J: But in a community area the room is already at forty-two. Three decibels of headroom. That is why noise reduction is funded first.   <<CUT IF LONG>>
+A: [Response Time] Classification takes about four seconds. The quality check takes a hundred and forty-five. That is our bottleneck, and fixing it is first on the list.
+J: [Agreement] And the one that matters. Six of fifteen recordings agreed with the reference labels. Forty percent.
+A: Hindi pa po siya magic.
+H: Fifteen recordings is far too few to call that a rate. The confidence interval runs from twenty percent to sixty-four percent.
+J: That interval contains chance, and it contains a working classifier. We cannot yet tell them apart.
+A: So we are not claiming a number. We are reporting a baseline.
+SLIDE 8 — Quality donut, noise chart, agreement, with the interval shown.
+
+[5:30-6:00] WHAT WE CANNOT CLAIM
+H: Four limitations, and we would rather say them than be asked.
+A: Fifteen paired recordings is not enough to establish performance.
+J: Our training data is European. ICBHI was collected in Portugal and Greece. There are no Filipino recordings in it.
+H: And we audited our own training split. Our samples overlap, and they were divided at random, so near-identical audio sat on both sides. Our corpus scores are inflated. The forty percent is the only clean number we have.
+A: Quality control also still takes a hundred and forty-five seconds, which is too long for a consultation.
+ALL: These results show the potential and the limits of a prototype.
+SLIDE 9 — Limitations, stated plainly.
+
+[6:00-6:35] REVIEW AND REHABILITATION
+H: Practitioners get one dashboard. Patients get another.
+A: The practitioner confirms, modifies, or requests a repeat. The last word is always theirs.
+J: Current recordings are compared against previous ones from the same location, and Resondi guides breathing exercises on top of that.
+A: A respiratory assessment is a snapshot. Rehabilitation is a movie. [timeline moves]
+ALL: Resondi connects those snapshots.
+SLIDE 10 — Dual dashboard, then the rehabilitation timeline.
+
+[6:35-7:05] WHAT COMES NEXT
+J: Three things, in order.
+A: Nine sites instead of seven. We add an interscapular pair on the upper back, so every lobe is heard from the front and the back.
+H: A three-branch model. Mel-spectrogram, MFCC and chromagram together, because a crackle is a click and a wheeze is a tone, and one view cannot capture both.
+J: And Filipino recordings, clinically labelled, so the model is trained on the patients it will actually hear.
+A: We will report the new model against this baseline, on the same split.
+SLIDE 11 — Nine-site map and the three-branch architecture, both labelled "planned."
+
+[7:05-7:35] VALIDATION AND WHO BENEFITS
+H: Reference recordings were reviewed by three pulmonologists, one of them also a practicing pediatrician.
+J: Acceptance was tested with twenty-seven respondents across Puerto Princesa City, and three patients at a private hospital. Overall acceptance came back at three point nine five out of five.
+A: Midwives and health workers in far barangays get a second set of ears.
+H: Nursing and medical schools can teach from real sounds.
+J: Supporting SDG 3, Good Health and Well-being. SDG 4, Quality Education. And SDG 9, Industry, Innovation and Infrastructure.
+ALL: Resondi supports the people doing the diagnosing. It does not replace them.
+SLIDE 12 — Validation, beneficiaries, SDGs.
+
+[7:35-8:00] CLOSE
+["Every Breath You Take" fades in softly under the closing lines. One final breath over the last beat.]
+ALL: We are Team Wheezards from Puerto Princesa City National Science High School.
+A: I'm Ahnycca Malimban.
+H: Hared Cabrera.
+J: And Jarred Llacuna.
+H: Yes, Wheezards. Wizards na marunong makinig sa wheeze.
+A: Because every breath carries information. [screen: RESONDI]
+H: It doesn't just listen to the lungs.
+J: It listens to recovery.
+ALL: Resondi. Hear smarter. Breathe better.
+[Black screen: LISTEN. ANALYZE. REHABILITATE.]
