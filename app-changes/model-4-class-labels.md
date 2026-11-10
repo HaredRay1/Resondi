@@ -1,6 +1,8 @@
 # App change: switch to the 4-class sound model
 
-> **Status, 9 Nov:** applied directly in code (no builder credits), not through the prompt below. Model files are committed for `HaredRay1/Ausculta` at `408971af2537276aa2c8a273bbe2dfa245fa13f1`, awaiting push. The app's new code path, run in Node on the 1,051 held-out clips, reproduces the checker exactly: accuracy 44.0%, balanced 33.5%. Not done from the list below: the "Analysed with the earlier model" note on old results (needs i18n text, so a builder turn). Item A6 (int16 scaling) is done.
+> **Status, 10 Nov:** PUBLISHED to resondi.base44.app at 00:12 UTC (checkpoint `6af2615526e226d3ac75e9f5`); the live bundle loads the new model, and its files at `HaredRay1/Ausculta@408971af2537276aa2c8a273bbe2dfa245fa13f1` are reachable on jsDelivr. Run the "After publishing, check" list below with a real recording.
+>
+> **Status, 9 Nov:** applied directly in code (no builder credits), not through the prompt below. Model files are committed for `HaredRay1/Ausculta` at `408971af2537276aa2c8a273bbe2dfa245fa13f1`. The app's new code path, run in Node on the 1,051 held-out clips, reproduces the checker exactly: accuracy 44.0%, balanced 33.5%. Not done from the list below: the "Analysed with the earlier model" note on old results (needs i18n text, so a builder turn). Item A6 (int16 scaling) is done.
 
 **When:** only after the new Edge Impulse model has passed `scripts/check_deployed_model.js` (see `model-rebuild/docs/EDGE-IMPULSE-RETRAINING.md`). Until then the app keeps the old model.
 
