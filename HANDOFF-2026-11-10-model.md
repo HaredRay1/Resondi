@@ -1,6 +1,13 @@
-# Resondi handoff: lung model rebuild and recent work (9–10 November 2026)
+# Resondi handoff: lung model rebuild and recent work (9–11 November 2026)
 
-Paste this into Claude chat to bring it up to date. It covers what changed on 9–10 November. The project's full state is in `CLAUDE.md` in the Resondi folder; where they disagree, this file is newer on the points below.
+Paste this into Claude chat to bring it up to date. It covers what changed on 9–11 November. The project's full state is in `CLAUDE.md` in the Resondi folder; where they disagree, this file is newer on the points below.
+
+> **Latest (11 Nov), in five lines:**
+> 1. **The new 4-class model is live in the app** and works end to end. On Resondi device recordings, however, its output is close to a random guess (section 5).
+> 2. **Ten training versions were tried** (MFE, augmentation, two detectors, mixup). The best scored **35.0% balanced on the 31 test patients**, no better than the deployed v1 (33.5%). Tuning on public data has hit its ceiling (section 4).
+> 3. **The next gain needs data:** clinician-labelled Resondi device recordings first, then HF_Lung_V1 once a working copy is found.
+> 4. **The 40% field figure:** the paper gives no record of who set the 15 reference labels or how (section 5).
+> 5. **Everything is on GitHub** (`HaredRay1/Resondi`, private, branch `master`).
 
 ---
 
@@ -64,21 +71,21 @@ Edge Impulse build, per class on the test clips: Crackles recall **71%**, Health
 - **Edge Impulse:** new project `Resondi-Lung-4class` (user account Hared123), deploy version 1, int8. Studio's own test page: 39.2% accuracy on 1 s windows. Its validation used the `patient` metadata key, and Auto-weight classes was on.
 - **Checked export:** the WebAssembly (browser) build passed `check_deployed_model.js`: correct four labels and 16,000-sample input.
 - **GitHub:** the model is pushed to `HaredRay1/Ausculta` at commit `408971af2537276aa2c8a273bbe2dfa245fa13f1`, folder `model/resondi-lung-4class-v1/browser/`. The old model folder is kept.
-- **The app (Base44):** published to the live app on 10 Nov, 00:12 UTC (checkpoint `6af2615526e226d3ac75e9f5`); the live bundle loads commit `408971af`. **Not yet tested end to end with a real recording.** The switch, applied in the app's code on 9 Nov:
+- **The app (Base44):** published to the live app on 10 Nov, 00:12 UTC (checkpoint `6af2615526e226d3ac75e9f5`); the live bundle loads commit `408971af`. **Tested end to end on 10 Nov** on all 45 stored lung recordings (section 5). The "earlier model" note on old results was published at 08:12 UTC (checkpoint `6af2d12594c68b17af6d8aca`). The switch, applied in the app's code on 9 Nov:
   - the model URL is pinned to that commit;
   - the new labels are used;
   - audio is scaled to int16.
 
-  Run in Node, the app's new code path reproduced the checker exactly (44.0% accuracy, 33.5% balanced). Still not done: an "Analysed with the earlier model" note on old results (needs a builder turn for the i18n text).
+  Run in Node, the app's new code path reproduced the checker exactly (44.0% accuracy, 33.5% balanced). The "Analysed with the earlier model" note is now done: English and Filipino, shown on the patient result page, the practitioner review card and the PDF export. A Filipino speaker should check its wording.
 - **Scaling finding (app review item A6):** the app fed −1..1 audio while the model expects int16 scale. On the old model this never changed the top label (270/270 windows), but moved scores by up to 0.25. Fixed in the new code path.
 
 ### Next steps, in order
 
-1. Test one real recording end to end in the live app.
+1. ~~Test one real recording end to end in the live app.~~ Done 10 Nov (section 5). Still to check by eye: the result screens, using a patient test account and a new recording.
 2. **Collect the local dataset:** Filipino patients, recorded on the Resondi device, each breathing cycle labelled independently by two clinicians, with ethics approval and consent. Target: at least 100 patients and at least 100 cycles per class. This is what the ₱46,000 local recording line pays for. The full procedure is in `model-rebuild/docs/LOCAL-DATASET-INTEGRATION` (Markdown, Word and PDF).
 3. Add HF_Lung_V1 (Taiwan; event-labelled, which fits these sound labels), **once a working copy is found** (see section 4).
 4. Optional: 5-fold patient cross-validation, so every ICBHI patient is tested once (about 30–40 minutes on the PC). Offered, not yet run.
-5. Try mel-spectrogram input with a 2-D CNN.
+5. ~~Try mel-spectrogram input.~~ Done 11 Nov with a 1-D CNN: no gain (section 4). A 2-D CNN on MFE is the one untested idea; it is about 6 hours per version on this PC but quick on Edge Impulse's servers.
 
 Measure every change on the same 31 test patients.
 
@@ -91,7 +98,8 @@ Measure every change on the same 31 test patients.
   - `export_onnx.py`, `export_edge_impulse.py`: exports;
   - `check_deployed_model.js`: checks an Edge Impulse export;
   - `add_local_dataset.py`: checks and imports local data.
-- `docs/EDGE-IMPULSE-RETRAINING.md`, `docs/LOCAL-DATASET-INTEGRATION.*`, `docs/LIMITATIONS.md`.
+- `scripts/experiment.py` (compares versions on validation only) and `scripts/final_test.py` (scores one chosen version on test, once, and logs every test run).
+- `docs/EDGE-IMPULSE-RETRAINING.md`, `docs/EDGE-IMPULSE-IMPROVEMENTS.md` (what to change in Edge Impulse, click by click), `docs/LOCAL-DATASET-INTEGRATION.*`, `docs/LIMITATIONS.md`.
 - `results/`: every evaluation report. The first, unbalanced split's results are in `results/run1-split-by-class-only/`.
 - `deploy/resondi-lung-4class-v1/browser/`: the checked Edge Impulse build.
 - `app/labels.js`: labels, display names and model version for the app.
@@ -115,7 +123,8 @@ Measure every change on the same 31 test patients.
 
 - Never quote 71–84% as model performance.
 - Never call the model validated, or say it diagnoses anything. It describes sounds, and a practitioner confirms every result.
-- Never say the new model is live in the app without checking.
+- The new model **is** live in the app (checked 10 Nov). Say "deployed and working end to end." **Never say it performs on the Resondi device:** on device recordings its output is close to a random guess.
+- Never swap the 40% field figure for a test-set figure. They measure different models on different audio (section 5).
 - The lung model must never be run on heart recordings. Heart Mode records only; there is no heart model yet.
 - Keep the answer key, the survey CSV (names and e-mails) and any credentials out of anything shared.
 
@@ -131,7 +140,7 @@ Test = **31 patients, 1,051 breathing cycles**, none used in training. Split by 
 - The source repository `github.com/techsupportHF/HF_Lung_V1` (the address in Hsu et al., 2021, PLOS ONE, CC BY 4.0) now returns **404 Not Found**. Every project document that gives this link points at a dead address.
 - Before using HF_Lung, find a copy that clearly comes from the original authors under the same licence, or email the authors (the paper lists a contact). Not yet done.
 
-### Plan to raise test accuracy honestly (agreed direction, not yet run)
+### Plan to raise test accuracy honestly (run on 11 Nov; the results follow below)
 Keep the 31 test patients untouched throughout. In order:
 1. **Mel-spectrogram input with a 2-D CNN** instead of 13 MFCCs. In Edge Impulse this is the **MFE** block, so the app still sends 1 s of raw audio and needs no change.
 2. **Data augmentation** (clinic noise, small time shifts, gain). Edge Impulse has a Data augmentation checkbox.
@@ -175,8 +184,56 @@ Never: move test patients into training, pick the model by its test score, re-sp
 - **How it syncs:** the local folder mirrors to the link-shared My Drive folder "Resondi" via the scheduled task "Resondi Drive Sync" (robocopy; the PC is the master copy). Anyone with the link can open what syncs.
 - **Keep out of it:** names or e-mails (survey export, `workspace-members.csv`), patient data and screenshots, PRC and phone numbers, future local recordings, the heart-validation answer key, and any passwords or tokens. Put private files in `Downloads\Resondi-private\`.
 - **Done 10 Nov:** the app security review (`app-review-2026-11-09.md`, which describes exploitable flaws step by step) now lives in `Downloads\Resondi-private\app-security-review\`, outside the synced and pushed project. It was removed from Drive and from the current GitHub tree, but it is still in the private repo's history (commits `33be00e`–`163a0cc`).
-- **Already excluded from sync:** `model-rebuild\export`, `work`, `work-3s`, `history-run1`, `.git`, `node_modules`, `.claude`.
+- **Already excluded from sync and git:** `model-rebuild\export`, `work`, `work-3s`, `work-exp` (the 1 GB experiment cache, added 11 Nov), `history-run1`, `.git`, `node_modules`, `.claude`.
+- **Still yours to do:** set the Drive folder's sharing to Restricted.
 - **Scan on 10 Nov:** no real e-mails, phone numbers or keys found in the synced folder.
 
 ### Q&A
-`final/04` now has 126 questions, including the section "The retrained model". Its question about whether the model is live can now be answered "yes, the app runs it", because the app was published 10 Nov. Still test one real recording first.
+`final/04` now has 126 questions, including the section "The retrained model". Its question about whether the model is live can now be answered "yes, the app runs it". It has been tested end to end; add that on Resondi device audio it is not yet reliable (section 5).
+
+---
+
+## 5. Added 11 November
+
+### Live-app test of the new model (10 Nov, read-only)
+Full write-up: `model-rebuild/results/live-app-device-test-2026-11-10.md`.
+- **Pipeline:** the published app's own classifier ran on all **45 stored lung recordings** with no errors, about 1.8 s each, and every result carried the new model version. Nothing was saved or changed.
+- **On the 33 Resondi device recordings** (`AUSCULTA00xx.WAV`), the top score is only **27–34%** (median 30%), close to the 25% of a random guess. Labels: Healthy 20, Crackles 7, Wheezing with Crackles 6, Wheezing 0. On ICBHI-style files the top scores reach 41–48%.
+- **Cause: the microphone, not loudness.** Normalising every device file to −20 dBFS changed 0 of 33 labels. The INMP441 MEMS microphone sounds different from ICBHI's four stethoscopes. The first training run showed the same effect: a model trained mostly on one stethoscope scored at chance on the others.
+- **Not checked by eye:** the result page, the practitioner page and the earlier-model note. Use a patient test account and a new recording, because re-analysing a stored recording deletes its result and reviews.
+
+### Where the 40% field figure comes from
+- **Source:** the 83-page paper, abstract (page 1) and Results, Figure 4.6 "Classification Agreement Summary" (page 12): "Of the 15 recordings evaluated, 6 produced matching classifications," meaning 40%, with McNemar p = 1.000.
+- **Most likely from:** the Methods describe "Device Unit Testing" and clinical validation "among three patients at a private hospital in Puerto Princesa City" under an attending physician.
+- **The paper does not record:**
+  - what the reference label was;
+  - who assigned it;
+  - whether that person saw the AI's answer first;
+  - which 15 recordings were used;
+  - the per-recording results.
+- **The three pulmonologists** in the paper reviewed the ICBHI training sounds, not these 15.
+- In the AM-P02 interview (page 20), the user describes an earlier validation where a teammate joined a doctor's appointment. That was about the earlier prototype, so it may not apply here.
+- **Ask the team:** which 15 files, what each reference label was, who gave it, and whether it was blinded. If the 15 can be matched to the `AUSCULTA00xx.WAV` files, the new model can be scored on them: the first honest device-audio number.
+- **Do not replace 40% with a test-set figure.** They measure different models on different audio. Report both, labelled. Suggested wording: *"In field testing, the first model agreed with the reference on 6 of 15 device recordings (40%). We then found that model's training was flawed and rebuilt it with sound labels and a patient-wise split. On 31 unseen patients it scores 44.0% accuracy (33.5% balanced, chance 25%). On our device's recordings it is not yet reliable; clinician-labelled device recordings are what the funding buys."*
+
+### Model experiments (11 Nov)
+See section 4, "Result of that plan". In short, the best test result is **35.0% balanced**, and tuning has reached its ceiling. A bug that made the mel-spectrogram (MFE) features meaningless was found and fixed mid-run. For Edge Impulse:
+- Keep MFCC.
+- If you change anything, turn on Auto-balance and Data augmentation.
+- If you try MFE, leave the high frequency at 8000 (cutting it to 2000 cost about 6 points), and pair it with a 2-D CNN.
+- Click-by-click steps are in `model-rebuild/docs/EDGE-IMPULSE-IMPROVEMENTS.md`.
+
+### Other 11 Nov items
+- **GitHub:** `HaredRay1/Resondi` (private, branch `master`) holds the project. Large datasets and caches are excluded.
+- **Product image:** `figures/Resondi-Device-Podium.png` (and `.jpg`) recreates the old Ausculta podium photo with the new device render. It uses `build/dev2/render_podium.py` (Blender, Cycles) and `build/dev2/compose_podium.py` (pink glow). It is not yet committed to git.
+- **Video:** the user asked for `ayun.mov` to be recreated, but no file by that name exists in the user profile or on Google Drive. A 360° spin video of the device (`build/dev2/render_spin_video.py`) stopped after 16 frames when the app restarted. It is unfinished and uncommitted.
+- **"Why us?" line** (for the deck): *"We've already built both ends: a working stethoscope and a live platform. Now we're making every breath and heartbeat count."*
+
+### Open items
+1. Find out where the 15 field-test reference labels came from (see above).
+2. Check the result screens by eye with a patient test account.
+3. Collect clinician-labelled Resondi device recordings: the only route to device accuracy.
+4. Find an author-sanctioned copy of HF_Lung_V1, or email the authors.
+5. Optional: train an MFE 2-D CNN in Edge Impulse (on their servers).
+6. Set the Drive folder to Restricted, and have a Filipino speaker check the earlier-model note.
+7. Find or re-supply `ayun.mov` if it still needs recreating, and finish the spin video.
