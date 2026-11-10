@@ -1,2 +1,30 @@
 mfe_floor72              seed 11  epoch 24  val cycle bal 0.375  F1 0.369  window bal 0.376  [Crac=0.59 Heal=0.64 Whee=0.25 Whee=0.02]  291s
 mfe_floor72              seed 22  epoch  7  val cycle bal 0.376  F1 0.332  window bal 0.371  [Crac=0.55 Heal=0.33 Whee=0.56 Whee=0.07]  171s
+mfe_floor72              seed 33  epoch 13  val cycle bal 0.386  F1 0.372  window bal 0.379  [Crac=0.66 Heal=0.56 Whee=0.30 Whee=0.02]  225s
+== mfe_floor72: validation cycle balanced accuracy 0.379 +/- 0.005 over 3 seeds
+
+mfe_aug                  seed 11  epoch 13  val cycle bal 0.385  F1 0.353  window bal 0.381  [Crac=0.72 Heal=0.40 Whee=0.29 Whee=0.14]  201s
+mfe_aug                  seed 22  epoch  9  val cycle bal 0.392  F1 0.348  window bal 0.368  [Crac=0.67 Heal=0.38 Whee=0.25 Whee=0.27]  145s
+mfe_aug                  seed 33  epoch 11  val cycle bal 0.354  F1 0.321  window bal 0.343  [Crac=0.72 Heal=0.43 Whee=0.12 Whee=0.16]  189s
+== mfe_aug: validation cycle balanced accuracy 0.377 +/- 0.016 over 3 seeds
+
+mfcc_twodet              seed 11  epoch  6  val cycle bal 0.436  F1 0.376  window bal 0.383  [Crac=0.75 Heal=0.33 Whee=0.33 Whee=0.34]  105s
+mfcc_twodet              seed 22  epoch 10  val cycle bal 0.430  F1 0.342  window bal 0.364  [Crac=0.72 Heal=0.26 Whee=0.28 Whee=0.45]  183s
+mfcc_twodet              seed 33  epoch 16  val cycle bal 0.460  F1 0.367  window bal 0.377  [Crac=0.78 Heal=0.29 Whee=0.25 Whee=0.52]  181s
+== mfcc_twodet: validation cycle balanced accuracy 0.442 +/- 0.013 over 3 seeds
+
+mfe_twodet               seed 11  epoch 12  val cycle bal 0.446  F1 0.355  window bal 0.417  [Crac=0.68 Heal=0.28 Whee=0.39 Whee=0.43]  172s
+mfe_twodet               seed 22  epoch 10  val cycle bal 0.423  F1 0.409  window bal 0.384  [Crac=0.56 Heal=0.60 Whee=0.33 Whee=0.20]  162s
+mfe_twodet               seed 33  epoch  8  val cycle bal 0.412  F1 0.341  window bal 0.377  [Crac=0.46 Heal=0.41 Whee=0.17 Whee=0.61]  134s
+== mfe_twodet: validation cycle balanced accuracy 0.427 +/- 0.014 over 3 seeds
+
+mfe_floor72_aug          seed 11  epoch  5  val cycle bal 0.340  F1 0.292  window bal 0.338  [Crac=0.73 Heal=0.63 Whee=0.00 Whee=0.00]  111s
+mfe_floor72_aug          seed 22  epoch  1  val cycle bal 0.338  F1 0.272  window bal 0.327  [Crac=0.88 Heal=0.48 Whee=0.00 Whee=0.00]  75s
+mfe_floor72_aug          seed 33  epoch 11  val cycle bal 0.350  F1 0.260  window bal 0.360  [Crac=0.82 Heal=0.18 Whee=0.10 Whee=0.30]  158s
+== mfe_floor72_aug: validation cycle balanced accuracy 0.342 +/- 0.005 over 3 seeds
+
+mfe_mixup                seed 11  epoch  9  val cycle bal 0.358  F1 0.285  window bal 0.355  [Crac=0.75 Heal=0.19 Whee=0.28 Whee=0.20]  146s
+mfe_mixup                seed 22  epoch  1  val cycle bal 0.372  F1 0.359  window bal 0.333  [Crac=0.59 Heal=0.65 Whee=0.25 Whee=0.00]  79s
+mfe_mixup                seed 33  epoch  8  val cycle bal 0.365  F1 0.286  window bal 0.365  [Crac=0.69 Heal=0.23 Whee=0.54 Whee=0.00]  141s
+== mfe_mixup: validation cycle balanced accuracy 0.365 +/- 0.006 over 3 seeds
+

@@ -1,0 +1,288 @@
+{
+ "evaluated": "2026-11-11 02:50",
+ "recipe": "baseline",
+ "settings": {
+  "feature": "mfcc13",
+  "net": "cnn1d",
+  "head": "softmax4",
+  "aug": "none"
+ },
+ "seed": 11,
+ "epoch": 6,
+ "validation": {
+  "window": {
+   "n": 3442,
+   "accuracy": 0.3558977338756537,
+   "balanced_accuracy": 0.38427831776657695,
+   "macro_f1": 0.30289733641096606,
+   "majority_class_baseline": 0.5409645554909936,
+   "per_class": [
+    {
+     "label": "Crackles",
+     "support": 986,
+     "precision": 0.37318255250403876,
+     "recall": 0.7028397565922921,
+     "specificity": 0.5260586319218241,
+     "f1": 0.4875131902919452
+    },
+    {
+     "label": "Healthy",
+     "support": 1862,
+     "precision": 0.6642201834862386,
+     "recall": 0.19441460794844254,
+     "specificity": 0.8841772151898735,
+     "f1": 0.3007893643539676
+    },
+    {
+     "label": "Wheezing",
+     "support": 405,
+     "precision": 0.2754491017964072,
+     "recall": 0.2271604938271605,
+     "specificity": 0.920316101415871,
+     "f1": 0.2489851150202977
+    },
+    {
+     "label": "Wheezing with Crackles",
+     "support": 189,
+     "precision": 0.11048158640226628,
+     "recall": 0.4126984126984127,
+     "specificity": 0.8069474331386413,
+     "f1": 0.17430167597765361
+    }
+   ],
+   "confusion_matrix": [
+    [
+     693,
+     78,
+     52,
+     163
+    ],
+    [
+     1031,
+     362,
+     152,
+     317
+    ],
+    [
+     99,
+     66,
+     92,
+     148
+    ],
+    [
+     34,
+     39,
+     38,
+     78
+    ]
+   ],
+   "confusion_rows_are": "true label"
+  },
+  "cycle": {
+   "n": 997,
+   "accuracy": 0.4062186559679037,
+   "balanced_accuracy": 0.47207735844996157,
+   "macro_f1": 0.35880815245804815,
+   "majority_class_baseline": 0.5526579739217653,
+   "per_class": [
+    {
+     "label": "Crackles",
+     "support": 264,
+     "precision": 0.3754646840148699,
+     "recall": 0.7651515151515151,
+     "specificity": 0.5416098226466576,
+     "f1": 0.5037406483790523
+    },
+    {
+     "label": "Healthy",
+     "support": 551,
+     "precision": 0.7382198952879581,
+     "recall": 0.2558983666061706,
+     "specificity": 0.8878923766816144,
+     "f1": 0.3800539083557951
+    },
+    {
+     "label": "Wheezing",
+     "support": 138,
+     "precision": 0.4069767441860465,
+     "recall": 0.2536231884057971,
+     "specificity": 0.940628637951106,
+     "f1": 0.3125
+    },
+    {
+     "label": "Wheezing with Crackles",
+     "support": 44,
+     "precision": 0.14835164835164835,
+     "recall": 0.6136363636363636,
+     "specificity": 0.8373557187827911,
+     "f1": 0.23893805309734512
+    }
+   ],
+   "confusion_matrix": [
+    [
+     202,
+     25,
+     8,
+     29
+    ],
+    [
+     303,
+     141,
+     39,
+     68
+    ],
+    [
+     28,
+     17,
+     35,
+     58
+    ],
+    [
+     5,
+     8,
+     4,
+     27
+    ]
+   ],
+   "confusion_rows_are": "true label"
+  }
+ },
+ "test": {
+  "window": {
+   "n": 3555,
+   "accuracy": 0.3527426160337553,
+   "balanced_accuracy": 0.3255850533546031,
+   "macro_f1": 0.28518206683451647,
+   "majority_class_baseline": 0.4970464135021097,
+   "per_class": [
+    {
+     "label": "Crackles",
+     "support": 986,
+     "precision": 0.38270893371757925,
+     "recall": 0.6734279918864098,
+     "specificity": 0.5831062670299727,
+     "f1": 0.48805586181550903
+    },
+    {
+     "label": "Healthy",
+     "support": 1767,
+     "precision": 0.6457725947521866,
+     "recall": 0.2507074136955291,
+     "specificity": 0.8640939597315436,
+     "f1": 0.36119037912759877
+    },
+    {
+     "label": "Wheezing",
+     "support": 428,
+     "precision": 0.1164021164021164,
+     "recall": 0.102803738317757,
+     "specificity": 0.893188359449952,
+     "f1": 0.10918114143920593
+    },
+    {
+     "label": "Wheezing with Crackles",
+     "support": 374,
+     "precision": 0.13624338624338625,
+     "recall": 0.27540106951871657,
+     "specificity": 0.794718641936498,
+     "f1": 0.1823008849557522
+    }
+   ],
+   "confusion_matrix": [
+    [
+     664,
+     116,
+     63,
+     143
+    ],
+    [
+     728,
+     443,
+     210,
+     386
+    ],
+    [
+     178,
+     82,
+     44,
+     124
+    ],
+    [
+     165,
+     45,
+     61,
+     103
+    ]
+   ],
+   "confusion_rows_are": "true label"
+  },
+  "cycle": {
+   "n": 1051,
+   "accuracy": 0.38534728829686016,
+   "balanced_accuracy": 0.35040964471934627,
+   "macro_f1": 0.30696493870405883,
+   "majority_class_baseline": 0.5280685061845861,
+   "per_class": [
+    {
+     "label": "Crackles",
+     "support": 268,
+     "precision": 0.3912175648702595,
+     "recall": 0.7313432835820896,
+     "specificity": 0.6104725415070242,
+     "f1": 0.5097529258777633
+    },
+    {
+     "label": "Healthy",
+     "support": 555,
+     "precision": 0.6536964980544747,
+     "recall": 0.3027027027027027,
+     "specificity": 0.8205645161290323,
+     "f1": 0.41379310344827586
+    },
+    {
+     "label": "Wheezing",
+     "support": 120,
+     "precision": 0.12871287128712872,
+     "recall": 0.10833333333333334,
+     "specificity": 0.9054779806659506,
+     "f1": 0.11764705882352941
+    },
+    {
+     "label": "Wheezing with Crackles",
+     "support": 108,
+     "precision": 0.14583333333333334,
+     "recall": 0.25925925925925924,
+     "specificity": 0.8260869565217391,
+     "f1": 0.18666666666666668
+    }
+   ],
+   "confusion_matrix": [
+    [
+     196,
+     42,
+     12,
+     18
+    ],
+    [
+     217,
+     168,
+     59,
+     111
+    ],
+    [
+     43,
+     29,
+     13,
+     35
+    ],
+    [
+     45,
+     18,
+     17,
+     28
+    ]
+   ],
+   "confusion_rows_are": "true label"
+  }
+ }
+}

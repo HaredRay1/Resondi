@@ -139,7 +139,26 @@ Keep the 31 test patients untouched throughout. In order:
 4. **HF_Lung_V1,** once a working copy exists.
 5. **Local Resondi recordings,** the only route to performance on the device and on Filipino patients.
 
-Never: move test patients into training, pick the model by its test score, re-split until a lucky split, or drop hard classes. Realistic expectation: strong published ICBHI 4-class models reach about 50–60% on the standard benchmark score; reaching the 40s would be a solid, defensible gain. Options 1–2 were offered as a local run (about 1–2 hours) and have not been started.
+Never: move test patients into training, pick the model by its test score, re-split until a lucky split, or drop hard classes. Realistic expectation: strong published ICBHI 4-class models reach about 50–60% on the standard benchmark score; reaching the 40s would be a solid, defensible gain.
+
+### Result of that plan (run 11 Nov, 00:38–02:50)
+`scripts/experiment.py` trained 10 versions with 3 seeds each and scored them on the **30 validation patients only**. Cycle balanced accuracy, chance 25%:
+
+| Version | Score | ± |
+|---|---|---|
+| MFCC + two detectors | 44.2% | 1.3 |
+| MFCC (the app's design) | 43.9% | 2.8 |
+| MFCC + augmentation | 43.1% | 2.4 |
+| MFE + two detectors | 42.7% | 1.4 |
+| MFE: full range, −72 dB floor, augmentation, mixup | 34–38% | |
+| MFE 50–2000 Hz | 31.4% | 0.6 |
+
+- An MFE scaling bug (int16 energies saturating 72% of inputs) was found and fixed during the run. The invalid first MFE results are kept in `results/experiments-validation-run1-mfe-bug.csv`.
+- **The two-detector head was the only idea that clearly helped,** and only for MFE (+5 points). Nothing beat the app's MFCC design by more than the seed-to-seed spread. A 2-D CNN was not run, because it takes about 6 hours per version on this PC.
+- **Single test run** (`scripts/final_test.py baseline`, logged in `results/final-test-log.csv`): the app's MFCC design, best of 3 seeds chosen on validation (47.2%), scored **35.0% balanced** on the 31 test patients (accuracy 38.5%, macro F1 0.31). Per-class recall: Crackles 0.73, Healthy 0.30, Wheezing 0.11, Wheezing with Crackles 0.26.
+  - The 12-point drop from validation to test shows that choosing among many versions on 30 patients flatters the winner.
+  - On test, this is no better than the deployed v1 (33.5%) or the 9 Nov local model (38.1%).
+- **Conclusion:** changing settings on ICBHI has reached its ceiling at about 33–38% on test patients. The next real gain needs **more or different data**: HF_Lung_V1 once a sanctioned copy exists, and above all clinician-labelled Resondi device recordings. Keep the deployed v1. Do not redeploy for this result.
 
 ### Canva deck fixes given to the user (pages 29 and 31; the user edits Canva herself)
 - **Page 31 blank:** "Target: ≥ 50% agreement on ≥ 300 recordings by month 16, every result still confirmed by a practitioner."

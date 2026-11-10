@@ -1,0 +1,2 @@
+time,recipe,seed,epoch,val_cycle_balanced_acc,test_cycle_balanced_acc,test_cycle_macro_f1,test_window_balanced_acc
+2026-11-11 02:50,baseline,11,6,0.4721,0.3504,0.3070,0.3256
