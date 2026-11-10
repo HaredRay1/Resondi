@@ -1,5 +1,7 @@
 # App change: switch to the 4-class sound model
 
+> **Earlier-model note, 10 Nov:** done and PUBLISHED 08:12 UTC (checkpoint `6af2d12594c68b17af6d8aca`). `src/components/EarlierModelNote.jsx` shows it wherever an analysis has no `model_version` (all 106 analyses saved before 10 Nov): the patient result page, the practitioner review card and the PDF export. Text is English and Filipino, kept in the component rather than `i18n.jsx`, so no builder credits were used. Have a Filipino speaker check the wording.
+>
 > **Status, 10 Nov:** PUBLISHED to resondi.base44.app at 00:12 UTC (checkpoint `6af2615526e226d3ac75e9f5`); the live bundle loads the new model, and its files at `HaredRay1/Ausculta@408971af2537276aa2c8a273bbe2dfa245fa13f1` are reachable on jsDelivr. Run the "After publishing, check" list below with a real recording.
 >
 > **Status, 9 Nov:** applied directly in code (no builder credits), not through the prompt below. Model files are committed for `HaredRay1/Ausculta` at `408971af2537276aa2c8a273bbe2dfa245fa13f1`. The app's new code path, run in Node on the 1,051 held-out clips, reproduces the checker exactly: accuracy 44.0%, balanced 33.5%. Not done from the list below: the "Analysed with the earlier model" note on old results (needs i18n text, so a builder turn). Item A6 (int16 scaling) is done.
