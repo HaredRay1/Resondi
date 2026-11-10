@@ -1,0 +1,2 @@
+mfe_floor72              seed 11  epoch 24  val cycle bal 0.375  F1 0.369  window bal 0.376  [Crac=0.59 Heal=0.64 Whee=0.25 Whee=0.02]  291s
+mfe_floor72              seed 22  epoch  7  val cycle bal 0.376  F1 0.332  window bal 0.371  [Crac=0.55 Heal=0.33 Whee=0.56 Whee=0.07]  171s

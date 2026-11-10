@@ -11,6 +11,7 @@ model-rebuild/export/
 model-rebuild/history-run1/
 model-rebuild/work/
 model-rebuild/work-3s/
+model-rebuild/work-exp/
 
 # Empty clone of the HF_Lung_V1 dataset repo (its own .git, no data)
 HF_Lung_V1/

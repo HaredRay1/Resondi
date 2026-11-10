@@ -33,6 +33,7 @@ $rcArgs = @(
     '/XD', '.git', 'node_modules', '__pycache__', '.claude',
            "$Source\model-rebuild\export",   # 6,902 ICBHI clips, regenerable; kept off Drive
            "$Source\model-rebuild\history-run1", "$Source\model-rebuild\work",
+           "$Source\model-rebuild\work-exp", # experiment caches (~1 GB audio windows), regenerable
            "$Source\model-rebuild\work-3s",  # training caches, regenerable; kept off Drive
     '/XF', 'desktop.ini', '~$*', '*.tmp',
     '/R:2', '/W:5',
