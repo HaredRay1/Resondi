@@ -21,7 +21,6 @@ CLAUDE.md
 HF_Lung_V1/.git/ (folder of audio clips)
 MANIFEST.txt
 README.md
-app-changes/app-review-2026-11-09.md
 app-changes/model-4-class-labels.md
 app-changes/seven-sites.md
 assess/Resondi_Concept_Note_PSC_XI_Assessment.docx
