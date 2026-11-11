@@ -1,0 +1,286 @@
+[0|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[1|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[2|Heading 1] RESEARCH PLAN
+[4|Heading 2] Resondi: A CNN-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System
+[5|normal] Ahnycca Krish N. Malimban
+[6|normal] Science, Technology, Engineering, and Mathematics, 
+Puerto Princesa City National Science High School, Puerto Princesa City, Palawan
+[8|Heading 1] RATIONALE
+[9|normal] Respiratory and cardiovascular disease account for the largest share of registered mortality in the Philippines. Of 701,884 deaths registered in 2024, ischaemic heart diseases led all causes at 19.1 percent, and pneumonia ranked fourth at 6.7 percent (Philippine Statistics Authority [PSA], 2026). Auscultation is the first instrumented examination a patient receives in a barangay health station or rural health unit, yet the difficulty is not that lung and heart sounds are inaudible but that they are not retained. A conventional stethoscope produces no record, so nothing survives that a second clinician could review or that could be compared against the same anatomical site at a later visit. In facilities without a resident physician, the assessment of a midwife or barangay health worker is therefore both unverifiable and unrepeatable.
+[10|normal] The diagnostic consequence is measurable. In a pooled analysis of thirty-four studies, unaided auscultation achieved a sensitivity of approximately 37 percent against a specificity of 89 percent (Arts et al., 2020), in part because stethoscope placement, listening conditions, and interpretation vary between practitioners (Bohadana et al., 2014). Follow-up care faces a similar gap: pulmonary rehabilitation was available to only 2.7 percent of people with chronic obstructive pulmonary disease worldwide in 2015 (Lahham & Holland, 2021), and change over time is usually tracked through written notes rather than through direct acoustic comparison.
+[11|normal] Digital stethoscopes can preserve respiratory and cardiac sounds as recordings (Leng et al., 2015), and convolutional neural networks can help classify them (Rocha et al., 2019; Tariq et al., 2022). However, performance in practice is constrained by background noise and contact artifacts (Shkarupylo et al., 2024), and current evidence does not support autonomous AI interpretation (Park et al., 2025). Commercial electronic stethoscopes also remain costly, with the 3M Littmann CORE listing at roughly ₱22,000 before shipping and duties (3M, 2025), and they do not guide placement or organize recordings by anatomical site for comparison between visits.
+[12|normal] This study developed and evaluated Resondi, a low-cost, IOT-based AI-assisted smart stethoscope and mobile cardiopulmonary monitoring platform. Separate Lung and Heart modes guide the user through standardized anatomical sites, store each recording by site on MicroSD, and classify lung sounds with a convolutional neural network. Every AI-assisted result is presented to a licensed practitioner, who may confirm, modify, or return it for a repeat recording. Heart sounds are currently captured and filed for review, with cardiac classification in development. Resondi is intended as a decision-support instrument rather than a diagnostic one, making an examination retrievable and comparable between visits.
+[14|Heading 1] RESEARCH QUESTIONS
+[15|normal] What is the quality of cardiopulmonary sound recordings captured using Resondi in terms of:
+• Signal quality;
+• Clarity; and
+• Noise level?
+[16|normal] What are the specifications of the Ausculta Smart Stethoscope in terms of:
+• Design;
+• Components; and
+• Cost?
+[17|normal] What are the specifications of the Ausculta Cardiopulmonary Monitoring Platform in terms of:
+• User interface;
+• System architecture;
+• Role-based access; and
+• Data management?
+[18|normal] What are the specifications of the Ausculta cardiopulmonary sound analysis system in terms of:
+• Audio preprocessing method;
+• Feature representations;
+• CNN branch architecture; and
+• Feature-fusion architecture?
+[19|normal] What is the response time of the Resondi system in terms of:
+• Smart-stethoscope connection;
+• Sound recording;
+• Recording-quality assessment;
+• Signal preprocessing; and
+• Classification output?
+[20|normal] Is there a significant difference in the classification performance of the CNN-fusion model between clean and noise-contaminated cardiopulmonary sound recordings?
+[21|normal] Is there a significant difference between the classification performance obtained from reference-dataset recordings and that obtained from Resondi device recordings?
+[22|normal] Is there a significant difference between the recording quality of a conventional stethoscope and Resondi?
+[23|normal] What is the level of acceptance of end users toward Resondi in terms of:
+• User-friendliness;
+• Usability;
+• Durability;
+• Functionality; and
+• Perceived usefulness for community-based monitoring?
+[24|normal] What are the preferences of end users regarding instructional support for Resondi in terms of:
+• Diagram-based auscultation-zone guidance;
+• Device manual clarity;
+• Overall ease of learning and self-use; and
+• App navigation flow?
+[25|normal] How can Resondi support longitudinal cardiopulmonary monitoring and practitioner-supervised rehabilitation through repeated sound recordings, comparison of monitoring records, AI-assisted summaries, and practitioner-approved recommendations?
+[27|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[28|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[30|Heading 1] HYPOTHESES, GOALS, EXPECTED OUTCOMES
+[31|Heading 2] Hypotheses
+[33|normal] 1. H₀: There is no significant difference in the classification performance of the CNN-fusion model between clean and noise-contaminated cardiopulmonary sound recordings.
+[34|normal] H₁: There is a significant difference in the classification performance of the CNN-fusion model between clean and noise-contaminated cardiopulmonary sound recordings.
+[35|normal] 2. H₀: There is no significant difference between the classification performance obtained from reference-dataset recordings and that obtained from Resondi device recordings.
+[36|normal] H₁: There is a significant difference between the classification performance obtained from reference-dataset recordings and that obtained from Resondi device recordings.
+[37|normal] 3. H₀: There is no significant difference between the recording quality of a conventional stethoscope and Resondi.
+[38|normal] H₁: There is a significant difference between the recording quality of a conventional stethoscope and Resondi.
+[39|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[40|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[44|Heading 2] Goals
+[45|normal] The main objective of the research is to develop and evaluate Resondi, a CNN-fusion-assisted smart auscultation and cardiopulmonary monitoring platform capable of standardized lung- and heart-sound acquisition, recording-quality assessment, cardiopulmonary sound classification, longitudinal monitoring, and medical-practitioner-supervised rehabilitation support. Specifically, the study aims to develop an ESP32-based smart stethoscope and mobile-first platform; establish BLE and MicroSD communication; guide standardized lung and heart auscultation using anatomical locations; capture and store cardiopulmonary sound recordings with metadata; assess recording quality before analysis; preprocess recordings and generate Spectrogram, MFCC, and Chromagram representations; implement a multi-branch CNN feature-fusion model based on the selected reference architecture; compare reference and device-recording performance; provide longitudinal comparison of cardiopulmonary sound patterns; and provide a human-in-the-loop workflow in which medical practitioners can review classifications and approve monitoring or rehabilitation-support recommendations.
+[47|Heading 2] Expected Outcomes
+[48|normal] The study is expected to produce a functional research prototype that supports standardized cardiopulmonary sound acquisition and CNN-fusion-assisted acoustic analysis under professional oversight. The platform is expected to provide recording-quality indicators, lung- and heart-sound classifications, longitudinal comparison, practitioner review, practitioner-approved monitoring or rehabilitation-support functions, and a de-identified research dashboard for model evaluation. The system will not independently diagnose cardiopulmonary diseases, prescribe rehabilitation, or replace professional assessment. AI outputs will remain decision-support information subject to professional interpretation.
+[52|Heading 1] PROCEDURES
+[54|Heading 2] Materials
+[55|normal] For the development of the prototype, the researcher will use Base44 for application and platform development; Draw.io for system architecture and workflow design; TinkerCAD for the 3D model; a 3D printer for casing fabrication; Arduino IDE for ESP32 firmware development; and Python with Edge-Impulse for respiratory-sound preprocessing and AI model development. Base44 will serve as the application/platform layer, while the ESP32 will serve as the physical smart-stethoscope layer. BLE/API integration will provide the communication layer, and the Python-based environment will support the respiratory-sound AI research layer.
+[56|normal] For the physical device, the materials will include an acoustic stethoscope chest piece, MEMS microphone, microphone preamplifier module, ESP32 microcontroller, BLE-capable communication, and microSD for appropriate storage/transmission component, rechargeable lithium-ion battery with appropriate charging and protection circuitry, silicon, connecting wires, resistors, and LED display. The casing will be 3D printed using PLA filament.
+[57|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[58|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[63|Heading 2] Procedures
+[65|normal] Reference Sound Collection and Validation
+[66|normal] ▼
+[67|Heading 2] Structural Design Conceptualization
+[68|normal] ▼
+[69|Heading 2] Components and System Requirements Gathering
+[70|normal] ▼
+[71|Heading 2] Device Fabrication and Assemblage
+[72|normal] ▼
+[73|Heading 2] System Integration of Sensing Properties
+[74|normal] ▼
+[75|Heading 2] Smart-Stethoscope BLE and MicroSD Integration
+[76|normal] ▼
+[77|Heading 2] Platform and Database Development
+[78|normal] ▼
+[79|Heading 2] Guided Auscultation and Recording Workflow Development
+[80|normal] ▼
+[81|Heading 2] Recording Quality Control Development
+[82|normal] ▼
+[83|Heading 2] Audio Preprocessing and CNN Model Development
+[84|normal] ▼
+[85|Heading 2] Manual (Reference Dataset) Testing
+[86|normal] ▼
+[87|Heading 2] Device Unit Testing
+[88|normal] ▼
+[89|Heading 2] Longitudinal Monitoring and Practitioner Review Testing
+[90|normal] ▼
+[91|Heading 2] Research Dashboard and Data-Export Testing
+[93|normal] End User Acceptance Testing
+[94|normal] The researcher will develop an ESP32-based smart stethoscope and an accompanying mobile-first cardiopulmonary  monitoring platform capable of standardized cardiopulmonary  sound acquisition, recording-quality assessment, audio processing, AI-assisted respiratory sound classification, longitudinal comparison, and practitioner-supervised monitoring. The validation process will compare reference-dataset performance with device recordings and evaluate system response time, recording quality, classification performance, workflow functionality, and end-user acceptance.
+[96|Heading 3] Reference Cardiopulmonary Sound Collection and Validation
+[97|normal] The ICBHI 2017 Respiratory Sound Database will be used as the primary public reference dataset for lung-sound training, validation, and testing. A heart-sound reference dataset appropriate to the selected heart-sound classification task, such as the CirCor DigiScope Phonocardiogram Dataset available through PhysioNet, will be incorporated for the cardiac-sound component. The heart-sound dataset selection will follow the availability and licensing requirements of the selected source and will be documented separately from the respiratory dataset. Reference labels will be stored separately from AI predictions. The selected CNN-fusion methodology is adapted from the reference article, which combines lung and heart sound data with multiple acoustic feature representations and CNN branches.
+[99|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[100|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[101|Heading 2] Structural Design Conceptualization
+[102|normal] The researcher will consult an electronics expert for circuit and hardware development and prepare a digital model of the stethoscope casing and platform architecture. The design will prioritize reliable sound acquisition, standardized positioning, ease of use, and safe separation of acoustic and electrical components.
+[104|Heading 2] Components and System Requirements Gathering
+[105|normal] The researcher will source the microcontroller, microphone, preamplifier, communication/storage components, battery, and other electronic parts from appropriate suppliers. Materials for the casing and assembly will be acquired locally where practical.
+[107|Heading 2] Device Fabrication and Assemblage
+[108|normal] The 3D-printed casing will be fabricated and assembled with the acoustic chest piece, diaphragm, microphone, tubing, and electrical compartment. The microphone will be positioned within the acoustic chamber to support respiratory sound capture while limiting ambient-noise leakage.
+[110|Heading 2] System Integration of Sensing Properties
+[111|normal] The microphone and preamplifier will be connected to the ESP32, with power and communication connections implemented according to the selected hardware configuration. Where included, the OLED display will provide basic device status. The rechargeable battery will use an appropriate charging and protection circuit.
+[113|Heading 2] Smart-Stethoscope Device Integration
+[114|normal] The ESP32 smart stethoscope will communicate with the application through BLE for real-time connectivity. The platform will support device scanning, compatible-device identification, selection, connection status, audio streaming or buffering (where supported), recording, and metadata storage. If the exact BLE audio implementation is not yet available, the platform will use a clearly labeled integration interface rather than representing a simulated connection as real.
+[115|normal] In addition to BLE, the device includes microSD integration for offline audio storage. The stethoscope can record patient lung sounds directly onto the microSD card. Users can remove the card, insert it into a card reader, and transfer the audio files to their phone. Once stored in the phone’s file system, the application will provide a feature to select which recordings to upload. These uploaded files will then be processed by the app’s AI algorithm, trained on curated audio datasets, to assess the severity of lung conditions.
+[117|Heading 2] Platform and Database Development
+[118|normal] The Resondi application will be developed using Base44 to implement the language and localization , user interface, role-based workflows, patient and assessment records, longitudinal monitoring interface, medical-practitioner review functions, research dashboard, and data-management components. The application architecture will be designed to support integration with the ESP32-based smart stethoscope through a BLE/API integration layer and with the dedicated respiratory-sound AI model through an AI-analysis interface. Features that require external hardware, BLE firmware, or a trained respiratory-sound model will be explicitly identified as integration-dependent and will not be represented as functional unless technically connected and validated.
+[119|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[120|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[122|Heading 2] Guided Auscultation and Recording Workflow Development
+[123|normal] The lung map will guide recordings from standard anatomical locations: right upper, left upper, right middle, left middle, right lower, and left lower. The user selects a location, places the stethoscope, confirms, records, and saves the audio with its metadata. Repeat recordings are allowed when needed. To support accurate placement, the platform will provide an instructional diagram highlighting lung zones (posterior, anterior, left, right). This diagram will serve as a visual reference for users during auscultation. In addition, a device manual will be supplied, offering step-by-step instructions on proper stethoscope positioning, recording workflow, and best practices for reproducibility.
+[125|Heading 2] Recording Quality Control Development
+[126|normal] Before AI analysis, each recording will be assessed where technically possible for background noise, signal amplitude, signal-to-noise ratio, duration, clipping, motion artifact, missing or invalid samples, and insufficient signal. Recordings will be classified as Good, Acceptable, Poor, or Invalid. Poor or invalid recordings will be recommended for repetition rather than forced into an AI classification.
+[128|Heading 2] Audio Preprocessing and CNN Model Development
+[129|normal] Reference recordings and eligible device recordings will undergo appropriate preprocessing, including noise reduction, filtering, segmentation, and conversion into Mel-spectrogram representations where appropriate. A dedicated CNN model will be developed to classify respiratory sound patterns such as normal, wheeze, crackle, and wheeze plus crackle. Additional categories such as other/abnormal, uncertain, and insufficient quality may be used at the platform level. The model will not be used to independently diagnose specific diseases.
+[131|Heading 2] Manual (Reference Dataset) Testing
+[132|normal] Reference recordings will be processed using the trained model to establish baseline classification performance. Accuracy, precision, sensitivity, specificity, F1-score, and confusion matrix results will be obtained.
+[134|Heading 2] Device Unit Testing
+[135|normal] Respiratory sounds captured using the Resondi prototype will undergo the same preprocessing and classification pipeline. Device recordings will be compared with reference recordings to evaluate consistency and performance under actual acquisition conditions, including varying noise conditions.
+[137|Heading 2] Longitudinal Monitoring and Practitioner Review Testing
+[138|normal] For authorized test cases, current recordings may be compared with previous recordings from the same anatomical location. Changes will be reported as respiratory sound pattern changes rather than disease diagnoses. Medical practitioners will be able to review recordings, recording quality, AI results, symptoms, and available manually entered vital signs; confirm, disagree with, modify, or request repeat recordings; and create monitoring or rehabilitation plans.
+[140|Heading 2] Research Dashboard and Data-Export Testing
+[141|normal] The platform will provide authorized researchers with de-identified respiratory sound records, reference labels, AI predictions, practitioner confirmations, AI/practitioner agreement,
+[142|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[143|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[145|normal] and model-performance statistics. Research exports will exclude unnecessary personally identifiable information.
+[147|Heading 2] End User Acceptance Testing
+[148|normal] A 5-point Likert scale survey will assess user-friendliness, usability, durability, functionality, and impact on community among appropriate prospective users, such as health workers and other authorized end users. The system’s purpose and limitations will be explained before the survey.
+[150|Heading 1] RISK AND SAFETY
+[151|normal] The study requires electrical components such as a microcontroller, microphone, battery, connecting wires, and communication modules, which may present risks of electrical shock, short circuits, overheating, or battery-related hazards if mishandled. The researchers will follow appropriate electrical safety procedures, keep circuitry away from water, use protective equipment where appropriate, and use suitable charging and protection circuitry for the rechargeable battery.
+[153|normal] Because the study may involve respiratory sound recordings and end-user testing, informed consent will be secured from participants where required. Research data will be anonymized or de-identified for authorized research use, and access will be controlled according to user role. Research-related data collection will occur only after the required consent process and appropriate institutional or ethics review.
+[155|normal] Resondi will not independently diagnose respiratory disease. AI-generated results will be clearly separated from medical-practitioner interpretation. The platform will not fabricate recordings, physiological measurements, device information, AI classifications, confidence values, or clinical decisions. If the smart stethoscope or AI model is not actually connected, the system will clearly identify the feature as unavailable or as a prototype/research integration interface.
+[157|normal] Manually entered vital signs, when available, will be identified by source and kept separate from auscultation-derived respiratory information. The platform will not automatically generate missing vital signs or substitute one data source for another.
+[160|Heading 1] DATA ANALYSIS
+[162|Heading 2] Unit of Analysis and Data Partitioning
+[163|normal] All analyses in this section will be reported against an explicitly stated unit of analysis. Three units will be used. The respiratory cycle is the unit at which the classification model operates, since the reference database annotates the onset and offset of each cycle together with the presence of crackles and wheezes. The recording is the unit at which the severity score is computed, since a severity percentage is meaningful only in relation to a defined set of breaths from one auscultation location. The patient is the unit at which device-level and longitudinal results are reported.
+[164|normal] All partitioning of data into training, validation, and testing subsets will be performed patient-wise, so that no patient contributes data to more than one subset. This is necessary because the reference database contains multiple recordings per patient and multiple cycles per recording; a random split at cycle or recording level would place the same patient on both sides of the partition and inflate every reported metric. Where the official ICBHI 2017 training and testing partition is available, it will be adopted directly so that results remain comparable with published work.
+[165|normal] Data augmentation, where applied, will be performed only after partitioning and only on the training subset. Augmented variants of a recording will never appear in the validation or testing subsets.
+[166|Heading 2] Reference Severity Score
+[167|normal] To establish a ground-truth measure of respiratory-sound severity, the researchers will derive a reference severity score from the expert-annotated respiratory cycles of the ICBHI 2017 Respiratory Sound Database. Each annotation file marks the beginning and end of every respiratory cycle in a recording, together with the presence or absence of crackles and wheezes as determined by expert annotators. The reference severity score will be computed per recording as the proportion of respiratory cycles containing adventitious sounds:
+[169|normal] where N(total) is the total number of annotated respiratory cycles in the recording and N(adv) is the number of cycles containing crackles, wheezes, or both. This yields a 0–100% scale with a direct interpretation: the percentage of the recorded breathing affected by abnormal sounds. Because the score is computed from expert annotations rather than from the AI model, it serves as an independent reference against which the Ausculta severity algorithm can be calibrated and validated.
+[170|Heading 2] Respiratory-Sound Severity Algorithm
+[171|normal] The researchers will develop a mathematical severity algorithm to quantify the degree of abnormal respiratory-sound activity detected by the Ausculta system on a 0–100% severity scale. The CNN feature-fusion classification model analyses each respiratory cycle and outputs confidence scores between 0 and 1 for four classes: Wheezing, Crackles, Wheezing with Crackles, and Healthy. These confidence scores, rather than the single top label, serve as the input of the severity algorithm, so that faint or uncertain abnormal sounds contribute proportionally less severity than strong, unambiguous ones.
+[172|normal] Because the reference severity score is defined as the proportion of cycles containing adventitious sounds, the direct estimator of that quantity is the mean abnormal-class confidence across the cycles of a recording:
+[175|normal] The resulting severity percentage describes the extent of detected abnormal respiratory-sound activity only. It will not be presented as a percentage of lung damage, disease severity, or an independent medical diagnosis.
+[177|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[178|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[179|Heading 2] Calibration of the Severity Algorithm
+[180|normal] Where the direct estimator shows systematic bias against the reference severity score, a calibration model will be fitted to correct it. The calibrated score is defined as a weighted model of the abnormal-class confidence scores, constrained to the admissible range:
+[182|normal] where p(W), p(C), and p(WC) are the mean confidence scores for wheezing, crackles, and wheezing with crackles across the cycles of the recording, and the coefficients are estimated from the reference data. The coefficients will be estimated by ordinary least squares regression, which selects the values minimizing the squared differences between the predicted and reference severity scores:
+[184|normal] Because the severity score is a proportion bounded at 0 and 100, and because the four confidence scores sum to one and are therefore structurally collinear, two safeguards will be applied. Predictions will be clipped to the 0–100 interval and the frequency of clipping reported, and beta regression will be fitted as a sensitivity analysis alongside ordinary least squares. Variance inflation factors will be reported so that the stability of the estimated coefficients can be judged.
+[185|normal] To perform the calibration, the trained classification model will be applied to the annotated dataset recordings, and each recording’s confidence scores will be paired with its reference severity score. The regression will be fitted in jamovi with the reference severity score as the dependent variable and the abnormal-class confidence scores as covariates. The dataset will be divided patient-wise into a calibration subset and a held-out validation subset, so that the accuracy of the severity algorithm is evaluated on patients whose recordings were not used to estimate the coefficients. The fitted coefficients will then be fixed and implemented in the Ausculta application.
+[186|Heading 2] Severity Bands
+[187|normal] For presentation in the application, severity percentages will be grouped into descriptive bands. The band thresholds will be reviewed against the distribution of reference severity scores in the annotated dataset rather than fixed arbitrarily, and the chosen thresholds together with the proportion of reference recordings falling into each band will be reported. The bands describe the extent of detected abnormal respiratory-sound activity and support the application’s summary and recommended respiratory exercises; they do not constitute a medical diagnosis.
+[188|Heading 2] Root Mean Square Error (RMSE)
+[189|normal] The researchers will use Root Mean Square Error (RMSE) to evaluate the accuracy of the calibrated severity algorithm on the held-out validation recordings. RMSE quantifies the magnitude of the difference between the Ausculta-generated severity score and the annotation-derived reference severity score, giving greater weight to larger errors:
+[191|normal] where y(i) is the reference severity score for observation i, ŷ(i) is the severity score generated by Resondi, and n is the number of validation observations. A lower RMSE will indicate that the Resondi severity algorithm produces values closer to the expert-derived reference. Because both scales range from 0 to 100%, RMSE is expressed in percentage-score units: an RMSE of 8 would mean that Ausculta’s severity estimates deviate from the reference by approximately eight percentage points on average, with larger errors weighted more heavily.
+[192|Heading 2] Mean Absolute Error (MAE)
+[193|normal] The researchers will also apply Mean Absolute Error (MAE) to quantify the average magnitude of error between the Ausculta severity percentage and the reference severity score:
+[195|normal] MAE measures the average absolute difference without squaring the errors, making it less influenced by occasional large deviations than RMSE. A lower MAE will indicate that the generated severity percentages are, on average, closer to the reference scores. Comparing MAE with RMSE will reveal whether prediction errors are uniform across recordings (RMSE approximately equal to MAE) or driven by occasional large outliers (RMSE substantially greater than MAE).
+[197|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[198|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[199|Heading 2] Coefficient of Determination (R²)
+[200|normal] The researchers will compute the Coefficient of Determination (R²) to determine how well the Resondi severity algorithm explains variation in the reference severity scores:
+[202|normal] where ȳ is the mean of the reference severity scores. An R² value closer to 1 will indicate that the severity algorithm explains a greater proportion of the variation in expert-derived severity, while a value closer to 0 will indicate weak correspondence. R² will be interpreted together with RMSE and MAE rather than as a standalone measure of accuracy, since a model can achieve a high R² while still exhibiting systematic bias in its absolute values.
+[203|Heading 2] Classification Metrics
+[204|normal] The performance of the respiratory-sound classification model will be evaluated using sensitivity, specificity, precision, F1-score, Cohen’s kappa, and the full confusion matrix, with ROC-AUC included where appropriate to the classification design. Accuracy will be reported alongside the majority-class baseline, since the reference database is severely imbalanced and accuracy alone would overstate performance: a model that always predicted the most frequent class would achieve a high accuracy while detecting nothing.
+[205|normal] Where results are to be compared with published work on the same database, the official ICBHI challenge metric will be reported. Specificity is the proportion of normal cycles classified correctly, sensitivity is the proportion of abnormal cycles classified into the correct class, and the ICBHI score is their mean:
+[207|normal] where C(norm) and C(abn) are the correctly classified normal and abnormal cycles and N(norm) and N(abn) are the corresponding totals. The F1-score, the harmonic mean of precision and recall, will be reported per class:
+[209|normal] Agreement beyond chance will be quantified using Cohen’s kappa, which is preferred to raw percentage agreement because percentage agreement is inflated by class imbalance:
+[211|normal] where p(o) is the observed proportion of agreement and p(e) is the proportion expected by chance. Ninety-five percent confidence intervals for all classification metrics will be obtained by bootstrap resampling with 1,000 iterations at the patient level.
+[213|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[214|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[215|Heading 2] Kruskal–Wallis Test
+[216|normal] To verify that the severity scale meaningfully separates the respiratory-sound categories, the non-parametric Kruskal–Wallis test will be conducted with the predicted severity score as the dependent variable and the reference sound category (Healthy, Crackles, Wheezing, Wheezing with Crackles) as the grouping factor:
+[218|normal] where N is the total number of observations, g is the number of groups, n(j) is the size of group j, and R(j) is the sum of ranks in group j. The predicted rather than the reference severity score is used as the dependent variable, because the reference score is computed from the same annotations that define the categories and a test between them could not fail; using the predicted score instead makes the test informative about model performance.
+[219|normal] Because a recording may contain cycles of more than one category, each recording will be assigned to a category using an explicit rule stated in advance: a recording is classified as Healthy when no cycle contains an adventitious sound, and otherwise by the most frequent adventitious category among its cycles, with ties resolved in favour of the combined category. The Kruskal–Wallis test is used in place of a parametric one-way ANOVA because the Healthy group exhibits near-zero variance in reference severity, which prevents the computation of variance-based tests. Because the test operates on ranks, it makes no assumptions about group variances or normality. A statistically significant result (p < .05) will indicate that predicted severity differs across reference categories. Pairwise comparisons using the Dwass–Steel–Critchlow–Fligner (DSCF) procedure will identify which specific category pairs differ significantly.
+[220|Heading 2] Tests of Difference
+[221|normal] The statistical test applied to each comparison will be selected according to the measurement scale and the pairing structure of the data rather than by default.
+[222|normal] Where classification outcomes are compared under two conditions applied to the same recordings — clean against noise-contaminated recordings, or reference-dataset audio against the same audio re-recorded through the Ausculta device — the outcomes are paired and binary. McNemar’s test will therefore be used in place of a t-test:
+[224|normal] where b and c are the discordant cells of the paired contingency table, that is, the number of cases classified correctly under one condition and incorrectly under the other. The continuity correction shown is applied for small samples, and the exact binomial version will be used where b + c is less than 25. The odds ratio will be reported as the effect size.
+[225|normal] Where a continuous measure is compared between two paired conditions — for example signal-to-noise ratio in decibels, or the severity score — the paired-samples t-test will be used:
+[227|normal] where d̄ is the mean of the paired differences, s(d) is their standard deviation, and n is the number of pairs. Normality of the differences will be assessed using the Shapiro–Wilk test; where it is violated, the Wilcoxon signed-rank test will be used instead. For unpaired comparisons of proportions, the chi-square test of independence will be used, or Fisher’s exact test where any expected cell count falls below five.
+[229|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[230|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[231|Heading 2] Equivalence Testing
+[232|normal] A non-significant result will not be interpreted as evidence that two conditions are equivalent. Where the study needs to assert that classification performance is preserved — for example that device recordings perform comparably to reference recordings — this will be tested using the two one-sided tests (TOST) procedure, which concludes equivalence only when the confidence interval for the difference falls entirely within a pre-specified equivalence margin:
+[234|normal] where δ is the equivalence margin. The margin will be specified before data collection and justified in terms of the smallest difference in classification performance that would be clinically meaningful, rather than chosen after the results are known.
+[235|Heading 2] Effect Sizes and Correction for Multiple Comparisons
+[236|normal] Because statistical significance alone does not indicate the practical magnitude of a difference, every inferential result will be accompanied by an appropriate effect size: eta-squared or partial eta-squared for analysis of variance, epsilon-squared for Kruskal–Wallis, Cohen’s d for paired and independent mean differences, Cramér’s V for categorical associations, and the odds ratio for McNemar comparisons. Ninety-five percent confidence intervals will be reported for all point estimates.
+[237|normal] Because performance will be compared across multiple conditions, categories, and auscultation zones, the Holm–Bonferroni procedure will be applied within each family of comparisons, and the number of tests in each family will be stated explicitly so that the adjusted significance threshold is transparent to the reader. All hypothesis tests will be two-tailed and evaluated at α = 0.05.
+[238|Heading 2] Rule-Based Interpretation Layer
+[239|normal] In addition to the severity score, Resondi applies a rule-based interpretation layer that summarizes the spatial distribution of per-zone classifications. The layer reports acoustic findings rather than disease names: no adventitious sounds detected; wheezing localized to one zone; wheezing distributed across multiple zones; crackles localized to one zone; crackles distributed across multiple zones; and mixed adventitious sounds across multiple zones. Each summary is accompanied by a statement that patterns of this type warrant clinical evaluation, without naming a condition.
+[240|normal] This formulation is deliberate. Mapping a spatial pattern directly to a named condition such as asthma or pneumonia would constitute diagnostic inference, which is outside the declared scope of the platform and is not supported by the evidence this study will produce. Where practitioner clinical impressions are available, agreement between the rule-based acoustic summary and the practitioner’s impression will be evaluated using percentage agreement and Cohen’s kappa, with kappa reported as the primary measure.
+[242|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[243|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[244|Heading 2] Heart-Sound Reference Labels
+[245|normal] For the cardiac component, ground truth will be taken from the expert annotations of the CirCor DigiScope Phonocardiogram Dataset. Each patient encounter carries a murmur label assigned by a cardiac physiologist — Present, Absent, or Unknown — together with the auscultation locations at which murmur waves were detected and, where present, the murmur’s timing, shape, grading, pitch, and quality. Recordings were acquired at up to four standard locations: the aortic, pulmonary, tricuspid, and mitral valve points. The dataset also supplies manual segmentation boundaries for S1, systole, S2, and diastole.
+[246|normal] The Unknown label denotes recordings whose signal quality prevented reliable murmur characterization rather than an intermediate clinical state. These cases will therefore be routed to the platform’s recording-quality pathway rather than treated as a diagnostic category, and the primary cardiac task will be defined as murmur Present versus Absent. The proportion of Unknown cases and the reason for their exclusion will be reported, since discarding them silently would overstate performance under field conditions where poor recordings are common.
+[247|Heading 2] Cardiac Abnormality Extent Score
+[248|normal] In parallel with the respiratory severity score, the researchers will derive a cardiac abnormality extent score expressing the spatial extent of detected murmur activity on a 0–100% scale. The reference extent score is the proportion of a patient’s recorded auscultation locations at which the annotator detected murmur waves:
+[250|normal] where L(murmur) is the number of locations annotated with murmur and L(recorded) is the number of locations actually recorded for that patient. The denominator is the number of locations recorded rather than four, because not all patients in the reference dataset have recordings from all four sites and the same will be true in field use. The predicted extent score is computed from the model confidence scores:
+[252|normal] where p(murmur,l) is the murmur-present confidence at location l and L is the number of locations recorded. This formulation requires no fitted coefficient and cannot produce a value outside the admissible range. The extent score describes the spatial distribution of detected murmur activity only; it will not be presented as a measure of valvular disease severity or cardiac function.
+[253|Heading 2] Cardiac Classification Metrics
+[254|normal] Murmur classification will be evaluated using sensitivity, specificity, precision, F1-score, Cohen’s kappa, and the confusion matrix, reported at both the recording level and the patient level, with the aggregation rule stated explicitly: a murmur is considered present for a patient when it is detected in at least one of that patient’s recordings, consistent with the annotation convention of the source dataset. Accuracy will again be reported alongside the majority-class baseline.
+[255|normal] Because the clinical cost of a missed murmur exceeds that of an unnecessary referral, sensitivity will be treated as the primary criterion. The operating threshold will be selected on the validation subset to achieve a pre-specified minimum sensitivity rather than to maximize accuracy, and the resulting specificity will be reported as the cost of that choice. Where comparison with published work on the same dataset is required, the weighted accuracy metric defined for the George B. Moody PhysioNet Challenge 2022 will be reported, with the weighting taken from the Challenge documentation and cited. Where two models or two acquisition conditions are compared by area under the ROC curve on the same cases, DeLong’s test for correlated ROC curves will be used.
+[257|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[258|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[259|Heading 2] Segmentation Analysis
+[260|normal] Because murmur interpretation depends on cardiac timing, an S1–systole–S2–diastole segmentation stage will precede feature extraction for the cardiac component, using the expert segmentation boundaries supplied with the reference dataset for training and an automated algorithm at inference time. Segmentation performance will be evaluated separately against the reference boundaries using the mean absolute timing error of detected S1 and S2 onsets, reported in milliseconds.
+[261|normal] The effect of segmentation on classification will be quantified by comparing classification performance obtained with expert segmentation against that obtained with automated segmentation. This isolates how much of any classification error originates in the timing stage rather than in the classifier itself.
+[262|Heading 2] Hardware Frequency Response Verification
+[263|normal] Fundamental heart sounds occupy a substantially lower frequency band than respiratory sounds, with S1 and S2 energy concentrated below approximately 150 Hz, whereas the diagnostically relevant respiratory band extends from roughly 100 to 2,000 Hz. Before any cardiac classification result is reported, the researchers will characterize the frequency response of the complete Resondi acquisition chain — chest piece, tubing, acoustic chamber, MEMS microphone, and preamplifier — by presenting swept sine tones from 20 Hz to 2,000 Hz through a coupled source and measuring the recorded amplitude at each frequency.
+[264|normal] The measured low-frequency roll-off will be reported, and cardiac classification performance will be interpreted in light of it. If the acquisition chain attenuates the band containing the fundamental heart sounds, this will be stated as a hardware limitation rather than attributed to the classification model, since no model can recover information the transducer did not capture.
+[265|Heading 2] Longitudinal Analysis
+[266|normal] For repeated recordings, cardiopulmonary sound classifications, severity and extent scores, recording quality, symptoms, and available manually entered vital signs will be summarized across time. Changes will be described as increasing, decreasing, stable, or inconclusive patterns when supported by the collected data, and a change will be reported as meaningful only when it exceeds the measurement error established by the RMSE of the severity algorithm. These trends will not be interpreted as disease prediction or diagnosis.
+[267|Heading 2] Research Agreement Analysis
+[268|normal] Where practitioner-confirmed reference labels are available, AI predictions will be compared with the reference labels to determine agreement, disagreement, modification, or uncertainty, quantified using percentage agreement and Cohen’s kappa. Where more than one practitioner reviews the same recordings, inter-rater agreement among practitioners will be computed using Fleiss’ kappa and reported alongside the AI–practitioner agreement, so that AI performance is interpreted against the achievable human baseline rather than against an assumption of perfect human consistency. AI predictions will never overwrite the reference or practitioner-confirmed label.
+[269|Heading 2] Software and Reproducibility
+[270|normal] Signal processing, feature extraction, and model training will be performed in Python 3 using NumPy, SciPy, librosa, scikit-learn, and TensorFlow. Inferential statistics will be computed in jamovi and cross-checked in Python using statsmodels and pingouin. Random seeds will be fixed and recorded for every partitioning, augmentation, and resampling operation so that the analysis is reproducible, and the analysis scripts together with the fitted coefficients of the severity algorithm will be deposited in the project repository.
+[271|Heading 2] Scope Limitation
+[272|normal] All analyses described in this section evaluate the detection of acoustic patterns in audio recordings. They do not establish the presence, type, or severity of respiratory or cardiac disease. No output of the analysis pipeline will be presented to patients or used in clinical decision-making. All results constitute decision-support information subject to interpretation by a licensed medical practitioner.
+[274|Heading 1] BIBLIOGRAPHY
+[275|normal] Philippine Statistics Authority. (2025). 2024 Causes of Death in the Philippines. (Provisional as of 31 July 2025). https://psa.gov.ph/content/2024-causes-death-philippines-provisional-31-july-2025
+[276|normal] Subido-Cariño, M. T., Donadel, M., Asi, L. D., Ariola-Ramos, M. S., Arguelles, V. L., Co, S. N., Mahon, G., Fernandez, S. P. C., Punzalan, K. A., Sornillo, J. B., Smith, R., Westercamp, M., & Hechanova-Cruz, R. A. (2025). SARS-CoV-2 seroprevalence, illness recall, and work absenteeism among healthcare workers: A facility-based cross-sectional study in the Philippines, 2021. Clinical Infectious Diseases, 81(2), 255. https://doi.org/10.1093/cid/ciaf342
+[277|normal] Yenew, C., et al. (2022). Occupational exposure to infectious diseases among health workers: Effects, managements and recommendations. Journal of Infectious Diseases and Epidemiology, 9, 295.
+[278|normal] Kim, T. (2015). T test as a parametric statistic. Korean Journal of Anesthesiology, 68(6), 540. https://doi.org/10.4097/kjae.2015.68.6.540
+[279|normal] Rocha, B. M., Filos, D., Mendes, L., Vogiatzis, I., Perantoni, E., Kaimakamis, E., Natsiavas, P., Oliveira, A., Jácome, C., Marques, A., Paiva, R. P., Chouvarda, I., Carvalho, P., & Maglaveras, N. (2018). A respiratory sound database for the development of automated classification. In Precision Medicine Powered by pHealth and Connected Health (pp. 51–55). Springer, Singapore. https://doi.org/10.1007/978-981-10-7419-6_6
+[280|normal] Rocha, B. M., et al. (2019). An open access database for the evaluation of respiratory sound classification algorithms. Physiological Measurement, 40, 035001. https://doi.org/10.1088/1361-6579/ab03ea
+[281|normal] Song, Y., et al. (2024). Performance evaluation of lung sounds classification using deep learning under variable parameters. EURASIP Journal on Advances in Signal Processing. https://doi.org/10.1186/s13634-024-01148-w
+[282|normal] Xu, R., et al. (2023). Deep learning-based lung sound analysis for intelligent stethoscope. Military Medical Research. https://doi.org/10.1186/s40779-023-00479-3
+[283|normal] Xia, T., Han, J., & Mascolo, C. (2022). Exploring machine learning for audio-based respiratory condition screening: A concise review of databases, methods, and open issues. Experimental Biology and Medicine. https://doi.org/10.1177/15353702221115428
+[284|normal] Philippine Statistics Authority. (2025, October 28). 2024 causes of death in the Philippines (provisional as of 31 August 2025). Philippine Statistics Authority. https://psa.gov.ph/system/files/vsd/1_Press%20Release%20_2024%20Cause%20of%20Death
+[285|normal] %20Statistics_as%20of31%20August%202025_ONS-%20signed.update.pdf
+[286|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[287|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[288|normal] Global Initiative for Asthma. (2023). Global strategy for asthma management and prevention (2023 update). Global Initiative for Asthma. https://ginasthma.org/gina-reports (ginasthma.org in Bing)
+[289|normal] Global Burden of Disease Collaborative Network. (2025). Global Burden of Disease Study 2023 (GBD 2023) results. Institute for Health Metrics and Evaluation (IHME). https://vizhub.healthdata.org/gbd-results/
+[290|normal] World Health Organization. (2023). Package of interventions for rehabilitation: Module 4. Cardiopulmonary	conditions.	World	Health	Organization. https://apps.who.int/iris/handle/10665/370395 (apps.who.int in Bing)
+[291|normal] Tanaka, T., Yanagita, Y., Morishita, T., Nagata, F., Granados Santiago, M., López-López, L., & Valenza,
+[292|normal] M. C. (2025). Effectiveness of physical and therapy interventions for non-ICU hospitalized pneumonia patients: A systematic review of randomized controlled trials. Healthcare, 13(12), 1444. https://doi.org/10.3390/healthcare13121444
+[293|normal] Leng, S., Tan R. S., Chai, K. T. C., Wang, C., Ghista, D., Zhong, L. (2015) The Electronic Stethoscope. https://doi.org/10.1186/s12938-015-0056-y
+[294|normal] Pramono, R. X. A., Bowyer, S., Rodriguez-Villegas, E. (2017) Automatic Adventitious Respiratory-sound Sound Analysis: A Systematic Review https://doi.org/10.1371/journal.pone.0177926
+[295|normal] Rocha, B. M., Filos, D., Mendes, L., Sorbes, G., Ulukaya, S., Kahya, Y. P., Jakovljevic, N., Turukalo, T. L., Vogiatzis, I. M., Perantoni, E., Kaimakamis, E., Natsiavas, P., Oliveira, A., Jácome, C., Marques, A., Maglaveras, N., Paiva, R. P, Chouvarda, I., de Carvalho, P. (2019) An Open Access Database For The Evaluation Of Respiratory SoundClassification Algorithms https://doi.org/10.1088/1361-6579/ab03ea
+[296|normal] Philips, A. L., Sodhi, I., Warrier, J., Sinha, V. (2016) Development Of Digital Stethoscope For Telemedicine https://www.researchgate.net/publication/289489645_Development_of_digital_stethoscope_for_ Telemedicine?hl=en-GB
+[297|normal] Weiskopf, N. G., Weng, C. (2013) Methods And Dimensions Of Electronic Health Record Data Quality Assessment: Enabling Reuse For Clinical Research https://academic.oup.com/jamia/article/20/1/144/2909176
+[298|normal] Holden, R. J., Ben-Tzion, K. (2010) The Technology Acceptance Model: Its Past and Its Future In Healthcare https://www.sciencedirect.com/science/article/pii/S1532046409000963?via%3Dihub
+[299|normal] Huang, D.-M., Huang, J., Qiao, K., Zhong, N.-S., Lu, H.-Z., & Wang, W.-J. (2023). Deep Learning-based lung sound analysis for intelligent stethoscope. Military Medical Research, 10,
+[300|normal] 44. https://doi.org/10.1186/s40779-023-00479-3
+[301|normal] Wang, Z., & Sun, Z. (2024). Performance evaluation of lung sounds classification using deep Learning under variable parameters. EURASIP Journal on Advances in Signal Processing, 2024,
+[302|normal] 51. https://doi.org/10.1186/s13634-024-01148-w
+[303|normal] DeepRespNet: A deep neural network for classification of respiratory sounds. (2024). Biomedical Signal Processing and Control, 93, 106191. https://doi.org/10.1016/j.bspc.2024.106191
+[304|normal] Tzeng, J.-T., Li, J.-L., Chen, H.-Y., Huang, C.-H., Chen, C.-H., Fan, C.-Y., Huang, E. P.-C., &
+[305|normal] Lee, C.-C. (2025). Improving the robustness and clinical applicability of automatic respiratory Sound classification using deep learning–based audio enhancement: Algorithm development And validation. JMIR AI, 4, e67239. https://doi.org/10.2196/67239
+[306|normal] Ye, P., Li, Q., Jian, W., Liu, S., Tan, L., Chen, W., Zhang, D., & Zheng, J. (2022). Regularity and Mechanism of fake crackle noise in an electronic stethoscope. Frontiers in Physiology, 13,
+[307|normal] PUERTO PRINCESA CITY NATIONAL SCIENCE HIGH SCHOOL
+[308|normal] SCIENCE, TECHNOLOGY, ENGINEERING, AND MATHEMATICS
+[309|normal] 1079468. https://doi.org/10.3389/fphys.2022.1079468
+[310|normal] Kim, J.-W., Bae, S., Cho, W.-Y., Lee, B., & Jung, H.-Y. (2024). Stethoscope-guided supervised Contrastive learning for cross-domain adaptation on respiratory sound classification.
+[311|normal] Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 2024, 1431–1435. https://doi.org/10.1109/ICASSP48485.2024.10447734
+[312|normal] Kim, J.-W., Toikkanen, M., Jalali, A., Kim, M., Han, H.-J., Kim, H., Shin, W., Jung, H.-Y., & Kim,
+[313|normal] K. (2025). Adaptive metadata-guided supervised contrastive learning for domain adaptation on Respiratory sound classification. IEEE Journal of Biomedical and Health Informatics, 29(8), 5381–5393. https://doi.org/10.1109/JBHI.2025.3545159
+[314|normal] Wang, Z., & Sun, Z. (2024). Performance evaluation of lung sounds classification using deep Learning under variable parameters. EURASIP Journal on Advances in Signal Processing, 2024,
+[315|normal] 51. https://doi.org/10.1186/s13634-024-01148-w
+[316|normal] Choi, S. I., Jeong, Y., Jung, W. J., Kim, B.-K., Lee, S. Y., Lee, J., Kim, J.-Y., Cho, W.-Y., Chang,
+[317|normal] , An, H., Park, S., & Lee, E. J. (2026). Usefulness of lung sound data collection using Skeeper SM-300® device: A pilot study. PLOS ONE, 21(5), e0348588. https://doi.org/10.1371/journal.pone.0348588
+[318|normal] Wei, T.-J., Hsiung, P.-Y., Liu, J.-H., Lin, T.-C., Kuo, F.-T., & Wu, C.-Y. (2022). Use of electronic Auscultation in full personal protective equipment to detect ventilation status in selective lung Ventilation: A randomized controlled trial. Frontiers in Medicine, 9, 851395. https://doi.org/10.3389/fmed.2022.851395
+[319|normal] Yin, Z., Yan, J., Fang, S., Wang, D., & Han, D. (2022). User acceptance of wearable intelligent Medical devices through a modified unified theory of acceptance and use of technology. Annals Of Translational Medicine, 10(11), 629. https://doi.org/10.21037/atm-21-5510
+[320|normal] Gonzales, A., Custodio, R., Lapitan, M. C., & Ladia, M. A. (2023). End users’ perspectives on The quality and design of mHealth technologies during the COVID-19 pandemic in the Philippines: Qualitative study. JMIR Formative Research, 7, e41838. https://doi.org/10.2196/41838
+[321|normal] Hajesmaeel-Gohari, S., Khordastan, F., Fatehi, F., Samzadeh, H., & Bahaadinbeigy, K. (2022). The most used questionnaires for evaluating satisfaction, usability, acceptance, and quality Outcomes of mobile health. BMC Medical Informatics and Decision Making, 22, 22. https://doi.org/10.1186/s12911-022-01764-2
+=== TABLES: 0
+=== images: 16

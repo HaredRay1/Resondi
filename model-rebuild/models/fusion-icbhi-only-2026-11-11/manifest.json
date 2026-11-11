@@ -1,0 +1,71 @@
+{
+ "created": "2026-11-11 19:51",
+ "training_data": "ICBHI 2017 only (65 train patients)",
+ "chosen_on": "30 ICBHI validation patients",
+ "late3": "average the probabilities of single_mfcc_seed11, single_spec_seed11 and single_chroma_seed11",
+ "runs": [
+  {
+   "file": "single_mfcc_seed22.pt",
+   "recipe": "single_mfcc",
+   "seed": 22,
+   "epoch": 11,
+   "val_cycle_balanced_acc": 0.4658,
+   "logged_this_morning": 0.4588,
+   "reproduced": false
+  },
+  {
+   "file": "single_mfcc_seed11.pt",
+   "recipe": "single_mfcc",
+   "seed": 11,
+   "epoch": 6,
+   "val_cycle_balanced_acc": 0.4615,
+   "logged_this_morning": 0.4521,
+   "reproduced": false
+  },
+  {
+   "file": "single_spec_seed11.pt",
+   "recipe": "single_spec",
+   "seed": 11,
+   "epoch": 22,
+   "val_cycle_balanced_acc": 0.4664,
+   "logged_this_morning": 0.4894,
+   "reproduced": false
+  },
+  {
+   "file": "single_chroma_seed33.pt",
+   "recipe": "single_chroma",
+   "seed": 33,
+   "epoch": 13,
+   "val_cycle_balanced_acc": 0.4363,
+   "logged_this_morning": 0.4259,
+   "reproduced": false
+  },
+  {
+   "file": "single_chroma_seed11.pt",
+   "recipe": "single_chroma",
+   "seed": 11,
+   "epoch": 1,
+   "val_cycle_balanced_acc": 0.4197,
+   "logged_this_morning": 0.4093,
+   "reproduced": false
+  },
+  {
+   "file": "fdc3_seed11.pt",
+   "recipe": "fdc3",
+   "seed": 11,
+   "epoch": 13,
+   "val_cycle_balanced_acc": 0.4738,
+   "logged_this_morning": 0.488,
+   "reproduced": false
+  },
+  {
+   "file": "fdc2_nochroma_seed11.pt",
+   "recipe": "fdc2_nochroma",
+   "seed": 11,
+   "epoch": 15,
+   "val_cycle_balanced_acc": 0.4718,
+   "logged_this_morning": 0.475,
+   "reproduced": true
+  }
+ ]
+}

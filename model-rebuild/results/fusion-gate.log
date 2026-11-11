@@ -5,3 +5,12 @@ saved single_spec seed 11: epoch 22, validation 0.466 (logged 0.489)  1227s
 saved single_chroma seed 33: epoch 13, validation 0.436 (logged 0.426)  298s
 saved single_chroma seed 11: epoch 1, validation 0.420 (logged 0.409)  115s
 saved fdc3 seed 11: epoch 13, validation 0.474 (logged 0.488)  1331s
+saved fdc2_nochroma seed 11: epoch 15, validation 0.472 (logged 0.475)  15876s
+checkpoint written to C:\Users\Hared\Downloads\Resondi\model-rebuild\models\fusion-icbhi-only-2026-11-11
+single_mfcc     icbhi-bl4k              seed 11  epoch  5  icbhi-val bal 0.432  F1 0.368  sprs-val 0.120  [Crac=0.77 Heal=0.32 Whee=0.25 Whee=0.39]  188s
+== single_mfcc (icbhi-bl4k): ICBHI validation cycle balanced accuracy 0.432 +/- 0.000
+
+single_mfcc     icbhi+sprs-bl4k-sn-bal  seed 11  epoch 18  icbhi-val bal 0.420  F1 0.366  sprs-val 0.482  [Crac=0.75 Heal=0.30 Whee=0.49 Whee=0.14]  638s
+== single_mfcc (icbhi+sprs-bl4k-srcnorm-bal): ICBHI validation cycle balanced accuracy 0.420 +/- 0.000
+
+done 11/11/2026 20:06:13.47 

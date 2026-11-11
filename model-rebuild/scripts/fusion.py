@@ -275,6 +275,7 @@ def load_parts(views, data):
 
 
 SRC_ID = {"icbhi": 0, "sprs": 1}
+SAVE_RUN_DIR = None   # --save-dir: save every model trained by `run`
 BALANCE = False   # --balance: cap SPRSound's healthy windows at ICBHI's count, and weight sources and classes equally
 HEALTHY = 1       # label index of Healthy (alphabetical order)
 
@@ -445,7 +446,17 @@ def run(data, names):
                 ep = 0
             else:
                 views = RECIPES[name]
-                _, _, ep, probs, vals = train(views, data, seed)
+                model, prep, ep, probs, vals = train(views, data, seed)
+                if SAVE_RUN_DIR:   # keep every trained model with its normalisation (per source if --srcnorm)
+                    import torch
+                    os.makedirs(SAVE_RUN_DIR, exist_ok=True)
+                    torch.save({"state_dict": model.state_dict(), "views": list(views),
+                                "shapes": [(F.shape[1], F.shape[2]) for F in vals["icbhi"][0]],
+                                "norm_mean": [m.numpy() for m, _ in prep.stats], "norm_std": [sd.numpy() for _, sd in prep.stats],
+                                "norm_sources": ["icbhi", "sprs"], "labels": load_config()["labels"], "seed": seed,
+                                "epoch": ep, "data": data, "bandlimit_100_3900_levelled": BANDLIMIT,
+                                "srcnorm": SRCNORM, "balance": BALANCE},
+                               os.path.join(SAVE_RUN_DIR, f"{name}_seed{seed}.pt"))
                 if len(views) == 1:
                     single_probs[seed][views[0]] = probs
                 res = {vs: score(probs[vs], vals[vs][1], vals[vs][2]) for vs in probs}
@@ -585,10 +596,12 @@ def main():
     ap.add_argument("--bandlimit", action="store_true", help="cut all audio to 0-4 kHz before features")
     ap.add_argument("--srcnorm", action="store_true", help="standardise features per data source")
     ap.add_argument("--balance", action="store_true", help="cap SPRSound healthy windows; weight sources and classes equally")
+    ap.add_argument("--save-dir", default="", help="folder under model-rebuild/ to save every model `run` trains")
     ap.add_argument("--seeds", default="11,22,33", help="comma-separated training seeds (a quick gate check can use one)")
     a = ap.parse_args()
-    global BANDLIMIT, SRCNORM, BALANCE, SEEDS
+    global BANDLIMIT, SRCNORM, BALANCE, SEEDS, SAVE_RUN_DIR
     BANDLIMIT, SRCNORM, BALANCE = a.bandlimit, a.srcnorm, a.balance
+    SAVE_RUN_DIR = os.path.join(ROOT, a.save_dir) if a.save_dir else None
     SEEDS = tuple(int(s) for s in a.seeds.split(","))
     if a.cmd == "save":
         save_icbhi_models()
