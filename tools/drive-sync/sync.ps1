@@ -35,6 +35,7 @@ $rcArgs = @(
            "$Source\model-rebuild\history-run1", "$Source\model-rebuild\work",
            "$Source\model-rebuild\work-exp", # experiment caches (~1 GB audio windows), regenerable
            "$Source\model-rebuild\work-3s",  # training caches, regenerable; kept off Drive
+           "$Source\build\dev2\out",         # Blender video frames (~200 MB), regenerable
     '/XF', 'desktop.ini', '~$*', '*.tmp',
     '/R:2', '/W:5',
     '/MON:1', '/MOT:1',   # re-run after >=1 change, at most once a minute

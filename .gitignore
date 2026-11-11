@@ -13,5 +13,8 @@ model-rebuild/work/
 model-rebuild/work-3s/
 model-rebuild/work-exp/
 
+# Blender render frames and intermediates (regenerable from build/dev2 scripts)
+build/dev2/out/
+
 # Empty clone of the HF_Lung_V1 dataset repo (its own .git, no data)
 HF_Lung_V1/

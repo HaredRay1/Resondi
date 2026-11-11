@@ -8,6 +8,11 @@ Paste this into Claude chat to bring it up to date. It covers what changed on 9�
 > 3. **The next gain needs data:** clinician-labelled Resondi device recordings first, then HF_Lung_V1 once a working copy is found.
 > 4. **The 40% field figure:** the paper gives no record of who set the 15 reference labels or how (section 5).
 > 5. **Everything is on GitHub** (`HaredRay1/Resondi`, private, branch `master`).
+>
+> **In progress (11 Nov, morning), see section 6:**
+> - A feature-fusion study (MFCC + spectrogram + chromagram, after Tariq et al. 2022) is training.
+> - The SPRSound dataset (Asian children, CC BY 4.0) is downloading, to be added as training data.
+> - The 3-D spin video is rendering.
 
 ---
 
@@ -226,7 +231,7 @@ See section 4, "Result of that plan". In short, the best test result is **35.0% 
 ### Other 11 Nov items
 - **GitHub:** `HaredRay1/Resondi` (private, branch `master`) holds the project. Large datasets and caches are excluded.
 - **Product image:** `figures/Resondi-Device-Podium.png` (and `.jpg`) recreates the old Ausculta podium photo with the new device render. It uses `build/dev2/render_podium.py` (Blender, Cycles) and `build/dev2/compose_podium.py` (pink glow). It is not yet committed to git.
-- **Video:** the user asked for `ayun.mov` to be recreated, but no file by that name exists in the user profile or on Google Drive. A 360° spin video of the device (`build/dev2/render_spin_video.py`) stopped after 16 frames when the app restarted. It is unfinished and uncommitted.
+- **Video:** the user asked for `ayun.mov` to be recreated, but no file by that name was found in the user profile or on Google Drive. Another session built a product video that copies the camera work of the team's earlier clip: 6.7 s, 1080p, 30 fps, four camera moves, dark studio floor, no text (`build/dev2/render_spin_video.py`). It stopped after 16 frames when the app restarted and was resumed at 06:28 (see section 6).
 - **"Why us?" line** (for the deck): *"We've already built both ends: a working stethoscope and a live platform. Now we're making every breath and heartbeat count."*
 
 ### Open items
@@ -237,3 +242,61 @@ See section 4, "Result of that plan". In short, the best test result is **35.0% 
 5. Optional: train an MFE 2-D CNN in Edge Impulse (on their servers).
 6. Set the Drive folder to Restricted, and have a Filipino speaker check the earlier-model note.
 7. Find or re-supply `ayun.mov` if it still needs recreating, and finish the spin video.
+
+---
+
+## 6. In progress, 11 November (status at 08:15)
+
+### Feature-fusion study (the user's request)
+**Why:** the concept note and deck describe a planned three-branch fusion model after **Tariq, Shah & Lee (2022), *Sensors* 22(4), 1521, "FDC-FS"**: three CNNs on a spectrogram, MFCC and chromagram, joined and passed to a dense layer. Its reported 99.1% is almost certainly inflated by the same random split that leaked in our old model. This study tests whether fusion helps under the honest patient split.
+
+**What runs** (`model-rebuild/scripts/fusion.py`): same 1-second windows, same patient split, same 1-D CNN branch (32/64 filters), 3 seeds each, chosen on the **30 ICBHI validation patients only**. Results go to `results/fusion-validation.csv` and the log `results/fusion-run-icbhi.log`. The versions:
+
+| Version | Input |
+|---|---|
+| `single_mfcc` | 13 MFCCs (the app's design) |
+| `single_spec` | log power spectrogram, 0–4 kHz, 129 bins, 20 ms frames |
+| `single_chroma` | 12-bin chromagram, 50–4000 Hz, 64 ms frames |
+| `late3` | the three single models vote (their probabilities averaged) |
+| `fdc3` | FDC-FS style: three branches → concatenate (3 × 64) → dense → 4 classes (190k parameters) |
+| `fdc2_nochroma` | `fdc3` without the chroma branch (chroma ablation) |
+
+**Results so far** (cycle balanced accuracy, chance 25%):
+- `single_mfcc` **45.5% ± 0.3**.
+- The others are training: spectrogram, then chromagram, then the fusion versions. Expected to finish around 10:15.
+
+**After that:**
+1. Rerun the same versions with `--data icbhi+sprs`, adding SPRSound training patients.
+2. Choose by ICBHI validation only.
+3. Run **one** test (`python scripts/fusion.py test <recipe> --data <...>`). It scores the 31 ICBHI test patients and the held-out SPRSound test children separately, and logs to `results/final-test-log.csv`.
+
+The bar to beat on test is **35.0%** (11 Nov, MFCC) and 33.5% (deployed v1).
+
+**Deployment caveat:** Edge Impulse has no chromagram block, and the app runs a single Edge Impulse model. If fusion wins, it needs a different route into the app (an ONNX model run in the browser) or a custom Edge Impulse processing block.
+
+### Added dataset: SPRSound (for training)
+- **What:** SJTU Paediatric Respiratory Sound Database (Shanghai Children's Medical Center, Yunting model II stethoscope). Children aged 1 month–18 years, 292 participants in the 2022 release. **CC BY 4.0.** [github.com/SJTU-YONGFU-RESEARCH-GRP/SPRSound](https://github.com/SJTU-YONGFU-RESEARCH-GRP/SPRSound).
+- **Why this one:**
+  - it is labelled per breath by sound type, which fits our four labels;
+  - Asian children are close to a core Resondi group (childhood pneumonia);
+  - it adds a fifth stethoscope type.
+- **Label mapping:**
+  - Normal → Healthy;
+  - Fine Crackle or Coarse Crackle → Crackles;
+  - Wheeze → Wheezing;
+  - Wheeze+Crackle → Wheezing with Crackles;
+  - **Rhonchi and Stridor are left out** (ICBHI has no stridor, and its wheeze flag is not documented to include rhonchi);
+  - "Poor Quality" records are skipped.
+- **Split:** by patient, 70/15/15, separately from ICBHI. ICBHI's 31 test patients stay the main comparison.
+- **Download:** git clone stalled on this connection, so files are fetched one by one from GitHub raw (resumable script in the session scratchpad). 13,136 files, 1.2 GB, all years 2022–2025. At 08:10 it was at 471 MB, at about 0.25 MB/s; expected done around 09:05. Saved to `C:\Users\Hared\Downloads\sprsound\`, outside the project, so it never syncs to Drive or git.
+- **Philippine data:** the only Filipino lung-sound corpus found is **HINGA V1** (Baguio, 51 patients). It has no public download and is diagnosis-labelled (healthy/asthma only), so it cannot train sound labels. Resondi's own clinician-labelled device recordings remain the real fix.
+
+### Spin video
+- **Progress:** 186 of 200 frames rendered at 08:10, at about 50 s per frame. `build/dev2/resume_video.ps1` renders any missing frames and then encodes **`figures/Resondi-Device-Video.mp4`** (H.264, 1080p, 30 fps).
+- **Housekeeping:** the frames in `build/dev2/out/` are excluded from git and Drive.
+
+### PC limits to know
+- **Hardware:** 4 cores and 7.8 GB RAM, with free memory down to about 0.5 GB while rendering, training and downloading at once. Claude Code stopped one watcher script for low memory (the work itself kept running).
+- **Long jobs:** run them as detached processes (`Start-Process`), so an app restart does not kill them, as happened at 01:52.
+- **Running now:** the training (`fusion.py run --data icbhi`), the video render and the SPRSound download are all detached processes.
+- **Untracked folder:** `research-plan/` is another session's work in progress and is deliberately not committed.

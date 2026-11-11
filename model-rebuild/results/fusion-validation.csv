@@ -1,0 +1,4 @@
+time,recipe,data,seed,epoch,val_set,cycle_balanced_acc,cycle_macro_f1,window_balanced_acc,recall_Crackles,recall_Healthy,recall_Wheezing,recall_Wheezing with Crackles
+2026-11-11 07:43,single_mfcc,icbhi,11,12,icbhi,0.4521,0.3865,0.4015,0.8030,0.2740,0.4130,0.3182
+2026-11-11 07:49,single_mfcc,icbhi,22,11,icbhi,0.4588,0.3787,0.3911,0.7917,0.2377,0.4420,0.3636
+2026-11-11 07:59,single_mfcc,icbhi,33,20,icbhi,0.4552,0.3771,0.3928,0.8030,0.2450,0.5000,0.2727
