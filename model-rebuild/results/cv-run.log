@@ -1,0 +1,12 @@
+start 12/11/2026  1:13:12.78 
+fold 0: 23 patients, 1355 cycles, labels [1771, 2638, 783, 626]
+fold 1: 26 patients, 1386 cycles, labels [1703, 3509, 803, 865]
+fold 2: 28 patients, 1371 cycles, labels [1558, 2711, 812, 379]
+fold 3: 23 patients, 1373 cycles, labels [1665, 3414, 705, 285]
+fold 4: 26 patients, 1413 cycles, labels [1551, 2931, 787, 420]
+mfcc_icbhi  seed 11 fold 0: epoch  4  val 0.395  TEST-FOLD bal 0.359  F1 0.361  90s
+mfcc_icbhi  seed 11 fold 1: epoch  7  val 0.403  TEST-FOLD bal 0.379  F1 0.364  114s
+mfcc_icbhi  seed 11 fold 2: epoch 15  val 0.402  TEST-FOLD bal 0.337  F1 0.307  183s
+mfcc_icbhi  seed 11 fold 3: epoch  3  val 0.300  TEST-FOLD bal 0.331  F1 0.255  89s
+mfcc_icbhi  seed 11 fold 4: epoch  3  val 0.330  TEST-FOLD bal 0.300  F1 0.232  99s
+fdc3_sprs   seed 11 fold 0: epoch  7  val 0.436  TEST-FOLD bal 0.407  F1 0.387  774s

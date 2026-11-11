@@ -1,0 +1,10 @@
+﻿ICBHI val  fdc3 seed 11            bal 0.489  F1 0.426  recall Crac=0.59 Heal=0.44 Whee=0.47 Whee=0.45
+ICBHI val  fdc3 seed 22            bal 0.474  F1 0.407  recall Crac=0.66 Heal=0.35 Whee=0.54 Whee=0.34
+ICBHI val  fdc3 seed 33            bal 0.499  F1 0.453  recall Crac=0.73 Heal=0.42 Whee=0.52 Whee=0.32
+ICBHI val  fdc3 3-seed ensemble     bal 0.495  F1 0.440  recall Crac=0.69 Heal=0.42 Whee=0.53 Whee=0.34
+ICBHI val  fdc3+late3, all seeds    bal 0.493  F1 0.434  recall Crac=0.75 Heal=0.39 Whee=0.47 Whee=0.36
+SPRS val   fdc3 seed 11            bal 0.503  F1 0.426  recall Crac=0.57 Heal=0.68 Whee=0.44 Whee=0.32
+SPRS val   fdc3 seed 22            bal 0.495  F1 0.413  recall Crac=0.56 Heal=0.66 Whee=0.44 Whee=0.32
+SPRS val   fdc3 seed 33            bal 0.513  F1 0.433  recall Crac=0.54 Heal=0.69 Whee=0.47 Whee=0.34
+SPRS val   fdc3 3-seed ensemble     bal 0.520  F1 0.437  recall Crac=0.58 Heal=0.69 Whee=0.45 Whee=0.36
+SPRS val   fdc3+late3, all seeds    bal 0.523  F1 0.430  recall Crac=0.58 Heal=0.68 Whee=0.42 Whee=0.40

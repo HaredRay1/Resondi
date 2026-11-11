@@ -465,3 +465,35 @@ The bar to beat on test is **35.0%** (11 Nov, MFCC) and 33.5% (deployed v1).
 > "We rebuilt the model without data leakage and tested fifteen designs honestly. The best is a three-branch fusion network on MFCC, spectrogram and chromagram, trained on ICBHI plus SPRSound, an Asian paediatric dataset. On unseen adult patients it scores 39.4% balanced accuracy against 25% chance. The model in our app today scores 33.5%. On unseen children it scores 57.2%. With 31 test patients the confidence interval is still wide, which is why the funding pays for clinician-labelled recordings from our own device."
 
 **Do not say:** that it is validated, that it diagnoses, or that it works on the Resondi device. It has not been tested on device audio, and it is not yet in the app (it needs an ONNX browser route; Edge Impulse has no chromagram block).
+
+---
+
+## 8. In progress, 12 Nov: options A and H (user's choice)
+
+### A. Averaging the three FDC-FS seeds (validation only, `scripts/ensemble_val.py`, `results/ensemble-validation.txt`)
+
+| | ICBHI val | SPRSound val |
+|---|---|---|
+| FDC-FS single seeds 11 / 22 / 33 | 48.9 / 47.4 / 49.9% (mean 48.7) | 50.3 / 49.5 / 51.3% |
+| **3-seed ensemble** | **49.5%** | **52.0%** |
+| FDC-FS + late fusion, all 6 averaged | 49.3% | 52.3% |
+
+- **About +0.8 / +1.7 points over a typical seed.** It is below the best seed (49.9%), but that seed was picked on the same patients.
+- **Not tested on the 31 test patients:** that would be a fourth read. It is evaluated inside H instead.
+
+### H. 5-fold patient cross-validation over all 126 ICBHI patients (`scripts/cv.py`, `scripts/run_cv.cmd`)
+- **Why:** the 31-patient test gives a wide interval (28–45%) and has been read three times. Cross-validation tests every patient exactly once, each by a model that never saw them.
+- **Folds:** 126 patients in 5 folds balanced by (label, stethoscope): 23–28 patients and about 1,370 cycles each, 6,898 cycles in total. In fold k, test = fold k, validation (early stopping only) = fold k+1, train = the other three (+ rebalanced SPRSound for FDC-FS).
+- **Compared:** MFCC on ICBHI only (the app's design, seed 11) vs FDC-FS + SPRSound (seeds 11/22/33 and their 3-seed ensemble). Every fold model is also scored on the 230 SPRSound test children.
+- **Resumable:** window probabilities are saved per (config, seed, fold) in `work-exp/cv/`. Re-run `scripts\run_cv.cmd` to continue. The final report goes to `results/cv-results.md` / `.json`.
+
+**Results so far (01:45; log `results/cv-run.log`), fold test balanced accuracy:**
+
+| Model | F0 | F1 | F2 | F3 | F4 | Mean |
+|---|---|---|---|---|---|---|
+| MFCC, ICBHI only | 35.9 | 37.9 | 33.7 | 33.1 | 30.0 | **≈ 34.1%** |
+| FDC-FS + SPRSound, seed 11 | **40.7** | … | | | | |
+
+- **The current design scores about 34% across all 126 patients,** matching the live app (33.5%).
+- **On fold 0, FDC-FS + SPRSound beats it by about 5 points on the same patients.**
+- **Expected to finish:** about 05:00. The pooled number with a 95% CI comes from `cv.py report`.
