@@ -4,3 +4,17 @@ single_mfcc     icbhi      seed 33  epoch 20  icbhi-val bal 0.455  F1 0.377  [Cr
 == single_mfcc (icbhi): ICBHI validation cycle balanced accuracy 0.455 +/- 0.003
 
 single_spec     icbhi      seed 11  epoch  9  icbhi-val bal 0.489  F1 0.449  [Crac=0.57 Heal=0.51 Whee=0.65 Whee=0.23]  1006s
+single_spec     icbhi      seed 22  epoch 19  icbhi-val bal 0.431  F1 0.405  [Crac=0.65 Heal=0.46 Whee=0.41 Whee=0.20]  839s
+single_spec     icbhi      seed 33  epoch  1  icbhi-val bal 0.423  F1 0.380  [Crac=0.73 Heal=0.48 Whee=0.48 Whee=0.00]  189s
+== single_spec (icbhi): ICBHI validation cycle balanced accuracy 0.448 +/- 0.030
+
+single_chroma   icbhi      seed 11  epoch  1  icbhi-val bal 0.409  F1 0.341  [Crac=0.70 Heal=0.26 Whee=0.65 Whee=0.02]  81s
+single_chroma   icbhi      seed 22  epoch  2  icbhi-val bal 0.402  F1 0.350  [Crac=0.77 Heal=0.27 Whee=0.54 Whee=0.02]  90s
+single_chroma   icbhi      seed 33  epoch  7  icbhi-val bal 0.426  F1 0.348  [Crac=0.76 Heal=0.20 Whee=0.59 Whee=0.16]  149s
+== single_chroma (icbhi): ICBHI validation cycle balanced accuracy 0.412 +/- 0.010
+
+late3           icbhi      seed 11  epoch  0  icbhi-val bal 0.502  F1 0.458  [Crac=0.73 Heal=0.41 Whee=0.69 Whee=0.18]  0s
+late3           icbhi      seed 22  epoch  0  icbhi-val bal 0.496  F1 0.455  [Crac=0.76 Heal=0.39 Whee=0.63 Whee=0.20]  0s
+late3           icbhi      seed 33  epoch  0  icbhi-val bal 0.449  F1 0.386  [Crac=0.78 Heal=0.33 Whee=0.66 Whee=0.02]  0s
+== late3 (icbhi): ICBHI validation cycle balanced accuracy 0.482 +/- 0.024
+

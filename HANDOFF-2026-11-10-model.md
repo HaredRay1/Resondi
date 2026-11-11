@@ -263,9 +263,11 @@ See section 4, "Result of that plan". In short, the best test result is **35.0% 
 
 **Results so far** (cycle balanced accuracy, chance 25%):
 - `single_mfcc` **45.5% ± 0.3**. Recall: Crackles about 0.80, Healthy 0.25, Wheezing 0.41–0.50, W+C 0.27–0.36.
-- `single_spec`, seed 11: **48.9%**, F1 0.449, the best single run so far. Recall: Crackles 0.57, **Healthy 0.51, Wheezing 0.65**, W+C 0.23.
-  - The spectrogram catches wheezes and healthy breaths that MFCC misses, and MFCC is stronger on crackles. That complementarity is why fusion may help.
-- The others are training: spectrogram seeds 22/33, chromagram, then the fusion versions. Expected to finish around 10:30.
+- `single_spec` **44.8% ± 3.0** (48.9, 43.1, 42.3). It finds about twice as many healthy breaths (0.46–0.51) and more wheezes. MFCC is stronger on crackles.
+- `single_chroma` **41.2% ± 1.0**. It is weak alone, and its best epoch came early.
+- **`late3` (the three models vote): 48.2% ± 2.4** (50.2, 49.6, 44.9), F1 up to 0.46. **The best result of the whole project, and the first change that clearly beat MFCC alone (+2.7 points).** Recall: Crackles 0.73–0.78, Wheezing 0.63–0.69, Healthy 0.33–0.41; Wheezing with Crackles is still weak (0.02–0.20).
+- Still training at 08:40: `fdc3` (one jointly trained three-branch network, about 25 minutes per seed), then `fdc2_nochroma`. Expected to finish around 10:30.
+- **Caution:** these are validation scores. The 11 Nov MFCC winner fell from 47.2% on validation to 35.0% on test. Only the single test run counts.
 
 **After that:**
 1. Rerun the same versions with `--data icbhi+sprs`, adding SPRSound training patients.
