@@ -18,3 +18,13 @@ late3           icbhi      seed 22  epoch  0  icbhi-val bal 0.496  F1 0.455  [Cr
 late3           icbhi      seed 33  epoch  0  icbhi-val bal 0.449  F1 0.386  [Crac=0.78 Heal=0.33 Whee=0.66 Whee=0.02]  0s
 == late3 (icbhi): ICBHI validation cycle balanced accuracy 0.482 +/- 0.024
 
+fdc3            icbhi      seed 11  epoch 10  icbhi-val bal 0.488  F1 0.451  [Crac=0.69 Heal=0.50 Whee=0.49 Whee=0.27]  812s
+fdc3            icbhi      seed 22  epoch 17  icbhi-val bal 0.461  F1 0.432  [Crac=0.68 Heal=0.50 Whee=0.49 Whee=0.18]  847s
+fdc3            icbhi      seed 33  epoch 15  icbhi-val bal 0.457  F1 0.428  [Crac=0.72 Heal=0.50 Whee=0.47 Whee=0.14]  820s
+== fdc3 (icbhi): ICBHI validation cycle balanced accuracy 0.469 +/- 0.014
+
+fdc2_nochroma   icbhi      seed 11  epoch 13  icbhi-val bal 0.475  F1 0.425  [Crac=0.73 Heal=0.46 Whee=0.30 Whee=0.41]  502s
+fdc2_nochroma   icbhi      seed 22  epoch 18  icbhi-val bal 0.447  F1 0.417  [Crac=0.67 Heal=0.48 Whee=0.45 Whee=0.18]  618s
+fdc2_nochroma   icbhi      seed 33  epoch  1  icbhi-val bal 0.396  F1 0.358  [Crac=0.76 Heal=0.43 Whee=0.38 Whee=0.02]  213s
+== fdc2_nochroma (icbhi): ICBHI validation cycle balanced accuracy 0.439 +/- 0.033
+

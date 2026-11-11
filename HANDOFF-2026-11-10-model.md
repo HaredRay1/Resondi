@@ -266,7 +266,10 @@ See section 4, "Result of that plan". In short, the best test result is **35.0% 
 - `single_spec` **44.8% ± 3.0** (48.9, 43.1, 42.3). It finds about twice as many healthy breaths (0.46–0.51) and more wheezes. MFCC is stronger on crackles.
 - `single_chroma` **41.2% ± 1.0**. It is weak alone, and its best epoch came early.
 - **`late3` (the three models vote): 48.2% ± 2.4** (50.2, 49.6, 44.9), F1 up to 0.46. **The best result of the whole project, and the first change that clearly beat MFCC alone (+2.7 points).** Recall: Crackles 0.73–0.78, Wheezing 0.63–0.69, Healthy 0.33–0.41; Wheezing with Crackles is still weak (0.02–0.20).
-- Still training at 08:40: `fdc3` (one jointly trained three-branch network, about 25 minutes per seed), then `fdc2_nochroma`. Expected to finish around 10:30.
+- **`fdc3` (FDC-FS, three branches trained as one network): 46.9% ± 1.4** (48.8, 46.1, 45.7). Steadier than `late3`, with Healthy recall 0.50 in every seed (MFCC alone gets about 0.25, so fewer false alarms).
+- `fdc2_nochroma` **43.9% ± 3.3**. Dropping chroma costs 3 points, so the chromagram adds information even though it is weakest alone.
+- **ICBHI-only round complete (11:56).** Ranking: late3 48.2 > fdc3 46.9 > MFCC 45.5 > spec 44.8 > fdc2 43.9 > chroma 41.2. Both fusion methods beat every single model.
+- **Next (started 11:56, detached, log `results/fusion-run-sprs.log`):** prepare SPRSound, then rerun all six with `--data icbhi+sprs`, about 3–4 hours. Then one test run for the version best on ICBHI validation.
 - **Caution:** these are validation scores. The 11 Nov MFCC winner fell from 47.2% on validation to 35.0% on test. Only the single test run counts.
 
 **After that:**
@@ -292,7 +295,7 @@ The bar to beat on test is **35.0%** (11 Nov, MFCC) and 33.5% (deployed v1).
   - **Rhonchi and Stridor are left out** (ICBHI has no stridor, and its wheeze flag is not documented to include rhonchi);
   - "Poor Quality" records are skipped.
 - **Split:** by patient, 70/15/15, separately from ICBHI. ICBHI's 31 test patients stay the main comparison.
-- **Download:** git clone stalled on this connection, so files are fetched one by one from GitHub raw (resumable script in the session scratchpad). 13,136 files, 1.2 GB, all years 2022–2025. At 08:10 it was at 471 MB, at about 0.25 MB/s; expected done around 09:05. Saved to `C:\Users\Hared\Downloads\sprsound\`, outside the project, so it never syncs to Drive or git.
+- **Download: COMPLETE.** All 13,136 files (1.2 GB, years 2022–2025) are size-checked in `C:\Users\Hared\Downloads\sprsound\`, outside the project, so they never sync to Drive or git. git clone stalled on this connection, so they were fetched one by one with `model-rebuild/scripts/download_sprsound.py` (resumable).
 - **Philippine data:** the only Filipino lung-sound corpus found is **HINGA V1** (Baguio, 51 patients). It has no public download and is diagnosis-labelled (healthy/asthma only), so it cannot train sound labels. Resondi's own clinician-labelled device recordings remain the real fix.
 
 ### Product video: DONE 08:22
