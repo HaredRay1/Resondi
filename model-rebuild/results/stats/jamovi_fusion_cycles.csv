@@ -1,0 +1,1052 @@
+cycle,patient,true_label,pred_deployed_mfcc,correct_deployed_mfcc,pred_single_mfcc,correct_single_mfcc,pred_single_spec,correct_single_spec,pred_single_chroma,correct_single_chroma,pred_fdc2_nochroma,correct_fdc2_nochroma,pred_fdc3,correct_fdc3,pred_late3,correct_late3
+1,icbhi_102,Healthy,Healthy,1,Wheezing,0,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+2,icbhi_102,Healthy,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+3,icbhi_102,Healthy,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+4,icbhi_102,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0
+5,icbhi_102,Healthy,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+6,icbhi_102,Healthy,Crackles,0,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1,Crackles,0
+7,icbhi_102,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+8,icbhi_102,Healthy,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+9,icbhi_102,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Wheezing,0,Wheezing,0
+10,icbhi_102,Healthy,Healthy,1,Healthy,1,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+11,icbhi_102,Healthy,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+12,icbhi_102,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+13,icbhi_102,Healthy,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Wheezing,0
+14,icbhi_103,Wheezing,Crackles,0,Crackles,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+15,icbhi_103,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+16,icbhi_103,Wheezing,Healthy,0,Crackles,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+17,icbhi_103,Wheezing,Healthy,0,Healthy,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+18,icbhi_103,Wheezing,Wheezing with Crackles,0,Healthy,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+19,icbhi_103,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+20,icbhi_106,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+21,icbhi_106,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+22,icbhi_106,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+23,icbhi_106,Crackles,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+24,icbhi_106,Crackles,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+25,icbhi_106,Crackles,Crackles,1,Wheezing with Crackles,0,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1
+26,icbhi_106,Crackles,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+27,icbhi_106,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+28,icbhi_106,Crackles,Healthy,0,Wheezing,0,Crackles,1,Wheezing,0,Crackles,1,Healthy,0,Healthy,0
+29,icbhi_106,Wheezing,Wheezing with Crackles,0,Crackles,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+30,icbhi_106,Wheezing,Crackles,0,Wheezing with Crackles,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0
+31,icbhi_106,Healthy,Crackles,0,Wheezing with Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+32,icbhi_106,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,0,Wheezing with Crackles,0,Wheezing,1,Wheezing with Crackles,0,Wheezing with Crackles,0
+33,icbhi_106,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,0,Wheezing with Crackles,0,Wheezing,1,Wheezing with Crackles,0,Wheezing with Crackles,0
+34,icbhi_106,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,1,Wheezing with Crackles,0,Wheezing,1,Wheezing with Crackles,0,Wheezing,1
+35,icbhi_106,Wheezing,Healthy,0,Wheezing,1,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0
+36,icbhi_106,Wheezing,Wheezing with Crackles,0,Wheezing,1,Healthy,0,Crackles,0,Wheezing,1,Healthy,0,Wheezing,1
+37,icbhi_106,Healthy,Healthy,1,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Wheezing,0
+38,icbhi_108,Healthy,Healthy,1,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Healthy,1,Crackles,0
+39,icbhi_108,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+40,icbhi_108,Healthy,Healthy,1,Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Crackles,0
+41,icbhi_108,Healthy,Healthy,1,Healthy,1,Crackles,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Crackles,0
+42,icbhi_108,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+43,icbhi_108,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+44,icbhi_108,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+45,icbhi_108,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+46,icbhi_117,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1
+47,icbhi_117,Healthy,Wheezing,0,Crackles,0,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Healthy,1
+48,icbhi_117,Healthy,Crackles,0,Crackles,0,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Healthy,1
+49,icbhi_117,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Healthy,1
+50,icbhi_117,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1
+51,icbhi_117,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1
+52,icbhi_117,Healthy,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Wheezing,0
+53,icbhi_117,Wheezing,Wheezing with Crackles,0,Wheezing,1,Healthy,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0
+54,icbhi_117,Wheezing,Wheezing with Crackles,0,Wheezing,1,Healthy,0,Wheezing,1,Wheezing with Crackles,0,Healthy,0,Healthy,0
+55,icbhi_117,Wheezing,Crackles,0,Crackles,0,Healthy,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0
+56,icbhi_117,Wheezing,Wheezing with Crackles,0,Wheezing,1,Healthy,0,Wheezing,1,Wheezing with Crackles,0,Healthy,0,Healthy,0
+57,icbhi_117,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0
+58,icbhi_124,Wheezing with Crackles,Wheezing,0,Healthy,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+59,icbhi_124,Wheezing,Healthy,0,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Wheezing,1
+60,icbhi_124,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1
+61,icbhi_124,Wheezing,Healthy,0,Wheezing,1,Healthy,0,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1
+62,icbhi_124,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Healthy,0,Wheezing,1,Healthy,0
+63,icbhi_124,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Healthy,0
+64,icbhi_124,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Wheezing,1
+65,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1
+66,icbhi_124,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Wheezing,1
+67,icbhi_124,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Wheezing,1
+68,icbhi_124,Wheezing,Wheezing,1,Healthy,0,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Healthy,0
+69,icbhi_124,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Wheezing,1
+70,icbhi_124,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Wheezing,1
+71,icbhi_124,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Healthy,0
+72,icbhi_124,Healthy,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1
+73,icbhi_124,Healthy,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+74,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+75,icbhi_124,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+76,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+77,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+78,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+79,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1
+80,icbhi_124,Healthy,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+81,icbhi_124,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+82,icbhi_124,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+83,icbhi_124,Healthy,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+84,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+85,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+86,icbhi_124,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+87,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+88,icbhi_124,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+89,icbhi_124,Healthy,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+90,icbhi_124,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+91,icbhi_124,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+92,icbhi_124,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+93,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1
+94,icbhi_124,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+95,icbhi_124,Healthy,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+96,icbhi_124,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+97,icbhi_124,Wheezing,Healthy,0,Healthy,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+98,icbhi_124,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0
+99,icbhi_124,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+100,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+101,icbhi_124,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+102,icbhi_124,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+103,icbhi_124,Healthy,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0,Wheezing,0,Wheezing,0,Healthy,1
+104,icbhi_124,Healthy,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0
+105,icbhi_124,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1
+106,icbhi_125,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+107,icbhi_125,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+108,icbhi_125,Crackles,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+109,icbhi_125,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+110,icbhi_125,Crackles,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+111,icbhi_125,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+112,icbhi_128,Crackles,Healthy,0,Crackles,1,Healthy,0,Wheezing,0,Wheezing with Crackles,0,Crackles,1,Healthy,0
+113,icbhi_128,Healthy,Wheezing with Crackles,0,Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1
+114,icbhi_128,Crackles,Crackles,1,Wheezing,0,Healthy,0,Wheezing,0,Wheezing with Crackles,0,Healthy,0,Healthy,0
+115,icbhi_128,Crackles,Wheezing with Crackles,0,Crackles,1,Healthy,0,Wheezing,0,Wheezing with Crackles,0,Healthy,0,Healthy,0
+116,icbhi_128,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Wheezing,0
+117,icbhi_129,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+118,icbhi_129,Crackles,Healthy,0,Healthy,0,Crackles,1,Crackles,1,Healthy,0,Healthy,0,Crackles,1
+119,icbhi_129,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+120,icbhi_129,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+121,icbhi_129,Crackles,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+122,icbhi_129,Crackles,Healthy,0,Wheezing,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0
+123,icbhi_129,Crackles,Wheezing with Crackles,0,Wheezing,0,Crackles,1,Wheezing with Crackles,0,Healthy,0,Healthy,0,Crackles,1
+124,icbhi_129,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+125,icbhi_129,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1
+126,icbhi_134,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+127,icbhi_134,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0
+128,icbhi_134,Healthy,Healthy,1,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0
+129,icbhi_134,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0
+130,icbhi_134,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0
+131,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0
+132,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+133,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+134,icbhi_134,Healthy,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+135,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+136,icbhi_134,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+137,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+138,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+139,icbhi_134,Healthy,Wheezing with Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+140,icbhi_134,Healthy,Crackles,0,Wheezing with Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0
+141,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+142,icbhi_134,Healthy,Healthy,1,Healthy,1,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+143,icbhi_134,Healthy,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Wheezing,0
+144,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+145,icbhi_134,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+146,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+147,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+148,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+149,icbhi_134,Healthy,Healthy,1,Healthy,1,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0
+150,icbhi_134,Healthy,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+151,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+152,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+153,icbhi_134,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+154,icbhi_134,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+155,icbhi_134,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0,Wheezing with Crackles,0
+156,icbhi_137,Healthy,Healthy,1,Healthy,1,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Healthy,1
+157,icbhi_137,Healthy,Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Crackles,0,Healthy,1,Healthy,1
+158,icbhi_137,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+159,icbhi_137,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+160,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Crackles,0,Healthy,1,Healthy,1
+161,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1
+162,icbhi_137,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Healthy,1
+163,icbhi_137,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1
+164,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+165,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+166,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Crackles,0,Healthy,1,Healthy,1
+167,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+168,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+169,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+170,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+171,icbhi_137,Healthy,Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+172,icbhi_137,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1
+173,icbhi_153,Healthy,Crackles,0,Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+174,icbhi_153,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+175,icbhi_153,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+176,icbhi_153,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+177,icbhi_153,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+178,icbhi_153,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+179,icbhi_153,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+180,icbhi_153,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+181,icbhi_153,Healthy,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0
+182,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+183,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+184,icbhi_156,Crackles,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+185,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+186,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Crackles,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0
+187,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+188,icbhi_156,Wheezing,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+189,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+190,icbhi_156,Crackles,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+191,icbhi_156,Healthy,Wheezing,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+192,icbhi_156,Crackles,Wheezing with Crackles,0,Crackles,1,Healthy,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0
+193,icbhi_156,Crackles,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+194,icbhi_156,Wheezing with Crackles,Crackles,0,Wheezing,0,Healthy,0,Crackles,0,Wheezing,0,Wheezing,0,Healthy,0
+195,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Healthy,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+196,icbhi_156,Wheezing with Crackles,Crackles,0,Wheezing,0,Healthy,0,Crackles,0,Healthy,0,Wheezing,0,Healthy,0
+197,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Healthy,0,Crackles,0,Wheezing with Crackles,1,Wheezing,0,Healthy,0
+198,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Crackles,0,Healthy,0,Crackles,0,Wheezing with Crackles,1,Wheezing,0,Crackles,0
+199,icbhi_156,Wheezing with Crackles,Crackles,0,Wheezing,0,Healthy,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Crackles,0
+200,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0
+201,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+202,icbhi_156,Crackles,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,0,Crackles,1,Wheezing with Crackles,0,Wheezing,0,Wheezing,0
+203,icbhi_156,Crackles,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+204,icbhi_156,Crackles,Wheezing with Crackles,0,Crackles,1,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0
+205,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+206,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Wheezing,0
+207,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Crackles,0,Wheezing,0,Healthy,0,Wheezing,0
+208,icbhi_156,Crackles,Wheezing with Crackles,0,Wheezing,0,Healthy,0,Wheezing with Crackles,0,Crackles,1,Healthy,0,Healthy,0
+209,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Healthy,0,Crackles,0,Crackles,0,Crackles,0,Healthy,0
+210,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Healthy,0,Crackles,0,Crackles,0,Crackles,0,Healthy,0
+211,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+212,icbhi_156,Crackles,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+213,icbhi_156,Crackles,Wheezing,0,Wheezing,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+214,icbhi_156,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+215,icbhi_156,Crackles,Wheezing,0,Wheezing,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+216,icbhi_156,Crackles,Wheezing,0,Wheezing,0,Crackles,1,Wheezing,0,Crackles,1,Crackles,1,Crackles,1
+217,icbhi_156,Crackles,Wheezing,0,Wheezing,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+218,icbhi_156,Wheezing,Crackles,0,Crackles,0,Wheezing,1,Crackles,0,Healthy,0,Healthy,0,Wheezing,1
+219,icbhi_156,Wheezing with Crackles,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0,Healthy,0,Wheezing,0,Wheezing,0
+220,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+221,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Crackles,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+222,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,0,Healthy,0,Wheezing,0
+223,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Healthy,0,Wheezing,0,Wheezing,0
+224,icbhi_156,Wheezing with Crackles,Crackles,0,Wheezing with Crackles,1,Wheezing,0,Wheezing with Crackles,1,Healthy,0,Wheezing with Crackles,1,Wheezing,0
+225,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Crackles,0,Healthy,0,Healthy,0,Crackles,0
+226,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing,0,Wheezing,0,Crackles,0,Healthy,0,Healthy,0,Wheezing,0
+227,icbhi_156,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,0,Healthy,0,Wheezing with Crackles,0,Wheezing,1,Healthy,0
+228,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing,0,Wheezing with Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+229,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+230,icbhi_156,Wheezing,Healthy,0,Wheezing,1,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+231,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+232,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing with Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+233,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+234,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing,0,Healthy,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0
+235,icbhi_156,Wheezing with Crackles,Healthy,0,Healthy,0,Healthy,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0
+236,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+237,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0,Crackles,0,Crackles,0
+238,icbhi_156,Crackles,Crackles,1,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+239,icbhi_156,Crackles,Crackles,1,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+240,icbhi_156,Crackles,Crackles,1,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+241,icbhi_156,Crackles,Crackles,1,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+242,icbhi_156,Crackles,Crackles,1,Crackles,1,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0
+243,icbhi_156,Crackles,Crackles,1,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+244,icbhi_156,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Healthy,0,Crackles,1
+245,icbhi_156,Crackles,Crackles,1,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0
+246,icbhi_156,Wheezing with Crackles,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Healthy,0,Crackles,0,Crackles,0
+247,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Healthy,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+248,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Crackles,0,Healthy,0,Crackles,0,Healthy,0,Crackles,0,Crackles,0
+249,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+250,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+251,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Healthy,0,Crackles,0,Healthy,0,Crackles,0,Healthy,0
+252,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Healthy,0,Wheezing with Crackles,1,Healthy,0,Healthy,0,Wheezing,0
+253,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0,Healthy,0,Crackles,0,Crackles,0
+254,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Crackles,0,Wheezing with Crackles,1,Wheezing,0,Wheezing with Crackles,1,Healthy,0
+255,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0
+256,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Crackles,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+257,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0
+258,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0
+259,icbhi_156,Wheezing with Crackles,Wheezing,0,Wheezing,0,Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0
+260,icbhi_156,Crackles,Wheezing,0,Wheezing,0,Crackles,1,Crackles,1,Wheezing,0,Wheezing,0,Crackles,1
+261,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing,0,Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0
+262,icbhi_156,Crackles,Wheezing with Crackles,0,Wheezing,0,Crackles,1,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0
+263,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Healthy,0,Crackles,0,Wheezing,0,Wheezing,0,Healthy,0
+264,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+265,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+266,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+267,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+268,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+269,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+270,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+271,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+272,icbhi_156,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+273,icbhi_156,Wheezing with Crackles,Healthy,0,Crackles,0,Healthy,0,Crackles,0,Wheezing,0,Healthy,0,Healthy,0
+274,icbhi_156,Wheezing with Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,0,Wheezing,0,Healthy,0,Healthy,0
+275,icbhi_156,Wheezing with Crackles,Healthy,0,Wheezing,0,Healthy,0,Wheezing with Crackles,1,Wheezing,0,Healthy,0,Healthy,0
+276,icbhi_156,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing,0,Healthy,0,Wheezing with Crackles,1,Healthy,0,Healthy,0,Healthy,0
+277,icbhi_156,Wheezing,Healthy,0,Crackles,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+278,icbhi_156,Wheezing,Crackles,0,Wheezing with Crackles,0,Healthy,0,Wheezing with Crackles,0,Wheezing,1,Healthy,0,Wheezing,1
+279,icbhi_156,Wheezing,Crackles,0,Healthy,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+280,icbhi_156,Crackles,Crackles,1,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1
+281,icbhi_156,Wheezing,Crackles,0,Crackles,0,Crackles,0,Healthy,0,Crackles,0,Crackles,0,Crackles,0
+282,icbhi_156,Wheezing,Wheezing with Crackles,0,Wheezing,1,Crackles,0,Healthy,0,Wheezing with Crackles,0,Crackles,0,Crackles,0
+283,icbhi_156,Wheezing,Crackles,0,Crackles,0,Crackles,0,Healthy,0,Crackles,0,Crackles,0,Crackles,0
+284,icbhi_156,Wheezing,Crackles,0,Crackles,0,Crackles,0,Healthy,0,Crackles,0,Crackles,0,Crackles,0
+285,icbhi_156,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0
+286,icbhi_156,Wheezing,Crackles,0,Crackles,0,Crackles,0,Healthy,0,Crackles,0,Crackles,0,Crackles,0
+287,icbhi_156,Wheezing,Crackles,0,Crackles,0,Crackles,0,Healthy,0,Crackles,0,Crackles,0,Crackles,0
+288,icbhi_156,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+289,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+290,icbhi_156,Wheezing with Crackles,Crackles,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing with Crackles,1
+291,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Healthy,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+292,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+293,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+294,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+295,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+296,icbhi_156,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Crackles,0
+297,icbhi_156,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0
+298,icbhi_156,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Crackles,0
+299,icbhi_156,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Crackles,0
+300,icbhi_156,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Crackles,0
+301,icbhi_156,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Crackles,0
+302,icbhi_156,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0
+303,icbhi_156,Wheezing,Crackles,0,Crackles,0,Crackles,0,Healthy,0,Crackles,0,Crackles,0,Crackles,0
+304,icbhi_156,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+305,icbhi_156,Wheezing,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+306,icbhi_156,Wheezing with Crackles,Healthy,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Wheezing with Crackles,1,Crackles,0
+307,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Crackles,0
+308,icbhi_156,Wheezing with Crackles,Crackles,0,Wheezing,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Crackles,0
+309,icbhi_156,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+310,icbhi_156,Wheezing with Crackles,Crackles,0,Wheezing,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Crackles,0
+311,icbhi_156,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0
+312,icbhi_160,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+313,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Wheezing,0
+314,icbhi_160,Wheezing,Wheezing with Crackles,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Crackles,0,Wheezing,1,Wheezing,1
+315,icbhi_160,Wheezing,Crackles,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Wheezing,1,Wheezing,1,Wheezing,1
+316,icbhi_160,Crackles,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1
+317,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+318,icbhi_160,Wheezing,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+319,icbhi_160,Wheezing,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+320,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+321,icbhi_160,Wheezing,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+322,icbhi_160,Healthy,Crackles,0,Healthy,1,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+323,icbhi_160,Wheezing,Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0
+324,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing,1,Wheezing,1,Wheezing,1,Crackles,0,Wheezing,1,Wheezing,1
+325,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0
+326,icbhi_160,Wheezing,Crackles,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Wheezing,1,Wheezing,1,Wheezing,1
+327,icbhi_160,Wheezing,Crackles,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Wheezing,1,Wheezing,1,Wheezing,1
+328,icbhi_160,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0,Wheezing,0
+329,icbhi_160,Wheezing,Healthy,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Crackles,0,Wheezing,1,Wheezing,1
+330,icbhi_160,Wheezing,Crackles,0,Crackles,0,Wheezing,1,Wheezing,1,Wheezing,1,Wheezing,1,Wheezing,1
+331,icbhi_160,Wheezing,Wheezing with Crackles,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Crackles,0,Wheezing,1,Wheezing,1
+332,icbhi_160,Wheezing,Crackles,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Wheezing,1,Wheezing,1,Wheezing,1
+333,icbhi_160,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Wheezing,0
+334,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing,1,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+335,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0
+336,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing,1,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0
+337,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0
+338,icbhi_160,Healthy,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0
+339,icbhi_160,Wheezing,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+340,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+341,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+342,icbhi_160,Wheezing,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+343,icbhi_160,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+344,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+345,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+346,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0
+347,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+348,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+349,icbhi_160,Healthy,Healthy,1,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0
+350,icbhi_160,Wheezing,Healthy,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,1,Crackles,0
+351,icbhi_160,Wheezing,Healthy,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0
+352,icbhi_160,Wheezing,Crackles,0,Wheezing,1,Wheezing,1,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0
+353,icbhi_160,Healthy,Healthy,1,Healthy,1,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0
+354,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Wheezing,0
+355,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+356,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Wheezing,0
+357,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Wheezing,0
+358,icbhi_160,Wheezing,Crackles,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Crackles,0,Wheezing,1,Wheezing,1
+359,icbhi_160,Wheezing,Crackles,0,Crackles,0,Wheezing,1,Wheezing with Crackles,0,Crackles,0,Wheezing,1,Wheezing,1
+360,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Wheezing,0
+361,icbhi_160,Wheezing with Crackles,Healthy,0,Crackles,0,Wheezing,0,Wheezing with Crackles,1,Crackles,0,Wheezing,0,Wheezing,0
+362,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0
+363,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0
+364,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+365,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+366,icbhi_160,Wheezing,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+367,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+368,icbhi_160,Wheezing,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+369,icbhi_160,Wheezing,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+370,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+371,icbhi_160,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Crackles,0,Crackles,0,Crackles,0
+372,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+373,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+374,icbhi_160,Wheezing,Wheezing with Crackles,0,Healthy,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0
+375,icbhi_160,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0
+376,icbhi_160,Wheezing,Healthy,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing,1,Wheezing with Crackles,0
+377,icbhi_160,Wheezing,Healthy,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+378,icbhi_160,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+379,icbhi_160,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+380,icbhi_160,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+381,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+382,icbhi_160,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+383,icbhi_160,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+384,icbhi_160,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+385,icbhi_160,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+386,icbhi_160,Crackles,Crackles,1,Wheezing with Crackles,0,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+387,icbhi_160,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Healthy,0,Healthy,0
+388,icbhi_160,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+389,icbhi_160,Crackles,Healthy,0,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+390,icbhi_160,Crackles,Healthy,0,Crackles,1,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+391,icbhi_160,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+392,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+393,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+394,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+395,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+396,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+397,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+398,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+399,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+400,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+401,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+402,icbhi_160,Crackles,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+403,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+404,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1
+405,icbhi_160,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+406,icbhi_160,Healthy,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0
+407,icbhi_160,Healthy,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0
+408,icbhi_160,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+409,icbhi_160,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Wheezing with Crackles,0
+410,icbhi_160,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+411,icbhi_160,Healthy,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Wheezing,0
+412,icbhi_160,Healthy,Wheezing with Crackles,0,Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing with Crackles,0,Wheezing with Crackles,0
+413,icbhi_161,Wheezing with Crackles,Healthy,0,Wheezing,0,Healthy,0,Crackles,0,Wheezing,0,Healthy,0,Healthy,0
+414,icbhi_161,Wheezing with Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+415,icbhi_161,Wheezing,Healthy,0,Healthy,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+416,icbhi_161,Wheezing,Healthy,0,Wheezing,1,Healthy,0,Crackles,0,Wheezing,1,Healthy,0,Healthy,0
+417,icbhi_161,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+418,icbhi_161,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+419,icbhi_161,Healthy,Crackles,0,Healthy,1,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+420,icbhi_161,Crackles,Healthy,0,Crackles,1,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+421,icbhi_161,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1
+422,icbhi_161,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+423,icbhi_161,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+424,icbhi_161,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+425,icbhi_161,Wheezing,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+426,icbhi_161,Wheezing,Healthy,0,Healthy,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+427,icbhi_161,Wheezing,Healthy,0,Healthy,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+428,icbhi_161,Wheezing,Healthy,0,Healthy,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+429,icbhi_161,Wheezing,Healthy,0,Healthy,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+430,icbhi_161,Wheezing,Healthy,0,Healthy,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+431,icbhi_161,Wheezing,Crackles,0,Healthy,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+432,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+433,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+434,icbhi_162,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+435,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0
+436,icbhi_162,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+437,icbhi_162,Healthy,Healthy,1,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+438,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+439,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+440,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+441,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+442,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+443,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+444,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+445,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+446,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+447,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+448,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+449,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+450,icbhi_162,Crackles,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+451,icbhi_162,Crackles,Healthy,0,Healthy,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+452,icbhi_162,Crackles,Healthy,0,Healthy,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+453,icbhi_162,Healthy,Wheezing,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+454,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+455,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0
+456,icbhi_162,Healthy,Wheezing with Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Crackles,0
+457,icbhi_162,Healthy,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+458,icbhi_162,Healthy,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,0
+459,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+460,icbhi_162,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+461,icbhi_162,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0,Wheezing,0
+462,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Wheezing,0
+463,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0
+464,icbhi_162,Healthy,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0
+465,icbhi_162,Healthy,Wheezing,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Wheezing,0
+466,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Wheezing,0
+467,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0
+468,icbhi_162,Healthy,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0
+469,icbhi_162,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+470,icbhi_162,Healthy,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+471,icbhi_162,Healthy,Wheezing,0,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1
+472,icbhi_162,Healthy,Healthy,1,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1
+473,icbhi_162,Healthy,Wheezing,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+474,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0
+475,icbhi_162,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+476,icbhi_162,Healthy,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,0
+477,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+478,icbhi_162,Healthy,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+479,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0
+480,icbhi_162,Healthy,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0
+481,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+482,icbhi_162,Healthy,Crackles,0,Crackles,0,Healthy,1,Wheezing with Crackles,0,Crackles,0,Crackles,0,Wheezing,0
+483,icbhi_162,Healthy,Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Crackles,0,Crackles,0,Wheezing,0
+484,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Healthy,1,Wheezing,0
+485,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0
+486,icbhi_162,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0
+487,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+488,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0
+489,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0
+490,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+491,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0
+492,icbhi_162,Healthy,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0
+493,icbhi_162,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+494,icbhi_162,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Crackles,0,Healthy,1
+495,icbhi_162,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1
+496,icbhi_162,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1
+497,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+498,icbhi_162,Healthy,Healthy,1,Healthy,1,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0
+499,icbhi_162,Healthy,Wheezing,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+500,icbhi_162,Healthy,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+501,icbhi_162,Healthy,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,0
+502,icbhi_162,Healthy,Healthy,1,Healthy,1,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Wheezing with Crackles,0
+503,icbhi_162,Healthy,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+504,icbhi_162,Healthy,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+505,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+506,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+507,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+508,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+509,icbhi_162,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0
+510,icbhi_162,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0
+511,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0
+512,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0
+513,icbhi_162,Wheezing,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0
+514,icbhi_162,Healthy,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0
+515,icbhi_162,Healthy,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0
+516,icbhi_162,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+517,icbhi_162,Crackles,Healthy,0,Crackles,1,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+518,icbhi_162,Crackles,Healthy,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Wheezing,0,Healthy,0,Healthy,0
+519,icbhi_162,Crackles,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+520,icbhi_162,Healthy,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+521,icbhi_164,Wheezing,Wheezing with Crackles,0,Healthy,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+522,icbhi_164,Wheezing,Healthy,0,Crackles,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+523,icbhi_164,Crackles,Healthy,0,Wheezing,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0
+524,icbhi_164,Healthy,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0
+525,icbhi_164,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+526,icbhi_164,Wheezing,Healthy,0,Healthy,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+527,icbhi_164,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+528,icbhi_164,Healthy,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+529,icbhi_164,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+530,icbhi_164,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+531,icbhi_165,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+532,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+533,icbhi_165,Crackles,Crackles,1,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+534,icbhi_165,Crackles,Crackles,1,Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+535,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+536,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+537,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+538,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+539,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+540,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+541,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+542,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+543,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+544,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+545,icbhi_165,Healthy,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+546,icbhi_165,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+547,icbhi_165,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+548,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Wheezing,0,Healthy,1
+549,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+550,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+551,icbhi_165,Wheezing,Crackles,0,Healthy,0,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0
+552,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+553,icbhi_165,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+554,icbhi_173,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+555,icbhi_173,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+556,icbhi_173,Crackles,Healthy,0,Healthy,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0
+557,icbhi_173,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+558,icbhi_173,Crackles,Healthy,0,Healthy,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0
+559,icbhi_173,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+560,icbhi_173,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+561,icbhi_173,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+562,icbhi_173,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+563,icbhi_173,Crackles,Healthy,0,Wheezing,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+564,icbhi_173,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+565,icbhi_173,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+566,icbhi_173,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+567,icbhi_176,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+568,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+569,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+570,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+571,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1
+572,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1
+573,icbhi_176,Crackles,Healthy,0,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Wheezing,0,Healthy,0
+574,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Wheezing,0,Healthy,0
+575,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Wheezing,0,Healthy,0
+576,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Wheezing,0,Healthy,0
+577,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+578,icbhi_176,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Healthy,0
+579,icbhi_176,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+580,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+581,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+582,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+583,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+584,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+585,icbhi_176,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+586,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+587,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+588,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Healthy,0
+589,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Healthy,0
+590,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+591,icbhi_176,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+592,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+593,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+594,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+595,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+596,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+597,icbhi_176,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+598,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+599,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+600,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+601,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+602,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+603,icbhi_176,Crackles,Healthy,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Crackles,1,Healthy,0,Wheezing,0
+604,icbhi_176,Crackles,Healthy,0,Healthy,0,Wheezing,0,Crackles,1,Crackles,1,Healthy,0,Wheezing,0
+605,icbhi_176,Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Crackles,1,Crackles,1,Healthy,0,Healthy,0
+606,icbhi_176,Crackles,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,1,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,1
+607,icbhi_176,Crackles,Crackles,1,Healthy,0,Wheezing,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+608,icbhi_176,Crackles,Wheezing with Crackles,0,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Healthy,0,Wheezing,0
+609,icbhi_176,Healthy,Healthy,1,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+610,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+611,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+612,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+613,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+614,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+615,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Wheezing,0,Crackles,1
+616,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Healthy,0,Crackles,1
+617,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+618,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Wheezing,0,Crackles,1
+619,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Healthy,0
+620,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Wheezing,0,Healthy,0
+621,icbhi_176,Crackles,Wheezing with Crackles,0,Crackles,1,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+622,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+623,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Healthy,0,Crackles,1
+624,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+625,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+626,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+627,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+628,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+629,icbhi_176,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Crackles,1,Healthy,0,Wheezing,0
+630,icbhi_176,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+631,icbhi_176,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+632,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+633,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Healthy,0,Crackles,1
+634,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+635,icbhi_176,Crackles,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+636,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+637,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+638,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+639,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Healthy,0,Crackles,1
+640,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+641,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+642,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+643,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+644,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+645,icbhi_176,Crackles,Healthy,0,Healthy,0,Wheezing,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+646,icbhi_176,Crackles,Healthy,0,Healthy,0,Wheezing,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+647,icbhi_176,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Healthy,0,Wheezing,0
+648,icbhi_176,Healthy,Healthy,1,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+649,icbhi_176,Crackles,Crackles,1,Healthy,0,Wheezing,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+650,icbhi_176,Crackles,Healthy,0,Wheezing,0,Wheezing,0,Crackles,1,Crackles,1,Healthy,0,Wheezing,0
+651,icbhi_176,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+652,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+653,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+654,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+655,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+656,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+657,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+658,icbhi_176,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing with Crackles,0,Crackles,0
+659,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+660,icbhi_176,Crackles,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+661,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+662,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+663,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+664,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+665,icbhi_176,Crackles,Crackles,1,Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0,Healthy,0,Wheezing,0
+666,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+667,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+668,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+669,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+670,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+671,icbhi_176,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+672,icbhi_176,Healthy,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Crackles,0
+673,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+674,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1
+675,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+676,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+677,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+678,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+679,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Crackles,1
+680,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+681,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+682,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+683,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+684,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+685,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+686,icbhi_176,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+687,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+688,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+689,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+690,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+691,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+692,icbhi_176,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+693,icbhi_176,Crackles,Healthy,0,Healthy,0,Wheezing,0,Crackles,1,Healthy,0,Healthy,0,Wheezing,0
+694,icbhi_176,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+695,icbhi_176,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+696,icbhi_176,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+697,icbhi_176,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+698,icbhi_176,Crackles,Wheezing,0,Healthy,0,Wheezing,0,Crackles,1,Wheezing,0,Healthy,0,Wheezing,0
+699,icbhi_176,Crackles,Wheezing,0,Wheezing,0,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Healthy,0
+700,icbhi_177,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Healthy,0,Wheezing,0,Healthy,0
+701,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+702,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Healthy,0,Healthy,0
+703,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Healthy,0,Wheezing,0,Wheezing,0
+704,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Healthy,0,Wheezing,0,Wheezing,0
+705,icbhi_177,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Wheezing,0,Wheezing,0
+706,icbhi_177,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Wheezing,0,Healthy,1
+707,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Healthy,0,Wheezing,0,Wheezing,0
+708,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+709,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Wheezing,0,Wheezing,0,Wheezing,0
+710,icbhi_177,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+711,icbhi_177,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+712,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+713,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+714,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+715,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+716,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+717,icbhi_177,Wheezing,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+718,icbhi_177,Wheezing,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+719,icbhi_177,Wheezing,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+720,icbhi_177,Healthy,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+721,icbhi_177,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+722,icbhi_177,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+723,icbhi_177,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+724,icbhi_177,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+725,icbhi_177,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+726,icbhi_177,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+727,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+728,icbhi_177,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+729,icbhi_177,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Crackles,0,Crackles,0
+730,icbhi_177,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Crackles,0,Crackles,0
+731,icbhi_177,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Crackles,0,Healthy,1
+732,icbhi_177,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0
+733,icbhi_177,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+734,icbhi_177,Healthy,Healthy,1,Wheezing,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Healthy,1
+735,icbhi_177,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1
+736,icbhi_177,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+737,icbhi_177,Healthy,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0,Crackles,0,Crackles,0,Healthy,1,Wheezing with Crackles,0
+738,icbhi_177,Healthy,Wheezing with Crackles,0,Crackles,0,Healthy,1,Wheezing with Crackles,0,Crackles,0,Healthy,1,Healthy,1
+739,icbhi_177,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+740,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+741,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+742,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+743,icbhi_177,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+744,icbhi_177,Wheezing,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+745,icbhi_177,Wheezing,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+746,icbhi_177,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+747,icbhi_177,Wheezing,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+748,icbhi_177,Wheezing with Crackles,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+749,icbhi_177,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Crackles,0,Healthy,1
+750,icbhi_177,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+751,icbhi_177,Healthy,Crackles,0,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+752,icbhi_177,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+753,icbhi_177,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+754,icbhi_177,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0
+755,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,1
+756,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+757,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,1
+758,icbhi_177,Healthy,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0
+759,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Healthy,0,Crackles,1,Healthy,0,Crackles,1
+760,icbhi_177,Healthy,Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0,Wheezing,0,Healthy,1
+761,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Wheezing,0,Crackles,1,Healthy,0,Healthy,0
+762,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Wheezing,0,Crackles,1,Wheezing,0,Healthy,0
+763,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing,0,Wheezing,0,Crackles,1,Crackles,1,Crackles,1
+764,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Healthy,0,Wheezing with Crackles,0
+765,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Crackles,1,Healthy,0,Wheezing with Crackles,0
+766,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Healthy,0,Crackles,1,Healthy,0,Wheezing with Crackles,0
+767,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Healthy,0,Crackles,1,Wheezing with Crackles,0,Wheezing with Crackles,0
+768,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Crackles,1,Wheezing with Crackles,0,Crackles,1,Wheezing with Crackles,0
+769,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Wheezing,0,Crackles,1,Healthy,0,Crackles,1
+770,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Healthy,0,Crackles,1,Healthy,0,Wheezing with Crackles,0
+771,icbhi_177,Crackles,Wheezing with Crackles,0,Crackles,1,Wheezing with Crackles,0,Crackles,1,Wheezing with Crackles,0,Healthy,0,Wheezing with Crackles,0
+772,icbhi_177,Crackles,Crackles,1,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,0,Crackles,1,Wheezing with Crackles,0,Wheezing with Crackles,0
+773,icbhi_177,Crackles,Crackles,1,Crackles,1,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,1,Crackles,1
+774,icbhi_177,Healthy,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0
+775,icbhi_177,Healthy,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+776,icbhi_177,Healthy,Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0
+777,icbhi_177,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Crackles,0,Healthy,1,Wheezing with Crackles,0
+778,icbhi_177,Healthy,Healthy,1,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+779,icbhi_179,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+780,icbhi_179,Wheezing with Crackles,Healthy,0,Healthy,0,Wheezing,0,Crackles,0,Healthy,0,Healthy,0,Wheezing,0
+781,icbhi_179,Crackles,Crackles,1,Crackles,1,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Healthy,0,Wheezing,0
+782,icbhi_179,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Healthy,1,Wheezing,0
+783,icbhi_179,Healthy,Healthy,1,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+784,icbhi_179,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+785,icbhi_179,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+786,icbhi_179,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1
+787,icbhi_179,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+788,icbhi_179,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+789,icbhi_179,Crackles,Healthy,0,Wheezing,0,Healthy,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0
+790,icbhi_179,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+791,icbhi_179,Wheezing,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+792,icbhi_179,Crackles,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+793,icbhi_179,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+794,icbhi_181,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+795,icbhi_181,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+796,icbhi_181,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+797,icbhi_181,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+798,icbhi_181,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Healthy,1
+799,icbhi_181,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Healthy,1
+800,icbhi_181,Healthy,Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Healthy,1
+801,icbhi_181,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0
+802,icbhi_181,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+803,icbhi_181,Crackles,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Crackles,1,Healthy,0,Crackles,1
+804,icbhi_181,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+805,icbhi_181,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+806,icbhi_181,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1
+807,icbhi_181,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0,Wheezing,0,Healthy,1
+808,icbhi_181,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Healthy,1
+809,icbhi_181,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Healthy,1
+810,icbhi_181,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1
+811,icbhi_183,Crackles,Wheezing,0,Crackles,1,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+812,icbhi_183,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Healthy,1
+813,icbhi_183,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+814,icbhi_183,Healthy,Crackles,0,Crackles,0,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+815,icbhi_183,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+816,icbhi_183,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+817,icbhi_183,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+818,icbhi_183,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+819,icbhi_196,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+820,icbhi_196,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+821,icbhi_196,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+822,icbhi_196,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+823,icbhi_196,Healthy,Crackles,0,Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+824,icbhi_196,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+825,icbhi_202,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Wheezing,0,Healthy,1
+826,icbhi_202,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+827,icbhi_202,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Wheezing,0,Healthy,1
+828,icbhi_202,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing,0,Wheezing,0,Healthy,1
+829,icbhi_202,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+830,icbhi_202,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+831,icbhi_202,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+832,icbhi_202,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+833,icbhi_202,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+834,icbhi_202,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+835,icbhi_204,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+836,icbhi_204,Wheezing,Crackles,0,Wheezing with Crackles,0,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Wheezing with Crackles,0
+837,icbhi_204,Wheezing,Crackles,0,Wheezing with Crackles,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+838,icbhi_204,Wheezing,Crackles,0,Wheezing with Crackles,0,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1,Healthy,0
+839,icbhi_204,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Wheezing,0,Wheezing,0,Wheezing,0
+840,icbhi_204,Wheezing,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Healthy,0,Crackles,0
+841,icbhi_204,Healthy,Crackles,0,Crackles,0,Healthy,1,Wheezing with Crackles,0,Healthy,1,Crackles,0,Crackles,0
+842,icbhi_204,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1
+843,icbhi_204,Wheezing,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+844,icbhi_204,Wheezing,Healthy,0,Crackles,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+845,icbhi_204,Healthy,Crackles,0,Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+846,icbhi_204,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+847,icbhi_204,Healthy,Crackles,0,Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+848,icbhi_204,Healthy,Wheezing,0,Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+849,icbhi_204,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+850,icbhi_204,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Crackles,0
+851,icbhi_204,Healthy,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1
+852,icbhi_204,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0,Crackles,0
+853,icbhi_204,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Crackles,0
+854,icbhi_204,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+855,icbhi_204,Healthy,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Wheezing,0
+856,icbhi_204,Healthy,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1
+857,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0
+858,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+859,icbhi_204,Healthy,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+860,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+861,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+862,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Crackles,0
+863,icbhi_204,Healthy,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+864,icbhi_204,Healthy,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+865,icbhi_204,Healthy,Crackles,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+866,icbhi_204,Healthy,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+867,icbhi_204,Healthy,Healthy,1,Crackles,0,Wheezing,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+868,icbhi_204,Healthy,Crackles,0,Crackles,0,Wheezing,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+869,icbhi_204,Healthy,Healthy,1,Crackles,0,Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+870,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+871,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+872,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+873,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+874,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+875,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+876,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+877,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+878,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0
+879,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0
+880,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0
+881,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Healthy,1
+882,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0
+883,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0
+884,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+885,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+886,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+887,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+888,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+889,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+890,icbhi_204,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0
+891,icbhi_204,Healthy,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+892,icbhi_204,Healthy,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+893,icbhi_204,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+894,icbhi_204,Healthy,Crackles,0,Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+895,icbhi_204,Healthy,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+896,icbhi_204,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+897,icbhi_204,Healthy,Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+898,icbhi_211,Healthy,Healthy,1,Crackles,0,Wheezing with Crackles,0,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+899,icbhi_211,Healthy,Healthy,1,Healthy,1,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0
+900,icbhi_211,Healthy,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing,0
+901,icbhi_211,Healthy,Healthy,1,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+902,icbhi_211,Healthy,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing,0
+903,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Healthy,1,Healthy,1,Wheezing with Crackles,0
+904,icbhi_211,Healthy,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1,Wheezing,0
+905,icbhi_211,Healthy,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Healthy,1,Crackles,0
+906,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing with Crackles,0
+907,icbhi_211,Healthy,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+908,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing,0
+909,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+910,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+911,icbhi_211,Wheezing,Wheezing,1,Wheezing,1,Wheezing with Crackles,0,Healthy,0,Wheezing,1,Healthy,0,Wheezing,1
+912,icbhi_211,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing with Crackles,1
+913,icbhi_211,Wheezing with Crackles,Wheezing,0,Wheezing,0,Wheezing with Crackles,1,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+914,icbhi_211,Crackles,Healthy,0,Wheezing,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+915,icbhi_211,Crackles,Wheezing,0,Crackles,1,Wheezing,0,Crackles,1,Crackles,1,Healthy,0,Healthy,0
+916,icbhi_211,Wheezing with Crackles,Wheezing with Crackles,1,Wheezing with Crackles,1,Wheezing,0,Crackles,0,Crackles,0,Wheezing with Crackles,1,Wheezing with Crackles,1
+917,icbhi_211,Crackles,Wheezing,0,Healthy,0,Wheezing with Crackles,0,Crackles,1,Wheezing,0,Healthy,0,Wheezing with Crackles,0
+918,icbhi_211,Wheezing,Wheezing with Crackles,0,Wheezing,1,Wheezing with Crackles,0,Crackles,0,Crackles,0,Healthy,0,Wheezing with Crackles,0
+919,icbhi_211,Wheezing with Crackles,Wheezing,0,Wheezing with Crackles,1,Wheezing with Crackles,1,Healthy,0,Wheezing,0,Healthy,0,Wheezing with Crackles,1
+920,icbhi_211,Wheezing,Wheezing with Crackles,0,Wheezing,1,Wheezing with Crackles,0,Healthy,0,Wheezing,1,Healthy,0,Wheezing with Crackles,0
+921,icbhi_211,Wheezing,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,0,Wheezing,1,Wheezing,1,Wheezing,1
+922,icbhi_211,Crackles,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Healthy,0,Wheezing with Crackles,0,Healthy,0,Wheezing,0
+923,icbhi_211,Crackles,Healthy,0,Healthy,0,Healthy,0,Wheezing,0,Healthy,0,Healthy,0,Healthy,0
+924,icbhi_211,Healthy,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0
+925,icbhi_211,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0
+926,icbhi_211,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+927,icbhi_211,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+928,icbhi_211,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0
+929,icbhi_211,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+930,icbhi_211,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0
+931,icbhi_211,Healthy,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0
+932,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0,Crackles,0,Wheezing with Crackles,0,Healthy,1,Healthy,1
+933,icbhi_211,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+934,icbhi_211,Healthy,Crackles,0,Crackles,0,Wheezing with Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+935,icbhi_211,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+936,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+937,icbhi_211,Healthy,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+938,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+939,icbhi_211,Healthy,Healthy,1,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Wheezing,0
+940,icbhi_211,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1
+941,icbhi_211,Healthy,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+942,icbhi_211,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Wheezing with Crackles,0,Healthy,1,Wheezing,0
+943,icbhi_211,Healthy,Healthy,1,Crackles,0,Healthy,1,Wheezing,0,Crackles,0,Wheezing,0,Crackles,0
+944,icbhi_211,Healthy,Healthy,1,Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+945,icbhi_211,Healthy,Crackles,0,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Crackles,0
+946,icbhi_211,Healthy,Healthy,1,Healthy,1,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Wheezing,0
+947,icbhi_211,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+948,icbhi_211,Healthy,Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0,Healthy,1,Crackles,0
+949,icbhi_211,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0,Healthy,1,Wheezing,0
+950,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Crackles,0,Healthy,1,Wheezing,0
+951,icbhi_211,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+952,icbhi_211,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Healthy,1,Wheezing with Crackles,0
+953,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Wheezing with Crackles,0,Wheezing with Crackles,0
+954,icbhi_211,Healthy,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+955,icbhi_211,Healthy,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+956,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Healthy,1
+957,icbhi_211,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+958,icbhi_211,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+959,icbhi_211,Healthy,Healthy,1,Crackles,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Wheezing with Crackles,0,Wheezing with Crackles,0
+960,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Healthy,1,Healthy,1
+961,icbhi_211,Healthy,Healthy,1,Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+962,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing with Crackles,0,Wheezing,0,Crackles,0,Crackles,0,Healthy,1,Wheezing,0
+963,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing with Crackles,0
+964,icbhi_211,Healthy,Wheezing with Crackles,0,Crackles,0,Wheezing,0,Wheezing,0,Crackles,0,Crackles,0,Wheezing,0
+965,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+966,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+967,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+968,icbhi_211,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+969,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+970,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+971,icbhi_211,Healthy,Wheezing,0,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+972,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+973,icbhi_211,Healthy,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+974,icbhi_211,Healthy,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+975,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+976,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+977,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1
+978,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+979,icbhi_211,Healthy,Wheezing,0,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+980,icbhi_211,Healthy,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+981,icbhi_211,Healthy,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+982,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Wheezing,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1
+983,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+984,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+985,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+986,icbhi_211,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+987,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+988,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+989,icbhi_211,Healthy,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+990,icbhi_211,Healthy,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+991,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+992,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+993,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+994,icbhi_211,Healthy,Healthy,1,Healthy,1,Wheezing,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+995,icbhi_211,Healthy,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Crackles,0,Healthy,1,Healthy,1
+996,icbhi_211,Healthy,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+997,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+998,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1
+999,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+1000,icbhi_211,Healthy,Wheezing with Crackles,0,Wheezing,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1001,icbhi_211,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+1002,icbhi_211,Healthy,Healthy,1,Wheezing,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1003,icbhi_211,Healthy,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+1004,icbhi_211,Healthy,Healthy,1,Healthy,1,Wheezing,0,Wheezing,0,Healthy,1,Healthy,1,Wheezing,0
+1005,icbhi_211,Healthy,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+1006,icbhi_211,Healthy,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+1007,icbhi_211,Healthy,Wheezing,0,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+1008,icbhi_211,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1
+1009,icbhi_214,Healthy,Healthy,1,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1010,icbhi_214,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1011,icbhi_214,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+1012,icbhi_214,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Wheezing,0,Wheezing,0,Wheezing,0
+1013,icbhi_214,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Wheezing,0,Healthy,1
+1014,icbhi_214,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1015,icbhi_214,Healthy,Crackles,0,Crackles,0,Wheezing,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1016,icbhi_216,Crackles,Healthy,0,Healthy,0,Healthy,0,Crackles,1,Healthy,0,Healthy,0,Healthy,0
+1017,icbhi_216,Healthy,Crackles,0,Crackles,0,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+1018,icbhi_216,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Healthy,0,Crackles,1,Healthy,0
+1019,icbhi_216,Crackles,Crackles,1,Crackles,1,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Crackles,1
+1020,icbhi_216,Crackles,Healthy,0,Healthy,0,Crackles,1,Crackles,1,Crackles,1,Healthy,0,Crackles,1
+1021,icbhi_216,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Crackles,0
+1022,icbhi_216,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+1023,icbhi_216,Healthy,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Healthy,1,Crackles,0
+1024,icbhi_216,Healthy,Healthy,1,Crackles,0,Healthy,1,Wheezing with Crackles,0,Healthy,1,Crackles,0,Healthy,1
+1025,icbhi_216,Healthy,Healthy,1,Crackles,0,Healthy,1,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+1026,icbhi_216,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+1027,icbhi_216,Healthy,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0,Crackles,0
+1028,icbhi_216,Wheezing,Healthy,0,Healthy,0,Healthy,0,Wheezing,1,Crackles,0,Healthy,0,Healthy,0
+1029,icbhi_216,Wheezing,Wheezing,1,Wheezing,1,Healthy,0,Wheezing,1,Crackles,0,Healthy,0,Healthy,0
+1030,icbhi_216,Wheezing,Wheezing with Crackles,0,Healthy,0,Healthy,0,Wheezing,1,Crackles,0,Healthy,0,Healthy,0
+1031,icbhi_216,Wheezing,Wheezing with Crackles,0,Wheezing,1,Healthy,0,Wheezing,1,Crackles,0,Healthy,0,Healthy,0
+1032,icbhi_216,Wheezing,Wheezing with Crackles,0,Wheezing,1,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+1033,icbhi_216,Wheezing,Wheezing with Crackles,0,Healthy,0,Healthy,0,Wheezing,1,Healthy,0,Healthy,0,Healthy,0
+1034,icbhi_216,Wheezing,Wheezing with Crackles,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+1035,icbhi_216,Wheezing,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0,Healthy,0
+1036,icbhi_216,Healthy,Wheezing with Crackles,0,Crackles,0,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+1037,icbhi_216,Healthy,Wheezing with Crackles,0,Healthy,1,Healthy,1,Wheezing,0,Crackles,0,Healthy,1,Healthy,1
+1038,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1039,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1
+1040,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1041,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Healthy,1
+1042,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Wheezing,0,Healthy,1
+1043,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+1044,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1,Healthy,1
+1045,icbhi_225,Healthy,Healthy,1,Healthy,1,Wheezing,0,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1046,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Wheezing,0,Healthy,1
+1047,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Wheezing,0,Healthy,1
+1048,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1049,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Wheezing,0,Wheezing,0,Healthy,1
+1050,icbhi_225,Healthy,Healthy,1,Healthy,1,Healthy,1,Wheezing with Crackles,0,Healthy,1,Healthy,1,Healthy,1
+1051,icbhi_225,Healthy,Healthy,1,Healthy,1,Wheezing,0,Healthy,1,Healthy,1,Healthy,1,Healthy,1

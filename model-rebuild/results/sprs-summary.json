@@ -1,0 +1,12 @@
+{
+ "recordings": 6337,
+ "events_used": 24287,
+ "skipped": {
+  "poor quality record": 230,
+  "Rhonchi": 217,
+  "Stridor": 74
+ },
+ "sample_rates": {
+  "8000": 6266
+ }
+}

@@ -1,0 +1,1 @@
+single_mfcc     icbhi+sprs seed 11  epoch 16  icbhi-val bal 0.393  F1 0.217  sprs-val 0.478  [Crac=0.62 Heal=0.02 Whee=0.22 Whee=0.70]  1132s

@@ -1,2 +1,8 @@
 time,recipe,seed,epoch,val_cycle_balanced_acc,test_cycle_balanced_acc,test_cycle_macro_f1,test_window_balanced_acc
 2026-11-11 02:50,baseline,11,6,0.4721,0.3504,0.3070,0.3256
+2026-11-11 14:52,fusion-eval:single_mfcc,22,,0.4658,0.3614,0.3165,
+2026-11-11 14:52,fusion-eval:single_spec,11,,0.4664,0.2672,0.2677,
+2026-11-11 14:52,fusion-eval:single_chroma,33,,0.4259,0.4211,0.3530,
+2026-11-11 14:52,fusion-eval:fdc2_nochroma,11,,0.4750,0.3446,0.3249,
+2026-11-11 14:52,fusion-eval:fdc3,11,,0.4880,0.3667,0.3580,
+2026-11-11 14:52,fusion-eval:late3 (PRIMARY),11,,0.4872,0.3286,0.3128,

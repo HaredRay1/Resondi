@@ -1,0 +1,42 @@
+source,recipe,seed,val_balanced_accuracy,val_macro_f1
+experiment,baseline,11,0.455,0.3417
+experiment,baseline,22,0.4003,0.3178
+experiment,baseline,33,0.4622,0.404
+experiment,mfcc_spec,11,0.4503,0.3074
+experiment,mfcc_spec,22,0.3982,0.3472
+experiment,mfcc_spec,33,0.4459,0.3809
+experiment,mfe2k,11,0.3181,0.2993
+experiment,mfe2k,22,0.3065,0.2856
+experiment,mfe2k,33,0.3185,0.3096
+experiment,mfe,11,0.3683,0.3324
+experiment,mfe,22,0.3831,0.3664
+experiment,mfe_floor72,11,0.3752,0.3692
+experiment,mfe_floor72,22,0.3764,0.3319
+experiment,mfe_floor72,33,0.3863,0.3719
+experiment,mfe_aug,11,0.3849,0.3535
+experiment,mfe_aug,22,0.3922,0.3477
+experiment,mfe_aug,33,0.3544,0.3206
+experiment,mfcc_twodet,11,0.4364,0.3764
+experiment,mfcc_twodet,22,0.4305,0.3419
+experiment,mfcc_twodet,33,0.4599,0.3675
+experiment,mfe_twodet,11,0.4457,0.3555
+experiment,mfe_twodet,22,0.4234,0.4095
+experiment,mfe_twodet,33,0.4122,0.3406
+experiment,mfe_floor72_aug,11,0.3402,0.2923
+experiment,mfe_floor72_aug,22,0.3376,0.2721
+experiment,mfe_floor72_aug,33,0.3496,0.2598
+experiment,mfe_mixup,11,0.3579,0.2845
+experiment,mfe_mixup,22,0.3722,0.359
+experiment,mfe_mixup,33,0.3654,0.2859
+fusion (icbhi),single_mfcc,11,0.4521,0.3865
+fusion (icbhi),single_mfcc,22,0.4588,0.3787
+fusion (icbhi),single_mfcc,33,0.4552,0.3771
+fusion (icbhi),single_spec,11,0.4894,0.4488
+fusion (icbhi),single_spec,22,0.4311,0.4049
+fusion (icbhi),single_spec,33,0.4226,0.38
+fusion (icbhi),single_chroma,11,0.4093,0.3407
+fusion (icbhi),single_chroma,22,0.4023,0.3501
+fusion (icbhi),single_chroma,33,0.4259,0.3481
+fusion (icbhi),late3,11,0.5024,0.4584
+fusion (icbhi),late3,22,0.4957,0.4548
+fusion (icbhi),late3,33,0.4491,0.3857

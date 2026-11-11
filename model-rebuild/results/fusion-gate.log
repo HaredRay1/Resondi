@@ -1,0 +1,7 @@
+start 11/11/2026 14:23:09.46 
+saved single_mfcc seed 22: epoch 11, validation 0.466 (logged 0.459)  396s
+saved single_mfcc seed 11: epoch 6, validation 0.462 (logged 0.452)  452s
+saved single_spec seed 11: epoch 22, validation 0.466 (logged 0.489)  1227s
+saved single_chroma seed 33: epoch 13, validation 0.436 (logged 0.426)  298s
+saved single_chroma seed 11: epoch 1, validation 0.420 (logged 0.409)  115s
+saved fdc3 seed 11: epoch 13, validation 0.474 (logged 0.488)  1331s

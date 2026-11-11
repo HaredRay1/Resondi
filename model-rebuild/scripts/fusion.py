@@ -165,12 +165,44 @@ def mfcc_feat(X):
 FEAT = {"mfcc": mfcc_feat, "spec": spec_feat, "chroma": chroma_feat}
 
 
+BANDLIMIT = False   # --bandlimit: cut every window to 0-4 kHz before features (set in main)
+
+
+TARGET_RMS = 32768 * 10 ** (-20 / 20)   # -20 dBFS
+
+
+def lowpass4k(X):
+    """Harmonise sources: keep exactly 100-3900 Hz, then level every window to -20 dBFS RMS.
+
+    SPRSound is recorded at 8 kHz (nothing above 4 kHz), about 11 dB quieter than ICBHI, and 82% Healthy.
+    Trained on ICBHI + SPRSound as is, the MFCC model found 2% of ICBHI's healthy breaths (11 Nov): it had
+    learned which dataset a clip came from. Measured on 1,500 windows each, the band above 4.2 kHz sat 35 dB
+    apart (73 vs 38 dB) and the 100-2000 Hz band 11 dB apart. A resampling low-pass left a 30 dB gap, so this
+    uses an exact cut in the frequency domain (per 1 s window) plus per-window level normalisation."""
+    n = X.shape[1]
+    f = np.fft.rfftfreq(n, 1 / SR)
+    # 100 Hz high-pass too: ICBHI carries strong <100 Hz rumble (heart, handling), so levelling on total RMS
+    # left its 100-2000 Hz breath band 16 dB below SPRSound's. Levelling on 100-3900 Hz matches them.
+    keep = (f >= 100) & (f <= 3900)
+    out = np.empty(X.shape, np.int16)
+    for a in range(0, len(X), 1024):
+        S = np.fft.rfft(X[a:a + 1024].astype(np.float32), axis=1)
+        S[:, ~keep] = 0
+        y = np.fft.irfft(S, n=n, axis=1)
+        rms = np.sqrt((y ** 2).mean(1, keepdims=True)) + 1e-3
+        out[a:a + 1024] = np.clip(y * (TARGET_RMS / rms), -32768, 32767).astype(np.int16)
+    return out
+
+
 def feature(view, part):
     """part: train | validation | test | sprs_train | sprs_validation | sprs_test"""
-    path = os.path.join(EXP, f"fus_{view}_{part}.npy")
+    pre = "fusbl" if BANDLIMIT else "fus"
+    path = os.path.join(EXP, f"{pre}_{view}_{part}.npy")
     if not os.path.exists(path):
         raw = os.path.join(EXP, f"raw_{part}.npz")
         X = np.load(raw)["X"]
+        if BANDLIMIT:
+            X = lowpass4k(X)
         F = FEAT[view](X)
         np.save(path, F)
         del X
@@ -226,38 +258,96 @@ def load_parts(views, data):
     va = np.load(os.path.join(EXP, "raw_validation.npz"))
     Ftr = [feature(v, "train") for v in views]
     ytr = tr["y"]
+    src = np.zeros(len(ytr), int)
     if data == "icbhi+sprs":
         st = np.load(os.path.join(EXP, "raw_sprs_train.npz"))
-        Ftr = [np.concatenate([a, feature(v, "sprs_train")]) for a, v in zip(Ftr, views)]
-        ytr = np.concatenate([ytr, st["y"]])
+        keep = np.arange(len(st["y"]))
+        if BALANCE:
+            keep = sprs_balanced_rows(st["y"], st["cycle"], int((ytr == HEALTHY).sum()))
+        Ftr = [np.concatenate([a, feature(v, "sprs_train")[keep]]) for a, v in zip(Ftr, views)]
+        ytr = np.concatenate([ytr, st["y"][keep]])
+        src = np.concatenate([src, np.ones(len(keep), int)])
     val = {"icbhi": ([feature(v, "validation") for v in views], va["y"], va["cycle"])}
     if os.path.exists(os.path.join(EXP, "raw_sprs_validation.npz")):
         sv = np.load(os.path.join(EXP, "raw_sprs_validation.npz"))
         val["sprs"] = ([feature(v, "sprs_validation") for v in views], sv["y"], sv["cycle"])
-    return Ftr, ytr, val
+    return Ftr, ytr, val, src
 
 
-def standardiser(Ftr):
+SRC_ID = {"icbhi": 0, "sprs": 1}
+BALANCE = False   # --balance: cap SPRSound's healthy windows at ICBHI's count, and weight sources and classes equally
+HEALTHY = 1       # label index of Healthy (alphabetical order)
+
+
+def sprs_balanced_rows(y, cycle, cap):
+    """All SPRSound adventitious windows, plus healthy windows from whole randomly chosen events until `cap`.
+
+    Unbalanced, SPRSound (82% healthy, children) supplied most healthy examples, and the model learned
+    "healthy = a child's breath": it found 0-2% of ICBHI's healthy adult breaths (11 Nov). The subset is
+    fixed (its own seed), so every recipe and training seed sees the same SPRSound windows."""
+    rng = np.random.default_rng(20261111)
+    keep = list(np.where(y != HEALTHY)[0])
+    h_events = np.unique(cycle[y == HEALTHY])
+    rng.shuffle(h_events)
+    rows_of = defaultdict(list)
+    for i in np.where(y == HEALTHY)[0]:
+        rows_of[cycle[i]].append(i)
+    n = 0
+    for e in h_events:
+        if n + len(rows_of[e]) > cap:
+            continue
+        keep += rows_of[e]
+        n += len(rows_of[e])
+    return np.sort(np.array(keep))
+
+
+SRCNORM = False   # --srcnorm: standardise each feature band per data source (ICBHI = 0, SPRSound = 1)
+
+
+def _band_stats(F, rows):
+    mu = np.zeros(F.shape[2], np.float64); sq = np.zeros(F.shape[2], np.float64); n = 0
+    for a in range(0, len(rows), 4096):
+        b = F[rows[a:a + 4096]].astype(np.float64)
+        mu += b.sum((0, 1)); sq += (b ** 2).sum((0, 1)); n += b.shape[0] * b.shape[1]
+    mu /= n
+    return mu, np.sqrt(np.maximum(sq / n - mu ** 2, 1e-12))
+
+
+def standardiser(Ftr, src=None):
+    """Per-band standardisation fitted on training data. With SRCNORM, one set of statistics per source:
+    SPRSound's stethoscope is 16-22 dB duller above 500 Hz than ICBHI's even after band-limiting and levelling,
+    so a shared normalisation would let the model tell the datasets apart by tone. prep(xs, g) takes the
+    source id(s) g of the batch (int or array)."""
     import torch
+    if src is None:
+        src = np.zeros(len(Ftr[0]), int)
+    groups = sorted(set(src.tolist())) if SRCNORM else [0]
     stats = []
     for F in Ftr:
-        mu = np.zeros(F.shape[2], np.float64); sq = np.zeros(F.shape[2], np.float64); n = 0
-        for a in range(0, len(F), 4096):
-            b = F[a:a + 4096].astype(np.float32)
-            mu += b.sum((0, 1)); sq += (b.astype(np.float64) ** 2).sum((0, 1)); n += b.shape[0] * b.shape[1]
-        mu /= n
-        sd = np.sqrt(np.maximum(sq / n - mu ** 2, 1e-12))
-        stats.append((torch.tensor(mu, dtype=torch.float32), torch.tensor(sd, dtype=torch.float32)))
-    return lambda xs: [(torch.as_tensor(x, dtype=torch.float32) - m) / s for x, (m, s) in zip(xs, stats)]
+        mus, sds = [], []
+        for g in (groups if SRCNORM else [None]):
+            rows = np.arange(len(F)) if g is None else np.where(src == g)[0]
+            m, s = _band_stats(F, rows)
+            mus.append(m); sds.append(s)
+        while len(mus) < 2:                      # unseen source at test time falls back to source 0
+            mus.append(mus[0]); sds.append(sds[0])
+        stats.append((torch.tensor(np.stack(mus), dtype=torch.float32), torch.tensor(np.stack(sds), dtype=torch.float32)))
+
+    def prep(xs, g=0):
+        gi = torch.as_tensor(np.broadcast_to(np.asarray(g if SRCNORM else 0), (len(xs[0]),)).copy(), dtype=torch.long)
+        return [(torch.as_tensor(x, dtype=torch.float32) - m[gi][:, None, :]) / s[gi][:, None, :]
+                for x, (m, s) in zip(xs, stats)]
+    prep.stats = stats            # kept so saved models carry their normalisation
+    return prep
 
 
-def predict(model, prep, Fs):
+def predict(model, prep, Fs, g=0):
     import torch
     model.eval()
     out = []
     with torch.no_grad():
         for a in range(0, len(Fs[0]), 1024):
-            out.append(torch.softmax(model(prep([F[a:a + 1024].astype(np.float32) for F in Fs])), 1).numpy())
+            out.append(torch.softmax(model(prep([F[a:a + 1024].astype(np.float32) for F in Fs], g)), 1).numpy())
     return np.concatenate(out)
 
 
@@ -277,14 +367,20 @@ def score(P, y, cyc):
 def train(views, data, seed, epochs=30, patience=8):
     import torch
     torch.manual_seed(seed); np.random.seed(seed)
-    Ftr, ytr, val = load_parts(views, data)
-    prep = standardiser(Ftr)
+    Ftr, ytr, val, src = load_parts(views, data)
+    prep = standardiser(Ftr, src)
     model = build([(F.shape[1], F.shape[2]) for F in Ftr])
     opt = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-3)
     sched = torch.optim.lr_scheduler.CosineAnnealingLR(opt, T_max=epochs)
     counts = np.bincount(ytr, minlength=4).astype(np.float32)
     w = torch.tensor(counts.sum() / (4 * counts))
     Y = torch.tensor(ytr)
+    sw = None
+    if BALANCE:   # every (source, class) cell carries the same total weight; mean sample weight 1
+        cell = src * 4 + ytr
+        n_cell = np.bincount(cell, minlength=8).astype(np.float64)
+        filled = (n_cell > 0).sum()
+        sw = torch.tensor(len(ytr) / (filled * n_cell[cell]), dtype=torch.float32)
     Fv, yv, cv = val["icbhi"]
     best, best_state, best_ep, wait = -1, None, 0, 0
     for ep in range(1, epochs + 1):
@@ -292,8 +388,12 @@ def train(views, data, seed, epochs=30, patience=8):
         perm = np.random.permutation(len(Y))
         for a in range(0, len(perm), 64):
             b = np.sort(perm[a:a + 64])
-            out = model(prep([F[b].astype(np.float32) for F in Ftr]))
-            loss = torch.nn.functional.cross_entropy(out, Y[b], weight=w)
+            out = model(prep([F[b].astype(np.float32) for F in Ftr], src[b]))
+            if sw is None:
+                loss = torch.nn.functional.cross_entropy(out, Y[b], weight=w)
+            else:
+                wb = sw[b]
+                loss = (torch.nn.functional.cross_entropy(out, Y[b], reduction="none") * wb).sum() / wb.sum()
             opt.zero_grad(); loss.backward(); opt.step()
         sched.step()
         s = score(predict(model, prep, Fv), yv, cv)["cycle"]["balanced_accuracy"]   # choose on ICBHI validation
@@ -305,7 +405,7 @@ def train(views, data, seed, epochs=30, patience=8):
             if wait >= patience:
                 break
     model.load_state_dict(best_state)
-    probs = {k: predict(model, prep, F) for k, (F, _, _) in val.items()}
+    probs = {k: predict(model, prep, F, SRC_ID[k]) for k, (F, _, _) in val.items()}
     return model, prep, best_ep, probs, val
 
 
@@ -349,17 +449,66 @@ def run(data, names):
                 if len(views) == 1:
                     single_probs[seed][views[0]] = probs
                 res = {vs: score(probs[vs], vals[vs][1], vals[vs][2]) for vs in probs}
-            log_row(name, data, seed, ep, res)
+            log_row(name, data + ("-bl4k" if BANDLIMIT else "") + ("-srcnorm" if SRCNORM else "") + ("-bal" if BALANCE else ""), seed, ep, res)
             c = res["icbhi"]["cycle"]
             scores.append(c["balanced_accuracy"])
             extra = f"  sprs-val {res['sprs']['cycle']['balanced_accuracy']:.3f}" if "sprs" in res else ""
             rec = " ".join(f"{p['label'][:4]}={p['recall']:.2f}" for p in c["per_class"])
-            print(f"{name:<15} {data:<10} seed {seed}  epoch {ep:>2}  icbhi-val bal {c['balanced_accuracy']:.3f}  "
+            print(f"{name:<15} {data + ('-bl4k' if BANDLIMIT else '') + ('-sn' if SRCNORM else '') + ('-bal' if BALANCE else ''):<23} seed {seed}  epoch {ep:>2}  icbhi-val bal {c['balanced_accuracy']:.3f}  "
                   f"F1 {c['macro_f1']:.3f}{extra}  [{rec}]  {time.time() - t0:.0f}s", flush=True)
         if scores:
             summary[name] = (np.mean(scores), np.std(scores))
-            print(f"== {name} ({data}): ICBHI validation cycle balanced accuracy {np.mean(scores):.3f} +/- {np.std(scores):.3f}\n", flush=True)
+            print(f"== {name} ({data}{'-bl4k' if BANDLIMIT else ''}{'-srcnorm' if SRCNORM else ''}{'-bal' if BALANCE else ''}): ICBHI validation cycle balanced accuracy {np.mean(scores):.3f} +/- {np.std(scores):.3f}\n", flush=True)
     return summary
+
+
+# ------------------------------------------------------------------ saved checkpoint of the ICBHI-only models
+SAVE_DIR = os.path.join(ROOT, "models", "fusion-icbhi-only-2026-11-11")
+# The runs that scored best on ICBHI validation in the ICBHI-only round (results/fusion-validation.csv, data=icbhi).
+# late3 = the three seed-11 single models averaged, so those are saved as well.
+SAVE_RUNS = [("single_mfcc", 22), ("single_mfcc", 11), ("single_spec", 11), ("single_chroma", 33),
+             ("single_chroma", 11), ("fdc3", 11), ("fdc2_nochroma", 11)]
+
+
+def save_icbhi_models():
+    """Retrain the chosen ICBHI-only runs (same seeds, same code path) and save each model with its
+    normalisation, so this state can be restored later without SPRSound. Each run's validation score is
+    compared with the score logged this morning; a mismatch is reported, not hidden."""
+    import torch
+    assert not (BANDLIMIT or SRCNORM or BALANCE), "the checkpoint is the plain ICBHI-only setup"
+    torch.set_num_threads(os.cpu_count() or 4)
+    os.makedirs(SAVE_DIR, exist_ok=True)
+    logged = {}
+    with open(os.path.join(ROOT, "results", "fusion-validation.csv")) as f:
+        for r in csv.DictReader(f):
+            if r["data"] == "icbhi" and r["val_set"] == "icbhi":
+                logged[(r["recipe"], int(r["seed"]))] = float(r["cycle_balanced_acc"])
+    manifest = []
+    for name, seed in SAVE_RUNS:
+        t0 = time.time()
+        views = RECIPES[name]
+        model, prep, ep, probs, vals = train(list(views), "icbhi", seed)
+        s = score(probs["icbhi"], vals["icbhi"][1], vals["icbhi"][2])["cycle"]
+        was = logged.get((name, seed))
+        path = os.path.join(SAVE_DIR, f"{name}_seed{seed}.pt")
+        torch.save({"state_dict": model.state_dict(), "views": list(views),
+                    "shapes": [(F.shape[1], F.shape[2]) for F in vals["icbhi"][0]],
+                    "norm_mean": [m[0].numpy() for m, _ in prep.stats], "norm_std": [sd[0].numpy() for _, sd in prep.stats],
+                    "labels": load_config()["labels"], "seed": seed, "epoch": ep,
+                    "val_cycle_balanced_acc": s["balanced_accuracy"], "data": "icbhi",
+                    "features": "1 s at 16 kHz; mfcc = config.json MFCC; spec = log power 0-4 kHz, 320-sample "
+                                "frames/hop, 512-pt FFT, 129 bins; chroma = 12 bins 50-4000 Hz, 1024-pt frames, 320 hop"},
+                   path)
+        manifest.append({"file": os.path.basename(path), "recipe": name, "seed": seed, "epoch": ep,
+                         "val_cycle_balanced_acc": round(s["balanced_accuracy"], 4),
+                         "logged_this_morning": was, "reproduced": was is not None and abs(was - s["balanced_accuracy"]) < 0.005})
+        print(f"saved {name} seed {seed}: epoch {ep}, validation {s['balanced_accuracy']:.3f} "
+              f"(logged {was if was is None else f'{was:.3f}'})  {time.time() - t0:.0f}s", flush=True)
+    json.dump({"created": datetime.now().strftime("%Y-%m-%d %H:%M"), "training_data": "ICBHI 2017 only (65 train patients)",
+               "chosen_on": "30 ICBHI validation patients", "late3": "average the probabilities of single_mfcc_seed11, "
+               "single_spec_seed11 and single_chroma_seed11", "runs": manifest},
+              open(os.path.join(SAVE_DIR, "manifest.json"), "w"), indent=1)
+    print("checkpoint written to", SAVE_DIR)
 
 
 # ------------------------------------------------------------------ the one test run
@@ -412,7 +561,7 @@ def test(name, data):
         text.append(f"\n### {key.upper()} test: {len(set(raw['patient']))} patients\n")
         text.append(to_text(r["cycle"], labels, "Cycle level (windows of one breathing cycle / event averaged)"))
     text = "\n".join(text)
-    tag = f"{name}-{data.replace('+', '-')}"
+    tag = f"{name}-{data.replace('+', '-')}" + ("-bl4k" if BANDLIMIT else "") + ("-srcnorm" if SRCNORM else "") + ("-bal" if BALANCE else "")
     open(os.path.join(ROOT, "results", f"final-test-fusion-{tag}.txt"), "w", encoding="utf-8").write(text)
     json.dump({"recipe": name, "data": data, "seed": seed, "val": s, "test": out},
               open(os.path.join(ROOT, "results", f"final-test-fusion-{tag}.json"), "w"), indent=1)
@@ -430,10 +579,20 @@ def test(name, data):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["sprs", "features", "run", "test"])
+    ap.add_argument("cmd", choices=["sprs", "features", "run", "test", "save"])
     ap.add_argument("recipes", nargs="*")
     ap.add_argument("--data", default="icbhi", choices=["icbhi", "icbhi+sprs"])
+    ap.add_argument("--bandlimit", action="store_true", help="cut all audio to 0-4 kHz before features")
+    ap.add_argument("--srcnorm", action="store_true", help="standardise features per data source")
+    ap.add_argument("--balance", action="store_true", help="cap SPRSound healthy windows; weight sources and classes equally")
+    ap.add_argument("--seeds", default="11,22,33", help="comma-separated training seeds (a quick gate check can use one)")
     a = ap.parse_args()
+    global BANDLIMIT, SRCNORM, BALANCE, SEEDS
+    BANDLIMIT, SRCNORM, BALANCE = a.bandlimit, a.srcnorm, a.balance
+    SEEDS = tuple(int(s) for s in a.seeds.split(","))
+    if a.cmd == "save":
+        save_icbhi_models()
+        return
     if a.cmd == "sprs":
         sprs()
     elif a.cmd == "features":

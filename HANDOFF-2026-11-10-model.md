@@ -9,6 +9,8 @@ Paste this into Claude chat to bring it up to date. It covers what changed on 9�
 > 4. **The 40% field figure:** the paper gives no record of who set the 15 reference labels or how (section 5).
 > 5. **Everything is on GitHub** (`HaredRay1/Resondi`, private, branch `master`).
 >
+> **11 Nov afternoon:** the fusion study's single test run is done. **Fusion did not beat the single models on unseen patients**: late fusion (pre-specified) scored 32.9% balanced, FDC-FS 36.7%, MFCC 36.1%, and every confidence interval overlaps. Adding SPRSound unbalanced broke healthy-breath detection; a rebalanced version is being gate-checked. The ICBHI-only models are saved as a checkpoint. See section 6.
+>
 > **In progress (11 Nov, morning), see section 6:**
 > - A feature-fusion study (MFCC + spectrogram + chromagram, after Tariq et al. 2022) is training.
 > - The SPRSound dataset (Asian children, CC BY 4.0) is downloading, to be added as training data.
@@ -269,7 +271,36 @@ See section 4, "Result of that plan". In short, the best test result is **35.0% 
 - **`fdc3` (FDC-FS, three branches trained as one network): 46.9% ± 1.4** (48.8, 46.1, 45.7). Steadier than `late3`, with Healthy recall 0.50 in every seed (MFCC alone gets about 0.25, so fewer false alarms).
 - `fdc2_nochroma` **43.9% ± 3.3**. Dropping chroma costs 3 points, so the chromagram adds information even though it is weakest alone.
 - **ICBHI-only round complete (11:56).** Ranking: late3 48.2 > fdc3 46.9 > MFCC 45.5 > spec 44.8 > fdc2 43.9 > chroma 41.2. Both fusion methods beat every single model.
-- **Next (started 11:56, detached, log `results/fusion-run-sprs.log`):** prepare SPRSound, then rerun all six with `--data icbhi+sprs`, about 3–4 hours. Then one test run for the version best on ICBHI validation.
+### TEST RESULT of the ICBHI fusion study (another session's `scripts/fusion_eval.py`, finished 14:53)
+- **Pre-registration:** late fusion (late3) was named the primary model, on validation, before any test patient was read. Every version was then scored once on the 31 ICBHI test patients (1,051 cycles).
+- **Outputs:** full report in `model-rebuild/results/stats/fusion-report.md`, with charts and jamovi CSVs in the same folder; every row is logged in `results/final-test-log.csv`.
+
+| Model | Test balanced acc. (95% CI) | Macro-F1 | Kappa | ICBHI score* |
+|---|---|---|---|---|
+| **Late fusion (PRIMARY)** | **32.9%** (23.9–40.9) | 0.31 | 0.16 | 42.7 |
+| FDC-FS three-branch | 36.7% (26.0–43.0) | 0.36 | 0.21 | **47.7** |
+| MFCC alone | 36.1% (28.3–44.0) | 0.32 | 0.16 | 39.4 |
+| Chromagram alone | 42.1% (31.0–48.7) | 0.35 | 0.19 | 40.4 |
+| Fusion without chroma | 34.5% (24.7–41.5) | 0.33 | 0.18 | 43.5 |
+| Spectrogram alone | 26.7% (18.8–33.4) | 0.27 | 0.07 | 37.0 |
+
+\*ICBHI challenge score = mean of sensitivity and specificity.
+
+- **Fusion did not carry its validation gain to the test patients.** Late fusion led on validation (48.2%) but scored 32.9% on test, below MFCC alone. Every confidence interval overlaps the others, so with 31 patients none of these models is clearly better than another.
+- **Chromagram alone scored best on test (42.1%), but it cannot be chosen now:** picking a model by its test score would leak the test set. Report it as an observation only.
+- **FDC-FS** has the best ICBHI challenge score (47.7) and finds the most healthy breaths (57%), meaning fewer false alarms. It is still not significantly better.
+- **Honest summary:** fusion, like every other tuning tried on ICBHI, lands at about 33–37% balanced accuracy on unseen patients. The deployed v1 (33.5%) is no worse. More and better data, not architecture, is what limits the model.
+- **All of these models fail on children:** 23–32% on the SPRSound test children (chance 25%).
+
+### SPRSound round (in progress)
+1. **First attempt (unbalanced), stopped:** with SPRSound added, MFCC found 0–2% of ICBHI's healthy breaths. SPRSound is 82% healthy and recorded from children, so the model learned "healthy = a child's breath". Band-limiting to 0.1–3.9 kHz, levelling and per-source normalisation (`--bandlimit --srcnorm`) did not fix it.
+2. **Fair baseline (ICBHI only, same filtering, `icbhi-bl4k`):** the filtering alone costs 1–4 points on ICBHI validation: MFCC 43.4%, spectrogram 43.5%, chromagram 39.9%, late fusion 44.0%, FDC-FS 46.9% (1 seed).
+3. **Now running:** `--balance`, which keeps all SPRSound crackles and wheezes plus only as many healthy breaths as ICBHI has (20,590 of 49,417 windows), with every (dataset, class) cell weighted equally. A one-seed MFCC gate check (`scripts/run_save_and_gate.cmd`, log `results/fusion-gate.log`) decides whether the full round runs. **The user's rule: keep SPRSound only if it raises ICBHI accuracy.**
+
+### ICBHI-only checkpoint (user's request: "so I can rewind")
+- **Where:** `model-rebuild/models/fusion-icbhi-only-2026-11-11/`, written by `python scripts/fusion.py save`. It holds each model's weights, its normalisation and its validation score, plus `manifest.json`.
+- **Saved:** MFCC seeds 22 and 11, spectrogram 11, chromagram 33 and 11, FDC-FS 11. FDC-FS without chroma (seed 11) is still training. Late fusion = the three seed-11 single models averaged.
+- **Reproducibility:** retrained scores differ from the morning logs by up to 2.3 points (spectrogram), because multi-threaded CPU arithmetic is not bit-identical. The manifest records each saved model's own score.
 - **Caution:** these are validation scores. The 11 Nov MFCC winner fell from 47.2% on validation to 35.0% on test. Only the single test run counts.
 
 **After that:**
