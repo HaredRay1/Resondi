@@ -262,8 +262,10 @@ See section 4, "Result of that plan". In short, the best test result is **35.0% 
 | `fdc2_nochroma` | `fdc3` without the chroma branch (chroma ablation) |
 
 **Results so far** (cycle balanced accuracy, chance 25%):
-- `single_mfcc` **45.5% ± 0.3**.
-- The others are training: spectrogram, then chromagram, then the fusion versions. Expected to finish around 10:15.
+- `single_mfcc` **45.5% ± 0.3**. Recall: Crackles about 0.80, Healthy 0.25, Wheezing 0.41–0.50, W+C 0.27–0.36.
+- `single_spec`, seed 11: **48.9%**, F1 0.449, the best single run so far. Recall: Crackles 0.57, **Healthy 0.51, Wheezing 0.65**, W+C 0.23.
+  - The spectrogram catches wheezes and healthy breaths that MFCC misses, and MFCC is stronger on crackles. That complementarity is why fusion may help.
+- The others are training: spectrogram seeds 22/33, chromagram, then the fusion versions. Expected to finish around 10:30.
 
 **After that:**
 1. Rerun the same versions with `--data icbhi+sprs`, adding SPRSound training patients.
@@ -291,8 +293,10 @@ The bar to beat on test is **35.0%** (11 Nov, MFCC) and 33.5% (deployed v1).
 - **Download:** git clone stalled on this connection, so files are fetched one by one from GitHub raw (resumable script in the session scratchpad). 13,136 files, 1.2 GB, all years 2022–2025. At 08:10 it was at 471 MB, at about 0.25 MB/s; expected done around 09:05. Saved to `C:\Users\Hared\Downloads\sprsound\`, outside the project, so it never syncs to Drive or git.
 - **Philippine data:** the only Filipino lung-sound corpus found is **HINGA V1** (Baguio, 51 patients). It has no public download and is diagnosis-labelled (healthy/asthma only), so it cannot train sound labels. Resondi's own clinician-labelled device recordings remain the real fix.
 
-### Spin video
-- **Progress:** 186 of 200 frames rendered at 08:10, at about 50 s per frame. `build/dev2/resume_video.ps1` renders any missing frames and then encodes **`figures/Resondi-Device-Video.mp4`** (H.264, 1080p, 30 fps).
+### Product video: DONE 08:22
+- **`figures/Resondi-Device-Video.mp4`:** 6.7 s, 1920×1080, 30 fps, H.264, 1.9 MB, no text or audio. It is a concept render of the Blender model, so like the stills it is about 160 × 100 × 60 mm, not the real 173 × 80 × 70.
+- **Four camera moves:** a three-quarter view of the box, a low close-up sliding along the chest piece and cable, a top-down drift, then a pull-back to a wide three-quarter view.
+- **To rebuild:** `build/dev2/resume_video.ps1` renders any missing frames, then encodes.
 - **Housekeeping:** the frames in `build/dev2/out/` are excluded from git and Drive.
 
 ### PC limits to know

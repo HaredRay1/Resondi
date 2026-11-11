@@ -3,3 +3,4 @@ single_mfcc     icbhi      seed 22  epoch 11  icbhi-val bal 0.459  F1 0.379  [Cr
 single_mfcc     icbhi      seed 33  epoch 20  icbhi-val bal 0.455  F1 0.377  [Crac=0.80 Heal=0.25 Whee=0.50 Whee=0.27]  589s
 == single_mfcc (icbhi): ICBHI validation cycle balanced accuracy 0.455 +/- 0.003
 
+single_spec     icbhi      seed 11  epoch  9  icbhi-val bal 0.489  F1 0.449  [Crac=0.57 Heal=0.51 Whee=0.65 Whee=0.23]  1006s
