@@ -9,6 +9,8 @@ Paste this into Claude chat to bring it up to date. It covers what changed on 9�
 > 4. **The 40% field figure:** the paper gives no record of who set the 15 reference labels or how (section 5).
 > 5. **Everything is on GitHub** (`HaredRay1/Resondi`, private, branch `master`).
 >
+> **12 Nov 00:45, NEW BEST MODEL:** FDC-FS three-branch fusion trained on **ICBHI + rebalanced SPRSound** (pre-specified on validation) scored **39.4% balanced accuracy on the 31 ICBHI test patients** (95% CI 28.4–44.6, patient bootstrap) and **57.2% on 230 held-out SPRSound children** (46.7–63.4). It is the best pre-specified test result of the project; previous results were 32.9–36.7%, and the deployed v1 scored 33.5%. Every confidence interval still overlaps, so it is an improvement, not yet a proven one. See section 6, "ICBHI + SPRSound round".
+>
 > **11 Nov afternoon:** the fusion study's single test run is done. **Fusion did not beat the single models on unseen patients**: late fusion (pre-specified) scored 32.9% balanced, FDC-FS 36.7%, MFCC 36.1%, and every confidence interval overlaps. Adding SPRSound unbalanced broke healthy-breath detection; a rebalanced version is being gate-checked. The ICBHI-only models are saved as a checkpoint. See section 6.
 >
 > **In progress (11 Nov, morning), see section 6:**
@@ -297,9 +299,56 @@ See section 4, "Result of that plan". In short, the best test result is **35.0% 
 2. **Fair baseline (ICBHI only, same filtering, `icbhi-bl4k`):** the filtering alone costs 1–4 points on ICBHI validation: MFCC 43.4%, spectrogram 43.5%, chromagram 39.9%, late fusion 44.0%, FDC-FS 46.9% (1 seed).
 3. **Now running:** `--balance`, which keeps all SPRSound crackles and wheezes plus only as many healthy breaths as ICBHI has (20,590 of 49,417 windows), with every (dataset, class) cell weighted equally. A one-seed MFCC gate check (`scripts/run_save_and_gate.cmd`, log `results/fusion-gate.log`) decides whether the full round runs. **The user's rule: keep SPRSound only if it raises ICBHI accuracy.**
 
+### ICBHI + SPRSound round: RESULT (user chose "option B", 11 Nov 20:31 – 12 Nov 00:24)
+**Why option B:** the one-seed gate check showed SPRSound left ICBHI validation about the same (42.0% vs 43.2%) but lifted children from 12% to 48%. Resondi screens children too (childhood pneumonia), so the user chose to keep it.
+
+**Setup:**
+- **Training data:** ICBHI plus rebalanced SPRSound: all SPRSound crackles and wheezes, and SPRSound healthy capped at ICBHI's count (20,590 of 49,417 SPRSound windows).
+- **Weighting:** every (dataset, class) cell carries equal weight.
+- **Features:** 0.1–3.9 kHz, levelled, normalised per dataset (`fusion.py run --data icbhi+sprs --bandlimit --srcnorm --balance`).
+- **Seeds and saving:** 3 seeds; every model is saved to `model-rebuild/models/fusion-icbhi-sprs-2026-11-11/` (15 files).
+
+**Validation** (ICBHI 30 patients | SPRSound validation children):
+
+| Version | ICBHI val | SPRSound val | Same setup, ICBHI only |
+|---|---|---|---|
+| **FDC-FS three-branch** | **48.7% ± 1.0** | 49.5–51.3% | 46.9% (1 seed) |
+| Late fusion | 48.1% ± 1.8 | 51.6–52.9% | 44.0% |
+| FDC-FS without chroma | 47.8% ± 0.4 | 50.5–52.1% | — |
+| Spectrogram | 47.1% ± 0.9 | 47.1–48.8% | 43.5% |
+| MFCC | 43.2% ± 1.1 | 48.2–49.6% | 43.4% |
+| Chromagram | 41.2% ± 2.6 | 38.9–47.0% | 39.9% |
+
+- **SPRSound added about 2–4 points on ICBHI validation** for fusion and the spectrogram, and lifted children from about 12–25% to about 50%.
+- **The chromagram adds about 1 point inside FDC-FS** (48.7 vs 47.8). The user asked to keep it.
+
+**Pre-specified primary:** `fdc3` seed 33, written to `results/prespec-icbhi-sprs-round.md` at 23:45, before any test read. It was scored from the saved model (`scripts/test_saved.py`). Loading was verified first: the saved models reproduce their validation scores exactly (49.9%, 50.5%).
+
+**TEST** (`results/final-test-icbhi-sprs.md`, rows in `results/final-test-log.csv`):
+
+| | ICBHI test (31 adults) | SPRSound test (230 children) |
+|---|---|---|
+| **Primary FDC-FS (seed 33)** | **39.4%** (95% CI 28.4–44.6), F1 0.38 | **57.2%** (46.7–63.4), F1 0.45 |
+| ↳ Recall: Crackles / Healthy / Wheezing / W+C | 57 / **52** / 24 / 25% | 53 / 70 / 55 / 51% |
+| Comparison only: late fusion s22 | 35.7% | 52.8% |
+| FDC-FS without chroma s11 | 36.5% | 53.4% |
+| MFCC s22 | 36.7% | 51.3% |
+| Spectrogram s33 | 34.6% | 51.0% |
+| Chromagram s33 | 38.9% | 45.9% |
+
+- **The best pre-specified test result of the project.** Earlier results: MFCC baseline 35.0%; ICBHI-only late fusion (primary) 32.9%; ICBHI-only FDC-FS 36.7%; deployed v1 33.5%.
+- **The validation pick held up on test:** FDC-FS was best on validation and is also the best version on both test sets.
+- **Healthy recall is 52% on ICBHI,** against about 25–30% for MFCC models, so there are far fewer false alarms.
+- **Caveats:**
+  - The 31-patient interval (28–45%) still overlaps earlier models, so call it an improvement on unseen patients, not a proven one.
+  - Wheezing remains weak on adults (24%).
+  - This is the third read of the ICBHI test set; report all three.
+  - Still not tested on the Resondi device.
+- **Deployment:** this model cannot go into Edge Impulse as is (no chromagram block, three inputs, per-source normalisation). It would need an ONNX export run in the browser, the same 0.1–3.9 kHz filtering and levelling in the app, and, for the Resondi device, its own normalisation statistics computed from local recordings.
+
 ### ICBHI-only checkpoint (user's request: "so I can rewind")
 - **Where:** `model-rebuild/models/fusion-icbhi-only-2026-11-11/`, written by `python scripts/fusion.py save`. It holds each model's weights, its normalisation and its validation score, plus `manifest.json`.
-- **Saved:** MFCC seeds 22 and 11, spectrogram 11, chromagram 33 and 11, FDC-FS 11. FDC-FS without chroma (seed 11) is still training. Late fusion = the three seed-11 single models averaged.
+- **Saved (all 7):** MFCC seeds 22 and 11, spectrogram 11, chromagram 33 and 11, FDC-FS 11, FDC-FS without chroma 11. Late fusion = the three seed-11 single models averaged.
 - **Reproducibility:** retrained scores differ from the morning logs by up to 2.3 points (spectrogram), because multi-threaded CPU arithmetic is not bit-identical. The manifest records each saved model's own score.
 - **Caution:** these are validation scores. The 11 Nov MFCC winner fell from 47.2% on validation to 35.0% on test. Only the single test run counts.
 

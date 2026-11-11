@@ -1,0 +1,13 @@
+﻿icbhi  fdc3 (PRIMARY)           seed 33  balanced 0.394  F1 0.383  Crac=0.57 Heal=0.52 Whee=0.24 Whee=0.25
+icbhi  late3                    seed 22  balanced 0.357  F1 0.345  Crac=0.62 Heal=0.51 Whee=0.17 Whee=0.12
+icbhi  fdc2_nochroma            seed 11  balanced 0.365  F1 0.349  Crac=0.55 Heal=0.46 Whee=0.25 Whee=0.20
+icbhi  single_spec              seed 33  balanced 0.346  F1 0.324  Crac=0.46 Heal=0.40 Whee=0.17 Whee=0.36
+icbhi  single_mfcc              seed 22  balanced 0.367  F1 0.324  Crac=0.74 Heal=0.30 Whee=0.27 Whee=0.17
+icbhi  single_chroma            seed 33  balanced 0.389  F1 0.308  Crac=0.81 Heal=0.21 Whee=0.07 Whee=0.45
+sprs   fdc3 (PRIMARY)           seed 33  balanced 0.572  F1 0.454  Crac=0.53 Heal=0.70 Whee=0.55 Whee=0.51
+sprs   late3                    seed 22  balanced 0.528  F1 0.425  Crac=0.48 Heal=0.70 Whee=0.44 Whee=0.49
+sprs   fdc2_nochroma            seed 11  balanced 0.534  F1 0.412  Crac=0.45 Heal=0.69 Whee=0.46 Whee=0.53
+sprs   single_spec              seed 33  balanced 0.510  F1 0.391  Crac=0.47 Heal=0.66 Whee=0.42 Whee=0.49
+sprs   single_mfcc              seed 22  balanced 0.513  F1 0.395  Crac=0.40 Heal=0.67 Whee=0.46 Whee=0.53
+sprs   single_chroma            seed 33  balanced 0.459  F1 0.223  Crac=0.51 Heal=0.14 Whee=0.36 Whee=0.82
+wrote results/final-test-icbhi-sprs.md

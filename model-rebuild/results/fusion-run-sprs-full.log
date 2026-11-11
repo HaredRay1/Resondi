@@ -1,1 +1,32 @@
 start 11/11/2026 20:31:13.78 
+single_mfcc     icbhi+sprs-bl4k-sn-bal  seed 11  epoch 18  icbhi-val bal 0.420  F1 0.366  sprs-val 0.482  [Crac=0.75 Heal=0.30 Whee=0.49 Whee=0.14]  552s
+single_mfcc     icbhi+sprs-bl4k-sn-bal  seed 22  epoch 19  icbhi-val bal 0.447  F1 0.370  sprs-val 0.483  [Crac=0.74 Heal=0.24 Whee=0.55 Whee=0.25]  537s
+single_mfcc     icbhi+sprs-bl4k-sn-bal  seed 33  epoch 15  icbhi-val bal 0.428  F1 0.346  sprs-val 0.496  [Crac=0.80 Heal=0.21 Whee=0.50 Whee=0.20]  463s
+== single_mfcc (icbhi+sprs-bl4k-srcnorm-bal): ICBHI validation cycle balanced accuracy 0.432 +/- 0.011
+
+single_spec     icbhi+sprs-bl4k-sn-bal  seed 11  epoch 20  icbhi-val bal 0.461  F1 0.378  sprs-val 0.488  [Crac=0.69 Heal=0.33 Whee=0.34 Whee=0.48]  886s
+single_spec     icbhi+sprs-bl4k-sn-bal  seed 22  epoch 23  icbhi-val bal 0.468  F1 0.394  sprs-val 0.487  [Crac=0.70 Heal=0.39 Whee=0.26 Whee=0.52]  959s
+single_spec     icbhi+sprs-bl4k-sn-bal  seed 33  epoch 27  icbhi-val bal 0.483  F1 0.402  sprs-val 0.471  [Crac=0.68 Heal=0.38 Whee=0.36 Whee=0.52]  1298s
+== single_spec (icbhi+sprs-bl4k-srcnorm-bal): ICBHI validation cycle balanced accuracy 0.471 +/- 0.009
+
+single_chroma   icbhi+sprs-bl4k-sn-bal  seed 11  epoch  3  icbhi-val bal 0.381  F1 0.288  sprs-val 0.455  [Crac=0.70 Heal=0.19 Whee=0.20 Whee=0.43]  262s
+single_chroma   icbhi+sprs-bl4k-sn-bal  seed 22  epoch  2  icbhi-val bal 0.408  F1 0.389  sprs-val 0.470  [Crac=0.65 Heal=0.43 Whee=0.46 Whee=0.09]  191s
+single_chroma   icbhi+sprs-bl4k-sn-bal  seed 33  epoch  1  icbhi-val bal 0.446  F1 0.290  sprs-val 0.389  [Crac=0.77 Heal=0.21 Whee=0.08 Whee=0.73]  167s
+== single_chroma (icbhi+sprs-bl4k-srcnorm-bal): ICBHI validation cycle balanced accuracy 0.412 +/- 0.026
+
+late3           icbhi+sprs-bl4k-sn-bal  seed 11  epoch  0  icbhi-val bal 0.460  F1 0.381  sprs-val 0.519  [Crac=0.76 Heal=0.29 Whee=0.41 Whee=0.39]  0s
+late3           icbhi+sprs-bl4k-sn-bal  seed 22  epoch  0  icbhi-val bal 0.505  F1 0.446  sprs-val 0.516  [Crac=0.78 Heal=0.37 Whee=0.44 Whee=0.43]  0s
+late3           icbhi+sprs-bl4k-sn-bal  seed 33  epoch  0  icbhi-val bal 0.477  F1 0.379  sprs-val 0.529  [Crac=0.80 Heal=0.28 Whee=0.30 Whee=0.52]  0s
+== late3 (icbhi+sprs-bl4k-srcnorm-bal): ICBHI validation cycle balanced accuracy 0.481 +/- 0.018
+
+fdc3            icbhi+sprs-bl4k-sn-bal  seed 11  epoch 30  icbhi-val bal 0.489  F1 0.426  sprs-val 0.503  [Crac=0.59 Heal=0.44 Whee=0.47 Whee=0.45]  1887s
+fdc3            icbhi+sprs-bl4k-sn-bal  seed 22  epoch 17  icbhi-val bal 0.474  F1 0.407  sprs-val 0.495  [Crac=0.66 Heal=0.35 Whee=0.54 Whee=0.34]  1724s
+fdc3            icbhi+sprs-bl4k-sn-bal  seed 33  epoch 15  icbhi-val bal 0.499  F1 0.453  sprs-val 0.513  [Crac=0.73 Heal=0.42 Whee=0.52 Whee=0.32]  1634s
+== fdc3 (icbhi+sprs-bl4k-srcnorm-bal): ICBHI validation cycle balanced accuracy 0.487 +/- 0.010
+
+fdc2_nochroma   icbhi+sprs-bl4k-sn-bal  seed 11  epoch 17  icbhi-val bal 0.482  F1 0.402  sprs-val 0.505  [Crac=0.72 Heal=0.36 Whee=0.35 Whee=0.50]  1208s
+fdc2_nochroma   icbhi+sprs-bl4k-sn-bal  seed 22  epoch 13  icbhi-val bal 0.473  F1 0.427  sprs-val 0.514  [Crac=0.64 Heal=0.46 Whee=0.48 Whee=0.32]  1116s
+fdc2_nochroma   icbhi+sprs-bl4k-sn-bal  seed 33  epoch 15  icbhi-val bal 0.479  F1 0.411  sprs-val 0.521  [Crac=0.68 Heal=0.38 Whee=0.41 Whee=0.45]  1084s
+== fdc2_nochroma (icbhi+sprs-bl4k-srcnorm-bal): ICBHI validation cycle balanced accuracy 0.478 +/- 0.004
+
+done 12/11/2026  0:24:17.85 

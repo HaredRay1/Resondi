@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Resondi User Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@page { size: A5; margin: 14mm 13mm 16mm 13mm; }
+:root { --rose:#E91E76; --plum:#8E2A52; --grey:#9E8892; --blush:#F7D6E4; --line:#EBD3DE; --bg:#FFF5F9; --ink:#2a1622; --soft:#5b4450; }
+* { box-sizing: border-box; }
+body { font-family: Poppins, Arial, sans-serif; color: var(--ink); font-size: 9.4pt; line-height: 1.45; margin: 0; }
+h2 { font-size: 16pt; color: var(--plum); font-weight: 600; margin: 0 0 1mm; }
+.kicker { font-size: 7.5pt; font-weight: 600; letter-spacing: 1.2pt; color: var(--rose); text-transform: uppercase; }
+.lead { color: var(--soft); margin: 0 0 4mm; }
+p { margin: 0 0 2mm; }
+section { break-before: page; }
+.keep { break-inside: avoid; }
+.cover { height: 178mm; display: flex; flex-direction: column; justify-content: space-between; }
+.brand { font-size: 32pt; font-weight: 700; color: var(--plum); line-height: 1; }
+.brand span { color: var(--rose); }
+.sub { font-size: 11pt; color: var(--grey); font-weight: 300; margin-top: 2mm; }
+.cover img { width: 100%; border-radius: 4mm; }
+.cover .tag { font-size: 10.5pt; color: var(--plum); font-weight: 500; }
+.cover .foot { font-size: 7pt; color: var(--grey); border-top: .3mm solid var(--line); padding-top: 2mm; }
+.qs { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.card { background: var(--bg); border-radius: 3mm; padding: 4mm; }
+.card .num { display: inline-block; width: 7mm; height: 7mm; border-radius: 50%; background: var(--rose); color: #fff; font-weight: 600; text-align: center; line-height: 7mm; font-size: 9pt; }
+.card svg { float: right; width: 11mm; height: 11mm; }
+.card h3 { font-size: 10.5pt; color: var(--plum); margin: 2.5mm 0 1mm; }
+.card p { font-size: 8.6pt; color: var(--soft); margin: 0; }
+.big { font-size: 13pt; font-weight: 600; color: var(--ink); }
+.step { display: grid; grid-template-columns: 9mm 1fr; gap: 3mm; margin-bottom: 3.2mm; }
+.step .n { width: 8mm; height: 8mm; border-radius: 50%; background: var(--blush); color: var(--plum); font-weight: 600; text-align: center; line-height: 8mm; }
+.shots { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin: 2mm 0 3mm; }
+.shot { text-align: center; font-size: 7.6pt; color: var(--grey); }
+.shot img { width: 100%; border-radius: 2.5mm; border: .3mm solid var(--line); display: block; margin-bottom: 1.2mm; }
+.note { border-left: 1mm solid var(--rose); background: var(--bg); padding: 2.2mm 3mm; border-radius: 0 2mm 2mm 0; font-size: 8.6pt; margin: 3mm 0; }
+.dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 3mm; }
+.dodont div { border-radius: 2.5mm; padding: 3mm; font-size: 8.4pt; }
+.do { background: #EEF8F1; } .dont { background: #FDEDEF; }
+.dodont h4 { margin: 0 0 1mm; font-size: 9pt; }
+.do h4 { color: #2e7d4f; } .dont h4 { color: #b3263b; }
+.dodont ul { margin: 0; padding-left: 4mm; } .dodont li { margin-bottom: .8mm; }
+.btn { display: inline-block; font-size: 6.8pt; font-weight: 600; color: #fff; border-radius: 1mm; padding: 0 1.4mm; }
+.red { background: #c62337; } .blue { background: #1f6fd1; }
+.legend { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5mm 4mm; margin-top: 3mm; }
+.legend div { display: grid; grid-template-columns: 7mm 1fr; gap: 2mm; align-items: start; font-size: 8.6pt; }
+.dot { width: 6mm; height: 6mm; border-radius: 50%; display: inline-block; }
+.legend b { display: block; color: var(--plum); font-size: 9pt; }
+.flow { display: flex; align-items: center; justify-content: space-between; margin: 4mm 0; }
+.flow .f { text-align: center; width: 22%; font-size: 7.8pt; color: var(--soft); }
+.flow .f .ic { width: 13mm; height: 13mm; border-radius: 50%; background: var(--bg); margin: 0 auto 1.5mm; display: flex; align-items: center; justify-content: center; }
+.flow .f b { display: block; color: var(--plum); font-size: 8.4pt; }
+.arrow { color: var(--rose); font-size: 13pt; }
+table { width: 100%; border-collapse: collapse; font-size: 8.4pt; }
+td { padding: 2mm 1.5mm; border-bottom: .25mm solid var(--line); vertical-align: top; }
+td:first-child { width: 42%; font-weight: 600; color: var(--plum); }
+th { text-align: left; font-size: 7.5pt; letter-spacing: 1pt; text-transform: uppercase; color: var(--rose); padding: 0 1.5mm 1.5mm; border-bottom: .4mm solid var(--rose); }
+.safety { background: var(--plum); color: #fff; border-radius: 3mm; padding: 3.5mm 4mm; margin-top: 4mm; font-size: 8.5pt; }
+.safety h4 { margin: 0 0 1.5mm; font-size: 10pt; }
+.safety ul { margin: 0; padding-left: 4mm; } .safety li { margin-bottom: .8mm; }
+.heart { display: grid; grid-template-columns: 52% 1fr; gap: 4mm; align-items: center; }
+.sites { list-style: none; padding: 0; margin: 0; font-size: 8.5pt; }
+.sites li { display: grid; grid-template-columns: 6mm 1fr; gap: 2mm; margin-bottom: 2.4mm; }
+.sites .k { width: 5.5mm; height: 5.5mm; border-radius: 50%; background: var(--rose); color: #fff; font-size: 7.5pt; font-weight: 600; text-align: center; line-height: 5.5mm; }
+.sites b { color: var(--plum); }
+.small { font-size: 7.6pt; color: var(--grey); }
+</style></head><body>
+
+<div class="cover">
+  <div>
+    <div class="brand">Resond<span>i</span></div>
+    <div class="sub">User Guide</div>
+  </div>
+  <img src="resondi-front-panel.jpg" alt="Resondi device">
+  <div>
+    <div class="tag">Record the chest. Keep the sound. Let a doctor hear it.</div>
+    <div class="foot" style="margin-top:4mm">Team Wheezards · Puerto Princesa City National Science High School · 2026<br>Resondi is a recording and review aid. It does not diagnose.</div>
+  </div>
+</div>
+
+<section>
+  <div class="kicker">Quick start</div>
+  <h2>Ready in 4 steps</h2>
+  <p class="lead">No internet and no app needed. Just the device and a phone.</p>
+  <div class="qs">
+    <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke="#E91E76" stroke-width="1.6"><path d="M12 3v8"/><path d="M7 6.5a7 7 0 1 0 10 0"/></svg><span class="num">1</span><h3>Turn it on</h3><p>Charge the device, then switch it on. The screen lights up with "RESONDI".</p></div>
+    <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke="#E91E76" stroke-width="1.6"><path d="M2 9a15 15 0 0 1 20 0"/><path d="M5.5 12.5a10 10 0 0 1 13 0"/><path d="M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19.5" r="1" fill="#E91E76"/></svg><span class="num">2</span><h3>Join the Wi-Fi</h3><p>On your phone, connect to <b>RESONDI_WIFI</b>.</p></div>
+    <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke="#E91E76" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18"/><path d="M12 3a14 14 0 0 0 0 18"/></svg><span class="num">3</span><h3>Open the page</h3><p>In Chrome, go to<br><span class="big">192.168.4.1</span></p></div>
+    <div class="card"><svg viewBox="0 0 24 24" fill="none" stroke="#E91E76" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4" fill="#E91E76"/></svg><span class="num">4</span><h3>Record</h3><p>Place the chest piece, press a button, and hold still for <b>15 seconds</b>.</p></div>
+  </div>
+  <div class="note" style="margin-top:5mm"><b>Which button?</b> Top button = <b>lungs</b>. Bottom button = <b>heart</b>.</div>
+</section>
+
+<section>
+  <div class="kicker">Meet your device</div>
+  <h2>What everything does</h2>
+  <img src="resondi-front-panel.jpg" alt="Front panel" style="width:100%;border-radius:3mm;margin-top:2mm">
+  <div class="legend">
+    <div><span class="dot" style="background:#F2C230"></span><span><b>Top button</b>Records lungs</span></div>
+    <div><span class="dot" style="background:#F2C230"></span><span><b>Bottom button</b>Records heart</span></div>
+    <div><span class="dot" style="background:#3CC66B"></span><span><b>Green light</b>On when the device is on</span></div>
+    <div><span class="dot" style="background:#C8323A"></span><span><b>Red light</b>Status light</span></div>
+    <div><span class="dot" style="background:#C9E84A"></span><span><b>Screen</b>Shows the 3 steps</span></div>
+    <div><span class="dot" style="background:#EBD3DE"></span><span><b>Chest piece</b>Goes on bare skin</span></div>
+  </div>
+  <p class="small" style="margin-top:4mm">Inside: a 32 GB memory card that keeps every recording (15 s, WAV).</p>
+</section>
+
+<section>
+  <div class="kicker">Step by step</div>
+  <h2>Connect your phone</h2>
+  <div class="shots">
+    <div class="shot"><img src="img/s1_wifi.png" alt="Wi-Fi">Tap <b>RESONDI_WIFI</b>, type the password, tap Connect</div>
+    <div class="shot"><img src="img/s3_ready.png" alt="Device page">Go to 192.168.4.1. Look for <b>System Ready</b></div>
+  </div>
+  <div class="step"><span class="n">1</span><div>Open <b>Wi-Fi settings</b> and tap <b>RESONDI_WIFI</b>. Enter the device password.</div></div>
+  <div class="step"><span class="n">2</span><div>Open <b>Chrome</b>, type <b>192.168.4.1</b> and press Go.</div></div>
+  <div class="note">Seeing <b>"No internet connection"</b>? That's normal. Resondi works offline.</div>
+</section>
+
+<section>
+  <div class="kicker">Step by step</div>
+  <h2>Make a recording</h2>
+  <div class="step"><span class="n">1</span><div><b>Place the chest piece</b> on bare skin. Press until the edge seals.</div></div>
+  <div class="step"><span class="n">2</span><div><b>Press a button</b> on the device, or tap <span class="btn blue">RECORD LUNG SOUNDS</span> / <span class="btn red">RECORD HEART SOUNDS</span> on the phone.</div></div>
+  <div class="step"><span class="n">3</span><div><b>Hold still for 15 seconds</b> until it says <b>System Ready</b> again.</div></div>
+  <div class="step"><span class="n">4</span><div><b>Check it:</b> tap <b>Refresh Recordings</b> and play it back. Unclear? Record again.</div></div>
+  <div class="shots">
+    <div class="shot"><img src="img/s4_progress.png" alt="Recording">While recording, the buttons turn grey</div>
+    <div class="shot"><img src="img/s5_saved.png" alt="Saved recordings">Refresh to see saved recordings</div>
+  </div>
+  <div class="dodont keep">
+    <div class="do"><h4>✓ Do</h4><ul><li>Use a quiet room</li><li>Patient sits upright</li><li>Slow, deep breaths for lungs</li></ul></div>
+    <div class="dont"><h4>✕ Don't</h4><ul><li>Record over clothing</li><li>Talk during the 15 s</li><li>Move the chest piece</li></ul></div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Where to listen</div>
+  <h2>Same sites, same order, every visit</h2>
+  <p class="lead">That is what lets a doctor compare today's sound with last week's.</p>
+  <div class="heart keep">
+    <svg viewBox="0 0 200 230" role="img" aria-label="Heart listening sites on the chest">
+      <path d="M40 30 Q100 10 160 30 L172 215 Q100 228 28 215 Z" fill="#FFF5F9" stroke="#EBD3DE" stroke-width="2"/>
+      <path d="M70 26 Q100 34 130 26" fill="none" stroke="#EBD3DE" stroke-width="2"/>
+      <rect x="93" y="40" width="14" height="110" rx="6" fill="#F7D6E4"/>
+      <g stroke="#EBD3DE" stroke-width="1.5" fill="none">
+        <path d="M92 62 Q65 58 44 66"/><path d="M108 62 Q135 58 156 66"/>
+        <path d="M92 84 Q65 80 44 88"/><path d="M108 84 Q135 80 156 88"/>
+        <path d="M92 106 Q65 102 46 110"/><path d="M108 106 Q135 102 154 110"/>
+        <path d="M92 128 Q65 124 48 132"/><path d="M108 128 Q135 124 152 132"/>
+      </g>
+      <g font-family="Poppins, Arial" font-size="10" font-weight="600" fill="#fff" text-anchor="middle">
+        <circle cx="80" cy="73" r="8" fill="#E91E76"/><text x="80" y="76.5">1</text>
+        <circle cx="120" cy="73" r="8" fill="#E91E76"/><text x="120" y="76.5">2</text>
+        <circle cx="120" cy="95" r="8" fill="#E91E76"/><text x="120" y="98.5">3</text>
+        <circle cx="113" cy="140" r="8" fill="#E91E76"/><text x="113" y="143.5">4</text>
+        <circle cx="140" cy="152" r="8" fill="#E91E76"/><text x="140" y="155.5">5</text>
+      </g>
+      <text x="40" y="200" font-family="Poppins, Arial" font-size="8" fill="#9E8892">patient's right</text>
+      <text x="160" y="200" font-family="Poppins, Arial" font-size="8" fill="#9E8892" text-anchor="end">patient's left</text>
+    </svg>
+    <div>
+      <div class="kicker" style="margin-bottom:2mm">Heart · 5 sites</div>
+      <ul class="sites">
+        <li><span class="k">1</span><span><b>Aortic</b><br>2nd space, right of breastbone</span></li>
+        <li><span class="k">2</span><span><b>Pulmonic</b><br>2nd space, left of breastbone</span></li>
+        <li><span class="k">3</span><span><b>Erb's point</b><br>3rd space, left of breastbone</span></li>
+        <li><span class="k">4</span><span><b>Tricuspid</b><br>4th space, lower left breastbone</span></li>
+        <li><span class="k">5</span><span><b>Mitral</b><br>5th space, below the nipple line</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="note"><b>Lungs · 7 sites:</b> the six lung fields plus the trachea. Follow the placement guide in the Resondi app for the order. A 20-second lung site is two 15-second recordings.</div>
+  <p class="small">A full exam takes about 34 minutes for the lungs, or 45 minutes or more with the heart.</p>
+</section>
+
+<section>
+  <div class="kicker">After the exam</div>
+  <h2>Send it for review</h2>
+  <p class="lead">For now, recordings travel on the memory card. Automatic sending is coming.</p>
+  <div class="flow">
+    <div class="f"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E91E76" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></div><b>Record</b>on the device</div>
+    <span class="arrow">→</span>
+    <div class="f"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E91E76" stroke-width="1.6"><path d="M7 3h7l4 4v14H7z"/><path d="M10 7v3M13 7v3"/></svg></div><b>Copy</b>the memory card</div>
+    <span class="arrow">→</span>
+    <div class="f"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E91E76" stroke-width="1.6"><path d="M12 16V5"/><path d="M7 10l5-5 5 5"/><path d="M4 19h16"/></svg></div><b>Upload</b>to the patient's record</div>
+    <span class="arrow">→</span>
+    <div class="f"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E91E76" stroke-width="1.6"><path d="M5 12l4 4 10-10"/></svg></div><b>Confirm</b>by a practitioner</div>
+  </div>
+  <div class="step"><span class="n">1</span><div><b>Switch the device off</b>, then take out the memory card.</div></div>
+  <div class="step"><span class="n">2</span><div><b>Copy the files</b> and upload them in the Resondi platform, choosing the patient and site.</div></div>
+  <div class="step"><span class="n">3</span><div>The AI <b>suggests</b> a pattern: normal, wheeze, crackle, or both. A practitioner <b>confirms, changes, or asks for a repeat</b>.</div></div>
+  <div class="step"><span class="n">4</span><div><b>Put the card back</b> before the next session.</div></div>
+  <div class="kicker" style="margin:4mm 0 1.5mm">Looking after it</div>
+  <p style="font-size:8.6pt">Wipe the chest piece with a 70% alcohol wipe between patients. Keep it dry and out of heat (the case is PLA plastic). Don't pull the chest piece by its cable.</p>
+</section>
+
+<section>
+  <div class="kicker">Need help?</div>
+  <h2>If something goes wrong</h2>
+  <table>
+    <tr><th>If you see…</th><th>Do this</th></tr>
+    <tr><td>No RESONDI_WIFI</td><td>Check the device is on. Turn your phone's Wi-Fi off and on.</td></tr>
+    <tr><td>"Obtaining IP address…"</td><td>Wait 10 seconds. Still stuck? Forget the network and join again.</td></tr>
+    <tr><td>The page won't open</td><td>Make sure you're on RESONDI_WIFI. Turn mobile data off. Type 192.168.4.1 exactly.</td></tr>
+    <tr><td>"No recordings found"</td><td>Tap Refresh Recordings. Check the memory card is pushed in.</td></tr>
+    <tr><td>Sound is muffled or noisy</td><td>Bare skin, press firmly, quieter room, no talking.</td></tr>
+    <tr><td>Buttons are grey</td><td>It's still recording. Wait for System Ready.</td></tr>
+  </table>
+  <div class="safety keep">
+    <h4>Important</h4>
+    <ul>
+      <li>Resondi does not diagnose. A licensed practitioner confirms every result.</li>
+      <li>The AI is still in development and not yet validated. Treat it as a hint to listen, not a finding.</li>
+      <li>Heart sounds are recorded but not yet analysed by the AI.</li>
+      <li>In an emergency, care for the patient first.</li>
+      <li>Recordings are patient data. Keep the card and phone secure.</li>
+    </ul>
+  </div>
+</section>
+
+</body></html>

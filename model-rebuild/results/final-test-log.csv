@@ -6,3 +6,9 @@ time,recipe,seed,epoch,val_cycle_balanced_acc,test_cycle_balanced_acc,test_cycle
 2026-11-11 14:52,fusion-eval:fdc2_nochroma,11,,0.4750,0.3446,0.3249,
 2026-11-11 14:52,fusion-eval:fdc3,11,,0.4880,0.3667,0.3580,
 2026-11-11 14:52,fusion-eval:late3 (PRIMARY),11,,0.4872,0.3286,0.3128,
+2026-11-12 00:25,icbhi+sprs:fdc3 (PRIMARY),33,,,0.3944,0.3829,0.3570
+2026-11-12 00:25,icbhi+sprs:late3,22,,,0.3571,0.3449,0.3344
+2026-11-12 00:25,icbhi+sprs:fdc2_nochroma,11,,,0.3654,0.3492,0.3195
+2026-11-12 00:25,icbhi+sprs:single_spec,33,,,0.3462,0.3244,0.3191
+2026-11-12 00:25,icbhi+sprs:single_mfcc,22,,,0.3674,0.3243,0.3264
+2026-11-12 00:25,icbhi+sprs:single_chroma,33,,,0.3887,0.3078,0.3597
