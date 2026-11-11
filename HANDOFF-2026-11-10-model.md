@@ -387,5 +387,81 @@ The bar to beat on test is **35.0%** (11 Nov, MFCC) and 33.5% (deployed v1).
 ### PC limits to know
 - **Hardware:** 4 cores and 7.8 GB RAM, with free memory down to about 0.5 GB while rendering, training and downloading at once. Claude Code stopped one watcher script for low memory (the work itself kept running).
 - **Long jobs:** run them as detached processes (`Start-Process`), so an app restart does not kill them, as happened at 01:52.
-- **Running now:** the training (`fusion.py run --data icbhi`), the video render and the SPRSound download are all detached processes.
-- **Untracked folder:** `research-plan/` is another session's work in progress and is deliberately not committed.
+- **Running now (12 Nov, 00:45):** nothing. All training has finished.
+- **Committed:** the research plan (`research-plan/`), the 3-minute pitch script (`final/18`) and the user guide (`final/19`), all from other sessions.
+
+---
+
+## 7. ALL RESULTS: comparison tables (12 Nov 2026)
+
+**How to read them:**
+- **Balanced accuracy** averages the four sounds equally; guessing scores **25%**. It is the fair single number.
+- **Plain accuracy** is inflated by the many Healthy breaths.
+- **Test results** come from patients the model never saw, and only they support claims. **Validation results** were used to choose versions.
+- **Sources:** `model-rebuild/results/final-test-log.csv`, `fusion-validation.csv`, `experiments-validation.csv` and the run logs.
+
+### Table 7.1 Test results: 31 unseen ICBHI adults (1,051 breathing cycles)
+
+| Date | Model | Training data | Plain acc. | **Balanced acc.** | Macro F1 | Children (SPRSound test, 230) |
+|---|---|---|---|---|---|---|
+| before 9 Nov | Old app model (diagnosis labels) | ICBHI, leaky split | ~~71.1%~~ invalid | — | — | — |
+| 9 Nov | Local CNN, app-sized | ICBHI | — | 32.4% | — | — |
+| 9 Nov | Local CNN, wider | ICBHI | — | 38.1% | — | — |
+| 9 Nov | Local CNN, 3 s windows | ICBHI | — | 34.0% | — | — |
+| 9 Nov | **Edge Impulse v1 (LIVE in the app)** | ICBHI | 44.0% | **33.5%** | — | — |
+| 11 Nov | MFCC (best of 10 versions) | ICBHI | 38.5% | 35.0% | 0.31 | — |
+| 11 Nov | ICBHI-only fusion: late fusion (primary) | ICBHI | — | 32.9% | 0.31 | 29.9% |
+| 11 Nov | ICBHI-only fusion: FDC-FS | ICBHI | — | 36.7% | 0.36 | 31.7% |
+| 11 Nov | ICBHI-only fusion: MFCC | ICBHI | — | 36.1% | 0.32 | 23.3% |
+| 11 Nov | ICBHI-only fusion: spectrogram | ICBHI | — | 26.7% | 0.27 | 24.4% |
+| 11 Nov | ICBHI-only fusion: chromagram | ICBHI | — | 42.1%* | 0.35 | 27.6% |
+| 11 Nov | ICBHI-only fusion: FDC-FS without chroma | ICBHI | — | 34.5% | 0.33 | 32.2% |
+| **12 Nov** | **FDC-FS + SPRSound (primary) ⭐** | **ICBHI + SPRSound** | **47.2%** | **39.4%** (CI 28.4–44.6) | **0.38** | **57.2%** (CI 46.7–63.4) |
+| 12 Nov | Late fusion + SPRSound | ICBHI + SPRSound | 46.1% | 35.7% | 0.34 | 52.8% |
+| 12 Nov | FDC-FS without chroma + SPRSound | ICBHI + SPRSound | 43.1% | 36.5% | 0.35 | 53.4% |
+| 12 Nov | MFCC + SPRSound | ICBHI + SPRSound | 39.3% | 36.7% | 0.32 | 51.3% |
+| 12 Nov | Spectrogram + SPRSound | ICBHI + SPRSound | 38.3% | 34.6% | 0.32 | 51.0% |
+| 12 Nov | Chromagram + SPRSound | ICBHI + SPRSound | 37.5% | 38.9% | 0.31 | 45.9% |
+
+\*Not pre-specified, so it cannot be claimed (choosing by test score leaks the test set). ~~71.1%~~ was inflated by data leakage; never quote it.
+
+**Not comparable to these:** the field test, 6 of 15 Resondi recordings = 40% (old model, device audio, reference labels undocumented).
+
+**The ICBHI test set has been read three times** (11 Nov 02:50, 11 Nov 14:52, 12 Nov 00:25). Each time the primary model was fixed in advance. Report all three.
+
+### Table 7.2 Validation results: 30 ICBHI patients, mean of 3 seeds (used only to choose)
+
+| Version | ICBHI only | ICBHI only, filtered 0.1–3.9 kHz | **ICBHI + SPRSound** (filtered) |
+|---|---|---|---|
+| MFCC | 45.5% | 43.4% | 43.2% |
+| Spectrogram | 44.8% | 43.5% | 47.1% |
+| Chromagram | 41.2% | 39.9% | 41.2% |
+| Late fusion | 48.2% | 44.0% | 48.1% |
+| **FDC-FS three-branch** | 46.9% | 46.9% (1 seed) | **48.7%** |
+| FDC-FS without chroma | 43.9% | — | 47.8% |
+| *Children (SPRSound validation)* | *12–24%* | *12–24%* | ***about 48–53%*** |
+
+**Earlier versions (11 Nov, `experiment.py`, ICBHI only, validation):**
+
+| Version | Validation |
+|---|---|
+| MFCC + two detectors | 44.2% |
+| MFCC | 43.9% |
+| MFCC + augmentation | 43.1% |
+| MFE + two detectors | 42.7% |
+| Other MFE versions | 31.4–37.9% |
+
+### Table 7.3 Per-class recall of the main models on the ICBHI test
+
+| Model | Crackles | Healthy | Wheezing | W + C | Balanced |
+|---|---|---|---|---|---|
+| Edge Impulse v1 (live app) | 71% | 45% | 9% | 8% | 33.5% |
+| MFCC (11 Nov) | 73% | 30% | 11% | 26% | 35.0% |
+| Late fusion, ICBHI only | 60% | 47% | 21% | 4% | 32.9% |
+| FDC-FS, ICBHI only | 56% | 57% | 24% | 9% | 36.7% |
+| **FDC-FS + SPRSound** | 57% | 52% | 24% | **25%** | **39.4%** |
+
+### What to say
+> "We rebuilt the model without data leakage and tested fifteen designs honestly. The best is a three-branch fusion network on MFCC, spectrogram and chromagram, trained on ICBHI plus SPRSound, an Asian paediatric dataset. On unseen adult patients it scores 39.4% balanced accuracy against 25% chance. The model in our app today scores 33.5%. On unseen children it scores 57.2%. With 31 test patients the confidence interval is still wide, which is why the funding pays for clinician-labelled recordings from our own device."
+
+**Do not say:** that it is validated, that it diagnoses, or that it works on the Resondi device. It has not been tested on device audio, and it is not yet in the app (it needs an ONNX browser route; Edge Impulse has no chromagram block).
