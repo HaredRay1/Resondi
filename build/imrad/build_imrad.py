@@ -65,8 +65,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 FIGDIR = os.path.join(HERE, "..", "..", "figures") + os.sep
 
 
+_N = {"fig": 0, "tab": 0}
+
+
 def FIG(num, caption, fname, width_in=6.0, note=None):
-    """Centred figure with a numbered caption beneath it."""
+    """Centred figure with a numbered caption beneath it. Numbers are assigned in order;
+    the num argument is ignored except for the lettered companion figure "1b"."""
+    if num != "1b":
+        _N["fig"] += 1
+        num = _N["fig"]
     from docx.shared import Inches as _In
     from PIL import Image as _Img
     p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -90,6 +97,8 @@ def FIG(num, caption, fname, width_in=6.0, note=None):
 
 
 def TBL(num, caption, rows, widths, note=None):
+    _N["tab"] += 1
+    num = _N["tab"]
     para(f"Table {num}", after=0, before=14, first=0,
          align=WD_ALIGN_PARAGRAPH.LEFT, bold=True, spacing=1.0)
     para(caption, after=6, first=0, align=WD_ALIGN_PARAGRAPH.LEFT,
@@ -129,6 +138,30 @@ para("Ahnycca Krish N. Malimban",
      after=4, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, spacing=1.2)
 para("Science, Technology, Engineering and Mathematics — Senior High School\nPuerto Princesa City National Science High School, Palawan",
      after=16, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, italic=True, spacing=1.2)
+
+# ═══════════════════════════════════════════════════ ABSTRACT
+H1("Abstract")
+para("Auscultation is the first examination most Filipino patients with heart or lung "
+     "disease receive, but a conventional stethoscope keeps no record, so a lung sound "
+     "cannot be reviewed by a second clinician or compared with the same site at a later "
+     "visit. This study developed Resondi, a low-cost smart stethoscope that records lung "
+     "sounds at seven guided sites, files each recording by site, classifies it into four "
+     "sound patterns with a convolutional neural network, and routes every result to a "
+     "practitioner for confirmation. In field testing in Puerto Princesa City, the device "
+     "produced a signal about 13 dB stronger than a conventional stethoscope (45 dB against "
+     "32 dB), 93 percent of recordings were rated good or acceptable, and the original "
+     "classifier agreed with reference labels on 6 of 15 recordings (40 percent; 95 percent "
+     "CI 19.8–64.3; p = 0.148 against 25 percent chance). That classifier was later found "
+     "to have been trained on leaked data, and was rebuilt with sound-based labels and a "
+     "patient-wise split. In five-fold cross-validation across all 126 ICBHI 2017 patients, "
+     "a three-branch feature-fusion network trained with the SPRSound paediatric corpus "
+     "reached 40.0 percent balanced accuracy against 34.0 percent for the original design, a "
+     "significant gain of 5.9 points (95 percent CI 1.0–10.3; p = 0.008). The rebuilt "
+     "models have not yet been tested on recordings from the Resondi device. Resondi is "
+     "established as a working acquisition platform; validating its classifier on "
+     "clinician-labelled Filipino recordings is the next step.", first=0, spacing=1.6)
+para("Keywords: auscultation, lung sounds, smart stethoscope, convolutional neural "
+     "network, feature fusion, primary care, Philippines", first=0, italic=True, spacing=1.6)
 
 # ═══════════════════════════════════════════════════ INTRODUCTION
 H1("Introduction")
@@ -277,22 +310,26 @@ para("This study is limited to lung sounds. Cardiac auscultation, although suppo
      "condition, or produce a diagnosis. All classifications are presented to a "
      "practitioner for confirmation and none is returned to a patient unreviewed. "
      "Evaluation was conducted in Puerto Princesa City with a prototype device, and the "
-     "findings describe that prototype rather than a production unit. The system as "
-     "evaluated records at seven standardised sites and classifies from a single "
-     "MFCC input. A nine-site protocol and a three-branch feature-fusion "
-     "classifier are specified as the next iteration and are discussed under planned "
-     "extensions; neither was implemented at the time of evaluation, and no result "
-     "reported here was produced by them.", first=0)
+     "findings describe that prototype rather than a production unit. The field "
+     "evaluation used the original classifier, a single-input MFCC network. After that "
+     "evaluation the classifier was rebuilt and a three-branch feature-fusion version was "
+     "trained and tested on public lung-sound databases (ICBHI 2017 and SPRSound); those "
+     "models have not yet been tested on recordings from the Resondi device. A nine-site "
+     "protocol remains planned and is discussed under planned extensions.", first=0)
 
 # ═══════════════════════════════════════════════════ METHODOLOGY
 H1("Methodology")
 
 H2("Research Design")
-para("The study employed a developmental\u2013descriptive research design. An instrument was designed, constructed, and then "
-         "characterised across five dimensions: signal acquisition relative to a "
-         "conventional acoustic stethoscope, recording clarity, system response time, "
-         "performance across ambient noise conditions, and agreement between the "
-         "model's classification and reference labels. No experimental manipulation or "
+para("The study employed a developmental\u2013descriptive research design in two phases. "
+         "In the first, an instrument was designed, constructed, and then characterised in "
+         "the field across five dimensions: signal acquisition relative to a conventional "
+         "acoustic stethoscope, recording clarity, system response time, performance across "
+         "ambient noise conditions, and agreement between the original model's "
+         "classification and reference labels. In the second, prompted by a flaw found in "
+         "how the original model had been trained, the classifier was rebuilt and its "
+         "candidate versions were compared on public lung-sound databases under a "
+         "patient-wise evaluation. No experimental manipulation of human participants or "
          "control group was involved.", first=0)
 p = para("", first=0, after=4, spacing=1.0)
 FILL(p, "confirm this is the term your institution uses. Developmental-descriptive "
@@ -393,7 +430,8 @@ p = para("The classifier is a convolutional neural network taking the MFCC seque
          "returns class probabilities over four categories: normal, wheezing, crackles, "
          "and wheezing with crackles. The model classifies respiratory sound patterns "
          "and does not identify diseases.", first=0)
-para("The model evaluated in this study was developed using the Edge Impulse "
+para("The original model, which produced the field results reported below, was "
+     "developed using the Edge Impulse "
      "platform and deployed as a WebAssembly build, which performs inference in the "
      "browser within the mobile-first application. This accounts for the classification "
      "latency reported below.", first=0)
@@ -461,18 +499,10 @@ p = para("The model was trained and evaluated against the ICBHI 2017 Respiratory
          "Aristotle University of Thessaloniki and associated hospitals. It contains no "
          "Filipino or other Asian representation, a limitation treated explicitly in the "
          "discussion.", first=0)
-para("The model evaluated in this study was not trained on the official ICBHI 2017 "
-     "train/test partition. Its training, validation and test sets were drawn at random "
-     "over individual samples, as described below. The retraining that follows this "
-     "study uses the official partition, so that results become comparable with work "
-     "reported on this benchmark, assigns whole patients to one side before any "
-     "segmentation, cuts one non-overlapping segment per annotated respiratory cycle, and "
-     "labels each segment from its own crackle and wheeze annotations.", first=0)
-p = para("", first=0, after=4, spacing=1.0)
-FILL(p, "once the retraining has run, insert the cycle and patient counts for each "
-        "partition from manifest.csv. The official partition is defined per recording, "
-        "so two patients contribute to both sides. Do not write that no patient appears "
-        "in both partitions")
+para("The original model was not trained on a patient-wise partition. Its training, "
+     "validation and test sets were drawn at random over individual samples, as "
+     "described below. The rebuilt models, described under Classifier Rebuild, correct "
+     "this.", first=0)
 
 para("One property of this partitioning bears directly on how the corpus results below "
      "should be read. The 19,246 labelled samples are five seconds long and total "
@@ -485,9 +515,83 @@ para("One property of this partitioning bears directly on how the corpus results
      "three partitions. Combined with patient-level labels, this allows a model to score "
      "well by recognising the patient rather than the sound. Neither the validation "
      "accuracy nor the held-out test accuracy is therefore independent of the training "
-     "data, and neither is reported as evidence of performance. The field agreement "
-     "reported in the Results is the only estimate in this study that is independent of "
-     "the training data.", first=0)
+     "data, and neither is reported as evidence of performance. For the original model, "
+     "the field agreement reported in the Results is the only estimate that is "
+     "independent of its training data.", first=0)
+
+H2("Classifier Rebuild")
+para("Because the original model had learned to recognise patients rather than sounds, "
+     "the classifier was rebuilt after the field evaluation. Three things were changed: "
+     "the labels, the way the data were divided, and, in a second step, the model "
+     "architecture and the training data.", first=0)
+para("Labels were taken from the sound rather than the diagnosis. Each annotated "
+     "breathing cycle in ICBHI 2017 carries its own crackle and wheeze flags, and these "
+     "were mapped to the four output classes as shown in Table 1. Every one of the 6,898 "
+     "cycles was used.", first=0)
+TBL(1, "Mapping of ICBHI 2017 Cycle Annotations to the Four Output Classes",
+    [["Crackles annotated", "Wheezes annotated", "Class"],
+     ["No", "No", "Healthy"],
+     ["Yes", "No", "Crackles"],
+     ["No", "Yes", "Wheezing"],
+     ["Yes", "Yes", "Wheezing with Crackles"]],
+    [1.8, 1.8, 2.3],
+    "Classes are ordered alphabetically in the model output (Crackles, Healthy, "
+    "Wheezing, Wheezing with Crackles), the order Edge Impulse uses.")
+para("Data were divided by patient before any audio was cut, so that no patient "
+     "contributed to more than one partition: 65 patients (4,850 cycles) for training, "
+     "30 (997 cycles) for validation, and 31 (1,051 cycles) for testing. The division was "
+     "balanced by both class and recording device. A first division balanced by class "
+     "alone placed 79 percent of the training audio on one of the database's four "
+     "stethoscopes, and the resulting model scored at chance on recordings from the "
+     "others; balancing the devices corrected most of that effect. Each cycle was cut into "
+     "non-overlapping one-second windows at 16 kHz, and a cycle's prediction is the mean "
+     "of its windows' class probabilities.", first=0)
+para("Two architectures are reported. The first keeps the original design: 13 MFCCs per "
+     "frame passed to a one-dimensional convolutional network, here with 32 and 64 "
+     "filters. An eight-bit Edge Impulse build of this network replaced the original "
+     "model in the Resondi application on 10 November 2026. The second is a three-branch "
+     "feature-fusion network after Tariq et al. (2022). The same window is represented "
+     "three ways: as 13 MFCCs, as a log-power spectrogram from 0 to 4 kHz (129 bins, "
+     "20 ms frames), and as a 12-bin chromagram from 50 to 4,000 Hz (64 ms frames). Each "
+     "representation passes through its own convolutional branch; the three 64-unit "
+     "outputs are concatenated and passed to a dense layer and a four-class softmax "
+     "output, about 190,000 parameters in total.", first=0)
+FIG(7, "The Three-Branch Feature-Fusion Classifier as Built",
+    "p2_fusion.png", 6.05,
+    note="The diagram was drawn when this design was planned. The built version uses a "
+         "log-power spectrogram in the first branch.")
+para("Because ICBHI 2017 contains only adult European patients, a second training "
+     "corpus was added: SPRSound, the SJTU Paediatric Respiratory Sound Database "
+     "(Zhang et al., 2022), recorded from children aged one month to 18 years at "
+     "Shanghai Children's Medical Center and released under a CC BY 4.0 licence. Its "
+     "event labels were mapped to the same four classes (normal to Healthy; fine or "
+     "coarse crackle to Crackles; wheeze to Wheezing; wheeze with crackle to Wheezing "
+     "with Crackles). Rhonchi and stridor events, which have no counterpart in the ICBHI "
+     "labels, were excluded, as were recordings marked as poor quality. SPRSound was "
+     "divided by patient, separately from ICBHI, with 230 children held out for testing. "
+     "Because 82 percent of its windows are healthy, it was rebalanced: all crackle and "
+     "wheeze windows were kept, healthy windows were capped at the number in ICBHI "
+     "(20,590 of 49,417), and every combination of dataset and class carried equal "
+     "weight in training. Audio from both corpora was band-limited to 0.1–3.9 kHz, "
+     "levelled, and normalised separately for each corpus.", first=0)
+para("Every version was trained with three random seeds, and versions were compared on "
+     "the validation patients only. Fifteen versions were tried, including mel-filterbank "
+     "input, data augmentation, a pair of yes-or-no detectors for crackles and wheezes, "
+     "single-representation networks, a late-fusion average of three single networks, and "
+     "the fusion network without its chromagram branch. Before any test patient was "
+     "scored, the version to be reported was named in writing, and every test run was "
+     "logged.", first=0)
+para("Two evaluations followed. The first scored the pre-specified versions once on the "
+     "31 ICBHI test patients and on the 230 SPRSound test children. The ICBHI test set was "
+     "read three times in this way across successive rounds, each with its primary "
+     "version fixed in advance. The second was a five-fold cross-validation across all 126 "
+     "ICBHI patients, so that every patient was tested once by a model that had never "
+     "seen them. Patients were dealt into five folds balanced by class and recording "
+     "device; in fold k the test patients were fold k, early stopping used fold k + 1, "
+     "and the remaining three folds were used for training, with SPRSound added for the "
+     "fusion network. The app's MFCC design trained on ICBHI alone was compared with the "
+     "fusion network trained on ICBHI and SPRSound, the latter averaged over its three "
+     "seeds.", first=0)
 
 H2("Evaluation Procedures")
 para("Before analysis, each recording was assessed where technically possible for "
@@ -569,11 +673,28 @@ p = para("Descriptive statistics were used to summarise recording clarity, respo
          "labels matched, with a 95 percent Wilson score interval and an exact one-sided "
          "binomial test against the 25 percent expected by chance.",
          first=0)
+para("The rebuilt classifiers were judged primarily by balanced accuracy, the mean of "
+     "the four per-class recalls, because healthy cycles make up about half of ICBHI and "
+     "plain accuracy rewards a model that always answers Healthy; with four classes, "
+     "chance is 25 percent. Plain accuracy, macro-averaged F1, per-class recall and "
+     "Cohen's kappa are reported alongside it. Confidence intervals are 95 percent "
+     "patient-level bootstrap intervals, resampling whole patients 1,000 times, because "
+     "the cycles of one patient are not independent of one another. The cross-validated "
+     "difference between the two architectures was tested with a paired patient "
+     "bootstrap of 5,000 resamples, applying the same resampled patients to both models, "
+     "with a one-sided p-value for the hypothesis that the fusion network is no better. "
+     "Paired predictions on the same cycles were compared with McNemar's test, and the "
+     "fold-level and patient-level differences with a paired t-test and a Wilcoxon "
+     "signed-rank test as supporting analyses.", first=0)
+para("Model training and the bootstrap analyses were run in Python 3 with NumPy, SciPy "
+     "and PyTorch. Every other statistic in this paper, and the statistical figures, were "
+     "produced or reproduced with jamovi 2.7 (The jamovi project, 2025) through its R "
+     "package jmv, from comma-separated files that accompany the paper.", first=0)
+p = para("", first=0, after=4, spacing=1.0)
 FILL(p, "the full paper's Data Analysis section specifies a paired-samples t-test for "
-        "three comparisons. A t-test operates on means of continuous data and is not "
-        "valid on class labels or on ordinal quality grades, so those references should "
-        "be corrected in the full paper to match what is stated here. Name the software "
-        "used")
+        "three comparisons on class labels and quality grades. A t-test operates on means "
+        "of continuous data and is not valid on those, so correct the full paper to match "
+        "what is stated here")
 
 H2("Ethical Considerations")
 para("The study was conducted under the supervision of the research adviser of the "
@@ -641,7 +762,9 @@ para("Of fifteen recordings compared against reference labels, six produced matc
      "the present sample cannot distinguish between them. An exact binomial test against "
      "chance returned p = 0.148; eight of fifteen agreements would have been required to "
      "reach conventional significance. Fifteen recordings is too small a sample to support "
-     "a conclusion about accuracy, and none is drawn here.", first=0)
+     "a conclusion about accuracy, and none is drawn here. These fifteen recordings were "
+     "classified by the original model. The rebuilt models reported below have not yet "
+     "been tested on recordings from the Resondi device.", first=0)
 
 FIG(10, "Classification Agreement Against Reference Labels, with the 95% "
         "Wilson Interval", "r4_agreement.png", 5.7)
@@ -675,6 +798,73 @@ p = para("Dichotomous items are reported as frequencies. Twenty-one of 27 respon
 FILL(p, "confirm whether the three patients recorded at the private hospital are "
         "distinct from the 13 respondents who identified themselves as patients in the "
         "acceptance questionnaire. The two groups are currently described separately")
+
+H2("Rebuilt Classifier: Pre-Specified Test")
+para("Table 2 gives the rebuilt models' scores on the 31 ICBHI test patients, none of "
+     "whom contributed to training. Every model scored above the 25 percent expected by "
+     "chance, but on ICBHI data alone no change of architecture moved balanced accuracy "
+     "clearly beyond the mid-thirties, and every confidence interval overlapped. The "
+     "fusion network trained on ICBHI and SPRSound, named as the primary model before the "
+     "test was read, reached 39.4 percent, the best pre-specified result, and 57.2 percent "
+     "on the 230 SPRSound test children. Models trained on ICBHI alone scored between 23 "
+     "and 32 percent on those children.", first=0)
+TBL(2, "Balanced Accuracy of the Rebuilt Models on the 31 ICBHI Test Patients",
+    [["Model", "Training data", "Balanced accuracy (95% CI)", "Plain accuracy", "Macro F1"],
+     ["MFCC network, Edge Impulse 8-bit build (in the app)", "ICBHI", "33.5%", "44.0%", "—"],
+     ["MFCC network, best of ten versions", "ICBHI", "35.0% (24.6–40.3)", "38.5%", "0.31"],
+     ["Late fusion of three single networks", "ICBHI", "32.9% (23.9–40.9)", "—", "0.31"],
+     ["Three-branch fusion network", "ICBHI", "36.7% (26.0–43.0)", "—", "0.36"],
+     ["Three-branch fusion network", "ICBHI + SPRSound", "39.4% (28.4–44.6)", "47.2%", "0.38"]],
+    [2.15, 1.05, 1.45, 0.75, 0.6],
+    "Chance is 25 percent. Intervals are patient-level bootstrap intervals. Each row was "
+    "named as its round's primary model before the test patients were scored, except the "
+    "Edge Impulse build, which was checked against the same patients after export.")
+
+H2("Rebuilt Classifier: Cross-Validation Across All 126 Patients")
+para("Because 31 test patients give wide intervals, the two architectures were also "
+     "compared by five-fold cross-validation, in which each of the 126 ICBHI patients and "
+     "6,898 cycles was classified once by a model that had not seen that patient. Table 3 "
+     "gives the result. The fusion network trained with SPRSound reached 40.0 percent "
+     "balanced accuracy against 34.0 percent for the app's MFCC design. The paired "
+     "difference was 5.9 percentage points (95 percent CI 1.0 to 10.3; one-sided "
+     "p = 0.008), and the fusion network scored higher on 14 of the 15 seed-and-fold "
+     "comparisons, the fifteenth being a tie. It improved recall on every class (Table 3). "
+     "On the 230 SPRSound test children, the fold models averaged 56 percent.", first=0)
+TBL(3, "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)",
+    [["Measure", "MFCC network, ICBHI only", "Fusion network, ICBHI + SPRSound"],
+     ["Balanced accuracy (95% CI)", "34.0% (30.4–38.2)", "40.0% (35.9–43.5)"],
+     ["Fold mean ± SD", "34.1 ± 2.7", "39.9 ± 2.8"],
+     ["Plain accuracy", "36.6%", "43.0%"],
+     ["Macro F1", "0.31", "0.37"],
+     ["Recall: Crackles", "50%", "56%"],
+     ["Recall: Healthy", "33%", "40%"],
+     ["Recall: Wheezing", "31%", "38%"],
+     ["Recall: Wheezing with Crackles", "22%", "26%"],
+     ["SPRSound test children", "—", "56%"]],
+    [2.2, 1.85, 2.05],
+    "The fusion network is the average of three training seeds. Intervals are "
+    "patient-level bootstrap intervals.")
+para("The supporting analyses agreed. Across the five folds the fusion network's "
+     "balanced accuracy was higher in every fold, by a mean of 5.8 points (paired "
+     "t(4) = 4.75, p = 0.009; Figure 12). Of the 126 patients, 69 had more of their cycles "
+     "classified correctly by the fusion network, 39 fewer, and 18 the same (Wilcoxon "
+     "signed-rank p = 0.009; Figure 13). Cycle by cycle, the fusion network alone was "
+     "right on 1,277 cycles and the MFCC network alone on 831 (McNemar p < 0.001), though "
+     "this last test treats cycles as independent and overstates the certainty; the "
+     "patient-level analyses are the ones to rely on. Figure 14 shows where each model's "
+     "errors fall.", first=0)
+FIG(13, "Balanced Accuracy of the Two Architectures in Each of the Five Folds",
+    "j1_cv_folds.png", 5.6,
+    note="Produced in jamovi (jmv, paired-samples t-test, descriptives plot). Points are "
+         "fold means with 95% confidence intervals.")
+FIG(14, "Share of Each Patient's Cycles Classified Correctly, by Architecture",
+    "j2_cv_patients.png", 5.6,
+    note="Produced in jamovi (jmv, paired-samples comparison of 126 patients).")
+FIG(15, "True Class Against Predicted Class in Cross-Validation",
+    "j3_cv_confusion.png", 6.05,
+    note="Produced in jamovi (jmv, contingency tables, row percentages). Each bar group is "
+         "one true class; bars show how its cycles were classified. The two panels have "
+         "different vertical scales.")
 
 # ═══════════════════════════════════════════════════ DISCUSSION
 H1("Discussion")
@@ -736,32 +926,60 @@ para("Quality assessment at 145 seconds dominates total elapsed time, exceeding 
      "development priority than any improvement in classification accuracy, because a "
      "system that is not used produces no classifications to improve.", first=0)
 
-H2("Planned Extension of the Protocol and Model")
-para("Two extensions are specified and funded but were not implemented at the time of "
-     "evaluation. They are described here because the results above establish the "
-     "baseline against which each will be measured, and because neither should be read "
-     "as a capability of the system as tested.", first=0)
+H2("What the Classifier Rebuild Shows")
+para("The rebuild changes how the classification result should be read, though not the "
+     "field figure itself. The 40 percent field agreement belongs to the original model, "
+     "whose training was flawed; it is neither confirmed nor contradicted by the rebuilt "
+     "models, which have not been tested on device recordings. What the rebuild provides "
+     "is the first estimate of the classifier's performance that is free of patient "
+     "leakage: about 34 to 35 percent balanced accuracy for the original MFCC design on "
+     "unseen patients, and about 40 percent for the fusion network trained with the "
+     "paediatric corpus, against 25 percent by chance.", first=0)
+para("Two findings from the rebuild bear on what comes next. First, architecture alone "
+     "did not help: on ICBHI data alone, the fusion network was not clearly better than "
+     "the single MFCC network on the test patients, and a late-fusion average of three "
+     "networks did no better. The gain appeared only when training data were added. "
+     "Second, data that differ from the training data defeat the model. A division that "
+     "left one stethoscope dominant in training produced a model that scored at chance on "
+     "the others, and models trained on adults alone scored near chance on children. Both "
+     "point the same way: the classifier will perform on Resondi recordings of Filipino "
+     "patients only once it has been trained on them.", first=0)
+para("The motivation for fusing representations is that the two abnormal classes have "
+     "opposite acoustic signatures. A crackle is a brief, broadband, discontinuous event, "
+     "well represented in a spectrogram; a wheeze is a continuous musical sound defined by "
+     "pitch, which a chromagram represents directly. The rebuilt MFCC network was indeed "
+     "weakest on wheezes on the test patients (11 percent recall), and the fusion network "
+     "trained with SPRSound raised wheeze recall to 24 percent on those patients and to "
+     "38 percent in cross-validation. Wheezing remains the weakest single class.", first=0)
+para("These figures should not be compared with the 95 to 99 percent reported by some "
+     "studies on ICBHI, including Tariq et al. (2022). Those studies usually classify the "
+     "patient's diagnosis rather than the sound of each breath, and divide recordings "
+     "at random, so that a patient's audio appears in both training and testing, which is "
+     "the same flaw found in this study's original model.", first=0)
 
+H2("Planned Extensions")
+para("Three extensions are planned and were not implemented in the work reported here.",
+     first=0)
 para("The acquisition protocol extends from seven sites to nine. The two additional "
-     "sites are an interscapular pair at T3\u2013T4, beside the spine, which sample the "
+     "sites are an interscapular pair at T3–T4, beside the spine, which sample the "
      "posterior upper lobes; the tracheal reference and the six fields already recorded "
-     "are retained. Figure 11 shows the nine sites on the body and Table 1 gives their "
+     "are retained. Figure 15 shows the nine sites on the body and Table 4 gives their "
      "landmarks.", first=0)
 
-FIG(11, "Planned Nine-Site Acquisition Protocol",
+FIG(15, "Planned Nine-Site Acquisition Protocol",
     "p1_nine_sites.png", 5.9)
 
-TBL(1, "Planned Nine-Site Acquisition Protocol",
+TBL(4, "Planned Nine-Site Acquisition Protocol",
     [["Site", "Surface landmark", "Region sampled"],
      ["Tc", "Suprasternal notch, over the trachea", "Central airway"],
      ["1", "2nd ICS, right midclavicular line", "Right upper lobe"],
      ["2", "2nd ICS, left midclavicular line", "Left upper lobe"],
-     ["3", "4th\u20135th ICS, right mid-axillary line", "Right middle lobe"],
-     ["4", "4th\u20135th ICS, left mid-axillary line", "Lingula"],
-     ["5", "Interscapular T3\u2013T4, right of the spine", "Right upper lobe"],
-     ["6", "Interscapular T3\u2013T4, left of the spine", "Left upper lobe"],
-     ["7", "Infrascapular T8\u2013T10, right", "Right lower lobe"],
-     ["8", "Infrascapular T8\u2013T10, left", "Left lower lobe"]],
+     ["3", "4th–5th ICS, right mid-axillary line", "Right middle lobe"],
+     ["4", "4th–5th ICS, left mid-axillary line", "Lingula"],
+     ["5", "Interscapular T3–T4, right of the spine", "Right upper lobe"],
+     ["6", "Interscapular T3–T4, left of the spine", "Left upper lobe"],
+     ["7", "Infrascapular T8–T10, right", "Right lower lobe"],
+     ["8", "Infrascapular T8–T10, left", "Left lower lobe"]],
     [0.75, 3.0, 2.0],
     "Sites 5 and 6 (interscapular) were not implemented at the time of evaluation; the "
     "other seven are the protocol evaluated here, renumbered. The tracheal reference is "
@@ -775,62 +993,32 @@ para("The rationale for sampling more positions is empirical rather than procedu
      "fields; the extension adds the posterior upper fields, so that every lobe is "
      "sampled from both the front and the back of the chest.", first=0)
 
-para("The classifier extends from a single MFCC input to a three-branch "
-     "feature-fusion architecture. Three time\u2013frequency representations are computed "
-     "from the same waveform \u2014 a mel-spectrogram, the mel-frequency cepstral "
-     "coefficients already in use, and a chromagram. Each is processed by its own "
-     "convolutional branch, the resulting feature vectors are concatenated, and a single "
-     "classifier operates on the fused vector. This is feature-level fusion: the branches "
-     "share one decision rather than voting on three (Tariq et al., 2022).", first=0)
+para("The second extension is to put the fusion network into the application. The "
+     "application runs a single Edge Impulse model, and Edge Impulse provides no "
+     "chromagram processing, so the fusion network would run in the browser as an "
+     "exported model, with the same band-limiting and levelling applied to every "
+     "recording. Until then, the application continues to run the 33.5 percent MFCC "
+     "build.", first=0)
 
-para("The motivation is that the two abnormal classes have opposite acoustic "
-     "signatures. A crackle is a brief, broadband, discontinuous event, well localised in "
-     "time and well represented in a spectrogram. A wheeze is a continuous musical sound "
-     "defined by pitch, which a chromagram represents directly. The MFCCs in use summarise "
-     "the spectral envelope of each frame, which captures neither property directly: "
-     "averaging over a frame blurs a crackle\u2019s onset, and the envelope discards the "
-     "pitch that defines a wheeze. The present MFCC-only classifier is therefore expected "
-     "to be weakest on wheezes \u2014 a prediction the retrained baseline makes testable.",
+para("The third, and the one that matters most, is a local dataset: recordings of "
+     "Filipino patients made on the Resondi device at the seven standardised sites, with "
+     "each breathing cycle labelled independently by two clinicians who have not seen the "
+     "model's output, collected with ethics approval and consent. The planned study "
+     "separates the effect of each change, as Table 5 shows. Its first three rows have "
+     "now been run on public data; the fourth cannot be run on any public dataset.",
      first=0)
 
-para("The training corpus extends in two directions. HF_Lung_V1 (Hsu et al., 2021) "
-     "provides 9,765 fifteen-second recordings from approximately 279 subjects, "
-     "collected in Taiwan and released open-access under CC BY 4.0 \u2014 roughly ten times "
-     "the recording count of ICBHI 2017, from an East Asian population rather than a "
-     "European one. Its event-level labels for continuous and discontinuous adventitious "
-     "sounds map onto the four-class scheme used here, with continuous sounds "
-     "corresponding to wheeze and discontinuous to crackle. Locally collected, "
-     "clinically labelled Philippine recordings form the second extension and are the "
-     "only component that cannot be obtained from a public source.", first=0)
-
-p = para("Because the architecture and the training corpus would both change, their "
-         "effects must be separated or neither is evidenced. Four runs are required, "
-         "evaluated on a single fixed test partition so that every comparison is made "
-         "on the same patients. Table 2 sets out the four runs.", first=0)
-FILL(p, "hold the ICBHI official test partition fixed across all four runs. If the test "
-        "set changes with the training set, no two runs are comparable and the "
-        "ablation establishes nothing")
-
-FIG(12, "Planned Three-Branch Feature-Fusion Architecture",
-    "p2_fusion.png", 6.05)
-
-TBL(2, "Planned Ablation Separating Architecture from Data",
-    [["Run", "Classifier", "Training corpus", "What it isolates"],
-     ["A", "Single-input CNN", "ICBHI 2017", "The baseline reported in this study"],
-     ["B", "Three-branch fusion", "ICBHI 2017", "Effect of the architecture alone"],
-     ["C", "Three-branch fusion", "ICBHI + HF_Lung_V1", "Effect of corpus scale"],
-     ["D", "Three-branch fusion", "ICBHI + HF_Lung_V1 + local",
-      "Effect of local representation"]],
-    [0.55, 1.5, 1.85, 2.0],
-    "All runs evaluated on the same fixed test partition, divided by subject. "
-    "McNemar\u2019s test applied to the paired predictions of successive runs establishes "
-    "whether each change produced a real improvement rather than sampling variation.")
-
-para("Run B against Run A answers whether feature fusion is worth its additional "
-     "parameters on the data already held. Run C against Run B answers whether more "
-     "recordings help more than a better architecture does. Run D against Run C is the "
-     "question that matters most for deployment in the Philippines, and the one no "
-     "public dataset can answer.", first=0)
+TBL(5, "Separating the Effects of Architecture and Data",
+    [["Run", "Classifier", "Training data", "Status", "Result (cross-validated or test)"],
+     ["A", "MFCC network", "ICBHI 2017", "Done", "34.0% (CV); 35.0% (test)"],
+     ["B", "Three-branch fusion", "ICBHI 2017", "Done", "36.7% (test); not clearly better than A"],
+     ["C", "Three-branch fusion", "ICBHI + SPRSound", "Done", "40.0% (CV); 39.4% (test)"],
+     ["D", "Three-branch fusion", "ICBHI + SPRSound + local Resondi recordings", "Planned",
+      "—"]],
+    [0.45, 1.25, 1.65, 0.7, 1.95],
+    "The plan originally named HF_Lung_V1, a Taiwanese corpus, for run C. Its public "
+    "download link no longer works, so SPRSound was used instead. All runs are scored on "
+    "the same ICBHI patients, so that every comparison is made on the same people.")
 
 H2("Intended Users and Deployment Context")
 para("The system is designed for a specific tier of the Philippine health system, and the "
@@ -892,19 +1080,27 @@ FILL(p, "name the institutions if you can, with dates. An unnamed engagement cla
         "cannot name one, delete this paragraph rather than leave it unsupported")
 
 H2("Limitations")
-para("Four limitations bear directly on the interpretation of these findings.", first=0,
+para("Six limitations bear directly on the interpretation of these findings.", first=0,
      after=6)
 for lim in [
     "Sample size. Fifteen paired recordings are insufficient to establish classification "
     "performance. The confidence interval reported above is the direct consequence.",
-    "Training data representation. The ICBHI 2017 database was collected in Portugal and "
-    "Greece and contains no Filipino or other Asian representation. The extent to which "
-    "a model trained on this population transfers to Philippine patients has not been "
-    "established and should not be assumed.",
-    "Evaluation partition. The reference database was not partitioned patient-wise: "
-    "overlapping segments of the same patient\u2019s audio, each carrying the patient\u2019s "
-    "condition label, fell on both sides of every split. The model\u2019s scores on that "
-    "database are inflated and are not reported as evidence of performance.",
+    "The rebuilt models are untested on the device. Every result for the rebuilt "
+    "classifier comes from public databases recorded on other stethoscopes. They have not "
+    "been tested on recordings from the Resondi device, whose digital microphone sounds "
+    "different, and the evidence above shows that a change of recording device alone can "
+    "reduce a model to chance.",
+    "Training data representation. ICBHI 2017 was collected from adults in Portugal and "
+    "Greece, and SPRSound from children in China. Neither contains Filipino patients, and "
+    "transfer to Philippine patients has not been established.",
+    "Original evaluation partition. The original model's database was not partitioned "
+    "patient-wise: overlapping segments of the same patient’s audio, each carrying "
+    "the patient’s condition label, fell on both sides of every split. Its scores on "
+    "that database are inflated and are not reported as evidence of performance.",
+    "Repeated use of the test patients. The 31 ICBHI test patients were scored three "
+    "times, once per round, each time with the primary model fixed in advance. All three "
+    "results are reported, and the cross-validation across all 126 patients guards "
+    "against a lucky split.",
     "Speed of automated quality control. The system assesses whether ambient noise, weak "
     "signal, or motion artifact has rendered a recording unusable, but at a mean of 145 "
     "seconds per recording the check is too slow to run routinely before "
@@ -918,12 +1114,18 @@ H2("Conclusion")
 para("Resondi acquires, organises, and processes lung sound recordings at seven "
      "standardised sites, operates across the range of ambient conditions "
      "found in Philippine primary care, and produces a signal measurably stronger than "
-     "that of a conventional acoustic stethoscope. These capabilities are demonstrated. "
-     "The classification component is not: agreement of 40 percent on fifteen recordings "
-     "establishes neither that the model works nor that it does not, and the study is "
-     "therefore best understood as establishing a working acquisition platform on which "
-     "a classifier can subsequently be validated.", first=0)
-
+     "that of a conventional acoustic stethoscope. These capabilities are demonstrated.",
+     first=0)
+para("The classification component is not yet demonstrated on the device. The original "
+     "model's 40 percent agreement on fifteen recordings establishes neither that it works "
+     "nor that it does not, and that model was later found to have been trained on leaked "
+     "data. Rebuilt without that flaw, the classifier scores about 34 percent balanced "
+     "accuracy on unseen patients, and about 40 percent once paediatric recordings are "
+     "added and the three-branch fusion network is used, a statistically significant "
+     "gain. These rebuilt models have not yet been tested on recordings from the Resondi "
+     "device. The study is therefore best understood as establishing a working "
+     "acquisition platform, together with an honestly measured classifier baseline, on "
+     "which validation with local recordings can now proceed.")
 para("The system does not replace clinical judgement and is not designed to. Every "
      "classification is presented to a practitioner who confirms, modifies, or rejects "
      "it, and no result is returned to a patient unreviewed. On the evidence reported "
@@ -931,15 +1133,17 @@ para("The system does not replace clinical judgement and is not designed to. Eve
 
 H2("Recommendations")
 for rec in [
-    "Evaluate the model on a substantially larger sample using a patient-wise partition, "
-    "and report sensitivity, specificity, and Cohen's kappa with confidence intervals "
-    "rather than raw agreement alone.",
-    "Implement the nine-site protocol and the three-branch fusion classifier described "
-    "above, and evaluate both against the seven-site MFCC baseline, retrained "
-    "on an identical patient-wise partition.",
-    "Collect and clinically label a Philippine lung sound dataset, and quantify the "
-    "performance difference between the model trained on ICBHI data alone and the same "
-    "model after local retraining.",
+    "Test the rebuilt models on recordings from the Resondi device, beginning with the "
+    "fifteen field recordings if their reference labels can be recovered, and report "
+    "balanced accuracy, per-class recall and Cohen's kappa with confidence intervals.",
+    "Collect and clinically label a Philippine lung sound dataset on the Resondi device, "
+    "with two independent, blinded clinicians per breathing cycle, ethics approval and "
+    "consent, and quantify the gain from training on it.",
+    "Put the fusion network into the application through a browser-run exported model, "
+    "and confirm on the same test patients that the deployed version reproduces its "
+    "scores.",
+    "Implement the nine-site protocol and evaluate it against the seven-site protocol on "
+    "the same patients.",
     "Reduce the execution time of the automated recording quality assessment, now 145 "
     "seconds, to a duration that allows it to run before every classification within "
     "clinical workflow.",
@@ -979,9 +1183,20 @@ REFS = [
  "Wu, Y.-L., Tseng, T.-L., Tseng, C.-T., Chen, Y.-T., & Lai, F. (2021). Benchmarking of "
  "eight recurrent neural network variants for breath phase and adventitious sound "
  "detection on a self-developed open-access lung sound database \u2014 HF_Lung_V1. "
- "arXiv:2102.03049. https://gitlab.com/techsupportHF/HF_Lung_V1",
- "Kim, Y., et al. (2025). Multi-channel lung sound classification across auscultation "
- "positions. [Add full citation from your reference list.]",
+ "arXiv:2102.03049.",
+ "Kim, Y., Kim, K. B., Leem, A. Y., Kim, K., & Lee, S. H. (2025). Enhanced respiratory "
+ "sound classification using deep learning and multi-channel auscultation. Journal of "
+ "Clinical Medicine, 14(15), 5437. https://doi.org/10.3390/jcm14155437",
+ "Zhang, Q., et al. (2022). SPRSound: Open-source SJTU paediatric "
+ "respiratory sound database. IEEE Transactions on Biomedical Circuits and Systems, 16(5), "
+ "867–881. https://doi.org/10.1109/TBCAS.2022.3204910",
+ "Venkatesh, V., Morris, M. G., Davis, G. B., & Davis, F. D. (2003). User acceptance of "
+ "information technology: Toward a unified view. MIS Quarterly, 27(3), 425–478.",
+ "The jamovi project. (2025). jamovi (Version 2.7) [Computer software]. "
+ "https://www.jamovi.org",
+ "R Core Team. (2025). R: A language and environment for statistical computing (Version "
+ "4.6) [Computer software]. R Foundation for Statistical Computing. "
+ "https://www.R-project.org",
  "Tariq, Z., Shah, S. K., & Lee, Y. (2022). Feature-based fusion using CNN for lung and "
  "heart sound classification. Sensors, 22(4), 1521.",
  "Acharya, J., & Basu, A. (2020). Deep neural network for respiratory sound "

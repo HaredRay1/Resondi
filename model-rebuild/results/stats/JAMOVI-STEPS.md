@@ -7,6 +7,7 @@ The numbers in the research plan's Results were computed in Python (`scripts/ana
 | `jamovi_test_cycles.csv` | test breathing cycle (1,051 rows, 31 patients) | classification metrics, McNemar |
 | `jamovi_recordings_severity.csv` | recording (158 validation, 164 test) | severity calibration, RMSE/MAE/R², Kruskal–Wallis |
 | `jamovi_validation_models.csv` | training run (recipe × seed) | model comparison on validation |
+| `jamovi_cv_cycles.csv`, `jamovi_cv_folds.csv`, `jamovi_cv_patients.csv` | cycle / fold / patient of the 5-fold cross-validation | IMRaD Table 3, Figures 12–14 (section 11) |
 | `jamovi_fusion_cycles.csv` | test breathing cycle (1,051 rows, 31 patients); one `pred_` and one `correct_` column per model | fusion vs individual models (Tables 14–15) |
 
 ## 1. Confusion matrix (Table 9 and Figure 7)
@@ -120,6 +121,31 @@ Note that b counts *cycles*, so these tests treat the 1,051 cycles as independen
 
 ## 10. SPRSound external check (Table 16)
 The SPRSound predictions are summarised in `fusion-comparison.json` (`sets.sprs`). No jamovi file is exported for them; report the Python values.
+
+## 11. Cross-validation, IMRaD Tables 3 and Figures 12–14 (added 13 Nov)
+The IMRaD's jamovi figures were made by `build/imrad/jamovi_figures.R`, which runs jamovi's own engine (R package jmv 2.8). Every number below is what jamovi shows from its menus; the full output is in `build/imrad/jamovi-output.txt`.
+
+**Fold comparison (Figure 12).** Open `jamovi_cv_folds.csv`, then go to **T-Tests → Paired Samples T-Test**.
+- Pair: `balacc_mfcc` with `balacc_fusion`.
+- Tick *Student's*, *Wilcoxon rank*, *Mean difference* with *Confidence interval*, *Effect size*, *Descriptives* and *Descriptives plots*.
+- Expected: t(4) = −4.747, p = .009, mean difference −5.76 (95% CI −9.13 to −2.39), Cohen's d = −2.12; Wilcoxon W = 0, p = .062 (the smallest p possible with 5 pairs). Means 34.14 and 39.90.
+
+**Patient comparison (Figure 13).** Open `jamovi_cv_patients.csv`, same analysis with `pct_correct_mfcc` and `pct_correct_fusion`.
+- Expected: Wilcoxon W = 2092, p = .009 (18 tied pairs); Student's t(125) = −2.08, p = .040. Means 39.58% and 44.57%.
+
+**Confusion matrices (Figure 14).** Open `jamovi_cv_cycles.csv`, then **Frequencies → Independent Samples**.
+- Rows: `true_label`. Columns: `pred_mfcc` (then again with `pred_fusion`). Cells: *Row %*.
+- Under **Plots**, tick *Bar plot*, Y-axis *Percentages within rows*, X-axis *Rows*, *Side by side*.
+- Expected recall (diagonal row %): MFCC 50.4 / 32.9 / 31.2 / 21.7; fusion 55.8 / 40.1 / 38.0 / 25.9. Balanced accuracy is their mean: 34.0% and 40.0%.
+
+**McNemar on the same cycles.** **Frequencies → Paired Samples (McNemar test)**.
+- Rows: `correct_mfcc`. Columns: `correct_fusion`.
+- Expected: 831 cycles right only for MFCC, 1,277 right only for fusion; χ² = 94.36, p < .001. This treats the 6,898 cycles as independent, so report the patient-level results above as the main ones.
+
+**Field agreement of the original model.** **Frequencies → 2 Outcomes (Binomial test)** on a 15-row variable with 6 "Match" and 9 "No match".
+- Test value 0.25, hypothesis *> test value*. Expected: p = .148. jamovi's interval is Clopper–Pearson; the paper reports Wilson's (19.8–64.3%).
+
+**Not computable in jamovi:** the pooled balanced accuracy with patient-bootstrap CIs, and the paired patient bootstrap (+5.9 points, CI +1.0 to +10.3, p = 0.008). These come from `model-rebuild/scripts/cv.py` and `cv_paired.py`.
 
 ## Not computable here
 - **Patient-level bootstrap 95% CIs** (1,000 resamples): computed in Python. jamovi has no patient-clustered bootstrap.

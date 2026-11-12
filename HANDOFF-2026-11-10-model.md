@@ -566,3 +566,25 @@ The bar to beat on test is **35.0%** (11 Nov, MFCC) and 33.5% (deployed v1).
 - **ayun.mov:** a 120 MB video in Google Drive (shared by a teammate on 20 Oct). The user asked for it to be recreated, then stopped the download request. Not started; ask before downloading.
 - **GitHub:** `HaredRay1/Resondi`, latest commit `3fde754` (13 Nov) plus this handoff update. Folder and GitHub match.
 - **Two prompts for starting a new Claude session** (Claude Code or Claude chat) are in `START-HERE-PROMPTS.md`.
+
+---
+
+## 10. Added 13 November (after the competition): IMRaD revised, jamovi set up
+
+- **The competition is over.** Work now is Ahnycca's research plan and IMRaD.
+- **IMRaD revised** (`final/06-Resondi-IMRaD-Lung-Only.docx` / `.pdf`, builder `build/imrad/build_imrad.py`, 43 pages, 15 figures, 6 tables):
+  - new Abstract;
+  - new Methods subsection "Classifier Rebuild" (sound labels, patient- and device-balanced 65/30/31 split, MFCC network, three-branch fusion, SPRSound, pre-specified tests, 5-fold CV);
+  - Data Analysis now names the statistics and software (Python; jamovi 2.7 / jmv);
+  - new Results "Rebuilt Classifier" (Table 2 test results, Table 3 CV, Figures 12–14 from jamovi);
+  - Discussion rewritten ("What the Classifier Rebuild Shows", "Planned Extensions" with the A–D ablation table, runs A–C done, D = local data);
+  - Limitations (six), Conclusion and Recommendations updated; references add SPRSound (Zhang et al., 2022), Kim et al. (2025) in full, Venkatesh (2003), jamovi, R.
+  - **The 6/15 field result is labelled as the original model's; the text says the rebuilt models have not been tested on Resondi device recordings.**
+  - Figure and table numbers are now assigned automatically by the builder.
+  - 14 `[[TO FILL]]` marks remain (8 blocking): `final/12-Resondi-IMRaD-Open-Items.docx`.
+- **jamovi engine installed:** R 4.6.2 (`C:\Program Files\R\R-4.6.2`) and the jamovi package **jmv 2.8** (+ ragg, exact2x2) in `%LOCALAPPDATA%\R\win-library\4.6`. jamovi 2.7.41 desktop is also installed.
+  - `build/imrad/jamovi_figures.R` makes `figures/j1_cv_folds.png`, `j2_cv_patients.png`, `j3_cv_confusion.png` and writes every jamovi table to `build/imrad/jamovi-output.txt`. Run: `"C:\Program Files\R\R-4.6.2\bin\Rscript.exe" build\imrad\jamovi_figures.R` from the Resondi folder.
+  - Its inputs come from `model-rebuild/scripts/export_jamovi_cv.py` → `results/stats/jamovi_cv_{cycles,folds,patients}.csv` (reproduces 34.0% / 40.0% exactly).
+  - jamovi results: folds paired t(4) = −4.75, p = .009; patients Wilcoxon p = .009 (69 better, 39 worse, 18 tied); McNemar on cycles χ² = 94.4, p < .001 (cycles not independent, so secondary). Steps in `JAMOVI-STEPS.md` section 11.
+- **Not available on this PC:** the raw acceptance-survey export (`survey_raw.csv`) and the raw field measurements (signal, noise, timings, quality ratings), so those results can't be recomputed in jamovi.
+- **Next:** update the research plan (`build/researchplan/build_plan.py`) with the SPRSound fusion and CV results; it still reports the 11 Nov ICBHI-only fusion round as the latest.
