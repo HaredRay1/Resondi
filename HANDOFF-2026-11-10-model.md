@@ -10,14 +10,15 @@ Paste this into Claude chat to bring it up to date. It covers what changed on 9�
 > |---|---|---|
 > | Old app model (diagnosis labels) | ~~71.1%~~ **invalid, data leakage. Never quote.** | Withdrawn |
 > | Field test, old model, 15 device recordings | 40% (6/15), reference labels undocumented | Not comparable to the rows below |
-> | **Edge Impulse v1, LIVE in the app now** | **33.5%** on 31 test patients (plain 44.0%) | Deployed 10 Nov |
-> | MFCC, the app's design, 5-fold CV on all 126 ICBHI patients | **34.0%** (CI 30.4–38.2) | Reference |
-> | **FDC-FS fusion + SPRSound, 3-seed ensemble, 5-fold CV** | **40.0%** (CI 35.9–43.5); children **56%** | **Best model. NOT in the app yet** |
+> | Edge Impulse v1 | 33.5% on 31 test patients (plain 44.0%) | Live 10–13 Nov; replaced |
+> | MFCC, v1's design, 5-fold CV on all 126 ICBHI patients | **34.0%** (CI 30.4–38.2) | Reference |
+> | **FDC-FS fusion + SPRSound, 3-seed ensemble, 5-fold CV** | **40.0%** (CI 35.9–43.5); children **56%** | **LIVE in the app since 13 Nov 03:43** (`resondi-lung-fusion-v2`) |
 > | Same design, single pre-specified test (31 patients) | 39.4% (CI 28.4–44.6); children 57.2% | Agrees with CV |
 >
 > - **The gain is real:** +5.9 points over MFCC (95% CI +1.0 to +10.3, p = 0.008), the same 126 patients, 14 of 15 seed-fold pairs better. Section 8.
-> - **On Resondi device audio the live model is close to guessing** (top scores 27–34%), because the device microphone sounds different from the hospital stethoscopes. The fusion model has not been tested on device audio. Section 5.
-> - **Getting the fusion model into the app** needs an ONNX model run in the browser (Edge Impulse has no chromagram block). Not started.
+> - **The fusion model is live** (13 Nov): ONNX in the browser, features reproduced in JavaScript and checked against Python (600/600 same top label). Section 11.
+> - **On Resondi device audio:** the old v1 was close to guessing (top scores 27–34%). The fusion model is more decisive on the same 26 device recordings (31–66%, median 42%), but there are no reference labels, so this is **not** accuracy on the device.
+> - **Device Wi-Fi transfer page:** written and saved in the app, **not published** (a permission check blocked the publish). It is a phone-carried transfer, not the Tier 2 gateway. Section 11.
 > - **Never say:** validated, diagnoses, or works on the Resondi device.
 > - **Next gain needs data:** clinician-labelled Resondi device recordings; HF_Lung_V1 once an author-sanctioned copy is found (the GitHub link is dead).
 >
@@ -588,3 +589,14 @@ The bar to beat on test is **35.0%** (11 Nov, MFCC) and 33.5% (deployed v1).
   - jamovi results: folds paired t(4) = −4.75, p = .009; patients Wilcoxon p = .009 (69 better, 39 worse, 18 tied); McNemar on cycles χ² = 94.4, p < .001 (cycles not independent, so secondary). Steps in `JAMOVI-STEPS.md` section 11.
 - **Not available on this PC:** the raw acceptance-survey export (`survey_raw.csv`) and the raw field measurements (signal, noise, timings, quality ratings), so those results can't be recomputed in jamovi.
 - **Next:** update the research plan (`build/researchplan/build_plan.py`) with the SPRSound fusion and CV results; it still reports the 11 Nov ICBHI-only fusion round as the latest.
+
+---
+
+## 11. Added 13 November (later): fusion model deployed; device transfer page
+
+Full detail: `app-changes/fusion-model-v2-and-device-transfer.md`.
+
+- **Fusion model v2 is LIVE** (published 13 Nov 03:43 PHT, checkpoint `6af616ece0e4bcab64cebaa1`; rollback to v1 = `6af615ea1b4884b2d1659ea3`). 3-seed FDC-FS ensemble as one 2.3 MB ONNX file on jsDelivr (Ausculta commit `c9cd3fa2`), run with onnxruntime-web 1.20.1. Browser features (`model-rebuild/app/fusionFeatures.js`) match Python: 600/600 validation windows give the same top label; a synthetic recording scored identically in Chrome and Python to 4 decimals. New analyses save `model_version: resondi-lung-fusion-v2`.
+- **Live test, 45 stored lung recordings, read-only:** all ran. On 26 unique device recordings: Healthy 16, Wheezing with Crackles 6, Wheezing 3, Crackles 1; top score 31–66% (median 42%) vs v1's 27–34%. No reference labels, so not an accuracy figure. `model-rebuild/results/live-app-device-test-fusion-2026-11-13.md`.
+- **Device Wi-Fi transfer page** (`/patient/record/device`, button on the exam start page): join RESONDI_WIFI → open http://192.168.4.1 to download the WAVs → reconnect to the internet → pick files, set chest sites, upload as one exam → open the exam summary to analyse. Saved as checkpoint `6af61921f6933d43a3bb0ce0`, compiles, **not published** (publish was blocked by a permission check; the user can publish from the Base44 editor). Not seen on screen with a patient account. The device firmware is not on this PC, so its download links were not checked.
+- **Pitch wording:** the transfer page replaces the memory card with the phone; it is **not** the gateway. "Both ends work; the bridge is still a person, now with a phone instead of a memory card. Automatic upload is what the ₱38,000 builds."

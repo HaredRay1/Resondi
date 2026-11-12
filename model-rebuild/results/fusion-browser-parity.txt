@@ -1,0 +1,11 @@
+Browser feature code (app/fusionFeatures.js) vs scripts/fusion.py, validation windows only
+validation: 300 windows
+  mfcc    max |diff| 0.165  mean |diff| 0.000425  (values up to 57.4); exactly equal 67.2%
+  spec    max |diff| 9.5  mean |diff| 0.00254  (values up to 100); exactly equal 98.0%
+  chroma  max |diff| 0.0004883  mean |diff| 2.06e-07  (values up to 1); exactly equal 99.5%
+  model: top label agrees on 100.00% of windows; max probability difference 0.0062
+sprs_validation: 300 windows
+  mfcc    max |diff| 0.3569  mean |diff| 0.000956  (values up to 60.7); exactly equal 51.6%
+  spec    max |diff| 10.44  mean |diff| 0.0127  (values up to 100); exactly equal 93.7%
+  chroma  max |diff| 0.0004883  mean |diff| 2.55e-07  (values up to 1); exactly equal 99.1%
+  model: top label agrees on 100.00% of windows; max probability difference 0.0063
