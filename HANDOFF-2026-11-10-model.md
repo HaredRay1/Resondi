@@ -1,7 +1,36 @@
-# Resondi handoff: lung model rebuild and recent work (9–11 November 2026)
+# Resondi handoff: lung model rebuild and recent work (9–13 November 2026)
 
-Paste this into Claude chat to bring it up to date. It covers what changed on 9–11 November. The project's full state is in `CLAUDE.md` in the Resondi folder; where they disagree, this file is newer on the points below.
+Paste this into Claude chat to bring it up to date. It covers what changed on 9–13 November. The project's full state is in `CLAUDE.md` in the Resondi folder; where they disagree, this file is newer on the points below. **Sections are in date order, so later sections override earlier ones**; the summary just below is the current state.
 
+> ## CURRENT STATE (13 Nov 2026), read this first
+>
+> **The lung model, in numbers you can quote:**
+>
+> | | Balanced accuracy (chance = 25%) | Status |
+> |---|---|---|
+> | Old app model (diagnosis labels) | ~~71.1%~~ **invalid, data leakage. Never quote.** | Withdrawn |
+> | Field test, old model, 15 device recordings | 40% (6/15), reference labels undocumented | Not comparable to the rows below |
+> | **Edge Impulse v1, LIVE in the app now** | **33.5%** on 31 test patients (plain 44.0%) | Deployed 10 Nov |
+> | MFCC, the app's design, 5-fold CV on all 126 ICBHI patients | **34.0%** (CI 30.4–38.2) | Reference |
+> | **FDC-FS fusion + SPRSound, 3-seed ensemble, 5-fold CV** | **40.0%** (CI 35.9–43.5); children **56%** | **Best model. NOT in the app yet** |
+> | Same design, single pre-specified test (31 patients) | 39.4% (CI 28.4–44.6); children 57.2% | Agrees with CV |
+>
+> - **The gain is real:** +5.9 points over MFCC (95% CI +1.0 to +10.3, p = 0.008), the same 126 patients, 14 of 15 seed-fold pairs better. Section 8.
+> - **On Resondi device audio the live model is close to guessing** (top scores 27–34%), because the device microphone sounds different from the hospital stethoscopes. The fusion model has not been tested on device audio. Section 5.
+> - **Getting the fusion model into the app** needs an ONNX model run in the browser (Edge Impulse has no chromagram block). Not started.
+> - **Never say:** validated, diagnoses, or works on the Resondi device.
+> - **Next gain needs data:** clinician-labelled Resondi device recordings; HF_Lung_V1 once an author-sanctioned copy is found (the GitHub link is dead).
+>
+> **Deliverables added 10–13 Nov** (all committed): 3-minute pitch script `final/18`, user guide `final/19`, technical Q&A `final/20`, revised research plan `research-plan/`, product image `figures/Resondi-Device-Podium.png`, product video `figures/Resondi-Device-Video.mp4`. Section 9.
+>
+> **Still open:** test a new recording on screen with a patient test account; ONNX deployment of the fusion model; the 15 field-test reference labels (who set them, how); Drive folder set to Restricted; the items in `CLAUDE.md` §9.
+>
+> **Where everything is:** GitHub `HaredRay1/Resondi` (private, branch `master`, up to date as of 13 Nov). Results: `model-rebuild/results/` (start with `cv-results.md` and `final-test-log.csv`). Models: `model-rebuild/models/`.
+>
+> ---
+>
+> *Earlier status notes, kept for history (newest first):*
+>
 > **Latest (11 Nov), in five lines:**
 > 1. **The new 4-class model is live in the app** and works end to end. On Resondi device recordings, however, its output is close to a random guess (section 5).
 > 2. **Ten training versions were tried** (MFE, augmentation, two detectors, mixup). The best scored **35.0% balanced on the 31 test patients**, no better than the deployed v1 (33.5%). Tuning on public data has hit its ceiling (section 4).
@@ -236,7 +265,7 @@ See section 4, "Result of that plan". In short, the best test result is **35.0% 
 
 ### Other 11 Nov items
 - **GitHub:** `HaredRay1/Resondi` (private, branch `master`) holds the project. Large datasets and caches are excluded.
-- **Product image:** `figures/Resondi-Device-Podium.png` (and `.jpg`) recreates the old Ausculta podium photo with the new device render. It uses `build/dev2/render_podium.py` (Blender, Cycles) and `build/dev2/compose_podium.py` (pink glow). It is not yet committed to git.
+- **Product image:** `figures/Resondi-Device-Podium.png` (and `.jpg`) recreates the old Ausculta podium photo with the new device render. It uses `build/dev2/render_podium.py` (Blender, Cycles) and `build/dev2/compose_podium.py` (pink glow). Committed 11 Nov.
 - **Video:** the user asked for `ayun.mov` to be recreated, but no file by that name was found in the user profile or on Google Drive. Another session built a product video that copies the camera work of the team's earlier clip: 6.7 s, 1080p, 30 fps, four camera moves, dark studio floor, no text (`build/dev2/render_spin_video.py`). It stopped after 16 frames when the app restarted and was resumed at 06:28 (see section 6).
 - **"Why us?" line** (for the deck): *"We've already built both ends: a working stethoscope and a live platform. Now we're making every breath and heartbeat count."*
 
@@ -521,3 +550,19 @@ The bar to beat on test is **35.0%** (11 Nov, MFCC) and 33.5% (deployed v1).
 **How to say it:** *"Tested on all 126 patients of the ICBHI benchmark, each by a model that never saw them, our fusion model scores 40% balanced accuracy, against 34% for our current model and 25% for chance. The 6-point gain is statistically significant (95% CI +1 to +10). On unseen children it scores 56%."*
 
 **Still not claimed:** validation as a medical device, diagnosis, or performance on the Resondi device. Device-audio testing needs clinician-labelled Resondi recordings.
+
+---
+
+## 9. Added 13 November
+
+- **5-fold cross-validation finished** (section 8): the fusion model's 40.0% vs 34.0% is the headline result. The single-split 39.4% agrees with it.
+- **New deliverables, all committed to GitHub:**
+  - `final/18-Resondi-Pitch-Script-3min` (.docx and .md): a 3-minute version of the pitch script.
+  - `final/19-Resondi-User-Guide.pdf`, built from `build/manual/manual.html` (updated 12 Nov).
+  - `final/20-Resondi-Tech-QA.docx`, built by `build/qa_tech/gen.py`: technical judge questions with answers.
+  - `research-plan/`: the revised research plan and its revision log (11 Nov).
+  - `figures/Resondi-Device-Podium.png` / `.jpg`: the old Ausculta podium photo recreated with the new device render.
+  - `figures/Resondi-Device-Video.mp4`: a 3-D spin video of the device.
+- **ayun.mov:** a 120 MB video in Google Drive (shared by a teammate on 20 Oct). The user asked for it to be recreated, then stopped the download request. Not started; ask before downloading.
+- **GitHub:** `HaredRay1/Resondi`, latest commit `3fde754` (13 Nov) plus this handoff update. Folder and GitHub match.
+- **Two prompts for starting a new Claude session** (Claude Code or Claude chat) are in `START-HERE-PROMPTS.md`.
