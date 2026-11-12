@@ -30,7 +30,7 @@ section { break-before: page; }
 .step .n { width: 8mm; height: 8mm; border-radius: 50%; background: var(--blush); color: var(--plum); font-weight: 600; text-align: center; line-height: 8mm; }
 .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin: 2mm 0 3mm; }
 .shot { text-align: center; font-size: 7.6pt; color: var(--grey); }
-.shot img { width: 100%; border-radius: 2.5mm; border: .3mm solid var(--line); display: block; margin-bottom: 1.2mm; }
+.shot img-unused { width: 100%; border-radius: 2.5mm; border: .3mm solid var(--line); display: block; margin-bottom: 1.2mm; }
 .note { border-left: 1mm solid var(--rose); background: var(--bg); padding: 2.2mm 3mm; border-radius: 0 2mm 2mm 0; font-size: 8.6pt; margin: 3mm 0; }
 .dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; margin-top: 3mm; }
 .dodont div { border-radius: 2.5mm; padding: 3mm; font-size: 8.4pt; }
@@ -62,6 +62,18 @@ th { text-align: left; font-size: 7.5pt; letter-spacing: 1pt; text-transform: up
 .sites .k { width: 5.5mm; height: 5.5mm; border-radius: 50%; background: var(--rose); color: #fff; font-size: 7.5pt; font-weight: 600; text-align: center; line-height: 5.5mm; }
 .sites b { color: var(--plum); }
 .small { font-size: 7.6pt; color: var(--grey); }
+.dev { width: 100%; display: block; }
+.dev2 { margin-top: 3mm; }
+.phone { border: .5mm solid #d9c7cf; border-radius: 4mm; background: #fff; padding: 3mm; height: 52mm; font-size: 7pt; color: var(--ink); text-align: left; margin-bottom: 1.5mm; }
+.pt { font-size: 10pt; font-weight: 600; margin-bottom: 3mm; }
+.pcard { border: .3mm solid var(--line); border-radius: 3mm; padding: 3mm; }
+.pfield { border: .4mm solid #1f6fd1; border-radius: 1.5mm; padding: 1.2mm 2mm; margin-bottom: 2mm; letter-spacing: 1pt; }
+.pbar { font-size: 5.8pt; color: var(--grey); text-align: center; margin-bottom: 2.5mm; }
+.ptitle { font-size: 11pt; font-weight: 600; text-align: center; }
+.psub { font-size: 5.8pt; color: var(--grey); text-align: center; margin-bottom: 2.5mm; }
+.pbtn { border-radius: 1mm; color: #fff; text-align: center; font-weight: 600; padding: 1.4mm 0; margin-bottom: 1.5mm; font-size: 6.3pt; }
+.pbtn.grey { background: #b8b0b4; } .pbtn.dark { background: #455a64; }
+.pstat { background: #f3eef1; border-radius: 1mm; text-align: center; padding: 1.4mm 0; font-size: 6.3pt; font-weight: 500; }
 </style></head><body>
 
 <div class="cover">
@@ -69,7 +81,17 @@ th { text-align: left; font-size: 7.5pt; letter-spacing: 1pt; text-transform: up
     <div class="brand">Resond<span>i</span></div>
     <div class="sub">User Guide</div>
   </div>
-  <img src="resondi-front-panel.jpg" alt="Resondi device">
+  <svg class="dev" viewBox="0 0 300 150" role="img" aria-label="Resondi front panel">
+<rect x="10" y="10" width="280" height="130" rx="10" fill="#fff" stroke="#EBD3DE" stroke-width="2"/>
+<text x="198" y="32" font-family="Poppins, Arial" font-size="13" font-weight="600" font-style="italic" fill="#9E8892" text-anchor="middle">Resondi</text>
+<circle cx="55" cy="48" r="25" fill="#FFF5F9" stroke="#EBD3DE" stroke-width="1.5"/><circle cx="55" cy="48" r="19" fill="#F2C230"/>
+<text x="55" y="51" font-family="Poppins, Arial" font-size="7.5" font-weight="700" fill="#6b4f00" text-anchor="middle">LUNGS</text>
+<circle cx="55" cy="104" r="25" fill="#FFF5F9" stroke="#EBD3DE" stroke-width="1.5"/><circle cx="55" cy="104" r="19" fill="#F2C230"/>
+<text x="55" y="107" font-family="Poppins, Arial" font-size="7.5" font-weight="700" fill="#6b4f00" text-anchor="middle">HEART</text>
+<circle cx="99" cy="64" r="4.5" fill="#3CC66B"/><circle cx="99" cy="88" r="4.5" fill="#C8323A"/>
+<rect x="116" y="44" width="164" height="70" rx="4" fill="#2a1622"/><rect x="122" y="50" width="152" height="58" fill="#C9E84A"/>
+<g font-family="Courier New, monospace" font-size="8" fill="#2c3a10"><text x="198" y="62" text-anchor="middle">RESONDI</text><text x="127" y="74">1. Place diaphragm</text><text x="127" y="86">2. Select HEART/LUNG</text><text x="127" y="98">3. Record 15 sec</text></g>
+</svg>
   <div>
     <div class="tag">Record the chest. Keep the sound. Let a doctor hear it.</div>
     <div class="foot" style="margin-top:4mm">Team Wheezards · Puerto Princesa City National Science High School · 2026<br>Resondi is a recording and review aid. It does not diagnose.</div>
@@ -92,7 +114,17 @@ th { text-align: left; font-size: 7.5pt; letter-spacing: 1pt; text-transform: up
 <section>
   <div class="kicker">Meet your device</div>
   <h2>What everything does</h2>
-  <img src="resondi-front-panel.jpg" alt="Front panel" style="width:100%;border-radius:3mm;margin-top:2mm">
+  <svg class="dev dev2" viewBox="0 0 300 150" role="img" aria-label="Resondi front panel">
+<rect x="10" y="10" width="280" height="130" rx="10" fill="#fff" stroke="#EBD3DE" stroke-width="2"/>
+<text x="198" y="32" font-family="Poppins, Arial" font-size="13" font-weight="600" font-style="italic" fill="#9E8892" text-anchor="middle">Resondi</text>
+<circle cx="55" cy="48" r="25" fill="#FFF5F9" stroke="#EBD3DE" stroke-width="1.5"/><circle cx="55" cy="48" r="19" fill="#F2C230"/>
+<text x="55" y="51" font-family="Poppins, Arial" font-size="7.5" font-weight="700" fill="#6b4f00" text-anchor="middle">LUNGS</text>
+<circle cx="55" cy="104" r="25" fill="#FFF5F9" stroke="#EBD3DE" stroke-width="1.5"/><circle cx="55" cy="104" r="19" fill="#F2C230"/>
+<text x="55" y="107" font-family="Poppins, Arial" font-size="7.5" font-weight="700" fill="#6b4f00" text-anchor="middle">HEART</text>
+<circle cx="99" cy="64" r="4.5" fill="#3CC66B"/><circle cx="99" cy="88" r="4.5" fill="#C8323A"/>
+<rect x="116" y="44" width="164" height="70" rx="4" fill="#2a1622"/><rect x="122" y="50" width="152" height="58" fill="#C9E84A"/>
+<g font-family="Courier New, monospace" font-size="8" fill="#2c3a10"><text x="198" y="62" text-anchor="middle">RESONDI</text><text x="127" y="74">1. Place diaphragm</text><text x="127" y="86">2. Select HEART/LUNG</text><text x="127" y="98">3. Record 15 sec</text></g>
+</svg>
   <div class="legend">
     <div><span class="dot" style="background:#F2C230"></span><span><b>Top button</b>Records lungs</span></div>
     <div><span class="dot" style="background:#F2C230"></span><span><b>Bottom button</b>Records heart</span></div>
@@ -108,8 +140,8 @@ th { text-align: left; font-size: 7.5pt; letter-spacing: 1pt; text-transform: up
   <div class="kicker">Step by step</div>
   <h2>Connect your phone</h2>
   <div class="shots">
-    <div class="shot"><img src="img/s1_wifi.png" alt="Wi-Fi">Tap <b>RESONDI_WIFI</b>, type the password, tap Connect</div>
-    <div class="shot"><img src="img/s3_ready.png" alt="Device page">Go to 192.168.4.1. Look for <b>System Ready</b></div>
+    <div class="shot"><div class="phone"><div class="pt">Wi-Fi</div><div class="pcard"><div style="text-align:center;font-weight:600;margin-bottom:2mm">RESONDI_WIFI</div><div class="pfield">••••••••</div><div class="pbtn blue">Connect</div></div></div>Tap <b>RESONDI_WIFI</b>, type the password, tap Connect</div>
+    <div class="shot"><div class="phone"><div class="pbar">192.168.4.1 · No internet connection</div><div class="ptitle">RESONDI</div><div class="psub">Intelligent Respiratory Auscultation System</div><div class="pbtn red">RECORD HEART SOUNDS</div><div class="pbtn blue">RECORD LUNG SOUNDS</div><div class="pstat">System Ready</div></div>Go to 192.168.4.1. Look for <b>System Ready</b></div>
   </div>
   <div class="step"><span class="n">1</span><div>Open <b>Wi-Fi settings</b> and tap <b>RESONDI_WIFI</b>. Enter the device password.</div></div>
   <div class="step"><span class="n">2</span><div>Open <b>Chrome</b>, type <b>192.168.4.1</b> and press Go.</div></div>
@@ -124,8 +156,8 @@ th { text-align: left; font-size: 7.5pt; letter-spacing: 1pt; text-transform: up
   <div class="step"><span class="n">3</span><div><b>Hold still for 15 seconds</b> until it says <b>System Ready</b> again.</div></div>
   <div class="step"><span class="n">4</span><div><b>Check it:</b> tap <b>Refresh Recordings</b> and play it back. Unclear? Record again.</div></div>
   <div class="shots">
-    <div class="shot"><img src="img/s4_progress.png" alt="Recording">While recording, the buttons turn grey</div>
-    <div class="shot"><img src="img/s5_saved.png" alt="Saved recordings">Refresh to see saved recordings</div>
+    <div class="shot"><div class="phone"><div class="pbar">192.168.4.1</div><div class="ptitle">RESONDI</div><div class="psub">Audio Recording</div><div class="pbtn grey">RECORD HEART SOUNDS</div><div class="pbtn grey">RECORD LUNG SOUNDS</div><div class="pstat">HEART RECORDING IN PROGRESS…</div></div>While recording, the buttons turn grey</div>
+    <div class="shot"><div class="phone"><div class="pbar">192.168.4.1</div><div style="font-weight:600;margin:2mm 0">Saved Recordings</div><div class="pbtn dark">REFRESH RECORDINGS</div><div class="psub" style="text-align:left;margin-top:2mm">Tap a recording, then press play under Audio Playback.</div></div>Refresh to see saved recordings</div>
   </div>
   <div class="dodont keep">
     <div class="do"><h4>✓ Do</h4><ul><li>Use a quiet room</li><li>Patient sits upright</li><li>Slow, deep breaths for lungs</li></ul></div>
