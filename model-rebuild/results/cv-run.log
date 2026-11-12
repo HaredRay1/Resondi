@@ -10,3 +10,24 @@ mfcc_icbhi  seed 11 fold 2: epoch 15  val 0.402  TEST-FOLD bal 0.337  F1 0.307  
 mfcc_icbhi  seed 11 fold 3: epoch  3  val 0.300  TEST-FOLD bal 0.331  F1 0.255  89s
 mfcc_icbhi  seed 11 fold 4: epoch  3  val 0.330  TEST-FOLD bal 0.300  F1 0.232  99s
 fdc3_sprs   seed 11 fold 0: epoch  7  val 0.436  TEST-FOLD bal 0.407  F1 0.387  774s
+fdc3_sprs   seed 11 fold 1: epoch 15  val 0.385  TEST-FOLD bal 0.417  F1 0.389  1377s
+fdc3_sprs   seed 11 fold 2: epoch 17  val 0.400  TEST-FOLD bal 0.379  F1 0.368  1316s
+fdc3_sprs   seed 11 fold 3: epoch  6  val 0.431  TEST-FOLD bal 0.329  F1 0.288  692s
+fdc3_sprs   seed 11 fold 4: epoch  3  val 0.400  TEST-FOLD bal 0.393  F1 0.299  568s
+fdc3_sprs   seed 22 fold 0: epoch  1  val 0.430  TEST-FOLD bal 0.426  F1 0.327  463s
+fdc3_sprs   seed 22 fold 1: epoch 17  val 0.367  TEST-FOLD bal 0.416  F1 0.404  1231s
+fdc3_sprs   seed 22 fold 2: epoch  9  val 0.394  TEST-FOLD bal 0.370  F1 0.359  892s
+fdc3_sprs   seed 22 fold 3: epoch 17  val 0.433  TEST-FOLD bal 0.359  F1 0.310  1259s
+fdc3_sprs   seed 22 fold 4: epoch  7  val 0.414  TEST-FOLD bal 0.384  F1 0.328  1213s
+fdc3_sprs   seed 33 fold 0: epoch 10  val 0.440  TEST-FOLD bal 0.412  F1 0.373  1095s
+fdc3_sprs   seed 33 fold 1: epoch 11  val 0.391  TEST-FOLD bal 0.426  F1 0.402  928s
+fdc3_sprs   seed 33 fold 2: epoch 17  val 0.408  TEST-FOLD bal 0.385  F1 0.381  1258s
+fdc3_sprs   seed 33 fold 3: epoch  9  val 0.437  TEST-FOLD bal 0.343  F1 0.292  865s
+fdc3_sprs   seed 33 fold 4: epoch  6  val 0.409  TEST-FOLD bal 0.411  F1 0.365  736s
+all folds done
+mfcc_icbhi seed 11                 pooled bal 0.340 (CI 0.304-0.382)  folds 0.341+/-0.027  acc 0.366  F1 0.312  Crac=0.50 Heal=0.33 Whee=0.31 Whee=0.22
+fdc3_sprs seed 11                  pooled bal 0.390 (CI 0.352-0.424)  folds 0.385+/-0.031  acc 0.411  F1 0.356  Crac=0.54 Heal=0.37 Whee=0.37 Whee=0.27  SPRS-test 0.561
+fdc3_sprs seed 22                  pooled bal 0.391 (CI 0.352-0.429)  folds 0.391+/-0.026  acc 0.402  F1 0.353  Crac=0.50 Heal=0.37 Whee=0.39 Whee=0.30  SPRS-test 0.545
+fdc3_sprs seed 33                  pooled bal 0.395 (CI 0.356-0.434)  folds 0.396+/-0.029  acc 0.430  F1 0.368  Crac=0.54 Heal=0.41 Whee=0.37 Whee=0.25  SPRS-test 0.552
+fdc3_sprs ensemble 11+22+33        pooled bal 0.400 (CI 0.359-0.435)  folds 0.399+/-0.028  acc 0.430  F1 0.369  Crac=0.56 Heal=0.40 Whee=0.38 Whee=0.26  SPRS-test 0.563
+done 12/11/2026  5:28:12.35 

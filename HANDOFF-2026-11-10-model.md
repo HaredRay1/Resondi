@@ -9,6 +9,8 @@ Paste this into Claude chat to bring it up to date. It covers what changed on 9�
 > 4. **The 40% field figure:** the paper gives no record of who set the 15 reference labels or how (section 5).
 > 5. **Everything is on GitHub** (`HaredRay1/Resondi`, private, branch `master`).
 >
+> **12 Nov 05:30, CONFIRMED BY 5-FOLD CROSS-VALIDATION on all 126 ICBHI patients:** FDC-FS fusion + SPRSound (3-seed ensemble) **40.0% balanced accuracy (95% CI 35.9–43.5)** vs **34.0%** for the app's MFCC design. The paired difference is **+5.9 points (CI +1.0 to +10.3, p = 0.008)**, a statistically significant gain. Children: 56%. See section 8.
+>
 > **12 Nov 00:45, NEW BEST MODEL:** FDC-FS three-branch fusion trained on **ICBHI + rebalanced SPRSound** (pre-specified on validation) scored **39.4% balanced accuracy on the 31 ICBHI test patients** (95% CI 28.4–44.6, patient bootstrap) and **57.2% on 230 held-out SPRSound children** (46.7–63.4). It is the best pre-specified test result of the project; previous results were 32.9–36.7%, and the deployed v1 scored 33.5%. Every confidence interval still overlaps, so it is an improvement, not yet a proven one. See section 6, "ICBHI + SPRSound round".
 >
 > **11 Nov afternoon:** the fusion study's single test run is done. **Fusion did not beat the single models on unseen patients**: late fusion (pre-specified) scored 32.9% balanced, FDC-FS 36.7%, MFCC 36.1%, and every confidence interval overlaps. Adding SPRSound unbalanced broke healthy-breath detection; a rebalanced version is being gate-checked. The ICBHI-only models are saved as a checkpoint. See section 6.
@@ -487,13 +489,35 @@ The bar to beat on test is **35.0%** (11 Nov, MFCC) and 33.5% (deployed v1).
 - **Compared:** MFCC on ICBHI only (the app's design, seed 11) vs FDC-FS + SPRSound (seeds 11/22/33 and their 3-seed ensemble). Every fold model is also scored on the 230 SPRSound test children.
 - **Resumable:** window probabilities are saved per (config, seed, fold) in `work-exp/cv/`. Re-run `scripts\run_cv.cmd` to continue. The final report goes to `results/cv-results.md` / `.json`.
 
-**Results so far (01:45; log `results/cv-run.log`), fold test balanced accuracy:**
+**FINAL RESULT (finished 12 Nov 05:28; `results/cv-results.md`, `cv-results.json`, `cv-paired.txt`).** All 126 ICBHI patients and 6,898 cycles, each tested once by a model that never saw that patient:
 
-| Model | F0 | F1 | F2 | F3 | F4 | Mean |
+| Model | **Pooled balanced acc. (95% CI)** | Folds mean ± SD | Plain acc. | Macro F1 | Recall C / H / W / W+C | SPRSound test children |
 |---|---|---|---|---|---|---|
-| MFCC, ICBHI only | 35.9 | 37.9 | 33.7 | 33.1 | 30.0 | **≈ 34.1%** |
-| FDC-FS + SPRSound, seed 11 | **40.7** | … | | | | |
+| MFCC, ICBHI only (the app's design) | **34.0%** (30.4–38.2) | 34.1 ± 2.7 | 36.6% | 0.31 | 50 / 33 / 31 / 22 | — |
+| FDC-FS + SPRSound, seed 11 | 39.0% (35.2–42.4) | 38.5 ± 3.1 | 41.1% | 0.36 | 54 / 37 / 37 / 27 | 56.1% |
+| FDC-FS + SPRSound, seed 22 | 39.1% (35.2–42.9) | 39.1 ± 2.6 | 40.2% | 0.35 | 50 / 37 / 39 / 30 | 54.5% |
+| FDC-FS + SPRSound, seed 33 | 39.5% (35.6–43.4) | 39.6 ± 2.9 | 43.0% | 0.37 | 54 / 41 / 37 / 25 | 55.2% |
+| **FDC-FS + SPRSound, 3-seed ensemble** | **40.0% (35.9–43.5)** | 39.9 ± 2.8 | 43.0% | 0.37 | 56 / 40 / 38 / 26 | **56.3%** |
 
-- **The current design scores about 34% across all 126 patients,** matching the live app (33.5%).
-- **On fold 0, FDC-FS + SPRSound beats it by about 5 points on the same patients.**
-- **Expected to finish:** about 05:00. The pooled number with a 95% CI comes from `cv.py report`.
+**Fold-by-fold:**
+
+| Model | F0 | F1 | F2 | F3 | F4 |
+|---|---|---|---|---|---|
+| MFCC | 35.9 | 37.9 | 33.7 | 33.1 | 30.0 |
+| FDC-FS seed 11 | 40.7 | 41.7 | 37.9 | 32.9 | 39.3 |
+| FDC-FS seed 22 | 42.6 | 41.6 | 37.0 | 35.9 | 38.4 |
+| FDC-FS seed 33 | 41.2 | 42.6 | 38.5 | 34.3 | 41.1 |
+
+**Paired comparison (`scripts/cv_paired.py`)**, using the same 126 patients and 6,898 cycles, with a patient bootstrap of 5,000:
+- **FDC-FS + SPRSound ensemble 40.0% vs MFCC 34.0%: a difference of +5.9 points, 95% CI +1.0 to +10.3, one-sided p = 0.008.**
+- FDC-FS beats MFCC on 14 of 15 seed-fold pairs; the one exception, seed 11 on fold 3, is a tie.
+
+**What this means:**
+- **The improvement is real, not the luck of one 31-patient split.** Across every ICBHI patient, the fusion model trained with SPRSound is about **6 points better** than the app's current design, and the gain is statistically significant.
+- The single-split test (39.4%) and cross-validation (40.0%) agree closely, so **about 40% is the honest estimate**, with a ±4-point interval.
+- **The 3-seed ensemble (option A) adds about 0.5–1 point** over a single seed (39.0–39.5%) and costs three times the model size.
+- **On SPRSound children, every fold model scores 54–56%.**
+
+**How to say it:** *"Tested on all 126 patients of the ICBHI benchmark, each by a model that never saw them, our fusion model scores 40% balanced accuracy, against 34% for our current model and 25% for chance. The 6-point gain is statistically significant (95% CI +1 to +10). On unseen children it scores 56%."*
+
+**Still not claimed:** validation as a medical device, diagnosis, or performance on the Resondi device. Device-audio testing needs clinician-labelled Resondi recordings.

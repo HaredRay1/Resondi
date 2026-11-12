@@ -1,0 +1,4 @@
+﻿patients 126, cycles 6898
+balanced accuracy: FDC-FS+SPRSound ensemble 0.400  vs  MFCC ICBHI-only 0.340
+difference +5.9 points, 95% CI +1.0 to +10.3, one-sided p (difference <= 0) = 0.0082
+patients where the new model gets more of their cycles right: 55%
