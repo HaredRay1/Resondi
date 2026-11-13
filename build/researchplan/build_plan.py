@@ -2,8 +2,8 @@
 
 Run: python build/researchplan/build_plan.py   (after figures.py)
 In : research-plan/original/Resondi-Research-Plan-Revised.docx   (untouched Drive download)
-Out: research-plan/Resondi-Research-Plan-Revised-2026-11-11.docx
-     research-plan/Resondi-Research-Plan-Revision-Log-2026-11-11.docx
+Out: research-plan/Resondi-Research-Plan-Revised-2026-11-13.docx
+     research-plan/Resondi-Research-Plan-Revision-Log-2026-11-13.docx
 Text in [[double brackets]] is written with a yellow highlight: facts only the team can confirm.
 Results and Discussion read their numbers from model-rebuild/results/stats/ (stats-results.json from
 analysis_stats.py; fusion-comparison.json from fusion_eval.py), so run those scripts first.
@@ -24,8 +24,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
 RP = os.path.join(ROOT, "research-plan")
 SRC = os.path.join(RP, "original", "Resondi-Research-Plan-Revised.docx")
-OUT = os.path.join(RP, "Resondi-Research-Plan-Revised-2026-11-11.docx")
-LOGF = os.path.join(RP, "Resondi-Research-Plan-Revision-Log-2026-11-11.docx")
+OUT = os.path.join(RP, "Resondi-Research-Plan-Revised-2026-11-13.docx")
+LOGF = os.path.join(RP, "Resondi-Research-Plan-Revision-Log-2026-11-13.docx")
 FIG = os.path.join(ROOT, "figures")
 RFIG = os.path.join(RP, "figures")
 
@@ -586,8 +586,9 @@ def fig(label, title, path, width, note_text):
 para("This section reports the evaluation completed to date. Results of the earlier field evaluation, which used "
      "the original and since-withdrawn classification model, are summarized first. The rebuilt lung-sound classifier is "
      "then reported on the 31 held-out test patients, followed by the tests of the hypotheses that the available data "
-     "allow and the severity-score analysis. Finally, the feature-fusion models are compared with the individual "
-     "single-representation models, with the original model, and with the reference study.")
+     "allow and the severity-score analysis. The feature-fusion models are then compared with the individual "
+     "single-representation models, a second round adds a paediatric corpus and is confirmed by cross-validation, and "
+     "the models are finally set beside the original model and the reference study.")
 
 h2("System Evaluation From the Field Study")
 para("Table 7 summarizes the system-level results of the earlier field evaluation. Resondi recorded a stronger signal "
@@ -849,8 +850,83 @@ if "sprs" in FZ["sets"]:
         "SPRSound (Zhang et al., 2022): paediatric recordings at 8 kHz, resampled to 16 kHz; event labels mapped to the "
         "four classes, with rhonchi and stridor excluded. W + C = Wheezing with Crackles.")
 
+CV = json.load(open(os.path.join(ROOT, "model-rebuild", "results", "cv-results.json"), encoding="utf-8"))["results"]
+cvm, cvf = CV["mfcc_icbhi seed 11"], CV["fdc3_sprs ensemble 11+22+33"]
+h2("Adding the Paediatric Corpus, and Cross-Validation")
+para("Because every model trained on ICBHI alone failed on the SPRSound children and none separated clearly from the "
+     "others on the ICBHI test patients, a second round added SPRSound to the training data. SPRSound is 82 percent "
+     "healthy and recorded from children, and added as it was, it taught the model that a child's breath is healthy: the "
+     "MFCC model then found almost none of ICBHI's healthy cycles. It was therefore rebalanced. All crackle and wheeze "
+     "windows were kept, healthy windows were capped at the number in ICBHI (20,590 of 49,417), every combination of "
+     "dataset and class carried equal weight, and the audio from both corpora was band-limited to 0.1–3.9 kHz, "
+     "levelled, and normalised separately for each corpus. The same six configurations were trained with three seeds "
+     "each and compared on the ICBHI validation patients only. The three-branch feature-fusion network led "
+     "(48.7 ± 1.0 percent), and its seed-33 run was named as the primary model in writing before the test patients "
+     "were scored.")
+para("On the 31 ICBHI test patients the primary model reached 39.4 percent balanced accuracy (95 percent CI 28.4–44.6; "
+     "macro-F1 0.38), the best pre-specified test result of the study, and 57.2 percent (46.7–63.4) on the 230 SPRSound "
+     "test children (Table 17). Healthy recall rose to 52 percent, against about 30 percent for the MFCC models, so far "
+     "fewer healthy breaths were flagged as abnormal. Wheezing remained weak at 24 percent.")
+tab("Table 17", "Test Results of the Second Round, Trained on ICBHI and SPRSound",
+    [["Model", "ICBHI test, 31 adults", "SPRSound test, 230 children", "Role"],
+     ["Three-branch feature fusion, seed 33", "39.4% (28.4–44.6)", "57.2% (46.7–63.4)", "Primary"],
+     ["MFCC alone, seed 22", "36.7%", "51.3%", "Comparison"],
+     ["Two-branch fusion without chromagram, seed 11", "36.5%", "53.4%", "Comparison"],
+     ["Late fusion of three models, seed 22", "35.7%", "52.8%", "Comparison"],
+     ["Spectrogram alone, seed 33", "34.6%", "51.0%", "Comparison"],
+     ["Chromagram alone, seed 33", "38.9%", "45.9%", "Comparison"]],
+    [2.6, 1.3, 1.5, 0.9],
+    "Balanced accuracy; chance is 25 percent. Intervals are patient-level bootstrap intervals and are given for the "
+    "primary model. This was the third reading of the ICBHI test patients; in each reading the primary model was "
+    "fixed in advance.")
+para("Thirty-one test patients give wide intervals, and the test patients had now been read three times. The two "
+     "designs that matter most were therefore compared by five-fold cross-validation across all 126 ICBHI patients: the "
+     "MFCC network trained on ICBHI alone, which is the design of the first deployed model, and the fusion network "
+     "trained on ICBHI and SPRSound, averaged over its three seeds. Patients were dealt into five folds balanced by "
+     "class and recording device; in fold k, fold k was the test set, fold k + 1 was used only for early stopping, and "
+     "the other three folds were used for training. Every patient was therefore classified once by a model that had "
+     "never seen them.")
+para(f"The fusion network reached {cvf['pooled_balanced']*100:.1f} percent balanced accuracy (95 percent CI "
+     f"{cvf['ci95'][0]*100:.1f}–{cvf['ci95'][1]*100:.1f}) against {cvm['pooled_balanced']*100:.1f} percent "
+     f"({cvm['ci95'][0]*100:.1f}–{cvm['ci95'][1]*100:.1f}) for the MFCC network (Table 18). In a paired patient "
+     "bootstrap of 5,000 resamples the difference was 5.9 points (95 percent CI 1.0 to 10.3; one-sided p = 0.008), and the "
+     "fusion network scored higher on 14 of the 15 seed-and-fold comparisons, the other being a tie. The supporting "
+     "analyses, run in jamovi, agreed: the fusion network was higher in every fold (paired t(4) = 4.75, p = .009; "
+     "Figure 12); 69 of the 126 patients had more of their cycles classified correctly by it, 39 fewer and 18 the same "
+     "(Wilcoxon signed-rank p = .009; Figure 13); and recall rose for every class (Figure 14). On the SPRSound test "
+     f"children the fold models averaged {cvf['sprs_test_mean']*100:.0f} percent. The single test reading (39.4 percent) "
+     "and the cross-validation (40.0 percent) agree closely, so about 40 percent is the study's best estimate.")
+_rc = lambda r: [f"{r['recall'][k]*100:.0f}%" for k in ("Crackles", "Healthy", "Wheezing", "Wheezing with Crackles")]
+tab("Table 18", "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)",
+    [["Measure", "MFCC network, ICBHI only", "Fusion network, ICBHI + SPRSound"],
+     ["Balanced accuracy (95% CI)", f"{cvm['pooled_balanced']*100:.1f}% ({cvm['ci95'][0]*100:.1f}–{cvm['ci95'][1]*100:.1f})",
+      f"{cvf['pooled_balanced']*100:.1f}% ({cvf['ci95'][0]*100:.1f}–{cvf['ci95'][1]*100:.1f})"],
+     ["Fold mean ± SD", f"{cvm['fold_mean']*100:.1f} ± {cvm['fold_sd']*100:.1f}",
+      f"{cvf['fold_mean']*100:.1f} ± {cvf['fold_sd']*100:.1f}"],
+     ["Plain accuracy", f"{cvm['accuracy']*100:.1f}%", f"{cvf['accuracy']*100:.1f}%"],
+     ["Macro-F1", f"{cvm['macro_f1']:.2f}", f"{cvf['macro_f1']:.2f}"],
+     ["Recall: Crackles / Healthy / Wheezing / W + C", " / ".join(_rc(cvm)), " / ".join(_rc(cvf))],
+     ["SPRSound test children (mean of folds)", "—", f"{cvf['sprs_test_mean']*100:.0f}%"]],
+    [2.4, 1.9, 2.0],
+    "The fusion network is the average of three training seeds. Intervals are patient-level bootstrap intervals. "
+    "W + C = Wheezing with Crackles.")
+fig("Figure 12", "Balanced Accuracy of the Two Designs in Each of the Five Folds", os.path.join(FIG, "j1_cv_folds.png"), 4.6,
+    "Produced in jamovi (jmv 2.8, paired-samples t-test, descriptives plot). Points are fold means with 95% confidence "
+    "intervals.")
+fig("Figure 13", "Share of Each Patient's Cycles Classified Correctly, by Design", os.path.join(FIG, "j2_cv_patients.png"), 4.6,
+    "Produced in jamovi (jmv 2.8, paired samples, 126 patients).")
+fig("Figure 14", "True Class Against Predicted Class in Cross-Validation", os.path.join(FIG, "j3_cv_confusion.png"), 5.4,
+    "Produced in jamovi (jmv 2.8, contingency tables, row percentages). The two panels have different vertical scales.")
+para("On 13 November 2026 this fusion network replaced the Edge Impulse model in the Resondi application. Because Edge "
+     "Impulse provides no chromagram processing, it runs in the browser as an exported ONNX model, the three seeds "
+     "combined in one file, with the band-limiting, levelling and feature extraction rewritten in JavaScript; the "
+     "rewritten features gave the same top class as the Python originals on 600 of 600 validation windows. On 26 "
+     "recordings already made with the Resondi device it gave top-class scores of 31 to 66 percent (median 42), against "
+     "27 to 34 percent for the model it replaced. That shows it is more decisive on device audio, not that it is more "
+     "often right: none of those recordings has a reference label, so its accuracy on the device remains untested.")
+
 h2("Comparison With the Original Model and the Reference Study")
-para("Table 17 places the models of this study beside the original Resondi model and the reference study. The original "
+para("Table 19 places the models of this study beside the original Resondi model and the reference study. The original "
      "model was reported at 71.1 percent test accuracy and 83.4 to 83.7 percent validation accuracy, but those figures "
      "came from five-second clips cut at a one-second stride from the same patients and split at random, so near-identical "
      "audio appeared in both training and testing, and every clip carried the patient's diagnosis rather than a label of "
@@ -868,17 +944,17 @@ para("The reference study reported a weighted accuracy of 99.1 percent for FDC-F
      "recordings, or the augmented copies of one recording, on one side of the split. Third, it classified 3-second clips "
      "rather than breathing cycles. Fourth, its fused network has about 1.48 million trainable parameters, against roughly "
      "190,000 for the fusion network here, which was trained on 65 patients. When the idea was adapted to the present task "
-     f"and evaluated on whole held-out patients, the best configuration reached {pc(max(FM[r]['balanced_accuracy'] for r in FORD))} "
-     "percent balanced accuracy. The gap shows how strongly the evaluation protocol and the task, rather than the "
+     "and evaluated on whole held-out patients, the best pre-specified configuration reached 39.4 percent balanced "
+     "accuracy on the test patients and 40.0 percent in cross-validation across all 126. The gap shows how strongly the evaluation protocol and the task, rather than the "
      "architecture, determine the number that is reported. The finding the two studies share is that spectrogram, MFCC, "
      "and chromagram representations each carry usable information about lung sounds.")
-tab("Table 17", "Original Model, Deployed Model, and Fusion Models Compared", [
+tab("Table 19", "Original Model, Deployed Models, and Fusion Models Compared", [
     ["Model", "Labels", "Evaluation", "Result", "Comparable?"],
     ["Original Resondi model (withdrawn)", "Patient diagnosis on every clip", "Random split of overlapping 5-s clips",
      "71.1% test; 83.4–83.7% validation accuracy", "No: leaked"],
     ["Original model, field test", "Reference label per recording", "15 device recordings",
      "6 of 15 = 40% agreement (95% CI 19.8–64.3%)", "Partly: device audio, n = 15"],
-    ["Deployed model (Edge Impulse v1, int8)", "Per-cycle sound labels", "31 held-out patients",
+    ["First deployed model (Edge Impulse v1, int8; in the app 10\u201313 Nov)", "Per-cycle sound labels", "31 held-out patients",
      "33.5% balanced; 44.0% accuracy", "Yes"],
     ["Deployed design retrained (11 Nov)", "Per-cycle sound labels", "31 held-out patients",
      "35.0% balanced (95% CI 24.6–40.3%)", "Yes"],
@@ -888,6 +964,12 @@ tab("Table 17", "Original Model, Deployed Model, and Fusion Models Compared", [
      f"{pc(FM['fdc3']['balanced_accuracy'])}% balanced", "Yes"],
     ["Late fusion (primary)", "Per-cycle sound labels", "31 held-out patients",
      f"{pc(lt['balanced_accuracy'])}% balanced (95% CI {FC['late3'][0]*100:.1f}–{FC['late3'][1]*100:.1f}%)", "Yes"],
+    ["Three-branch fusion + SPRSound (primary, second round)", "Per-cycle sound labels", "31 held-out patients",
+     "39.4% balanced (95% CI 28.4–44.6%)", "Yes"],
+    ["Three-branch fusion + SPRSound, 3-seed ensemble (in the app since 13 Nov)", "Per-cycle sound labels",
+     "5-fold cross-validation, all 126 patients", "40.0% balanced (95% CI 35.9–43.5%)", "Yes"],
+    ["MFCC design, same cross-validation", "Per-cycle sound labels", "5-fold cross-validation, all 126 patients",
+     "34.0% balanced (95% CI 30.4–38.2%)", "Yes"],
     ["Reference study, FDC-FS (Tariq et al., 2022), original data", "Diagnosis, 6 classes (COPD 85%)",
      "64/16/20 split of 3-s clips; patient separation not reported", "97% (spectrogram), 91% (MFCC), 95% (chromagram), weighted",
      "No: different task and protocol"],
@@ -905,14 +987,15 @@ para("Rebuilding the classifier with per-cycle sound labels and a patient-wise, 
      "Cohen's kappa of 0.15 indicates only slight agreement. The figures of 71 to 84 percent reported for the original "
      "model came from overlapping windows of the same patients appearing in both training and testing, together with "
      "diagnosis labels applied to every window, and cannot be compared with these results. The present figures are lower "
-     "but measure what the plan set out to measure.")
+     "but measure what the plan set out to measure. A second round, which added a paediatric corpus to training, raised "
+     "the best estimate to about 40 percent, confirmed across all 126 patients.")
 para("Three findings shape the next stage. First, validation scores were consistently optimistic: the chosen model fell "
      "from 47.2 percent on validation to 35.0 percent on test, which justifies scoring the test subset once and reporting "
      "every test run. Second, the model's errors are systematic rather than random: it detects crackles but misses most "
      "wheezes and flags about 70 percent of healthy cycles as abnormal. As a screening aid this is the safer direction of "
      "error, but it would overload a practitioner's review queue, and it also explains why the severity score separates "
      "the recording categories so weakly. Third, the classifier is fragile: noise at 20 dB below the signal reduced it to "
-     "chance, and on recordings from the Resondi microphone its output was close to uniform. Both point to the same "
+     "chance, and on recordings from the Resondi microphone the first deployed model's output was close to uniform. Both point to the same "
      "limitation, which is that a model trained on four hospital stethoscopes does not transfer to a different acquisition "
      "chain or a noisier environment.")
 _gain = (lt["balanced_accuracy"] - sm["balanced_accuracy"]) * 100
@@ -931,7 +1014,7 @@ else:
                 f"{'below' if _gain < 0 else 'level with'} the MFCC model, despite leading on validation.")
 _dep = 35.0
 para("The fusion study tested the central design idea of the reference study under honest conditions. " + _verdict +
-     f" It also scored below the deployed design retrained on the same split ({_dep:.1f} percent), so fusion is not adopted. "
+     f" It also scored below the deployed design retrained on the same split ({_dep:.1f} percent), so fusion trained on ICBHI alone was not adopted. "
      "Two observations explain why fusion was worth testing and why it did not pay off. First, the representations made "
      "different errors: the MFCC model over-called crackles, the spectrogram and fusion models recognised healthy breaths "
      "better, and the chromagram picked up the tonal quality of wheezes. Averaging their outputs, however, pulled the "
@@ -956,8 +1039,16 @@ para(f"The chromagram model alone had the highest test balanced accuracy ({pc(FM
      "percent range obtained here, shows that the task and the evaluation protocol matter far more than the architecture: "
      "a diagnosis-level task dominated by one class, evaluated without reported patient separation, can yield very high "
      "accuracy that need not carry over to unseen patients.")
+para("That verdict held only for ICBHI alone. When the rebalanced paediatric corpus was added, the three-branch fusion "
+     "network became the best model on validation, on the single test reading (39.4 percent) and in cross-validation "
+     "(40.0 against 34.0 percent; difference 5.9 points, 95 percent CI 1.0 to 10.3, p = 0.008). Fusion therefore helps "
+     "once the network has more varied data to learn from, and the fusion network was adopted and placed in the "
+     "application on 13 November 2026. The order in which the gains appeared is the lesson: architecture alone moved "
+     "little, data moved more, and the data that matter most, Resondi recordings of Filipino patients, are still to be "
+     "collected.")
 para("These results define the work the funding is meant to buy rather than undermining it. Changing the feature "
-     "representation and training recipe on the public corpus produced gains of only a few points, while a change of "
+     "representation and training recipe on ICBHI alone produced no clear gain; the one significant gain, about six points, "
+     "came from adding a second corpus to training, while a change of "
      "device or noise level erased the model's skill entirely. The decisive step is therefore a local dataset: Resondi "
      "device recordings of Filipino patients at the seven standard sites, with each breathing cycle labelled independently "
      "by two clinicians blinded to the AI output, with noise augmentation during training and a recording-quality gate "
@@ -966,7 +1057,17 @@ para("These results define the work the funding is meant to buy rather than unde
 para("The study has several limitations. Thirty-one test patients give wide confidence intervals. The reference corpus "
      "is dominated by adult patients with chronic obstructive pulmonary disease, whereas Resondi targets community and "
      "paediatric use. The noise experiment used synthetic Gaussian noise rather than recorded ward or community noise, "
-     "and the earlier field results came from the withdrawn model with no record of reference-label blinding.")
+     "and the earlier field results came from the withdrawn model with no record of reference-label blinding. The ICBHI "
+     "test patients were read three times, once per round, each time with the primary model fixed in advance, which the "
+     "cross-validation across all 126 patients guards against. Above all, neither the fusion network now in the "
+     "application nor any other rebuilt model has been tested on Resondi device recordings with reference labels.")
+log("Second training round, cross-validation, deployment (13 Nov)", "Fusion reported as not adopted (ICBHI-only round)",
+    "New section 'Adding the Paediatric Corpus, and Cross-Validation': Table 17 (ICBHI + SPRSound test, 39.4% / 57.2%), "
+    "Table 18 (5-fold CV, 40.0% vs 34.0%, +5.9 points, p = 0.008), Figures 12-14 made with jamovi (jmv), and the 13 Nov "
+    "deployment of the fusion network in the app. Comparison table renumbered 17 -> 19 with three new rows. Discussion: "
+    "verdict revised (fusion helps once SPRSound is added), limitations add the three test readings and the untested device.",
+    "Requested by the user on 13 Nov. Numbers from model-rebuild/results/final-test-icbhi-sprs.md and cv-results.json; "
+    "jamovi output in build/imrad/jamovi-output.txt.")
 log("Results and Discussion (new)", "—",
     "Section G with Tables 7–13 and Figures 6–9: field-study results, validation comparison, single test run with bootstrap CIs, "
     "McNemar noise test (H1), H2/H3 status, severity calibration (OLS, VIF, beta regression, RMSE/MAE/R²), Kruskal–Wallis with "
@@ -1112,7 +1213,7 @@ for s in L.sections:
     s.top_margin = s.bottom_margin = Inches(0.7)
 L.add_heading("Resondi Research Plan: Revision Log (11 November 2026)", level=1)
 L.add_paragraph("Source: Resondi-Research-Plan-Revised.docx (Google Drive, last modified 11 Nov 2026). Revised copy: "
-                "Resondi-Research-Plan-Revised-2026-11-11.docx. The original was not edited. Results and Discussion are "
+                "Resondi-Research-Plan-Revised-2026-11-13.docx. The original was not edited. Results and Discussion are "
                 "not part of this revision: the fusion model is still training. Yellow highlights in the revised plan "
                 "mark facts only the team can confirm.")
 tb = L.add_table(rows=1, cols=5)

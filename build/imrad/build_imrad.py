@@ -549,7 +549,8 @@ para("Data were divided by patient before any audio was cut, so that no patient 
 para("Two architectures are reported. The first keeps the original design: 13 MFCCs per "
      "frame passed to a one-dimensional convolutional network, here with 32 and 64 "
      "filters. An eight-bit Edge Impulse build of this network replaced the original "
-     "model in the Resondi application on 10 November 2026. The second is a three-branch "
+     "model in the Resondi application on 10 November 2026, and was itself replaced by "
+     "the fusion network on 13 November 2026. The second is a three-branch "
      "feature-fusion network after Tariq et al. (2022). The same window is represented "
      "three ways: as 13 MFCCs, as a log-power spectrogram from 0 to 4 kHz (129 bins, "
      "20 ms frames), and as a 12-bin chromagram from 50 to 4,000 Hz (64 ms frames). Each "
@@ -810,7 +811,7 @@ para("Table 2 gives the rebuilt models' scores on the 31 ICBHI test patients, no
      "and 32 percent on those children.", first=0)
 TBL(2, "Balanced Accuracy of the Rebuilt Models on the 31 ICBHI Test Patients",
     [["Model", "Training data", "Balanced accuracy (95% CI)", "Plain accuracy", "Macro F1"],
-     ["MFCC network, Edge Impulse 8-bit build (in the app)", "ICBHI", "33.5%", "44.0%", "—"],
+     ["MFCC network, Edge Impulse 8-bit build (in the app 10–13 Nov)", "ICBHI", "33.5%", "44.0%", "—"],
      ["MFCC network, best of ten versions", "ICBHI", "35.0% (24.6–40.3)", "38.5%", "0.31"],
      ["Late fusion of three single networks", "ICBHI", "32.9% (23.9–40.9)", "—", "0.31"],
      ["Three-branch fusion network", "ICBHI", "36.7% (26.0–43.0)", "—", "0.36"],
@@ -956,9 +957,19 @@ para("These figures should not be compared with the 95 to 99 percent reported by
      "patient's diagnosis rather than the sound of each breath, and divide recordings "
      "at random, so that a patient's audio appears in both training and testing, which is "
      "the same flaw found in this study's original model.", first=0)
+para("The fusion network has since been put into the Resondi application. Because Edge "
+     "Impulse provides no chromagram processing, it runs in the browser as an exported "
+     "ONNX model, the three seeds combined in one file, with the band-limiting, levelling "
+     "and feature extraction rewritten in JavaScript. The rewritten features gave the same "
+     "top class as the Python originals on 600 of 600 validation windows. Run on 26 "
+     "recordings already made with the Resondi device, the deployed fusion network gave "
+     "top-class scores of 31 to 66 percent (median 42), against 27 to 34 percent for the "
+     "Edge Impulse build it replaced. That shows it is more decisive on device audio, not "
+     "that it is more often right: none of those recordings has a reference label.",
+     first=0)
 
 H2("Planned Extensions")
-para("Three extensions are planned and were not implemented in the work reported here.",
+para("Two extensions are planned and were not implemented in the work reported here.",
      first=0)
 para("The acquisition protocol extends from seven sites to nine. The two additional "
      "sites are an interscapular pair at T3–T4, beside the spine, which sample the "
@@ -993,14 +1004,7 @@ para("The rationale for sampling more positions is empirical rather than procedu
      "fields; the extension adds the posterior upper fields, so that every lobe is "
      "sampled from both the front and the back of the chest.", first=0)
 
-para("The second extension is to put the fusion network into the application. The "
-     "application runs a single Edge Impulse model, and Edge Impulse provides no "
-     "chromagram processing, so the fusion network would run in the browser as an "
-     "exported model, with the same band-limiting and levelling applied to every "
-     "recording. Until then, the application continues to run the 33.5 percent MFCC "
-     "build.", first=0)
-
-para("The third, and the one that matters most, is a local dataset: recordings of "
+para("The second, and the one that matters most, is a local dataset: recordings of "
      "Filipino patients made on the Resondi device at the seven standardised sites, with "
      "each breathing cycle labelled independently by two clinicians who have not seen the "
      "model's output, collected with ethics approval and consent. The planned study "
@@ -1139,9 +1143,8 @@ for rec in [
     "Collect and clinically label a Philippine lung sound dataset on the Resondi device, "
     "with two independent, blinded clinicians per breathing cycle, ethics approval and "
     "consent, and quantify the gain from training on it.",
-    "Put the fusion network into the application through a browser-run exported model, "
-    "and confirm on the same test patients that the deployed version reproduces its "
-    "scores.",
+    "Confirm on labelled device recordings that the fusion network now running in the "
+    "application performs as it did on the public test patients.",
     "Implement the nine-site protocol and evaluate it against the seven-site protocol on "
     "the same patients.",
     "Reduce the execution time of the automated recording quality assessment, now 145 "
