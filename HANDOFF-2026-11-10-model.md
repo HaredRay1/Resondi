@@ -19,6 +19,9 @@ Paste this into Claude chat to bring it up to date. It covers what changed on 9�
 > - **The fusion model is live** (13 Nov): ONNX in the browser, features reproduced in JavaScript and checked against Python (600/600 same top label). Section 11.
 > - **On Resondi device audio:** the old v1 was close to guessing (top scores 27–34%). The fusion model is more decisive on the same 26 device recordings (31–66%, median 41%), but there are no reference labels, so this is **not** accuracy on the device.
 > - **Device Wi-Fi transfer page:** written and saved in the app, **not published** (a permission check blocked the publish). It is a phone-carried transfer, not the Tier 2 gateway. Section 11.
+> - **Leakage demonstration (14 Nov), IMRaD Table 4:** the same fusion network (seed 11) scores 39.0% balanced on unseen patients, 58.2% when test patients' other breaths are in training, 52.5% when pieces of the same breath are on both sides, 78.5% on its own training data. It shows why the study splits by patient. **Never quote the leaky rows as accuracy.** `model-rebuild/results/leakage-demo.md`.
+> - **Ahnycca's papers (14 Nov):** `Ahnyccas papers/` holds copies of the heart-and-lung IMRaD, its fill-ins, the research plan and its revision log (Word + PDF). Recopy after a rebuild.
+> - **Heart models (14 Nov, training started ~01:10):** CirCor, patient-wise split (564/189/189 patients). S1/S2 timing and heart rate (`heart_seg.py`), murmur present/absent at a pre-specified 80% validation sensitivity (`heart_murmur.py`). Results will be in `model-rebuild/results/heart-segmentation.md` and `heart-murmur.md`. CirCor only; not checked on device audio; not in the app yet.
 > - **Never say:** validated, diagnoses, or works on the Resondi device.
 > - **Next gain needs data:** clinician-labelled Resondi device recordings; HF_Lung_V1 once an author-sanctioned copy is found (the GitHub link is dead).
 >

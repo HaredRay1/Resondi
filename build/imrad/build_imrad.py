@@ -633,6 +633,17 @@ para("Two evaluations followed. The first scored the pre-specified versions once
      "fusion network trained on ICBHI and SPRSound, the latter averaged over its three "
      "seeds.", first=0)
 
+para("To show how much a leaky division of the data inflates the score, the fusion "
+     "network was also trained on two deliberately leaky divisions, with every other "
+     "setting unchanged (one training seed). In the first, ICBHI breathing cycles were "
+     "assigned at random to training (70 percent), validation (10 percent) and testing "
+     "(20 percent), so that a test patient's other breaths were in the training data. In "
+     "the second, the one-second windows were assigned at random, so that overlapping "
+     "pieces of the same breath fell on both sides, similar in kind to the original model's division. "
+     "The model from the first division was also scored on its own training cycles. "
+     "These runs are a demonstration of the flaw, not estimates of accuracy, and no "
+     "accuracy claim in this paper rests on them.", first=0)
+
 H2("Heart Sound Component")
 para("Heart recordings are not classified in the system reported here. The cardiac "
      "classifier is specified to follow the same discipline as the lung classifier, an "
@@ -976,6 +987,28 @@ FIG(15, "True Class Against Predicted Class in Cross-Validation",
          "different vertical scales.")
 
 
+H2("Rebuilt Classifier: Effect of a Leaky Division")
+para("Table 4 shows what the same fusion network scores when the division of the data "
+     "leaks. Trained and tested on patients it had never heard, it reached 39.0 percent "
+     "balanced accuracy. When the cycles were divided at random, so that 119 of 119 test "
+     "patients also had breaths in training, the score rose to 58.2 percent. When the "
+     "one-second windows were divided at random, it reached 52.5 percent, a smaller rise "
+     "because only the training portion of the database had been cut into overlapping "
+     "windows. Scored on its own training cycles, it reached 78.5 percent. The model and "
+     "its training were identical in every row; only the division changed. The higher "
+     "figures measure how well the network recognises audio it has already heard, not how "
+     "well it classifies a new patient, and are not reported as its accuracy.", first=0)
+TBL(4, "The Same Fusion Network Scored on an Honest and on Leaky Divisions of ICBHI 2017",
+    [["Division of the data", "Test patients heard in training", "Balanced accuracy", "Plain accuracy"],
+     ["By patient (five-fold cross-validation): the reported figure", "None", "39.0%", "41.1%"],
+     ["Breathing cycles at random", "119 of 119", "58.2%", "56.6%"],
+     ["One-second windows at random", "Pieces of the same breath (3,822 of 4,008 test cycles)", "52.5%", "50.2%"],
+     ["Scored on its own training cycles", "All", "78.5%", "68.9%"]],
+    [2.25, 1.75, 1.05, 1.05],
+    "One training seed (11), so the first row is 39.0 percent rather than the 40.0 percent of "
+    "the three-seed ensemble. Chance is 25 percent. The leaky rows are a demonstration of "
+    "the flaw and must not be quoted as the model's accuracy.")
+
 H2("Rebuilt Classifier on Resondi Device Recordings")
 para("The fusion network ran without error on all 45 stored lung recordings, at a "
      "median of 2.0 seconds per recording including fetching the audio. On the 26 unique "
@@ -1084,6 +1117,12 @@ para("These figures should not be compared with the 95 to 99 percent reported by
      "patient's diagnosis rather than the sound of each breath, and divide recordings "
      "at random, so that a patient's audio appears in both training and testing, which is "
      "the same flaw found in this study's original model.", first=0)
+para("Table 4 measures the size of that effect on this study's own network. The same model "
+     "that scores 39.0 percent on unseen patients scores 58.2 percent once their other "
+     "breaths are in training, and 78.5 percent on the breaths it was trained on, within "
+     "the 71 to 84 percent the original model reported. The original model's division was "
+     "leakier than either demonstration: five-second samples overlapping by four seconds, "
+     "each labelled with the patient's diagnosis.", first=0)
 para("The fusion network has since been put into the Resondi application. Because Edge "
      "Impulse provides no chromagram processing, it runs in the browser as an exported "
      "ONNX model, the three seeds combined in one file, with the band-limiting, levelling "
@@ -1118,7 +1157,7 @@ para("Two extensions are planned and were not implemented in the work reported h
 para("The acquisition protocol extends from seven sites to nine. The two additional "
      "sites are an interscapular pair at T3–T4, beside the spine, which sample the "
      "posterior upper lobes; the tracheal reference and the six fields already recorded "
-     "are retained. Figure 17 shows the nine sites on the body and Table 4 gives their "
+     "are retained. Figure 17 shows the nine sites on the body and Table 5 gives their "
      "landmarks.", first=0)
 
 FIG(15, "Planned Nine-Site Acquisition Protocol",
@@ -1152,7 +1191,7 @@ para("The second, and the one that matters most, is a local dataset: recordings 
      "Filipino patients made on the Resondi device at the seven standardised sites, with "
      "each breathing cycle labelled independently by two clinicians who have not seen the "
      "model's output, collected with ethics approval and consent. The planned study "
-     "separates the effect of each change, as Table 5 shows. Its first three rows have "
+     "separates the effect of each change, as Table 6 shows. Its first three rows have "
      "now been run on public data; the fourth cannot be run on any public dataset.",
      first=0)
 

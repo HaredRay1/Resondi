@@ -1,0 +1,71 @@
+{
+ "evaluated": "2026-11-14 00:39",
+ "results": {
+  "patients_shared": {
+   "balanced": 0.5824355787070421,
+   "ci95_cycle_bootstrap": [
+    0.5499779090670116,
+    0.6129139182375856
+   ],
+   "accuracy": 0.5664233576642336,
+   "cycles": 1370,
+   "patients": 119,
+   "recall": {
+    "Crackles": 0.5732984293193717,
+    "Healthy": 0.5515759312320917,
+    "Wheezing": 0.5523255813953488,
+    "Wheezing with Crackles": 0.652542372881356
+   },
+   "epoch": 23,
+   "test_patients_also_in_training": "119 of 119"
+  },
+  "training_data": {
+   "balanced": 0.7847299743221516,
+   "ci95_cycle_bootstrap": [
+    0.7732472329471042,
+    0.7964366870310705
+   ],
+   "accuracy": 0.6891447368421053,
+   "cycles": 4864,
+   "patients": 126,
+   "recall": {
+    "Crackles": 0.7113163972286374,
+    "Healthy": 0.6043829296424452,
+    "Wheezing": 0.8385579937304075,
+    "Wheezing with Crackles": 0.9846625766871165
+   }
+  },
+  "windows_shared": {
+   "balanced": 0.5253079937005117,
+   "ci95_cycle_bootstrap": [
+    0.5066019923207837,
+    0.5450019713711791
+   ],
+   "accuracy": 0.5022455089820359,
+   "cycles": 4008,
+   "patients": 126,
+   "recall": {
+    "Crackles": 0.6222826086956522,
+    "Healthy": 0.43474041727316837,
+    "Wheezing": 0.4701348747591522,
+    "Wheezing with Crackles": 0.5740740740740741
+   },
+   "epoch": 22,
+   "test_cycles_with_windows_in_training": "3822 of 4008"
+  },
+  "patient_wise_cv_seed11": {
+   "balanced": 0.38954456619700284,
+   "ci95": [
+    0.3520039195772123,
+    0.4235365266672832
+   ],
+   "accuracy": 0.4108437228182082,
+   "recall": {
+    "Crackles": 0.5429184549356223,
+    "Healthy": 0.37204832509610103,
+    "Wheezing": 0.3724604966139955,
+    "Wheezing with Crackles": 0.2707509881422925
+   }
+  }
+ }
+}
