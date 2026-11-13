@@ -176,9 +176,37 @@ def device():
     save(fig, OUT + "r5_device.png")
 
 
+# ── R6 heart rate on CirCor test patients ───────────────────────────────────
+# Source: model-rebuild/work-exp/heart/seg_test_rows.npz, written by
+# model-rebuild/scripts/heart_seg.py report (reference vs estimated BPM per recording).
+def heart_rate():
+    src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "model-rebuild",
+                       "work-exp", "heart", "seg_test_rows.npz")
+    d = np.load(src)
+    ref, est = d["ref"], d["est"]
+    ok = ~np.isnan(est)
+    err = np.abs(est[ok] - ref[ok])
+    lo, hi = min(40, float(ref.min()) - 5), max(200, float(np.nanmax(est)) + 5, float(ref.max()) + 5)
+    fig, ax = plt.subplots(figsize=(W * 0.62, W * 0.62))
+    ax.fill_between([lo, hi], [lo - 5, hi - 5], [lo + 5, hi + 5], color=PALE, zorder=1, lw=0)
+    ax.plot([lo, hi], [lo, hi], color=GREY, lw=1.0, ls="--", zorder=2)
+    far = err > 10
+    ax.scatter(ref[ok][~far], est[ok][~far], s=11, color=PRIMARY, alpha=0.55, lw=0, zorder=3)
+    ax.scatter(ref[ok][far], est[ok][far], s=13, color=TEAL, alpha=0.8, lw=0, zorder=4)
+    ax.set_xlim(lo, hi); ax.set_ylim(lo, hi); ax.set_aspect("equal")
+    ax.set_xlabel("Reference heart rate (BPM)", fontsize=9.5, color=GREY)
+    ax.set_ylabel("Estimated heart rate (BPM)", fontsize=9.5, color=GREY)
+    ax.tick_params(labelsize=8.5)
+    strip(ax, keep=("left", "bottom"), grid="both")
+    ax.text(0.02, 0.97, f"{ok.sum()} recordings\n{100 * np.mean(err <= 5):.0f}% within 5 BPM (band)\n"
+            f"teal: off by more than 10", transform=ax.transAxes, va="top", fontsize=8.3,
+            color=INK, linespacing=1.3)
+    save(fig, OUT + "r6_heart_rate.png")
+
+
 if __name__ == "__main__":
     import sys
     wanted = sys.argv[1:]
-    for f in (clarity, noise, response, agreement, device):
+    for f in (clarity, noise, response, agreement, device, heart_rate):
         if not wanted or f.__name__ in wanted:
             f()

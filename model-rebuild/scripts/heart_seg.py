@@ -4,8 +4,10 @@ Fixed before the test patients are scored:
   - Model: frame classifier on the 50 frame/s log-power features (heart_data.py): three 1-D convolutions
     (129 -> 64 channels, kernel 5) and a bidirectional GRU (2 x 48), 4 outputs (S1, systole, S2, diastole).
     Trained on random 8 s crops of the TRAIN patients' annotated frames, class-weighted, AdamW 1e-3,
-    up to 40 epochs, early stopping (patience 6) on VALIDATION frame accuracy. Seeds 11, 22, 33; their
-    probabilities are averaged (the primary model).
+    up to 15 epochs, early stopping (patience 3) on VALIDATION frame accuracy, seed 11 (the primary model).
+    CHANGED 14 Nov 00:55, before any test patient was scored: the first plan was 3 seeds, 40 epochs,
+    patience 6, but one epoch took about 5 minutes on this computer (up to 10 hours in all), and
+    validation frame accuracy was already 0.89 after 2 epochs.
   - Decoding: Viterbi over the cyclic order S1 -> systole -> S2 -> diastole -> S1, each state may stay or
     advance. The advance probability is chosen on VALIDATION (lowest heart-rate error) from {0.05, 0.1, 0.2, 0.3}.
   - Heart rate: 60 / median interval between consecutive decoded S1 onsets over the whole recording
@@ -31,7 +33,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from heart_data import WORK, FPS
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-SEEDS = (11, 22, 33)
+SEEDS = (11,)
 STATES = ["S1", "systole", "S2", "diastole"]
 CROP = 400
 
@@ -110,7 +112,7 @@ def train():
         torch.manual_seed(s); rng = np.random.default_rng(s)
         m = build(); opt = torch.optim.AdamW(m.parameters(), lr=1e-3, weight_decay=1e-3)
         best, best_state, wait, t0 = -1, None, 0, time.time()
-        for ep in range(1, 41):
+        for ep in range(1, 16):
             m.train()
             for _ in range(len(Ftr) // 32):
                 X, Y = crops(Ftr, ytr, rng, 32)
@@ -125,7 +127,7 @@ def train():
                 best_state = {k: v.clone() for k, v in m.state_dict().items()}
             else:
                 wait += 1
-                if wait >= 6:
+                if wait >= 3:
                     break
             print(f"  seed {s} epoch {ep:>2}  val frame acc {acc:.3f}  {time.time() - t0:.0f}s", flush=True)
         torch.save(best_state, path)
@@ -259,7 +261,7 @@ def report():
         "# Heart sound segmentation and heart rate on CirCor test patients (14 Nov 2026)",
         "",
         f"Patient-wise split, {mo['patients']} test patients, {mo['recordings']} recordings with at least 3 reference S1 onsets. "
-        "Model: 3-seed CNN + BiGRU frame classifier with cyclic Viterbi decoding (`scripts/heart_seg.py`). "
+        "Model: CNN + BiGRU frame classifier (one seed) with cyclic Viterbi decoding (`scripts/heart_seg.py`). "
         f"Viterbi advance probability {adv}, chosen on validation patients.",
         "",
         "| Measure | Trained model | No-training baseline (autocorrelation) |",

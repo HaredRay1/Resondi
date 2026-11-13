@@ -1,0 +1,101 @@
+﻿start 00:53
+  seed 11 epoch  1  val frame acc 0.866  277s
+  seed 11 epoch  2  val frame acc 0.887  537s
+  seed 11 epoch  3  val frame acc 0.896  796s
+  seed 11 epoch  4  val frame acc 0.889  1053s
+  seed 11 epoch  5  val frame acc 0.890  1310s
+seed 11: best epoch 3, val frame acc 0.896
+# Heart sound segmentation and heart rate on CirCor test patients (14 Nov 2026)
+
+Patient-wise split, 189 test patients, 631 recordings with at least 3 reference S1 onsets. Model: CNN + BiGRU frame classifier (one seed) with cyclic Viterbi decoding (`scripts/heart_seg.py`). Viterbi advance probability 0.3, chosen on validation patients.
+
+| Measure | Trained model | No-training baseline (autocorrelation) |
+|---|---|---|
+| Heart rate mean absolute error | **3.0 BPM** (95% CI 2.5–3.6) | 35.4 BPM (29.9–40.8) |
+| Median absolute error | 1.8 BPM | 4.3 BPM |
+| Recordings within 5 BPM | 85% | 54% |
+| Recordings within 10 BPM | 96% | 63% |
+| No estimate | 0 | 0 |
+
+Bland–Altman (model − reference): bias +0.1 BPM, 95% limits -13.7 to +14.0. Reference heart rates: 49–171 BPM, median 103 (children and adolescents).
+
+| Heart sound | Found within 100 ms (sensitivity) | Detections that are real (PPV) | Onset timing error |
+|---|---|---|---|
+| S1 | 96.8% | 95.7% | 15 ms |
+| S2 | 97.3% | 96.5% | 12 ms |
+
+Frame accuracy on annotated frames (four states): 87.1%.
+
+These are results on CirCor recordings (Brazilian children, electronic stethoscope). They have not been checked on Resondi device recordings, whose microphone may lose the lowest heart-sound frequencies.
+
+  seed 11 epoch  1  val patient AUROC 0.819  25s
+  seed 11 epoch  2  val patient AUROC 0.912  55s
+  seed 11 epoch  3  val patient AUROC 0.924  84s
+  seed 11 epoch  4  val patient AUROC 0.947  114s
+  seed 11 epoch  5  val patient AUROC 0.961  145s
+  seed 11 epoch  6  val patient AUROC 0.956  175s
+  seed 11 epoch  7  val patient AUROC 0.963  205s
+  seed 11 epoch  8  val patient AUROC 0.968  235s
+  seed 11 epoch  9  val patient AUROC 0.959  263s
+  seed 11 epoch 10  val patient AUROC 0.969  292s
+  seed 11 epoch 11  val patient AUROC 0.922  321s
+  seed 11 epoch 12  val patient AUROC 0.964  350s
+  seed 11 epoch 13  val patient AUROC 0.939  379s
+  seed 11 epoch 14  val patient AUROC 0.952  408s
+  seed 11 epoch 15  val patient AUROC 0.938  438s
+seed 11: best epoch 10, val AUROC 0.969
+  seed 22 epoch  1  val patient AUROC 0.852  30s
+  seed 22 epoch  2  val patient AUROC 0.918  63s
+  seed 22 epoch  3  val patient AUROC 0.933  98s
+  seed 22 epoch  4  val patient AUROC 0.928  128s
+  seed 22 epoch  5  val patient AUROC 0.942  158s
+  seed 22 epoch  6  val patient AUROC 0.953  187s
+  seed 22 epoch  7  val patient AUROC 0.933  216s
+  seed 22 epoch  8  val patient AUROC 0.956  246s
+  seed 22 epoch  9  val patient AUROC 0.939  276s
+  seed 22 epoch 10  val patient AUROC 0.936  305s
+  seed 22 epoch 11  val patient AUROC 0.951  334s
+  seed 22 epoch 12  val patient AUROC 0.946  365s
+  seed 22 epoch 13  val patient AUROC 0.928  394s
+seed 22: best epoch 8, val AUROC 0.956
+  seed 33 epoch  1  val patient AUROC 0.855  30s
+  seed 33 epoch  2  val patient AUROC 0.900  59s
+  seed 33 epoch  3  val patient AUROC 0.925  89s
+  seed 33 epoch  4  val patient AUROC 0.913  119s
+  seed 33 epoch  5  val patient AUROC 0.932  149s
+  seed 33 epoch  6  val patient AUROC 0.959  182s
+  seed 33 epoch  7  val patient AUROC 0.950  213s
+  seed 33 epoch  8  val patient AUROC 0.946  244s
+  seed 33 epoch  9  val patient AUROC 0.930  274s
+  seed 33 epoch 10  val patient AUROC 0.963  304s
+  seed 33 epoch 11  val patient AUROC 0.947  334s
+  seed 33 epoch 12  val patient AUROC 0.933  363s
+  seed 33 epoch 13  val patient AUROC 0.945  393s
+  seed 33 epoch 14  val patient AUROC 0.952  422s
+  seed 33 epoch 15  val patient AUROC 0.944  452s
+seed 33: best epoch 10, val AUROC 0.963
+# Heart murmur detection on CirCor test patients (14 Nov 2026)
+
+Patient-wise split. Test: 36 patients with a murmur, 139 without (plus 14 'unknown', reported separately). Model: 3-seed 1-D CNN on log-power spectra (`scripts/heart_murmur.py`); a patient is positive when any site is.
+
+Threshold set on validation patients for a pre-specified sensitivity of 80% (validation: sensitivity 80.6%, specificity 97.1%).
+
+| Measure (test patients) | Value (95% CI) |
+|---|---|
+| Sensitivity | **66.7% (50.0–81.8)** |
+| Specificity | 97.1% (93.9–99.3) |
+| Positive predictive value | 85.7% (71.0–96.7) |
+| F1 | 0.75 (0.61–0.86) |
+| Cohen's kappa | 0.70 (0.54–0.82) |
+| AUROC | 0.96 (0.92–0.99) |
+
+| | Model: murmur | Model: no murmur |
+|---|---|---|
+| Reference: murmur | 24 | 12 |
+| Reference: no murmur | 4 | 135 |
+
+'Unknown' test patients flagged as murmur: 2 of 14.
+
+CirCor recordings only (Brazilian children, electronic stethoscope). Not checked on Resondi device recordings. A screening flag for practitioner review, never a diagnosis. Murmur timing (systolic / diastolic) not yet attempted.
+
+done 01:55

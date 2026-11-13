@@ -164,10 +164,15 @@ para("Auscultation is the first examination most Filipino patients with heart or
      "27 to 34 percent), but those recordings carry no reference labels, so its accuracy "
      "on the device has not been measured. Resondi is "
      "established as a working acquisition platform; validating its classifier on "
-     "clinician-labelled Filipino recordings is the next step. Heart sounds are recorded "
-     "but not yet classified: a heart-murmur classifier has been specified on the CirCor "
-     "DigiScope dataset, and a blinded review of 25 of its recordings by a cardiologist has "
-     "been prepared to check its labels before training.", first=0, spacing=1.6)
+     "clinician-labelled Filipino recordings is the next step. "
+     "Heart sounds are recorded at five sites, and two heart-sound models were trained"
+     " and tested on the public CirCor DigiScope dataset with a patient-wise split. On"
+     " 189 test patients, a segmentation model found about 97 percent of first and "
+     "second heart sounds within 100 ms and estimated heart rate with a mean error of "
+     "3.0 beats per minute (95 percent CI 2.5–3.6); a murmur detector reached 66.7 "
+     "percent sensitivity (95 percent CI 50.0–81.8), short of its pre-specified 80 "
+     "percent, at 97.1 percent specificity. Neither heart model has been tested on "
+     "recordings from the Resondi device.", first=0, spacing=1.6)
 para("Keywords: auscultation, lung sounds, heart sounds, smart stethoscope, convolutional neural "
      "network, feature fusion, primary care, Philippines", first=0, italic=True, spacing=1.6)
 
@@ -302,10 +307,10 @@ for n, (obj, sub) in enumerate([
     ("To implement AI-assisted classification of respiratory sound patterns.",
      "A convolutional neural network classifies each recording as normal, wheezing, "
      "crackles, or wheezing with crackles."),
-    ("To prepare AI-assisted detection of heart murmurs.",
-     "A heart-sound classifier is specified to report whether a murmur is present and "
-     "when in the cardiac cycle it occurs, trained on expert-annotated public recordings "
-     "whose labels are first checked by a cardiologist."),
+    ("To develop AI-assisted analysis of heart sounds.",
+     "Two models are trained on expert-annotated public recordings: one finds the "
+     "first and second heart sounds and estimates heart rate, and one reports whether "
+     "a murmur is present. Placing a murmur in the cardiac cycle is the next step."),
     ("To establish longitudinal monitoring of respiratory sound changes across visits.",
      "A recording is compared against an earlier recording taken at the same anatomical "
      "site on the same patient."),
@@ -323,9 +328,12 @@ for n, (obj, sub) in enumerate([
 H2("Scope and Delimitation")
 para("This study covers lung and heart sounds, at different stages. Lung sounds are "
      "recorded, classified and evaluated. Heart sounds are recorded at five sites and "
-     "stored for practitioner review; a heart-murmur classifier is specified and its "
-     "training data prepared, but it has not been trained or evaluated, and no heart "
-     "recording is passed to the lung classifier. Lung classification is limited to four "
+     "stored for practitioner review. Two heart-sound models, one that times the heart"
+     " sounds and estimates heart rate and one that detects murmurs, were trained and "
+     "tested on a public dataset; they do not yet run in the application and have not "
+     "been tested on Resondi heart recordings, and no heart recording is passed to the"
+     " lung classifier. "
+     "Lung classification is limited to four "
      "categories — normal, wheezing, crackles, and "
      "wheezing with crackles — and the system does not identify a disease, stage a "
      "condition, or produce a diagnosis. All classifications are presented to a "
@@ -645,14 +653,16 @@ para("To show how much a leaky division of the data inflates the score, the fusi
      "accuracy claim in this paper rests on them.", first=0)
 
 H2("Heart Sound Component")
-para("Heart recordings are not classified in the system reported here. The cardiac "
-     "classifier is specified to follow the same discipline as the lung classifier, an "
+para("Heart recordings are not classified in the application reported here. The cardiac "
+     "models follow the same discipline as the lung classifier, an "
      "acoustic description and never a diagnosis. The planned output, in order of build, is "
      "that the first and second heart sounds (S1 and S2) are identified and timed, that a "
      "murmur is reported as present or absent, and that a present murmur is placed as "
      "systolic or diastolic, with a recording-quality gate in front. Third and fourth heart "
      "sounds (S3 and S4) are named but not promised, because no public dataset labels "
-     "them in enough patients to train on.", first=0)
+     "them in enough patients to train on. The first two steps, heart-sound timing with "
+     "heart rate and murmur presence, were built and tested for this paper; murmur timing "
+     "and the quality gate were not.", first=0)
 para("The training corpus is the CirCor DigiScope Phonocardiogram Dataset (Oliveira et al., "
      "2022), recorded from children and adolescents in Brazil at the aortic, pulmonic, "
      "tricuspid and mitral areas and released under the Open Data Commons Attribution "
@@ -663,26 +673,51 @@ para("The training corpus is the CirCor DigiScope Phonocardiogram Dataset (Olive
      "the boundaries of S1, systole, S2 and diastole. The unknown label marks recordings "
      "too poor to judge rather than a clinical state, so those patients are routed to the "
      "quality pathway rather than treated as a class.", first=0)
-para("The planned evaluation divides CirCor by patient, as for the lung data, and reports "
-     "sensitivity, specificity, F1-score, Cohen's kappa and the confusion matrix at the "
-     "patient level, a murmur counting as present when it is detected at any site. Because "
-     "a missed murmur costs more than an unnecessary referral, sensitivity is the primary "
-     "criterion: the decision threshold will be set on the validation patients to reach a "
-     "pre-specified sensitivity, and the specificity that results will be reported as the "
-     "cost of that choice. S1 and S2 timing will be scored separately against the reference "
-     "boundaries, as the mean absolute error in milliseconds.", first=0)
-para("Before training, the dataset's labels are being checked against an independent "
+para("CirCor was divided by patient with a fixed seed into training (564 patients, "
+     "1,898 recordings), validation (189 patients, 634 recordings) and test (189 "
+     "patients, 631 recordings) sets, balanced by murmur label and by the dataset's "
+     "two collection campaigns, so that no patient's recordings fell on more than one "
+     "side. Each recording was band-pass filtered from 25 to 1,900 Hz, brought to a "
+     "common level, and converted to a log-power spectrogram at 50 frames per second.", first=0)
+para("Two models were trained. The first, for heart-sound timing, is a small "
+     "convolutional network followed by a bidirectional recurrent layer that labels "
+     "every 20 ms frame as S1, systole, S2 or diastole, learned from the dataset's "
+     "annotated boundaries. Its frame labels are then decoded so that the four states "
+     "can only follow each other in the order of the cardiac cycle, with the one "
+     "decoding setting chosen on the validation patients. Heart rate is 60 divided by "
+     "the median interval between successive S1 onsets, as the application would "
+     "compute it. It was scored on test recordings against the heart rate from the "
+     "reference boundaries, with an untrained autocorrelation estimate as a baseline, "
+     "and an S1 or S2 onset counted as found when it lay within 100 ms of a reference "
+     "onset. The second model, for murmurs, is a one-dimensional convolutional network"
+     " that scores six-second windows; a recording's score is the mean over its "
+     "windows and a patient's is the highest over their sites, so a murmur counts as "
+     "present when it is detected at any site. Three training seeds were averaged, and"
+     " patients labelled unknown were left out of training and reported separately.", first=0)
+para("Because a missed murmur costs more than an unnecessary referral, sensitivity was"
+     " the primary criterion. Before any test patient was scored, the decision "
+     "threshold was fixed on the validation patients as the highest one reaching 80 "
+     "percent sensitivity there; sensitivity, specificity, positive predictive value, "
+     "F1-score, Cohen's kappa, the area under the ROC curve (AUROC) and the confusion "
+     "matrix were then reported at the patient level, with patient-level bootstrap "
+     "confidence intervals. One change was made to the plan before testing and is "
+     "recorded in the training script: the timing model was planned with three seeds "
+     "and up to 40 epochs, but one epoch took about five minutes on the available "
+     "computer, so it was trained with one seed for up to 15 epochs.", first=0)
+para("The dataset's labels are also being checked against an independent "
      "listener. Twenty-five CirCor recordings were drawn at random with a fixed seed, five "
      "from each of five groups: no murmur, holosystolic, early-systolic, mid-systolic, and "
      "diastolic murmur. They were renamed S01 to S25 in mixed order and given to a reviewing "
      "cardiologist with an answer sheet asking, for each recording, whether it is usable, "
      "whether a murmur is heard, its timing, its grade, and the reviewer's confidence. The "
      "dataset's own labels are held separately and are not shown to the reviewer, so the "
-     "comparison tests the labels the classifier will learn from.", first=0)
+     "comparison tests the labels the models learned from. The review was planned to "
+     "finish before training, but the models were trained before it was returned; if it "
+     "finds the dataset's labels unreliable, the heart results below must be revised.", first=0)
 p = para("Fundamental heart sounds lie lower in frequency than lung sounds, with most S1 and "
          "S2 energy below about 150 Hz. The digital microphone in the version 2.0 build is "
          "specified by its manufacturer from about 60 Hz upward, so the low end of the heart "
-         "sound band may be attenuated. Before any cardiac result is reported, the frequency "
+         "sound band may be attenuated. Before any cardiac result on the device is reported, the frequency "
          "response of the whole acquisition chain will be measured with swept tones from "
          "20 Hz to 2,000 Hz, and any low-frequency loss will be reported as a hardware "
          "limitation rather than attributed to the classifier.", first=0)
@@ -913,11 +948,11 @@ para("Heart Mode was implemented on the device and in the application. It guides
      "operator through the five cardiac sites in order, records 15 seconds at each in the "
      "same 16 kHz WAV format as lung recordings, and files each recording by site for "
      "practitioner review, with no classification applied. No quantitative evaluation of "
-     "heart recordings was carried out in this study: signal strength, recording clarity "
-     "and classification agreement were measured on lung recordings only. The CirCor "
-     "training data were obtained and checked, and the blinded review set for the "
-     "cardiologist was prepared; the review had not been returned when this paper was "
-     "written.", first=0)
+     "heart recordings made with the device was carried out in this study: signal strength, "
+     "recording clarity and classification agreement were measured on lung recordings only. "
+     "The heart-sound models were evaluated on public recordings instead, as reported "
+     "below; the cardiologist's review of the CirCor labels had not been returned when this "
+     "paper was written.", first=0)
 
 H2("Rebuilt Classifier: Pre-Specified Test")
 para("Table 2 gives the rebuilt models' scores on the 31 ICBHI test patients, none of "
@@ -1026,6 +1061,53 @@ FIG(16, "Top-Class Score of the Deployed Fusion Network on 26 Resondi Device "
          "The shaded band is the range of top-class scores the previous Edge Impulse build "
          "gave on the same device files. No recording has a reference label, so the chart "
          "shows how decisive the network is, not how accurate.")
+
+H2("Heart-Sound Models on CirCor Test Patients")
+para("Table 5 gives the heart-sound results on the 189 CirCor test patients, none of "
+     "whom contributed to training, to the decoding setting or to the murmur "
+     "threshold. The timing model found 96.8 percent of reference S1 sounds and 97.3 "
+     "percent of S2 sounds within 100 ms, with a mean onset error of 15 and 12 ms, and"
+     " 95.7 and 96.5 percent of its detections were real. Its heart rate was within 5 "
+     "beats per minute of the reference on 85 percent of 631 recordings and within 10 "
+     "on 96 percent: a mean absolute error of 3.0 beats per minute (95 percent CI "
+     "2.5–3.6), against 35.4 for the untrained baseline, which often locked onto half "
+     "or double the true rate. The error had almost no bias (+0.1 beats per minute), "
+     "but its 95 percent limits of agreement were −13.7 to +14.0, because a few "
+     "recordings were read badly wrong; Figure 17 shows that these were mostly fast "
+     "rates read too low and slow rates read too high. Reference rates ranged from 49 "
+     "to 171 beats per minute, median 103, as expected in children.", first=0)
+para("The murmur detector did not reach its pre-specified target. On the validation "
+     "patients the chosen threshold gave 80.6 percent sensitivity; on the test "
+     "patients it found 24 of the 36 with a murmur, 66.7 percent (95 percent CI "
+     "50.0–81.8), and wrongly flagged 4 of the 139 without one, a specificity of 97.1 "
+     "percent. Its AUROC of 0.96 shows that it ranks patients well, but the threshold "
+     "carried over from the validation patients was too strict for the test patients, "
+     "and it was not adjusted after the test was read. Of the 14 test patients whose "
+     "murmur status the dataset marks unknown, it flagged 2. The 12 missed murmurs are"
+     " the result to weigh: a screening flag that misses one murmur in three cannot be"
+     " used to rule a murmur out.", first=0)
+TBL(5, "Heart-Sound Models on 189 CirCor Test Patients",
+    [["Model", "Measure", "Result (95% CI)"],
+     ["Heart-sound timing", "S1 found within 100 ms; detections that are real", "96.8%; 95.7%"],
+     ["Heart-sound timing", "S2 found within 100 ms; detections that are real", "97.3%; 96.5%"],
+     ["Heart-sound timing", "Mean onset error, S1; S2", "15 ms; 12 ms"],
+     ["Heart rate (631 recordings)", "Mean absolute error", "3.0 BPM (2.5–3.6); untrained baseline 35.4 (29.9–40.8)"],
+     ["Heart rate (631 recordings)", "Within 5 BPM; within 10 BPM", "85%; 96%"],
+     ["Murmur (175 patients)", "Sensitivity (pre-specified target 80%)", "66.7% (50.0–81.8): 24 of 36"],
+     ["Murmur (175 patients)", "Specificity", "97.1% (93.9–99.3): 135 of 139"],
+     ["Murmur (175 patients)", "Positive predictive value", "85.7% (71.0–96.7)"],
+     ["Murmur (175 patients)", "F1-score; Cohen's kappa", "0.75 (0.61–0.86); 0.70 (0.54–0.82)"],
+     ["Murmur (175 patients)", "AUROC", "0.96 (0.92–0.99)"]],
+    [1.7, 2.35, 2.05],
+    "CirCor recordings: children and adolescents in Brazil, recorded with an electronic "
+    "stethoscope. Murmur measures are per patient, a patient counting as positive when any "
+    "site is; the 14 patients labelled unknown are excluded and reported in the text. "
+    "Neither model has been tested on Resondi device recordings.")
+FIG(17, "Estimated Against Reference Heart Rate on 631 CirCor Test Recordings",
+    "r6_heart_rate.png", 4.4,
+    note="Each point is one recording. The dashed line is perfect agreement and the shaded "
+         "band is within 5 beats per minute. Teal points are more than 10 beats per minute "
+         "off. Reference rates come from the dataset's annotated S1 boundaries.")
 
 # ═══════════════════════════════════════════════════ DISCUSSION
 H1("Discussion")
@@ -1136,20 +1218,29 @@ para("The fusion network has since been put into the Resondi application. Becaus
      first=0)
 
 H2("The Heart Sound Component")
-para("The heart component is less advanced than the lung component, and the paper reports "
-     "it as such. What exists is the acquisition side: a guided, fixed-order cardiac "
-     "sequence that makes heart recordings comparable between visits in the same way as "
-     "lung recordings. What does not yet exist is any automated interpretation of them, "
-     "and the lung results above carry a direct warning for that work: a classifier trained "
-     "on one set of stethoscopes, or one age group, did not transfer to another.", first=0)
-para("That warning applies with more force to the heart. CirCor was recorded from Brazilian "
-     "children with a commercial electronic stethoscope; Resondi's patients include "
-     "Filipino adults, and its microphone may attenuate the lowest heart-sound frequencies. "
-     "The work therefore proceeds in a fixed order: confirm the reference labels with the "
-     "cardiologist's review, measure the device's low-frequency response, train and test "
-     "the murmur classifier on CirCor with a patient-wise split, and only then test it on "
-     "heart recordings made with the Resondi device and labelled by a cardiologist.",
-     first=0)
+para("The heart component has moved past the acquisition side, unevenly. On the CirCor"
+     " test patients, finding the heart sounds and reading heart rate from them worked"
+     " well: S1 and S2 were found about 97 percent of the time, and heart rate was "
+     "usually within 5 beats per minute. Murmur detection was weaker than planned. The"
+     " model ranks patients well, yet at the threshold fixed in advance it missed 12 "
+     "of 36 murmurs, so the 80 percent sensitivity reached on the validation patients "
+     "did not hold on new ones. Reporting the miss rather than moving the threshold "
+     "after the fact is the same discipline applied to the lung results. Setting the "
+     "threshold on more validation patients, or letting the murmur model use the "
+     "timing model's S1 and S2 positions to look inside systole and diastole "
+     "separately, are the likely ways to close the gap.", first=0)
+para("None of this has yet been shown on the Resondi device, and the lung results "
+     "carry a direct warning: a classifier trained on one set of stethoscopes, or one "
+     "age group, did not transfer to another. That warning applies with more force to "
+     "the heart. CirCor was recorded from Brazilian children with a commercial "
+     "electronic stethoscope; Resondi's patients include Filipino adults, whose "
+     "resting heart rates are lower than the median of 103 in the test set, and its "
+     "microphone may attenuate the lowest heart-sound frequencies. The models were "
+     "also trained before the cardiologist's review of the CirCor labels was returned,"
+     " the reverse of the order this study planned. The remaining work is therefore to"
+     " complete that review, measure the device's low-frequency response, and test "
+     "both models on heart recordings made with the Resondi device and labelled by a "
+     "cardiologist, before any heart result is shown in the application.", first=0)
 
 H2("Planned Extensions")
 para("Two extensions are planned and were not implemented in the work reported here.",
@@ -1157,7 +1248,7 @@ para("Two extensions are planned and were not implemented in the work reported h
 para("The acquisition protocol extends from seven sites to nine. The two additional "
      "sites are an interscapular pair at T3–T4, beside the spine, which sample the "
      "posterior upper lobes; the tracheal reference and the six fields already recorded "
-     "are retained. Figure 17 shows the nine sites on the body and Table 5 gives their "
+     "are retained. Figure 18 shows the nine sites on the body and Table 6 gives their "
      "landmarks.", first=0)
 
 FIG(15, "Planned Nine-Site Acquisition Protocol",
@@ -1191,7 +1282,7 @@ para("The second, and the one that matters most, is a local dataset: recordings 
      "Filipino patients made on the Resondi device at the seven standardised sites, with "
      "each breathing cycle labelled independently by two clinicians who have not seen the "
      "model's output, collected with ethics approval and consent. The planned study "
-     "separates the effect of each change, as Table 6 shows. Its first three rows have "
+     "separates the effect of each change, as Table 7 shows. Its first three rows have "
      "now been run on public data; the fourth cannot be run on any public dataset.",
      first=0)
 
@@ -1288,9 +1379,12 @@ for lim in [
     "times, once per round, each time with the primary model fixed in advance. All three "
     "results are reported, and the cross-validation across all 126 patients guards "
     "against a lucky split.",
-    "The heart component is not evaluated. Heart recordings are captured and filed, but "
-    "no heart-sound measurement or classification result is reported, and the device's "
-    "response at the lowest heart-sound frequencies has not been measured.",
+    "The heart models are untested on the device. The heart-sound timing, heart-rate and "
+    "murmur results come from CirCor, children recorded in Brazil on another stethoscope. "
+    "The models have not been run on Resondi heart recordings, the device's response at the "
+    "lowest heart-sound frequencies has not been measured, and the models were trained "
+    "before the cardiologist's check of the dataset's labels was returned. The murmur "
+    "detector also missed its pre-specified sensitivity on the test patients.",
     "Speed of automated quality control. The system assesses whether ambient noise, weak "
     "signal, or motion artifact has rendered a recording unusable, but at a mean of 145 "
     "seconds per recording the check is too slow to run routinely before "
@@ -1316,9 +1410,10 @@ para("The classification component is not yet demonstrated on the device. The or
      "more clearly on device recordings than its predecessor, but its accuracy on those "
      "recordings has not been measured. The study is therefore best understood as establishing a working "
      "acquisition platform, together with an honestly measured classifier baseline, on "
-     "which validation with local recordings can now proceed. The heart component has "
-     "reached the same starting point on the acquisition side, with its classifier "
-     "specified and its training data prepared but not yet built.")
+     "which validation with local recordings can now proceed. The heart component is one "
+     "step behind: its models time the heart sounds, read heart rate and detect murmurs on "
+     "public recordings, the last short of its sensitivity target, but none has yet been "
+     "tested on the device.")
 para("The system does not replace clinical judgement and is not designed to. Every "
      "classification is presented to a practitioner who confirms, modifies, or rejects "
      "it, and no result is returned to a patient unreviewed. On the evidence reported "
@@ -1346,10 +1441,14 @@ for rec in [
     "on the version 2.0 build before reporting any result as a property of the current "
     "device.",
     "Complete the cardiologist's blinded review of the 25 CirCor recordings and report "
-    "agreement with the dataset's labels before training on them.",
-    "Train and evaluate the heart-murmur classifier on CirCor with a patient-wise split, "
-    "with sensitivity as the primary criterion, and measure the device's frequency "
-    "response from 20 Hz before testing it on Resondi heart recordings.",
+    "agreement with the dataset's labels; if agreement is poor, retrain and revise the "
+    "heart results.",
+    "Raise the murmur detector's sensitivity to its 80 percent target on new patients, "
+    "for example by setting the threshold on more validation patients or by using the "
+    "heart-sound timing to examine systole and diastole separately, and add murmur timing.",
+    "Measure the device's frequency response from 20 Hz, then test the heart-sound timing, "
+    "heart-rate and murmur models on Resondi heart recordings labelled by a cardiologist "
+    "before any heart result appears in the application.",
     "Conduct a prospective evaluation in a rural health unit measuring recordings "
     "captured per week, proportion of abnormal classifications reviewed, and time to "
     "review.",
