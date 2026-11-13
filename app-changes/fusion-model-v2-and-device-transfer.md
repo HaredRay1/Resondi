@@ -11,7 +11,7 @@
   - browser feature code vs Python: same top label on 600/600 validation windows (`model-rebuild/results/fusion-browser-parity.txt`); the full browser path (JS features + onnxruntime-web) in Node: 300/300.
   - Chrome, app preview: a synthetic 15 s recording gave the same four scores as Python to 4 decimals; 5.4 s including the first model download.
   - live bundle verified to load commit `c9cd3fa2` (chunk `lungClassifier-C0psc4D0.js`).
-  - **live test on all 45 stored lung recordings, read-only:** 45/45 ran. On the 26 unique Resondi device recordings the top score is 31–66% (median 42%), against 27–34% for v1. More decisive, not proven more correct: no reference labels. `model-rebuild/results/live-app-device-test-fusion-2026-11-13.md`.
+  - **live test on all 45 stored lung recordings, read-only:** 45/45 ran. On the 26 unique Resondi device recordings the top score is 31–66% (median 41%), against 27–34% for v1. More decisive, not proven more correct: no reference labels. `model-rebuild/results/live-app-device-test-fusion-2026-11-13.md`.
 - **Not checked:** the result screens by eye with a patient account (admin is redirected away from patient pages).
 
 ## 2. Device Wi-Fi transfer page: SAVED, NOT PUBLISHED

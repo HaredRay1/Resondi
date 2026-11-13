@@ -115,6 +115,70 @@ def agreement():
     save(fig, OUT + "r4_agreement.png")
 
 
+# ── R5 deployed fusion network on Resondi device recordings ─────────────────
+# Source: model-rebuild/results/live-app-device-test-fusion-2026-11-13.md
+# (26 unique AUSCULTA recordings; scores Crackles / Healthy / Wheezing / W+C).
+# The Edge Impulse build's per-file scores were not kept, only its range
+# (27-34%, median 30%, live-app-device-test-2026-11-10.md), so it is a band.
+DEVICE_SCORES = [
+    (0.422, 0.307, 0.095, 0.176), (0.104, 0.153, 0.344, 0.399),
+    (0.248, 0.495, 0.072, 0.185), (0.117, 0.118, 0.416, 0.349),
+    (0.157, 0.326, 0.199, 0.318), (0.317, 0.398, 0.073, 0.213),
+    (0.277, 0.482, 0.101, 0.140), (0.188, 0.348, 0.240, 0.224),
+    (0.115, 0.295, 0.401, 0.189), (0.195, 0.377, 0.198, 0.231),
+    (0.143, 0.301, 0.309, 0.247), (0.217, 0.315, 0.171, 0.297),
+    (0.181, 0.437, 0.272, 0.110), (0.183, 0.380, 0.164, 0.273),
+    (0.155, 0.358, 0.109, 0.378), (0.246, 0.363, 0.076, 0.315),
+    (0.069, 0.307, 0.114, 0.511), (0.187, 0.330, 0.063, 0.420),
+    (0.205, 0.151, 0.047, 0.597), (0.082, 0.387, 0.112, 0.419),
+    (0.250, 0.357, 0.068, 0.325), (0.284, 0.398, 0.026, 0.292),
+    (0.302, 0.444, 0.060, 0.194), (0.249, 0.454, 0.059, 0.238),
+    (0.228, 0.418, 0.024, 0.330), (0.155, 0.657, 0.123, 0.066),
+]
+LABELS4 = ["Crackles", "Healthy", "Wheezing", "Wheezing with Crackles"]
+
+
+def device():
+    top = [(LABELS4[int(np.argmax(s))], 100 * max(s)) for s in DEVICE_SCORES]
+    rows = ["Healthy", "Wheezing with Crackles", "Wheezing", "Crackles"]
+    med = float(np.median([v for _, v in top]))
+    fig, ax = plt.subplots(figsize=(W, 2.35))
+    ax.set_xlim(20, 70)
+    ax.set_ylim(-0.7, len(rows) + 0.05)
+    y_of = {r: len(rows) - 1 - i for i, r in enumerate(rows)}
+
+    ax.axvspan(27, 34, color=PALE, zorder=1)
+    ax.text(30.5, len(rows), "previous build\n27–34%", ha="center",
+            va="top", fontsize=8.3, color=GREY, style="italic", linespacing=1.15)
+    ax.axvline(25, color=TEAL, lw=1.6, ls=(0, (4, 2.5)), zorder=2)
+    ax.text(24.6, -0.55, "chance\n25%", ha="right", va="bottom", fontsize=8.3,
+            color=TEAL, linespacing=1.15)
+    ax.axvline(med, color=PRIMARY, lw=1.0, ls=":", zorder=2)
+    ax.text(med + 0.5, -0.55, f"median {med:.0f}%", ha="left", va="bottom",
+            fontsize=8.5, color=PRIMARY)
+
+    rng = np.random.default_rng(7)
+    for lab, v in top:
+        yy = y_of[lab] + rng.uniform(-0.17, 0.17)
+        ax.plot(v, yy, "o", ms=6.5, color=PRIMARY, alpha=0.85,
+                markeredgecolor=SURFACE, markeredgewidth=0.8, zorder=4)
+    counts = {r: sum(1 for lab, _ in top if lab == r) for r in rows}
+    ax.set_yticks([y_of[r] for r in rows])
+    ax.set_yticklabels([f"{r} ({counts[r]})" for r in rows], fontsize=9.5, color=INK)
+    ax.set_xticks([25, 30, 40, 50, 60, 70])
+    ax.set_xticklabels(["25", "30", "40", "50", "60", "70%"], fontsize=9)
+    ax.set_xlabel("Score of the top class, per recording", fontsize=9.5,
+                  color=GREY, labelpad=6)
+    strip(ax, keep=(), grid="x")
+    ax.text(0, 1.06, "26 device recordings, grouped by the class the network chose; "
+            "no reference labels exist",
+            transform=ax.transAxes, fontsize=9.5, color=GREY, style="italic")
+    save(fig, OUT + "r5_device.png")
+
+
 if __name__ == "__main__":
-    for f in (clarity, noise, response, agreement):
-        f()
+    import sys
+    wanted = sys.argv[1:]
+    for f in (clarity, noise, response, agreement, device):
+        if not wanted or f.__name__ in wanted:
+            f()

@@ -20,7 +20,7 @@ The **published** app code (chunk `lungClassifier-C0psc4D0.js` on resondi.base44
 | Wheezing | 3 | 5 |
 | Crackles | 1 | 1 |
 
-**Top score per recording: 31% to 66%, median 42%** (four uniform classes would give 25% each).
+**Top score per unique recording (26): 31% to 66%, median 41%** (four uniform classes would give 25% each). Corrected on 13 Nov from "median 42%": the median of the 26 unique recordings is 40.85%. The paper's Figure 16 is drawn from the table below by `build/imradfig/results.py`.
 
 The previous model (Edge Impulse 4-class v1) scored 27% to 34%, median 30%, on the same files (10 Nov). So the fusion model is clearly **more decisive on device audio**, plausibly because every window is now band-limited to 100–3900 Hz and levelled to -20 dBFS before features, which removes part of the microphone and loudness difference.
 
