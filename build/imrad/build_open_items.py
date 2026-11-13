@@ -13,8 +13,8 @@ from docx.oxml import OxmlElement
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "build_imrad.py")
-OUT = os.path.normpath(os.path.join(HERE, "..", "..", "deliverables",
-                                    "Resondi-IMRaD-Open-Items.docx"))
+OUT = os.path.normpath(os.path.join(HERE, "..", "..", "imrad",
+                                    "Resondi-IMRaD-Heart-and-Lung-Open-Items-2026-11-13.docx"))
 
 INK, GREY, ACCENT = RGBColor(0x1A, 0x1A, 0x1A), RGBColor(0x5A, 0x5A, 0x5A), RGBColor(0x8E, 0x2A, 0x52)
 

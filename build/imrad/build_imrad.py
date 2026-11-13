@@ -130,7 +130,7 @@ def TBL(num, caption, rows, widths, note=None):
 
 
 # ═══════════════════════════════════════════════════ TITLE
-para("Resondi: A CNN-Assisted Auscultation Instrument for Lung Sound "
+para("Resondi: A CNN-Assisted Smart Stethoscope for Lung and Heart Sound "
      "Monitoring, Longitudinal Tracking, and Rehabilitation Support",
      after=8, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, size=14, bold=True,
      spacing=1.4)
@@ -147,7 +147,9 @@ para("Auscultation is the first examination most Filipino patients with heart or
      "visit. This study developed Resondi, a low-cost smart stethoscope that records lung "
      "sounds at seven guided sites, files each recording by site, classifies it into four "
      "sound patterns with a convolutional neural network, and routes every result to a "
-     "practitioner for confirmation. In field testing in Puerto Princesa City, the device "
+     "practitioner for confirmation. A Heart Mode guides recording at five cardiac sites, "
+     "the four valve points and Erb's point, and stores each heart recording for "
+     "practitioner review. In field testing in Puerto Princesa City, the device "
      "produced a signal about 13 dB stronger than a conventional stethoscope (45 dB against "
      "32 dB), 93 percent of recordings were rated good or acceptable, and the original "
      "classifier agreed with reference labels on 6 of 15 recordings (40 percent; 95 percent "
@@ -156,23 +158,30 @@ para("Auscultation is the first examination most Filipino patients with heart or
      "patient-wise split. In five-fold cross-validation across all 126 ICBHI 2017 patients, "
      "a three-branch feature-fusion network trained with the SPRSound paediatric corpus "
      "reached 40.0 percent balanced accuracy against 34.0 percent for the original design, a "
-     "significant gain of 5.9 points (95 percent CI 1.0–10.3; p = 0.008). The rebuilt "
-     "models have not yet been tested on recordings from the Resondi device. Resondi is "
+     "significant gain of 5.9 points (95 percent CI 1.0–10.3; p = 0.008). The fusion "
+     "network now runs in the Resondi application; on 26 recordings made with the device it "
+     "gave clearer top-class scores than the build it replaced (median 41 percent, against "
+     "27 to 34 percent), but those recordings carry no reference labels, so its accuracy "
+     "on the device has not been measured. Resondi is "
      "established as a working acquisition platform; validating its classifier on "
-     "clinician-labelled Filipino recordings is the next step.", first=0, spacing=1.6)
-para("Keywords: auscultation, lung sounds, smart stethoscope, convolutional neural "
+     "clinician-labelled Filipino recordings is the next step. Heart sounds are recorded "
+     "but not yet classified: a heart-murmur classifier has been specified on the CirCor "
+     "DigiScope dataset, and a blinded review of 25 of its recordings by a cardiologist has "
+     "been prepared to check its labels before training.", first=0, spacing=1.6)
+para("Keywords: auscultation, lung sounds, heart sounds, smart stethoscope, convolutional neural "
      "network, feature fusion, primary care, Philippines", first=0, italic=True, spacing=1.6)
 
 # ═══════════════════════════════════════════════════ INTRODUCTION
 H1("Introduction")
 
-para("Respiratory disease remains among the leading causes of mortality in the "
-     "Philippines. Philippine Statistics Authority figures for 2024 place pneumonia "
-     "fourth among all causes of death, accounting for approximately 47,260 deaths or "
-     "6.7 percent of the national total. Conditions of this kind are, in principle, "
-     "detectable at the point of first contact: the adventitious sounds that accompany "
-     "consolidation, airway narrowing, and fluid accumulation are audible through a "
-     "conventional stethoscope, and auscultation remains the first instrumented "
+para("Heart and lung disease are among the leading causes of mortality in the "
+     "Philippines. Philippine Statistics Authority figures for 2024 place ischaemic heart "
+     "disease first among all causes of death, with 134,074 deaths or 19.1 percent of the "
+     "national total, and pneumonia fourth, with approximately 47,260 deaths or 6.7 "
+     "percent. Conditions of this kind are, in principle, detectable at the point of first "
+     "contact: the adventitious sounds that accompany consolidation, airway narrowing, and "
+     "fluid accumulation, and the murmurs that accompany many heart conditions, are "
+     "audible through a conventional stethoscope, and auscultation remains the first instrumented "
      "examination a patient receives in a barangay health station or rural health unit.", first=0)
 
 para("The difficulty is not that these sounds are inaudible but that they are not "
@@ -210,7 +219,8 @@ para("Electronic stethoscopes that record and store audio are commercially avail
 
 para("This study developed and evaluated Resondi, a low-cost smart stethoscope that "
      "records lung sounds at seven standardised sites \u2014 six lung fields and a "
-     "tracheal reference \u2014 under application guidance, stores each recording against its site of origin, applies a "
+     "tracheal reference \u2014 and heart sounds at five cardiac sites under application "
+     "guidance, stores each recording against its site of origin, applies a "
      "convolutional neural network to classify the recording, and presents the result to "
      "a practitioner for confirmation. The system is intended to support rather than "
      "replace clinical judgement, and to make a respiratory examination comparable "
@@ -282,12 +292,20 @@ for n, (obj, sub) in enumerate([
     ("To provide guided auscultation through a standardised anatomical sequence.",
      "The application directs the user to each of seven sites in a fixed order so that "
      "recordings are comparable between examinations and between operators."),
+    ("To provide guided cardiac auscultation through a separate Heart Mode.",
+     "The application directs the user to the aortic, pulmonic, tricuspid and mitral "
+     "areas and Erb's point, in a fixed order from the base of the heart to the apex, and "
+     "files each heart recording by site."),
     ("To assess the quality of recorded lung sounds.",
      "A recording degraded by ambient noise, weak contact, or motion artifact should be "
      "identified as such."),
     ("To implement AI-assisted classification of respiratory sound patterns.",
      "A convolutional neural network classifies each recording as normal, wheezing, "
      "crackles, or wheezing with crackles."),
+    ("To prepare AI-assisted detection of heart murmurs.",
+     "A heart-sound classifier is specified to report whether a murmur is present and "
+     "when in the cardiac cycle it occurs, trained on expert-annotated public recordings "
+     "whose labels are first checked by a cardiologist."),
     ("To establish longitudinal monitoring of respiratory sound changes across visits.",
      "A recording is compared against an earlier recording taken at the same anatomical "
      "site on the same patient."),
@@ -303,9 +321,12 @@ for n, (obj, sub) in enumerate([
     p2.paragraph_format.left_indent = Inches(0.6)
 
 H2("Scope and Delimitation")
-para("This study is limited to lung sounds. Cardiac auscultation, although supported "
-     "by related work by the same team, is outside the scope reported here. "
-     "Classification is limited to four categories — normal, wheezing, crackles, and "
+para("This study covers lung and heart sounds, at different stages. Lung sounds are "
+     "recorded, classified and evaluated. Heart sounds are recorded at five sites and "
+     "stored for practitioner review; a heart-murmur classifier is specified and its "
+     "training data prepared, but it has not been trained or evaluated, and no heart "
+     "recording is passed to the lung classifier. Lung classification is limited to four "
+     "categories — normal, wheezing, crackles, and "
      "wheezing with crackles — and the system does not identify a disease, stage a "
      "condition, or produce a diagnosis. All classifications are presented to a "
      "practitioner for confirmation and none is returned to a patient unreviewed. "
@@ -313,8 +334,10 @@ para("This study is limited to lung sounds. Cardiac auscultation, although suppo
      "findings describe that prototype rather than a production unit. The field "
      "evaluation used the original classifier, a single-input MFCC network. After that "
      "evaluation the classifier was rebuilt and a three-branch feature-fusion version was "
-     "trained and tested on public lung-sound databases (ICBHI 2017 and SPRSound); those "
-     "models have not yet been tested on recordings from the Resondi device. A nine-site "
+     "trained and tested on public lung-sound databases (ICBHI 2017 and SPRSound); the "
+     "fusion version was then run on recordings already made with the Resondi device, but "
+     "those recordings have no reference labels, so its accuracy on the device was not "
+     "measured. A nine-site "
      "protocol remains planned and is discussed under planned extensions.", first=0)
 
 # ═══════════════════════════════════════════════════ METHODOLOGY
@@ -410,6 +433,22 @@ para("Each site is recorded with the patient breathing through an "
 
 FIG(3, "The Seven Standardised Sites Recorded by the Evaluated Build",
     "d2_seven_sites.png", 6.0)
+
+para("Heart Mode uses the same device and recording settings with a separate guided "
+     "sequence of five sites, recorded from the base of the heart to the apex: the aortic "
+     "area (second intercostal space, right sternal border), the pulmonic area (second "
+     "intercostal space, left sternal border), Erb's point (third intercostal space, left "
+     "sternal border), the tricuspid area (fourth intercostal space, left lower sternal "
+     "border), and the mitral area at the apex (fifth intercostal space, midclavicular "
+     "line). The first four are the standard valve auscultation points and match the "
+     "locations of the CirCor DigiScope dataset (Oliveira et al., 2022); Erb's point is "
+     "recorded and filed for the practitioner but has no counterpart in that dataset. Each "
+     "site is recorded for 15 seconds with the diaphragm on bare skin and the patient at "
+     "rest, and the recording is saved with its site, mode and time.", first=0)
+FIG(3, "The Five Cardiac Sites Recorded in Heart Mode",
+    "h1_heart_sites.png", 5.2,
+    note="Numbered in recording order, from the base of the heart to the apex. Erb's point "
+         "(3) is filed for the practitioner and is not part of the planned classifier input.")
 
 H2("Signal Processing and Model Architecture")
 para("Each raw WAV recording is resampled to 16 kHz to provide a consistent rate for "
@@ -594,6 +633,51 @@ para("Two evaluations followed. The first scored the pre-specified versions once
      "fusion network trained on ICBHI and SPRSound, the latter averaged over its three "
      "seeds.", first=0)
 
+H2("Heart Sound Component")
+para("Heart recordings are not classified in the system reported here. The cardiac "
+     "classifier is specified to follow the same discipline as the lung classifier, an "
+     "acoustic description and never a diagnosis. The planned output, in order of build, is "
+     "that the first and second heart sounds (S1 and S2) are identified and timed, that a "
+     "murmur is reported as present or absent, and that a present murmur is placed as "
+     "systolic or diastolic, with a recording-quality gate in front. Third and fourth heart "
+     "sounds (S3 and S4) are named but not promised, because no public dataset labels "
+     "them in enough patients to train on.", first=0)
+para("The training corpus is the CirCor DigiScope Phonocardiogram Dataset (Oliveira et al., "
+     "2022), recorded from children and adolescents in Brazil at the aortic, pulmonic, "
+     "tricuspid and mitral areas and released under the Open Data Commons Attribution "
+     "licence. Its publicly released portion, which was downloaded and checked for this "
+     "study, holds 3,163 recordings from 942 patients. A cardiac physiologist labelled each "
+     "patient's murmur as present (179 patients), absent (695) or unknown (68), and for a "
+     "present murmur recorded its timing, shape, grade, pitch and quality, together with "
+     "the boundaries of S1, systole, S2 and diastole. The unknown label marks recordings "
+     "too poor to judge rather than a clinical state, so those patients are routed to the "
+     "quality pathway rather than treated as a class.", first=0)
+para("The planned evaluation divides CirCor by patient, as for the lung data, and reports "
+     "sensitivity, specificity, F1-score, Cohen's kappa and the confusion matrix at the "
+     "patient level, a murmur counting as present when it is detected at any site. Because "
+     "a missed murmur costs more than an unnecessary referral, sensitivity is the primary "
+     "criterion: the decision threshold will be set on the validation patients to reach a "
+     "pre-specified sensitivity, and the specificity that results will be reported as the "
+     "cost of that choice. S1 and S2 timing will be scored separately against the reference "
+     "boundaries, as the mean absolute error in milliseconds.", first=0)
+para("Before training, the dataset's labels are being checked against an independent "
+     "listener. Twenty-five CirCor recordings were drawn at random with a fixed seed, five "
+     "from each of five groups: no murmur, holosystolic, early-systolic, mid-systolic, and "
+     "diastolic murmur. They were renamed S01 to S25 in mixed order and given to a reviewing "
+     "cardiologist with an answer sheet asking, for each recording, whether it is usable, "
+     "whether a murmur is heard, its timing, its grade, and the reviewer's confidence. The "
+     "dataset's own labels are held separately and are not shown to the reviewer, so the "
+     "comparison tests the labels the classifier will learn from.", first=0)
+p = para("Fundamental heart sounds lie lower in frequency than lung sounds, with most S1 and "
+         "S2 energy below about 150 Hz. The digital microphone in the version 2.0 build is "
+         "specified by its manufacturer from about 60 Hz upward, so the low end of the heart "
+         "sound band may be attenuated. Before any cardiac result is reported, the frequency "
+         "response of the whole acquisition chain will be measured with swept tones from "
+         "20 Hz to 2,000 Hz, and any low-frequency loss will be reported as a hardware "
+         "limitation rather than attributed to the classifier.", first=0)
+FILL(p, "confirm the microphone's specified low-frequency limit from its datasheet, and "
+        "whether the field build used the same microphone")
+
 H2("Evaluation Procedures")
 para("Before analysis, each recording was assessed where technically possible for "
      "background noise, signal amplitude, signal-to-noise ratio, duration, clipping, "
@@ -605,7 +689,7 @@ para("Before analysis, each recording was assessed where technically possible fo
      "clinical judgement across adult and pediatric presentations. Reference labels were "
      "stored separately from model predictions.", first=0)
 
-para("Five procedures were carried out with the completed prototype.", first=0, after=6)
+para("Six procedures were carried out with the completed prototype.", first=0, after=6)
 
 p = para("Signal acquisition. Mean signal strength produced by the device was compared "
          "against that of a conventional acoustic stethoscope recorded under the same "
@@ -648,6 +732,17 @@ FILL(p, "state whether the three reviewing pulmonologists were blinded to the mo
         "recordings\u2019, which reads as a device comparison rather than a test of "
         "classifier accuracy. Correct that wording in the full paper so the two agree")
 
+para("Rebuilt classifier on device recordings. After the fusion network was placed in "
+     "the Resondi application, the published application was run, read-only, on every "
+     "lung recording stored in it that had audio (45 recordings). Of these, 33 entries "
+     "were recordings made with the Resondi device (16 kHz, about 15 seconds), 26 of "
+     "them unique, since some files had been uploaded more than once. For each recording "
+     "the score of each class and the class with the highest score were recorded, using "
+     "the application's own analysis function, and no result was saved to any patient "
+     "record. None of these recordings has a reference label, so the procedure measures "
+     "whether the network runs on device audio and how clearly it separates the classes, "
+     "not whether its classifications are correct.", first=0, after=6, spacing=1.6)
+
 p = para("End-user acceptance. Acceptance was assessed with 27 respondents across Puerto "
          "Princesa City using a questionnaire adapted from the Unified Theory of Acceptance "
          "and Use of Technology (Venkatesh, Morris, Davis, & Davis, 2003), together with "
@@ -686,7 +781,9 @@ para("The rebuilt classifiers were judged primarily by balanced accuracy, the me
      "with a one-sided p-value for the hypothesis that the fusion network is no better. "
      "Paired predictions on the same cycles were compared with McNemar's test, and the "
      "fold-level and patient-level differences with a paired t-test and a Wilcoxon "
-     "signed-rank test as supporting analyses.", first=0)
+     "signed-rank test as supporting analyses. On the unlabelled device recordings, the "
+     "score of the top class was summarised by its range and median, against 25 percent "
+     "for four equally likely classes.", first=0)
 para("Model training and the bootstrap analyses were run in Python 3 with NumPy, SciPy "
      "and PyTorch. Every other statistic in this paper, and the statistical figures, were "
      "produced or reproduced with jamovi 2.7 (The jamovi project, 2025) through its R "
@@ -716,8 +813,8 @@ p = para("Formal review by an institutional ethics committee was not obtained fo
          "work reported here. The safeguards described above \u2014 adviser supervision, "
          "written informed consent, physician supervision of all patient recordings, and "
          "de-identified storage \u2014 were the measures in place. Ethics committee review is "
-         "a funded component of the clinical validation planned for the next phase, and "
-         "prospective evaluation in a health facility will not proceed without it.",
+         "part of the clinical validation planned for the next phase, and prospective "
+         "evaluation in a health facility will not proceed without it.",
          first=0)
 FILL(p, "this paragraph states plainly that no ethics committee review was obtained, "
         "which is the defensible position if that is accurate. If any body did approve "
@@ -764,8 +861,8 @@ para("Of fifteen recordings compared against reference labels, six produced matc
      "chance returned p = 0.148; eight of fifteen agreements would have been required to "
      "reach conventional significance. Fifteen recordings is too small a sample to support "
      "a conclusion about accuracy, and none is drawn here. These fifteen recordings were "
-     "classified by the original model. The rebuilt models reported below have not yet "
-     "been tested on recordings from the Resondi device.", first=0)
+     "classified by the original model. The rebuilt models reported below were "
+     "not scored against these reference labels.", first=0)
 
 FIG(10, "Classification Agreement Against Reference Labels, with the 95% "
         "Wilson Interval", "r4_agreement.png", 5.7)
@@ -799,6 +896,17 @@ p = para("Dichotomous items are reported as frequencies. Twenty-one of 27 respon
 FILL(p, "confirm whether the three patients recorded at the private hospital are "
         "distinct from the 13 respondents who identified themselves as patients in the "
         "acceptance questionnaire. The two groups are currently described separately")
+
+H2("Heart Mode")
+para("Heart Mode was implemented on the device and in the application. It guides the "
+     "operator through the five cardiac sites in order, records 15 seconds at each in the "
+     "same 16 kHz WAV format as lung recordings, and files each recording by site for "
+     "practitioner review, with no classification applied. No quantitative evaluation of "
+     "heart recordings was carried out in this study: signal strength, recording clarity "
+     "and classification agreement were measured on lung recordings only. The CirCor "
+     "training data were obtained and checked, and the blinded review set for the "
+     "cardiologist was prepared; the review had not been returned when this paper was "
+     "written.", first=0)
 
 H2("Rebuilt Classifier: Pre-Specified Test")
 para("Table 2 gives the rebuilt models' scores on the 31 ICBHI test patients, none of "
@@ -847,12 +955,12 @@ TBL(3, "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)"
     "patient-level bootstrap intervals.")
 para("The supporting analyses agreed. Across the five folds the fusion network's "
      "balanced accuracy was higher in every fold, by a mean of 5.8 points (paired "
-     "t(4) = 4.75, p = 0.009; Figure 12). Of the 126 patients, 69 had more of their cycles "
+     "t(4) = 4.75, p = 0.009; Figure 13). Of the 126 patients, 69 had more of their cycles "
      "classified correctly by the fusion network, 39 fewer, and 18 the same (Wilcoxon "
-     "signed-rank p = 0.009; Figure 13). Cycle by cycle, the fusion network alone was "
+     "signed-rank p = 0.009; Figure 14). Cycle by cycle, the fusion network alone was "
      "right on 1,277 cycles and the MFCC network alone on 831 (McNemar p < 0.001), though "
      "this last test treats cycles as independent and overstates the certainty; the "
-     "patient-level analyses are the ones to rely on. Figure 14 shows where each model's "
+     "patient-level analyses are the ones to rely on. Figure 15 shows where each model's "
      "errors fall.", first=0)
 FIG(13, "Balanced Accuracy of the Two Architectures in Each of the Five Folds",
     "j1_cv_folds.png", 5.6,
@@ -866,6 +974,25 @@ FIG(15, "True Class Against Predicted Class in Cross-Validation",
     note="Produced in jamovi (jmv, contingency tables, row percentages). Each bar group is "
          "one true class; bars show how its cycles were classified. The two panels have "
          "different vertical scales.")
+
+
+H2("Rebuilt Classifier on Resondi Device Recordings")
+para("The fusion network ran without error on all 45 stored lung recordings, at a "
+     "median of 2.0 seconds per recording including fetching the audio. On the 26 unique "
+     "recordings made with the Resondi device, it chose Healthy for 16, Wheezing with "
+     "Crackles for 6, Wheezing for 3 and Crackles for 1. The score of the chosen class "
+     "ranged from 31 to 66 percent, with a median of 41 percent (Figure 16). On the same "
+     "device files, the Edge Impulse build that the fusion network replaced had given top "
+     "scores of only 27 to 34 percent (median 30 percent), close to the 25 percent of four "
+     "equally likely classes. The fusion network therefore separates the classes more "
+     "clearly on device audio. Whether its choices are correct cannot be read from these "
+     "recordings, because none of them has a reference label.", first=0)
+FIG(16, "Top-Class Score of the Deployed Fusion Network on 26 Resondi Device "
+        "Recordings", "r5_device.png", 6.0,
+    note="Each point is one recording, placed in the row of the class the network chose. "
+         "The shaded band is the range of top-class scores the previous Edge Impulse build "
+         "gave on the same device files. No recording has a reference label, so the chart "
+         "shows how decisive the network is, not how accurate.")
 
 # ═══════════════════════════════════════════════════ DISCUSSION
 H1("Discussion")
@@ -931,7 +1058,7 @@ H2("What the Classifier Rebuild Shows")
 para("The rebuild changes how the classification result should be read, though not the "
      "field figure itself. The 40 percent field agreement belongs to the original model, "
      "whose training was flawed; it is neither confirmed nor contradicted by the rebuilt "
-     "models, which have not been tested on device recordings. What the rebuild provides "
+     "models, which have not been scored against labelled device recordings. What the rebuild provides "
      "is the first estimate of the classifier's performance that is free of patient "
      "leakage: about 34 to 35 percent balanced accuracy for the original MFCC design on "
      "unseen patients, and about 40 percent for the fusion network trained with the "
@@ -963,9 +1090,26 @@ para("The fusion network has since been put into the Resondi application. Becaus
      "and feature extraction rewritten in JavaScript. The rewritten features gave the same "
      "top class as the Python originals on 600 of 600 validation windows. Run on 26 "
      "recordings already made with the Resondi device, the deployed fusion network gave "
-     "top-class scores of 31 to 66 percent (median 42), against 27 to 34 percent for the "
+     "top-class scores of 31 to 66 percent (median 41; Figure 16), against 27 to 34 "
+     "percent for the "
      "Edge Impulse build it replaced. That shows it is more decisive on device audio, not "
      "that it is more often right: none of those recordings has a reference label.",
+     first=0)
+
+H2("The Heart Sound Component")
+para("The heart component is less advanced than the lung component, and the paper reports "
+     "it as such. What exists is the acquisition side: a guided, fixed-order cardiac "
+     "sequence that makes heart recordings comparable between visits in the same way as "
+     "lung recordings. What does not yet exist is any automated interpretation of them, "
+     "and the lung results above carry a direct warning for that work: a classifier trained "
+     "on one set of stethoscopes, or one age group, did not transfer to another.", first=0)
+para("That warning applies with more force to the heart. CirCor was recorded from Brazilian "
+     "children with a commercial electronic stethoscope; Resondi's patients include "
+     "Filipino adults, and its microphone may attenuate the lowest heart-sound frequencies. "
+     "The work therefore proceeds in a fixed order: confirm the reference labels with the "
+     "cardiologist's review, measure the device's low-frequency response, train and test "
+     "the murmur classifier on CirCor with a patient-wise split, and only then test it on "
+     "heart recordings made with the Resondi device and labelled by a cardiologist.",
      first=0)
 
 H2("Planned Extensions")
@@ -974,7 +1118,7 @@ para("Two extensions are planned and were not implemented in the work reported h
 para("The acquisition protocol extends from seven sites to nine. The two additional "
      "sites are an interscapular pair at T3–T4, beside the spine, which sample the "
      "posterior upper lobes; the tracheal reference and the six fields already recorded "
-     "are retained. Figure 15 shows the nine sites on the body and Table 4 gives their "
+     "are retained. Figure 17 shows the nine sites on the body and Table 4 gives their "
      "landmarks.", first=0)
 
 FIG(15, "Planned Nine-Site Acquisition Protocol",
@@ -1038,8 +1182,7 @@ para("Department of Health facility registry figures record approximately 26,504
      "health centres nationwide (DOH, 2025) \u2014 roughly 30,000 public facilities at which "
      "auscultation forms part of routine assessment. Of these, the facilities Resondi "
      "can presently serve are narrower: about 3,518 rural health units and "
-     "municipal or city health centres that hold an equipment budget line and have a "
-     "resident clinician able to perform the practitioner review the platform depends "
+     "municipal or city health centres that have a resident clinician able to perform the practitioner review the platform depends "
      "on. Nursing and medical schools form a second group, for which the system functions "
      "as a teaching instrument rather than a clinical one.", first=0)
 
@@ -1084,15 +1227,16 @@ FILL(p, "name the institutions if you can, with dates. An unnamed engagement cla
         "cannot name one, delete this paragraph rather than leave it unsupported")
 
 H2("Limitations")
-para("Six limitations bear directly on the interpretation of these findings.", first=0,
+para("Seven limitations bear directly on the interpretation of these findings.", first=0,
      after=6)
 for lim in [
     "Sample size. Fifteen paired recordings are insufficient to establish classification "
     "performance. The confidence interval reported above is the direct consequence.",
-    "The rebuilt models are untested on the device. Every result for the rebuilt "
-    "classifier comes from public databases recorded on other stethoscopes. They have not "
-    "been tested on recordings from the Resondi device, whose digital microphone sounds "
-    "different, and the evidence above shows that a change of recording device alone can "
+    "The rebuilt models' accuracy on the device is unmeasured. Every accuracy figure for "
+    "the rebuilt classifier comes from public databases recorded on other stethoscopes. "
+    "The fusion network has been run on 26 recordings from the Resondi device, whose "
+    "digital microphone sounds different, but none of them has a reference label, and "
+    "the evidence above shows that a change of recording device alone can "
     "reduce a model to chance.",
     "Training data representation. ICBHI 2017 was collected from adults in Portugal and "
     "Greece, and SPRSound from children in China. Neither contains Filipino patients, and "
@@ -1105,6 +1249,9 @@ for lim in [
     "times, once per round, each time with the primary model fixed in advance. All three "
     "results are reported, and the cross-validation across all 126 patients guards "
     "against a lucky split.",
+    "The heart component is not evaluated. Heart recordings are captured and filed, but "
+    "no heart-sound measurement or classification result is reported, and the device's "
+    "response at the lowest heart-sound frequencies has not been measured.",
     "Speed of automated quality control. The system assesses whether ambient noise, weak "
     "signal, or motion artifact has rendered a recording unusable, but at a mean of 145 "
     "seconds per recording the check is too slow to run routinely before "
@@ -1116,7 +1263,7 @@ for lim in [
 
 H2("Conclusion")
 para("Resondi acquires, organises, and processes lung sound recordings at seven "
-     "standardised sites, operates across the range of ambient conditions "
+     "standardised sites and heart sound recordings at five, operates across the range of ambient conditions "
      "found in Philippine primary care, and produces a signal measurably stronger than "
      "that of a conventional acoustic stethoscope. These capabilities are demonstrated.",
      first=0)
@@ -1126,10 +1273,13 @@ para("The classification component is not yet demonstrated on the device. The or
      "data. Rebuilt without that flaw, the classifier scores about 34 percent balanced "
      "accuracy on unseen patients, and about 40 percent once paediatric recordings are "
      "added and the three-branch fusion network is used, a statistically significant "
-     "gain. These rebuilt models have not yet been tested on recordings from the Resondi "
-     "device. The study is therefore best understood as establishing a working "
+     "gain. The fusion network now runs in the application and separates the classes "
+     "more clearly on device recordings than its predecessor, but its accuracy on those "
+     "recordings has not been measured. The study is therefore best understood as establishing a working "
      "acquisition platform, together with an honestly measured classifier baseline, on "
-     "which validation with local recordings can now proceed.")
+     "which validation with local recordings can now proceed. The heart component has "
+     "reached the same starting point on the acquisition side, with its classifier "
+     "specified and its training data prepared but not yet built.")
 para("The system does not replace clinical judgement and is not designed to. Every "
      "classification is presented to a practitioner who confirms, modifies, or rejects "
      "it, and no result is returned to a patient unreviewed. On the evidence reported "
@@ -1137,7 +1287,8 @@ para("The system does not replace clinical judgement and is not designed to. Eve
 
 H2("Recommendations")
 for rec in [
-    "Test the rebuilt models on recordings from the Resondi device, beginning with the "
+    "Score the fusion network against reference labels on recordings from the Resondi "
+    "device, beginning with the "
     "fifteen field recordings if their reference labels can be recovered, and report "
     "balanced accuracy, per-class recall and Cohen's kappa with confidence intervals.",
     "Collect and clinically label a Philippine lung sound dataset on the Resondi device, "
@@ -1155,6 +1306,11 @@ for rec in [
     "field deployment, and repeat the signal-strength and recording-clarity measurements "
     "on the version 2.0 build before reporting any result as a property of the current "
     "device.",
+    "Complete the cardiologist's blinded review of the 25 CirCor recordings and report "
+    "agreement with the dataset's labels before training on them.",
+    "Train and evaluate the heart-murmur classifier on CirCor with a patient-wise split, "
+    "with sensitivity as the primary criterion, and measure the device's frequency "
+    "response from 20 Hz before testing it on Resondi heart recordings.",
     "Conduct a prospective evaluation in a rural health unit measuring recordings "
     "captured per week, proportion of abnormal classifications reviewed, and time to "
     "review.",
@@ -1193,6 +1349,11 @@ REFS = [
  "Zhang, Q., et al. (2022). SPRSound: Open-source SJTU paediatric "
  "respiratory sound database. IEEE Transactions on Biomedical Circuits and Systems, 16(5), "
  "867–881. https://doi.org/10.1109/TBCAS.2022.3204910",
+ "Oliveira, J., Renna, F., Costa, P. D., Nogueira, M., Oliveira, C., Ferreira, C., Jorge, "
+ "A., Mattos, S., Hatem, T., Tavares, T., Elola, A., Rad, A. B., Sameni, R., Clifford, G. "
+ "D., & Coimbra, M. T. (2022). The CirCor DigiScope dataset: From murmur detection to "
+ "murmur classification. IEEE Journal of Biomedical and Health Informatics, 26(6), "
+ "2524\u20132535. https://doi.org/10.1109/JBHI.2021.3137048",
  "Venkatesh, V., Morris, M. G., Davis, G. B., & Davis, F. D. (2003). User acceptance of "
  "information technology: Toward a unified view. MIS Quarterly, 27(3), 425–478.",
  "The jamovi project. (2025). jamovi (Version 2.7) [Computer software]. "
@@ -1218,7 +1379,7 @@ for r in sorted(REFS):
     p.paragraph_format.left_indent = Inches(0.5)
     p.paragraph_format.first_line_indent = Inches(-0.5)
 
-OUT = os.path.normpath(os.path.join(HERE, "..", "..", "deliverables", "Resondi-IMRaD-Lung-Only.docx"))
+OUT = os.path.normpath(os.path.join(HERE, "..", "..", "imrad", "Resondi-IMRaD-Heart-and-Lung-2026-11-13.docx"))
 doc.save(OUT)
 
 import re
@@ -1227,7 +1388,6 @@ print(f"saved {OUT}")
 print(f"  words        : {len(txt.split()):,}")
 print(f"  TO FILL marks: {txt.count('[[TO FILL')}")
 print(f"  tables       : {len(doc.tables)}")
-assert "heart" not in txt.lower().replace("heart sound", "") or True
-for bad in ("CirCor", "Heart Mode", "cardiac auscultation site", "murmur"):
+for bad in ("\u20b1", "budget", "funded", "funding"):
     if bad.lower() in txt.lower():
-        print(f"  WARNING cardiac content present: {bad}")
+        print(f"  NOTE financial wording present: {bad}")

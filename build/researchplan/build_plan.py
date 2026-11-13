@@ -2,8 +2,8 @@
 
 Run: python build/researchplan/build_plan.py   (after figures.py)
 In : research-plan/original/Resondi-Research-Plan-Revised.docx   (untouched Drive download)
-Out: research-plan/Resondi-Research-Plan-Revised-2026-11-13.docx
-     research-plan/Resondi-Research-Plan-Revision-Log-2026-11-13.docx
+Out: research-plan/Resondi-Research-Plan-Revised-Heart-and-Lung-2026-11-13.docx
+     research-plan/Resondi-Research-Plan-Revision-Log-Heart-and-Lung-2026-11-13.docx
 Text in [[double brackets]] is written with a yellow highlight: facts only the team can confirm.
 Results and Discussion read their numbers from model-rebuild/results/stats/ (stats-results.json from
 analysis_stats.py; fusion-comparison.json from fusion_eval.py), so run those scripts first.
@@ -24,8 +24,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
 RP = os.path.join(ROOT, "research-plan")
 SRC = os.path.join(RP, "original", "Resondi-Research-Plan-Revised.docx")
-OUT = os.path.join(RP, "Resondi-Research-Plan-Revised-2026-11-13.docx")
-LOGF = os.path.join(RP, "Resondi-Research-Plan-Revision-Log-2026-11-13.docx")
+OUT = os.path.join(RP, "Resondi-Research-Plan-Revised-Heart-and-Lung-2026-11-13.docx")
+LOGF = os.path.join(RP, "Resondi-Research-Plan-Revision-Log-Heart-and-Lung-2026-11-13.docx")
 FIG = os.path.join(ROOT, "figures")
 RFIG = os.path.join(RP, "figures")
 
@@ -921,7 +921,7 @@ para("On 13 November 2026 this fusion network replaced the Edge Impulse model in
      "Impulse provides no chromagram processing, it runs in the browser as an exported ONNX model, the three seeds "
      "combined in one file, with the band-limiting, levelling and feature extraction rewritten in JavaScript; the "
      "rewritten features gave the same top class as the Python originals on 600 of 600 validation windows. On 26 "
-     "recordings already made with the Resondi device it gave top-class scores of 31 to 66 percent (median 42), against "
+     "recordings already made with the Resondi device it gave top-class scores of 31 to 66 percent (median 41), against "
      "27 to 34 percent for the model it replaced. That shows it is more decisive on device audio, not that it is more "
      "often right: none of those recordings has a reference label, so its accuracy on the device remains untested.")
 
@@ -979,6 +979,29 @@ tab("Table 19", "Original Model, Deployed Models, and Fusion Models Compared", [
 ], [1.9, 1.3, 1.4, 1.6, 1.0], "Balanced accuracy averages the four per-class recalls; plain accuracy is inflated by the "
    "Healthy majority (52.8 percent of test cycles). The reference study's figures are weighted accuracies over six "
    "diagnosis classes as published (Tariq et al., 2022, Tables 8 and 9).")
+
+h2("Heart Sound Component: Status")
+para("The cardiac component has reached the acquisition stage and no further. Heart Mode is implemented on the device and "
+     "in the application: it guides the operator through the aortic, pulmonic, tricuspid and mitral areas and Erb's point, "
+     "in order from the base of the heart to the apex (Figure 15), records 15 seconds at each site in the same 16 kHz WAV "
+     "format as lung recordings, and files each recording by site for practitioner review. No heart recording is passed to "
+     "the lung classifier, and no cardiac classification is applied.")
+fig("Figure 15", "The Five Cardiac Sites Recorded in Heart Mode", os.path.join(FIG, "h1_heart_sites.png"), 3.8,
+    "Numbered in recording order. Erb's point (3) is filed for the practitioner and has no counterpart in the CirCor "
+    "dataset, so it is not part of the planned classifier input.")
+para("For the murmur classifier, the CirCor DigiScope public release (Table 3) was downloaded and its counts checked: "
+     "3,163 recordings from 942 patients, with murmur present in 179, absent in 695 and unknown in 68. The blinded review "
+     "set was drawn from it: 25 recordings, five from each of no murmur, holosystolic, early-systolic, mid-systolic and "
+     "diastolic murmur, renamed S01 to S25 in mixed order, with an answer sheet for the reviewing cardiologist and the "
+     "dataset's labels held separately. The review had not been returned when this plan was revised, so no agreement "
+     "figure is reported. The murmur classifier has not yet been trained, the frequency-response measurement of the "
+     "acquisition chain has not yet been made, and Hypotheses that concern heart sounds therefore remain untested.")
+para("The order of the remaining cardiac work follows from the lung results. A lung classifier trained on one set of "
+     "stethoscopes or one age group did not transfer to another, and CirCor was recorded from Brazilian children with a "
+     "commercial electronic stethoscope. The cardiologist's review will first confirm the reference labels; the acquisition "
+     "chain's low-frequency response will then be measured, since most S1 and S2 energy lies below about 150 Hz; the murmur "
+     "classifier will be trained and tested on CirCor with a patient-wise split and sensitivity as the primary criterion; "
+     "and only then will it be tested on heart recordings made with the Resondi device and labelled by a cardiologist.")
 
 h2("Discussion")
 para("Rebuilding the classifier with per-cycle sound labels and a patient-wise, device-balanced split produced the first "
@@ -1046,7 +1069,7 @@ para("That verdict held only for ICBHI alone. When the rebalanced paediatric cor
      "application on 13 November 2026. The order in which the gains appeared is the lesson: architecture alone moved "
      "little, data moved more, and the data that matter most, Resondi recordings of Filipino patients, are still to be "
      "collected.")
-para("These results define the work the funding is meant to buy rather than undermining it. Changing the feature "
+para("These results define the next stage of the work rather than undermining it. Changing the feature "
      "representation and training recipe on ICBHI alone produced no clear gain; the one significant gain, about six points, "
      "came from adding a second corpus to training, while a change of "
      "device or noise level erased the model's skill entirely. The decisive step is therefore a local dataset: Resondi "
@@ -1060,7 +1083,16 @@ para("The study has several limitations. Thirty-one test patients give wide conf
      "and the earlier field results came from the withdrawn model with no record of reference-label blinding. The ICBHI "
      "test patients were read three times, once per round, each time with the primary model fixed in advance, which the "
      "cross-validation across all 126 patients guards against. Above all, neither the fusion network now in the "
-     "application nor any other rebuilt model has been tested on Resondi device recordings with reference labels.")
+     "application nor any other rebuilt model has been tested on Resondi device recordings with reference labels. The "
+     "heart component is not yet evaluated: heart recordings are captured and filed, but no cardiac classifier has been "
+     "trained, and the cardiologist's review of the training labels is pending.")
+log("Heart sound component (13 Nov, regional science fair version)", "Results reported the lung component only",
+    "New section 'Heart Sound Component: Status' with Figure 15 (the five cardiac sites): Heart Mode implemented; CirCor "
+    "public release checked (942 patients, 3,163 recordings, murmur 179/695/68); blinded cardiologist review set prepared, "
+    "review pending; murmur classifier not yet trained. Limitations add the unevaluated heart component. The sentence "
+    "about 'the work the funding is meant to buy' reworded, as this version is for the regional science and technology "
+    "fair and carries no financial requirement.",
+    "Requested by the user on 13 Nov: include the heart feature and exclude the financial requirement.")
 log("Second training round, cross-validation, deployment (13 Nov)", "Fusion reported as not adopted (ICBHI-only round)",
     "New section 'Adding the Paediatric Corpus, and Cross-Validation': Table 17 (ICBHI + SPRSound test, 39.4% / 57.2%), "
     "Table 18 (5-fold CV, 40.0% vs 34.0%, +5.9 points, p = 0.008), Figures 12-14 made with jamovi (jmv), and the 13 Nov "
@@ -1213,7 +1245,7 @@ for s in L.sections:
     s.top_margin = s.bottom_margin = Inches(0.7)
 L.add_heading("Resondi Research Plan: Revision Log (11 November 2026)", level=1)
 L.add_paragraph("Source: Resondi-Research-Plan-Revised.docx (Google Drive, last modified 11 Nov 2026). Revised copy: "
-                "Resondi-Research-Plan-Revised-2026-11-13.docx. The original was not edited. Results and Discussion are "
+                "Resondi-Research-Plan-Revised-Heart-and-Lung-2026-11-13.docx. The original was not edited. Results and Discussion are "
                 "not part of this revision: the fusion model is still training. Yellow highlights in the revised plan "
                 "mark facts only the team can confirm.")
 tb = L.add_table(rows=1, cols=5)
