@@ -208,10 +208,10 @@ im_block_rows = [(label(t), f"In {s}: {cap(t)}. Answer from the team's records o
 im_lookup_rows = [(label(t), f"In {s}: {cap(t)}.", "Team", BLOCKS) for s, t in im_lookup]
 # References in the IMRaD that still carry a visible "[Add full citation ...]" placeholder.
 IMRAD_FINAL = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.docx")
-im_ref_rows = [(f"Reference list: {p.text.split('[Add full citation')[0].strip()} (placeholder still visible)",
+im_ref_rows = [(f"Reference list: {re.split(r'\[Add', p.text)[0].strip()} (placeholder still visible)",
                 "Give the full reference (authors, year, title, source, DOI or URL), or drop the citation and the "
                 "sentence that uses it.", "Team (Ahnycca)", BLOCKS)
-               for p in docx.Document(IMRAD_FINAL).paragraphs if "[Add full citation" in p.text]
+               for p in docx.Document(IMRAD_FINAL).paragraphs if re.search(r"\[Add (the )?full citation", p.text)]
 im_lookup_rows += im_ref_rows
 im_advice_rows = [(label(t), f"In {s}: {cap(t)}. Act on it or decide not to, then delete the marker; the IMRaD "
                    "text itself is already correct.", "Team", BLOCKS) for s, t in im_advice]
@@ -318,6 +318,10 @@ resolved = [
      "AI\"; swapped into the compiled document in place of the 29 Aug pages."),
     ("Research plan RQ 9 and IMRaD acceptance: functionality", "One physician's instrument validation, 29 Aug 2026, "
      "added (Survey Validation form)."),
+    ("IMRaD: three unfinished references", "Department of Health (2025), Baraeinejad et al. (2023) and Kim et al. "
+     "(2021) removed with their citations at the user's request (14 Nov); the sentences that rested on them (the "
+     "registry counts and the 3,518 figure, the 86.5 percent accuracy comparison, the Bluetooth stethoscope finding) "
+     "were removed too."),
     ("Form 7 attachment (continuation project)", "The previous year's paper, SmartSteth (2025), supplied by the user "
      "on 14 Nov, placed after Form 7 in the compiled document. In the compiled copy only, a stray footer photo that "
      "covered the text and hid the interview transcripts was removed, and the page numbers made continuous."),

@@ -248,18 +248,11 @@ para("This study developed and evaluated Resondi, a low-cost smart stethoscope t
      "between visits.")
 
 H2("The Research Gap")
-para("The literature establishes two things firmly. Convolutional neural networks "
-     "classify lung sounds at a standard that compares favourably with human listeners: "
-     "Kim et al. (2021), training on 1,918 recordings from actual patients, reported 86.5 "
-     "percent accuracy in detecting abnormal lung sounds and 85.7 percent in "
-     "distinguishing crackles, wheezes and rhonchi, outperforming medical students, "
-     "interns and several residents tested on the same recordings. Acharya and Basu "
-     "(2020) reported comparable results from a CNN-RNN model operating on "
-     "mel-spectrograms. Separately, digital stethoscopes built on MEMS microphones and "
-     "Bluetooth Low Energy have been shown to capture and transmit usable respiratory "
-     "audio to a mobile application (Baraeinejad et al., 2023).", first=0)
+para("The literature shows that neural networks can classify lung sounds recorded "
+     "under research conditions: Acharya and Basu (2020), for example, classified "
+     "respiratory sounds with a CNN-RNN model operating on mel-spectrograms.", first=0)
 
-para("What the literature does not establish is that either result survives contact with "
+para("What the literature does not establish is that this result survives contact with "
      "the conditions of primary care. Reported classification performance is obtained on "
      "curated benchmark corpora such as the ICBHI 2017 database (Rocha et al., 2019), "
      "whose recordings were collected by researchers using research-grade equipment under "
@@ -267,8 +260,8 @@ para("What the literature does not establish is that either result survives cont
      "operators differ from these in ways that bear directly on classification: ambient "
      "noise, inconsistent chest-piece placement, variation in operator technique, and "
      "differences between recording devices have all been identified as degrading "
-     "AI-supported analysis. The performance figures above are therefore properties of a "
-     "model evaluated on clean audio, not predictions about what that model will do with "
+     "AI-supported analysis. Such performance figures are therefore properties of models "
+     "evaluated on clean audio, not predictions about what a model will do with "
      "audio captured in a barangay health station.", first=0)
 
 para("Acquisition is the uncontrolled variable, and it is the one that existing systems "
@@ -1535,13 +1528,11 @@ para("The system is designed for a specific tier of the Philippine health system
      "half of Filipinos can reach a rural health unit within thirty minutes of travel "
      "(Department of Health, 2020).", first=0)
 
-para("Department of Health facility registry figures record approximately 26,504 "
-     "barangay health stations, 2,682 rural health units, and 836 municipal and city "
-     "health centres nationwide (DOH, 2025) \u2014 roughly 30,000 public facilities at which "
-     "auscultation forms part of routine assessment. Of these, the facilities Resondi "
-     "can presently serve are narrower: about 3,518 rural health units and "
-     "municipal or city health centres that have a resident clinician able to perform the practitioner review the platform depends "
-     "on. Nursing and medical schools form a second group, for which the system functions "
+para("Auscultation forms part of routine assessment in barangay health stations, rural "
+     "health units, and municipal and city health centres. Of these, the facilities "
+     "Resondi can presently serve are narrower: rural health units and municipal or city "
+     "health centres that have a resident clinician able to perform the practitioner "
+     "review the platform depends on. Nursing and medical schools form a second group, for which the system functions "
      "as a teaching instrument rather than a clinical one.", first=0)
 
 TBL(3, "Intended Users and Their Role in the System",
@@ -1696,7 +1687,6 @@ REFS = [
  "New England Journal of Medicine, 370(8), 744–751.",
  "Department of Health. (2020). Philippine health system review / primary care "
  "access figures. [Add the full citation you used in the concept note.]",
- "Department of Health. (2025). National health facility registry. [Add full citation.]",
  "Philippine Statistics Authority. (2025). Registered deaths in the Philippines, 2024.",
  "Rocha, B. M., Filos, D., Mendes, L., Serbes, G., Ulukaya, S., Kahya, Y. P., Jakovljevic, "
  "N., Turukalo, T. L., Vogiatzis, I. M., Perantoni, E., Kaimakamis, E., Natsiavas, P., "
@@ -1732,10 +1722,6 @@ REFS = [
  "Acharya, J., & Basu, A. (2020). Deep neural network for respiratory sound "
  "classification in wearable devices enabled by patient specific model tuning. IEEE "
  "Transactions on Biomedical Circuits and Systems, 14(3), 535\u2013544.",
- "Baraeinejad, B., et al. (2023). Design and implementation of an ultralow-power "
- "digital stethoscope. [Add full citation from your reference list.]",
- "Kim, Y., et al. (2021). Respiratory sound classification for crackles, wheezes, and "
- "rhonchi using a convolutional neural network. [Add full citation from your list.]",
  "Shkarupylo, V., et al. (2024). Intelligent digital stethoscope for neural network "
  "analysis of auscultatory signals: A review of sensors, architectures and algorithms. "
  "https://science.lpnu.ua/node/43249",
