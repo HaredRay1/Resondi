@@ -226,7 +226,8 @@ Never: move test patients into training, pick the model by its test score, re-sp
   - footnote → "*Feature fusion and heart classification are planned".
 
 ### Google Drive
-- **How it syncs:** the local folder mirrors to the link-shared My Drive folder "Resondi" via the scheduled task "Resondi Drive Sync" (robocopy; the PC is the master copy). Anyone with the link can open what syncs.
+- **How it syncs:** the local folder mirrors to `G:\My Drive\Resondi` via the scheduled task "Resondi Drive Sync" (robocopy; the PC is the master copy), and Drive for desktop uploads it to My Drive. Anyone with the link can open what syncs.
+- **Not online since 12 Nov (found 14 Nov).** Drive for desktop syncing has been paused since 12 Nov. Every upload since then was cancelled (`%LOCALAPPDATA%\Google\DriveFS\Logs\drive_fs_6.txt`), so the cloud has no "Resondi" folder and no `Ahnyccas papers`; G: matching this folder proves nothing. The user chose to leave it for now. To publish, click the Drive tray icon and choose Resume syncing, then check in the cloud.
 - **Keep out of it:** names or e-mails (survey export, `workspace-members.csv`), patient data and screenshots, PRC and phone numbers, future local recordings, the heart-validation answer key, and any passwords or tokens. Put private files in `Downloads\Resondi-private\`.
 - **Done 10 Nov:** the app security review (`app-review-2026-11-09.md`, which describes exploitable flaws step by step) now lives in `Downloads\Resondi-private\app-security-review\`, outside the synced and pushed project. It was removed from Drive and from the current GitHub tree, but it is still in the private repo's history (commits `33be00e`–`163a0cc`).
 - **Already excluded from sync and git:** `model-rebuild\export`, `work`, `work-3s`, `work-exp` (the 1 GB experiment cache, added 11 Nov), `history-run1`, `.git`, `node_modules`, `.claude`.
