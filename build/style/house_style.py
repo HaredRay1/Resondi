@@ -16,7 +16,13 @@ What it does, outside tables:
 Inside tables: font and size only; cell paragraphs lose first-line and left indents, alignment is kept (justified
 text in narrow columns opens wide gaps). Headers and footers: font and size only.
 Fonts: every run, style, list number and the document defaults become Times New Roman 11 pt; symbol fonts (bullet
-glyphs) are kept. Line spacing is not changed.
+glyphs) are kept.
+Line spacing (only when apply(doc, line_spacing=2.0) is asked for; the papers ask, user 14 Nov): every paragraph with
+text outside tables gets that spacing. Body text, lists, references, captions and notes lose their extra space
+before and after, the usual double-spaced layout, since the doubled line already separates them; headings and centred
+lines (title page) keep theirs. Table cells, paragraphs holding a picture, and a text flowchart (centred lines
+with arrow lines such as "▼" between them, the plan's Procedures chart) stay as they are: Word multiplies the
+height of a line with an inline picture, and a doubled flowchart no longer fits on one page.
 """
 import copy
 import re
@@ -107,6 +113,38 @@ def set_ind(p, left=0.0, first=0.0):
         ind.set(qn("w:hanging"), str(round(-first * TW)))
     else:
         ind.set(qn("w:firstLine"), str(round(first * TW)))
+
+
+def set_spacing(p, line=None, before=None, after=None):
+    """Line spacing as a multiple (2.0 = double) and space before/after in twips; None leaves a value alone."""
+    ppr = p.find(qn("w:pPr"))
+    if ppr is None:
+        ppr = OxmlElement("w:pPr")
+        p.insert(0, ppr)
+    sp = child(ppr, "spacing", PPR_ORDER)
+    if line is not None:
+        sp.set(qn("w:line"), str(round(240 * line)))
+        sp.set(qn("w:lineRule"), "auto")
+    for side, v in (("before", before), ("after", after)):
+        if v is not None:
+            sp.set(qn("w:" + side), str(v))
+            for a in (side + "Lines", side + "Autospacing"):  # these override before/after in Word
+                sp.attrib.pop(qn("w:" + a), None)
+
+
+TIGHT = {"body", "list", "list_cont", "list2", "reference", "note", "caption"}
+ARROWS = set("▼↓⬇▽⇩")
+
+
+def flowchart(seq, styles):
+    """Centred paragraphs that are arrow lines, or sit next to one, in the order of (p, text) pairs given."""
+    flow = set()
+    for i, (p, t) in enumerate(seq):
+        if t and set(t.replace(" ", "")) <= ARROWS:
+            for j in (i - 1, i, i + 1):
+                if 0 <= j < len(seq) and get_jc(seq[j][0], styles) == "center":
+                    flow.add(j)
+    return flow
 
 
 def get_jc(p, styles):
@@ -248,7 +286,7 @@ def classify(p, text, styles, in_refs):
     return "body"
 
 
-def apply(doc):
+def apply(doc, line_spacing=None):
     styles = {}
     for s in doc.styles.element.findall(qn("w:style")):
         sid = s.get(qn("w:styleId"))
@@ -293,6 +331,13 @@ def apply(doc):
     in_refs = False
     prev = None
     numbered_parent = False
+    seq = []
+    for p in body.iter(qn("w:p")):
+        if not {qn("w:tc"), qn("w:txbxContent")} & {a.tag for a in p.iterancestors()}:
+            t = "".join(x.text or "" for x in p.iter(qn("w:t"))).strip()
+            if t:
+                seq.append((p, t))
+    flow_ps = [seq[i][0] for i in flowchart(seq, styles)]
     for p in list(body.iter(qn("w:p"))):
         anc = {a.tag for a in p.iterancestors()}
         if qn("w:txbxContent") in anc:
@@ -356,6 +401,14 @@ def apply(doc):
             set_jc(p, "both")
         if kind in ("heading", "heading_num", "caption"):  # never strand a heading or caption at a page foot
             child(p.find(qn("w:pPr")), "keepNext", PPR_ORDER)
+        if any(p is q for q in flow_ps):
+            counts["flowchart"] = counts.get("flowchart", 0) + 1
+        elif line_spacing and p.find(".//" + qn("w:drawing")) is None and p.find(".//" + qn("w:pict")) is None:
+            if kind in TIGHT:
+                set_spacing(p, line_spacing, 0, 0)
+            else:
+                set_spacing(p, line_spacing)
+            counts["spaced"] = counts.get("spaced", 0) + 1
         counts[kind] = counts.get(kind, 0) + 1
         prev = kind
     return counts

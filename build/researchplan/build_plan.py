@@ -1518,10 +1518,40 @@ log("Title", "Resondi: A CNN-Assisted Auscultation Instrument for Cardiopulmonar
     "Rehabilitation-Support System", "Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System",
     "Matches the title registered on the signed ISEF forms and the title page (user, 14 Nov).")
 D.core_properties.title = "Resondi Research Plan (revised 11 November 2026)"
+# Layout for double spacing (14 Nov). The original's empty paragraphs holding only a manual page break (six, all in
+# Data Analysis) were placed for its single-spaced layout and now end pages after a line or two; headings are kept
+# with their text instead. Section starts (page break before A., B., ...) are kept.
+_pb = [p for p in D.element.body.iter(qn("w:p"))
+       if not "".join(x.text or "" for x in p.iter(qn("w:t"))).strip()
+       and any(b.get(qn("w:type")) == "page" for b in p.iter(qn("w:br")))
+       and p.find(qn("w:pPr") + "/" + qn("w:sectPr")) is None
+       and qn("w:tc") not in {a.tag for a in p.iterancestors()}]
+assert len(_pb) == 6, len(_pb)
+for _p in _pb:
+    _p.getparent().remove(_p)
+# A sentence in Research Dashboard and Data-Export Testing was split over two paragraphs with an empty one between
+# ("... AI/practitioner agreement," / "and model-performance statistics. ..."), which shows as a blank line mid-sentence.
+_a = [p for p in D.paragraphs if p.text.rstrip().endswith("AI/practitioner agreement,")]
+_b = [p for p in D.paragraphs if p.text.startswith("and model-performance statistics")]
+assert len(_a) == 1 and len(_b) == 1
+_a, _b = _a[0], _b[0]
+_mid = []
+_n = _a._p.getnext()
+while _n is not None and _n is not _b._p:
+    assert _n.tag == qn("w:p") and not "".join(x.text or "" for x in _n.iter(qn("w:t"))).strip()
+    _mid.append(_n)
+    _n = _n.getnext()
+assert _n is _b._p
+if not _a.text.endswith(" "):
+    _a.add_run(" ")
+for _r in list(_b._p.iter(qn("w:r"))):
+    _a._p.append(_r)
+for _x in _mid + [_b._p]:
+    _x.getparent().remove(_x)
 import os as _os, sys as _sys  # house style: Times New Roman 11, justified, consistent indents (14 Nov)
 _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
 import house_style  # noqa: E402
-print("  house style:", house_style.apply(D))
+print("  house style:", house_style.apply(D, line_spacing=2.0))  # double spacing (user, 14 Nov)
 D.save(OUT)
 print("wrote", OUT)
 

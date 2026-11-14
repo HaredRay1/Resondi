@@ -1756,7 +1756,7 @@ OUT = os.path.normpath(os.path.join(HERE, "..", "..", "imrad", "Resondi-IMRaD-He
 import os as _os, sys as _sys  # house style: Times New Roman 11, justified, consistent indents (14 Nov)
 _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
 import house_style  # noqa: E402
-print("  house style:", house_style.apply(doc))
+print("  house style:", house_style.apply(doc, line_spacing=2.0))  # double spacing (user, 14 Nov)
 doc.save(OUT)
 
 import re
