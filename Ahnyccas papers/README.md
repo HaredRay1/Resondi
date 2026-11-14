@@ -22,13 +22,13 @@ This folder holds the final revised IMRaD and research plan (each as Word and PD
 4. rerun `compile_rstf.py`.
 
 Kept out of this folder on 14 Nov, at the user's request:
-- the IMRaD fill-ins (now 12 `[[TO FILL]]` items, 7 blocking): `../imrad/Resondi-IMRaD-Heart-and-Lung-Open-Items-2026-11-13`;
+- the IMRaD fill-ins (now 7 `[[TO FILL]]` items, 4 blocking; 15 Nov): `../imrad/Resondi-IMRaD-Heart-and-Lung-Open-Items-2026-11-13`;
 - the research plan revision log: `../research-plan/Resondi-Research-Plan-Revision-Log-Heart-and-Lung-2026-11-13`.
 
 The lung-only versions are in `../imrad/old-lung-only/` and `../research-plan/old-lung-only/`.
 
 **Before submitting, fill the marked gaps** (all listed in the missing-items file). They are facts only the team can supply, so they are left visible on purpose and must not be guessed:
-- the IMRaD has 12 `[[TO FILL: ...]]` notes, 7 of them facts its main claims rest on;
+- the IMRaD has 7 `[[TO FILL: ...]]` notes, 4 of them facts its main claims rest on (15 Nov: microphone, recording settings and the hospital-patient question filled; the t-test and kappa notes removed);
 - the research plan has no CONFIRM notes left (the review cited as Shkarupylo et al. (2024) is really Komaryshyn & Kogut (2026), now cited with its full reference in both papers);
 - the acceptance results (n = 27, overall 3.95) are of the old version: repeat the UTAUT survey on the current version, with durability, functionality and the question 10 items added;
 - the compiled document needs the logbook scans and Ahnycca's own answers to questions 2, 5 and 6 on the ISEF abstract page.

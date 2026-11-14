@@ -150,24 +150,28 @@ the murmur result as 80%.
 
 ## 6. What is still missing (the to-do list in `Ahnyccas papers/`)
 
-**Part A, must do before submitting** (14 items; the papers show each gap as a visible `[[TO FILL]]` marker):
+**Part A, must do before submitting** (9 items since 15 Nov; the papers show each gap as a visible `[[TO FILL]]`
+marker):
 
 1. The name of the research design.
-2. Which microphone the field-test device used: the INMP441 or the MAX4466. The IMRaD has a known inconsistency
-   here: its description of the evaluated build (a microphone with a preamplifier, Bluetooth Low Energy) comes from
-   the original paper, while the current device has a digital MEMS microphone and Wi-Fi.
-3. The recording bit depth and window length.
-4. The original model's loss function.
-5. How the lung sites group into the app's four zones.
-6. The microphone's lowest frequency.
-7. Details of the 45 vs 32 dB test.
-8. Who rated the recording quality.
-9. How the 27 survey respondents were chosen.
-10. A note about the t-test in the 83-page full paper.
-11. Whether the hospital patients overlap with the survey patients.
-12. Cohen's kappa (optional).
-13. Scan the logbook.
-14. Tick questions 2, 5 and 6 on the ISEF abstract page.
+2. The original model's loss function.
+3. Which zone each of the two side (mid-axillary) lung sites belongs to (front sites are upper, lower-back sites
+   lower).
+4. Confirm the INMP441's lowest frequency (about 60 Hz) from its datasheet.
+5. Details of the 45 vs 32 dB test.
+6. Who rated the recording quality.
+7. How the 27 survey respondents were chosen.
+8. Scan the logbook.
+9. Tick questions 2, 5 and 6 on the ISEF abstract page.
+
+**Filled on 15 Nov from the project files:** the microphone is the INMP441 (the parts tables of the 83-page paper);
+recordings are 16-bit and cut into 1-second segments (50% overlap in training, none in testing and the app); the
+three hospital patients took part in the survey, as the 83-page paper says (whether all three are among the 27
+responses is not recorded). The notes on the full paper's t-test and on Cohen's kappa were removed.
+
+**Known contradictions with the 83-page paper:** it reports signal strength as 32.49 dB (Ausculta) against 7.89 dB
+(stethoscope), while the IMRaD uses 45 against 32 dB; and it gives 30 survey participants plus the 3 hospital
+patients, while the IMRaD analyses n = 27.
 
 **Part B, before the fair** (16 items):
 

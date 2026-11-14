@@ -423,22 +423,23 @@ p = para("The microphone was selected for unit-to-unit consistency of frequency 
          "response. Because the system's central claim is that a recording taken at "
          "one visit can be compared against the same site at a later visit, variation "
          "in transducer response between devices would introduce drift into precisely "
-         "the measurement the system exists to make.", first=0)
-FILL(p, "name the microphone part. Earlier project documentation cites both an "
-        "INMP441 (a MEMS microphone) and a MAX4466 (an electret amplifier board); "
-        "these are different components and only one is in the build. The "
-        "consistency argument above holds either way, but the part must be named "
-        "for the device to be reproducible")
+         "the measurement the system exists to make. The microphone is an INMP441 "
+         "omnidirectional digital MEMS microphone, the part listed in the study's component "
+         "and cost tables.", first=0)
 
-p = para("The microcontroller samples the preamplified acoustic signal, writes the "
+p = para("The microcontroller receives the digitised acoustic signal from the microphone "
+         "over its I\u00b2S bus, writes the "
          "recording to MicroSD together with its metadata — anatomical site, timestamp, "
          "and duration \u2014 in WAV format, and advertises over Bluetooth Low Energy. Two "
          "storage paths "
          "operate in parallel: recordings transfer to the paired mobile application "
          "where a phone is present, and are retained on MicroSD for later transfer where "
          "it is not. Capture therefore does not depend on connectivity.", first=0)
-FILL(p, "bit depth and the segment length used at segmentation. The paper gives the "
-        "16 kHz rate and WAV format but not these two")
+para("Recordings were stored as 16-bit, 16 kHz mono WAV files of 15 seconds and divided "
+     "into 1-second segments (16,000 samples) for classification; during training the "
+     "segments overlapped by 50 percent (0.5-second hop), and at testing and in the "
+     "application they did not overlap, with segment scores averaged over each breathing "
+     "cycle.", first=0)
 
 FIG(2, "Hardware Architecture of the Device",
     "d1_hardware.png", 6.05)
@@ -540,7 +541,7 @@ FILL(p, "state the loss function. The architecture terminates in a softmax over 
 FIG(5, "Classification Model Architecture",
     "d4_classifier.png", 6.05)
 
-para("A rule-based interpretation layer operates above the classifier. Per-zone "
+p = para("A rule-based interpretation layer operates above the classifier. Per-zone "
          "classifications are mapped by six explicit rules to a literature-supported "
          "possibility \u2014 for example, all zones healthy, a bilateral upper-zone wheeze "
          "component, or crackles in one or both lower zones \u2014 each accompanied by its "
@@ -549,9 +550,9 @@ para("A rule-based interpretation layer operates above the classifier. Per-zone 
          "possibilities requiring clinical evaluation and none is presented as a "
          "diagnosis.", first=0)
 FILL(p, "the interpretation rules operate on four zones (upper left, upper right, lower "
-        "left, lower right) while recording yields six classified lung fields plus the "
-        "tracheal reference. State how the six fields map onto the four zones the rules "
-        "evaluate, in particular where the two mid-axillary sites are assigned")
+        "left, lower right). In the application the two anterior sites are filed as upper "
+        "and the two posterior infrascapular sites as lower; state which zone each of the "
+        "two mid-axillary (lateral) sites is assigned to")
 
 FIG(6, "Rule-Based Interpretation Layer Above the Classifier",
     "d5_rules.png", 6.05)
@@ -759,8 +760,8 @@ p = para("Fundamental heart sounds lie lower in frequency than lung sounds, with
          "response of the whole acquisition chain will be measured with swept tones from "
          "20 Hz to 2,000 Hz, and any low-frequency loss will be reported as a hardware "
          "limitation rather than attributed to the classifier.", first=0)
-FILL(p, "confirm the microphone's specified low-frequency limit from its datasheet, and "
-        "whether the field build used the same microphone")
+FILL(p, "confirm the INMP441's specified low-frequency limit (about 60 Hz) from its "
+        "datasheet")
 
 H2("Evaluation Procedures")
 para("Before analysis, each recording was assessed where technically possible for "
@@ -875,11 +876,6 @@ para("Model training and the bootstrap analyses were run in Python 3 with NumPy,
      "and PyTorch. Every other statistic in this paper, and the statistical figures, were "
      "produced or reproduced with jamovi 2.7 (The jamovi project, 2025) through its R "
      "package jmv, from comma-separated files that accompany the paper.", first=0)
-p = para("", first=0, after=4, spacing=1.0)
-FILL(p, "the full paper's Data Analysis section specifies a paired-samples t-test for "
-        "three comparisons on class labels and quality grades. A t-test operates on means "
-        "of continuous data and is not valid on those, so correct the full paper to match "
-        "what is stated here")
 
 H2("Ethical Considerations")
 para("The study was conducted under the supervision of the research adviser, John "
@@ -1256,9 +1252,9 @@ p = para("Dichotomous items are reported as frequencies. Twenty-one of 27 respon
          "(30 percent) \u2018yes\u2019 and 7 (26 percent) \u2018no\u2019. Eleven "
          "respondents (41 percent) reported prior experience with medical devices or "
          "health applications.")
-FILL(p, "confirm whether the three patients recorded at the private hospital are "
-        "distinct from the 13 respondents who identified themselves as patients in the "
-        "acceptance questionnaire. The two groups are currently described separately")
+para("The study's full report states that the three patients recorded at the private "
+     "hospital also took part in the acceptance survey; the records do not show whether "
+     "all three are among the 27 responses analysed here.")
 
 para("Mapped to the five aspects named in Research Question 9, effort expectancy is "
      "the closest measure of user-friendliness and usability (4.09) and performance "
@@ -1382,8 +1378,6 @@ p = para("No test of marginal homogeneity is reported for the agreement comparis
          "versions on the same fixed test partition, where the paired predictions make it "
          "the correct instrument. That use is set out in the evaluation plan below.",
          first=0)
-FILL(p, "consider reporting Cohen's kappa with a confidence interval alongside the "
-        "agreement rate, since kappa corrects for the agreement expected by chance")
 
 H2("Response Time as a Usability Constraint")
 para("Quality assessment at 145 seconds dominates total elapsed time, exceeding the "

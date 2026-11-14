@@ -48,8 +48,8 @@ PLAIN = [
      "Which microphone was inside the device you tested in the field: the INMP441 or the MAX4466? Only one was used.",
      "Look at the device itself or the parts list / receipt."),
     ("low-frequency limit", "The microphone's lowest frequency",
-     "The lowest sound frequency that microphone can pick up (for example \"60 Hz\"), and whether the field-test device "
-     "used the same microphone.", "The microphone's datasheet (search \"INMP441 datasheet\" or \"MAX4466 datasheet\")."),
+     "Check that the INMP441 microphone picks up sound from about 60 Hz upward, as the paper says. Reply with the "
+     "figure the datasheet gives.", "The INMP441 datasheet (search \"INMP441 datasheet\")."),
     ("bit depth", "Recording settings",
      "The bit depth of the recordings (for example 16-bit) and how long each piece was when the recordings were cut up "
      "for the model (for example 5 seconds).", "Edge Impulse project settings, or the device code."),
@@ -57,8 +57,8 @@ PLAIN = [
      "The name of the loss function the original Edge Impulse model used. It is almost certainly \"categorical "
      "cross-entropy\"; just confirm it.", "Edge Impulse: open the model in expert mode and scroll past the optimizer line."),
     ("four zones", "How the lung sites group into four zones",
-     "The app's rules use four zones (upper left, upper right, lower left, lower right), but you record six lung sites "
-     "plus the trachea. Say which zone each site belongs to, especially the two side (mid-axillary) sites.",
+     "The app's rules use four zones (upper left, upper right, lower left, lower right). The front sites count as "
+     "upper and the lower-back sites as lower. Say which zone each of the two side (mid-axillary) sites belongs to.",
      "Your design notes, or the rules in the app."),
     ("measurement unit", "Details of the 45 dB vs 32 dB test",
      "What unit and reference you measured in, the brand and model of the regular stethoscope, and how you measured the "
@@ -251,6 +251,9 @@ for line in (
     "The reference cited as Shkarupylo et al. (2024) is really Komaryshyn & Kogut (2026); corrected in both papers, with its full citation.",
     "The acceptance results are marked as coming from the old version.",
     "The SmartSteth paper is attached after Form 7 in the compiled document.",
+    "Microphone (INMP441, from the parts tables in your full paper) and recording settings (16-bit, 1-second "
+    "segments): filled in. The hospital patients are described as taking part in the survey, as your full paper "
+    "says. The notes on the full paper's t-test and on Cohen's kappa were removed (15 Nov).",
     "Both papers are formatted: Times New Roman 11, justified, double-spaced (the space between paragraphs kept), "
     "consistent indents, references flush left with a hanging indent.",
 ):
