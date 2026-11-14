@@ -1,0 +1,299 @@
+"""What is still missing from the research plan and the IMRaD, by category, for Ahnyccas papers/.
+
+The visible markers are read from the papers themselves, so the list always matches them:
+  - IMRaD: every FILL(...) call in build/imrad/build_imrad.py, with its section heading
+  - research plan: every paragraph of the FINAL research plan that carries a CONFIRM note
+The other items (research questions or analyses the data cannot yet answer, and decisions for the
+team) are stated in the papers' own limitations, and are listed here with what would close each.
+
+Run:  python build/missing/build_missing.py   -> Ahnyccas papers/Resondi-Missing-Items-Research-Plan-and-IMRaD.docx
+"""
+import ast
+import os
+import re
+
+import docx
+from docx import Document
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
+from docx.shared import Inches, Pt, RGBColor
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.normpath(os.path.join(HERE, "..", ".."))
+IMRAD_SRC = os.path.join(ROOT, "build", "imrad", "build_imrad.py")
+PAPERS = os.path.join(ROOT, "Ahnyccas papers")
+PLAN = os.path.join(PAPERS, "Resondi-Research-Plan-Heart-and-Lung-FINAL.docx")
+OUT = os.path.join(PAPERS, "Resondi-Missing-Items-Research-Plan-and-IMRaD.docx")
+
+INK, GREY, ACCENT = RGBColor(0x1A, 0x1A, 0x1A), RGBColor(0x5A, 0x5A, 0x5A), RGBColor(0x8E, 0x2A, 0x52)
+BLOCKS, BEFORE, LATER = "Blocks submission", "Before the fair", "Future work"
+
+# IMRaD markers whose facts the paper's main claims rest on (same list as build/imrad/build_open_items.py)
+BLOCKING = ("microphone", "four zones", "measurement unit", "how many qualified", "blinded",
+            "sampling method", "ethics", "distinct from the 13")
+# IMRaD markers that are advice about the 83-page full paper or an optional addition, not a missing fact
+ADVICE = ("full paper's data analysis section specifies", "consider reporting cohen's kappa")
+
+
+def imrad_markers():
+    tree = ast.parse(open(IMRAD_SRC, encoding="utf-8").read())
+    h1 = h2 = ""
+    out = []
+    for stmt in tree.body:
+        for call in [n for n in ast.walk(stmt) if isinstance(n, ast.Call)]:
+            name = getattr(call.func, "id", "")
+            if name in ("H1", "H2") and call.args:
+                try:
+                    text = ast.literal_eval(call.args[0])
+                except ValueError:
+                    continue
+                h1, h2 = (text, "") if name == "H1" else (h1, text)
+            elif name == "FILL" and len(call.args) == 2:
+                out.append((h2 or h1, ast.literal_eval(call.args[1])))
+    return out
+
+
+def plan_markers():
+    d = docx.Document(PLAN)
+    out = []
+    for p in d.paragraphs:  # the builder prints these notes without the [[ ]] brackets
+        if "CONFIRM" in p.text:
+            out.append(p.text.strip())
+    return out
+
+
+# ------------------------------------------------------------------ document helpers
+doc = Document()
+st = doc.styles["Normal"]
+st.font.name, st.font.size, st.font.color.rgb = "Calibri", Pt(10.5), INK
+for s in doc.sections:
+    s.top_margin = s.bottom_margin = Inches(0.75)
+    s.left_margin = s.right_margin = Inches(0.75)
+
+
+def para(text, size=10.5, bold=False, italic=False, color=INK, after=6, before=0):
+    p = doc.add_paragraph()
+    p.paragraph_format.space_after, p.paragraph_format.space_before = Pt(after), Pt(before)
+    r = p.add_run(text)
+    r.font.size, r.bold, r.italic, r.font.color.rgb = Pt(size), bold, italic, color
+    return p
+
+
+def shade(cell, fill):
+    pr = cell._tc.get_or_add_tcPr()
+    sh = OxmlElement("w:shd")
+    sh.set(qn("w:val"), "clear"); sh.set(qn("w:fill"), fill)
+    pr.append(sh)
+
+
+W = [0.35, 2.05, 2.9, 0.95, 0.85]
+
+
+def table(rows):
+    t = doc.add_table(rows=1, cols=5)
+    t.style = "Table Grid"
+    for c, h in enumerate(["#", "What is missing", "What closes it", "Who", "Priority"]):
+        cell = t.rows[0].cells[c]
+        cell.width = Inches(W[c]); shade(cell, "EBD3DE")
+        r = cell.paragraphs[0].add_run(h); r.bold = True; r.font.size = Pt(9.5)
+    for i, row in enumerate(rows, 1):
+        cells = t.add_row().cells
+        for c, v in enumerate([str(i)] + list(row)):
+            cells[c].width = Inches(W[c])
+            r = cells[c].paragraphs[0].add_run(v)
+            r.font.size = Pt(9)
+            if c == 4:
+                r.bold = v == BLOCKS
+                if v == BLOCKS:
+                    r.font.color.rgb = ACCENT
+    para("", after=4)
+
+
+def heading(text, size=13, before=8):
+    para(text, size=size, bold=True, color=ACCENT, after=4, before=before)
+
+
+def cap(s):
+    return s[0].upper() + s[1:]
+
+
+# ------------------------------------------------------------------ content
+IM = imrad_markers()
+im_block = [(s, t) for s, t in IM if any(k in t.lower() for k in BLOCKING)]
+im_advice = [(s, t) for s, t in IM if any(k in t.lower() for k in ADVICE)]
+im_lookup = [(s, t) for s, t in IM if (s, t) not in im_block and (s, t) not in im_advice]
+PL = plan_markers()
+
+plan_refs = [(f"Reference list: {m.split('. CONFIRM')[0].split('CONFIRM')[0].strip(' .:')}",
+              "The full reference (authors, year, title, journal, volume, pages, DOI). If the source cannot be "
+              "found, drop the citation and reword the Rationale sentence that uses it.", "Team (Ahnycca)", BLOCKS)
+             for m in PL]
+
+plan_rq = [
+    ("RQ 1, signal quality: no formal signal-to-noise ratio. The 45 dB and 32 dB figures were not measured against "
+     "a common reference.", "Record Resondi and the conventional stethoscope at the same site with the same sound level "
+     "meter and reference, and report the paired difference.", "Team with the device", LATER),
+    ("RQ 7 / Hypothesis 2, reference vs device recordings: not testable. No Resondi recordings with "
+     "clinician-assigned labels exist.", "Clinician-labelled Resondi device recordings (two blinded clinicians per "
+     "breathing cycle), then score the fusion network on them.", "Team + clinicians", LATER),
+    ("RQ 8 / Hypothesis 3, conventional vs Resondi quality: not tested inferentially. The paired raw measurements "
+     "behind 45 dB and 32 dB were not kept.", "Paired recordings at the same sites; paired t-test or Wilcoxon "
+     "signed-rank test, as Table 6 plans.", "Team with the device", LATER),
+    ("RQ 9, acceptance: durability and functionality were not measured as such. The survey measured the four "
+     "UTAUT constructs.", "Add durability and functionality items to the next survey, or state that RQ 9 is "
+     "answered through the UTAUT constructs.", "Team", BEFORE),
+    ("RQ 10, instructional-support preferences: not answered. The survey had no items on diagram guidance, manual "
+     "clarity, ease of learning, or app navigation.", "A short survey on those four aspects after a guided "
+     "examination (frequency and percentage, as Table 6 plans).", "Team", BEFORE),
+    ("RQ 11, longitudinal monitoring and rehabilitation: built but not evaluated. No patient has repeated "
+     "recordings; the severity-error rule in Table 6 has not been applied.", "Repeated same-site recordings of the "
+     "same patients over weeks, with rehabilitation completion and outcome recorded.", "Team + practitioner", LATER),
+]
+
+plan_analyses = [
+    ("Cardiologist's blinded review of the 25 CirCor recordings has not been returned (the heart models were "
+     "trained before it).", "The reviewer's answer sheet; then report agreement with the dataset's labels and "
+     "revise the heart results if agreement is poor.", "Cardiologist", BEFORE),
+    ("Heart models not tested on Resondi heart recordings; the device's low-frequency response is not measured.",
+     "Swept-tone frequency response from 20 Hz, then heart recordings on the device labelled by a cardiologist.",
+     "Team + cardiologist", LATER),
+    ("Murmur sensitivity 66.7% on test patients, short of the pre-specified 80%.", "Set the threshold on more "
+     "validation patients, or let the murmur model use the S1/S2 timing; retest on new patients.", "Model work", LATER),
+    ("Murmur timing (systolic / diastolic) not attempted; the segmentation stage is not yet used by the murmur model.",
+     "Next model round.", "Model work", LATER),
+    ("Cardiac abnormality extent score and recording-level murmur metrics not computed (planned in Data Analysis).",
+     "Compute from the existing test predictions.", "Model work", BEFORE),
+    ("Hypotheses 1 and 2 tested for lung sounds only.", "Repeat the noise test on heart recordings; Hypothesis 2 "
+     "needs labelled device heart recordings.", "Model work + team", LATER),
+    ("Local Filipino lung dataset (run D in the plan) not collected.", "Resondi recordings of Filipino patients at "
+     "the seven sites, labelled by two blinded clinicians, with ethics approval and consent.", "Team + clinicians",
+     LATER),
+]
+
+plan_decisions = [
+    ("Peso figures remain: bill of materials ₱2,775, unit cost ₱4,000 (they answer RQ 2, cost) and the Littmann "
+     "price ₱22,000 in the Rationale.", "Keep them as device specifications, or remove them if the fair's rules "
+     "exclude any money figure (RQ 2's cost item would then go too).", "Team", BEFORE),
+]
+
+# Short labels for the IMRaD markers, keyed by a phrase in the marker text (first match wins).
+LABELS = [
+    ("name the microphone part", "Which microphone the evaluated build used (INMP441 or MAX4466)"),
+    ("low-frequency limit", "The microphone's low-frequency limit, from its datasheet"),
+    ("four zones", "How the six lung fields map onto the four zones the rules use"),
+    ("measurement unit", "Signal test: unit, reference level, comparator stethoscope, how it was captured"),
+    ("how many qualified", "Clarity ratings: number of raters and whether they agreed"),
+    ("blinded", "Whether the three pulmonologists were blinded to the model output"),
+    ("sampling method", "How the 27 acceptance respondents were recruited"),
+    ("ethics", "Ethics: any committee, school or hospital approval, with its date"),
+    ("distinct from the 13", "Whether the 3 hospital patients are among the 13 survey patients"),
+    ("confirm this is the term", "The research-design term your school uses"),
+    ("bit depth", "Bit depth and segment length used at segmentation"),
+    ("loss function", "The original model's loss function"),
+    ("name the institutions", "Names and dates of the institutions in early engagement"),
+    ("full paper's data analysis", "Full paper (not the IMRaD): replace the paired t-test on class labels"),
+    ("consider reporting cohen", "Optional: Cohen's kappa with a confidence interval"),
+]
+
+
+def label(t):
+    low = t.lower()
+    return next((lab for key, lab in LABELS if key in low), cap(t[:80]))
+
+
+im_block_rows = [(label(t), f"In {s}: {cap(t)}. Answer from the team's records or the adviser; never estimate.",
+                  "Team / adviser", BLOCKS) for s, t in im_block]
+im_lookup_rows = [(label(t), f"In {s}: {cap(t)}.", "Team", BLOCKS) for s, t in im_lookup]
+im_advice_rows = [(label(t), f"In {s}: {cap(t)}. Act on it or decide not to, then delete the marker; the IMRaD "
+                   "text itself is already correct.", "Team", BLOCKS) for s, t in im_advice]
+
+im_evidence = [
+    ("Classifier accuracy on Resondi device recordings is unmeasured (26 device recordings ran, none labelled).",
+     "Clinician-labelled device recordings, then balanced accuracy, per-class recall, kappa.", "Team + clinicians",
+     LATER),
+    ("The 15 field recordings' reference labels are not linked to the recordings, so kappa and a confusion matrix "
+     "cannot be computed.", "Recover the 15 paired classifications from the field records.", "Team", BEFORE),
+    ("Heart: cardiologist review pending; device frequency response unmeasured; heart models untested on device; "
+     "murmur sensitivity 66.7% against the 80% target.", "As in the research plan's list above.",
+     "Cardiologist + team", LATER),
+    ("Objectives 7 to 9 (longitudinal monitoring, rehabilitation support, practitioner review) are built but not "
+     "evaluated.", "Repeated recordings, rehabilitation outcomes, and the number and time of practitioner reviews.",
+     "Team + practitioner", LATER),
+    ("Automated quality check takes 145 s per recording, too slow to run before every classification.",
+     "Faster quality check, then re-time it.", "Development", LATER),
+    ("The practitioner cannot change the AI's classification label directly (objective 9 says confirm, modify, or "
+     "reject); disagreement goes in a comment.", "Add an override control in the app, or reword objective 9.",
+     "Development / team", BEFORE),
+]
+
+im_decisions = [
+    ("Littmann price ₱22,000 in the Introduction.", "Keep as a cost comparison, or remove if the fair excludes money "
+     "figures.", "Team", BEFORE),
+    ("Heart result screen not yet viewed with a patient account (the paper says the app shows it).", "Record a heart "
+     "site from a patient account and press Analyse heart sound.", "Team", BEFORE),
+    ("In-app Filipino text for the heart results not checked by a Filipino speaker.", "Read it in the app and "
+     "correct any wording.", "Team", BEFORE),
+]
+
+n_plan = len(plan_refs) + len(plan_rq) + len(plan_analyses) + len(plan_decisions)
+n_im = len(im_block_rows) + len(im_lookup_rows) + len(im_advice_rows) + len(im_evidence) + len(im_decisions)
+n_block_plan = sum(r[3] == BLOCKS for r in plan_refs + plan_rq + plan_analyses + plan_decisions)
+n_block_im = sum(r[3] == BLOCKS for r in im_block_rows + im_lookup_rows + im_advice_rows + im_evidence + im_decisions)
+
+# ------------------------------------------------------------------ write
+para("RESONDI · AHNYCCA'S PAPERS", size=9, bold=True, color=ACCENT, after=0)
+para("What is still missing: research plan and IMRaD", size=19, bold=True, after=2)
+para("Generated 14 November 2026 by build/missing/build_missing.py from the FINAL papers. The visible markers are "
+     "read from the papers, so this list matches them.", size=10, italic=True, color=GREY, after=8)
+
+heading("Priority", size=12, before=2)
+for line in (
+    f"{BLOCKS}: a [[...]] marker is visible in the paper. Fill or remove every one before the paper is submitted.",
+    f"{BEFORE}: should be done for the regional fair, but the paper is honest without it; it already states the gap.",
+    f"{LATER}: needs new data or a new model round. The paper reports it as a limitation or planned work, so it does "
+    "not stop submission.",
+):
+    para("•  " + line, after=2)
+
+heading("Summary", size=12)
+t = doc.add_table(rows=3, cols=3); t.style = "Table Grid"
+for r, vals in enumerate([["Paper", "Items", BLOCKS],
+                          ["Research plan", str(n_plan), str(n_block_plan)],
+                          ["IMRaD", str(n_im), str(n_block_im)]]):
+    for c, v in enumerate(vals):
+        cell = t.rows[r].cells[c]
+        if r == 0:
+            shade(cell, "EBD3DE")
+        run = cell.paragraphs[0].add_run(v); run.font.size = Pt(9.5); run.bold = r == 0
+para("", after=2)
+
+heading("Part 1. Research plan (Resondi-Research-Plan-Heart-and-Lung-FINAL)", size=14, before=10)
+heading("1.1  Visible notes in the paper", size=11.5)
+table(plan_refs)
+heading("1.2  Research questions the data cannot yet fully answer (stated in Table 21)", size=11.5)
+table(plan_rq)
+heading("1.3  Planned analyses not yet done", size=11.5)
+table(plan_analyses)
+heading("1.4  Decisions for the team", size=11.5)
+table(plan_decisions)
+
+heading("Part 2. IMRaD (Resondi-IMRaD-Heart-and-Lung-FINAL)", size=14, before=10)
+heading(f"2.1  Visible [[TO FILL]] facts the main claims rest on ({len(im_block_rows)})", size=11.5)
+table(im_block_rows)
+heading(f"2.2  Visible [[TO FILL]] facts to look up ({len(im_lookup_rows)})", size=11.5)
+table(im_lookup_rows)
+heading(f"2.3  Visible [[TO FILL]] notes that are advice, not missing facts ({len(im_advice_rows)})", size=11.5)
+table(im_advice_rows)
+heading("2.4  Evidence not yet collected (stated in the paper's limitations)", size=11.5)
+table(im_evidence)
+heading("2.5  Decisions and checks for the team", size=11.5)
+table(im_decisions)
+
+para("Send the answers to the visible markers and they can be written into the papers, rebuilt, and recopied here "
+     "under the FINAL names; this list then shrinks on its next run. The full fill-in worksheet for the IMRaD, with the "
+     "same 15 markers, is in imrad/ (Resondi-IMRaD-Heart-and-Lung-Open-Items-2026-11-13).",
+     size=9.5, italic=True, color=GREY, before=6)
+
+doc.save(OUT)
+print(f"wrote {OUT}: plan {n_plan} items ({n_block_plan} blocking), IMRaD {n_im} items ({n_block_im} blocking); "
+      f"IMRaD markers {len(IM)} = {len(im_block)} + {len(im_lookup)} + {len(im_advice)}; plan markers {len(PL)}")
