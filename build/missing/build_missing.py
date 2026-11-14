@@ -66,9 +66,10 @@ PLAIN = [
     ("how many qualified", "Who rated the recording quality",
      "How many health professionals rated the recordings as good, acceptable or poor, and whether you checked that they "
      "agreed with each other.", "Your field-test records."),
-    ("sampling method", "How the 27 survey respondents were chosen",
-     "How you chose the 27 people who answered the acceptance survey (for example, everyone available at the clinic "
-     "that day) and who was allowed to take part.", "Your survey records, or ask your adviser."),
+    ("inclusion criteria", "Who was allowed to answer the survey",
+     "The paper now says the 27 respondents were chosen by convenience sampling. Say who was allowed to take part "
+     "(for example: aged 18 or over, a health worker, patient or resident of Puerto Princesa City).",
+     "Your survey records, or ask your adviser."),
     ("distinct from the 13", "Hospital patients vs survey patients",
      "Are the 3 patients you recorded at the private hospital the same people as any of the 13 patients who answered "
      "the survey? Just yes or no.", "Your records."),
@@ -251,9 +252,11 @@ for line in (
     "The reference cited as Shkarupylo et al. (2024) is really Komaryshyn & Kogut (2026); corrected in both papers, with its full citation.",
     "The acceptance results are marked as coming from the old version.",
     "The SmartSteth paper is attached after Form 7 in the compiled document.",
-    "Microphone (INMP441, from the parts tables in your full paper) and recording settings (16-bit, 1-second "
-    "segments): filled in. The hospital patients are described as taking part in the survey, as your full paper "
+    "Recording settings (16-bit, 1-second segments): filled in. The hospital patients are described as taking part in the survey, as your full paper "
     "says. The notes on the full paper's t-test and on Cohen's kappa were removed (15 Nov).",
+    "Your answers of 15 Nov: research design kept as developmental-descriptive; the field-test device used a MAX4466 "
+    "microphone board (the INMP441 came with version 2.0); three health professionals rated recording quality; the "
+    "survey used convenience sampling.",
     "Both papers are formatted: Times New Roman 11, justified, double-spaced (the space between paragraphs kept), "
     "consistent indents, references flush left with a hanging indent.",
 ):

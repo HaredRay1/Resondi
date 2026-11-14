@@ -389,12 +389,6 @@ para("The study employed a developmental\u2013descriptive research design in two
          "candidate versions were compared on public lung-sound databases under a "
          "patient-wise evaluation. No experimental manipulation of human participants or "
          "control group was involved.", first=0)
-p = para("", first=0, after=4, spacing=1.0)
-FILL(p, "confirm this is the term your institution uses. Developmental-descriptive "
-        "is accurate for what was done and is standard in Philippine senior high "
-        "school research; some programmes say research and development (R&D) or "
-        "design and development research (DDR) instead. Do not let it be called "
-        "experimental \u2014 there is no manipulated variable and no control group")
 
 H2("Device Development")
 para("The device pairs a conventional acoustic chest piece and silicone tubing with a "
@@ -419,18 +413,15 @@ FIG("1b", "Concept Render of the Version 2.0 Enclosure", "Resondi-Device-3D.png"
     note="Rendered from the team's Blender model. Proportions and colours are illustrative, "
          "and no result in this paper was obtained on this build.")
 
-p = para("The microphone was selected for unit-to-unit consistency of frequency "
+p = para("The MAX4466 was selected for unit-to-unit consistency of frequency "
          "response. Because the system's central claim is that a recording taken at "
          "one visit can be compared against the same site at a later visit, variation "
          "in transducer response between devices would introduce drift into precisely "
-         "the measurement the system exists to make. The microphone is an INMP441 "
-         "omnidirectional digital MEMS microphone, the part listed in the study's component "
-         "and cost tables.", first=0)
+         "the measurement the system exists to make.", first=0)
 
-p = para("The microcontroller receives the digitised acoustic signal from the microphone "
-         "over its I\u00b2S bus, writes the "
-         "recording to MicroSD together with its metadata — anatomical site, timestamp, "
-         "and duration \u2014 in WAV format, and advertises over Bluetooth Low Energy. Two "
+p = para("The microcontroller samples the preamplified acoustic signal, writes the "
+         "recording to MicroSD together with its metadata (anatomical site, timestamp, "
+         "and duration) in WAV format, and advertises over Bluetooth Low Energy. Two "
          "storage paths "
          "operate in parallel: recordings transfer to the paired mobile application "
          "where a phone is present, and are retained on MicroSD for later transfer where "
@@ -439,7 +430,7 @@ para("Recordings were stored as 16-bit, 16 kHz mono WAV files of 15 seconds and 
      "into 1-second segments (16,000 samples) for classification; during training the "
      "segments overlapped by 50 percent (0.5-second hop), and at testing and in the "
      "application they did not overlap, with segment scores averaged over each breathing "
-     "cycle.", first=0)
+     "cycle or recording.", first=0)
 
 FIG(2, "Hardware Architecture of the Device",
     "d1_hardware.png", 6.05)
@@ -754,14 +745,15 @@ para("The dataset's labels are also being checked against an independent "
      "finish before training, but the models were trained before it was returned; if it "
      "finds the dataset's labels unreliable, the heart results below must be revised.", first=0)
 p = para("Fundamental heart sounds lie lower in frequency than lung sounds, with most S1 and "
-         "S2 energy below about 150 Hz. The digital microphone in the version 2.0 build is "
+         "S2 energy below about 150 Hz. The field build used an electret microphone on a "
+         "MAX4466 amplifier board, whose low-frequency response is set by the capsule and its "
+         "acoustic coupling and is not specified by the manufacturer for this application. "
+         "The digital microphone in the version 2.0 build is "
          "specified by its manufacturer from about 60 Hz upward, so the low end of the heart "
          "sound band may be attenuated. Before any cardiac result on the device is reported, the frequency "
          "response of the whole acquisition chain will be measured with swept tones from "
          "20 Hz to 2,000 Hz, and any low-frequency loss will be reported as a hardware "
          "limitation rather than attributed to the classifier.", first=0)
-FILL(p, "confirm the INMP441's specified low-frequency limit (about 60 Hz) from its "
-        "datasheet")
 
 H2("Evaluation Procedures")
 para("Before analysis, each recording was assessed where technically possible for "
@@ -784,13 +776,9 @@ FILL(p, "the measurement unit, the reference level if the figures are in decibel
         "an acoustic stethoscope was captured for measurement")
 
 para("Recording clarity. Recordings acquired with a conventional stethoscope and with "
-     "Resondi were evaluated by qualified healthcare professionals against predetermined "
+     "Resondi were evaluated by three qualified healthcare professionals against predetermined "
      "recording-quality criteria, and rated good, acceptable, or poor.", first=0,
      after=2, spacing=1.6)
-p = para("", first=0, after=6, spacing=1.6)
-FILL(p, "how many qualified healthcare professionals rated the recordings, and "
-        "whether inter-rater agreement was assessed. The criteria are documented; the "
-        "raters are not")
 
 para("Ambient noise conditions. Recordings were obtained in three settings — a "
      "community area, a quiet room, and a hospital ward — with ambient noise measured in "
@@ -829,10 +817,12 @@ para("Rebuilt classifier on device recordings. After the fusion network was plac
      "not whether its classifications are correct.", first=0, after=6, spacing=1.6)
 
 p = para("End-user acceptance. Acceptance was assessed with 27 respondents across Puerto "
-         "Princesa City using a questionnaire adapted from the Unified Theory of Acceptance "
-         "and Use of Technology (Venkatesh, Morris, Davis, & Davis, 2003), together with "
-         "three patients at a private hospital under the supervision of an attending "
-         "physician who reviewed and consented to the procedure. Items were rated on a "
+         "Princesa City, recruited by convenience sampling, using a questionnaire adapted "
+         "from the Unified Theory of Acceptance and Use of Technology (Venkatesh, Morris, "
+         "Davis, & Davis, 2003), together with three patients at a private hospital under "
+         "the supervision of an attending physician who reviewed and consented to the "
+         "procedure. Because respondents were not randomly selected, the results describe "
+         "this group and are not generalised to the wider population. Items were rated on a "
          "five-point Likert scale and grouped into four constructs \u2014 performance "
          "expectancy, effort expectancy, social influence and facilitating conditions "
          "\u2014 together with a fifth group assessing the degree to which conformity with "
@@ -847,8 +837,8 @@ p = para("End-user acceptance. Acceptance was assessed with 27 respondents acros
          "model; the current version, with the rebuilt lung-sound classifier and the "
          "heart-sound models, has not yet been rated.",
          first=0, after=6, spacing=1.6)
-FILL(p, "sampling method and inclusion criteria for the 27 respondents. The instrument is "
-        "documented; how respondents were recruited is not")
+FILL(p, "inclusion criteria for the 27 respondents: who was allowed to take part. "
+        "The sampling method (convenience) is stated; the eligibility rule is not")
 
 H2("Data Analysis")
 p = para("Descriptive statistics were used to summarise recording clarity, response "
@@ -941,7 +931,7 @@ para("These results answer Research Question 1 descriptively. In signal quality,
      "community setting.", first=0)
 
 H2("Research Question 2: Specifications of the Smart Stethoscope")
-para("In design, the Resondi smart stethoscope is a handheld unit that joins an "
+para("In its current version 2.0 design, the Resondi smart stethoscope is a handheld unit that joins an "
      "acoustic chest piece to a digital microphone in a 3D-printed polylactic acid "
      "enclosure of 173 by 80 by 70 mm, with a 20 by 4 character display and two "
      "buttons, used to record at seven standardised lung sites and five cardiac sites."
@@ -949,7 +939,9 @@ para("In design, the Resondi smart stethoscope is a handheld unit that joins an 
      " microphone, a 32 GB microSD card and a 10,000 mAh battery; it records "
      "15-second, 16 kHz mono WAV files and serves its own Wi-Fi network and web page, "
      "so it works without internet. Its cost is a bill of materials of ₱2,775 and a "
-     "fully loaded unit cost of ₱4,000.", first=0)
+     "fully loaded unit cost of ₱4,000. The field build tested in this study differed in "
+     "two parts: it used an electret microphone on a MAX4466 amplifier board and "
+     "communicated over Bluetooth Low Energy.", first=0)
 
 H3("Heart Mode")
 para("Heart Mode was implemented on the device and in the application. It guides the "

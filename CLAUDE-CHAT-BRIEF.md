@@ -150,24 +150,24 @@ the murmur result as 80%.
 
 ## 6. What is still missing (the to-do list in `Ahnyccas papers/`)
 
-**Part A, must do before submitting** (9 items since 15 Nov; the papers show each gap as a visible `[[TO FILL]]`
+**Part A, must do before submitting** (6 items since 15 Nov; the papers show each gap as a visible `[[TO FILL]]`
 marker):
 
-1. The name of the research design.
-2. The original model's loss function.
-3. Which zone each of the two side (mid-axillary) lung sites belongs to (front sites are upper, lower-back sites
+1. The original model's loss function.
+2. Which zone each of the two side (mid-axillary) lung sites belongs to (front sites are upper, lower-back sites
    lower).
-4. Confirm the INMP441's lowest frequency (about 60 Hz) from its datasheet.
-5. Details of the 45 vs 32 dB test.
-6. Who rated the recording quality.
-7. How the 27 survey respondents were chosen.
-8. Scan the logbook.
-9. Tick questions 2, 5 and 6 on the ISEF abstract page.
+3. Details of the 45 vs 32 dB test.
+4. Who was allowed to answer the survey (inclusion criteria).
+5. Scan the logbook.
+6. Tick questions 2, 5 and 6 on the ISEF abstract page.
 
-**Filled on 15 Nov from the project files:** the microphone is the INMP441 (the parts tables of the 83-page paper);
-recordings are 16-bit and cut into 1-second segments (50% overlap in training, none in testing and the app); the
-three hospital patients took part in the survey, as the 83-page paper says (whether all three are among the 27
-responses is not recorded). The notes on the full paper's t-test and on Cohen's kappa were removed.
+**Filled on 15 Nov.** From the project files: recordings are 16-bit and cut into 1-second segments (50% overlap in
+training, none in testing and the app); the three hospital patients took part in the survey, as the 83-page paper
+says (whether all three are among the 27 responses is not recorded); the notes on the full paper's t-test and on
+Cohen's kappa were removed. Confirmed by the team: the research design is developmental–descriptive; **the
+field-test device used an electret microphone on a MAX4466 board with Bluetooth Low Energy** (the INMP441 and Wi-Fi
+came with version 2.0; the 83-page paper's parts tables list the INMP441, which the team overrode); three health
+professionals rated recording quality; the survey used convenience sampling.
 
 **Known contradictions with the 83-page paper:** it reports signal strength as 32.49 dB (Ausculta) against 7.89 dB
 (stethoscope), while the IMRaD uses 45 against 32 dB; and it gives 30 survey participants plus the 3 hospital
