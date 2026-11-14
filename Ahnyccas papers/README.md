@@ -4,10 +4,10 @@ The final revised IMRaD and research plan, each as Word and PDF. Last refreshed 
 
 | File | What it is |
 |---|---|
-| `Resondi-IMRaD-Heart-and-Lung-2026-11-13` | The IMRaD paper: lung and heart, with no financial requirement. Includes the rebuilt classifier, the cross-validation, the leakage demonstration (Table 4), the run on Resondi device recordings (Figure 16), and the heart-sound models on CirCor test patients and in the app (Table 5, Figure 17). |
-| `Resondi-Research-Plan-Revised-Heart-and-Lung-2026-11-13` | The individual proponent research plan (Ahnycca Krish N. Malimban), revised, with the heart component and the heart-sound model results (Table 20, Figure 16). |
+| `Resondi-IMRaD-Heart-and-Lung-FINAL` | The IMRaD paper: lung and heart, with no financial requirement. Includes the rebuilt classifier, the cross-validation, the leakage demonstration (Table 4), the run on Resondi device recordings (Figure 16), and the heart-sound models on CirCor test patients and in the app (Table 5, Figure 17). |
+| `Resondi-Research-Plan-Heart-and-Lung-FINAL` | The individual proponent research plan (Ahnycca Krish N. Malimban), revised, with the heart component and the heart-sound model results (Table 20, Figure 16). |
 
-These are copies. The builders write to `../imrad/` and `../research-plan/`; after a rebuild, copy the two new files here again. Kept out of this folder on 14 Nov, at the user's request:
+These are copies, renamed FINAL. The builders write to `../imrad/Resondi-IMRaD-Heart-and-Lung-2026-11-13` and `../research-plan/Resondi-Research-Plan-Revised-Heart-and-Lung-2026-11-13`; after a rebuild, copy those here again under the FINAL names. Kept out of this folder on 14 Nov, at the user's request:
 - the IMRaD fill-ins (15 `[[TO FILL]]` items, 9 blocking): `../imrad/Resondi-IMRaD-Heart-and-Lung-Open-Items-2026-11-13`;
 - the research plan revision log: `../research-plan/Resondi-Research-Plan-Revision-Log-Heart-and-Lung-2026-11-13`.
 
