@@ -230,5 +230,9 @@ para("No fieldwork audio was sent to an AI service. To test the models, the AI r
      "are the names of the research adviser and consultants, which the fair requires on the IMRaD cover page. Phone "
      "numbers and e-mail addresses were kept out of every document it wrote.")
 
+import os as _os, sys as _sys  # house style: Times New Roman 11, justified, consistent indents (14 Nov)
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
+import house_style  # noqa: E402
+print("  house style:", house_style.apply(doc))
 doc.save(OUT)
 print("wrote", OUT)

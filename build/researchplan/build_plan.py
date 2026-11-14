@@ -199,6 +199,17 @@ log("Research questions 2–4", "the Ausculta Smart Stethoscope / Platform / ana
 replace(P[19], "Smart-stethoscope connection", "Smart-stethoscope Wi-Fi connection")
 log("Research question 5", "Smart-stethoscope connection", "Smart-stethoscope Wi-Fi connection",
     "The device connects over its own Wi-Fi access point, not Bluetooth.")
+# Number the research questions 1 to 11: both papers and the Results refer to them by number. Their "•" sub-items,
+# written with manual line breaks, are split into their own paragraphs by build/style/house_style.py.
+RQ = P[15:26]
+assert RQ[0].text.startswith("What is the quality") and RQ[-1].text.startswith("How can Resondi"), \
+    [q.text[:30] for q in RQ]
+for _n, _q in enumerate(RQ, 1):
+    assert len(_q.runs) == 1, (_n, len(_q.runs))
+    _q.runs[0].text = f"{_n}. " + _q.runs[0].text
+log("Research questions (format)", "Unnumbered; sub-items as manual line breaks", "Numbered 1 to 11; each sub-item its "
+    "own bulleted line, indented under its question", "The Results and the IMRaD refer to the questions by number. "
+    "Formatting requested by the user on 14 Nov: Times New Roman 11, justified, consistent indentation.")
 
 # ======================================================================= GOALS
 replace(P[45], "establish BLE and MicroSD communication", "establish Wi-Fi access-point and microSD communication")
@@ -1503,6 +1514,10 @@ log("Title", "Resondi: A CNN-Assisted Auscultation Instrument for Cardiopulmonar
     "Rehabilitation-Support System", "Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System",
     "Matches the title registered on the signed ISEF forms and the title page (user, 14 Nov).")
 D.core_properties.title = "Resondi Research Plan (revised 11 November 2026)"
+import os as _os, sys as _sys  # house style: Times New Roman 11, justified, consistent indents (14 Nov)
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
+import house_style  # noqa: E402
+print("  house style:", house_style.apply(D))
 D.save(OUT)
 print("wrote", OUT)
 
@@ -1539,5 +1554,9 @@ for t in ["Full references for 3M (2025), Park et al. (2025) and Shkarupylo et a
           "The fusion design in Table 4 and Figure 4 follows the training script now running (three branches, concatenation, dense). "
           "If the final model differs, update both."]:
     L.add_paragraph(t, style="List Bullet")
+import os as _os, sys as _sys  # house style: Times New Roman 11, justified, consistent indents (14 Nov)
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
+import house_style  # noqa: E402
+print("  house style:", house_style.apply(L))
 L.save(LOGF)
 print("wrote", LOGF, len(LOG), "edits")

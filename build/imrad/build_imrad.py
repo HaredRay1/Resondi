@@ -1746,6 +1746,10 @@ for r in sorted(REFS):
     p.paragraph_format.first_line_indent = Inches(-0.5)
 
 OUT = os.path.normpath(os.path.join(HERE, "..", "..", "imrad", "Resondi-IMRaD-Heart-and-Lung-2026-11-13.docx"))
+import os as _os, sys as _sys  # house style: Times New Roman 11, justified, consistent indents (14 Nov)
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
+import house_style  # noqa: E402
+print("  house style:", house_style.apply(doc))
 doc.save(OUT)
 
 import re

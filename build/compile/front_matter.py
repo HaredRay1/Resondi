@@ -2,7 +2,7 @@
 
 Source: the team's draft "edit pa title page na orange ... may error sa table of contents" (14 Nov 2026), kept
 privately as Downloads\\Resondi-private\\compile-sources\\front-matter-draft.pdf.
-  - Title page: rebuilt in the same layout (A4, Times 12 pt, the orange RIM-I-RSTF7b tag) with the title corrected
+  - Title page: rebuilt in the same layout (A4, Times, the orange RIM-I-RSTF7b tag; text 11 pt since 14 Nov, as the papers) with the title corrected
     to the one registered on the signed ISEF forms ("AI-Assissted" -> "AI-Assisted", "IOT" -> "IoT",
     "Rehabilitation Support-System" -> "Rehabilitation-Support System").
   - Checklist of forms required: the team's page, unchanged.
@@ -51,8 +51,8 @@ LINE = 15.6
 
 def centred(p, y, text, bold):
     font = "tibo" if bold else "tiro"
-    w = fitz.get_text_length(text, fontname=font, fontsize=12)
-    p.insert_text(((W - w) / 2, y), text, fontname=font, fontsize=12)
+    w = fitz.get_text_length(text, fontname=font, fontsize=11)
+    p.insert_text(((W - w) / 2, y), text, fontname=font, fontsize=11)
 
 
 def wrap(text, font, size, width):
@@ -74,7 +74,7 @@ def title_page(doc):
     tw = fitz.get_text_length(CODE, fontname="hebo", fontsize=20)
     p.insert_text((tag.x0 + (tag.width - tw) / 2, tag.y1 - 11), CODE, fontname="hebo", fontsize=20, color=(1, 1, 1))
     y = 74
-    for line in wrap(TITLE, "tibo", 12, 420):
+    for line in wrap(TITLE, "tibo", 11, 420):
         centred(p, y, line, True); y += LINE
     for lines, bold, gap in BLOCKS:
         y += gap
@@ -117,8 +117,8 @@ def imrad_headings():
 def contents_page(doc):
     p = doc.new_page(width=W, height=H)
     head = "TABLE OF CONTENTS"
-    hw = fitz.get_text_length(head, fontname="tibo", fontsize=12)
-    p.insert_text(((W - hw) / 2, 92), head, fontname="tibo", fontsize=12)
+    hw = fitz.get_text_length(head, fontname="tibo", fontsize=11)
+    p.insert_text(((W - hw) / 2, 92), head, fontname="tibo", fontsize=11)
     x0, x1 = 72, W - 72
     p.draw_line(fitz.Point(x0, 102), fitz.Point(x1, 102), width=0.6)
     y = 132
@@ -127,13 +127,13 @@ def contents_page(doc):
         font = "tibo" if lvl == 0 else "tiro"
         x = x0 + (22 if lvl else 0)
         num = str(page)
-        nw = fitz.get_text_length(num, fontname="tiro", fontsize=12)
-        tw = fitz.get_text_length(text, fontname=font, fontsize=12)
-        p.insert_text((x, y), text, fontname=font, fontsize=12)
-        p.insert_text((x1 - nw, y), num, fontname="tiro", fontsize=12)
-        dot_w = fitz.get_text_length(".", fontname="tiro", fontsize=12)
+        nw = fitz.get_text_length(num, fontname="tiro", fontsize=11)
+        tw = fitz.get_text_length(text, fontname=font, fontsize=11)
+        p.insert_text((x, y), text, fontname=font, fontsize=11)
+        p.insert_text((x1 - nw, y), num, fontname="tiro", fontsize=11)
+        dot_w = fitz.get_text_length(".", fontname="tiro", fontsize=11)
         n = int((x1 - nw - 6 - (x + tw + 6)) / dot_w)
-        p.insert_text((x + tw + 4, y), "." * max(n, 0), fontname="tiro", fontsize=12)
+        p.insert_text((x + tw + 4, y), "." * max(n, 0), fontname="tiro", fontsize=11)
         y += 22 if lvl == 0 else 17
     p.draw_line(fitz.Point(x0, y - 8), fitz.Point(x1, y - 8), width=0.6)
     return p

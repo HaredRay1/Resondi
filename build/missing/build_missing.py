@@ -395,6 +395,10 @@ para("Send the answers to the visible markers and they can be written into the p
      "same markers, is in imrad/ (Resondi-IMRaD-Heart-and-Lung-Open-Items-2026-11-13).",
      size=9.5, italic=True, color=GREY, before=6)
 
+import os as _os, sys as _sys  # house style: Times New Roman 11, justified, consistent indents (14 Nov)
+_sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
+import house_style  # noqa: E402
+print("  house style:", house_style.apply(doc))
 doc.save(OUT)
 print(f"wrote {OUT}: plan {n_plan} items ({n_block_plan} blocking), IMRaD {n_im} items ({n_block_im} blocking); "
       f"IMRaD markers {len(IM)} = {len(im_block)} + {len(im_lookup)} + {len(im_advice)}; plan markers {len(PL)}")
