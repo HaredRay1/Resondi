@@ -888,7 +888,8 @@ H1("Results")
 
 para("Findings are reported in the order the evaluation procedures were carried out. "
      "The classification result is the weakest of the five and is stated without "
-     "qualification.", first=0)
+     "qualification. The section ends with the result for each of the nine objectives "
+     "of the study.", first=0)
 
 H2("Signal Acquisition")
 para("Mean signal strength measured approximately 45 dB for Resondi against "
@@ -1133,6 +1134,64 @@ para("Placed in the application, the models gave the same results through the de
      "about how the models perform on the Resondi microphone.", first=0)
 
 # ═══════════════════════════════════════════════════ DISCUSSION
+H2("Longitudinal Comparison, Rehabilitation Support, and Practitioner Review")
+para("The functions behind the last three objectives were built and run in the "
+     "application, but none was evaluated with users. For longitudinal comparison, a "
+     "recording's page shows the two most recent recordings from the same anatomical "
+     "site side by side, with each one's classification and the number of days between"
+     " them, and a four-week chart sets the number of exercises a patient completed "
+     "each week against the share of that week's lung recordings classified as normal."
+     " For rehabilitation support, each lung result generates a suggested breathing-"
+     "exercise plan matched to its sound class, and each heart recording a cardiac "
+     "activity plan; no exercise can be started until a practitioner with the matching"
+     " specialization has approved it, a guided session player then leads the patient "
+     "through it, and each completed session is recorded. For practitioner review, a "
+     "verified practitioner sees only the recordings a patient has sent to them, "
+     "listens to each, reads its AI-assisted result, and approves, disapproves, or "
+     "returns each recommended exercise with a comment. The application has no "
+     "separate control for overriding the classification label itself, so a "
+     "practitioner who disagrees with it records that in the comment.", first=0)
+para("None of these functions has been measured. No patient was recorded repeatedly "
+     "over time, so no change between visits has been observed; no rehabilitation "
+     "outcome was recorded; and the number of results reviewed and the time a review "
+     "takes were not measured. They are reported as built, not as shown to work.", first=0)
+
+H2("Results by Objective")
+para("Against the nine objectives set out in the introduction, the results stand as "
+     "follows.", first=0)
+for n, txt in enumerate([
+    "Smart stethoscope that records and organizes lung sounds by site: achieved. The "
+    "device records at each standardized site and files every recording by site, and "
+    "it produced a signal about 13 dB stronger than a conventional stethoscope.",
+    "Guided auscultation through a standardized sequence: achieved. The application "
+    "guides the user through the seven lung sites in a fixed order (Figure 3).",
+    "Guided cardiac auscultation in Heart Mode: achieved. Heart Mode guides recording"
+    " at the four valve areas and Erb's point; heart recordings made with the device "
+    "have not been evaluated quantitatively.",
+    "Assessment of recording quality: achieved in part. Ninety-three percent of "
+    "recordings were rated good or acceptable, but the automated quality check, at "
+    "145 seconds a recording, is too slow to run before every classification.",
+    "AI-assisted classification of respiratory sound patterns: achieved in part. The "
+    "classifier runs in the application; its rebuilt form scores 40.0 percent "
+    "balanced accuracy on unseen ICBHI patients against 25 percent by chance, and its"
+    " accuracy on Resondi device recordings has not been measured.",
+    "AI-assisted analysis of heart sounds: achieved in part. On CirCor test patients "
+    "the heart-rate error was 3.0 beats per minute and murmur sensitivity 66.7 "
+    "percent, short of the 80 percent target; both models run in the application but "
+    "have not been tested on device recordings.",
+    "Longitudinal monitoring across visits: built, not evaluated. Same-site "
+    "comparison and the four-week trend run in the application, but no patient has "
+    "repeated recordings in the study data.",
+    "Rehabilitation support: built, not evaluated. Exercise plans are released only "
+    "after practitioner approval and completion is recorded; no rehabilitation "
+    "outcome was measured.",
+    "Practitioner review workflow: built, not evaluated. Practitioners review only "
+    "the cases sent to them and decide on each recommendation; review volume and time"
+    " were not measured.",
+], 1):
+    p = para(f"{n}. {txt}", first=0, after=4, spacing=1.6)
+    p.paragraph_format.left_indent = Inches(0.35)
+
 H1("Discussion")
 
 para("The results separate cleanly into two groups. Signal acquisition, recording "

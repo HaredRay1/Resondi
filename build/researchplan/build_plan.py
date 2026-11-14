@@ -250,8 +250,9 @@ t1 = table(c._p, [
 n = note(t1._tbl, "Values are from the VER 2.0 specification sheet and bill of materials.", BODY)
 c = caption(n._p, "Figure 1", "Hardware Architecture of the Resondi Smart Stethoscope", BODY)
 f = figure(c._p, os.path.join(FIG, "Resondi-Hardware-Block-VER2.png"), 6.0, BODY)
-n = note(f._p, "Recordings cross from the device to the platform on the microSD card; the automatic gateway between "
-         "them is not yet built.", BODY)
+n = note(f._p, "Recordings cross from the device to the platform on the microSD card or, since 14 November 2026, by "
+         "a phone that downloads them over the device's Wi-Fi and uploads them through the application; the automatic "
+         "gateway between them is not yet built.", BODY)
 c = caption(n._p, "Figure 2", "Concept Render of the Resondi Smart Stethoscope", BODY)
 f = figure(c._p, os.path.join(FIG, "Resondi-Device-3D.png"), 5.2, BODY)
 note(f._p, "Rendered from the team's 3D model, which measures about 160 × 100 × 60 mm; the fabricated enclosure "
@@ -589,9 +590,42 @@ para("This section reports the evaluation completed to date. Results of the earl
      "allow and the severity-score analysis. The feature-fusion models are then compared with the individual "
      "single-representation models, a second round adds a paediatric corpus and is confirmed by cross-validation, and "
      "the models are then set beside the original model and the reference study. The heart-sound models, tested on "
-     "public recordings, are reported last.")
+     "public recordings, are reported last. Each research question is answered under the heading that names it, and "
+     "Table 21, at the end of the results, gives the answer to all eleven questions and where each is reported.")
 
-h2("System Evaluation From the Field Study")
+h2("Specifications of the Device, Platform, and Analysis System (Research Questions 2 to 4)")
+para("Research Question 2 asked for the specifications of the smart stethoscope. In design, it is a handheld unit that "
+     "joins an acoustic chest piece to a digital microphone in a 3D-printed PLA enclosure of 173 by 80 by 70 mm, with a "
+     "20 by 4 character display and two buttons, used to record at seven standardized lung sites and five cardiac sites "
+     "(Figure 2; sites in Figures 3 and 15). Its components are an ESP32 microcontroller with built-in Wi-Fi, an INMP441 digital MEMS microphone "
+     "on the I2S interface, a 32 GB microSD card, and a 10,000 mAh battery; it records 15-second, 16 kHz, 16-bit mono WAV "
+     "files and serves its own Wi-Fi network and web page, so it works without internet (Table 1 and Figure 1). Its cost "
+     "is a bill of materials of 2,775 pesos and a fully loaded unit cost of 4,000 pesos (Table 1).")
+para("Research Question 3 asked for the specifications of the monitoring platform. Its user interface is a web "
+     "application in English and Filipino with separate Lung and Heart modes, each of which guides the user through its "
+     "sites on a body diagram and files every recording by site, together with a recording history, a same-site "
+     "comparison, and trend charts. Its system architecture has three tiers: the device, which records to its microSD "
+     "card; the transfer, in which a phone joins the device's Wi-Fi, downloads the recordings, and uploads them through "
+     "the application's transfer page, since the automatic gateway between device and platform is not yet built; and the "
+     "platform, which stores each recording against the patient's record, runs the lung-sound and heart-sound models in "
+     "the browser, and presents every result to a practitioner. Role-based access separates patients, practitioners, and "
+     "administrators: a practitioner is verified by an administrator, may review only recordings in the specialization "
+     "they hold (respiratory, cardiac, or both), and can read only the cases a patient has sent to them, which row-level "
+     "security on each record enforces. For data management, each recording is stored as a private audio file with its "
+     "site, mode, examination, and date; each analysis is saved separately with the name of the model that produced it; "
+     "deleting a recording deletes its analyses, plans, reviews, and submissions; and an approved recording can be "
+     "exported as a PDF report.")
+para("Research Question 4 asked for the specifications of the sound analysis system. Audio is preprocessed to 16 kHz "
+     "mono and cut into 1-second windows, each band-limited to 100 to 3,900 Hz and levelled before its features are "
+     "computed. The feature representations are MFCC, a log-power spectrogram, and a chromagram (Table 4). Each feeds its "
+     "own CNN branch, and the fusion architecture concatenates the three branch outputs into a dense layer with a softmax "
+     "over the four sound classes (Figure 4). The configuration adopted is that fusion network trained on ICBHI 2017 and "
+     "SPRSound, which reached 40.0 percent balanced accuracy in cross-validation, against 34.0 percent for the "
+     "single-branch MFCC design (Table 18), and which has run in the application since 13 November 2026. Heart sounds are "
+     "analysed by two separate models, a segmentation model that times S1 and S2 and gives the heart rate, and a murmur "
+     "model (Table 20).")
+
+h2("System Evaluation From the Field Study (Research Questions 1, 5, and 8)")
 para("Table 7 summarizes the system-level results of the earlier field evaluation. Resondi recorded a stronger signal "
      "than a conventional stethoscope (45 dB against 32 dB, a 13 dB margin, or about 4.5 times the amplitude). These are "
      "indicative margins rather than a formal signal-to-noise ratio, because the two figures were not captured against a "
@@ -613,6 +647,28 @@ tab("Table 7", "Results of the Earlier Field Evaluation", [
 ], [2.0, 4.3], "Values are from the full research paper (response times from its Table 5). The number of recordings "
    "behind the quality proportions was not recorded, and the field test did not record whether the reference labeller "
    "was blinded to the AI output.")
+para("These results answer Research Question 1 descriptively: in signal quality, Resondi recorded about 13 dB more "
+     "than a conventional stethoscope; in clarity, 93 percent of recordings were good or acceptable; and in noise level, "
+     "recordings were made at ambient levels of 24, 35, and 42 dB, the last in a community setting. They answer Research "
+     "Question 5 with the stage times in Table 7, of which the quality check, at 144.68 seconds, is the one that limits "
+     "use. The rebuilt classifier is faster than the original: the fusion network took a median of 2.0 seconds per "
+     "recording in the application, including fetching the audio, and the heart-sound models under 1 second once loaded.")
+
+h2("End-User Acceptance and Instructional Support (Research Questions 9 and 10)")
+para("Twenty-seven respondents (13 patients, 13 general respondents, and one health practitioner) rated the system "
+     "with an acceptance questionnaire adapted from the Unified Theory of Acceptance and Use of Technology (Venkatesh "
+     "et al., 2003). Overall acceptance was 3.95 of 5, interpreted as Agree. By construct, performance expectancy and "
+     "effort expectancy each returned 4.09, facilitating conditions 3.84, and social influence 3.63, all interpreted as "
+     "Agree. Research Question 9 named five aspects, but the questionnaire measured these four constructs, so the answer "
+     "is partial: effort expectancy is the closest measure of user-friendliness and usability (4.09), and performance "
+     "expectancy of perceived usefulness for community-based monitoring (4.09), while durability and functionality were "
+     "not measured as such. Only effort expectancy reached acceptable internal consistency (alpha = 0.76), so the "
+     "construct scores are descriptive.")
+para("Research Question 10 is not yet answered. The questionnaire contained no items on diagram-based zone guidance, "
+     "manual clarity, ease of learning, or app navigation, and its open-ended items returned no responses. The nearest "
+     "evidence is that access to training and technical support was the least certain item: 12 of 27 respondents (44 "
+     "percent) answered maybe, 8 (30 percent) yes, and 7 (26 percent) no. A short survey on the four named aspects, given "
+     "after a guided examination, is needed to answer it.")
 
 h2("Model Development on the Validation Subset")
 vs = sorted([r for r in S["validation_summary"] if r["seeds"] >= 2], key=lambda r: -r["bal_mean"])
@@ -673,7 +729,7 @@ tab("Table 10", "Per-Class Test Performance", [["Class", "Cycles", "Recall (sens
 fig("Figure 7", "Test-Set Confusion Matrix", os.path.join(STATS, "fig_confusion_test.png"), 4.2,
     "Cell counts with row percentages; the diagonal is the recall of each class.")
 
-h2("Hypothesis 1: Clean Versus Noise-Contaminated Recordings")
+h2("Hypothesis 1: Clean Versus Noise-Contaminated Recordings (Research Question 6)")
 n20, n10, n5 = S["noise_20dB"], S["noise_10dB"], S["noise_5dB"]
 para(f"To test Hypothesis 1, Gaussian noise was added to every test window at signal-to-noise ratios of 20, 10, and 5 dB "
      f"and the same cycles were classified again. Performance fell to chance at every level (Table 11 and Figure 8): at "
@@ -693,7 +749,7 @@ tab("Table 11", "Effect of Added Noise on the Same Test Cycles", [["Condition", 
 fig("Figure 8", "Test-Set Performance Under Added Noise", os.path.join(STATS, "fig_noise_test.png"), 4.6,
     "The dashed line marks chance (25 percent).")
 
-h2("Hypotheses 2 and 3: Device and Conventional-Stethoscope Comparisons")
+h2("Hypotheses 2 and 3: Device and Conventional-Stethoscope Comparisons (Research Questions 7 and 8)")
 para("Hypothesis 2 could not be tested: no Resondi device recordings with independent, clinician-assigned cycle labels "
      "exist yet, and the 15 field-test recordings are not linked to their reference labels in the study records. "
      "Descriptively, when the deployed model was run on the 33 stored Resondi device recordings, its highest class score "
@@ -1064,6 +1120,58 @@ para("The order of the remaining cardiac work follows from the lung results. A l
      "application before that test, which the plan had put first, so every heart result there is marked as a "
      "screening aid until the device test is done.")
 
+h2("Longitudinal Monitoring and Rehabilitation Support (Research Question 11)")
+para("Research Question 11 asked how Resondi can support longitudinal monitoring and practitioner-supervised "
+     "rehabilitation. The platform supports it in four ways, all now running in the application. First, repeated "
+     "recordings are compared by site: a recording's page shows the two most recent recordings from the same "
+     "anatomical site side by side, with each one's classification and the number of days between them. Second, "
+     "monitoring records are summarized over time: a four-week chart sets the number of exercises the patient "
+     "completed each week against the share of that week's lung recordings classified as Healthy. Third, every "
+     "analysis carries an AI-assisted summary in plain language that describes a sound pattern, never a diagnosis. "
+     "Fourth, recommendations are approved by a practitioner before use: each lung result generates a suggested "
+     "breathing-exercise plan matched to its sound class, each heart recording a cardiac activity plan, and a "
+     "practitioner with the matching specialization approves, disapproves, or returns each exercise; only approved "
+     "exercises can be started, a guided session player leads the patient through them, and each completed session is "
+     "recorded. How well this support works is not yet known. No patient in the study data was recorded repeatedly over "
+     "time, so the planned rule of reporting a change only when it exceeds the severity score's error (Table 6) has not "
+     "been applied, and no rehabilitation outcome has been measured.")
+
+h2("Summary of Answers to the Research Questions")
+para("Table 21 gives the answer to each research question, the evidence behind it, and how complete it is. Of the eleven "
+     "questions, five are answered (Questions 1 to 5), one hypothesis was tested and rejected (Question 6), three are "
+     "answered in part (Questions 8, 9, and 11), and two cannot yet be answered with the data collected (Questions 7 and "
+     "10).")
+tab("Table 21", "Answers to the Research Questions", [
+    ["Research question", "Answer", "Status and where reported"],
+    ["1. Recording quality: signal, clarity, noise", "Signal 45 dB against 32 dB for a conventional stethoscope; 68% good, "
+     "25% acceptable, 7% poor; recorded at 24, 35, and 42 dB ambient noise", "Answered descriptively; no formal "
+     "signal-to-noise ratio (Table 7)"],
+    ["2. Smart stethoscope: design, components, cost", "Handheld PLA unit, 173 × 80 × 70 mm; ESP32, INMP441 MEMS "
+     "microphone, microSD, own Wi-Fi; bill of materials ₱2,775, unit cost ₱4,000", "Answered (Table 1, Figures 1–3)"],
+    ["3. Platform: interface, architecture, access, data", "Bilingual web app with guided Lung and Heart modes; device, "
+     "phone transfer, and platform tiers; patient, practitioner, and administrator roles with case-level access; "
+     "recordings stored by site with versioned analyses", "Answered (this section)"],
+    ["4. Analysis system: preprocessing, features, branches, fusion", "1-s band-limited windows; MFCC, spectrogram, "
+     "chromagram; one CNN branch each; concatenation fusion, 40.0% balanced accuracy in cross-validation; separate "
+     "heart models", "Answered (Table 4, Figure 4, Tables 14–18 and 20)"],
+    ["5. Response time", "Connection 4.55 s; recording 15.00 s; quality check 144.68 s; preprocessing 20.91 s; "
+     "classification 3.97 s", "Answered; the quality check limits use (Table 7)"],
+    ["6. Clean vs noise-contaminated (Hypothesis 1)", "Balanced accuracy fell from 35.0% to about 25% at 20, 10, and 5 dB "
+     "signal-to-noise ratio; McNemar Holm-adjusted p < .001 at each level", "H₀ rejected (Table 11, Figure 8)"],
+    ["7. Reference vs device recordings (Hypothesis 2)", "No device recordings with clinician labels exist; on unlabelled "
+     "device recordings the models are less decisive", "Not yet testable; needs labelled device recordings"],
+    ["8. Conventional stethoscope vs Resondi quality (Hypothesis 3)", "Resondi signal about 13 dB stronger; paired raw "
+     "measurements were not kept", "Answered in part, descriptively; not tested inferentially"],
+    ["9. Acceptance", "Overall 3.95 of 5 (Agree); effort expectancy 4.09, performance expectancy 4.09, facilitating "
+     "conditions 3.84, social influence 3.63", "Answered in part; durability and functionality not measured as such"],
+    ["10. Instructional-support preferences", "Not measured; 44% unsure whether training and technical support is "
+     "available", "Not yet answered; needs a short survey"],
+    ["11. Longitudinal monitoring and rehabilitation", "Same-site comparison, four-week trend, AI-assisted summaries, and "
+     "practitioner-approved exercise plans are built and running", "Answered in part; not evaluated over repeated "
+     "visits"],
+], [1.75, 2.85, 1.7], "Status: answered, the question is fully addressed by the data; answered in part, some named aspects "
+   "are addressed; not yet answered, the data needed have not been collected.")
+
 h2("Discussion")
 para("Rebuilding the classifier with per-cycle sound labels and a patient-wise, device-balanced split produced the first "
      "unleaked estimate of its performance: a balanced accuracy of 35.0 percent on 31 unseen patients. This is above the "
@@ -1168,6 +1276,14 @@ log("Bibliography: four references completed (14 Nov)",
     "plus the last, as APA 7 requires)",
     "Checked 14 Nov against the PLOS ONE article page and the Crossref records for the DOIs. Shkarupylo et al. (2024) is still "
     "unresolved and stays marked for the team.")
+log("Results and Discussion answer each research question (14 Nov)",
+    "Results organized by analysis; Research Questions 2-4, 10, and 11 not answered, Question 9 only as an overall mean",
+    "New sections for Research Questions 2-4 (device, platform, analysis system), 9-10 (acceptance by construct, mapped "
+    "to the named aspects; instructional preferences not measured), and 11 (same-site comparison, trend, AI summaries, "
+    "practitioner-approved exercise plans); research-question numbers added to the existing headings; new Table 21 "
+    "summarizing the answer to all eleven questions; Figure 1 note updated for the Wi-Fi transfer page.",
+    "Requested by the user on 14 Nov: make sure the Results and Discussion answer the research questions. Platform facts "
+    "checked against the live application's code; acceptance figures are those of the full paper, as in the IMRaD.")
 log("Bibliography: Park et al. (2025) completed (14 Nov)", "Park et al. (2025), no full reference",
     "Park, J. S., Park, S.-Y., Moon, J. W., Kim, K., & Suh, D. I. (2025). Artificial intelligence models for pediatric lung "
     "sound analysis: Systematic review and meta-analysis. Journal of Medical Internet Research, 27, e66491",
@@ -1227,6 +1343,7 @@ BIB = [
     "Tanaka, T., Yanagita, Y., Morishita, T., Nagata, F., Granados Santiago, M., López-López, L., & Valenza, M. C. (2025). Effectiveness of physical and therapy interventions for non-ICU hospitalized pneumonia patients: A systematic review of randomized controlled trials. Healthcare, 13(12), 1444. https://doi.org/10.3390/healthcare13121444",
     "Tariq, Z., Shah, S. K., & Lee, Y. (2022). Feature-based fusion using CNN for lung and heart sound classification. Sensors, 22(4), 1521. https://doi.org/10.3390/s22041521",
     "Tzeng, J.-T., Li, J.-L., Chen, H.-Y., Huang, C.-H., Chen, C.-H., Fan, C.-Y., Huang, E. P.-C., & Lee, C.-C. (2025). Improving the robustness and clinical applicability of automatic respiratory sound classification using deep learning–based audio enhancement: Algorithm development and validation. JMIR AI, 4, e67239. https://doi.org/10.2196/67239",
+    "Venkatesh, V., Morris, M. G., Davis, G. B., & Davis, F. D. (2003). User acceptance of information technology: Toward a unified view. MIS Quarterly, 27(3), 425–478. https://doi.org/10.2307/30036540",
     "Wang, Z., & Sun, Z. (2024). Performance evaluation of lung sounds classification using deep learning under variable parameters. EURASIP Journal on Advances in Signal Processing, 2024, 51. https://doi.org/10.1186/s13634-024-01148-w",
     "Wei, T.-J., Hsiung, P.-Y., Liu, J.-H., Lin, T.-C., Kuo, F.-T., & Wu, C.-Y. (2022). Use of electronic auscultation in full personal protective equipment to detect ventilation status in selective lung ventilation: A randomized controlled trial. Frontiers in Medicine, 9, 851395. https://doi.org/10.3389/fmed.2022.851395",
     "Weiskopf, N. G., & Weng, C. (2013). Methods and dimensions of electronic health record data quality assessment: Enabling reuse for clinical research. Journal of the American Medical Informatics Association, 20(1), 144–151. https://doi.org/10.1136/amiajnl-2011-000681",
