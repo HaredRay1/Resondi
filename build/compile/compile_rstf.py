@@ -1,7 +1,8 @@
 """Compile Ahnycca's fair submission into one PDF, in the order of the example compilation (MCS-I-RSTF7b.pdf):
 
     I.   Research Plan       Ahnyccas papers/Resondi-Research-Plan-Heart-and-Lung-FINAL.pdf
-    II.  ISEF Forms          the team's signed ISEF-Forms-2027 PDF (Drive, folder "ISEF")
+    II.  ISEF Forms          the team's signed ISEF-Forms-2027 PDF: the user's newer copy of 14 Nov 2026 (consent
+                             forms updated to cardiopulmonary); the older Drive copy is kept as -drive-older.pdf
     III. ISEF Abstract       generated here: ISEF Abstract & Certification layout, abstract from the IMRaD
     IV.  Research Paper      Ahnyccas papers/Resondi-IMRaD-Heart-and-Lung-FINAL.pdf
     V.   Project Data Book   placeholder: the logbook is not in the shared folders
