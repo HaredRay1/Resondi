@@ -620,7 +620,7 @@ para("Table 7 summarizes the system-level results of the earlier field evaluatio
      "common reference, so no inferential test was applied and Hypothesis 3 remains untested. Most recordings were rated "
      "good (68 percent) or acceptable (25 percent). The recording-quality check was the slowest stage at 144.68 seconds, "
      "longer than the 15-second recording it assesses, so at 14 captures a full lung and heart examination would take "
-     "about 34 minutes of screening time. End users rated the system favourably (n = 27; overall weighted mean 3.95 of 5, "
+     "about 34 minutes of screening time. End users rated the earlier version favourably (n = 27; overall weighted mean 3.95 of 5, "
      "\"agree\"). In the field test, the original model's output agreed with the reference label for 6 of 15 recordings "
      "(40 percent; Wilson 95% CI 19.8–64.3%), which does not differ significantly from the 25 percent expected by chance "
      "(exact binomial p = .148).")
@@ -631,7 +631,7 @@ tab("Table 7", "Results of the Earlier Field Evaluation", [
     ["Recording quality", "Good 68%; acceptable 25%; poor 7%"],
     ["Response time (s)", "Connection 4.55; recording 15.00; quality check 144.68; preprocessing 20.91; classification 3.97"],
     ["Field agreement (original model)", "6 of 15 = 40% (Wilson 95% CI 19.8–64.3%); exact binomial vs 25%: p = .148"],
-    ["End-user acceptance", "n = 27; overall weighted mean 3.95 of 5"],
+    ["End-user acceptance", "n = 27, earlier version; overall weighted mean 3.95 of 5"],
 ], [2.0, 4.3], "Values are from the full research paper (response times from its Table 5). The number of recordings "
    "behind the quality proportions was not recorded, and the field test did not record whether the reference labeller "
    "was blinded to the AI output.")
@@ -1098,7 +1098,8 @@ para("Hypothesis 3 was not tested inferentially, because the paired raw measurem
      "retained on the present data.")
 
 h2("Research Question 9: End-User Acceptance")
-para("Twenty-seven respondents (13 patients, 13 general respondents, and one health practitioner) rated the system "
+para("Twenty-seven respondents (13 patients, 13 general respondents, and one health practitioner) rated the earlier version of the "
+     "system, which ran the original classification model, "
      "with an acceptance questionnaire adapted from the Unified Theory of Acceptance and Use of Technology (Venkatesh "
      "et al., 2003). Overall acceptance was 3.95 of 5, interpreted as Agree. By construct, performance expectancy and "
      "effort expectancy each returned 4.09, facilitating conditions 3.84, and social influence 3.63, all interpreted as "
@@ -1108,7 +1109,8 @@ para("Twenty-seven respondents (13 patients, 13 general respondents, and one hea
      "Functionality was rated only by one physician, on the study's instrument validation form on 29 August 2026: 5 of 5 "
      "for functionality, as for relevance, usability, accessibility and reliability, and 3 of 5 for patient safety and "
      "clinical usefulness. That is one expert's judgement, not an end-user result. Only effort expectancy reached acceptable internal consistency (alpha = 0.76), so the "
-     "construct scores are descriptive.")
+     "construct scores are descriptive. Acceptance of the current version, with the rebuilt lung-sound classifier "
+     "and the heart-sound models, has not yet been surveyed.")
 h2("Research Question 10: Preferences for Instructional Support")
 para("Research Question 10 is not yet answered. The questionnaire contained no items on diagram-based zone guidance, "
      "manual clarity, ease of learning, or app navigation, and its open-ended items returned no responses. The nearest "
@@ -1208,7 +1210,8 @@ tab("Table 21", "Answers to the Research Questions", [
     ["8. Conventional stethoscope vs Resondi quality (Hypothesis 3)", "Resondi signal about 13 dB stronger; paired raw "
      "measurements were not kept", "Answered in part, descriptively; not tested inferentially"],
     ["9. Acceptance", "Overall 3.95 of 5 (Agree); effort expectancy 4.09, performance expectancy 4.09, facilitating "
-     "conditions 3.84, social influence 3.63", "Answered in part; durability not measured; functionality rated by one physician only"],
+     "conditions 3.84, social influence 3.63", "Answered in part, for the earlier version; durability not measured; functionality rated by one physician "
+     "only; current version not yet surveyed"],
     ["10. Instructional-support preferences", "Not measured; 44% unsure whether training and technical support is "
      "available", "Not yet answered; needs a short survey"],
     ["11. Longitudinal monitoring and rehabilitation", "Same-site comparison, four-week trend, AI-assisted summaries, and "
@@ -1324,6 +1327,10 @@ log("Bibliography: four references completed (14 Nov)",
 log("Research Question 9: physician validation (14 Nov)", "Durability and functionality not measured as such",
     "Functionality rated by one physician on the instrument validation form (29 Aug 2026; 5 of 5); durability still "
     "not measured", "From the team's Survey Validation form, supplied by the user on 14 Nov.")
+log("Acceptance survey version (14 Nov)", "The acceptance results did not say which version of the system was "
+    "rated", "The 27 respondents rated the earlier version, which ran the original classification model; the "
+    "current version has not yet been surveyed (Research Questions 1 and 9; Tables 7 and 21)", "The user "
+    "confirmed on 14 Nov that the UTAUT survey was of the old model and has not been repeated on the new one.")
 log("Results and Discussion in research-question order (14 Nov)", "Results ordered by analysis, with the research "
     "questions spread across sections", "One heading per research question, 1 to 11 in order; the model sections are "
     "subsections of Research Question 4 and the severity score of Research Question 11; Results tables renumbered "

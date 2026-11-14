@@ -139,10 +139,11 @@ plan_rq = [
     ("RQ 8 / Hypothesis 3, conventional vs Resondi quality: not tested inferentially. The paired raw measurements "
      "behind 45 dB and 32 dB were not kept.", "Paired recordings at the same sites; paired t-test or Wilcoxon "
      "signed-rank test, as Table 6 plans.", "Team with the device", LATER),
-    ("RQ 9, acceptance: durability was not measured, and functionality was rated by one physician only (5 of 5, "
-     "29 Aug 2026), not by end users. The survey measured the four UTAUT constructs.", "Add durability and "
-     "functionality items to the next end-user survey, or state that RQ 9 is answered through the UTAUT constructs.",
-     "Team", BEFORE),
+    ("RQ 9, acceptance: the UTAUT survey (n = 27) rated the old version, which ran the original model; the "
+     "current version (rebuilt lung classifier, heart-sound models) has not been surveyed. Durability was not "
+     "measured, and functionality was rated by one physician only (5 of 5, 29 Aug 2026), not by end users.",
+     "Repeat the UTAUT survey on the current version, adding durability and functionality items and the four RQ 10 "
+     "items, so one survey closes RQ 9 and RQ 10; then replace the n = 27 results in both papers.", "Team", BEFORE),
     ("RQ 10, instructional-support preferences: not answered. The survey had no items on diagram guidance, manual "
      "clarity, ease of learning, or app navigation.", "A short survey on those four aspects after a guided "
      "examination (frequency and percentage, as Table 6 plans).", "Team", BEFORE),
@@ -220,6 +221,8 @@ im_evidence = [
     ("Objectives 7 to 9 (longitudinal monitoring, rehabilitation support, practitioner review) are built but not "
      "evaluated.", "Repeated recordings, rehabilitation outcomes, and the number and time of practitioner reviews.",
      "Team + practitioner", LATER),
+    ("Acceptance (n = 27, overall 3.95) was rated on the old version; the current version has not been surveyed.",
+     "As in the research plan's list above: one repeated UTAUT survey on the current version.", "Team", BEFORE),
     ("Automated quality check takes 145 s per recording, too slow to run before every classification.",
      "Faster quality check, then re-time it.", "Development", LATER),
     ("The practitioner cannot change the AI's classification label directly (objective 9 says confirm, modify, or "
@@ -275,6 +278,10 @@ forms = [
      "abstract. Questions 1, 3 and 4 are ticked from the signed forms; questions 2, 5 and 6 (own work, display-board "
      "photos, certification) are left blank.", "Ahnycca ticks questions 2, 5 and 6 herself and checks the page "
      "against the official ISEF form.", "Ahnycca", BLOCKS),
+    ("Compiled document, section II: Form 7 lists the previous year's abstract and research plan as attached. The "
+     "SmartSteth paper (2025), which carries its abstract, is now attached after Form 7; the 2025 research plan "
+     "itself is not in the folders.", "If the fair wants the 2025 research plan as well, supply it and it is added "
+     "after the paper.", "Team", BEFORE),
     ("Compiled document: the example compilation also opens with a cover page, a plagiarism report and the DepEd "
      "checklist of required forms. They were left out, following the order given (research plan first).",
      "Add them in front if the fair asks for them.", "Team", BEFORE),
@@ -304,6 +311,9 @@ resolved = [
      "AI\"; swapped into the compiled document in place of the 29 Aug pages."),
     ("Research plan RQ 9 and IMRaD acceptance: functionality", "One physician's instrument validation, 29 Aug 2026, "
      "added (Survey Validation form)."),
+    ("Form 7 attachment (continuation project)", "The previous year's paper, SmartSteth (2025), supplied by the user "
+     "on 14 Nov, placed after Form 7 in the compiled document. In the compiled copy only, a stray footer photo that "
+     "covered the text and hid the interview transcripts was removed, and the page numbers made continuous."),
 ]
 
 n_plan = len(plan_refs) + len(plan_rq) + len(plan_analyses) + len(plan_decisions)

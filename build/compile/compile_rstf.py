@@ -3,7 +3,9 @@
     front                    title page and DepEd checklist of forms (build/compile/front_matter.py)
     I.   Research Plan      Ahnyccas papers/Resondi-Research-Plan-Heart-and-Lung-FINAL.pdf
     II.  ISEF Forms          the team's signed ISEF-Forms-2027 PDF: the user's newer copy of 14 Nov 2026 (consent
-                             forms updated to cardiopulmonary); the older Drive copy is kept as -drive-older.pdf
+                             forms updated to cardiopulmonary); the older Drive copy is kept as -drive-older.pdf.
+                             After Form 7 (continuation project): the previous year's paper, SmartSteth (2025),
+                             which Form 7 lists as attached (build/compile/prior_project.py)
     III. ISEF Abstract       generated here: ISEF Abstract & Certification layout, abstract from the IMRaD
     IV.  Research Paper      title page, table of contents, Ahnyccas papers/Resondi-IMRaD-Heart-and-Lung-FINAL.pdf
     V.   Project Data Book   placeholder: the logbook is not in the shared folders
@@ -36,6 +38,7 @@ IMRAD_DOCX = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.docx")
 ISEF = os.path.join(SRC, "ISEF-Forms-2027.pdf")
 REVIEW = os.path.join(SRC, "Review-and-Recommendation-Form-RIM-I-signed.pdf")
 AI_DISCLOSURE = os.path.join(PAPERS, "Resondi-AI-Usage-Disclosure-2026-11-14.pdf")
+PRIOR = os.path.join(SRC, "SmartSteth-FINAL-compile.pdf")  # Form 7 attachment, from build/compile/prior_project.py
 
 W, H = 612, 792  # US Letter, like the example's divider pages
 
@@ -184,7 +187,7 @@ def logbook_placeholder(doc):
 
 
 def main():
-    for f in (PLAN, IMRAD, IMRAD_DOCX, ISEF, REVIEW, AI_DISCLOSURE, FRONT):
+    for f in (PLAN, IMRAD, IMRAD_DOCX, ISEF, REVIEW, AI_DISCLOSURE, FRONT, PRIOR):
         if not os.path.exists(f):
             raise SystemExit(f"missing source: {f}")
     os.makedirs(OUTDIR, exist_ok=True)
@@ -218,8 +221,17 @@ def main():
     assert a < b and "Qualified Scientist" not in texts[b], (a, b)
     out.insert_pdf(isef, from_page=0, to_page=a - 1)
     out.insert_pdf(fitz.open(AI_DISCLOSURE))
-    out.insert_pdf(isef, from_page=b + 1, to_page=isef.page_count - 1)
-    print(f"  ISEF forms: replaced old AI disclosure pages {a + 1}-{b + 1} with the 14 Nov update")
+    # Form 7 (Continuation/Research Progression Projects) is followed by the previous year's paper it lists as attached.
+    f7 = [i for i, t in enumerate(texts) if "Projects Form (7)" in t and "Additional changes" in t]
+    assert len(f7) == 1 and f7[0] > b, f7
+    f7 = f7[0]
+    out.insert_pdf(isef, from_page=b + 1, to_page=f7)
+    toc.append([2, "Form 7 attachment: previous project, SmartSteth (2025)", out.page_count + 1])
+    n_prior = insert(PRIOR)
+    if f7 + 1 < isef.page_count:
+        out.insert_pdf(isef, from_page=f7 + 1, to_page=isef.page_count - 1)
+    print(f"  ISEF forms: replaced old AI disclosure pages {a + 1}-{b + 1} with the 14 Nov update; "
+          f"SmartSteth ({n_prior} pages) after Form 7 (forms page {f7 + 1})")
     add_section("III. ISEF ABSTRACT", "III. ISEF Abstract")
     size = abstract_page(out, imrad_abstract())
     add_section("IV. RESEARCH PAPER", "IV. Research Paper (IMRaD)")
@@ -232,12 +244,13 @@ def main():
     insert(REVIEW)
 
     out.set_toc(toc)
-    out.set_metadata({"title": "Resondi: research plan, ISEF forms, abstract, research paper, logbook, SRC evaluation",
+    out.set_metadata({"title": "Resondi: research plan, ISEF forms (with the Form 7 attachment), abstract, research "
+                               "paper, logbook, SRC evaluation",
                       "author": "Ahnycca Krish N. Malimban"})
     out.save(OUT, garbage=3, deflate=True)
     print(f"wrote {OUT}: {out.page_count} pages; abstract font {size:.2f} pt")
     for lvl, t, pg in toc:
-        print(f"  p.{pg:>3}  {t}")
+        print(f"  p.{pg:>3}  {'   ' * (lvl - 1)}{t}")
 
 
 if __name__ == "__main__":

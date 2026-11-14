@@ -840,7 +840,10 @@ p = para("End-user acceptance. Acceptance was assessed with 27 respondents acros
          "were computed for each construct and interpreted against the five-point "
          "acceptance scale. Three items used a dichotomous response format and are reported "
          "as frequencies rather than means. Three behavioural-intention items and all "
-         "open-ended items returned no responses and are not reported.",
+         "open-ended items returned no responses and are not reported. The respondents "
+         "rated the earlier version of the system, which ran the original classification "
+         "model; the current version, with the rebuilt lung-sound classifier and the "
+         "heart-sound models, has not yet been rated.",
          first=0, after=6, spacing=1.6)
 FILL(p, "sampling method and inclusion criteria for the 27 respondents. The instrument is "
         "documented; how respondents were recruited is not")
@@ -1219,7 +1222,8 @@ para("Hypothesis 3 was not tested inferentially, because the paired raw measurem
      "the null hypothesis can be neither rejected nor retained on the present data.", first=0)
 
 H2("Research Question 9: End-User Acceptance")
-para("Twenty-seven respondents completed the acceptance questionnaire: 13 patients, "
+para("Twenty-seven respondents completed the acceptance questionnaire on the earlier "
+     "version of the system, which ran the original classification model: 13 patients, "
      "13 general respondents and one health practitioner. Across the twelve five-point "
      "Likert items, overall acceptance was 3.95, interpreted as Agree.", first=0)
 
@@ -1259,7 +1263,9 @@ para("Mapped to the five aspects named in Research Question 9, effort expectancy
      "the closest measure of user-friendliness and usability (4.09) and performance "
      "expectancy of perceived usefulness for community-based monitoring (4.09). "
      "Functionality was rated only by the physician validator (5 of 5), and durability"
-     " was not measured, so the answer to Research Question 9 is partial.", first=0)
+     " was not measured, so the answer to Research Question 9 is partial. These ratings are of the earlier version; acceptance of the current "
+     "version, with the rebuilt classifier and the heart-sound models, has not yet been "
+     "surveyed.", first=0)
 
 H2("Research Question 10: Preferences for Instructional Support")
 para("Research Question 10 is not yet answered. The questionnaire contained no items "
