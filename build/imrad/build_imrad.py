@@ -267,7 +267,8 @@ para("What the literature does not establish is that either result survives cont
      "operators differ from these in ways that bear directly on classification: ambient "
      "noise, inconsistent chest-piece placement, variation in operator technique, and "
      "differences between recording devices have all been identified as degrading "
-     "AI-supported analysis. The performance figures above are therefore properties of a "
+     "AI-supported analysis (Komaryshyn & Kogut, 2026). The performance figures above are "
+     "therefore properties of a "
      "model evaluated on clean audio, not predictions about what that model will do with "
      "audio captured in a barangay health station.", first=0)
 
@@ -1741,9 +1742,10 @@ REFS = [
  "Respiratory sound classification for crackles, wheezes, and rhonchi in the clinical "
  "field using deep learning. Scientific Reports, 11(1), 17186. "
  "https://doi.org/10.1038/s41598-021-96724-7",
- "Shkarupylo, V., et al. (2024). Intelligent digital stethoscope for neural network "
+ "Komaryshyn, T., & Kogut, I. (2026). Intelligent digital stethoscope for neural network "
  "analysis of auscultatory signals: A review of sensors, architectures and algorithms. "
- "https://science.lpnu.ua/node/43249",
+ "Computational Problems of Electrical Engineering, 16(1), 7\u201310. "
+ "https://doi.org/10.23939/jcpee2026.01.007",
 ]
 for r in sorted(REFS):
     p = para(r, first=0, after=8, align=WD_ALIGN_PARAGRAPH.LEFT, size=11, spacing=1.6)

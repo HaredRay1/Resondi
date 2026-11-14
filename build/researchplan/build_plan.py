@@ -1400,6 +1400,7 @@ BIB = [
     "Kim, J.-W., Bae, S., Cho, W.-Y., Lee, B., & Jung, H.-Y. (2024). Stethoscope-guided supervised contrastive learning for cross-domain adaptation on respiratory sound classification. Proceedings of the IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 1431–1435. https://doi.org/10.1109/ICASSP48485.2024.10447734",
     "Kim, J.-W., Toikkanen, M., Jalali, A., Kim, M., Han, H.-J., Kim, H., Shin, W., Jung, H.-Y., & Kim, K. (2025). Adaptive metadata-guided supervised contrastive learning for domain adaptation on respiratory sound classification. IEEE Journal of Biomedical and Health Informatics, 29(8), 5381–5393. https://doi.org/10.1109/JBHI.2025.3545159",
     "Kim, T. K. (2015). T test as a parametric statistic. Korean Journal of Anesthesiology, 68(6), 540–546. https://doi.org/10.4097/kjae.2015.68.6.540",
+    "Komaryshyn, T., & Kogut, I. (2026). Intelligent digital stethoscope for neural network analysis of auscultatory signals: A review of sensors, architectures and algorithms. Computational Problems of Electrical Engineering, 16(1), 7–10. https://doi.org/10.23939/jcpee2026.01.007",
     "Lahham, A., & Holland, A. E. (2021). The need for expanding pulmonary rehabilitation services. Life, 11(11), 1236. https://doi.org/10.3390/life11111236",
     "Leng, S., Tan, R. S., Chai, K. T. C., Wang, C., Ghista, D., & Zhong, L. (2015). The electronic stethoscope. BioMedical Engineering OnLine, 14, 66. https://doi.org/10.1186/s12938-015-0056-y",
     "Oliveira, J., Renna, F., Costa, P. D., Nogueira, M., Oliveira, C., Ferreira, C., Jorge, A., Mattos, S., Hatem, T., Tavares, T., Elola, A., Rad, A. B., Sameni, R., Clifford, G. D., & Coimbra, M. T. (2022). The CirCor DigiScope dataset: From murmur detection to murmur classification. IEEE Journal of Biomedical and Health Informatics, 26(6), 2524–2535. https://doi.org/10.1109/JBHI.2021.3137048",
@@ -1410,7 +1411,6 @@ BIB = [
     "Pramono, R. X. A., Bowyer, S., & Rodriguez-Villegas, E. (2017). Automatic adventitious respiratory sound analysis: A systematic review. PLOS ONE, 12(5), e0177926. https://doi.org/10.1371/journal.pone.0177926",
     "Rocha, B. M., Filos, D., Mendes, L., Vogiatzis, I., Perantoni, E., Kaimakamis, E., Natsiavas, P., Oliveira, A., Jácome, C., Marques, A., Paiva, R. P., Chouvarda, I., Carvalho, P., & Maglaveras, N. (2018). A respiratory sound database for the development of automated classification. In Precision Medicine Powered by pHealth and Connected Health (pp. 51–55). Springer. https://doi.org/10.1007/978-981-10-7419-6_6",
     "Rocha, B. M., Filos, D., Mendes, L., Serbes, G., Ulukaya, S., Kahya, Y. P., Jakovljevic, N., Turukalo, T. L., Vogiatzis, I. M., Perantoni, E., Kaimakamis, E., Natsiavas, P., Oliveira, A., Jácome, C., Marques, A., Maglaveras, N., Paiva, R. P., Chouvarda, I., & de Carvalho, P. (2019). An open access database for the evaluation of respiratory sound classification algorithms. Physiological Measurement, 40(3), 035001. https://doi.org/10.1088/1361-6579/ab03ea",
-    "[[Shkarupylo et al. (2024). CONFIRM: add the full reference for the source cited in the Rationale on noise and contact artifacts.]]",
     "Subido-Cariño, M. T., Donadel, M., Asi, L. D., Ariola-Ramos, M. S., Arguelles, V. L., Co, S. N., Mahon, G., Fernandez, S. P. C., Punzalan, K. A., Sornillo, J. B., Smith, R., Westercamp, M., & Hechanova-Cruz, R. A. (2025). SARS-CoV-2 seroprevalence, illness recall, and work absenteeism among healthcare workers: A facility-based cross-sectional study in the Philippines, 2021. Clinical Infectious Diseases, 81(2), 255. https://doi.org/10.1093/cid/ciaf342",
     "Tanaka, T., Yanagita, Y., Morishita, T., Nagata, F., Granados Santiago, M., López-López, L., & Valenza, M. C. (2025). Effectiveness of physical and therapy interventions for non-ICU hospitalized pneumonia patients: A systematic review of randomized controlled trials. Healthcare, 13(12), 1444. https://doi.org/10.3390/healthcare13121444",
     "Tariq, Z., Shah, S. K., & Lee, Y. (2022). Feature-based fusion using CNN for lung and heart sound classification. Sensors, 22(4), 1521. https://doi.org/10.3390/s22041521",
@@ -1426,6 +1426,10 @@ BIB = [
     "Yin, Z., Yan, J., Fang, S., Wang, D., & Han, D. (2022). User acceptance of wearable intelligent medical devices through a modified unified theory of acceptance and use of technology. Annals of Translational Medicine, 10(11), 629. https://doi.org/10.21037/atm-21-5510",
     "Zhang, Q., Zhang, J., Yuan, J., Huang, H., Zhang, Y., Zhang, B., Lv, G., Lin, S., Wang, N., Liu, X., Tang, M., Wang, Y., Ma, H., Liu, L., Yuan, S., Zhou, H., Zhao, J., Li, Y., Yin, Y., … Lian, Y. (2022). SPRSound: Open-source SJTU paediatric respiratory sound database. IEEE Transactions on Biomedical Circuits and Systems, 16(5), 867–881. https://doi.org/10.1109/TBCAS.2022.3204910",
 ]
+# The Rationale cited "Shkarupylo et al., 2024"; the article is by Komaryshyn and Kogut (2026) (journal page and Crossref).
+_rp = next(p for p in P if "(Shkarupylo et al., 2024)" in p.text)
+replace(_rp, "(Shkarupylo et al., 2024)", "(Komaryshyn & Kogut, 2026)")
+log("Rationale and References: the review on noise and contact artifacts", "Shkarupylo et al. (2024), reference not supplied (CONFIRM)", "Komaryshyn, T., & Kogut, I. (2026), Computational Problems of Electrical Engineering, 16(1), 7–10, doi 10.23939/jcpee2026.01.007", "The cited article, found at the URL the IMRaD listed, is by Komaryshyn and Kogut and was published in 2026; its abstract gives special attention to noise, contact artifacts and differences between devices, the point the Rationale cites it for.")
 bib_tpl = P[275]
 anchor = P[274]._p
 old_bib = [p for p in P[275:] if not p.text.startswith(("PUERTO PRINCESA CITY NATIONAL", "SCIENCE, TECHNOLOGY, ENGINEERING"))]
@@ -1546,7 +1550,7 @@ for row in tb.rows:
     for j, w in enumerate([0.3, 1.2, 1.9, 2.1, 1.9]):
         row.cells[j].width = Inches(w)
 L.add_heading("For the team to confirm (highlighted in the plan)", level=2)
-for t in ["Full references for 3M (2025), Park et al. (2025) and Shkarupylo et al. (2024), cited in the Rationale.",
+for t in ["Full references for 3M (2025), Park et al. (2025) and the review cited on noise (Shkarupylo et al., 2024, which is really Komaryshyn & Kogut, 2026): all completed on 14 Nov.",
           "Authors of the DeepRespNet (2024) article; the missing initials of 'Chang' in Choi et al. (2026); the SPRSound author list.",
           "Which PSA release (2025a or 2025b) gives the 701,884 total; the plan now cites 2025b.",
           "Research question 9 lists user-friendliness, usability, durability, functionality and perceived usefulness, but the survey "

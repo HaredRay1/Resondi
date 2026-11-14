@@ -29,7 +29,7 @@ The lung-only versions are in `../imrad/old-lung-only/` and `../research-plan/ol
 
 **Before submitting, fill the marked gaps** (all listed in the missing-items file). They are facts only the team can supply, so they are left visible on purpose and must not be guessed:
 - the IMRaD has 12 `[[TO FILL: ...]]` notes, 7 of them facts its main claims rest on;
-- the research plan has 1 CONFIRM note, the full reference for Shkarupylo et al. (2024);
+- the research plan has no CONFIRM notes left (the review cited as Shkarupylo et al. (2024) is really Komaryshyn & Kogut (2026), now cited with its full reference in both papers);
 - the acceptance results (n = 27, overall 3.95) are of the old version: repeat the UTAUT survey on the current version, with durability, functionality and the question 10 items added;
 - the compiled document needs the logbook scans and Ahnycca's own answers to questions 2, 5 and 6 on the ISEF abstract page.
 

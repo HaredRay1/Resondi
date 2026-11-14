@@ -248,6 +248,7 @@ for line in (
     "the Department of Health's facility plan (2020) and facility registry (2025).",
     "Cost figures (₱2,775 parts, ₱4,000 per unit): kept, as you decided; the ₱22,000 Littmann price comparison stays "
     "too.",
+    "The reference cited as Shkarupylo et al. (2024) is really Komaryshyn & Kogut (2026); corrected in both papers, with its full citation.",
     "The acceptance results are marked as coming from the old version.",
     "The SmartSteth paper is attached after Form 7 in the compiled document.",
     "Both papers are formatted: Times New Roman 11, justified, consistent indents, references flush left with a "
