@@ -139,9 +139,10 @@ plan_rq = [
     ("RQ 8 / Hypothesis 3, conventional vs Resondi quality: not tested inferentially. The paired raw measurements "
      "behind 45 dB and 32 dB were not kept.", "Paired recordings at the same sites; paired t-test or Wilcoxon "
      "signed-rank test, as Table 6 plans.", "Team with the device", LATER),
-    ("RQ 9, acceptance: durability and functionality were not measured as such. The survey measured the four "
-     "UTAUT constructs.", "Add durability and functionality items to the next survey, or state that RQ 9 is "
-     "answered through the UTAUT constructs.", "Team", BEFORE),
+    ("RQ 9, acceptance: durability was not measured, and functionality was rated by one physician only (5 of 5, "
+     "29 Aug 2026), not by end users. The survey measured the four UTAUT constructs.", "Add durability and "
+     "functionality items to the next end-user survey, or state that RQ 9 is answered through the UTAUT constructs.",
+     "Team", BEFORE),
     ("RQ 10, instructional-support preferences: not answered. The survey had no items on diagram guidance, manual "
      "clarity, ease of learning, or app navigation.", "A short survey on those four aspects after a guided "
      "examination (frequency and percentage, as Table 6 plans).", "Team", BEFORE),
@@ -227,12 +228,66 @@ im_evidence = [
 ]
 
 im_decisions = [
+    ("Reference style: the DepEd review form asks for Works Cited in MLA format; the IMRaD uses APA 7 (the research "
+     "plan's form asks for APA). The panel ticked the earlier paper complete.", "Ask the adviser which style the "
+     "regional fair enforces; converting the 40-odd references and in-text citations to MLA can be done in one pass.",
+     "Team / adviser", BEFORE),
     ("Littmann price ₱22,000 in the Introduction.", "Keep as a cost comparison, or remove if the fair excludes money "
      "figures.", "Team", BEFORE),
     ("Heart result screen not yet viewed with a patient account (the paper says the app shows it).", "Record a heart "
      "site from a patient account and press Analyse heart sound.", "Team", BEFORE),
     ("In-app Filipino text for the heart results not checked by a Filipino speaker.", "Read it in the app and "
      "correct any wording.", "Team", BEFORE),
+]
+
+# Fair forms and documents outside the two papers, found in the team's Drive folders on 14 Nov 2026.
+forms = [
+    ("AI Usage Disclosure (dated 29 Aug 2026) is out of date. It says AI did not create, train or modify the model and "
+     "quotes the model as about 71% accurate. Since then AI (Claude) rebuilt and trained the lung models, built the "
+     "heart models, and revised the IMRaD and research plan; 71% is the leaked figure the papers say must not be quoted.",
+     "Update the disclosure and its prompt-log summary to cover the November work and remove the 71% figure. A draft "
+     "can be written from the project records for the team to check.", "Team", BEFORE),
+    ("Student Checklist (1A), item 10, Source of Data: only 'self-collected' is ticked. The rebuilt models use the "
+     "public ICBHI 2017, SPRSound and CirCor datasets.", "Also tick 'publicly available' and name the three datasets.",
+     "Team", BEFORE),
+    ("Project title differs across the forms: some say Ausculta (Qualified Scientist Form 2B, the physicians' "
+     "certificates, the validation form) and the papers say Resondi.", "Make the title consistent, or add a line "
+     "explaining the rename; do not edit the signed certificates.", "Team", BEFORE),
+    ("Letters of 4 Nov 2026 to five cardiologists (three hospitals) and the draft CirCor heart-sound certificate are "
+     "still unsigned. The draft certificate calls the heart samples 'respiratory sound characteristics'.", "Get the "
+     "signatures, and correct the certificate wording to heart sounds before it is signed.", "Team", BEFORE),
+    ("Review form (5 Nov 2026): logbook item 6, 'accurate and detailed description of procedures', was left unticked "
+     "(neither complete nor incomplete).", "Make sure the logbook describes each procedure, with dates.", "Team",
+     BEFORE),
+    ("Compiled document, section V: the logbook (Project Data Book) is not in the shared folders, so a placeholder "
+     "page stands in for it.", "Scan the logbook and put the pages after that page (or send the scans and the "
+     "compilation is rebuilt with them).", "Team", BLOCKS),
+    ("Compiled document, section III: the ISEF Abstract & Certification page was generated from the IMRaD's 250-word "
+     "abstract. Questions 1, 3 and 4 are ticked from the signed forms; questions 2, 5 and 6 (own work, display-board "
+     "photos, certification) are left blank.", "Ahnycca ticks questions 2, 5 and 6 herself and checks the page "
+     "against the official ISEF form.", "Ahnycca", BLOCKS),
+    ("Compiled document: the example compilation also opens with a cover page, a plagiarism report and the DepEd "
+     "checklist of required forms. They were left out, following the order given (research plan first).",
+     "Add them in front if the fair asks for them.", "Team", BEFORE),
+]
+
+# What the Drive folders resolved on 14 Nov 2026 (recorded so the team knows where each answer came from).
+resolved = [
+    ("IMRaD: ethics approval", "School Institutional Review Board, full committee, 16 Jul 2026, minimal risk; Scientific "
+     "Review Committee 17 Jul 2026; data collected 17 Jul to 20 Aug 2026 (ISEF Forms 4, 1B, 1A). Also added to the "
+     "research plan's Risk and Safety."),
+    ("IMRaD: whether the reviewing physicians were blinded", "They confirmed the labels they were shown, against the "
+     "ICBHI 2017 categories, on 21 Aug 2026; not blinded to the labels; exposure to the model output not recorded "
+     "(the four certificates)."),
+    ("IMRaD: who the three physicians are", "A pulmonologist, a pediatric pulmonologist and a pediatrician (the "
+     "certificates and Form 2A); the paper had said three pulmonologists."),
+    ("IMRaD: institutions engaged", "Interviews with written permission, 18 to 22 Aug 2026: ACE Medical Center Palawan, "
+     "Palawan Medical Plaza, Posas Medical Clinic, Palawan Coop Hospital (TB-DOTS), Provincial Health Office (the "
+     "permission letters). The paper's claim of pilot and classroom discussions was replaced with this."),
+    ("IMRaD: cover page credits (review form, Part 3)", "Research adviser and consultants added from Form 2A."),
+    ("IMRaD: abstract length (review form, Part 4, max 250 words)", "Rewritten to 250 words from 420."),
+    ("Research plan RQ 9 and IMRaD acceptance: functionality", "One physician's instrument validation, 29 Aug 2026, "
+     "added (Survey Validation form)."),
 ]
 
 n_plan = len(plan_refs) + len(plan_rq) + len(plan_analyses) + len(plan_decisions)
@@ -256,10 +311,12 @@ for line in (
     para("•  " + line, after=2)
 
 heading("Summary", size=12)
-t = doc.add_table(rows=3, cols=3); t.style = "Table Grid"
+t = doc.add_table(rows=4, cols=3); t.style = "Table Grid"
 for r, vals in enumerate([["Paper", "Items", BLOCKS],
                           ["Research plan", str(n_plan), str(n_block_plan)],
-                          ["IMRaD", str(n_im), str(n_block_im)]]):
+                          ["IMRaD", str(n_im), str(n_block_im)],
+                          ["Fair forms and the compiled document", str(len(forms)),
+                           str(sum(r[3] == BLOCKS for r in forms))]]):
     for c, v in enumerate(vals):
         cell = t.rows[r].cells[c]
         if r == 0:
@@ -289,9 +346,27 @@ table(im_evidence)
 heading("2.5  Decisions and checks for the team", size=11.5)
 table(im_decisions)
 
+heading("Part 3. Fair forms and the compiled document (Resondi-Compiled-RSTF-FINAL)", size=14, before=10)
+para("Found in the team's Drive folders (research papers and supporting documents) on 14 November 2026. These are not "
+     "part of the IMRaD or research plan, but the fair reviews them with the papers.", size=10, italic=True,
+     color=GREY, after=4)
+table(forms)
+
+heading("Resolved on 14 November 2026 from the team's Drive folders", size=14, before=10)
+t2 = doc.add_table(rows=1, cols=2); t2.style = "Table Grid"
+for c, (h, w) in enumerate(zip(["Item", "Answer and source"], [2.2, 4.8])):
+    cell = t2.rows[0].cells[c]; cell.width = Inches(w); shade(cell, "EBD3DE")
+    r = cell.paragraphs[0].add_run(h); r.bold = True; r.font.size = Pt(9.5)
+for item, ans in resolved:
+    cells = t2.add_row().cells
+    for c, (v, w) in enumerate(zip([item, ans], [2.2, 4.8])):
+        cells[c].width = Inches(w)
+        r = cells[c].paragraphs[0].add_run(v); r.font.size = Pt(9)
+para("", after=4)
+
 para("Send the answers to the visible markers and they can be written into the papers, rebuilt, and recopied here "
      "under the FINAL names; this list then shrinks on its next run. The full fill-in worksheet for the IMRaD, with the "
-     "same 15 markers, is in imrad/ (Resondi-IMRaD-Heart-and-Lung-Open-Items-2026-11-13).",
+     "same markers, is in imrad/ (Resondi-IMRaD-Heart-and-Lung-Open-Items-2026-11-13).",
      size=9.5, italic=True, color=GREY, before=6)
 
 doc.save(OUT)

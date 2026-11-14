@@ -137,43 +137,39 @@ para("Resondi: A CNN-Assisted Smart Stethoscope for Lung and Heart Sound "
 para("Ahnycca Krish N. Malimban",
      after=4, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, spacing=1.2)
 para("Science, Technology, Engineering and Mathematics — Senior High School\nPuerto Princesa City National Science High School, Palawan",
-     after=16, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, italic=True, spacing=1.2)
+     after=8, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, italic=True, spacing=1.2)
+para("Research Adviser: John Lemuel J. Noche",
+     after=2, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, size=11, spacing=1.2)
+para("Research Consultants: Bemsor T. Caabay (Palawan State University; qualified scientist, artificial "
+     "neural networks) · Harry Ericson A. Cabrera (software development) · Jeff T. Magsino (Hajimeru IT "
+     "Solutions; hardware) · Dr. Kenneth Wilson O. Lim (pulmonology, ACE Medical Center Palawan) · "
+     "Dr. Sonia Ulanday (pediatric pulmonology, ACE Medical Center Palawan) · Dr. Riza Cornelle C. de la "
+     "Bajan (pediatrics, Palawan Medical Plaza)",
+     after=16, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, size=10, spacing=1.2)
 
 # ═══════════════════════════════════════════════════ ABSTRACT
 H1("Abstract")
-para("Auscultation is the first examination most Filipino patients with heart or lung "
-     "disease receive, but a conventional stethoscope keeps no record, so a lung sound "
-     "cannot be reviewed by a second clinician or compared with the same site at a later "
-     "visit. This study developed Resondi, a low-cost smart stethoscope that records lung "
-     "sounds at seven guided sites, files each recording by site, classifies it into four "
-     "sound patterns with a convolutional neural network, and routes every result to a "
-     "practitioner for confirmation. A Heart Mode guides recording at five cardiac sites, "
-     "the four valve points and Erb's point, and stores each heart recording for "
-     "practitioner review. In field testing in Puerto Princesa City, the device "
-     "produced a signal about 13 dB stronger than a conventional stethoscope (45 dB against "
-     "32 dB), 93 percent of recordings were rated good or acceptable, and the original "
-     "classifier agreed with reference labels on 6 of 15 recordings (40 percent; 95 percent "
-     "CI 19.8–64.3; p = 0.148 against 25 percent chance). That classifier was later found "
-     "to have been trained on leaked data, and was rebuilt with sound-based labels and a "
-     "patient-wise split. In five-fold cross-validation across all 126 ICBHI 2017 patients, "
-     "a three-branch feature-fusion network trained with the SPRSound paediatric corpus "
-     "reached 40.0 percent balanced accuracy against 34.0 percent for the original design, a "
-     "significant gain of 5.9 points (95 percent CI 1.0–10.3; p = 0.008). The fusion "
-     "network now runs in the Resondi application; on 26 recordings made with the device it "
-     "gave clearer top-class scores than the build it replaced (median 41 percent, against "
-     "27 to 34 percent), but those recordings carry no reference labels, so its accuracy "
-     "on the device has not been measured. Resondi is "
-     "established as a working acquisition platform; validating its classifier on "
-     "clinician-labelled Filipino recordings is the next step. "
-     "Heart sounds are recorded at five sites, and two heart-sound models were trained"
-     " and tested on the public CirCor DigiScope dataset with a patient-wise split. On"
-     " 189 test patients, a segmentation model found about 97 percent of first and "
-     "second heart sounds within 100 ms and estimated heart rate with a mean error of "
-     "3.0 beats per minute (95 percent CI 2.5–3.6); a murmur detector reached 66.7 "
-     "percent sensitivity (95 percent CI 50.0–81.8), short of its pre-specified 80 "
-     "percent, at 97.1 percent specificity. Both heart models now run in the Resondi "
-     "application, which reports a heart rate and a murmur screening flag for each heart "
-     "recording, but neither has been tested on recordings from the Resondi device.", first=0, spacing=1.6)
+para("A conventional stethoscope keeps no record, so a heart or lung sound cannot be "
+     "reviewed by a second clinician or compared with the same site at a later visit. "
+     "This study developed Resondi, a low-cost smart stethoscope that records lung "
+     "sounds at seven guided sites and heart sounds at five, files each recording by "
+     "site, analyses it with neural networks, and routes every result to a "
+     "practitioner for confirmation. In field testing in Puerto Princesa City, the "
+     "device produced a signal about 13 dB stronger than a conventional stethoscope, "
+     "93 percent of recordings were rated good or acceptable, and the original "
+     "classifier agreed with reference labels on 6 of 15 recordings (40 percent; p = "
+     "0.148 against 25 percent chance). That classifier had been trained on leaked "
+     "data, so it was rebuilt with sound-based labels and a patient-wise split. In "
+     "five-fold cross-validation on all 126 ICBHI 2017 patients, a three-branch "
+     "feature-fusion network trained with paediatric SPRSound recordings reached 40.0 "
+     "percent balanced accuracy against 34.0 percent for the original design "
+     "(difference 5.9 points, p = 0.008). Two heart-sound models trained on the public"
+     " CirCor dataset estimated heart rate within 3.0 beats per minute on 189 test "
+     "patients and detected murmurs with 66.7 percent sensitivity, short of the 80 "
+     "percent target, at 97.1 percent specificity. All the models now run in the "
+     "Resondi application, but none has been tested against labelled recordings from "
+     "the device. Resondi is a working acquisition platform; validating its models on "
+     "clinician-labelled Filipino recordings is the next step.", first=0, spacing=1.6)
 para("Keywords: auscultation, lung sounds, heart sounds, smart stethoscope, convolutional neural "
      "network, feature fusion, primary care, Philippines", first=0, italic=True, spacing=1.6)
 
@@ -743,9 +739,9 @@ para("Before analysis, each recording was assessed where technically possible fo
      "motion artifact, missing or invalid samples, and insufficient signal, and "
      "classified as Good, Acceptable, Poor, or Invalid. Poor or invalid recordings were "
      "recommended for repetition rather than forced into a classification. Reference "
-     "recordings were additionally reviewed by three pulmonologists, one of whom is also "
-     "a practising pediatrician, so that classifications could be checked against expert "
-     "clinical judgement across adult and pediatric presentations. Reference labels were "
+     "recordings were additionally reviewed by three physicians, a pulmonologist, a "
+     "pediatric pulmonologist and a pediatrician, so that classifications could be checked "
+     "against expert clinical judgement across adult and pediatric presentations. Reference labels were "
      "stored separately from model predictions.", first=0)
 
 para("Six procedures were carried out with the completed prototype.", first=0, after=6)
@@ -783,13 +779,13 @@ p = para("Classification agreement. Fifteen recordings classified by the model w
          "addresses the direction of disagreement rather than the extent of agreement and "
          "is without power at this sample size. Reference labels were stored separately "
          "from model predictions.", first=0, after=6, spacing=1.6)
-FILL(p, "state whether the three reviewing pulmonologists were blinded to the model "
-        "output when assigning reference labels. If the labels were assigned before the "
-        "model was trained, say so \u2014 chronology establishes blinding and is the "
-        "strongest form of it. Note also that the full paper\u2019s Data Analysis section "
-        "describes this as a comparison between \u2018the two sources of respiratory-sound "
-        "recordings\u2019, which reads as a device comparison rather than a test of "
-        "classifier accuracy. Correct that wording in the full paper so the two agree")
+para("The physicians' review was a confirmation of labels, not independent labelling. "
+     "Each reviewed the respiratory sound samples together with the labels the "
+     "researchers presented, judged them against the ICBHI 2017 categories, and "
+     "certified on 21 August 2026 that the samples and their labels were consistent "
+     "with recognised respiratory sound characteristics. The reviewers therefore saw "
+     "the labels; their certificates do not record whether they also saw the model's "
+     "output.", first=0, after=6, spacing=1.6)
 
 para("Rebuilt classifier on device recordings. After the fusion network was placed in "
      "the Resondi application, the published application was run, read-only, on every "
@@ -854,8 +850,9 @@ FILL(p, "the full paper's Data Analysis section specifies a paired-samples t-tes
         "what is stated here")
 
 H2("Ethical Considerations")
-para("The study was conducted under the supervision of the research adviser of the "
-     "Puerto Princesa City National Science High School research programme. "
+para("The study was conducted under the supervision of the research adviser, John "
+     "Lemuel J. Noche, of the Puerto Princesa City National Science High School research "
+     "programme. "
      "Participation was voluntary throughout. Written consent forms and data recording "
      "sheets were used for monitoring and record-keeping, and the purpose and stated "
      "limitations of the system were explained to participants before any recording was "
@@ -868,19 +865,16 @@ para("Recordings of the three hospital patients were obtained under the guidance
      "recordings constitute sensitive personal information under Republic Act No. 10173, "
      "the Data Privacy Act of 2012, and were handled accordingly.", first=0)
 
-p = para("Formal review by an institutional ethics committee was not obtained for the "
-         "work reported here. The safeguards described above \u2014 adviser supervision, "
-         "written informed consent, physician supervision of all patient recordings, and "
-         "de-identified storage \u2014 were the measures in place. Ethics committee review is "
-         "part of the clinical validation planned for the next phase, and prospective "
-         "evaluation in a health facility will not proceed without it.",
-         first=0)
-FILL(p, "this paragraph states plainly that no ethics committee review was obtained, "
-        "which is the defensible position if that is accurate. If any body did approve "
-        "the study \u2014 a school research committee, the partner hospital, or the "
-        "Provincial Health Office \u2014 name it and the approval date here instead, and "
-        "delete the first sentence. Do not describe physician supervision as ethics "
-        "approval; a research panel will distinguish them")
+para("The study was reviewed before any data were collected. The school's "
+     "Institutional Review Board, a three-member panel of a registered nurse, an "
+     "educator and the school administrator, approved it after full committee review "
+     "on 16 July 2026 as minimal risk, with written informed consent required from "
+     "participants aged 18 or over and no minors enrolled, and the school's Scientific"
+     " Review Committee approved the research plan on 17 July 2026. Data were "
+     "collected from 17 July to 20 August 2026. This was review at school level under "
+     "the science fair rules, not review by a hospital or university research ethics "
+     "committee; the clinical validation planned for the next phase will seek that "
+     "review before it begins.", first=0)
 
 
 # ═══════════════════════════════════════════════════ RESULTS
@@ -936,6 +930,13 @@ para("Performance expectancy and effort expectancy each returned a weighted mean
      "4.09 (SD = 0.59 and 0.60 respectively), both interpreted as Agree. Facilitating "
      "conditions returned 3.84 (SD = 0.61) and social influence 3.63 (SD = 1.21), "
      "likewise interpreted as Agree.")
+
+para("One physician also rated the prototype on the study's instrument validation form"
+     " on 29 August 2026, giving the highest rating, 5 of 5, for general relevance, "
+     "functionality, performance and usability, accessibility, and reliability, and "
+     "rated it 4 of 5 for clinical relevance, clinical appropriateness and information"
+     " clarity, and 3 of 5 for patient safety and clinical usefulness. This is one "
+     "expert's judgement, not an end-user result.")
 
 para("Internal consistency varied across constructs. Effort expectancy reached "
      "acceptable reliability (\u03b1 = 0.76). Facilitating conditions (\u03b1 = 0.59) and "
@@ -1432,15 +1433,13 @@ para("Two features of this setting bear directly on the design decisions reporte
      "choice would be necessary in a tertiary hospital, and neither is incidental to the "
      "results reported here.", first=0)
 
-p = para("Early engagement has begun in Palawan, with exploratory discussions among "
-         "rural health units, private clinics, and nursing and medical schools in and "
-         "around Puerto Princesa City regarding pilot deployment and classroom use. These "
-         "are exploratory conversations rather than commitments; no memorandum of "
-         "agreement is in place, and they are reported only to establish that the "
-         "deployment setting described above is reachable.", first=0)
-FILL(p, "name the institutions if you can, with dates. An unnamed engagement claim is "
-        "the first thing a reviewer or a panel asks you to substantiate, and if you "
-        "cannot name one, delete this paragraph rather than leave it unsupported")
+para("Engagement with health facilities in Palawan so far consists of interviews. "
+     "Between 18 and 22 August 2026, with written permission from each, the researcher"
+     " interviewed practitioners at ACE Medical Center Palawan, Palawan Medical Plaza,"
+     " Posas Medical Clinic, Palawan Coop Hospital (its tuberculosis DOTS programme) "
+     "and the Provincial Health Office about the care of patients with lung disease. "
+     "These were information-gathering interviews, not agreements to pilot or deploy "
+     "the system, and no memorandum of agreement is in place.", first=0)
 
 H2("Limitations")
 para("Seven limitations bear directly on the interpretation of these findings.", first=0,

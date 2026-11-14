@@ -18,3 +18,6 @@ build/dev2/out/
 
 # Empty clone of the HF_Lung_V1 dataset repo (its own .git, no data)
 HF_Lung_V1/
+
+# Compiled fair submission: contains the ISEF forms' phone numbers and e-mails (user wants it in Ahnyccas papers, not on GitHub)
+Ahnyccas papers/Resondi-Compiled-RSTF-FINAL.pdf

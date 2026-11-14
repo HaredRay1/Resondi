@@ -83,7 +83,7 @@ blocking = [i for i, (_, _, t) in enumerate(ITEMS)
 
 para("RESONDI", size=9, bold=True, color=ACCENT, after=0)
 para("IMRaD paper: open items", size=20, bold=True, after=2)
-para(f"Every TO FILL marker in the lung-only IMRaD, {len(ITEMS)} in all, in the order they "
+para(f"Every TO FILL marker in the heart-and-lung IMRaD, {len(ITEMS)} in all, in the order they "
      "appear. Generated from build/imrad/build_imrad.py on each run, so this list always "
      "matches the paper.", size=10.5, italic=True, color=GREY, after=10)
 para("How to use it", size=12, bold=True, color=ACCENT, after=3)

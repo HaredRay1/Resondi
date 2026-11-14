@@ -420,6 +420,20 @@ f = figure(c._p, os.path.join(RFIG, "fig4_fusion.png"), 6.2, BODY)
 note(f._p, "Adapted from Tariq et al. (2022), who fused three CNN architectures on one representation at a time; here "
      "the three representations are fused. The MFCC branch alone is the baseline against which fusion is judged.", BODY)
 
+# ======================================================================= RISK AND SAFETY: approvals obtained
+_rs = next(p for p in P if p.text.startswith("Because the study may involve respiratory sound recordings"))
+set_text(_rs, _rs.text.rstrip() + " The school's Institutional Review Board, a registered nurse, an educator and the "
+         "school administrator, approved the study after full committee review on 16 July 2026 as minimal risk, requiring "
+         "written informed consent from participants aged 18 or over, with no minors enrolled. The Scientific Review "
+         "Committee approved this plan on 17 July 2026, and data collection ran from 17 July to 20 August 2026. The "
+         "physicians who reviewed the reference recordings and the practitioners who were interviewed gave written "
+         "informed consent, and each institution where interviews were held gave written permission.")
+log("Risk and safety: approvals", "Consent and review described only as future steps",
+    "Adds the school Institutional Review Board approval (16 Jul 2026, minimal risk, full committee), the Scientific "
+    "Review Committee approval (17 Jul 2026), the data-collection dates, and the written consents and permissions",
+    "From the team's ISEF forms (Human Participants Form 4, Approval Form 1B, Student Checklist 1A) and permission letters, "
+    "supplied by the user on 14 Nov.")
+
 # ======================================================================= TESTING
 set_text(P[132], P[132].text.rstrip() + " Because the classes are imbalanced, balanced accuracy (the mean of the four "
          "per-class recalls) will be the primary measure, reported against the 25 percent chance level for four classes "
@@ -661,8 +675,10 @@ para("Twenty-seven respondents (13 patients, 13 general respondents, and one hea
      "effort expectancy each returned 4.09, facilitating conditions 3.84, and social influence 3.63, all interpreted as "
      "Agree. Research Question 9 named five aspects, but the questionnaire measured these four constructs, so the answer "
      "is partial: effort expectancy is the closest measure of user-friendliness and usability (4.09), and performance "
-     "expectancy of perceived usefulness for community-based monitoring (4.09), while durability and functionality were "
-     "not measured as such. Only effort expectancy reached acceptable internal consistency (alpha = 0.76), so the "
+     "expectancy of perceived usefulness for community-based monitoring (4.09), while durability was not measured. "
+     "Functionality was rated only by one physician, on the study's instrument validation form on 29 August 2026: 5 of 5 "
+     "for functionality, as for relevance, usability, accessibility and reliability, and 3 of 5 for patient safety and "
+     "clinical usefulness. That is one expert's judgement, not an end-user result. Only effort expectancy reached acceptable internal consistency (alpha = 0.76), so the "
      "construct scores are descriptive.")
 para("Research Question 10 is not yet answered. The questionnaire contained no items on diagram-based zone guidance, "
      "manual clarity, ease of learning, or app navigation, and its open-ended items returned no responses. The nearest "
@@ -1163,7 +1179,7 @@ tab("Table 21", "Answers to the Research Questions", [
     ["8. Conventional stethoscope vs Resondi quality (Hypothesis 3)", "Resondi signal about 13 dB stronger; paired raw "
      "measurements were not kept", "Answered in part, descriptively; not tested inferentially"],
     ["9. Acceptance", "Overall 3.95 of 5 (Agree); effort expectancy 4.09, performance expectancy 4.09, facilitating "
-     "conditions 3.84, social influence 3.63", "Answered in part; durability and functionality not measured as such"],
+     "conditions 3.84, social influence 3.63", "Answered in part; durability not measured; functionality rated by one physician only"],
     ["10. Instructional-support preferences", "Not measured; 44% unsure whether training and technical support is "
      "available", "Not yet answered; needs a short survey"],
     ["11. Longitudinal monitoring and rehabilitation", "Same-site comparison, four-week trend, AI-assisted summaries, and "
@@ -1276,6 +1292,9 @@ log("Bibliography: four references completed (14 Nov)",
     "plus the last, as APA 7 requires)",
     "Checked 14 Nov against the PLOS ONE article page and the Crossref records for the DOIs. Shkarupylo et al. (2024) is still "
     "unresolved and stays marked for the team.")
+log("Research Question 9: physician validation (14 Nov)", "Durability and functionality not measured as such",
+    "Functionality rated by one physician on the instrument validation form (29 Aug 2026; 5 of 5); durability still "
+    "not measured", "From the team's Survey Validation form, supplied by the user on 14 Nov.")
 log("Results and Discussion answer each research question (14 Nov)",
     "Results organized by analysis; Research Questions 2-4, 10, and 11 not answered, Question 9 only as an overall mean",
     "New sections for Research Questions 2-4 (device, platform, analysis system), 9-10 (acceptance by construct, mapped "
