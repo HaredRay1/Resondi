@@ -15,7 +15,7 @@ The lung-only versions are in `../imrad/old-lung-only/` and `../research-plan/ol
 
 **Before submitting, fill the marked gaps.** These are facts only the team can supply, so they are left visible on purpose and must not be guessed:
 - The IMRaD has 15 `[[TO FILL: ...]]` notes, 9 of them blocking. The fill-ins document in `../imrad/` lists them with what each needs.
-- The research plan's reference list has 2 `[[... CONFIRM ...]]` notes: the full references for Shkarupylo et al. (2024) and Park et al. (2025), both cited in the Rationale. A likely match for Park is Park, J. S., Park, S.-Y., Moon, J. W., Kim, K., & Suh, D. I. (2025), *Artificial intelligence models for pediatric lung sound analysis: Systematic review and meta-analysis*, Journal of Medical Internet Research, 27, e66491, https://doi.org/10.2196/66491. Confirm that it is the source meant before using it.
+- The research plan's reference list has 1 `[[... CONFIRM ...]]` note: the full reference for Shkarupylo et al. (2024), cited in the Rationale for noise and contact artifacts. (Park et al., 2025 was completed on 14 Nov with the JMIR meta-analysis, chosen by the user.)
 
 **Never quote the leaky rows of Table 4 as accuracy.** They show how a leaky split inflates the score. The model's accuracy on unseen patients is 40.0 percent balanced (39.0 percent for the single seed in Table 4), against 25 percent by chance.
 

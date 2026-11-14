@@ -1166,8 +1166,12 @@ log("Bibliography: four references completed (14 Nov)",
     "3M product listing (the source the IMRaD uses for the ₱22,000 price); Chang, H. (HyeSun Chang, from the PLOS ONE article); "
     "Gupta, Singh, Travieso-González, Burget and Dutta (2024), moved to G; SPRSound author list confirmed (22 authors, first 19 "
     "plus the last, as APA 7 requires)",
-    "Checked 14 Nov against the PLOS ONE article page and the Crossref records for the DOIs. Shkarupylo et al. (2024) and Park et "
-    "al. (2025) are still unresolved and stay marked for the team.")
+    "Checked 14 Nov against the PLOS ONE article page and the Crossref records for the DOIs. Shkarupylo et al. (2024) is still "
+    "unresolved and stays marked for the team.")
+log("Bibliography: Park et al. (2025) completed (14 Nov)", "Park et al. (2025), no full reference",
+    "Park, J. S., Park, S.-Y., Moon, J. W., Kim, K., & Suh, D. I. (2025). Artificial intelligence models for pediatric lung "
+    "sound analysis: Systematic review and meta-analysis. Journal of Medical Internet Research, 27, e66491",
+    "Chosen by the user on 14 Nov as the source cited in the Rationale; details from the Crossref record for 10.2196/66491.")
 log("Heart-sound models in the application (14 Nov)", "Models tested on CirCor; application did not classify heart sounds",
     "Results: the models now run in the application (ONNX in the browser, 16 kHz audio decimated to 4 kHz); app-path check "
     "on 631 test recordings (heart-rate error 3.03 vs 3.01 BPM, murmur flag the same on 99.7%); JavaScript matched Python "
@@ -1211,7 +1215,7 @@ BIB = [
     "Lahham, A., & Holland, A. E. (2021). The need for expanding pulmonary rehabilitation services. Life, 11(11), 1236. https://doi.org/10.3390/life11111236",
     "Leng, S., Tan, R. S., Chai, K. T. C., Wang, C., Ghista, D., & Zhong, L. (2015). The electronic stethoscope. BioMedical Engineering OnLine, 14, 66. https://doi.org/10.1186/s12938-015-0056-y",
     "Oliveira, J., Renna, F., Costa, P. D., Nogueira, M., Oliveira, C., Ferreira, C., Jorge, A., Mattos, S., Hatem, T., Tavares, T., Elola, A., Rad, A. B., Sameni, R., Clifford, G. D., & Coimbra, M. T. (2022). The CirCor DigiScope dataset: From murmur detection to murmur classification. IEEE Journal of Biomedical and Health Informatics, 26(6), 2524–2535. https://doi.org/10.1109/JBHI.2021.3137048",
-    "[[Park et al. (2025). CONFIRM: add the full reference for the source cited in the Rationale on autonomous AI interpretation.]]",
+    "Park, J. S., Park, S.-Y., Moon, J. W., Kim, K., & Suh, D. I. (2025). Artificial intelligence models for pediatric lung sound analysis: Systematic review and meta-analysis. Journal of Medical Internet Research, 27, e66491. https://doi.org/10.2196/66491",
     "Philips, A. L., Sodhi, I., Warrier, J., & Sinha, V. (2016). Development of digital stethoscope for telemedicine. https://www.researchgate.net/publication/289489645",
     "Philippine Statistics Authority. (2025a). 2024 causes of death in the Philippines (provisional as of 31 July 2025). https://psa.gov.ph/content/2024-causes-death-philippines-provisional-31-july-2025",
     "Philippine Statistics Authority. (2025b, October 28). 2024 causes of death in the Philippines (provisional as of 31 August 2025). https://psa.gov.ph/system/files/vsd/1_Press%20Release%20_2024%20Cause%20of%20Death%20Statistics_as%20of31%20August%202025_ONS-%20signed.update.pdf",
