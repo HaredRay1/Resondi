@@ -1,10 +1,10 @@
-# App change, 14 Nov 2026: heart-sound models v1 (saved, NOT published)
+# App change, 14 Nov 2026: heart-sound models v1 (PUBLISHED)
 
 ## Status
 
 - **Saved in the app** as checkpoint `6af81b7f647d6ad4c4c7ac20` ("Heart models v1: heart rate + murmur screening"). Every changed file compiles on the preview.
-- **Not published.** Publishing through the API was refused by the session's permission check (as on 13 Nov). To publish: Base44 editor → Publish, or deploy that checkpoint.
-- **Publishing also releases the 13 Nov device Wi-Fi transfer page**, which is in the same saved version (`fusion-model-v2-and-device-transfer.md`, section 2).
+- **Published 14 Nov 2026 09:30 UTC (17:30 PHT)** at the user's request: checkpoint `6af81b7f647d6ad4c4c7ac20`, app commit `c89b50a5`. The live bundle loads the heart models from Ausculta `1e34348b` (chunk `HeartAnalysisCard-mpsoYAhW.js`); the lung model is unchanged (`c9cd3fa2`).
+- **This also published the 13 Nov device Wi-Fi transfer page** (chunk `DeviceTransfer-C1Q4MX-K.js`), which was in the same saved version.
 - **Rollback:** checkpoint `6af819488ec579cffb113985` ("Before heart models v1"). The `HeartAnalysis` entity was created before that checkpoint; it is new and nothing else reads it.
 
 ## What the app now does with a heart recording
@@ -43,4 +43,4 @@ On the recording page (and as a compact row on the exam summary), "Analyse heart
 
 ## What this does not change
 
-The heart models are tested on CirCor only. The IMRaD and research plan were updated on 14 Nov to say the models run in the application, which is true only once this version is published. The papers also say that the models went into the application before the device test the plan had put first, and that every heart result there is marked as a screening aid.
+The heart models are tested on CirCor only. The IMRaD and research plan were updated on 14 Nov to say the models run in the application, which is now true. The papers also say that the models went into the application before the device test the plan had put first, and that every heart result there is marked as a screening aid.

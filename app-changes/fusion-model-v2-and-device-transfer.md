@@ -1,4 +1,4 @@
-# App changes, 13 Nov 2026: fusion model v2 (LIVE) and device Wi-Fi transfer (saved, NOT published)
+# App changes, 13 Nov 2026: fusion model v2 (LIVE) and device Wi-Fi transfer (PUBLISHED 14 Nov)
 
 ## 1. Fusion lung model v2: PUBLISHED
 
@@ -14,7 +14,7 @@
   - **live test on all 45 stored lung recordings, read-only:** 45/45 ran. On the 26 unique Resondi device recordings the top score is 31–66% (median 41%), against 27–34% for v1. More decisive, not proven more correct: no reference labels. `model-rebuild/results/live-app-device-test-fusion-2026-11-13.md`.
 - **Not checked:** the result screens by eye with a patient account (admin is redirected away from patient pages).
 
-## 2. Device Wi-Fi transfer page: SAVED, NOT PUBLISHED
+## 2. Device Wi-Fi transfer page: PUBLISHED 14 Nov 2026 (with the heart models, checkpoint `6af81b7f`)
 
 - **Status:** written into the app and compiles on the preview, saved as checkpoint `6af61921f6933d43a3bb0ce0` ("Device Wi-Fi transfer page + fusion v2"). Publishing it was blocked by a permission check on 13 Nov, so the live app does not have it yet. To publish: Base44 editor → Publish, or deploy that checkpoint.
 - **Files:** new `src/pages/patient/DeviceTransfer.jsx` (copy: `app-changes/DeviceTransfer.jsx`); `src/App.jsx` adds the route `/patient/record/device`; `src/pages/patient/FullExam.jsx` adds a "Transfer from Resondi device (Wi-Fi)" button under "Start exam".

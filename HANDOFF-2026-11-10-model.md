@@ -22,7 +22,7 @@ Paste this into Claude chat to bring it up to date. It covers what changed on 9�
 > - **Leakage demonstration (14 Nov), IMRaD Table 4:** the same fusion network (seed 11) scores 39.0% balanced on unseen patients, 58.2% when test patients' other breaths are in training, 52.5% when pieces of the same breath are on both sides, 78.5% on its own training data. It shows why the study splits by patient. **Never quote the leaky rows as accuracy.** `model-rebuild/results/leakage-demo.md`.
 > - **Ahnycca's papers (14 Nov):** `Ahnyccas papers/` holds copies of the heart-and-lung IMRaD, its fill-ins, the research plan and its revision log (Word + PDF). Recopy after a rebuild.
 > - **Heart models (14 Nov, done):** CirCor, patient-wise split (564/189/189 patients). On 189 test patients: S1/S2 found within 100 ms 96.8%/97.3%; **heart rate mean error 3.0 BPM** (CI 2.5–3.6; 85% within 5 BPM; untrained baseline 35.4). **Murmur: sensitivity 66.7% (CI 50.0–81.8), missing its pre-specified 80%**, specificity 97.1%, AUROC 0.96 (24/36 found, 4/139 false flags). Results in `model-rebuild/results/heart-segmentation.md` and `heart-murmur.md`; in the IMRaD as Table 5 and Figure 17. Trained before the cardiologist's label review returned (disclosed). CirCor only; not checked on device audio. Never quote the murmur result as 80%.
-> - **Heart models in the app (14 Nov): SAVED, NOT PUBLISHED.** Checkpoint `6af81b7f647d6ad4c4c7ac20`; the API publish was refused by the permission check, so publish from the Base44 editor. Publishing also releases the 13 Nov device-transfer page. ONNX in `HaredRay1/Ausculta@1e34348b`. Browser code matches Python (25/25 in Node, 8/8 in Chrome). The IMRaD and research plan were updated the same day to say the models run in the application, which is true only once this version is published. Details: `app-changes/heart-models-v1.md`.
+> - **Heart models in the app: PUBLISHED 14 Nov 17:30 PHT** (checkpoint `6af81b7f647d6ad4c4c7ac20`, app commit `c89b50a5`; rollback `6af819488ec579cffb113985`). The 13 Nov device-transfer page went live with it. ONNX in `HaredRay1/Ausculta@1e34348b`. Browser code matches Python (25/25 in Node, 8/8 in Chrome). The IMRaD and research plan were updated the same day to say the models run in the application, which is now true. Details: `app-changes/heart-models-v1.md`.
 > - **Never say:** validated, diagnoses, or works on the Resondi device.
 > - **Next gain needs data:** clinician-labelled Resondi device recordings; HF_Lung_V1 once an author-sanctioned copy is found (the GitHub link is dead).
 >
@@ -170,7 +170,7 @@ Measure every change on the same 31 test patients.
 - Never call the model validated, or say it diagnoses anything. It describes sounds, and a practitioner confirms every result.
 - The new model **is** live in the app (checked 10 Nov). Say "deployed and working end to end." **Never say it performs on the Resondi device:** on device recordings its output is close to a random guess.
 - Never swap the 40% field figure for a test-set figure. They measure different models on different audio (section 5).
-- The lung model must never be run on heart recordings. Heart recordings use the separate heart models (14 Nov; saved in the app, not yet published).
+- The lung model must never be run on heart recordings. Heart recordings use the separate heart models (14 Nov; live in the app).
 - Keep the answer key, the survey CSV (names and e-mails) and any credentials out of anything shared.
 
 ---
