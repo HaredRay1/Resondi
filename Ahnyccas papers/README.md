@@ -1,6 +1,6 @@
 # Ahnycca's papers (regional science and technology fair, heart and lung)
 
-Copies made on 14 Nov 2026. Each Word file has a PDF beside it.
+Copies made on 14 Nov 2026 (last refreshed after the heart models went live in the Resondi app, 14 Nov 17:30). Each Word file has a PDF beside it.
 
 | File | What it is |
 |---|---|
@@ -13,4 +13,4 @@ These are copies. The builders write to `../imrad/` and `../research-plan/`; aft
 
 **Never quote the leaky rows of Table 4 as accuracy.** They show how a leaky split inflates the score. The model's accuracy on unseen patients is 40.0 percent balanced (39.0 percent for the single seed in Table 4), against 25 percent by chance.
 
-**Heart results (IMRaD Table 5, research plan Table 20) are on CirCor recordings only,** not on the Resondi device. The murmur detector reached 66.7 percent sensitivity on test patients, short of its 80 percent target; do not quote 80 percent as its result.
+**Heart results (IMRaD Table 5, research plan Table 20) are on CirCor recordings only,** not on the Resondi device. The murmur detector reached 66.7 percent sensitivity on test patients, short of its 80 percent target; do not quote 80 percent as its result. Both papers say the heart models run in the app (published 14 Nov), and that they went in before the device test the plan had put first; every heart result in the app is marked as a screening aid.
