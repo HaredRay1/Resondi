@@ -69,6 +69,10 @@ def H2(t):
     para(t, after=8, before=12, first=0, size=12, bold=True, spacing=2.0)
 
 
+def H3(t):
+    para(t, after=6, before=8, first=0, size=12, bold=True, italic=True, spacing=2.0)
+
+
 def FILL(p, text):
     r = p.add_run("  [[TO FILL: " + text + "]]")
     r.italic = True
@@ -337,6 +341,15 @@ for n, (obj, sub) in enumerate([
     p.paragraph_format.left_indent = Inches(0.35)
     p2 = para(sub, first=0, after=8, size=11, italic=True, spacing=1.6)
     p2.paragraph_format.left_indent = Inches(0.6)
+
+H2("Research Questions")
+para("The study, as set out in the research plan, sought to answer the following questions. Questions 6, "
+     "7 and 8 correspond to the plan's three hypotheses.", first=0, after=6)
+for n, (q, subs) in enumerate([('What is the quality of cardiopulmonary sound recordings captured using Resondi in terms of', ['signal quality', 'clarity', 'noise level']), ('What are the specifications of the Resondi Smart Stethoscope in terms of', ['design', 'components', 'cost']), ('What are the specifications of the Resondi Cardiopulmonary Monitoring Platform in terms of', ['user interface', 'system architecture', 'role-based access', 'data management']), ('What are the specifications of the Resondi cardiopulmonary sound analysis system in terms of', ['audio preprocessing method', 'feature representations', 'CNN branch architecture', 'feature-fusion architecture']), ('What is the response time of the Resondi system in terms of', ['smart-stethoscope Wi-Fi connection', 'sound recording', 'recording-quality assessment', 'signal preprocessing', 'classification output']), ('Is there a significant difference in the classification performance of the CNN-fusion model between clean and noise-contaminated cardiopulmonary sound recordings?', []), ('Is there a significant difference between the classification performance obtained from reference-dataset recordings and that obtained from Resondi device recordings?', []), ('Is there a significant difference between the recording quality of a conventional stethoscope and Resondi?', []), ('What is the level of acceptance of end users toward Resondi in terms of', ['user-friendliness', 'usability', 'durability', 'functionality', 'perceived usefulness for community-based monitoring']), ('What are the preferences of end users regarding instructional support for Resondi in terms of', ['diagram-based auscultation-zone guidance', 'device manual clarity', 'overall ease of learning and self-use', 'app navigation flow']), ('How can Resondi support longitudinal cardiopulmonary monitoring and practitioner-supervised rehabilitation through repeated sound recordings, comparison of monitoring records, AI-assisted summaries, and practitioner-approved recommendations?', [])], 1):
+    text = q + (": " + "; ".join(subs[:-1]) + (", and " if len(subs) > 2 else " and ") + subs[-1] + "?"
+                if subs else "")
+    p = para(f"{n}. {text}", first=0, after=4, spacing=1.6)
+    p.paragraph_format.left_indent = Inches(0.35)
 
 H2("Scope and Delimitation")
 para("This study covers lung and heart sounds, at different stages. Lung sounds are "
@@ -895,12 +908,16 @@ para("The study was reviewed before any data were collected. The school's "
 # ═══════════════════════════════════════════════════ RESULTS
 H1("Results")
 
-para("Findings are reported in the order the evaluation procedures were carried out. "
-     "The classification result is the weakest of the five and is stated without "
-     "qualification. The section ends with the result for each of the nine objectives "
-     "of the study.", first=0)
+para("The results are reported by research question, in the order the questions were "
+     "set. Research Questions 1, 5 and 9 are answered from the field evaluation, which"
+     " used the original classifier; Research Questions 2 to 4 from the device, the "
+     "platform and the rebuilt analysis system, including the tests of the rebuilt "
+     "lung-sound and heart-sound models; and Research Questions 6 to 8 by the three "
+     "hypotheses. The section ends with the result for each of the study's nine "
+     "objectives.", first=0)
 
-H2("Signal Acquisition")
+H2("Research Question 1: Quality of the Recordings")
+H3("Signal Acquisition")
 para("Mean signal strength measured approximately 45 dB for Resondi against "
      "approximately 32 dB for a conventional acoustic stethoscope recorded under "
      "the same conditions. Because the decibel scale is logarithmic, the 13 dB "
@@ -909,19 +926,75 @@ para("Mean signal strength measured approximately 45 dB for Resondi against "
      "not establish better clinical performance; recording quality and "
      "classification accuracy bear on that separately.", first=0)
 
-H2("Recording Clarity")
+H3("Recording Clarity")
 FIG(7, "Distribution of Recording Clarity Ratings",
     "r1_clarity.png", 5.7)
 
-H2("Ambient Noise Conditions")
+H3("Ambient Noise Conditions")
 FIG(8, "Ambient Noise Levels Across Three Recording Environments",
     "r2_noise.png", 5.7)
 
-H2("System Response Time")
-FIG(9, "Mean Duration of Each Processing Stage",
-    "r3_response.png", 5.9)
+para("These results answer Research Question 1 descriptively. In signal quality, "
+     "Resondi recorded about 13 dB more than a conventional stethoscope; in clarity, "
+     "93 percent of recordings were rated good or acceptable; and in noise level, "
+     "recordings were made at ambient levels of 24, 35 and 42 dB, the last in a "
+     "community setting.", first=0)
 
-H2("Classification Agreement")
+H2("Research Question 2: Specifications of the Smart Stethoscope")
+para("In design, the Resondi smart stethoscope is a handheld unit that joins an "
+     "acoustic chest piece to a digital microphone in a 3D-printed polylactic acid "
+     "enclosure of 173 by 80 by 70 mm, with a 20 by 4 character display and two "
+     "buttons, used to record at seven standardised lung sites and five cardiac sites."
+     " Its components are an ESP32 microcontroller with built-in Wi-Fi, a digital MEMS"
+     " microphone, a 32 GB microSD card and a 10,000 mAh battery; it records "
+     "15-second, 16 kHz mono WAV files and serves its own Wi-Fi network and web page, "
+     "so it works without internet. Its cost is a bill of materials of ₱2,775 and a "
+     "fully loaded unit cost of ₱4,000.", first=0)
+
+H3("Heart Mode")
+para("Heart Mode was implemented on the device and in the application. It guides the "
+     "operator through the five cardiac sites in order, records 15 seconds at each in the "
+     "same 16 kHz WAV format as lung recordings, and files each recording by site for "
+     "practitioner review; the heart-sound models described above can then be run on it. "
+     "No quantitative evaluation of "
+     "heart recordings made with the device was carried out in this study: signal strength, "
+     "recording clarity and classification agreement were measured on lung recordings only. "
+     "The heart-sound models were evaluated on public recordings instead, as reported "
+     "below; the cardiologist's review of the CirCor labels had not been returned when this "
+     "paper was written.", first=0)
+
+H2("Research Question 3: Specifications of the Monitoring Platform")
+para("The platform's user interface is a web application in English and Filipino with "
+     "separate Lung and Heart modes, each guiding the user through its sites on a body"
+     " diagram and filing every recording by site, with a recording history, a same-"
+     "site comparison and trend charts. Its architecture has three tiers: the device, "
+     "which records to its microSD card; the transfer, in which a phone joins the "
+     "device's Wi-Fi, downloads the recordings and uploads them through the "
+     "application's transfer page, since the automatic gateway is not yet built; and "
+     "the platform, which stores each recording against the patient's record, runs the"
+     " lung-sound and heart-sound models in the browser and presents every result to a"
+     " practitioner. Role-based access separates patients, practitioners and "
+     "administrators: a practitioner is verified by an administrator, may review only "
+     "recordings in the specialisation they hold, respiratory, cardiac or both, and "
+     "can read only the cases a patient has sent to them, which row-level security on "
+     "each record enforces. For data management, each recording is stored as a private"
+     " audio file with its site, mode, examination and date; each analysis is saved "
+     "separately with the name of the model that produced it; deleting a recording "
+     "deletes its analyses, plans, reviews and submissions; and an approved recording "
+     "can be exported as a PDF report.", first=0)
+
+H2("Research Question 4: Specifications and Performance of the Sound Analysis System")
+para("The analysis system preprocesses audio to 16 kHz mono and cuts it into 1-second "
+     "windows, each band-limited to 100 to 3,900 Hz and levelled before its features "
+     "are computed. Its feature representations are MFCC, a log-power spectrogram and "
+     "a chromagram; each feeds its own CNN branch, and the fusion architecture "
+     "concatenates the three branch outputs into a dense layer with a softmax over the"
+     " four sound classes. Heart sounds are analysed by two separate models, a "
+     "segmentation model that times S1 and S2 and gives the heart rate, and a murmur "
+     "model. The subsections below report how the original classifier and the rebuilt "
+     "models performed.", first=0)
+
+H3("Classification Agreement")
 para("Of fifteen recordings compared against reference labels, six produced matching "
      "classifications, an agreement of 40 percent with a 95 percent Wilson score interval "
      "of 19.8 to 64.3 percent. That interval contains both the 25 percent agreement "
@@ -936,56 +1009,7 @@ para("Of fifteen recordings compared against reference labels, six produced matc
 FIG(10, "Classification Agreement Against Reference Labels, with the 95% "
         "Wilson Interval", "r4_agreement.png", 5.7)
 
-H2("End-User Acceptance")
-para("Twenty-seven respondents completed the acceptance questionnaire: 13 patients, "
-     "13 general respondents and one health practitioner. Across the twelve five-point "
-     "Likert items, overall acceptance was 3.95, interpreted as Agree.", first=0)
-
-para("Performance expectancy and effort expectancy each returned a weighted mean of "
-     "4.09 (SD = 0.59 and 0.60 respectively), both interpreted as Agree. Facilitating "
-     "conditions returned 3.84 (SD = 0.61) and social influence 3.63 (SD = 1.21), "
-     "likewise interpreted as Agree.")
-
-para("One physician also rated the prototype on the study's instrument validation form"
-     " on 29 August 2026, giving the highest rating, 5 of 5, for general relevance, "
-     "functionality, performance and usability, accessibility, and reliability, and "
-     "rated it 4 of 5 for clinical relevance, clinical appropriateness and information"
-     " clarity, and 3 of 5 for patient safety and clinical usefulness. This is one "
-     "expert's judgement, not an end-user result.")
-
-para("Internal consistency varied across constructs. Effort expectancy reached "
-     "acceptable reliability (\u03b1 = 0.76). Facilitating conditions (\u03b1 = 0.59) and "
-     "performance expectancy (\u03b1 = 0.51) fell below the conventional 0.70 "
-     "threshold. With three to five items per construct and 27 respondents these "
-     "values are reported as provisional, and the constructs are presented "
-     "descriptively rather than as validated scales. Social influence is represented "
-     "by a single item, for which no alpha is computed.")
-
-p = para("Dichotomous items are reported as frequencies. Twenty-one of 27 respondents "
-         "(78 percent) indicated that peers or colleagues encourage use of the device, "
-         "and 20 of 27 (74 percent) reported that their institution provides resources "
-         "to use it effectively. Access to training and technical support was the least "
-         "certain response: 12 respondents (44 percent) answered \u2018maybe\u2019, 8 "
-         "(30 percent) \u2018yes\u2019 and 7 (26 percent) \u2018no\u2019. Eleven "
-         "respondents (41 percent) reported prior experience with medical devices or "
-         "health applications.")
-FILL(p, "confirm whether the three patients recorded at the private hospital are "
-        "distinct from the 13 respondents who identified themselves as patients in the "
-        "acceptance questionnaire. The two groups are currently described separately")
-
-H2("Heart Mode")
-para("Heart Mode was implemented on the device and in the application. It guides the "
-     "operator through the five cardiac sites in order, records 15 seconds at each in the "
-     "same 16 kHz WAV format as lung recordings, and files each recording by site for "
-     "practitioner review; the heart-sound models described above can then be run on it. "
-     "No quantitative evaluation of "
-     "heart recordings made with the device was carried out in this study: signal strength, "
-     "recording clarity and classification agreement were measured on lung recordings only. "
-     "The heart-sound models were evaluated on public recordings instead, as reported "
-     "below; the cardiologist's review of the CirCor labels had not been returned when this "
-     "paper was written.", first=0)
-
-H2("Rebuilt Classifier: Pre-Specified Test")
+H3("Rebuilt Classifier: Pre-Specified Test")
 para("Table 2 gives the rebuilt models' scores on the 31 ICBHI test patients, none of "
      "whom contributed to training. Every model scored above the 25 percent expected by "
      "chance, but on ICBHI data alone no change of architecture moved balanced accuracy "
@@ -1006,7 +1030,7 @@ TBL(2, "Balanced Accuracy of the Rebuilt Models on the 31 ICBHI Test Patients",
     "named as its round's primary model before the test patients were scored, except the "
     "Edge Impulse build, which was checked against the same patients after export.")
 
-H2("Rebuilt Classifier: Cross-Validation Across All 126 Patients")
+H3("Rebuilt Classifier: Cross-Validation Across All 126 Patients")
 para("Because 31 test patients give wide intervals, the two architectures were also "
      "compared by five-fold cross-validation, in which each of the 126 ICBHI patients and "
      "6,898 cycles was classified once by a model that had not seen that patient. Table 3 "
@@ -1032,12 +1056,12 @@ TBL(3, "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)"
     "patient-level bootstrap intervals.")
 para("The supporting analyses agreed. Across the five folds the fusion network's "
      "balanced accuracy was higher in every fold, by a mean of 5.8 points (paired "
-     "t(4) = 4.75, p = 0.009; Figure 13). Of the 126 patients, 69 had more of their cycles "
+     "t(4) = 4.75, p = 0.009; Figure 12). Of the 126 patients, 69 had more of their cycles "
      "classified correctly by the fusion network, 39 fewer, and 18 the same (Wilcoxon "
-     "signed-rank p = 0.009; Figure 14). Cycle by cycle, the fusion network alone was "
+     "signed-rank p = 0.009; Figure 13). Cycle by cycle, the fusion network alone was "
      "right on 1,277 cycles and the MFCC network alone on 831 (McNemar p < 0.001), though "
      "this last test treats cycles as independent and overstates the certainty; the "
-     "patient-level analyses are the ones to rely on. Figure 15 shows where each model's "
+     "patient-level analyses are the ones to rely on. Figure 14 shows where each model's "
      "errors fall.", first=0)
 FIG(13, "Balanced Accuracy of the Two Architectures in Each of the Five Folds",
     "j1_cv_folds.png", 5.6,
@@ -1053,7 +1077,7 @@ FIG(15, "True Class Against Predicted Class in Cross-Validation",
          "different vertical scales.")
 
 
-H2("Rebuilt Classifier: Effect of a Leaky Division")
+H3("Rebuilt Classifier: Effect of a Leaky Division")
 para("Table 4 shows what the same fusion network scores when the division of the data "
      "leaks. Trained and tested on patients it had never heard, it reached 39.0 percent "
      "balanced accuracy. When the cycles were divided at random, so that 119 of 119 test "
@@ -1075,25 +1099,7 @@ TBL(4, "The Same Fusion Network Scored on an Honest and on Leaky Divisions of IC
     "the three-seed ensemble. Chance is 25 percent. The leaky rows are a demonstration of "
     "the flaw and must not be quoted as the model's accuracy.")
 
-H2("Rebuilt Classifier on Resondi Device Recordings")
-para("The fusion network ran without error on all 45 stored lung recordings, at a "
-     "median of 2.0 seconds per recording including fetching the audio. On the 26 unique "
-     "recordings made with the Resondi device, it chose Healthy for 16, Wheezing with "
-     "Crackles for 6, Wheezing for 3 and Crackles for 1. The score of the chosen class "
-     "ranged from 31 to 66 percent, with a median of 41 percent (Figure 16). On the same "
-     "device files, the Edge Impulse build that the fusion network replaced had given top "
-     "scores of only 27 to 34 percent (median 30 percent), close to the 25 percent of four "
-     "equally likely classes. The fusion network therefore separates the classes more "
-     "clearly on device audio. Whether its choices are correct cannot be read from these "
-     "recordings, because none of them has a reference label.", first=0)
-FIG(16, "Top-Class Score of the Deployed Fusion Network on 26 Resondi Device "
-        "Recordings", "r5_device.png", 6.0,
-    note="Each point is one recording, placed in the row of the class the network chose. "
-         "The shaded band is the range of top-class scores the previous Edge Impulse build "
-         "gave on the same device files. No recording has a reference label, so the chart "
-         "shows how decisive the network is, not how accurate.")
-
-H2("Heart-Sound Models on CirCor Test Patients")
+H3("Heart-Sound Models on CirCor Test Patients")
 para("Table 5 gives the heart-sound results on the 189 CirCor test patients, none of "
      "whom contributed to training, to the decoding setting or to the murmur "
      "threshold. The timing model found 96.8 percent of reference S1 sounds and 97.3 "
@@ -1104,7 +1110,7 @@ para("Table 5 gives the heart-sound results on the 189 CirCor test patients, non
      "2.5–3.6), against 35.4 for the untrained baseline, which often locked onto half "
      "or double the true rate. The error had almost no bias (+0.1 beats per minute), "
      "but its 95 percent limits of agreement were −13.7 to +14.0, because a few "
-     "recordings were read badly wrong; Figure 17 shows that these were mostly fast "
+     "recordings were read badly wrong; Figure 15 shows that these were mostly fast "
      "rates read too low and slow rates read too high. Reference rates ranged from 49 "
      "to 171 beats per minute, median 103, as expected in children.", first=0)
 para("The murmur detector did not reach its pre-specified target. On the validation "
@@ -1150,7 +1156,121 @@ para("Placed in the application, the models gave the same results through the de
      "about how the models perform on the Resondi microphone.", first=0)
 
 # ═══════════════════════════════════════════════════ DISCUSSION
-H2("Longitudinal Comparison, Rehabilitation Support, and Practitioner Review")
+H2("Research Question 5: Response Time")
+para("Figure 16 gives the mean time of each stage in the field system: device "
+     "connection 4.55 seconds, sound recording 15.00 seconds, recording-quality "
+     "assessment 144.68 seconds, signal preprocessing 20.91 seconds and "
+     "classification output 3.97 seconds.", first=0)
+
+FIG(9, "Mean Duration of Each Processing Stage",
+    "r3_response.png", 5.9)
+
+para("The quality check is the stage that limits use: it takes longer than the "
+     "15-second recording it assesses, so at 14 captures a full lung and heart "
+     "examination would take about 34 minutes of screening time. The rebuilt "
+     "classifier is faster than the original: the fusion network took a median of 2.0 "
+     "seconds per recording in the application, including fetching the audio, and the "
+     "heart-sound models took under 1 second once loaded.", first=0)
+
+H2("Research Question 6: Clean Versus Noise-Contaminated Recordings (Hypothesis 1)")
+para("To test Hypothesis 1, Gaussian noise was added to every test window at signal-"
+     "to-noise ratios of 20, 10 and 5 dB, and the same 1,051 cycles of the 31 ICBHI "
+     "test patients were classified again by the single-branch MFCC network chosen on "
+     "11 November, before the fusion network was adopted. Balanced accuracy fell from "
+     "35.0 percent on clean audio to 26.6, 25.4 and 25.3 percent, that is, to chance. "
+     "At each level McNemar's exact test found far more cycles turned from correct to "
+     "incorrect than the reverse (20 dB: 183 against 75; 10 dB: 205 against 69; 5 dB: "
+     "209 against 72; Holm-adjusted p < .001 at every level). The null hypothesis was "
+     "therefore rejected: classification performance differs significantly between "
+     "clean and noise-contaminated recordings, and noise even milder than the ward and"
+     " community conditions measured in the field reduces the classifier to chance. "
+     "The fusion network now in the application has not yet been tested under added "
+     "noise.", first=0)
+
+H2("Research Question 7: Reference-Dataset Versus Device Recordings (Hypothesis 2)")
+para("Hypothesis 2 could not be tested: no Resondi device recordings with independent,"
+     " clinician-assigned labels exist yet, and the 15 field-test recordings are not "
+     "linked to their reference labels in the study records. What can be reported is "
+     "how the networks behave on device recordings without labels.", first=0)
+
+para("The fusion network ran without error on all 45 stored lung recordings, at a "
+     "median of 2.0 seconds per recording including fetching the audio. On the 26 unique "
+     "recordings made with the Resondi device, it chose Healthy for 16, Wheezing with "
+     "Crackles for 6, Wheezing for 3 and Crackles for 1. The score of the chosen class "
+     "ranged from 31 to 66 percent, with a median of 41 percent (Figure 17). On the same "
+     "device files, the Edge Impulse build that the fusion network replaced had given top "
+     "scores of only 27 to 34 percent (median 30 percent), close to the 25 percent of four "
+     "equally likely classes. The fusion network therefore separates the classes more "
+     "clearly on device audio. Whether its choices are correct cannot be read from these "
+     "recordings, because none of them has a reference label.", first=0)
+FIG(16, "Top-Class Score of the Deployed Fusion Network on 26 Resondi Device "
+        "Recordings", "r5_device.png", 6.0,
+    note="Each point is one recording, placed in the row of the class the network chose. "
+         "The shaded band is the range of top-class scores the previous Edge Impulse build "
+         "gave on the same device files. No recording has a reference label, so the chart "
+         "shows how decisive the network is, not how accurate.")
+
+H2("Research Question 8: Recording Quality of a Conventional Stethoscope Versus Resondi (Hypothesis 3)")
+para("Hypothesis 3 was not tested inferentially, because the paired raw measurements "
+     "behind the 45 dB and 32 dB figures were not retained. Descriptively, Resondi "
+     "recorded a signal about 13 dB stronger than the conventional stethoscope, about "
+     "4.5 times the amplitude, and 93 percent of its recordings were rated good or "
+     "acceptable. These are indicative margins rather than a test of difference, so "
+     "the null hypothesis can be neither rejected nor retained on the present data.", first=0)
+
+H2("Research Question 9: End-User Acceptance")
+para("Twenty-seven respondents completed the acceptance questionnaire: 13 patients, "
+     "13 general respondents and one health practitioner. Across the twelve five-point "
+     "Likert items, overall acceptance was 3.95, interpreted as Agree.", first=0)
+
+para("Performance expectancy and effort expectancy each returned a weighted mean of "
+     "4.09 (SD = 0.59 and 0.60 respectively), both interpreted as Agree. Facilitating "
+     "conditions returned 3.84 (SD = 0.61) and social influence 3.63 (SD = 1.21), "
+     "likewise interpreted as Agree.")
+
+para("One physician also rated the prototype on the study's instrument validation form"
+     " on 29 August 2026, giving the highest rating, 5 of 5, for general relevance, "
+     "functionality, performance and usability, accessibility, and reliability, and "
+     "rated it 4 of 5 for clinical relevance, clinical appropriateness and information"
+     " clarity, and 3 of 5 for patient safety and clinical usefulness. This is one "
+     "expert's judgement, not an end-user result.")
+
+para("Internal consistency varied across constructs. Effort expectancy reached "
+     "acceptable reliability (\u03b1 = 0.76). Facilitating conditions (\u03b1 = 0.59) and "
+     "performance expectancy (\u03b1 = 0.51) fell below the conventional 0.70 "
+     "threshold. With three to five items per construct and 27 respondents these "
+     "values are reported as provisional, and the constructs are presented "
+     "descriptively rather than as validated scales. Social influence is represented "
+     "by a single item, for which no alpha is computed.")
+
+p = para("Dichotomous items are reported as frequencies. Twenty-one of 27 respondents "
+         "(78 percent) indicated that peers or colleagues encourage use of the device, "
+         "and 20 of 27 (74 percent) reported that their institution provides resources "
+         "to use it effectively. Access to training and technical support was the least "
+         "certain response: 12 respondents (44 percent) answered \u2018maybe\u2019, 8 "
+         "(30 percent) \u2018yes\u2019 and 7 (26 percent) \u2018no\u2019. Eleven "
+         "respondents (41 percent) reported prior experience with medical devices or "
+         "health applications.")
+FILL(p, "confirm whether the three patients recorded at the private hospital are "
+        "distinct from the 13 respondents who identified themselves as patients in the "
+        "acceptance questionnaire. The two groups are currently described separately")
+
+para("Mapped to the five aspects named in Research Question 9, effort expectancy is "
+     "the closest measure of user-friendliness and usability (4.09) and performance "
+     "expectancy of perceived usefulness for community-based monitoring (4.09). "
+     "Functionality was rated only by the physician validator (5 of 5), and durability"
+     " was not measured, so the answer to Research Question 9 is partial.", first=0)
+
+H2("Research Question 10: Preferences for Instructional Support")
+para("Research Question 10 is not yet answered. The questionnaire contained no items "
+     "on diagram-based zone guidance, manual clarity, ease of learning or app "
+     "navigation, and its open-ended items returned no responses. The nearest evidence"
+     " is that access to training and technical support was the least certain item: 12"
+     " of 27 respondents (44 percent) answered maybe, 8 (30 percent) yes and 7 (26 "
+     "percent) no. A short survey on the four named aspects, given after a guided "
+     "examination, is needed to answer it.", first=0)
+
+H2("Research Question 11: Longitudinal Monitoring and Rehabilitation Support")
 para("The functions behind the last three objectives were built and run in the "
      "application, but none was evaluated with users. For longitudinal comparison, a "
      "recording's page shows the two most recent recordings from the same anatomical "
@@ -1309,7 +1429,7 @@ para("The fusion network has since been put into the Resondi application. Becaus
      "and feature extraction rewritten in JavaScript. The rewritten features gave the same "
      "top class as the Python originals on 600 of 600 validation windows. Run on 26 "
      "recordings already made with the Resondi device, the deployed fusion network gave "
-     "top-class scores of 31 to 66 percent (median 41; Figure 16), against 27 to 34 "
+     "top-class scores of 31 to 66 percent (median 41; Figure 17), against 27 to 34 "
      "percent for the "
      "Edge Impulse build it replaced. That shows it is more decisive on device audio, not "
      "that it is more often right: none of those recordings has a reference label.",

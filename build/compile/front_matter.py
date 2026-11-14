@@ -86,17 +86,27 @@ def title_page(doc):
 def imrad_headings():
     """(entry, level, printed page) for the IMRaD's main sections, read from the FINAL PDF."""
     d = fitz.open(IMRAD)
-    wanted = [("ABSTRACT", 0), ("INTRODUCTION", 0), ("The Research Gap", 1), ("Objectives of the Study", 1),
-              ("Scope and Delimitation", 1), ("METHODOLOGY", 0), ("RESULTS", 0), ("DISCUSSION", 0),
-              ("Limitations", 1), ("Conclusion", 1), ("Recommendations", 1), ("REFERENCES", 0)]
+    rq = ["Quality of the Recordings", "Specifications of the Smart Stethoscope",
+          "Specifications of the Monitoring Platform", "Specifications and Performance of the Analysis System",
+          "Response Time", "Clean Versus Noise-Contaminated Recordings", "Reference-Dataset Versus Device Recordings",
+          "Conventional Stethoscope Versus Resondi", "End-User Acceptance", "Preferences for Instructional Support",
+          "Longitudinal Monitoring and Rehabilitation Support"]
+    # (text to find, level, entry shown); a text ending in ":" is matched as the start of a line (long headings wrap)
+    wanted = ([("ABSTRACT", 0, None), ("INTRODUCTION", 0, None), ("The Research Gap", 1, None),
+               ("Objectives of the Study", 1, None), ("Research Questions", 1, None),
+               ("Scope and Delimitation", 1, None), ("METHODOLOGY", 0, None), ("RESULTS", 0, None)]
+              + [(f"Research Question {k}:", 1, f"Research Question {k}: {t}") for k, t in enumerate(rq, 1)]
+              + [("Results by Objective", 1, None), ("DISCUSSION", 0, None), ("Limitations", 1, None),
+                 ("Conclusion", 1, None), ("Recommendations", 1, None), ("REFERENCES", 0, None)])
     out, start = [], 0
-    for name, lvl in wanted:
+    for name, lvl, shown in wanted:
         for i in range(start, len(d)):
             lines = [s.strip() for s in d[i].get_text().splitlines()]
-            if name in lines:
+            hit = any(s.startswith(name) for s in lines) if name.endswith(":") else name in lines
+            if hit:
                 printed = next((s for s in reversed(lines) if s.isdigit()), None)
                 assert printed == str(i + 1), (name, i + 1, printed)  # the footer number matches the PDF page
-                out.append((name.title() if lvl == 0 else name, lvl, i + 1))
+                out.append((shown or (name.title() if lvl == 0 else name), lvl, i + 1))
                 start = i
                 break
         else:
@@ -124,7 +134,7 @@ def contents_page(doc):
         dot_w = fitz.get_text_length(".", fontname="tiro", fontsize=12)
         n = int((x1 - nw - 6 - (x + tw + 6)) / dot_w)
         p.insert_text((x + tw + 4, y), "." * max(n, 0), fontname="tiro", fontsize=12)
-        y += 26 if lvl == 0 else 22
+        y += 22 if lvl == 0 else 17
     p.draw_line(fitz.Point(x0, y - 8), fitz.Point(x1, y - 8), width=0.6)
     return p
 

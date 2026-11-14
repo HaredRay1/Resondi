@@ -579,6 +579,11 @@ def h2(text):
     cur = new_para(cur, text, HEAD2, keep_next=True)._p
 
 
+def h3(text):
+    global cur
+    cur = new_para(cur, text, DBODY, bold=True, italic=True, keep_next=True)._p
+
+
 def para(text):
     global cur
     cur = new_para(cur, text, DBODY)._p
@@ -598,48 +603,17 @@ def fig(label, title, path, width, note_text):
     cur = note(f_._p, note_text, DBODY)._p
 
 
-para("This section reports the evaluation completed to date. Results of the earlier field evaluation, which used "
-     "the original and since-withdrawn classification model, are summarized first. The rebuilt lung-sound classifier is "
-     "then reported on the 31 held-out test patients, followed by the tests of the hypotheses that the available data "
-     "allow and the severity-score analysis. The feature-fusion models are then compared with the individual "
-     "single-representation models, a second round adds a paediatric corpus and is confirmed by cross-validation, and "
-     "the models are then set beside the original model and the reference study. The heart-sound models, tested on "
-     "public recordings, are reported last. Each research question is answered under the heading that names it, and "
-     "Table 21, at the end of the results, gives the answer to all eleven questions and where each is reported.")
+para("This section answers the eleven research questions in order. The earlier field evaluation, which used the "
+     "original and since-withdrawn classification model, supplies the answers on recording quality (Research Question 1), "
+     "response time (Research Question 5), and acceptance (Research Question 9). The specifications of the device, the "
+     "platform, and the analysis system answer Research Questions 2 to 4; under Research Question 4, the rebuilt "
+     "lung-sound classifier is reported on the held-out test patients, compared across feature representations, "
+     "confirmed by cross-validation with a paediatric corpus, set beside the original model and the reference study, and "
+     "followed by the heart-sound models. The three hypotheses are tested under Research Questions 6 to 8, and the "
+     "severity score is reported under Research Question 11, whose planned monitoring rule depends on it. Table 21, at "
+     "the end of the results, summarizes the answer to every question.")
 
-h2("Specifications of the Device, Platform, and Analysis System (Research Questions 2 to 4)")
-para("Research Question 2 asked for the specifications of the smart stethoscope. In design, it is a handheld unit that "
-     "joins an acoustic chest piece to a digital microphone in a 3D-printed PLA enclosure of 173 by 80 by 70 mm, with a "
-     "20 by 4 character display and two buttons, used to record at seven standardized lung sites and five cardiac sites "
-     "(Figure 2; sites in Figures 3 and 15). Its components are an ESP32 microcontroller with built-in Wi-Fi, an INMP441 digital MEMS microphone "
-     "on the I2S interface, a 32 GB microSD card, and a 10,000 mAh battery; it records 15-second, 16 kHz, 16-bit mono WAV "
-     "files and serves its own Wi-Fi network and web page, so it works without internet (Table 1 and Figure 1). Its cost "
-     "is a bill of materials of 2,775 pesos and a fully loaded unit cost of 4,000 pesos (Table 1).")
-para("Research Question 3 asked for the specifications of the monitoring platform. Its user interface is a web "
-     "application in English and Filipino with separate Lung and Heart modes, each of which guides the user through its "
-     "sites on a body diagram and files every recording by site, together with a recording history, a same-site "
-     "comparison, and trend charts. Its system architecture has three tiers: the device, which records to its microSD "
-     "card; the transfer, in which a phone joins the device's Wi-Fi, downloads the recordings, and uploads them through "
-     "the application's transfer page, since the automatic gateway between device and platform is not yet built; and the "
-     "platform, which stores each recording against the patient's record, runs the lung-sound and heart-sound models in "
-     "the browser, and presents every result to a practitioner. Role-based access separates patients, practitioners, and "
-     "administrators: a practitioner is verified by an administrator, may review only recordings in the specialization "
-     "they hold (respiratory, cardiac, or both), and can read only the cases a patient has sent to them, which row-level "
-     "security on each record enforces. For data management, each recording is stored as a private audio file with its "
-     "site, mode, examination, and date; each analysis is saved separately with the name of the model that produced it; "
-     "deleting a recording deletes its analyses, plans, reviews, and submissions; and an approved recording can be "
-     "exported as a PDF report.")
-para("Research Question 4 asked for the specifications of the sound analysis system. Audio is preprocessed to 16 kHz "
-     "mono and cut into 1-second windows, each band-limited to 100 to 3,900 Hz and levelled before its features are "
-     "computed. The feature representations are MFCC, a log-power spectrogram, and a chromagram (Table 4). Each feeds its "
-     "own CNN branch, and the fusion architecture concatenates the three branch outputs into a dense layer with a softmax "
-     "over the four sound classes (Figure 4). The configuration adopted is that fusion network trained on ICBHI 2017 and "
-     "SPRSound, which reached 40.0 percent balanced accuracy in cross-validation, against 34.0 percent for the "
-     "single-branch MFCC design (Table 18), and which has run in the application since 13 November 2026. Heart sounds are "
-     "analysed by two separate models, a segmentation model that times S1 and S2 and gives the heart rate, and a murmur "
-     "model (Table 20).")
-
-h2("System Evaluation From the Field Study (Research Questions 1, 5, and 8)")
+h2("Research Question 1: Quality of the Recordings")
 para("Table 7 summarizes the system-level results of the earlier field evaluation. Resondi recorded a stronger signal "
      "than a conventional stethoscope (45 dB against 32 dB, a 13 dB margin, or about 4.5 times the amplitude). These are "
      "indicative margins rather than a formal signal-to-noise ratio, because the two figures were not captured against a "
@@ -663,30 +637,47 @@ tab("Table 7", "Results of the Earlier Field Evaluation", [
    "was blinded to the AI output.")
 para("These results answer Research Question 1 descriptively: in signal quality, Resondi recorded about 13 dB more "
      "than a conventional stethoscope; in clarity, 93 percent of recordings were good or acceptable; and in noise level, "
-     "recordings were made at ambient levels of 24, 35, and 42 dB, the last in a community setting. They answer Research "
-     "Question 5 with the stage times in Table 7, of which the quality check, at 144.68 seconds, is the one that limits "
-     "use. The rebuilt classifier is faster than the original: the fusion network took a median of 2.0 seconds per "
-     "recording in the application, including fetching the audio, and the heart-sound models under 1 second once loaded.")
+     "recordings were made at ambient levels of 24, 35, and 42 dB, the last in a community setting. The response times, "
+     "the field agreement, and the acceptance score in Table 7 are taken up under Research Questions 5, 4, and 9.")
 
-h2("End-User Acceptance and Instructional Support (Research Questions 9 and 10)")
-para("Twenty-seven respondents (13 patients, 13 general respondents, and one health practitioner) rated the system "
-     "with an acceptance questionnaire adapted from the Unified Theory of Acceptance and Use of Technology (Venkatesh "
-     "et al., 2003). Overall acceptance was 3.95 of 5, interpreted as Agree. By construct, performance expectancy and "
-     "effort expectancy each returned 4.09, facilitating conditions 3.84, and social influence 3.63, all interpreted as "
-     "Agree. Research Question 9 named five aspects, but the questionnaire measured these four constructs, so the answer "
-     "is partial: effort expectancy is the closest measure of user-friendliness and usability (4.09), and performance "
-     "expectancy of perceived usefulness for community-based monitoring (4.09), while durability was not measured. "
-     "Functionality was rated only by one physician, on the study's instrument validation form on 29 August 2026: 5 of 5 "
-     "for functionality, as for relevance, usability, accessibility and reliability, and 3 of 5 for patient safety and "
-     "clinical usefulness. That is one expert's judgement, not an end-user result. Only effort expectancy reached acceptable internal consistency (alpha = 0.76), so the "
-     "construct scores are descriptive.")
-para("Research Question 10 is not yet answered. The questionnaire contained no items on diagram-based zone guidance, "
-     "manual clarity, ease of learning, or app navigation, and its open-ended items returned no responses. The nearest "
-     "evidence is that access to training and technical support was the least certain item: 12 of 27 respondents (44 "
-     "percent) answered maybe, 8 (30 percent) yes, and 7 (26 percent) no. A short survey on the four named aspects, given "
-     "after a guided examination, is needed to answer it.")
+h2("Research Question 2: Specifications of the Smart Stethoscope")
+para("Research Question 2 asked for the specifications of the smart stethoscope. In design, it is a handheld unit that "
+     "joins an acoustic chest piece to a digital microphone in a 3D-printed PLA enclosure of 173 by 80 by 70 mm, with a "
+     "20 by 4 character display and two buttons, used to record at seven standardized lung sites and five cardiac sites "
+     "(Figure 2; sites in Figures 3 and 13). Its components are an ESP32 microcontroller with built-in Wi-Fi, an INMP441 digital MEMS microphone "
+     "on the I2S interface, a 32 GB microSD card, and a 10,000 mAh battery; it records 15-second, 16 kHz, 16-bit mono WAV "
+     "files and serves its own Wi-Fi network and web page, so it works without internet (Table 1 and Figure 1). Its cost "
+     "is a bill of materials of 2,775 pesos and a fully loaded unit cost of 4,000 pesos (Table 1).")
+h2("Research Question 3: Specifications of the Monitoring Platform")
+para("Research Question 3 asked for the specifications of the monitoring platform. Its user interface is a web "
+     "application in English and Filipino with separate Lung and Heart modes, each of which guides the user through its "
+     "sites on a body diagram and files every recording by site, together with a recording history, a same-site "
+     "comparison, and trend charts. Its system architecture has three tiers: the device, which records to its microSD "
+     "card; the transfer, in which a phone joins the device's Wi-Fi, downloads the recordings, and uploads them through "
+     "the application's transfer page, since the automatic gateway between device and platform is not yet built; and the "
+     "platform, which stores each recording against the patient's record, runs the lung-sound and heart-sound models in "
+     "the browser, and presents every result to a practitioner. Role-based access separates patients, practitioners, and "
+     "administrators: a practitioner is verified by an administrator, may review only recordings in the specialization "
+     "they hold (respiratory, cardiac, or both), and can read only the cases a patient has sent to them, which row-level "
+     "security on each record enforces. For data management, each recording is stored as a private audio file with its "
+     "site, mode, examination, and date; each analysis is saved separately with the name of the model that produced it; "
+     "deleting a recording deletes its analyses, plans, reviews, and submissions; and an approved recording can be "
+     "exported as a PDF report.")
+h2("Research Question 4: Specifications and Performance of the Sound Analysis System")
+para("Research Question 4 asked for the specifications of the sound analysis system. Audio is preprocessed to 16 kHz "
+     "mono and cut into 1-second windows, each band-limited to 100 to 3,900 Hz and levelled before its features are "
+     "computed. The feature representations are MFCC, a log-power spectrogram, and a chromagram (Table 4). Each feeds its "
+     "own CNN branch, and the fusion architecture concatenates the three branch outputs into a dense layer with a softmax "
+     "over the four sound classes (Figure 4). The configuration adopted is that fusion network trained on ICBHI 2017 and "
+     "SPRSound, which reached 40.0 percent balanced accuracy in cross-validation, against 34.0 percent for the "
+     "single-branch MFCC design (Table 15), and which has run in the application since 13 November 2026. Heart sounds are "
+     "analysed by two separate models, a segmentation model that times S1 and S2 and gives the heart rate, and a murmur "
+     "model (Table 17).")
 
-h2("Model Development on the Validation Subset")
+para("The subsections below report how the lung-sound models were developed and tested, and how the heart-sound "
+     "models performed.")
+
+h3("Model Development on the Validation Subset")
 vs = sorted([r for r in S["validation_summary"] if r["seeds"] >= 2], key=lambda r: -r["bal_mean"])
 NAMES = {"late3": "Late fusion of three views", "single_mfcc": "MFCC (fusion study)", "single_spec": "Spectrogram",
          "mfcc_twodet": "MFCC, two yes/no detectors", "baseline": "MFCC (deployed design)", "mfcc_spec": "MFCC + augmentation",
@@ -713,7 +704,7 @@ tab("Table 8", "Validation Balanced Accuracy of the Model Configurations", [["Co
 fig("Figure 6", "Validation Balanced Accuracy by Configuration", os.path.join(STATS, "fig_validation_models.png"), 5.6,
     "Bars show the mean over three seeds; whiskers show one standard deviation. Rose bars are fusion models.")
 
-h2("Classification Performance on the Test Subset")
+h3("Classification Performance on the Test Subset")
 cm = T["confusion"]
 sup = [sum(r) for r in cm]
 para(f"The configuration chosen on 11 November (the single-branch MFCC network, seed {S['model']['seed']}, epoch "
@@ -745,82 +736,7 @@ tab("Table 10", "Per-Class Test Performance", [["Class", "Cycles", "Recall (sens
 fig("Figure 7", "Test-Set Confusion Matrix", os.path.join(STATS, "fig_confusion_test.png"), 4.2,
     "Cell counts with row percentages; the diagonal is the recall of each class.")
 
-h2("Hypothesis 1: Clean Versus Noise-Contaminated Recordings (Research Question 6)")
-n20, n10, n5 = S["noise_20dB"], S["noise_10dB"], S["noise_5dB"]
-para(f"To test Hypothesis 1, Gaussian noise was added to every test window at signal-to-noise ratios of 20, 10, and 5 dB "
-     f"and the same cycles were classified again. Performance fell to chance at every level (Table 11 and Figure 8): at "
-     f"20 dB, balanced accuracy dropped from {pc(T['balanced_accuracy'])} to {pc(n20['metrics']['balanced_accuracy'])} percent. "
-     f"McNemar's exact test showed that more cycles changed from correct to incorrect than the reverse at each level "
-     f"(20 dB: b = {n20['mcnemar']['b']}, c = {n20['mcnemar']['c']}, odds ratio {n20['mcnemar']['odds_ratio']:.2f}, "
-     f"Holm-adjusted p {pfmt(n20['mcnemar']['p_holm'])}). The null hypothesis of no difference was therefore rejected: the "
-     f"classifier is not robust to added noise, even at a level milder than the ward and community conditions measured in "
-     f"the field.")
-tab("Table 11", "Effect of Added Noise on the Same Test Cycles", [["Condition", "Accuracy", "Balanced accuracy", "b", "c", "Odds ratio", "p (Holm)"],
-    ["Clean", f"{pc(T['accuracy'])}%", f"{pc(T['balanced_accuracy'])}%", "—", "—", "—", "—"]] +
-    [[f"{s} dB SNR", f"{pc(S[f'noise_{s}dB']['metrics']['accuracy'])}%", f"{pc(S[f'noise_{s}dB']['metrics']['balanced_accuracy'])}%",
-      str(S[f"noise_{s}dB"]["mcnemar"]["b"]), str(S[f"noise_{s}dB"]["mcnemar"]["c"]), f"{S[f'noise_{s}dB']['mcnemar']['odds_ratio']:.2f}",
-      pfmt(S[f"noise_{s}dB"]["mcnemar"]["p_holm"])] for s in (20, 10, 5)],
-    [1.2, 0.9, 1.2, 0.5, 0.5, 0.9, 0.9], "b = cycles correct when clean and wrong when noisy; c = the reverse. "
-    "McNemar's exact binomial test, Holm-corrected across the three noise levels.")
-fig("Figure 8", "Test-Set Performance Under Added Noise", os.path.join(STATS, "fig_noise_test.png"), 4.6,
-    "The dashed line marks chance (25 percent).")
-
-h2("Hypotheses 2 and 3: Device and Conventional-Stethoscope Comparisons (Research Questions 7 and 8)")
-para("Hypothesis 2 could not be tested: no Resondi device recordings with independent, clinician-assigned cycle labels "
-     "exist yet, and the 15 field-test recordings are not linked to their reference labels in the study records. "
-     "Descriptively, when the deployed model was run on the 33 stored Resondi device recordings, its highest class score "
-     "was only 27–34 percent (median 30 percent), close to the 25 percent of a uniform guess, compared with 41–48 percent "
-     "on reference-style recordings. Normalizing the loudness of every device recording changed none of the 33 labels, "
-     "which points to the microphone, not the recording level, as the cause. Hypothesis 3 was likewise not tested "
-     "inferentially, because the paired raw measurements behind the 45 dB and 32 dB figures were not retained.")
-
-h2("Respiratory-Sound Severity Score")
-cal_, sv = S["calibration"], S["severity_test"]
-co = cal_["coef"]
-para(f"The severity algorithm was calibrated on the {cal_['n_recordings']} validation recordings by ordinary least squares "
-     f"(Table 12). All three abnormal-class confidence scores were significant predictors, but the fit was weak "
-     f"(R² = {cal_['r2_fit']:.3f}), and the wheezing and crackles terms were strongly collinear (VIF {cal_['vif'][0]:.1f} and "
-     f"{cal_['vif'][1]:.1f}), so the individual coefficients are unstable. On the {sv['n_recordings']} test recordings, "
-     f"whose reference severity averaged {sv['ref_mean']:.1f} ± {sv['ref_sd']:.1f} percent, the uncalibrated estimator "
-     f"overestimated severity by {sv['direct']['bias']:.1f} points on average (RMSE {sv['direct']['rmse']:.1f}, MAE "
-     f"{sv['direct']['mae']:.1f}, R² {sv['direct']['r2']:.2f}). Calibration removed most of the bias but explained almost "
-     f"none of the variation (RMSE {sv['calibrated_ols']['rmse']:.1f}, MAE {sv['calibrated_ols']['mae']:.1f}, R² "
-     f"{sv['calibrated_ols']['r2']:.3f}; {cal_['clipped_test']} predictions clipped), and the beta-regression sensitivity "
-     f"analysis gave the same picture (RMSE {sv['beta_regression']['rmse']:.1f}, R² {sv['beta_regression']['r2']:.3f}; Figure 9). "
-     f"Because RMSE equalled roughly 43 points on a 0–100 scale, a change in severity between visits would have to exceed "
-     f"about 43 points before the longitudinal analysis could count it as real.")
-tab("Table 12", "Severity Calibration and Accuracy", [
-    ["", "Estimate", "SE", "p", "VIF"],
-    ["Intercept", f"{co['intercept']:.1f}", f"{cal_['se'][0]:.1f}", pfmt(cal_['p'][0]), "—"],
-    ["p(Wheezing)", f"{co['p(W)']:.1f}", f"{cal_['se'][1]:.1f}", pfmt(cal_['p'][1]), f"{cal_['vif'][0]:.1f}"],
-    ["p(Crackles)", f"{co['p(C)']:.1f}", f"{cal_['se'][2]:.1f}", pfmt(cal_['p'][2]), f"{cal_['vif'][1]:.1f}"],
-    ["p(Wheezing with Crackles)", f"{co['p(WC)']:.1f}", f"{cal_['se'][3]:.1f}", pfmt(cal_['p'][3]), f"{cal_['vif'][2]:.1f}"],
-    ["Test recordings (n = 164)", "RMSE", "MAE", "R²", "Bias"],
-    ["Direct estimator", f"{sv['direct']['rmse']:.1f}", f"{sv['direct']['mae']:.1f}", f"{sv['direct']['r2']:.3f}", f"{sv['direct']['bias']:+.1f}"],
-    ["Calibrated (OLS)", f"{sv['calibrated_ols']['rmse']:.1f}", f"{sv['calibrated_ols']['mae']:.1f}", f"{sv['calibrated_ols']['r2']:.3f}", f"{sv['calibrated_ols']['bias']:+.1f}"],
-    ["Beta regression (sensitivity)", f"{sv['beta_regression']['rmse']:.1f}", f"{sv['beta_regression']['mae']:.1f}", f"{sv['beta_regression']['r2']:.3f}", f"{sv['beta_regression']['bias']:+.1f}"],
-], [2.3, 1.0, 1.0, 1.0, 0.9], f"Calibration fitted on {cal_['n_recordings']} validation recordings (R² = {cal_['r2_fit']:.3f}, "
-   f"df = {cal_['df']}); errors are in percentage points on the 0–100 severity scale.")
-fig("Figure 9", "Predicted Against Reference Severity (Test Recordings)", os.path.join(STATS, "fig_severity_test.png"), 4.0,
-    "The dashed line marks perfect agreement.")
-kw = S["kruskal"]
-g = kw["groups"]
-sig = [d for d in kw["dscf"] if d["p"] < 0.05]
-para(f"A Kruskal–Wallis test found that predicted severity differed across the reference recording categories, "
-     f"H({kw['df']}) = {kw['H']:.2f}, p {pfmt(kw['p'])}, but the effect was small (ε² = {kw['epsilon_sq']:.3f}; Table 13). "
-     f"Dwass–Steel–Critchlow–Fligner comparisons located the difference only between Crackles and Wheezing with Crackles "
-     f"recordings (p {pfmt(sig[0]['p']) if sig else '> .05'}); healthy recordings received a median predicted severity of "
-     f"{g['Healthy']['median']:.1f} percent, close to that of abnormal recordings, which reflects the model's tendency to "
-     f"label healthy breaths as abnormal.")
-tab("Table 13", "Predicted Severity by Reference Recording Category (Test Recordings)",
-    [["Category", "n", "Median (%)", "IQR (%)"]] +
-    [[k_, str(v_["n"]), f"{v_['median']:.1f}", f"{v_['iqr'][0]:.1f}–{v_['iqr'][1]:.1f}"] for k_, v_ in g.items()] +
-    [["Pairwise (DSCF)", "W", "p", ""]] + [[d["pair"], f"{d['W']:.2f}", pfmt(d["p"]).replace("= ", ""), ""] for d in kw["dscf"]],
-    [2.8, 0.8, 1.2, 1.4], f"Kruskal–Wallis H({kw['df']}) = {kw['H']:.2f}, p {pfmt(kw['p'])}, ε² = {kw['epsilon_sq']:.3f}. "
-    "Recording category: Healthy if no cycle is adventitious, otherwise the most frequent adventitious class, ties to "
-    "Wheezing with Crackles.")
-
-h2("Feature-Fusion Model Compared With the Individual Models")
+h3("Feature-Fusion Model Compared With the Individual Models")
 FZ = json.load(open(os.path.join(STATS, "fusion-comparison.json"), encoding="utf-8"))
 FI = FZ["sets"]["icbhi"]
 FM, FC, FMC = FI["metrics"], FI["ci"], FI["mcnemar_vs_primary"]
@@ -857,7 +773,7 @@ para("The fusion design is adapted from the reference study (Tariq et al., 2022)
      "test scores was used to choose a model.")
 para(f"On the test subset, late fusion reached a balanced accuracy of {pc(lt['balanced_accuracy'])} percent (95% "
      f"patient-level bootstrap CI {FC['late3'][0]*100:.1f}–{FC['late3'][1]*100:.1f}), macro-F1 {lt['macro_f1']:.3f}, and "
-     f"Cohen's kappa {lt['kappa']:.3f} (Table 14 and Figure 10). The MFCC model alone, the representation used by the "
+     f"Cohen's kappa {lt['kappa']:.3f} (Table 11 and Figure 8). The MFCC model alone, the representation used by the "
      f"deployed classifier, reached {pc(sm['balanced_accuracy'])} percent, the spectrogram model "
      f"{pc(FM['single_spec']['balanced_accuracy'])} percent, and the chromagram model "
      f"{pc(FM['single_chroma']['balanced_accuracy'])} percent. The jointly trained three-branch feature-fusion network reached "
@@ -869,7 +785,7 @@ para(f"On the test subset, late fusion reached a balanced accuracy of {pc(lt['ba
      f"{pfmt(FMC['single_mfcc']['p_holm'])}. Late fusion therefore classified more cycles correctly than the MFCC model, "
      "mostly healthy ones, yet scored lower on balanced accuracy, because it recognised fewer cycles of the smaller "
      "abnormal classes; balanced accuracy, not the cycle count, is the primary measure.")
-tab("Table 14", "Test-Set Performance of the Individual and Fusion Models (31 Patients, 1,051 Cycles)",
+tab("Table 11", "Test-Set Performance of the Individual and Fusion Models (31 Patients, 1,051 Cycles)",
     [["Model", "Validation BA (%)", "Test BA, 95% CI (%)", "Macro-F1", "Kappa", "ICBHI score (%)", "vs late fusion: b / c, p (Holm)"]] +
     [[FN[r], f"{VAL[r]['bal_mean']*100:.1f}" if r in VAL else "—",
       f"{pc(FM[r]['balanced_accuracy'])} ({FC[r][0]*100:.1f}–{FC[r][1]*100:.1f})", f"{FM[r]['macro_f1']:.3f}",
@@ -880,14 +796,14 @@ tab("Table 14", "Test-Set Performance of the Individual and Fusion Models (31 Pa
     "each test score uses the seed chosen on validation. b = cycles that late fusion classified correctly and the other "
     "model did not; c = the reverse. McNemar's exact test, Holm-corrected across the five comparisons. Every test run is "
     "logged in model-rebuild/results/final-test-log.csv.")
-fig("Figure 10", "Test Balanced Accuracy of the Deployed, Individual, and Fusion Models",
+fig("Figure 8", "Test Balanced Accuracy of the Deployed, Individual, and Fusion Models",
     os.path.join(STATS, "fig_fusion_test.png"), 6.2,
     "Whiskers are 95 percent patient-level bootstrap confidence intervals; the dashed line marks chance. Grey bars are "
     "single-representation models, pale bars jointly trained fusion, and the rose bar the primary late-fusion model.")
 _cls = ["Crackles", "Healthy", "Wheezing", "Wheezing with Crackles"]
 _top = {i: max(FORD, key=lambda r: FM[r]["recall"][i]) for i in range(4)}
-para("The representations failed in different places, which is the condition under which fusion can help (Table 15 and "
-     f"Figure 11). The MFCC model found most crackles (recall {pc(sm['recall'][0])} percent) but labelled most healthy "
+para("The representations failed in different places, which is the condition under which fusion can help (Table 12 and "
+     f"Figure 9). The MFCC model found most crackles (recall {pc(sm['recall'][0])} percent) but labelled most healthy "
      f"cycles as abnormal (Healthy recall {pc(sm['recall'][1])} percent). The spectrogram model recognised more healthy "
      f"cycles ({pc(FM['single_spec']['recall'][1])} percent) but few wheezes ({pc(FM['single_spec']['recall'][2])} percent). "
      f"The chromagram model, which keeps only pitch-class information, had the highest recall for wheezes "
@@ -899,23 +815,23 @@ para("The representations failed in different places, which is the condition und
      f"sounds for fewer false alarms on healthy breaths, and the combined class was largely lost. No configuration detected "
      f"the combined Wheezing with Crackles class reliably; the best recall for it was "
      f"{max(FM[r]['recall'][3] for r in FORD)*100:.1f} percent ({FN[_top[3]]}).")
-tab("Table 15", "Per-Class Test Recall of the Individual and Fusion Models",
+tab("Table 12", "Per-Class Test Recall of the Individual and Fusion Models",
     [["Model", "Crackles", "Healthy", "Wheezing", "Wheezing with Crackles", "Specificity for Healthy"]] +
     [[FN[r]] + [f"{x*100:.1f}%" for x in FM[r]["recall"]] + [f"{FM[r]['icbhi_sp']*100:.1f}%"] for r in FORD],
     [2.2, 0.8, 0.8, 0.8, 1.2, 1.0],
     "Recall is the share of each class's test cycles classified correctly. The class sizes are Crackles 268, Healthy "
     "555, Wheezing 120, and Wheezing with Crackles 108 cycles.")
-fig("Figure 11", "Per-Class Test Recall by Model", os.path.join(STATS, "fig_fusion_recall.png"), 6.2,
+fig("Figure 9", "Per-Class Test Recall by Model", os.path.join(STATS, "fig_fusion_recall.png"), 6.2,
     "Bars show recall for each class. The representations make different errors; no configuration detects the combined class reliably.")
 if "sprs" in FZ["sets"]:
     FS = FZ["sets"]["sprs"]
     para(f"As an external check, the same models were applied to the held-out SPRSound test set ({FS['patients']} "
-         f"children, {FS['cycles']:,} annotated events; Table 16). These recordings come from a different stethoscope, a "
+         f"children, {FS['cycles']:,} annotated events; Table 13). These recordings come from a different stethoscope, a "
          f"different age group, and a different hospital, and none of these children were used in training. Late fusion "
          f"reached {pc(FS['metrics']['late3']['balanced_accuracy'])} percent balanced accuracy and the MFCC model "
          f"{pc(FS['metrics']['single_mfcc']['balanced_accuracy'])} percent, so the ranking of the configurations should "
          f"be read as specific to the ICBHI recording conditions until it is confirmed on other data.")
-    tab("Table 16", "External Check on the SPRSound Test Set (Children, Models Trained on ICBHI Only)",
+    tab("Table 13", "External Check on the SPRSound Test Set (Children, Models Trained on ICBHI Only)",
         [["Model", "Balanced accuracy, 95% CI (%)", "Macro-F1", "Crackles", "Healthy", "Wheezing", "W + C"]] +
         [[FN[r], f"{pc(FS['metrics'][r]['balanced_accuracy'])} ({FS['ci'][r][0]*100:.1f}–{FS['ci'][r][1]*100:.1f})",
           f"{FS['metrics'][r]['macro_f1']:.3f}"] + [f"{x*100:.0f}%" for x in FS["metrics"][r]["recall"]] for r in FORD],
@@ -925,7 +841,7 @@ if "sprs" in FZ["sets"]:
 
 CV = json.load(open(os.path.join(ROOT, "model-rebuild", "results", "cv-results.json"), encoding="utf-8"))["results"]
 cvm, cvf = CV["mfcc_icbhi seed 11"], CV["fdc3_sprs ensemble 11+22+33"]
-h2("Adding the Paediatric Corpus, and Cross-Validation")
+h3("Adding the Paediatric Corpus, and Cross-Validation")
 para("Because every model trained on ICBHI alone failed on the SPRSound children and none separated clearly from the "
      "others on the ICBHI test patients, a second round added SPRSound to the training data. SPRSound is 82 percent "
      "healthy and recorded from children, and added as it was, it taught the model that a child's breath is healthy: the "
@@ -938,9 +854,9 @@ para("Because every model trained on ICBHI alone failed on the SPRSound children
      "were scored.")
 para("On the 31 ICBHI test patients the primary model reached 39.4 percent balanced accuracy (95 percent CI 28.4–44.6; "
      "macro-F1 0.38), the best pre-specified test result of the study, and 57.2 percent (46.7–63.4) on the 230 SPRSound "
-     "test children (Table 17). Healthy recall rose to 52 percent, against about 30 percent for the MFCC models, so far "
+     "test children (Table 14). Healthy recall rose to 52 percent, against about 30 percent for the MFCC models, so far "
      "fewer healthy breaths were flagged as abnormal. Wheezing remained weak at 24 percent.")
-tab("Table 17", "Test Results of the Second Round, Trained on ICBHI and SPRSound",
+tab("Table 14", "Test Results of the Second Round, Trained on ICBHI and SPRSound",
     [["Model", "ICBHI test, 31 adults", "SPRSound test, 230 children", "Role"],
      ["Three-branch feature fusion, seed 33", "39.4% (28.4–44.6)", "57.2% (46.7–63.4)", "Primary"],
      ["MFCC alone, seed 22", "36.7%", "51.3%", "Comparison"],
@@ -961,16 +877,16 @@ para("Thirty-one test patients give wide intervals, and the test patients had no
      "never seen them.")
 para(f"The fusion network reached {cvf['pooled_balanced']*100:.1f} percent balanced accuracy (95 percent CI "
      f"{cvf['ci95'][0]*100:.1f}–{cvf['ci95'][1]*100:.1f}) against {cvm['pooled_balanced']*100:.1f} percent "
-     f"({cvm['ci95'][0]*100:.1f}–{cvm['ci95'][1]*100:.1f}) for the MFCC network (Table 18). In a paired patient "
+     f"({cvm['ci95'][0]*100:.1f}–{cvm['ci95'][1]*100:.1f}) for the MFCC network (Table 15). In a paired patient "
      "bootstrap of 5,000 resamples the difference was 5.9 points (95 percent CI 1.0 to 10.3; one-sided p = 0.008), and the "
      "fusion network scored higher on 14 of the 15 seed-and-fold comparisons, the other being a tie. The supporting "
      "analyses, run in jamovi, agreed: the fusion network was higher in every fold (paired t(4) = 4.75, p = .009; "
-     "Figure 12); 69 of the 126 patients had more of their cycles classified correctly by it, 39 fewer and 18 the same "
-     "(Wilcoxon signed-rank p = .009; Figure 13); and recall rose for every class (Figure 14). On the SPRSound test "
+     "Figure 10); 69 of the 126 patients had more of their cycles classified correctly by it, 39 fewer and 18 the same "
+     "(Wilcoxon signed-rank p = .009; Figure 11); and recall rose for every class (Figure 12). On the SPRSound test "
      f"children the fold models averaged {cvf['sprs_test_mean']*100:.0f} percent. The single test reading (39.4 percent) "
      "and the cross-validation (40.0 percent) agree closely, so about 40 percent is the study's best estimate.")
 _rc = lambda r: [f"{r['recall'][k]*100:.0f}%" for k in ("Crackles", "Healthy", "Wheezing", "Wheezing with Crackles")]
-tab("Table 18", "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)",
+tab("Table 15", "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)",
     [["Measure", "MFCC network, ICBHI only", "Fusion network, ICBHI + SPRSound"],
      ["Balanced accuracy (95% CI)", f"{cvm['pooled_balanced']*100:.1f}% ({cvm['ci95'][0]*100:.1f}–{cvm['ci95'][1]*100:.1f})",
       f"{cvf['pooled_balanced']*100:.1f}% ({cvf['ci95'][0]*100:.1f}–{cvf['ci95'][1]*100:.1f})"],
@@ -983,12 +899,12 @@ tab("Table 18", "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898
     [2.4, 1.9, 2.0],
     "The fusion network is the average of three training seeds. Intervals are patient-level bootstrap intervals. "
     "W + C = Wheezing with Crackles.")
-fig("Figure 12", "Balanced Accuracy of the Two Designs in Each of the Five Folds", os.path.join(FIG, "j1_cv_folds.png"), 4.6,
+fig("Figure 10", "Balanced Accuracy of the Two Designs in Each of the Five Folds", os.path.join(FIG, "j1_cv_folds.png"), 4.6,
     "Produced in jamovi (jmv 2.8, paired-samples t-test, descriptives plot). Points are fold means with 95% confidence "
     "intervals.")
-fig("Figure 13", "Share of Each Patient's Cycles Classified Correctly, by Design", os.path.join(FIG, "j2_cv_patients.png"), 4.6,
+fig("Figure 11", "Share of Each Patient's Cycles Classified Correctly, by Design", os.path.join(FIG, "j2_cv_patients.png"), 4.6,
     "Produced in jamovi (jmv 2.8, paired samples, 126 patients).")
-fig("Figure 14", "True Class Against Predicted Class in Cross-Validation", os.path.join(FIG, "j3_cv_confusion.png"), 5.4,
+fig("Figure 12", "True Class Against Predicted Class in Cross-Validation", os.path.join(FIG, "j3_cv_confusion.png"), 5.4,
     "Produced in jamovi (jmv 2.8, contingency tables, row percentages). The two panels have different vertical scales.")
 para("On 13 November 2026 this fusion network replaced the Edge Impulse model in the Resondi application. Because Edge "
      "Impulse provides no chromagram processing, it runs in the browser as an exported ONNX model, the three seeds "
@@ -998,8 +914,8 @@ para("On 13 November 2026 this fusion network replaced the Edge Impulse model in
      "27 to 34 percent for the model it replaced. That shows it is more decisive on device audio, not that it is more "
      "often right: none of those recordings has a reference label, so its accuracy on the device remains untested.")
 
-h2("Comparison With the Original Model and the Reference Study")
-para("Table 19 places the models of this study beside the original Resondi model and the reference study. The original "
+h3("Comparison With the Original Model and the Reference Study")
+para("Table 16 places the models of this study beside the original Resondi model and the reference study. The original "
      "model was reported at 71.1 percent test accuracy and 83.4 to 83.7 percent validation accuracy, but those figures "
      "came from five-second clips cut at a one-second stride from the same patients and split at random, so near-identical "
      "audio appeared in both training and testing, and every clip carried the patient's diagnosis rather than a label of "
@@ -1021,7 +937,7 @@ para("The reference study reported a weighted accuracy of 99.1 percent for FDC-F
      "accuracy on the test patients and 40.0 percent in cross-validation across all 126. The gap shows how strongly the evaluation protocol and the task, rather than the "
      "architecture, determine the number that is reported. The finding the two studies share is that spectrogram, MFCC, "
      "and chromagram representations each carry usable information about lung sounds.")
-tab("Table 19", "Original Model, Deployed Models, and Fusion Models Compared", [
+tab("Table 16", "Original Model, Deployed Models, and Fusion Models Compared", [
     ["Model", "Labels", "Evaluation", "Result", "Comparable?"],
     ["Original Resondi model (withdrawn)", "Patient diagnosis on every clip", "Random split of overlapping 5-s clips",
      "71.1% test; 83.4–83.7% validation accuracy", "No: leaked"],
@@ -1053,13 +969,13 @@ tab("Table 19", "Original Model, Deployed Models, and Fusion Models Compared", [
    "Healthy majority (52.8 percent of test cycles). The reference study's figures are weighted accuracies over six "
    "diagnosis classes as published (Tariq et al., 2022, Tables 8 and 9).")
 
-h2("Heart Sound Component: Models Tested on CirCor")
+h3("Heart Sound Component: Models Tested on CirCor")
 para("Heart Mode is implemented on the device and in the application: it guides the operator through the aortic, "
-     "pulmonic, tricuspid and mitral areas and Erb's point, in order from the base of the heart to the apex (Figure 15), "
+     "pulmonic, tricuspid and mitral areas and Erb's point, in order from the base of the heart to the apex (Figure 13), "
      "records 15 seconds at each site in the same 16 kHz WAV format as lung recordings, and files each recording by site "
      "for practitioner review. No heart recording is passed to the lung classifier; heart recordings are analysed by "
      "the separate heart-sound models described below, which now run in the application.")
-fig("Figure 15", "The Five Cardiac Sites Recorded in Heart Mode", os.path.join(FIG, "h1_heart_sites.png"), 3.8,
+fig("Figure 13", "The Five Cardiac Sites Recorded in Heart Mode", os.path.join(FIG, "h1_heart_sites.png"), 3.8,
     "Numbered in recording order. Erb's point (3) is filed for the practitioner and has no counterpart in the CirCor "
     "dataset, so it is not part of the classifier input.")
 para("Two heart-sound models were trained and tested on the CirCor DigiScope public release (Table 3: 3,163 recordings "
@@ -1075,11 +991,11 @@ para("Two heart-sound models were trained and tested on the CirCor DigiScope pub
      "Unknown were left out of training and are reported separately. As the analysis plan specifies, the murmur "
      "threshold was fixed on the validation patients, before any test patient was scored, as the highest one reaching "
      "the pre-specified minimum sensitivity of 80 percent.")
-para("Table 20 gives the results on the 189 test patients. The segmentation model found 96.8 percent of reference S1 "
+para("Table 17 gives the results on the 189 test patients. The segmentation model found 96.8 percent of reference S1 "
      "sounds and 97.3 percent of S2 sounds within 100 ms, with mean onset errors of 15 and 12 ms. Heart rate was within "
      "5 beats per minute of the reference on 85 percent of 631 recordings and within 10 on 96 percent, a mean absolute "
      "error of 3.0 beats per minute (95 percent CI 2.5–3.6) against 35.4 for an untrained autocorrelation baseline "
-     "(Figure 16). The error had almost no bias (+0.1 beats per minute), but its 95 percent limits of agreement were "
+     "(Figure 14). The error had almost no bias (+0.1 beats per minute), but its 95 percent limits of agreement were "
      "−13.7 to +14.0, because a few recordings, mostly at very fast or very slow rates, were read badly wrong.")
 para("The murmur model did not reach its pre-specified sensitivity on the test patients. The threshold that gave 80.6 "
      "percent sensitivity on validation found 24 of the 36 test patients with a murmur, 66.7 percent (95 percent CI "
@@ -1098,7 +1014,7 @@ para("Both models were then placed in the Resondi application, exported to ONNX 
      "their limits (a screening aid, tested on public recordings of children and not on the device, and a missing "
      "flag does not rule a murmur out), and passed to the reviewing cardiac practitioner with the case. These checks "
      "show that the application computes what was tested, not how the models perform on the Resondi microphone.")
-tab("Table 20", "Heart-Sound Models on 189 CirCor Test Patients", [
+tab("Table 17", "Heart-Sound Models on 189 CirCor Test Patients", [
     ["Model", "Measure", "Result (95% CI)"],
     ["Segmentation", "S1 found within 100 ms; detections that are real", "96.8%; 95.7%"],
     ["Segmentation", "S2 found within 100 ms; detections that are real", "97.3%; 96.5%"],
@@ -1113,7 +1029,7 @@ tab("Table 20", "Heart-Sound Models on 189 CirCor Test Patients", [
 ], [1.7, 2.4, 2.2], "CirCor recordings: children and adolescents in Brazil, recorded with an electronic stethoscope. "
    "Murmur measures are per patient; the 14 patients labelled Unknown are excluded and reported in the text. Neither "
    "model has been tested on Resondi device recordings. Scripts: model-rebuild/scripts/heart_seg.py and heart_murmur.py.")
-fig("Figure 16", "Estimated Against Reference Heart Rate on 631 CirCor Test Recordings",
+fig("Figure 14", "Estimated Against Reference Heart Rate on 631 CirCor Test Recordings",
     os.path.join(FIG, "r6_heart_rate.png"), 3.9,
     "Each point is one recording. The dashed line is perfect agreement and the shaded band is within 5 beats per minute; "
     "teal points are more than 10 beats per minute off. Reference rates come from the dataset's annotated S1 boundaries.")
@@ -1136,7 +1052,71 @@ para("The order of the remaining cardiac work follows from the lung results. A l
      "application before that test, which the plan had put first, so every heart result there is marked as a "
      "screening aid until the device test is done.")
 
-h2("Longitudinal Monitoring and Rehabilitation Support (Research Question 11)")
+h2("Research Question 5: Response Time")
+para("Table 7 gives the time of each stage in the field system: device connection 4.55 seconds, recording 15.00 "
+     "seconds, recording-quality assessment 144.68 seconds, preprocessing 20.91 seconds, and classification 3.97 seconds. "
+     "The quality check is the stage that limits use: it takes longer than the 15-second recording it assesses, so at 14 "
+     "captures a full lung and heart examination would take about 34 minutes of screening time. The rebuilt classifier is "
+     "faster than the original: the fusion network took a median of 2.0 seconds per recording in the application, "
+     "including fetching the audio, and the heart-sound models took under 1 second once loaded.")
+
+h2("Research Question 6: Clean Versus Noise-Contaminated Recordings (Hypothesis 1)")
+n20, n10, n5 = S["noise_20dB"], S["noise_10dB"], S["noise_5dB"]
+para(f"To test Hypothesis 1, Gaussian noise was added to every test window at signal-to-noise ratios of 20, 10, and 5 dB "
+     f"and the same cycles were classified again. Performance fell to chance at every level (Table 18 and Figure 15): at "
+     f"20 dB, balanced accuracy dropped from {pc(T['balanced_accuracy'])} to {pc(n20['metrics']['balanced_accuracy'])} percent. "
+     f"McNemar's exact test showed that more cycles changed from correct to incorrect than the reverse at each level "
+     f"(20 dB: b = {n20['mcnemar']['b']}, c = {n20['mcnemar']['c']}, odds ratio {n20['mcnemar']['odds_ratio']:.2f}, "
+     f"Holm-adjusted p {pfmt(n20['mcnemar']['p_holm'])}). The null hypothesis of no difference was therefore rejected: the "
+     f"classifier is not robust to added noise, even at a level milder than the ward and community conditions measured in "
+     f"the field.")
+tab("Table 18", "Effect of Added Noise on the Same Test Cycles", [["Condition", "Accuracy", "Balanced accuracy", "b", "c", "Odds ratio", "p (Holm)"],
+    ["Clean", f"{pc(T['accuracy'])}%", f"{pc(T['balanced_accuracy'])}%", "—", "—", "—", "—"]] +
+    [[f"{s} dB SNR", f"{pc(S[f'noise_{s}dB']['metrics']['accuracy'])}%", f"{pc(S[f'noise_{s}dB']['metrics']['balanced_accuracy'])}%",
+      str(S[f"noise_{s}dB"]["mcnemar"]["b"]), str(S[f"noise_{s}dB"]["mcnemar"]["c"]), f"{S[f'noise_{s}dB']['mcnemar']['odds_ratio']:.2f}",
+      pfmt(S[f"noise_{s}dB"]["mcnemar"]["p_holm"])] for s in (20, 10, 5)],
+    [1.2, 0.9, 1.2, 0.5, 0.5, 0.9, 0.9], "b = cycles correct when clean and wrong when noisy; c = the reverse. "
+    "McNemar's exact binomial test, Holm-corrected across the three noise levels.")
+fig("Figure 15", "Test-Set Performance Under Added Noise", os.path.join(STATS, "fig_noise_test.png"), 4.6,
+    "The dashed line marks chance (25 percent).")
+
+h2("Research Question 7: Reference-Dataset Versus Device Recordings (Hypothesis 2)")
+para("Hypothesis 2 could not be tested: no Resondi device recordings with independent, clinician-assigned cycle labels "
+     "exist yet, and the 15 field-test recordings are not linked to their reference labels in the study records. "
+     "Descriptively, when the deployed model was run on the 33 stored Resondi device recordings, its highest class score "
+     "was only 27–34 percent (median 30 percent), close to the 25 percent of a uniform guess, compared with 41–48 percent "
+     "on reference-style recordings. Normalizing the loudness of every device recording changed none of the 33 labels, "
+     "which points to the microphone, not the recording level, as the cause. The fusion network now in the application "
+     "gave clearer top-class scores on 26 of the same device recordings, 31 to 66 percent with a median of 41 percent "
+     "(Research Question 4), but without reference labels that shows how decisive it is, not how accurate.")
+
+h2("Research Question 8: Recording Quality of a Conventional Stethoscope Versus Resondi (Hypothesis 3)")
+para("Hypothesis 3 was not tested inferentially, because the paired raw measurements behind the 45 dB and 32 dB "
+     "figures were not retained. Descriptively, Resondi recorded a signal about 13 dB stronger than the conventional "
+     "stethoscope, about 4.5 times the amplitude, and 93 percent of its recordings were rated good or acceptable (Table 7). "
+     "These are indicative margins rather than a test of difference, so the null hypothesis can be neither rejected nor "
+     "retained on the present data.")
+
+h2("Research Question 9: End-User Acceptance")
+para("Twenty-seven respondents (13 patients, 13 general respondents, and one health practitioner) rated the system "
+     "with an acceptance questionnaire adapted from the Unified Theory of Acceptance and Use of Technology (Venkatesh "
+     "et al., 2003). Overall acceptance was 3.95 of 5, interpreted as Agree. By construct, performance expectancy and "
+     "effort expectancy each returned 4.09, facilitating conditions 3.84, and social influence 3.63, all interpreted as "
+     "Agree. Research Question 9 named five aspects, but the questionnaire measured these four constructs, so the answer "
+     "is partial: effort expectancy is the closest measure of user-friendliness and usability (4.09), and performance "
+     "expectancy of perceived usefulness for community-based monitoring (4.09), while durability was not measured. "
+     "Functionality was rated only by one physician, on the study's instrument validation form on 29 August 2026: 5 of 5 "
+     "for functionality, as for relevance, usability, accessibility and reliability, and 3 of 5 for patient safety and "
+     "clinical usefulness. That is one expert's judgement, not an end-user result. Only effort expectancy reached acceptable internal consistency (alpha = 0.76), so the "
+     "construct scores are descriptive.")
+h2("Research Question 10: Preferences for Instructional Support")
+para("Research Question 10 is not yet answered. The questionnaire contained no items on diagram-based zone guidance, "
+     "manual clarity, ease of learning, or app navigation, and its open-ended items returned no responses. The nearest "
+     "evidence is that access to training and technical support was the least certain item: 12 of 27 respondents (44 "
+     "percent) answered maybe, 8 (30 percent) yes, and 7 (26 percent) no. A short survey on the four named aspects, given "
+     "after a guided examination, is needed to answer it.")
+
+h2("Research Question 11: Longitudinal Monitoring and Rehabilitation Support")
 para("Research Question 11 asked how Resondi can support longitudinal monitoring and practitioner-supervised "
      "rehabilitation. The platform supports it in four ways, all now running in the application. First, repeated "
      "recordings are compared by site: a recording's page shows the two most recent recordings from the same "
@@ -1151,6 +1131,55 @@ para("Research Question 11 asked how Resondi can support longitudinal monitoring
      "recorded. How well this support works is not yet known. No patient in the study data was recorded repeatedly over "
      "time, so the planned rule of reporting a change only when it exceeds the severity score's error (Table 6) has not "
      "been applied, and no rehabilitation outcome has been measured.")
+
+para("The planned monitoring rule counts a change between visits only when it exceeds the error of the "
+     "severity score, so that score's calibration on the reference recordings is reported here.")
+
+h3("Respiratory-Sound Severity Score")
+cal_, sv = S["calibration"], S["severity_test"]
+co = cal_["coef"]
+para(f"The severity algorithm was calibrated on the {cal_['n_recordings']} validation recordings by ordinary least squares "
+     f"(Table 19). All three abnormal-class confidence scores were significant predictors, but the fit was weak "
+     f"(R² = {cal_['r2_fit']:.3f}), and the wheezing and crackles terms were strongly collinear (VIF {cal_['vif'][0]:.1f} and "
+     f"{cal_['vif'][1]:.1f}), so the individual coefficients are unstable. On the {sv['n_recordings']} test recordings, "
+     f"whose reference severity averaged {sv['ref_mean']:.1f} ± {sv['ref_sd']:.1f} percent, the uncalibrated estimator "
+     f"overestimated severity by {sv['direct']['bias']:.1f} points on average (RMSE {sv['direct']['rmse']:.1f}, MAE "
+     f"{sv['direct']['mae']:.1f}, R² {sv['direct']['r2']:.2f}). Calibration removed most of the bias but explained almost "
+     f"none of the variation (RMSE {sv['calibrated_ols']['rmse']:.1f}, MAE {sv['calibrated_ols']['mae']:.1f}, R² "
+     f"{sv['calibrated_ols']['r2']:.3f}; {cal_['clipped_test']} predictions clipped), and the beta-regression sensitivity "
+     f"analysis gave the same picture (RMSE {sv['beta_regression']['rmse']:.1f}, R² {sv['beta_regression']['r2']:.3f}; Figure 16). "
+     f"Because RMSE equalled roughly 43 points on a 0–100 scale, a change in severity between visits would have to exceed "
+     f"about 43 points before the longitudinal analysis could count it as real.")
+tab("Table 19", "Severity Calibration and Accuracy", [
+    ["", "Estimate", "SE", "p", "VIF"],
+    ["Intercept", f"{co['intercept']:.1f}", f"{cal_['se'][0]:.1f}", pfmt(cal_['p'][0]), "—"],
+    ["p(Wheezing)", f"{co['p(W)']:.1f}", f"{cal_['se'][1]:.1f}", pfmt(cal_['p'][1]), f"{cal_['vif'][0]:.1f}"],
+    ["p(Crackles)", f"{co['p(C)']:.1f}", f"{cal_['se'][2]:.1f}", pfmt(cal_['p'][2]), f"{cal_['vif'][1]:.1f}"],
+    ["p(Wheezing with Crackles)", f"{co['p(WC)']:.1f}", f"{cal_['se'][3]:.1f}", pfmt(cal_['p'][3]), f"{cal_['vif'][2]:.1f}"],
+    ["Test recordings (n = 164)", "RMSE", "MAE", "R²", "Bias"],
+    ["Direct estimator", f"{sv['direct']['rmse']:.1f}", f"{sv['direct']['mae']:.1f}", f"{sv['direct']['r2']:.3f}", f"{sv['direct']['bias']:+.1f}"],
+    ["Calibrated (OLS)", f"{sv['calibrated_ols']['rmse']:.1f}", f"{sv['calibrated_ols']['mae']:.1f}", f"{sv['calibrated_ols']['r2']:.3f}", f"{sv['calibrated_ols']['bias']:+.1f}"],
+    ["Beta regression (sensitivity)", f"{sv['beta_regression']['rmse']:.1f}", f"{sv['beta_regression']['mae']:.1f}", f"{sv['beta_regression']['r2']:.3f}", f"{sv['beta_regression']['bias']:+.1f}"],
+], [2.3, 1.0, 1.0, 1.0, 0.9], f"Calibration fitted on {cal_['n_recordings']} validation recordings (R² = {cal_['r2_fit']:.3f}, "
+   f"df = {cal_['df']}); errors are in percentage points on the 0–100 severity scale.")
+fig("Figure 16", "Predicted Against Reference Severity (Test Recordings)", os.path.join(STATS, "fig_severity_test.png"), 4.0,
+    "The dashed line marks perfect agreement.")
+kw = S["kruskal"]
+g = kw["groups"]
+sig = [d for d in kw["dscf"] if d["p"] < 0.05]
+para(f"A Kruskal–Wallis test found that predicted severity differed across the reference recording categories, "
+     f"H({kw['df']}) = {kw['H']:.2f}, p {pfmt(kw['p'])}, but the effect was small (ε² = {kw['epsilon_sq']:.3f}; Table 20). "
+     f"Dwass–Steel–Critchlow–Fligner comparisons located the difference only between Crackles and Wheezing with Crackles "
+     f"recordings (p {pfmt(sig[0]['p']) if sig else '> .05'}); healthy recordings received a median predicted severity of "
+     f"{g['Healthy']['median']:.1f} percent, close to that of abnormal recordings, which reflects the model's tendency to "
+     f"label healthy breaths as abnormal.")
+tab("Table 20", "Predicted Severity by Reference Recording Category (Test Recordings)",
+    [["Category", "n", "Median (%)", "IQR (%)"]] +
+    [[k_, str(v_["n"]), f"{v_['median']:.1f}", f"{v_['iqr'][0]:.1f}–{v_['iqr'][1]:.1f}"] for k_, v_ in g.items()] +
+    [["Pairwise (DSCF)", "W", "p", ""]] + [[d["pair"], f"{d['W']:.2f}", pfmt(d["p"]).replace("= ", ""), ""] for d in kw["dscf"]],
+    [2.8, 0.8, 1.2, 1.4], f"Kruskal–Wallis H({kw['df']}) = {kw['H']:.2f}, p {pfmt(kw['p'])}, ε² = {kw['epsilon_sq']:.3f}. "
+    "Recording category: Healthy if no cycle is adventitious, otherwise the most frequent adventitious class, ties to "
+    "Wheezing with Crackles.")
 
 h2("Summary of Answers to the Research Questions")
 para("Table 21 gives the answer to each research question, the evidence behind it, and how complete it is. Of the eleven "
@@ -1169,11 +1198,11 @@ tab("Table 21", "Answers to the Research Questions", [
      "recordings stored by site with versioned analyses", "Answered (this section)"],
     ["4. Analysis system: preprocessing, features, branches, fusion", "1-s band-limited windows; MFCC, spectrogram, "
      "chromagram; one CNN branch each; concatenation fusion, 40.0% balanced accuracy in cross-validation; separate "
-     "heart models", "Answered (Table 4, Figure 4, Tables 14–18 and 20)"],
+     "heart models", "Answered (Table 4, Figure 4, Tables 11–15 and 17)"],
     ["5. Response time", "Connection 4.55 s; recording 15.00 s; quality check 144.68 s; preprocessing 20.91 s; "
      "classification 3.97 s", "Answered; the quality check limits use (Table 7)"],
     ["6. Clean vs noise-contaminated (Hypothesis 1)", "Balanced accuracy fell from 35.0% to about 25% at 20, 10, and 5 dB "
-     "signal-to-noise ratio; McNemar Holm-adjusted p < .001 at each level", "H₀ rejected (Table 11, Figure 8)"],
+     "signal-to-noise ratio; McNemar Holm-adjusted p < .001 at each level", "H₀ rejected (Table 18, Figure 15)"],
     ["7. Reference vs device recordings (Hypothesis 2)", "No device recordings with clinician labels exist; on unlabelled "
      "device recordings the models are less decisive", "Not yet testable; needs labelled device recordings"],
     ["8. Conventional stethoscope vs Resondi quality (Hypothesis 3)", "Resondi signal about 13 dB stronger; paired raw "
@@ -1295,6 +1324,12 @@ log("Bibliography: four references completed (14 Nov)",
 log("Research Question 9: physician validation (14 Nov)", "Durability and functionality not measured as such",
     "Functionality rated by one physician on the instrument validation form (29 Aug 2026; 5 of 5); durability still "
     "not measured", "From the team's Survey Validation form, supplied by the user on 14 Nov.")
+log("Results and Discussion in research-question order (14 Nov)", "Results ordered by analysis, with the research "
+    "questions spread across sections", "One heading per research question, 1 to 11 in order; the model sections are "
+    "subsections of Research Question 4 and the severity score of Research Question 11; Results tables renumbered "
+    "11->18, 12->19, 13->20, 14->11, 15->12, 16->13, 17->14, 18->15, 19->16, 20->17 and figures "
+    "8->15, 9->16, 10->8, 11->9, 12->10, 13->11, 14->12, 15->13, 16->14", "Requested by the user on 14 Nov: answer the "
+    "research questions respectively.")
 log("Results and Discussion answer each research question (14 Nov)",
     "Results organized by analysis; Research Questions 2-4, 10, and 11 not answered, Question 9 only as an overall mean",
     "New sections for Research Questions 2-4 (device, platform, analysis system), 9-10 (acceptance by construct, mapped "
