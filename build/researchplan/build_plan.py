@@ -1454,6 +1454,12 @@ log("Layout", "School header typed into the body at the top of each page (one se
     "Header moved into the real page header; single section; major parts start on a new page",
     "With tables and figures added, typed headers would have landed mid-page.")
 
+# The title registered on the signed ISEF forms (aligned 14 Nov 2026).
+_tp = next(p for p in D.paragraphs if "Auscultation Instrument for Cardiopulmonary Monitoring" in p.text)
+set_text(_tp, "Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System")
+log("Title", "Resondi: A CNN-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and "
+    "Rehabilitation-Support System", "Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System",
+    "Matches the title registered on the signed ISEF forms and the title page (user, 14 Nov).")
 D.core_properties.title = "Resondi Research Plan (revised 11 November 2026)"
 D.save(OUT)
 print("wrote", OUT)

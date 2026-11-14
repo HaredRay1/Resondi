@@ -249,9 +249,19 @@ forms = [
     ("Student Checklist (1A), item 10, Source of Data: only 'self-collected' is ticked. The rebuilt models use the "
      "public ICBHI 2017, SPRSound and CirCor datasets.", "Also tick 'publicly available' and name the three datasets.",
      "Team", BEFORE),
-    ("Project title differs across the forms: some say Ausculta (Qualified Scientist Form 2B, the physicians' "
-     "certificates, the validation form) and the papers say Resondi.", "Make the title consistent, or add a line "
-     "explaining the rename; do not edit the signed certificates.", "Team", BEFORE),
+    ("Project title: the papers, title page and abstract now use the title registered on the signed ISEF forms, but "
+     "some documents still say Ausculta (Qualified Scientist Form 2B, the physicians' certificates, the validation "
+     "form).", "Add a line explaining the rename where the fair asks; do not edit the signed certificates.", "Team",
+     BEFORE),
+    ("Possible conflict of interest: Genelyn O. Bautista is listed as a research adviser on the title page (and now "
+     "the IMRaD cover), but she also signed the Human Participants Form (4) as the review board's medical "
+     "professional. ISEF rules say board members may not be the adult sponsor, direct supervisor or qualified "
+     "scientist; Form 2A names only John Lemuel J. Noche as adviser.", "Ask the SRC whether her adviser role "
+     "conflicts with her board role; if it does, remove her from one of them (the papers and title page follow the "
+     "title page's list).", "Team / adviser", BEFORE),
+    ("Checklist of forms required: the Form 2C row (Regulated Research Institution / Industrial Setting) is blank, "
+     "but a Form 2C (completed by the hardware consultant) is in the ISEF forms.", "Tick it, or mark it NA if the "
+     "SRC says it does not apply.", "Team", BEFORE),
     ("Letters of 4 Nov 2026 to five cardiologists (three hospitals) and the draft CirCor heart-sound certificate are "
      "still unsigned. The draft certificate calls the heart samples 'respiratory sound characteristics'.", "Get the "
      "signatures, and correct the certificate wording to heart sounds before it is signed.", "Team", BEFORE),
@@ -285,7 +295,11 @@ resolved = [
      "permission letters). The paper's claim of pilot and classroom discussions was replaced with this."),
     ("IMRaD: cover page credits (review form, Part 3)", "Research adviser and consultants added from Form 2A."),
     ("IMRaD: abstract length (review form, Part 4, max 250 words)", "Rewritten to 250 words from 420."),
-    ("ISEF AI Usage Disclosure", "Updated 14 Nov: covers the November work (model rebuild, heart models, app, paper "
+    ("Title page and table of contents", "Title page rebuilt with the typos fixed (AI-Assisted, IoT, "
+     "Rehabilitation-Support System); the IMRaD now has printed page numbers, and the table of contents is generated "
+     "from its real headings (the draft listed sections that do not exist); both papers now carry the registered "
+     "title; the IMRaD cover credits match the title page."),
+    ("ISEF AI Usage Disclosure","Updated 14 Nov: covers the November work (model rebuild, heart models, app, paper "
      "revisions), withdraws the leaked 71% figure, corrects \"AI did not train the model\" and \"paper not written by "
      "AI\"; swapped into the compiled document in place of the 29 Aug pages."),
     ("Research plan RQ 9 and IMRaD acceptance: functionality", "One physician's instrument validation, 29 Aug 2026, "

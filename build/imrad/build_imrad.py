@@ -28,6 +28,21 @@ sec = doc.sections[0]
 sec.left_margin = Inches(1.25); sec.right_margin = Inches(1.0)
 sec.top_margin = sec.bottom_margin = Inches(1.0)
 
+# Page numbers in the footer, so the table of contents in the compiled submission can point at real pages.
+_fp = sec.footer.paragraphs[0]
+_fp.alignment = WD_ALIGN_PARAGRAPH.CENTER
+_run = _fp.add_run()
+for _tag, _attr in (("w:fldChar", "begin"), ("w:instrText", None), ("w:fldChar", "separate")):
+    _el = OxmlElement(_tag)
+    if _attr:
+        _el.set(qn("w:fldCharType"), _attr)
+    else:
+        _el.set(qn("xml:space"), "preserve"); _el.text = "PAGE"
+    _run._r.append(_el)
+_t = OxmlElement("w:t"); _t.text = "1"; _run._r.append(_t)
+_end = OxmlElement("w:fldChar"); _end.set(qn("w:fldCharType"), "end"); _run._r.append(_end)
+_run.font.size, _run.font.name = Pt(11), FONT
+
 
 def para(text="", *, after=10, before=0, first=0.5, align=WD_ALIGN_PARAGRAPH.JUSTIFY,
          size=12, bold=False, italic=False, color=None, spacing=2.0):
@@ -130,22 +145,22 @@ def TBL(num, caption, rows, widths, note=None):
 
 
 # ═══════════════════════════════════════════════════ TITLE
-para("Resondi: A CNN-Assisted Smart Stethoscope for Lung and Heart Sound "
-     "Monitoring, Longitudinal Tracking, and Rehabilitation Support",
+para("Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary "
+     "Monitoring, Longitudinal Tracking, and Rehabilitation-Support System",
      after=8, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, size=14, bold=True,
      spacing=1.4)
 para("Ahnycca Krish N. Malimban",
      after=4, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, spacing=1.2)
 para("Science, Technology, Engineering and Mathematics — Senior High School\nPuerto Princesa City National Science High School, Palawan",
      after=8, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, italic=True, spacing=1.2)
-para("Research Adviser: John Lemuel J. Noche",
+# Credits as on the team's title page (14 Nov 2026).
+para("Research Advisers: John Lemuel J. Noche · Genelyn O. Bautista",
      after=2, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, size=11, spacing=1.2)
-para("Research Consultants: Bemsor T. Caabay (Palawan State University; qualified scientist, artificial "
-     "neural networks) · Harry Ericson A. Cabrera (software development) · Jeff T. Magsino (Hajimeru IT "
-     "Solutions; hardware) · Dr. Kenneth Wilson O. Lim (pulmonology, ACE Medical Center Palawan) · "
-     "Dr. Sonia Ulanday (pediatric pulmonology, ACE Medical Center Palawan) · Dr. Riza Cornelle C. de la "
-     "Bajan (pediatrics, Palawan Medical Plaza)",
-     after=16, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, size=10, spacing=1.2)
+para("Qualified Scientist: Bemsor T. Caabay, MSc",
+     after=2, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, size=11, spacing=1.2)
+para("Consultants: Kenneth Wilson O. Lim, MD, FPCP, FPCCP · Sonia A. Ulanday, MD, FPPS, FPAPP · "
+     "Riza Cornelle C. De La Bajan, MD, FPPS",
+     after=16, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, size=11, spacing=1.2)
 
 # ═══════════════════════════════════════════════════ ABSTRACT
 H1("Abstract")

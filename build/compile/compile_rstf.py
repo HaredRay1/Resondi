@@ -1,10 +1,11 @@
 """Compile Ahnycca's fair submission into one PDF, in the order of the example compilation (MCS-I-RSTF7b.pdf):
 
-    I.   Research Plan       Ahnyccas papers/Resondi-Research-Plan-Heart-and-Lung-FINAL.pdf
+    front                    title page and DepEd checklist of forms (build/compile/front_matter.py)
+    I.   Research Plan      Ahnyccas papers/Resondi-Research-Plan-Heart-and-Lung-FINAL.pdf
     II.  ISEF Forms          the team's signed ISEF-Forms-2027 PDF: the user's newer copy of 14 Nov 2026 (consent
                              forms updated to cardiopulmonary); the older Drive copy is kept as -drive-older.pdf
     III. ISEF Abstract       generated here: ISEF Abstract & Certification layout, abstract from the IMRaD
-    IV.  Research Paper      Ahnyccas papers/Resondi-IMRaD-Heart-and-Lung-FINAL.pdf
+    IV.  Research Paper      title page, table of contents, Ahnyccas papers/Resondi-IMRaD-Heart-and-Lung-FINAL.pdf
     V.   Project Data Book   placeholder: the logbook is not in the shared folders
     VI.  SRC Evaluation      the signed Review and Recommendation Form (Drive, 5 Nov 2026)
 
@@ -38,8 +39,9 @@ AI_DISCLOSURE = os.path.join(PAPERS, "Resondi-AI-Usage-Disclosure-2026-11-14.pdf
 
 W, H = 612, 792  # US Letter, like the example's divider pages
 
-TITLE = ("Resondi: A CNN-Assisted Smart Stethoscope for Lung and Heart Sound Monitoring, "
-         "Longitudinal Tracking, and Rehabilitation Support")
+TITLE = ("Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, "
+         "Longitudinal Tracking, and Rehabilitation-Support System")  # as registered on the signed ISEF forms
+FRONT = os.path.join(PAPERS, "Resondi-Title-Page-and-Contents-FINAL.pdf")  # title page, checklist, contents
 STUDENT = "Malimban, Ahnycca Krish N."
 SCHOOL = "Puerto Princesa City National Science High School, Palawan, Philippines"
 
@@ -182,7 +184,7 @@ def logbook_placeholder(doc):
 
 
 def main():
-    for f in (PLAN, IMRAD, IMRAD_DOCX, ISEF, REVIEW, AI_DISCLOSURE):
+    for f in (PLAN, IMRAD, IMRAD_DOCX, ISEF, REVIEW, AI_DISCLOSURE, FRONT):
         if not os.path.exists(f):
             raise SystemExit(f"missing source: {f}")
     os.makedirs(OUTDIR, exist_ok=True)
@@ -197,6 +199,12 @@ def main():
         src = fitz.open(path)
         out.insert_pdf(src)
         return src.page_count
+
+    # Front matter, as in the example compilation: the title page and the DepEd checklist of forms.
+    front = fitz.open(FRONT)
+    out.insert_pdf(front, from_page=0, to_page=1)
+    toc.append([1, "Title page", 1])
+    toc.append([1, "Checklist of forms required", 2])
 
     add_section("I. RESEARCH PLAN", "I. Research Plan")
     insert(PLAN)
@@ -215,6 +223,8 @@ def main():
     add_section("III. ISEF ABSTRACT", "III. ISEF Abstract")
     size = abstract_page(out, imrad_abstract())
     add_section("IV. RESEARCH PAPER", "IV. Research Paper (IMRaD)")
+    out.insert_pdf(front, from_page=0, to_page=0)   # the paper's title page
+    out.insert_pdf(front, from_page=2, to_page=2)   # its table of contents (IMRaD page numbers)
     insert(IMRAD)
     add_section("V. PROJECT DATA BOOK", "V. Project Data Book (Logbook)")
     logbook_placeholder(out)
