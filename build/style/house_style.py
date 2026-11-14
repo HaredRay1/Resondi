@@ -18,9 +18,9 @@ text in narrow columns opens wide gaps). Headers and footers: font and size only
 Fonts: every run, style, list number and the document defaults become Times New Roman 11 pt; symbol fonts (bullet
 glyphs) are kept.
 Line spacing (only when apply(doc, line_spacing=2.0) is asked for; the papers ask, user 14 Nov): every paragraph with
-text outside tables gets that spacing. Body text, lists, references, captions and notes lose their extra space
-before and after, the usual double-spaced layout, since the doubled line already separates them; headings and centred
-lines (title page) keep theirs. Table cells, paragraphs holding a picture, and a text flowchart (centred lines
+text outside tables gets that spacing, and keeps its own space before and after (user, 15 Nov: keep the space
+between paragraphs), with widow/orphan control on so no paragraph leaves a single line alone at the top or foot of a
+page (the original plan had it off). Table cells, paragraphs holding a picture, and a text flowchart (centred lines
 with arrow lines such as "▼" between them, the plan's Procedures chart) stay as they are: Word multiplies the
 height of a line with an inline picture, and a doubled flowchart no longer fits on one page.
 """
@@ -132,7 +132,6 @@ def set_spacing(p, line=None, before=None, after=None):
                 sp.attrib.pop(qn("w:" + a), None)
 
 
-TIGHT = {"body", "list", "list_cont", "list2", "reference", "note", "caption"}
 ARROWS = set("▼↓⬇▽⇩")
 
 
@@ -404,10 +403,9 @@ def apply(doc, line_spacing=None):
         if any(p is q for q in flow_ps):
             counts["flowchart"] = counts.get("flowchart", 0) + 1
         elif line_spacing and p.find(".//" + qn("w:drawing")) is None and p.find(".//" + qn("w:pict")) is None:
-            if kind in TIGHT:
-                set_spacing(p, line_spacing, 0, 0)
-            else:
-                set_spacing(p, line_spacing)
+            set_spacing(p, line_spacing)  # space before/after kept (user, 15 Nov)
+            wc = child(p.find(qn("w:pPr")), "widowControl", PPR_ORDER)
+            wc.attrib.pop(qn("w:val"), None)  # on
             counts["spaced"] = counts.get("spaced", 0) + 1
         counts[kind] = counts.get(kind, 0) + 1
         prev = kind
