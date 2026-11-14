@@ -242,11 +242,10 @@ im_decisions = [
 
 # Fair forms and documents outside the two papers, found in the team's Drive folders on 14 Nov 2026.
 forms = [
-    ("AI Usage Disclosure (dated 29 Aug 2026) is out of date. It says AI did not create, train or modify the model and "
-     "quotes the model as about 71% accurate. Since then AI (Claude) rebuilt and trained the lung models, built the "
-     "heart models, and revised the IMRaD and research plan; 71% is the leaked figure the papers say must not be quoted.",
-     "Update the disclosure and its prompt-log summary to cover the November work and remove the 71% figure. A draft "
-     "can be written from the project records for the team to check.", "Team", BEFORE),
+    ("AI Usage Disclosure: the updated version (14 Nov 2026, Resondi-AI-Usage-Disclosure-2026-11-14) was written by AI "
+     "from the project records and replaces the 29 Aug attachment in the compiled document. Its statements about who "
+     "did what have not yet been checked by the team.", "Read it, correct anything wrong about the team's own work, "
+     "and replace the 29 Aug attachment in the team's own ISEF form set too.", "Team", BEFORE),
     ("Student Checklist (1A), item 10, Source of Data: only 'self-collected' is ticked. The rebuilt models use the "
      "public ICBHI 2017, SPRSound and CirCor datasets.", "Also tick 'publicly available' and name the three datasets.",
      "Team", BEFORE),
@@ -286,6 +285,9 @@ resolved = [
      "permission letters). The paper's claim of pilot and classroom discussions was replaced with this."),
     ("IMRaD: cover page credits (review form, Part 3)", "Research adviser and consultants added from Form 2A."),
     ("IMRaD: abstract length (review form, Part 4, max 250 words)", "Rewritten to 250 words from 420."),
+    ("ISEF AI Usage Disclosure", "Updated 14 Nov: covers the November work (model rebuild, heart models, app, paper "
+     "revisions), withdraws the leaked 71% figure, corrects \"AI did not train the model\" and \"paper not written by "
+     "AI\"; swapped into the compiled document in place of the 29 Aug pages."),
     ("Research plan RQ 9 and IMRaD acceptance: functionality", "One physician's instrument validation, 29 Aug 2026, "
      "added (Survey Validation form)."),
 ]

@@ -33,6 +33,7 @@ IMRAD = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.pdf")
 IMRAD_DOCX = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.docx")
 ISEF = os.path.join(SRC, "ISEF-Forms-2027.pdf")
 REVIEW = os.path.join(SRC, "Review-and-Recommendation-Form-RIM-I-signed.pdf")
+AI_DISCLOSURE = os.path.join(PAPERS, "Resondi-AI-Usage-Disclosure-2026-11-14.pdf")
 
 W, H = 612, 792  # US Letter, like the example's divider pages
 
@@ -180,7 +181,7 @@ def logbook_placeholder(doc):
 
 
 def main():
-    for f in (PLAN, IMRAD, IMRAD_DOCX, ISEF, REVIEW):
+    for f in (PLAN, IMRAD, IMRAD_DOCX, ISEF, REVIEW, AI_DISCLOSURE):
         if not os.path.exists(f):
             raise SystemExit(f"missing source: {f}")
     os.makedirs(OUTDIR, exist_ok=True)
@@ -199,7 +200,17 @@ def main():
     add_section("I. RESEARCH PLAN", "I. Research Plan")
     insert(PLAN)
     add_section("II. ISEF FORMS", "II. ISEF Forms")
-    insert(ISEF)
+    # The signed forms, with the 29 Aug 2026 AI-disclosure attachment (pages after Form 2A) replaced by the
+    # updated disclosure of 14 Nov 2026. The signed form pages themselves are not touched.
+    isef = fitz.open(ISEF)
+    texts = [" ".join(pg.get_text().split()) for pg in isef]
+    a = next(i for i, t in enumerate(texts) if t.startswith("AI Usage Disclosure"))
+    b = next(i for i, t in enumerate(texts) if "These were found and fixed during the session" in t)
+    assert a < b and "Qualified Scientist" not in texts[b], (a, b)
+    out.insert_pdf(isef, from_page=0, to_page=a - 1)
+    out.insert_pdf(fitz.open(AI_DISCLOSURE))
+    out.insert_pdf(isef, from_page=b + 1, to_page=isef.page_count - 1)
+    print(f"  ISEF forms: replaced old AI disclosure pages {a + 1}-{b + 1} with the 14 Nov update")
     add_section("III. ISEF ABSTRACT", "III. ISEF Abstract")
     size = abstract_page(out, imrad_abstract())
     add_section("IV. RESEARCH PAPER", "IV. Research Paper (IMRaD)")
