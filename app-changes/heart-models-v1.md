@@ -43,4 +43,4 @@ On the recording page (and as a compact row on the exam summary), "Analyse heart
 
 ## What this does not change
 
-The heart models are tested on CirCor only. The IMRaD and research plan say the models "do not yet run in the application" and that device testing should come before any heart result is shown in it. If this version is published, those sentences need updating, and the order the papers recommend has not been followed.
+The heart models are tested on CirCor only. The IMRaD and research plan were updated on 14 Nov to say the models run in the application, which is true only once this version is published. The papers also say that the models went into the application before the device test the plan had put first, and that every heart result there is marked as a screening aid.

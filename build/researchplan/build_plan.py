@@ -185,7 +185,7 @@ set_text(P[12],
          "Crackles) with a convolutional neural network. The device's bill of materials is ₱2,775, about one-eighth of the "
          "listed price of the Littmann CORE. Every AI-assisted result will be presented to a licensed practitioner, who may "
          "confirm, modify, or return it for a repeat recording. Heart sounds will be captured and filed for review, and "
-         "heart-sound timing, heart-rate and murmur models will be added once they are tested on the device. Resondi is intended as a decision-support instrument rather than a "
+         "the heart-sound timing, heart-rate and murmur models already in the application will be tested on the device. Resondi is intended as a decision-support instrument rather than a "
          "diagnostic one, making an examination retrievable and comparable between visits.")
 log("Rationale ¶4", "This study developed and evaluated Resondi, a low-cost, IOT-based …",
     "Future tense; seven lung and five cardiac sites; the four output classes; BOM ₱2,775 against ₱22,000",
@@ -985,8 +985,8 @@ h2("Heart Sound Component: Models Tested on CirCor")
 para("Heart Mode is implemented on the device and in the application: it guides the operator through the aortic, "
      "pulmonic, tricuspid and mitral areas and Erb's point, in order from the base of the heart to the apex (Figure 15), "
      "records 15 seconds at each site in the same 16 kHz WAV format as lung recordings, and files each recording by site "
-     "for practitioner review. No heart recording is passed to the lung classifier, and the application does not yet "
-     "classify heart sounds.")
+     "for practitioner review. No heart recording is passed to the lung classifier; heart recordings are analysed by "
+     "the separate heart-sound models described below, which now run in the application.")
 fig("Figure 15", "The Five Cardiac Sites Recorded in Heart Mode", os.path.join(FIG, "h1_heart_sites.png"), 3.8,
     "Numbered in recording order. Erb's point (3) is filed for the practitioner and has no counterpart in the CirCor "
     "dataset, so it is not part of the classifier input.")
@@ -1015,6 +1015,17 @@ para("The murmur model did not reach its pre-specified sensitivity on the test p
      "that it ranks patients well, so the shortfall lies in a threshold set on 189 validation patients that did not "
      "carry over; the threshold was not changed after the test was read. Of the 14 test patients labelled Unknown, it "
      "flagged 2. A screening flag that misses one murmur in three cannot be used to rule a murmur out.")
+para("Both models were then placed in the Resondi application, exported to ONNX and run in the browser with ONNX "
+     "Runtime Web, with the feature calculation rewritten in JavaScript. The application first low-pass filters each "
+     "16 kHz device recording and keeps every fourth sample, to match CirCor's 4 kHz, and then computes exactly the "
+     "training features. Through that path the 631 test recordings, upsampled to 16 kHz, gave a heart-rate error of "
+     "3.03 beats per minute against 3.01, and the same murmur flag on 99.7 percent of recordings. The JavaScript code "
+     "matched the Python reference on 25 of 25 recordings in Node.js and on 8 of 8 in a browser on the application's "
+     "preview build, where an analysis took under a second once the models, about 2 MB, had downloaded. A heart "
+     "recording is analysed on request; the estimated heart rate and the murmur flag are saved with it, shown with "
+     "their limits (a screening aid, tested on public recordings of children and not on the device, and a missing "
+     "flag does not rule a murmur out), and passed to the reviewing cardiac practitioner with the case. These checks "
+     "show that the application computes what was tested, not how the models perform on the Resondi microphone.")
 tab("Table 20", "Heart-Sound Models on 189 CirCor Test Patients", [
     ["Model", "Measure", "Result (95% CI)"],
     ["Segmentation", "S1 found within 100 ms; detections that are real", "96.8%; 95.7%"],
@@ -1048,9 +1059,10 @@ para("The order of the remaining cardiac work follows from the lung results. A l
      "heart rates (median 103 beats per minute in the test set) are higher than those of the Filipino adults Resondi "
      "will also examine, with a commercial electronic stethoscope. The cardiologist's review will be completed, the "
      "acquisition chain's low-frequency response measured, since most S1 and S2 energy lies below about 150 Hz, and the "
-     "murmur model's sensitivity raised to its target on new patients; only then will the models be tested on heart "
-     "recordings made with the Resondi device and labelled by a cardiologist, and only after that shown in the "
-     "application.")
+     "murmur model's sensitivity raised to its target on new patients, and the models will then be tested on heart "
+     "recordings made with the Resondi device and labelled by a cardiologist. The models were placed in the "
+     "application before that test, which the plan had put first, so every heart result there is marked as a "
+     "screening aid until the device test is done.")
 
 h2("Discussion")
 para("Rebuilding the classifier with per-cycle sound labels and a patient-wise, device-balanced split produced the first "
@@ -1133,7 +1145,7 @@ para("The study has several limitations. Thirty-one test patients give wide conf
      "test patients were read three times, once per round, each time with the primary model fixed in advance, which the "
      "cross-validation across all 126 patients guards against. Above all, neither the fusion network now in the "
      "application nor any other rebuilt model has been tested on Resondi device recordings with reference labels. The "
-     "heart models have been tested on CirCor only: not on Resondi heart recordings, not after the cardiologist's review "
+     "heart models run in the application but have been tested on CirCor only: not on Resondi heart recordings, not after the cardiologist's review "
      "of their training labels, which is still pending, and, for murmurs, short of the pre-specified sensitivity.")
 log("Heart sound component (13 Nov, regional science fair version)", "Results reported the lung component only",
     "New section 'Heart Sound Component: Status' with Figure 15 (the five cardiac sites): Heart Mode implemented; CirCor "
@@ -1149,6 +1161,13 @@ log("Heart-sound models (14 Nov)", "Heart section reported the acquisition stage
     "before the cardiologist's review; segmentation not yet used by the murmur model; murmur timing, extent score and "
     "recording-level metrics not done; one-seed change. Rationale and limitations updated.",
     "Requested by the user on 14 Nov. Numbers from model-rebuild/results/heart-segmentation.md and heart-murmur.md.")
+log("Heart-sound models in the application (14 Nov)", "Models tested on CirCor; application did not classify heart sounds",
+    "Results: the models now run in the application (ONNX in the browser, 16 kHz audio decimated to 4 kHz); app-path check "
+    "on 631 test recordings (heart-rate error 3.03 vs 3.01 BPM, murmur flag the same on 99.7%); JavaScript matched Python "
+    "25/25 in Node.js and 8/8 in a browser. States that the models went into the application before the device test the "
+    "plan put first, and that every heart result there is marked as a screening aid. Rationale and limitations updated.",
+    "Requested by the user on 14 Nov. Numbers from model-rebuild/results/heart-app-path-check.md and heart-js-parity.json; "
+    "app change in app-changes/heart-models-v1.md.")
 log("Second training round, cross-validation, deployment (13 Nov)", "Fusion reported as not adopted (ICBHI-only round)",
     "New section 'Adding the Paediatric Corpus, and Cross-Validation': Table 17 (ICBHI + SPRSound test, 39.4% / 57.2%), "
     "Table 18 (5-fold CV, 40.0% vs 34.0%, +5.9 points, p = 0.008), Figures 12-14 made with jamovi (jmv), and the 13 Nov "

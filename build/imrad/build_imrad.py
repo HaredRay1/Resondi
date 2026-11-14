@@ -171,8 +171,9 @@ para("Auscultation is the first examination most Filipino patients with heart or
      "second heart sounds within 100 ms and estimated heart rate with a mean error of "
      "3.0 beats per minute (95 percent CI 2.5–3.6); a murmur detector reached 66.7 "
      "percent sensitivity (95 percent CI 50.0–81.8), short of its pre-specified 80 "
-     "percent, at 97.1 percent specificity. Neither heart model has been tested on "
-     "recordings from the Resondi device.", first=0, spacing=1.6)
+     "percent, at 97.1 percent specificity. Both heart models now run in the Resondi "
+     "application, which reports a heart rate and a murmur screening flag for each heart "
+     "recording, but neither has been tested on recordings from the Resondi device.", first=0, spacing=1.6)
 para("Keywords: auscultation, lung sounds, heart sounds, smart stethoscope, convolutional neural "
      "network, feature fusion, primary care, Philippines", first=0, italic=True, spacing=1.6)
 
@@ -310,7 +311,8 @@ for n, (obj, sub) in enumerate([
     ("To develop AI-assisted analysis of heart sounds.",
      "Two models are trained on expert-annotated public recordings: one finds the "
      "first and second heart sounds and estimates heart rate, and one reports whether "
-     "a murmur is present. Placing a murmur in the cardiac cycle is the next step."),
+     "a murmur is present. Both run in the application; placing a murmur in the cardiac "
+     "cycle is the next step."),
     ("To establish longitudinal monitoring of respiratory sound changes across visits.",
      "A recording is compared against an earlier recording taken at the same anatomical "
      "site on the same patient."),
@@ -330,9 +332,9 @@ para("This study covers lung and heart sounds, at different stages. Lung sounds 
      "recorded, classified and evaluated. Heart sounds are recorded at five sites and "
      "stored for practitioner review. Two heart-sound models, one that times the heart"
      " sounds and estimates heart rate and one that detects murmurs, were trained and "
-     "tested on a public dataset; they do not yet run in the application and have not "
-     "been tested on Resondi heart recordings, and no heart recording is passed to the"
-     " lung classifier. "
+     "tested on a public dataset and placed in the application, which shows each "
+     "result with its limits; they have not been tested on Resondi heart recordings, and "
+     "no heart recording is passed to the lung classifier. "
      "Lung classification is limited to four "
      "categories — normal, wheezing, crackles, and "
      "wheezing with crackles — and the system does not identify a disease, stage a "
@@ -653,16 +655,15 @@ para("To show how much a leaky division of the data inflates the score, the fusi
      "accuracy claim in this paper rests on them.", first=0)
 
 H2("Heart Sound Component")
-para("Heart recordings are not classified in the application reported here. The cardiac "
-     "models follow the same discipline as the lung classifier, an "
+para("The cardiac models follow the same discipline as the lung classifier, an "
      "acoustic description and never a diagnosis. The planned output, in order of build, is "
      "that the first and second heart sounds (S1 and S2) are identified and timed, that a "
      "murmur is reported as present or absent, and that a present murmur is placed as "
      "systolic or diastolic, with a recording-quality gate in front. Third and fourth heart "
      "sounds (S3 and S4) are named but not promised, because no public dataset labels "
      "them in enough patients to train on. The first two steps, heart-sound timing with "
-     "heart rate and murmur presence, were built and tested for this paper; murmur timing "
-     "and the quality gate were not.", first=0)
+     "heart rate and murmur presence, were built, tested and placed in the application for "
+     "this paper; murmur timing and the quality gate were not.", first=0)
 para("The training corpus is the CirCor DigiScope Phonocardiogram Dataset (Oliveira et al., "
      "2022), recorded from children and adolescents in Brazil at the aortic, pulmonic, "
      "tricuspid and mitral areas and released under the Open Data Commons Attribution "
@@ -704,6 +705,18 @@ para("Because a missed murmur costs more than an unnecessary referral, sensitivi
      "recorded in the training script: the timing model was planned with three seeds "
      "and up to 40 epochs, but one epoch took about five minutes on the available "
      "computer, so it was trained with one seed for up to 15 epochs.", first=0)
+para("Both models were then placed in the Resondi application in the same way as the "
+     "lung fusion network: exported to ONNX and run in the browser with ONNX Runtime "
+     "Web, with the feature calculation rewritten in JavaScript. Because the device "
+     "records at 16 kHz and CirCor at 4 kHz, the application first low-pass filters "
+     "each recording and keeps every fourth sample, then computes exactly the training"
+     " features. This path was checked in three ways: in Python, by passing all 631 "
+     "test recordings, upsampled to 16 kHz, through it; in Node.js, by comparing the "
+     "JavaScript code with the Python reference on 25 test recordings; and in a "
+     "browser on the application's preview build, on 8. A heart recording in the "
+     "application is analysed on request, and the result, an estimated heart rate and "
+     "a murmur flag at the threshold fixed above, is saved with the recording, shown "
+     "with its limits, and passed to the reviewing cardiac practitioner with the case.", first=0)
 para("The dataset's labels are also being checked against an independent "
      "listener. Twenty-five CirCor recordings were drawn at random with a fixed seed, five "
      "from each of five groups: no murmur, holosystolic, early-systolic, mid-systolic, and "
@@ -947,7 +960,8 @@ H2("Heart Mode")
 para("Heart Mode was implemented on the device and in the application. It guides the "
      "operator through the five cardiac sites in order, records 15 seconds at each in the "
      "same 16 kHz WAV format as lung recordings, and files each recording by site for "
-     "practitioner review, with no classification applied. No quantitative evaluation of "
+     "practitioner review; the heart-sound models described above can then be run on it. "
+     "No quantitative evaluation of "
      "heart recordings made with the device was carried out in this study: signal strength, "
      "recording clarity and classification agreement were measured on lung recordings only. "
      "The heart-sound models were evaluated on public recordings instead, as reported "
@@ -1108,6 +1122,15 @@ FIG(17, "Estimated Against Reference Heart Rate on 631 CirCor Test Recordings",
     note="Each point is one recording. The dashed line is perfect agreement and the shaded "
          "band is within 5 beats per minute. Teal points are more than 10 beats per minute "
          "off. Reference rates come from the dataset's annotated S1 boundaries.")
+para("Placed in the application, the models gave the same results through the device's"
+     " 16 kHz audio path as through the original one. On the 631 test recordings, the "
+     "heart-rate error was 3.03 beats per minute against 3.01, and the murmur flag was"
+     " the same on 99.7 percent of recordings, so the extra resampling costs nothing "
+     "measurable. The JavaScript code gave the same heart rate and murmur flag as the "
+     "Python reference on 25 of 25 recordings, and in the browser on 8 of 8, where an "
+     "analysis took under a second once the models, about 2 MB, had downloaded. These "
+     "checks show that the application computes what was tested; they say nothing "
+     "about how the models perform on the Resondi microphone.", first=0)
 
 # ═══════════════════════════════════════════════════ DISCUSSION
 H1("Discussion")
@@ -1240,7 +1263,11 @@ para("None of this has yet been shown on the Resondi device, and the lung result
      " the reverse of the order this study planned. The remaining work is therefore to"
      " complete that review, measure the device's low-frequency response, and test "
      "both models on heart recordings made with the Resondi device and labelled by a "
-     "cardiologist, before any heart result is shown in the application.", first=0)
+     "cardiologist. The models were placed in the application before that test, which "
+     "this study had planned to come first. Each heart result in the application is "
+     "therefore labelled as a screening aid, tested on public recordings of children "
+     "and not on the device, with a note that a missing murmur flag does not rule a "
+     "murmur out, and each goes to a cardiac practitioner for review.", first=0)
 
 H2("Planned Extensions")
 para("Two extensions are planned and were not implemented in the work reported here.",
@@ -1379,7 +1406,8 @@ for lim in [
     "times, once per round, each time with the primary model fixed in advance. All three "
     "results are reported, and the cross-validation across all 126 patients guards "
     "against a lucky split.",
-    "The heart models are untested on the device. The heart-sound timing, heart-rate and "
+    "The heart models are untested on the device, although they run in the application. "
+    "The heart-sound timing, heart-rate and "
     "murmur results come from CirCor, children recorded in Brazil on another stethoscope. "
     "The models have not been run on Resondi heart recordings, the device's response at the "
     "lowest heart-sound frequencies has not been measured, and the models were trained "
@@ -1412,8 +1440,8 @@ para("The classification component is not yet demonstrated on the device. The or
      "acquisition platform, together with an honestly measured classifier baseline, on "
      "which validation with local recordings can now proceed. The heart component is one "
      "step behind: its models time the heart sounds, read heart rate and detect murmurs on "
-     "public recordings, the last short of its sensitivity target, but none has yet been "
-     "tested on the device.")
+     "public recordings, the last short of its sensitivity target, and they now run in "
+     "the application, but none has yet been tested on the device.")
 para("The system does not replace clinical judgement and is not designed to. Every "
      "classification is presented to a practitioner who confirms, modifies, or rejects "
      "it, and no result is returned to a patient unreviewed. On the evidence reported "
@@ -1447,8 +1475,9 @@ for rec in [
     "for example by setting the threshold on more validation patients or by using the "
     "heart-sound timing to examine systole and diastole separately, and add murmur timing.",
     "Measure the device's frequency response from 20 Hz, then test the heart-sound timing, "
-    "heart-rate and murmur models on Resondi heart recordings labelled by a cardiologist "
-    "before any heart result appears in the application.",
+    "heart-rate and murmur models on Resondi heart recordings labelled by a cardiologist, "
+    "and keep every heart result in the application marked as a screening aid until that "
+    "test is done.",
     "Conduct a prospective evaluation in a rural health unit measuring recordings "
     "captured per week, proportion of abnormal classifications reviewed, and time to "
     "review.",
