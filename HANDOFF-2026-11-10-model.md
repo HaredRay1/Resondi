@@ -1,8 +1,18 @@
-# Resondi handoff: lung model rebuild and recent work (9–13 November 2026)
+# Resondi handoff: lung model rebuild and recent work (9–15 November 2026)
 
 Paste this into Claude chat to bring it up to date. It covers what changed on 9–13 November. The project's full state is in `CLAUDE.md` in the Resondi folder; where they disagree, this file is newer on the points below. **Sections are in date order, so later sections override earlier ones**; the summary just below is the current state.
 
-> ## CURRENT STATE (13 Nov 2026), read this first
+> ## CURRENT STATE (15 Nov 2026), read this first
+>
+> **The one-page summary of everything is now `CLAUDE-CHAT-BRIEF.md`** (project root), and `START-HERE-PROMPTS.md` has the prompts for Claude chat and Claude Code. Since 13 Nov:
+>
+> - **App (14 Nov):** the heart models and the device Wi-Fi transfer page are published (see the 13 Nov block below and `app-changes/heart-models-v1.md`).
+> - **Papers (14–15 Nov), `Ahnyccas papers/`:** both papers' Results follow research questions 1–11; the compiled RSTF submission (214 pages, with SmartSteth (2025) after Form 7; kept out of git because it holds ISEF contact details); the acceptance survey (n = 27) marked as the earlier version; every reference completed ("Shkarupylo et al. 2024" is really Komaryshyn & Kogut 2026); format Times New Roman 11, justified, double-spaced with the space between paragraphs kept, APA references with a hanging indent; a plain-language to-do list (Part A: 14 items before submitting).
+> - **Drive:** syncing is still paused (since 12 Nov; the user chose to leave it), so the Drive copy is out of date.
+>
+> The model numbers below (13 Nov) still hold.
+>
+> ### Model state (13 Nov 2026)
 >
 > **The lung model, in numbers you can quote:**
 >
@@ -18,7 +28,7 @@ Paste this into Claude chat to bring it up to date. It covers what changed on 9�
 > - **The gain is real:** +5.9 points over MFCC (95% CI +1.0 to +10.3, p = 0.008), the same 126 patients, 14 of 15 seed-fold pairs better. Section 8.
 > - **The fusion model is live** (13 Nov): ONNX in the browser, features reproduced in JavaScript and checked against Python (600/600 same top label). Section 11.
 > - **On Resondi device audio:** the old v1 was close to guessing (top scores 27–34%). The fusion model is more decisive on the same 26 device recordings (31–66%, median 41%), but there are no reference labels, so this is **not** accuracy on the device.
-> - **Device Wi-Fi transfer page:** written and saved in the app, **not published** (a permission check blocked the publish). It is a phone-carried transfer, not the Tier 2 gateway. Section 11.
+> - **Device Wi-Fi transfer page:** written and saved in the app; not published on 13 Nov (a permission check blocked it); **published 14 Nov with the heart models**. It is a phone-carried transfer, not the Tier 2 gateway. Section 11.
 > - **Leakage demonstration (14 Nov), IMRaD Table 4:** the same fusion network (seed 11) scores 39.0% balanced on unseen patients, 58.2% when test patients' other breaths are in training, 52.5% when pieces of the same breath are on both sides, 78.5% on its own training data. It shows why the study splits by patient. **Never quote the leaky rows as accuracy.** `model-rebuild/results/leakage-demo.md`.
 > - **Ahnycca's papers (14 Nov):** `Ahnyccas papers/` holds only the final heart-and-lung IMRaD and research plan (Word + PDF), renamed `…-FINAL` (user, 14 Nov); the fill-ins and revision log stay in `imrad/` and `research-plan/`. Recopy after a rebuild.
 > - **Heart models (14 Nov, done):** CirCor, patient-wise split (564/189/189 patients). On 189 test patients: S1/S2 found within 100 ms 96.8%/97.3%; **heart rate mean error 3.0 BPM** (CI 2.5–3.6; 85% within 5 BPM; untrained baseline 35.4). **Murmur: sensitivity 66.7% (CI 50.0–81.8), missing its pre-specified 80%**, specificity 97.1%, AUROC 0.96 (24/36 found, 4/139 false flags). Results in `model-rebuild/results/heart-segmentation.md` and `heart-murmur.md`; in the IMRaD as Table 5 and Figure 15. Trained before the cardiologist's label review returned (disclosed). CirCor only; not checked on device audio. Never quote the murmur result as 80%.
@@ -28,9 +38,9 @@ Paste this into Claude chat to bring it up to date. It covers what changed on 9�
 >
 > **Deliverables added 10–13 Nov** (all committed): 3-minute pitch script `final/18`, user guide `final/19`, technical Q&A `final/20`, revised research plan `research-plan/`, product image `figures/Resondi-Device-Podium.png`, product video `figures/Resondi-Device-Video.mp4`. Section 9.
 >
-> **Still open:** test a new recording on screen with a patient test account; ONNX deployment of the fusion model; the 15 field-test reference labels (who set them, how); Drive folder set to Restricted; the items in `CLAUDE.md` §9.
+> **Still open:** test a new recording on screen with a patient test account (to-do B12); the 15 field-test reference labels (who set them, how); Drive folder set to Restricted; the to-do list in `Ahnyccas papers/`; the items in `CLAUDE.md` §9. (The fusion model's ONNX deployment was done on 13 Nov.)
 >
-> **Where everything is:** GitHub `HaredRay1/Resondi` (private, branch `master`, up to date as of 13 Nov). Results: `model-rebuild/results/` (start with `cv-results.md` and `final-test-log.csv`). Models: `model-rebuild/models/`.
+> **Where everything is:** GitHub `HaredRay1/Resondi` (private, branch `master`, up to date as of 15 Nov). Results: `model-rebuild/results/` (start with `cv-results.md` and `final-test-log.csv`). Models: `model-rebuild/models/`.
 >
 > ---
 >

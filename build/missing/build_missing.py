@@ -251,8 +251,8 @@ for line in (
     "The reference cited as Shkarupylo et al. (2024) is really Komaryshyn & Kogut (2026); corrected in both papers, with its full citation.",
     "The acceptance results are marked as coming from the old version.",
     "The SmartSteth paper is attached after Form 7 in the compiled document.",
-    "Both papers are formatted: Times New Roman 11, justified, consistent indents, references flush left with a "
-    "hanging indent.",
+    "Both papers are formatted: Times New Roman 11, justified, double-spaced (the space between paragraphs kept), "
+    "consistent indents, references flush left with a hanging indent.",
 ):
     para("•  " + line, after=3)
 para("Made by build/missing/build_missing.py from the FINAL papers, so it always matches what is in them.", italic=True,

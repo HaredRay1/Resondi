@@ -123,8 +123,8 @@ bullets([
     "Software: the models exported to ONNX, their feature extraction rewritten in JavaScript and checked against the "
     "Python originals, and placed in the Resondi web application with the device Wi-Fi transfer page and the "
     "heart-sound analysis screens. Each change was published at a team member's request (13 and 14 November).",
-    "Documents: the IMRaD and research plan in this submission (methods, results, discussion, tables, figures and "
-    "reference checks; the research plan's revision log records each change), the list of missing items, the "
+    "Documents: the IMRaD and research plan in this submission (methods, results, discussion, tables, figures, "
+    "reference checks and formatting; the research plan's revision log records each change), the list of missing items, the "
     "compiled submission, its ISEF abstract page, and this disclosure.",
     "Earlier in November (2–9 November): business-competition documents (concept note, pitch script, question bank), "
     "revisions of Chapters 1 to 3 with a revision log, unsigned re-issue copies of the physicians' certificates under "
