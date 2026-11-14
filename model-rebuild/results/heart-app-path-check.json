@@ -1,0 +1,36 @@
+{
+ "training_path": {
+  "recordings_scored": 631,
+  "no_estimate": 0,
+  "mae_bpm": 3.0078084053835292,
+  "within5": 0.8526148969889065,
+  "murmur": {
+   "tp": 24,
+   "fn": 12,
+   "tn": 135,
+   "fp": 4,
+   "sensitivity": 0.6666666666666666,
+   "specificity": 0.9712230215827338,
+   "auroc": 0.9592326139088729
+  }
+ },
+ "app_path": {
+  "recordings_scored": 631,
+  "no_estimate": 0,
+  "mae_bpm": 3.0299990062852484,
+  "within5": 0.8573692551505546,
+  "murmur": {
+   "tp": 25,
+   "fn": 11,
+   "tn": 135,
+   "fp": 4,
+   "sensitivity": 0.6944444444444444,
+   "specificity": 0.9712230215827338,
+   "auroc": 0.9606314948041567
+  }
+ },
+ "same_frames": 631,
+ "recordings": 631,
+ "bpm_app_vs_orig_within1": 0.9429477020602218,
+ "murmur_flag_agreement": 0.9968304278922345
+}
