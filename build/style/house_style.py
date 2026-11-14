@@ -11,7 +11,7 @@ What it does, outside tables:
   captions, notes  (every run italic, or "Note." first) no indent; caption titles flush left, notes justified
   lists            ("1. ", "a) ", "•" first, or Word numbering) left 0.5", the marker hanging 0.25" with a tab
                    after it so wrapped lines align with the text
-  references       (after the References heading, or any hanging paragraph) justified, hanging 0.5"
+  references       (after the References heading, or any hanging paragraph) flush left, hanging 0.5"
   centred lines    (title page, figures, figure captions, the plan's flowchart) stay centred, indents cleared
 Inside tables: font and size only; cell paragraphs lose first-line and left indents, alignment is kept (justified
 text in narrow columns opens wide gaps). Headers and footers: font and size only.
@@ -335,9 +335,9 @@ def apply(doc):
         elif kind == "note":
             set_ind(p, 0, 0)
             set_jc(p, "both")
-        elif kind == "reference":
+        elif kind == "reference":  # hanging 0.5", flush left (user, 14 Nov: long web addresses stretch justified lines)
             set_ind(p, 0.5, -0.5)
-            set_jc(p, "both")
+            set_jc(p, "left")
         elif kind == "list":
             set_ind(p, 0.5, -0.25)
             set_jc(p, "both")

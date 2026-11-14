@@ -206,6 +206,13 @@ def label(t):
 im_block_rows = [(label(t), f"In {s}: {cap(t)}. Answer from the team's records or the adviser; never estimate.",
                   "Team / adviser", BLOCKS) for s, t in im_block]
 im_lookup_rows = [(label(t), f"In {s}: {cap(t)}.", "Team", BLOCKS) for s, t in im_lookup]
+# References in the IMRaD that still carry a visible "[Add full citation ...]" placeholder.
+IMRAD_FINAL = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.docx")
+im_ref_rows = [(f"Reference list: {p.text.split('[Add full citation')[0].strip()} (placeholder still visible)",
+                "Give the full reference (authors, year, title, source, DOI or URL), or drop the citation and the "
+                "sentence that uses it.", "Team (Ahnycca)", BLOCKS)
+               for p in docx.Document(IMRAD_FINAL).paragraphs if "[Add full citation" in p.text]
+im_lookup_rows += im_ref_rows
 im_advice_rows = [(label(t), f"In {s}: {cap(t)}. Act on it or decide not to, then delete the marker; the IMRaD "
                    "text itself is already correct.", "Team", BLOCKS) for s, t in im_advice]
 
@@ -363,7 +370,7 @@ table(plan_decisions)
 heading("Part 2. IMRaD (Resondi-IMRaD-Heart-and-Lung-FINAL)", size=14, before=10)
 heading(f"2.1  Visible [[TO FILL]] facts the main claims rest on ({len(im_block_rows)})", size=11.5)
 table(im_block_rows)
-heading(f"2.2  Visible [[TO FILL]] facts to look up ({len(im_lookup_rows)})", size=11.5)
+heading(f"2.2  Visible [[TO FILL]] facts and unfinished references to look up ({len(im_lookup_rows)})", size=11.5)
 table(im_lookup_rows)
 heading(f"2.3  Visible [[TO FILL]] notes that are advice, not missing facts ({len(im_advice_rows)})", size=11.5)
 table(im_advice_rows)
