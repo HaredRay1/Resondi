@@ -1161,6 +1161,13 @@ log("Heart-sound models (14 Nov)", "Heart section reported the acquisition stage
     "before the cardiologist's review; segmentation not yet used by the murmur model; murmur timing, extent score and "
     "recording-level metrics not done; one-seed change. Rationale and limitations updated.",
     "Requested by the user on 14 Nov. Numbers from model-rebuild/results/heart-segmentation.md and heart-murmur.md.")
+log("Bibliography: four references completed (14 Nov)",
+    "3M source missing; Choi et al. author Chang without initials; DeepRespNet listed without authors; SPRSound author list unchecked",
+    "3M product listing (the source the IMRaD uses for the ₱22,000 price); Chang, H. (HyeSun Chang, from the PLOS ONE article); "
+    "Gupta, Singh, Travieso-González, Burget and Dutta (2024), moved to G; SPRSound author list confirmed (22 authors, first 19 "
+    "plus the last, as APA 7 requires)",
+    "Checked 14 Nov against the PLOS ONE article page and the Crossref records for the DOIs. Shkarupylo et al. (2024) and Park et "
+    "al. (2025) are still unresolved and stay marked for the team.")
 log("Heart-sound models in the application (14 Nov)", "Models tested on CirCor; application did not classify heart sounds",
     "Results: the models now run in the application (ONNX in the browser, 16 kHz audio decimated to 4 kHz); app-path check "
     "on 631 test recordings (heart-rate error 3.03 vs 3.01 BPM, murmur flag the same on 99.7%); JavaScript matched Python "
@@ -1187,14 +1194,14 @@ log("Results and Discussion (new)", "—",
 
 # ======================================================================= BIBLIOGRAPHY
 BIB = [
-    "[[3M. (2025). 3M Littmann CORE Digital Stethoscope [Product listing]. CONFIRM: add the source of the ₱22,000 price cited in the Rationale.]]",
+    "3M. (2025). Littmann CORE digital stethoscope (Model 8480) [Product listing]. https://mdmaxx.com/products/3m-8480-littmann-core-digital-stethoscope",
     "Arts, L., Lim, E. H. T., van de Ven, P. M., Heunks, L., & Tuinman, P. R. (2020). The diagnostic accuracy of lung auscultation in adult patients with acute pulmonary pathologies: A meta-analysis. Scientific Reports, 10, 7347. https://doi.org/10.1038/s41598-020-64405-6",
     "Bohadana, A., Izbicki, G., & Kraman, S. S. (2014). Fundamentals of lung auscultation. New England Journal of Medicine, 370(8), 744–751. https://doi.org/10.1056/NEJMra1302901",
-    "Choi, S. I., Jeong, Y., Jung, W. J., Kim, B.-K., Lee, S. Y., Lee, J., Kim, J.-Y., Cho, W.-Y., Chang, [[CONFIRM initials]], An, H., Park, S., & Lee, E. J. (2026). Usefulness of lung sound data collection using Skeeper SM-300® device: A pilot study. PLOS ONE, 21(5), e0348588. https://doi.org/10.1371/journal.pone.0348588",
-    "[[DeepRespNet: A deep neural network for classification of respiratory sounds. (2024). Biomedical Signal Processing and Control, 93, 106191. https://doi.org/10.1016/j.bspc.2024.106191 — CONFIRM: add the authors.]]",
+    "Choi, S. I., Jeong, Y., Jung, W. J., Kim, B.-K., Lee, S. Y., Lee, J., Kim, J.-Y., Cho, W.-Y., Chang, H., An, H., Park, S., & Lee, E. J. (2026). Usefulness of lung sound data collection using Skeeper SM-300® device: A pilot study. PLOS ONE, 21(5), e0348588. https://doi.org/10.1371/journal.pone.0348588",
     "Global Burden of Disease Collaborative Network. (2025). Global Burden of Disease Study 2023 (GBD 2023) results. Institute for Health Metrics and Evaluation. https://vizhub.healthdata.org/gbd-results/",
     "Global Initiative for Asthma. (2023). Global strategy for asthma management and prevention (2023 update). https://ginasthma.org/gina-reports",
     "Gonzales, A., Custodio, R., Lapitan, M. C., & Ladia, M. A. (2023). End users' perspectives on the quality and design of mHealth technologies during the COVID-19 pandemic in the Philippines: Qualitative study. JMIR Formative Research, 7, e41838. https://doi.org/10.2196/41838",
+    "Gupta, R., Singh, R., Travieso-González, C. M., Burget, R., & Dutta, M. K. (2024). DeepRespNet: A deep neural network for classification of respiratory sounds. Biomedical Signal Processing and Control, 93, 106191. https://doi.org/10.1016/j.bspc.2024.106191",
     "Hajesmaeel-Gohari, S., Khordastan, F., Fatehi, F., Samzadeh, H., & Bahaadinbeigy, K. (2022). The most used questionnaires for evaluating satisfaction, usability, acceptance, and quality outcomes of mobile health. BMC Medical Informatics and Decision Making, 22, 22. https://doi.org/10.1186/s12911-022-01764-2",
     "Holden, R. J., & Karsh, B.-T. (2010). The technology acceptance model: Its past and its future in health care. Journal of Biomedical Informatics, 43(1), 159–172. https://doi.org/10.1016/j.jbi.2009.07.002",
     "Huang, D.-M., Huang, J., Qiao, K., Zhong, N.-S., Lu, H.-Z., & Wang, W.-J. (2023). Deep learning-based lung sound analysis for intelligent stethoscope. Military Medical Research, 10, 44. https://doi.org/10.1186/s40779-023-00479-3",
@@ -1224,7 +1231,7 @@ BIB = [
     "Ye, P., Li, Q., Jian, W., Liu, S., Tan, L., Chen, W., Zhang, D., & Zheng, J. (2022). Regularity and mechanism of fake crackle noise in an electronic stethoscope. Frontiers in Physiology, 13, 1079468. https://doi.org/10.3389/fphys.2022.1079468",
     "Yenew, C., et al. (2022). Occupational exposure to infectious diseases among health workers: Effects, managements and recommendations. Journal of Infectious Diseases and Epidemiology, 9, 295.",
     "Yin, Z., Yan, J., Fang, S., Wang, D., & Han, D. (2022). User acceptance of wearable intelligent medical devices through a modified unified theory of acceptance and use of technology. Annals of Translational Medicine, 10(11), 629. https://doi.org/10.21037/atm-21-5510",
-    "Zhang, Q., Zhang, J., Yuan, J., Huang, H., Zhang, Y., Zhang, B., Lv, G., Lin, S., Wang, N., Liu, X., Tang, M., Wang, Y., Ma, H., Liu, L., Yuan, S., Zhou, H., Zhao, J., Li, Y., Yin, Y., … Lian, Y. (2022). SPRSound: Open-source SJTU paediatric respiratory sound database. IEEE Transactions on Biomedical Circuits and Systems, 16(5), 867–881. https://doi.org/10.1109/TBCAS.2022.3204910 [[CONFIRM the author list against the article.]]",
+    "Zhang, Q., Zhang, J., Yuan, J., Huang, H., Zhang, Y., Zhang, B., Lv, G., Lin, S., Wang, N., Liu, X., Tang, M., Wang, Y., Ma, H., Liu, L., Yuan, S., Zhou, H., Zhao, J., Li, Y., Yin, Y., … Lian, Y. (2022). SPRSound: Open-source SJTU paediatric respiratory sound database. IEEE Transactions on Biomedical Circuits and Systems, 16(5), 867–881. https://doi.org/10.1109/TBCAS.2022.3204910",
 ]
 bib_tpl = P[275]
 anchor = P[274]._p

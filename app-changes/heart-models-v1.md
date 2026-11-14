@@ -4,6 +4,9 @@
 
 - **Saved in the app** as checkpoint `6af81b7f647d6ad4c4c7ac20` ("Heart models v1: heart rate + murmur screening"). Every changed file compiles on the preview.
 - **Published 14 Nov 2026 09:30 UTC (17:30 PHT)** at the user's request: checkpoint `6af81b7f647d6ad4c4c7ac20`, app commit `c89b50a5`. The live bundle loads the heart models from Ausculta `1e34348b` (chunk `HeartAnalysisCard-mpsoYAhW.js`); the lung model is unchanged (`c9cd3fa2`).
+- **Follow-up text fix, published 14 Nov 09:56 UTC** (checkpoint `6af8302134a40e8556f67ae4`, app commit `43464f55`):
+  - the practitioner sign-up screen's cardiac description no longer says "no automated classification yet". The override is in `PractitionerOnboarding.jsx`; the i18n key is unchanged.
+  - the page meta descriptions in `index.html` now mention heart-rate and murmur screening.
 - **This also published the 13 Nov device Wi-Fi transfer page** (chunk `DeviceTransfer-C1Q4MX-K.js`), which was in the same saved version.
 - **Rollback:** checkpoint `6af819488ec579cffb113985` ("Before heart models v1"). The `HeartAnalysis` entity was created before that checkpoint; it is new and nothing else reads it.
 
