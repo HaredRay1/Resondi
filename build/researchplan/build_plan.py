@@ -1552,6 +1552,14 @@ import os as _os, sys as _sys  # house style: Times New Roman 11, justified, con
 _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
 import house_style  # noqa: E402
 print("  house style:", house_style.apply(D, line_spacing=2.0))  # double spacing (user, 14 Nov)
+# Submission copy (user, 15 Nov: "make sure it's ready to pass"): no highlighted text may remain, including
+# highlights carried over from the original document.
+_hl = 0
+for _el in D.element.body.iter(qn("w:highlight")):
+    _hl += 1
+for _el in list(D.element.body.iter(qn("w:highlight"))):
+    _el.getparent().remove(_el)
+print("  highlights removed:", _hl)
 D.save(OUT)
 print("wrote", OUT)
 

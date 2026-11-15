@@ -153,7 +153,13 @@ the murmur result as 80%.
 
 ## 6. What is still missing (the to-do list in `Ahnyccas papers/`)
 
-**Part A, must do before submitting** (2 items; **the IMRaD has no `[[TO FILL]]` markers left** since the evening of
+**Both papers are submission-ready (15 Nov, late evening).** Ahnycca can no longer answer questions, so no
+`[[TO FILL]]` marker, CONFIRM note or highlight may be added back to either paper; anything unknown is written as
+"not recorded". The research plan's last two yellow highlights were removed (its builder now strips all highlights
+before saving). One-page table of the lung fusion and heart model results:
+`model-rebuild/results/accuracy-summary-lung-heart.md`.
+
+**Part A, must do before submitting** (2 items, both outside the papers; **the IMRaD has no `[[TO FILL]]` markers left** since the evening of
 15 Nov):
 
 1. Scan the logbook.

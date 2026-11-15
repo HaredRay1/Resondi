@@ -27,7 +27,7 @@ Kept out of this folder on 14 Nov, at the user's request:
 
 The lung-only versions are in `../imrad/old-lung-only/` and `../research-plan/old-lung-only/`.
 
-**Before submitting, fill the marked gaps** (all listed in the missing-items file). They are facts only the team can supply, so they are left visible on purpose and must not be guessed:
+**Ready to submit (15 Nov, late evening, at Ahnycca's request: "leave no to fill things... make sure its ready to pass").** Neither paper has any `[[TO FILL]]` marker, CONFIRM note or highlighted text left; the research plan's last two yellow highlights (carried over from the original document) were removed by its builder. What is still outside the papers:
 - the IMRaD has no `[[TO FILL]]` notes left: the last four (loss function, side-site zones, dB test details, survey eligibility) were filled on 15 Nov evening at Ahnycca's request from the earlier papers or stated as not recorded, and to-do item B "Check four sentences filled on 15 November" asks the team to confirm them (earlier on 15 Nov: recording settings, the hospital-patient question and the team's answers filled: developmental-descriptive design, MAX4466 field microphone, three raters, convenience sampling; the t-test and kappa notes removed);
 - the research plan has no CONFIRM notes left (the review cited as Shkarupylo et al. (2024) is really Komaryshyn & Kogut (2026), now cited with its full reference in both papers);
 - the acceptance results (n = 27, overall 3.95) are of the old version: repeat the UTAUT survey on the current version, with durability, functionality and the question 10 items added;
