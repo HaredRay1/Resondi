@@ -15,7 +15,7 @@ from docx.oxml.ns import qn
 from docx.shared import Inches, Pt, RGBColor
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".."))
-OUT = os.path.join(ROOT, "Ahnyccas papers", "Resondi-AI-Usage-Disclosure-2026-11-14.docx")
+OUT = os.path.join(ROOT, "papers-support", "Resondi-AI-Usage-Disclosure-2026-11-14.docx")
 INK, GREY, ACCENT = RGBColor(0x1A, 0x1A, 0x1A), RGBColor(0x5A, 0x5A, 0x5A), RGBColor(0x8E, 0x2A, 0x52)
 
 doc = Document()

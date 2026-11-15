@@ -21,7 +21,7 @@ IMRAD_SRC = os.path.join(ROOT, "build", "imrad", "build_imrad.py")
 PAPERS = os.path.join(ROOT, "Ahnyccas papers")
 PLAN = os.path.join(PAPERS, "Resondi-Research-Plan-Heart-and-Lung-FINAL.docx")
 IMRAD_FINAL = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.docx")
-OUT = os.path.join(PAPERS, "Resondi-Missing-Items-Research-Plan-and-IMRaD.docx")
+OUT = os.path.join(ROOT, "papers-support", "Resondi-Missing-Items-Research-Plan-and-IMRaD.docx")
 ACCENT, GREY = RGBColor(0x8E, 0x2A, 0x52), RGBColor(0x5A, 0x5A, 0x5A)
 
 

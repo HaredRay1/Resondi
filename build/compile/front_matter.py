@@ -19,7 +19,7 @@ ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 PAPERS = os.path.join(ROOT, "Ahnyccas papers")
 DRAFT = os.path.normpath(os.path.join(ROOT, "..", "Resondi-private", "compile-sources", "front-matter-draft.pdf"))
 IMRAD = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.pdf")
-OUT = os.path.join(PAPERS, "Resondi-Title-Page-and-Contents-FINAL.pdf")
+OUT = os.path.join(ROOT, "papers-support", "Resondi-Title-Page-and-Contents-FINAL.pdf")
 
 W, H = 595.3, 841.9  # A4, as the draft
 ORANGE = (0.922, 0.482, 0.184)

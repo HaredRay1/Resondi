@@ -1231,6 +1231,31 @@ tab("Table 21", "Answers to the Research Questions", [
 ], [1.75, 2.85, 1.7], "Status: answered, the question is fully addressed by the data; answered in part, some named aspects "
    "are addressed; not yet answered, the data needed have not been collected.")
 
+h2("Summary of the Model Results")
+para("Table 22 brings together the results of the models now running in the platform: the lung fusion network and the "
+     "two heart-sound models. Every figure comes from public datasets on patients the models never heard in training; "
+     "none comes from Resondi device recordings.")
+tab("Table 22", "Accuracy of the Lung Fusion Network and the Heart-Sound Models", [
+    ["Model", "Test", "Measure", "Result (95% CI)"],
+    ["Lung fusion network (MFCC, spectrogram, chromagram; ICBHI + SPRSound)", "Five-fold cross-validation, 126 ICBHI "
+     "adults", "Balanced accuracy; accuracy; macro F1", "40.0% (35.9–43.5); 43.0%; 0.37"],
+    ["Lung fusion network", "Held-out SPRSound children, 230 patients", "Balanced accuracy", "56.3%"],
+    ["Lung fusion network", "Single pre-specified test, 31 ICBHI adults", "Balanced accuracy; accuracy; macro F1",
+     "39.4% (28.4–44.6); 47.2%; 0.38"],
+    ["Lung fusion network", "Single pre-specified test, 230 SPRSound children", "Balanced accuracy",
+     "57.2% (46.7–63.4)"],
+    ["MFCC network, ICBHI only (comparison)", "Five-fold cross-validation, 126 ICBHI adults", "Balanced accuracy",
+     "34.0% (30.4–38.2)"],
+    ["Fusion against MFCC", "Same 126 adults, paired", "Difference in balanced accuracy",
+     "+5.9 points (+1.0 to +10.3), p = .008"],
+    ["Heart-sound timing", "189 CirCor test patients", "S1 found; S2 found (within 100 ms)", "96.8%; 97.3%"],
+    ["Heart rate", "631 CirCor test recordings", "Mean absolute error; within 5 BPM", "3.0 BPM (2.5–3.6); 85%"],
+    ["Murmur detection", "175 CirCor test patients", "Sensitivity (target 80%)", "66.7% (50.0–81.8)"],
+    ["Murmur detection", "175 CirCor test patients", "Specificity; AUROC", "97.1% (93.9–99.3); 0.96"],
+], [1.75, 1.65, 1.6, 1.3], "Chance for the four lung classes is 25 percent balanced accuracy. The lung rows come "
+   "from Tables 14 and 15 and the text around them, and the heart rows from Table 17. The murmur detector missed its pre-specified 80 percent sensitivity. "
+   "None of these models has been tested on labelled Resondi device recordings.")
+
 h2("Discussion")
 para("Rebuilding the classifier with per-cycle sound labels and a patient-wise, device-balanced split produced the first "
      "unleaked estimate of its performance: a balanced accuracy of 35.0 percent on 31 unseen patients. This is above the "

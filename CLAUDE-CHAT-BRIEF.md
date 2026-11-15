@@ -47,7 +47,7 @@ Keep it current: any Claude Code session that changes the project's state update
 
 | File | What it is |
 |---|---|
-| `Resondi-IMRaD-Heart-and-Lung-FINAL` (.docx, .pdf) | **The IMRaD paper, 61 pages**, covering lung and heart. Title: *Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System*. The introduction lists the 11 research questions; the Results answer them in order, one heading each, then give "Results by Objective" for the nine objectives. It has a 250-word abstract. |
+| `Resondi-IMRaD-Heart-and-Lung-FINAL` (.docx, .pdf) | **The IMRaD paper, 62 pages**, covering lung and heart. Title: *Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System*. The introduction lists the 11 research questions; the Results answer them in order, one heading each, then give "Results by Objective" for the nine objectives. It has a 250-word abstract. |
 | `Resondi-Research-Plan-Heart-and-Lung-FINAL` (.docx, .pdf) | **The research plan, 71 pages**, revised from Ahnycca's original. Sections: A Rationale, B Research Questions (numbered 1–11), C Hypotheses, Goals and Expected Outcomes, D Procedures, E Risk and Safety, F Data Analysis, G Results and Discussion, H Bibliography. Its 46 changes from the original are listed in `research-plan/…Revision-Log…`. |
 | `Resondi-Compiled-RSTF-FINAL.pdf` | **The full submission, 214 pages**, with bookmarks. Order: title page, checklist and contents; I. Research Plan; II. ISEF Forms (the signed set, the 14 Nov AI disclosure, and last year's paper *SmartSteth* (2025) after Form 7); III. ISEF Abstract; IV. the IMRaD; V. Project Data Book (placeholder until the logbook is scanned); VI. SRC Evaluation. **It contains phone numbers and e-mail addresses from the ISEF forms. Do not share it.** |
 | `Resondi-AI-Usage-Disclosure-2026-11-14` | What AI did and did not do in the project. Ahnycca still has to read it and correct it. |
@@ -151,13 +151,16 @@ the murmur result as 80%.
   and that the Filipino wording reads well (B13).
 - **The next real gain needs data:** clinician-labelled Resondi device recordings of Filipino patients.
 
-## 6. What is still missing (the to-do list in `Ahnyccas papers/`)
+## 6. What is still missing (the to-do list in `papers-support/`)
 
 **Both papers are submission-ready (15 Nov, late evening).** Ahnycca can no longer answer questions, so no
 `[[TO FILL]]` marker, CONFIRM note or highlight may be added back to either paper; anything unknown is written as
 "not recorded". The research plan's last two yellow highlights were removed (its builder now strips all highlights
 before saving). One-page table of the lung fusion and heart model results:
-`model-rebuild/results/accuracy-summary-lung-heart.md`.
+`model-rebuild/results/accuracy-summary-lung-heart.md`; the same table is now **IMRaD Table 6** and **research plan
+Table 22**. The IMRaD's later tables became 7 (nine-site protocol), 8 (architecture vs data) and 9 (intended users);
+it is now 62 pages. **`Ahnyccas papers/` holds only the two papers (Word + PDF) and the compiled PDF**; the AI
+disclosure, the to-do list, the title page and the folder README are in `papers-support/`.
 
 **Part A, must do before submitting** (2 items, both outside the papers; **the IMRaD has no `[[TO FILL]]` markers left** since the evening of
 15 Nov):
@@ -248,7 +251,7 @@ patients, while the IMRaD analyses n = 27.
 - **GitHub:** `HaredRay1/Resondi` (private, branch `master`) holds everything except the compiled PDF and private
   data.
 - **The project folder** `Downloads\Resondi`:
-  - `Ahnyccas papers/`: the final papers and the to-do list.
+  - `Ahnyccas papers/`: the two final papers and the compiled PDF only; `papers-support/`: the to-do list, AI disclosure, title page.
   - `imrad/` and `research-plan/`: working copies, fill-ins and the revision log.
   - `model-rebuild/results/`: every model result.
   - `app-changes/`: every app change.

@@ -1149,6 +1149,40 @@ para("Placed in the application, the models gave the same results through the de
      "checks show that the application computes what was tested; they say nothing "
      "about how the models perform on the Resondi microphone.", first=0)
 
+H3("Summary of the Model Results")
+para("Table 6 brings together the results of the models now running in the application: "
+     "the lung fusion network and the two heart-sound models. Every figure comes from "
+     "public datasets on patients the models never heard in training; none comes from "
+     "Resondi device recordings.", first=0)
+TBL(6, "Accuracy of the Lung Fusion Network and the Heart-Sound Models",
+    [["Model", "Test", "Measure", "Result (95% CI)"],
+     ["Lung fusion network (MFCC, spectrogram, chromagram; ICBHI + SPRSound)",
+      "Five-fold cross-validation, 126 ICBHI adults", "Balanced accuracy; accuracy; macro F1",
+      "40.0% (35.9–43.5); 43.0%; 0.37"],
+     ["Lung fusion network", "Held-out SPRSound children, 230 patients", "Balanced accuracy",
+      "56.3%"],
+     ["Lung fusion network", "Single pre-specified test, 31 ICBHI adults",
+      "Balanced accuracy; accuracy; macro F1", "39.4% (28.4–44.6); 47.2%; 0.38"],
+     ["Lung fusion network", "Single pre-specified test, 230 SPRSound children",
+      "Balanced accuracy", "57.2% (46.7–63.4)"],
+     ["MFCC network, ICBHI only (comparison)", "Five-fold cross-validation, 126 ICBHI adults",
+      "Balanced accuracy", "34.0% (30.4–38.2)"],
+     ["Fusion against MFCC", "Same 126 adults, paired", "Difference in balanced accuracy",
+      "+5.9 points (+1.0 to +10.3), p = .008"],
+     ["Heart-sound timing", "189 CirCor test patients", "S1 found; S2 found (within 100 ms)",
+      "96.8%; 97.3%"],
+     ["Heart rate", "631 CirCor test recordings", "Mean absolute error; within 5 BPM",
+      "3.0 BPM (2.5–3.6); 85%"],
+     ["Murmur detection", "175 CirCor test patients", "Sensitivity (target 80%)",
+      "66.7% (50.0–81.8)"],
+     ["Murmur detection", "175 CirCor test patients", "Specificity; AUROC",
+      "97.1% (93.9–99.3); 0.96"]],
+    [1.75, 1.6, 1.5, 1.25],
+    "Chance for the four lung classes is 25 percent balanced accuracy. The lung rows "
+    "come from Tables 2 and 3 and the text around them, and the heart rows from Table 5. The murmur detector missed its "
+    "pre-specified 80 percent sensitivity. None of these models has been tested on "
+    "labelled Resondi device recordings.")
+
 # ═══════════════════════════════════════════════════ DISCUSSION
 H2("Research Question 5: Response Time")
 para("Figure 16 gives the mean time of each stage in the field system: device "
@@ -1465,7 +1499,7 @@ para("Two extensions are planned and were not implemented in the work reported h
 para("The acquisition protocol extends from seven sites to nine. The two additional "
      "sites are an interscapular pair at T3–T4, beside the spine, which sample the "
      "posterior upper lobes; the tracheal reference and the six fields already recorded "
-     "are retained. Figure 18 shows the nine sites on the body and Table 6 gives their "
+     "are retained. Figure 18 shows the nine sites on the body and Table 7 gives their "
      "landmarks.", first=0)
 
 FIG(15, "Planned Nine-Site Acquisition Protocol",
@@ -1499,7 +1533,7 @@ para("The second, and the one that matters most, is a local dataset: recordings 
      "Filipino patients made on the Resondi device at the seven standardised sites, with "
      "each breathing cycle labelled independently by two clinicians who have not seen the "
      "model's output, collected with ethics approval and consent. The planned study "
-     "separates the effect of each change, as Table 7 shows. Its first three rows have "
+     "separates the effect of each change, as Table 8 shows. Its first three rows have "
      "now been run on public data; the fourth cannot be run on any public dataset.",
      first=0)
 

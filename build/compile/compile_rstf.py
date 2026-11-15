@@ -37,14 +37,14 @@ IMRAD = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.pdf")
 IMRAD_DOCX = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.docx")
 ISEF = os.path.join(SRC, "ISEF-Forms-2027.pdf")
 REVIEW = os.path.join(SRC, "Review-and-Recommendation-Form-RIM-I-signed.pdf")
-AI_DISCLOSURE = os.path.join(PAPERS, "Resondi-AI-Usage-Disclosure-2026-11-14.pdf")
+AI_DISCLOSURE = os.path.join(ROOT, "papers-support", "Resondi-AI-Usage-Disclosure-2026-11-14.pdf")
 PRIOR = os.path.join(SRC, "SmartSteth-FINAL-compile.pdf")  # Form 7 attachment, from build/compile/prior_project.py
 
 W, H = 612, 792  # US Letter, like the example's divider pages
 
 TITLE = ("Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, "
          "Longitudinal Tracking, and Rehabilitation-Support System")  # as registered on the signed ISEF forms
-FRONT = os.path.join(PAPERS, "Resondi-Title-Page-and-Contents-FINAL.pdf")  # title page, checklist, contents
+FRONT = os.path.join(ROOT, "papers-support", "Resondi-Title-Page-and-Contents-FINAL.pdf")  # title page, checklist, contents
 STUDENT = "Malimban, Ahnycca Krish N."
 SCHOOL = "Puerto Princesa City National Science High School, Palawan, Philippines"
 
