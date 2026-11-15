@@ -139,7 +139,10 @@ bullets([
     "The hardware design and physical build, the original model trained in Edge Impulse Studio in August, and the "
     "original research paper and research plan that the November revisions started from.",
     "The facts about the fieldwork in the papers. Where the team had not supplied one, AI left a visible [[TO FILL]] "
-    "note rather than invent it; facts filled on 14 November came from the team's own signed forms and certificates.",
+    "note rather than invent it. Facts filled on 14 November came from the team's own signed forms and certificates, "
+    "and on 15 November from the team's answers and the original research paper. At the student's request, the last "
+    "four notes were filled on 15 November from the earlier papers and Edge Impulse's default settings, or by stating "
+    "that the detail was not recorded; the team is checking them.",
 ])
 
 head("5. What AI did not decide")
@@ -204,8 +207,9 @@ head("What the AI refused or escalated rather than decide")
 bullets([
     "Presenting the score from a split where test patients also appear in training as the model's accuracy. It was "
     "run instead as a labelled demonstration of the flaw.",
-    "Filling the papers' fieldwork facts (raters, microphone, recruitment and others) without records: left as "
-    "[[TO FILL]] notes.",
+    "Inventing fieldwork facts (raters, microphone, recruitment and others) that no record held. They were left as "
+    "[[TO FILL]] notes until the team answered them; where no earlier paper held a detail either, the IMRaD now says "
+    "it was not recorded.",
     "Editing the names on the signed physicians' certificates.",
     "Entering passwords into any website, and publishing the application without a team member's request.",
     "Ticking the student's own certifications on the ISEF abstract page.",

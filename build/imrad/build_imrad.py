@@ -512,7 +512,9 @@ para("The classifier is a one-dimensional convolutional network: the coefficient
      "vector is reshaped to 13 channels, passed through a convolutional layer of 8 "
      "filters with kernel size 3 and ReLU activation, max-pooled with pool size and "
      "stride 2, and dropped out at 0.25; the same block repeats with 16 filters; the "
-     "result is flattened into a four-unit softmax output layer. Training used the "
+     "result is flattened into a four-unit softmax output layer. Training minimised "
+     "categorical cross-entropy, the default loss of the Edge Impulse classification "
+     "block, which was not changed, using the "
      "Adam optimiser at a learning rate of 0.005 with beta-1 of 0.9 and beta-2 of "
      "0.999, a batch size of 32, and 100 epochs. The impulse was trained on the full "
      "data subset. On the profiled target the feature block requires approximately "
@@ -524,10 +526,6 @@ para("Twenty percent of the training data was held out for validation. No metada
      "parent recording or by subject. The impulse was profiled for an eight-bit "
      "quantised build, which is the build deployed to the device. No data "
      "augmentation was configured.", first=0)
-p = para("", first=0, after=4, spacing=1.0)
-FILL(p, "state the loss function. The architecture terminates in a softmax over four "
-        "classes, so categorical cross-entropy is near certain, but confirm it by "
-        "scrolling the expert-mode editor past the optimiser definition")
 
 FIG(5, "Classification Model Architecture",
     "d4_classifier.png", 6.05)
@@ -539,11 +537,12 @@ p = para("A rule-based interpretation layer operates above the classifier. Per-z
          "supporting source. Patterns matching none of the defined rules default to a "
          "recommendation for further clinical evaluation. All outputs are framed as "
          "possibilities requiring clinical evaluation and none is presented as a "
-         "diagnosis.", first=0)
-FILL(p, "the interpretation rules operate on four zones (upper left, upper right, lower "
-        "left, lower right). In the application the two anterior sites are filed as upper "
-        "and the two posterior infrascapular sites as lower; state which zone each of the "
-        "two mid-axillary (lateral) sites is assigned to")
+         "diagnosis. The rules operate on four zones: the two anterior second-intercostal "
+         "sites form the upper left and upper right zones, and the two posterior "
+         "infrascapular sites the lower left and lower right zones. The two mid-axillary "
+         "sites, over the right middle lobe and the lingula, and the trachea are classified "
+         "and reported site by site but are not inputs to the zone rules, which as "
+         "specified name only the four upper and lower zones.", first=0)
 
 FIG(6, "Rule-Based Interpretation Layer Above the Classifier",
     "d5_rules.png", 6.05)
@@ -770,10 +769,11 @@ para("Six procedures were carried out with the completed prototype.", first=0, a
 
 p = para("Signal acquisition. Mean signal strength produced by the device was compared "
          "against that of a conventional acoustic stethoscope recorded under the same "
-         "conditions.", first=0, after=6, spacing=1.6)
-FILL(p, "the measurement unit, the reference level if the figures are in decibels, the "
-        "make and model of the comparator stethoscope, and how the acoustic output of "
-        "an acoustic stethoscope was captured for measurement")
+         "conditions. Both figures are reported in decibels. The study records did not "
+         "keep the reference level, the make and model of the conventional stethoscope, "
+         "or how its acoustic output was captured, so the two figures were not measured "
+         "against a common reference; they are reported as indicative margins, not as a "
+         "signal-to-noise ratio.", first=0, after=6, spacing=1.6)
 
 para("Recording clarity. Recordings acquired with a conventional stethoscope and with "
      "Resondi were evaluated by three qualified healthcare professionals against predetermined "
@@ -835,10 +835,12 @@ p = para("End-user acceptance. Acceptance was assessed with 27 respondents acros
          "open-ended items returned no responses and are not reported. The respondents "
          "rated the earlier version of the system, which ran the original classification "
          "model; the current version, with the rebuilt lung-sound classifier and the "
-         "heart-sound models, has not yet been rated.",
+         "heart-sound models, has not yet been rated. Respondents were eligible if they "
+         "were prospective users of the system, such as health workers and other "
+         "authorised end users, or patients examined with it, and the system\u2019s "
+         "purpose and limitations were explained to each before the survey was "
+         "administered. No further eligibility rule, such as an age limit, was recorded.",
          first=0, after=6, spacing=1.6)
-FILL(p, "inclusion criteria for the 27 respondents: who was allowed to take part. "
-        "The sampling method (convenience) is stated; the eligibility rule is not")
 
 H2("Data Analysis")
 p = para("Descriptive statistics were used to summarise recording clarity, response "

@@ -202,6 +202,14 @@ item("B", "Heart result screen", "Log in with a patient account, record a heart 
      "and check the result screen shows. The paper says the app shows it.")
 item("B", "Filipino wording", "Have a Filipino speaker read the Filipino text on the heart result screen and correct "
      "anything awkward.")
+item("B", "Check four sentences filled on 15 November", "The last four [[TO FILL]] gaps in the IMRaD were filled from "
+     "the old papers because no team record had the answer. Read them and correct any that are wrong: (1) the original "
+     "model's loss is categorical cross-entropy, Edge Impulse's default (Methods, classifier paragraph); (2) the two "
+     "side sites and the trachea are reported site by site but are not used by the four-zone rules (Methods, "
+     "rule-based layer); (3) the 45 vs 32 dB test did not record its reference level, the stethoscope model or how the "
+     "stethoscope's sound was captured (Procedures, signal acquisition); (4) survey respondents were prospective users, "
+     "such as health workers, or patients, with no further rule such as an age limit (Procedures, end-user "
+     "acceptance).", "Your field-test notes, logbook and Edge Impulse project.")
 para("Information to collect", bold=True, after=4, before=4)
 item("B", "Repeat the acceptance survey", "The 27 survey answers were about the old version. Run the survey again on "
      "the new version, and add questions on durability, functionality, and the four instructional-support topics "

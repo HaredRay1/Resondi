@@ -153,19 +153,31 @@ the murmur result as 80%.
 
 ## 6. What is still missing (the to-do list in `Ahnyccas papers/`)
 
-**Part A, must do before submitting** (6 items since 15 Nov; the papers show each gap as a visible `[[TO FILL]]`
-marker):
+**Part A, must do before submitting** (2 items; **the IMRaD has no `[[TO FILL]]` markers left** since the evening of
+15 Nov):
 
-1. The original model's loss function.
-2. Which zone each of the two side (mid-axillary) lung sites belongs to (front sites are upper, lower-back sites
-   lower).
-3. Details of the 45 vs 32 dB test.
-4. Who was allowed to answer the survey (inclusion criteria).
-5. Scan the logbook.
-6. Tick questions 2, 5 and 6 on the ISEF abstract page.
+1. Scan the logbook.
+2. Tick questions 2, 5 and 6 on the ISEF abstract page.
 
-**Filled on 15 Nov** (commits `882df5c` and `3930c40`; the IMRaD went from 12 `[[TO FILL]]` markers to 4: the
-loss function, the side-site zones, the dB test details and the inclusion criteria). From the project files: recordings are 16-bit and cut into 1-second segments (50% overlap in
+**The last four markers were filled on 15 Nov at Ahnycca's request** ("if cant, answer it still or use the old ones
+answer"), from the earlier papers, because no team record had the answers. Part B item "Check four sentences
+filled on 15 November" asks the team to confirm them:
+
+- **Loss function:** categorical cross-entropy, Edge Impulse's default for its classification block (Ahnycca chose
+  this).
+- **Zones:** the two anterior upper sites form the upper zones and the two posterior infrascapular sites the lower
+  zones. The two side (mid-axillary) sites, over the right middle lobe and the lingula, and the trachea are reported
+  site by site but are not inputs to the zone rules. Basis: the 83-page paper's rule table names only UL/UR/LL/LR.
+  The app's rule layer is not in its code, so this was not checked against it.
+- **45 vs 32 dB test:** the IMRaD now says the reference level, the stethoscope's make and model, and how its sound
+  was captured were not recorded, so the figures are indicative margins, not a signal-to-noise ratio. No earlier
+  paper records the method either.
+- **Survey eligibility:** prospective users such as health workers and other authorised end users, or patients
+  examined with the system, with its purpose and limitations explained first. This is the 83-page paper's wording;
+  no further rule, such as an age limit, was recorded.
+
+**Filled earlier on 15 Nov** (commits `882df5c` and `3930c40`; the IMRaD went from 12 `[[TO FILL]]` markers to 4,
+and then to 0 as above). From the project files: recordings are 16-bit and cut into 1-second segments (50% overlap in
 training, none in testing and the app); the three hospital patients took part in the survey, as the 83-page paper
 says (whether all three are among the 27 responses is not recorded); the notes on the full paper's t-test and on
 Cohen's kappa were removed. Confirmed by the team: the research design is developmental–descriptive; **the
@@ -177,7 +189,7 @@ professionals rated recording quality; the survey used convenience sampling.
 (stethoscope), while the IMRaD uses 45 against 32 dB; and it gives 30 survey participants plus the 3 hospital
 patients, while the IMRaD analyses n = 27.
 
-**Part B, before the fair** (16 items):
+**Part B, before the fair** (17 items):
 
 - **Decisions:**
   - APA or MLA: the fair's form says MLA; both papers use APA.
@@ -195,6 +207,7 @@ patients, while the IMRaD analyses n = 27.
   - The Department of Health facility counts (26,504 / 2,682 / 836).
   - The heart result screen.
   - The Filipino wording.
+  - The four sentences filled on 15 November (above).
 - **Information to collect:**
   - Repeat the acceptance survey on the new version.
   - The 15 field-test results matched to their reference labels.
