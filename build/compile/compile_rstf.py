@@ -183,7 +183,7 @@ def logbook_placeholder(doc):
                      fontsize=16, align=fitz.TEXT_ALIGN_CENTER)
     p.insert_textbox(fitz.Rect(90, 340, W - 90, 420),
                      "The logbook is not in the shared folders. Scan its pages and insert them after this page; "
-                     "the start and end dates must match the Student Checklist (1A): 17 July 2026 to 20 August "
+                     "the start and end dates must match the papers: 20 July 2026 to 28 August "
                      "2026.", fontname="tiro", fontsize=11, align=fitz.TEXT_ALIGN_CENTER)
 
 

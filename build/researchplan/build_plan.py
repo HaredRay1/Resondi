@@ -436,7 +436,7 @@ _rs = next(p for p in P if p.text.startswith("Because the study may involve resp
 set_text(_rs, _rs.text.rstrip() + " The school's Institutional Review Board, a registered nurse, an educator and the "
          "school administrator, approved the study after full committee review on 16 July 2026 as minimal risk, requiring "
          "written informed consent from participants aged 18 or over, with no minors enrolled. The Scientific Review "
-         "Committee approved this plan on 17 July 2026, and data collection ran from 17 July to 20 August 2026. The "
+         "Committee approved this plan on 17 July 2026, and data collection ran from 20 July to 28 August 2026, the start and end of experimentation in the research logbook. The "
          "physicians who reviewed the reference recordings and the practitioners who were interviewed gave written "
          "informed consent, and each institution where interviews were held gave written permission.")
 log("Risk and safety: approvals", "Consent and review described only as future steps",

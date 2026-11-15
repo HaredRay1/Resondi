@@ -183,10 +183,7 @@ item("B", "The old name Ausculta", "Form 2B, the doctors' certificates and the v
 item("B", "Unsigned letters", "The 4 November letters to the five cardiologists and the heart-sound certificate are "
      "not signed yet. Before it is signed, change \"respiratory sound characteristics\" on the certificate to heart "
      "sounds.")
-item("B", "Logbook end date", "The scanned logbook (now Part V of the compiled document, 13 pages, from 15 June 2026) "
-     "marks the end of experimentation on 28 August 2026, but the Student Checklist (Form 1A) and both papers give "
-     "17 July to 20 August 2026. Be ready to explain the difference, or check which date is right. Do not change "
-     "the logbook.", None, "Compiled document, Part V; Form 1A")
+item("B", "Form 1A dates", "Both papers now give the logbook's experimentation dates, 20 July to 28 August 2026 (changed 15 Nov at your request). The signed Student Checklist (Form 1A) still says 17 July to 20 August. Do not edit the signed form; if the fair asks, the logbook is the day-by-day record.", None, "Form 1A (signed)")
 item("B", "Logbook procedures", "The review form left logbook item 6 (\"accurate and detailed description of "
      "procedures\") unticked. Make sure every procedure is written in the logbook with its date.")
 item("B", "Read the AI Usage Disclosure", "The new disclosure (14 November) was written by AI from the project "
