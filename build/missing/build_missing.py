@@ -159,9 +159,6 @@ for p in docx.Document(IMRAD_FINAL).paragraphs:
         item("A", "Finish a reference in the IMRaD", f"{re.split(r'\[Add', p.text)[0].strip()}: give the full "
              "reference, or say \"find it\".", None, "IMRaD, References")
 
-item("A", "Scan your logbook", "Scan the pages of your research logbook (Project Data Book). Its dates must match the "
-     "Student Checklist (Form 1A): 17 July to 20 August 2026. Send the scans and they go into the compiled document.",
-     None, "Compiled document, Part V")
 item("A", "Tick three boxes on the ISEF abstract page", "On the abstract page, questions 2, 5 and 6 (your own work, "
      "photos of people on your display board, and your certification) must be answered by you. Questions 1, 3 and 4 "
      "are already ticked from your signed forms.", None, "Compiled document, Part III")
@@ -186,6 +183,10 @@ item("B", "The old name Ausculta", "Form 2B, the doctors' certificates and the v
 item("B", "Unsigned letters", "The 4 November letters to the five cardiologists and the heart-sound certificate are "
      "not signed yet. Before it is signed, change \"respiratory sound characteristics\" on the certificate to heart "
      "sounds.")
+item("B", "Logbook end date", "The scanned logbook (now Part V of the compiled document, 13 pages, from 15 June 2026) "
+     "marks the end of experimentation on 28 August 2026, but the Student Checklist (Form 1A) and both papers give "
+     "17 July to 20 August 2026. Be ready to explain the difference, or check which date is right. Do not change "
+     "the logbook.", None, "Compiled document, Part V; Form 1A")
 item("B", "Logbook procedures", "The review form left logbook item 6 (\"accurate and detailed description of "
      "procedures\") unticked. Make sure every procedure is written in the logbook with its date.")
 item("B", "Read the AI Usage Disclosure", "The new disclosure (14 November) was written by AI from the project "

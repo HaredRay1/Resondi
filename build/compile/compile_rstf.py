@@ -8,7 +8,7 @@
                              which Form 7 lists as attached (build/compile/prior_project.py)
     III. ISEF Abstract       generated here: ISEF Abstract & Certification layout, abstract from the IMRaD
     IV.  Research Paper      title page, table of contents, Ahnyccas papers/Resondi-IMRaD-Heart-and-Lung-FINAL.pdf
-    V.   Project Data Book   placeholder: the logbook is not in the shared folders
+    V.   Project Data Book   the scanned logbook (13 pages, CamScanner, supplied 15 Nov 2026)
     VI.  SRC Evaluation      the signed Review and Recommendation Form (Drive, 5 Nov 2026)
 
 Each part opens with a divider page, as in the example, and the PDF has bookmarks.
@@ -38,6 +38,7 @@ IMRAD_DOCX = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.docx")
 ISEF = os.path.join(SRC, "ISEF-Forms-2027.pdf")
 REVIEW = os.path.join(SRC, "Review-and-Recommendation-Form-RIM-I-signed.pdf")
 AI_DISCLOSURE = os.path.join(ROOT, "papers-support", "Resondi-AI-Usage-Disclosure-2026-11-14.pdf")
+LOGBOOK = os.path.join(SRC, "Logbook-scan-2026-11-15.pdf")  # the team's scanned logbook (user, 15 Nov)
 PRIOR = os.path.join(SRC, "SmartSteth-FINAL-compile.pdf")  # Form 7 attachment, from build/compile/prior_project.py
 
 W, H = 612, 792  # US Letter, like the example's divider pages
@@ -187,7 +188,7 @@ def logbook_placeholder(doc):
 
 
 def main():
-    for f in (PLAN, IMRAD, IMRAD_DOCX, ISEF, REVIEW, AI_DISCLOSURE, FRONT, PRIOR):
+    for f in (PLAN, IMRAD, IMRAD_DOCX, ISEF, REVIEW, AI_DISCLOSURE, FRONT, PRIOR, LOGBOOK):
         if not os.path.exists(f):
             raise SystemExit(f"missing source: {f}")
     os.makedirs(OUTDIR, exist_ok=True)
@@ -239,7 +240,7 @@ def main():
     out.insert_pdf(front, from_page=2, to_page=2)   # its table of contents (IMRaD page numbers)
     insert(IMRAD)
     add_section("V. PROJECT DATA BOOK", "V. Project Data Book (Logbook)")
-    logbook_placeholder(out)
+    insert(LOGBOOK)
     add_section("VI. SRC EVALUATION", "VI. SRC Evaluation")
     insert(REVIEW)
 

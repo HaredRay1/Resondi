@@ -49,7 +49,7 @@ Keep it current: any Claude Code session that changes the project's state update
 |---|---|
 | `Resondi-IMRaD-Heart-and-Lung-FINAL` (.docx, .pdf) | **The IMRaD paper, 62 pages**, covering lung and heart. Title: *Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System*. The introduction lists the 11 research questions; the Results answer them in order, one heading each, then give "Results by Objective" for the nine objectives. It has a 250-word abstract. |
 | `Resondi-Research-Plan-Heart-and-Lung-FINAL` (.docx, .pdf) | **The research plan, 71 pages**, revised from Ahnycca's original. Sections: A Rationale, B Research Questions (numbered 1–11), C Hypotheses, Goals and Expected Outcomes, D Procedures, E Risk and Safety, F Data Analysis, G Results and Discussion, H Bibliography. Its 46 changes from the original are listed in `research-plan/…Revision-Log…`. |
-| `Resondi-Compiled-RSTF-FINAL.pdf` | **The full submission, 214 pages**, with bookmarks. Order: title page, checklist and contents; I. Research Plan; II. ISEF Forms (the signed set, the 14 Nov AI disclosure, and last year's paper *SmartSteth* (2025) after Form 7); III. ISEF Abstract; IV. the IMRaD; V. Project Data Book (placeholder until the logbook is scanned); VI. SRC Evaluation. **It contains phone numbers and e-mail addresses from the ISEF forms. Do not share it.** |
+| `Resondi-Compiled-RSTF-FINAL.pdf` | **The full submission, 227 pages**, with bookmarks. Order: title page, checklist and contents; I. Research Plan; II. ISEF Forms (the signed set, the 14 Nov AI disclosure, and last year's paper *SmartSteth* (2025) after Form 7); III. ISEF Abstract; IV. the IMRaD; V. Project Data Book (the scanned logbook, 13 pages, added 15 Nov; it ends 28 Aug, Form 1A says 20 Aug); VI. SRC Evaluation. **It contains phone numbers and e-mail addresses from the ISEF forms. Do not share it.** |
 | `Resondi-AI-Usage-Disclosure-2026-11-14` | What AI did and did not do in the project. Ahnycca still has to read it and correct it. |
 | `Resondi-Missing-Items-Research-Plan-and-IMRaD` | **The plain-language to-do list** (section 6 below). |
 
@@ -162,11 +162,10 @@ Table 22**. The IMRaD's later tables became 7 (nine-site protocol), 8 (architect
 it is now 62 pages. **`Ahnyccas papers/` holds only the two papers (Word + PDF) and the compiled PDF**; the AI
 disclosure, the to-do list, the title page and the folder README are in `papers-support/`.
 
-**Part A, must do before submitting** (2 items, both outside the papers; **the IMRaD has no `[[TO FILL]]` markers left** since the evening of
+**Part A, must do before submitting** (1 item, outside the papers; the logbook scan was added 15 Nov; **the IMRaD has no `[[TO FILL]]` markers left** since the evening of
 15 Nov):
 
-1. Scan the logbook.
-2. Tick questions 2, 5 and 6 on the ISEF abstract page.
+1. Tick questions 2, 5 and 6 on the ISEF abstract page.
 
 **The last four markers were filled on 15 Nov at Ahnycca's request** ("if cant, answer it still or use the old ones
 answer"), from the earlier papers, because no team record had the answers. Part B item "Check four sentences
