@@ -75,8 +75,11 @@ script and rebuilds.
    - Recordings rated good: 68%; acceptable: 25%; poor: 7%.
    - Background noise: 24, 35 and 42 dB in a quiet room, a ward and the community.
 2. **Device specifications.**
-   - Build: PLA enclosure, 173 × 80 × 70 mm; ESP32; digital MEMS microphone; 32 GB microSD; 20 × 4 display; two
-     buttons; 10,000 mAh battery.
+   - Build (version 2.0, the current device): PLA enclosure, 173 × 80 × 70 mm; ESP32; INMP441 digital MEMS
+     microphone; 32 GB microSD; 20 × 4 display; two buttons; 10,000 mAh battery; Wi-Fi.
+   - **The field build tested in the study differed in two parts:** an electret microphone on a MAX4466 amplifier
+     board, and Bluetooth Low Energy instead of Wi-Fi. The IMRaD says so, and says no result was obtained on
+     version 2.0.
    - Cost: **bill of materials ₱2,775, unit cost ₱4,000.** Ahnycca decided to keep the cost figures.
 3. **Platform specifications.**
    - A web app with Lung and Heart modes, a body-diagram guide and role-based access.
@@ -161,7 +164,8 @@ marker):
 5. Scan the logbook.
 6. Tick questions 2, 5 and 6 on the ISEF abstract page.
 
-**Filled on 15 Nov.** From the project files: recordings are 16-bit and cut into 1-second segments (50% overlap in
+**Filled on 15 Nov** (commits `882df5c` and `3930c40`; the IMRaD went from 12 `[[TO FILL]]` markers to 4: the
+loss function, the side-site zones, the dB test details and the inclusion criteria). From the project files: recordings are 16-bit and cut into 1-second segments (50% overlap in
 training, none in testing and the app); the three hospital patients took part in the survey, as the 83-page paper
 says (whether all three are among the 27 responses is not recorded); the notes on the full paper's t-test and on
 Cohen's kappa were removed. Confirmed by the team: the research design is developmental–descriptive; **the
