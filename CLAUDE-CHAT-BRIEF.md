@@ -47,9 +47,9 @@ Keep it current: any Claude Code session that changes the project's state update
 
 | File | What it is |
 |---|---|
-| `Resondi-IMRaD-Heart-and-Lung-FINAL` (.docx, .pdf) | **The IMRaD paper, 62 pages**, covering lung and heart. Title: *Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System*. The introduction lists the 11 research questions; the Results answer them in order, one heading each, then give "Results by Objective" for the nine objectives. It has a 250-word abstract. |
+| `Resondi-IMRaD-Heart-and-Lung-FINAL` (.docx, .pdf) | **The IMRaD paper, 61 pages**, covering lung and heart. Title: *Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System*. The introduction lists the 11 research questions; the Results answer them in order, one heading each, then give "Results by Objective" for the nine objectives. It has a 250-word abstract. |
 | `Resondi-Research-Plan-Heart-and-Lung-FINAL` (.docx, .pdf) | **The research plan, 72 pages**, revised from Ahnycca's original. Sections: A Rationale, B Research Questions (numbered 1–11), C Hypotheses, Goals and Expected Outcomes, D Procedures, E Risk and Safety, F Data Analysis, G Results and Discussion, H Bibliography. Its 46 changes from the original are listed in `research-plan/…Revision-Log…`. |
-| `Resondi-Compiled-RSTF-FINAL.pdf` | **The full submission, 228 pages**, with bookmarks. Order: title page, checklist and contents; I. Research Plan; II. ISEF Forms (the signed set, the 14 Nov AI disclosure, and last year's paper *SmartSteth* (2025) after Form 7); III. ISEF Abstract; IV. the IMRaD; V. Project Data Book (the scanned logbook, 13 pages, added 15 Nov; 20 Jul to 28 Aug, the dates both papers now use; the signed Form 1A says 17 Jul to 20 Aug); VI. SRC Evaluation. **It contains phone numbers and e-mail addresses from the ISEF forms. Do not share it.** |
+| `Resondi-Compiled-RSTF-FINAL.pdf` | **The full submission, 227 pages**, with bookmarks. Order: title page, checklist and contents; I. Research Plan; II. ISEF Forms (the signed set, the 14 Nov AI disclosure, and last year's paper *SmartSteth* (2025) after Form 7); III. ISEF Abstract; IV. the IMRaD; V. Project Data Book (the scanned logbook, 13 pages, added 15 Nov; 20 Jul to 28 Aug, the dates both papers now use; the signed Form 1A says 17 Jul to 20 Aug); VI. SRC Evaluation. **It contains phone numbers and e-mail addresses from the ISEF forms. Do not share it.** |
 | `Resondi-AI-Usage-Disclosure-2026-11-14` | What AI did and did not do in the project. Ahnycca still has to read it and correct it. |
 | `Resondi-Missing-Items-Research-Plan-and-IMRaD` | **The plain-language to-do list** (section 6 below). |
 
@@ -159,7 +159,7 @@ the murmur result as 80%.
 before saving). One-page table of the lung fusion and heart model results:
 `model-rebuild/results/accuracy-summary-lung-heart.md`; the same table is now **IMRaD Table 6** and **research plan
 Table 22**. The IMRaD's later tables became 7 (nine-site protocol), 8 (architecture vs data) and 9 (intended users);
-it is now 62 pages. **`Ahnyccas papers/` holds only the two papers (Word + PDF) and the compiled PDF**; the AI
+it is now 61 pages. **16 Nov:** Figure 1 of the IMRaD and Figure 2 of the plan are now a labelled render of the version 2.0 device (`figures/Resondi-Device-3D-Labelled.png`, `build/dev2/label_render.py`), replacing the old labelled prototype figure; and a full review fixed 16 IMRaD and 20 plan errors through `build/style/review_fixes.py` (examination time now 17 min for the quality check over seven lung sites, no kappa claim for the field test, no file paths, ONNX deployment stated, flowchart arrow restored). **`Ahnyccas papers/` holds only the two papers (Word + PDF) and the compiled PDF**; the AI
 disclosure, the to-do list, the title page and the folder README are in `papers-support/`.
 
 **Part A, must do before submitting** (1 item, outside the papers; the logbook scan was added 15 Nov; **the IMRaD has no `[[TO FILL]]` markers left** since the evening of

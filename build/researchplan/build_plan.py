@@ -264,10 +264,10 @@ f = figure(c._p, os.path.join(FIG, "Resondi-Hardware-Block-VER2.png"), 6.0, BODY
 n = note(f._p, "Recordings cross from the device to the platform on the microSD card or, since 14 November 2026, by "
          "a phone that downloads them over the device's Wi-Fi and uploads them through the application; the automatic "
          "gateway between them is not yet built.", BODY)
-c = caption(n._p, "Figure 2", "Concept Render of the Resondi Smart Stethoscope", BODY)
-f = figure(c._p, os.path.join(FIG, "Resondi-Device-3D.png"), 5.2, BODY)
+c = caption(n._p, "Figure 2", "The Resondi Smart Stethoscope, Version 2.0, with Components Identified", BODY)
+f = figure(c._p, os.path.join(FIG, "Resondi-Device-3D-Labelled.png"), 6.2, BODY)  # build/dev2/label_render.py
 note(f._p, "Rendered from the team's 3D model, which measures about 160 × 100 × 60 mm; the fabricated enclosure "
-     "measures 173 × 80 × 70 mm.", BODY)
+     "measures 173 × 80 × 70 mm, and colours are illustrative.", BODY)
 log("Materials (new)", "—", "Table 1 (device specification), Figure 1 (hardware block diagram), Figure 2 (device render)",
     "Gives the specification research question a concrete reference and replaces prose-only description.")
 
@@ -711,7 +711,8 @@ para(f"{len(vs)} model configurations were trained with three random seeds each 
 tab("Table 8", "Validation Balanced Accuracy of the Model Configurations", [["Configuration", "Seeds", "Balanced accuracy, mean ± SD (%)", "Macro-F1"]] +
     [[NAMES.get(r["recipe"], r["recipe"]), str(r["seeds"]), f"{r['bal_mean']*100:.1f} ± {r['bal_sd']*100:.1f}", f"{r['f1_mean']:.3f}"] for r in vs],
     [2.6, 0.6, 2.0, 0.9], "Cycle-level scores on the 30 validation patients; chance is 25 percent. Validation scores are "
-    "optimistic: they were used to choose the configuration, seed, and training epoch.")
+    "optimistic: they were used to choose the configuration, seed, and training epoch. The jointly trained "
+    "three-branch (46.9) and two-branch (43.9) fusion networks are reported in Table 11.")
 fig("Figure 6", "Validation Balanced Accuracy by Configuration", os.path.join(STATS, "fig_validation_models.png"), 5.6,
     "Bars show the mean over three seeds; whiskers show one standard deviation. Rose bars are fusion models.")
 
@@ -1585,6 +1586,52 @@ for _el in D.element.body.iter(qn("w:highlight")):
 for _el in list(D.element.body.iter(qn("w:highlight"))):
     _el.getparent().remove(_el)
 print("  highlights removed:", _hl)
+# Review of 16 Nov 2026 (user: "review it further"): contradictions, file paths and small errors.
+import review_fixes  # noqa: E402
+print("  review fixes:", review_fixes.apply(D, [
+    ("so at 14 captures a full lung and heart examination would take about 34 minutes of screening time.",
+     "so across the seven lung sites the quality check alone would add about 17 minutes to an examination, "
+     "and more with Heart Mode.", 2),
+    ("Settings are those of the training scripts in the project repository (model-rebuild).",
+     "Settings are those of the study's training scripts.", 1),
+    ("Every test run is logged in model-rebuild/results/final-test-log.csv.", "Every test run was logged.", 1),
+    (" Scripts: model-rebuild/scripts/heart_seg.py and heart_murmur.py.", "", 1),
+    ("Edge Impulse int8 WebAssembly library loaded by the platform; a fusion model would need an ONNX or "
+     "custom-block route, because Edge Impulse has no chromagram block",
+     "First model: Edge Impulse int8 WebAssembly library; fusion network: exported ONNX model run in the browser "
+     "with ONNX Runtime Web, because Edge Impulse has no chromagram block", 1),
+    ("will be exported from Edge Impulse as a WebAssembly library and run in the browser",
+     "will be exported as a WebAssembly library (Edge Impulse) or an ONNX model and run in the browser", 1),
+    ("the design of the deployed model, will serve", "the design of the first deployed model, will serve", 1),
+    ("and in Edge Impulse, whose trained models will be exported as WebAssembly libraries and checked in Node",
+     "and in Edge Impulse; trained models will be exported as WebAssembly libraries or ONNX models and checked "
+     "in Node", 1),
+    ("No output of the analysis pipeline will be presented to patients or used in clinical decision-making.",
+     "No output of the analysis pipeline will be used in clinical decision-making without confirmation by a "
+     "licensed practitioner.", 1),
+    ("and CirCor was recorded from Brazilian children, whose heart rates (median 103 beats per minute in the test "
+     "set) are higher than those of the Filipino adults Resondi will also examine, with a commercial electronic "
+     "stethoscope.",
+     "and CirCor was recorded from Brazilian children with a commercial electronic stethoscope; their heart rates "
+     "(median 103 beats per minute in the test set) are higher than those of the Filipino adults Resondi will "
+     "also examine.", 1),
+    ("produced the first unleaked estimate of its performance",
+     "produced an unleaked estimate of its performance on held-out patients", 1),
+    ("The school's Institutional Review Board, a registered nurse, an educator and the school administrator, "
+     "approved",
+     "The school's Institutional Review Board (a registered nurse, an educator, and the school administrator) "
+     "approved", 1),
+    ("Reference Sound Collection and Validation", "Reference Cardiopulmonary Sound Collection and Validation", 1),
+    ("Smart-Stethoscope Wi-Fi and MicroSD Integration", "Smart-Stethoscope Device Integration", 1),
+    ("Planned Three-Branch Feature-Fusion Classifier", "Three-Branch Feature-Fusion Classifier", 1),
+    ("implement the language and localization , user interface", "implement language localization, the user "
+     "interface", 1),
+    ("cardiopulmonary  ", "cardiopulmonary ", 2),
+    ("14 model configurations were trained", "Fourteen model configurations were trained", 1),
+    ("            A 5-point Likert scale survey", "A 5-point Likert scale survey", 1),
+]))
+print("  flowchart arrow:", review_fixes.insert_after(D, "Research Dashboard and Data-Export Testing",
+                                                      "End User Acceptance Testing", "▼"))
 D.save(OUT)
 print("wrote", OUT)
 

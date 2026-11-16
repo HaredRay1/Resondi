@@ -403,15 +403,14 @@ para("The device has since been revised as enclosure version 2.0, which was not 
      "point through which a browser connects to the device directly. Whether the revised "
      "build changes recording quality has not yet been measured.", first=0)
 
-FIG(1, "The Resondi Smart Stethoscope, with Components Identified",
-    "d6_device.png", 6.05,
-    note="The enclosure houses the microphone and preamplifier, the ESP32 "
-         "with Bluetooth Low Energy, MicroSD storage, and the lithium-ion "
-         "cell with its charging and protection circuitry.")
-
-FIG("1b", "Concept Render of the Version 2.0 Enclosure", "Resondi-Device-3D.png", 5.2,
-    note="Rendered from the team's Blender model. Proportions and colours are illustrative, "
-         "and no result in this paper was obtained on this build.")
+# 16 Nov 2026 (user): the labelled figure of the old prototype was replaced with the version 2.0 3D model,
+# labelled by build/dev2/label_render.py.
+FIG(1, "The Resondi Smart Stethoscope, Version 2.0, with Components Identified",
+    "Resondi-Device-3D-Labelled.png", 6.3,
+    note="Rendered from the team's 3D model, which measures about 160 × 100 × 60 mm; the "
+         "fabricated enclosure measures 173 × 80 × 70 mm, and colours are illustrative. The "
+         "results in this paper were obtained with the earlier field build, which used an "
+         "electret microphone on a MAX4466 board and Bluetooth Low Energy.")
 
 p = para("The MAX4466 was selected for unit-to-unit consistency of frequency "
          "response. Because the system's central claim is that a recording taken at "
@@ -1780,6 +1779,42 @@ import os as _os, sys as _sys  # house style: Times New Roman 11, justified, con
 _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
 import house_style  # noqa: E402
 print("  house style:", house_style.apply(doc, line_spacing=2.0))  # double spacing (user, 14 Nov)
+# Review of 16 Nov 2026 (user: "review it further"): internal contradictions and small errors.
+import review_fixes  # noqa: E402
+print("  review fixes:", review_fixes.apply(doc, [
+    ("so at 14 captures a full lung and heart examination would take about 34 minutes of screening time.",
+     "so across the seven lung sites the quality check alone would add about 17 minutes to an examination, "
+     "and more with Heart Mode.", 1),
+    ("Chance performance is itself class-dependent. With four classes, the expected agreement by chance alone is "
+     "25 percent, and the observed 40 percent corresponds to a Cohen's kappa of approximately +0.20, conventionally "
+     "described as slight to fair.",
+     "With four equally likely classes, the expected agreement by chance alone is 25 percent. Cohen's kappa could "
+     "not be computed, because the fifteen recordings are not linked to their reference labels in the study "
+     "records.", 1),
+    ("That use is set out in the evaluation plan below.",
+     "That is how it is used in this study, in the noise test of Research Question 6.", 1),
+    ("Wheezing remains the weakest single class.",
+     "Wheezing with Crackles remains the weakest class (26 percent recall in cross-validation; Table 3).", 1),
+    ("Each cycle was cut into non-overlapping one-second windows at 16 kHz,",
+     "Each cycle was cut into one-second windows at 16 kHz, overlapping by half in training and not overlapping "
+     "in testing,", 1),
+    ("and the trachea are classified and reported site by site", "and the trachea are reported site by site", 1),
+    ("and Research Questions 6 to 8 by the three hypotheses.",
+     "Research Questions 6 to 8 by the three hypotheses; and Research Questions 10 and 11 from the survey and "
+     "the application.", 1),
+    ("Each row was named as its round's primary model before the test patients were scored,",
+     "Each row was named in advance, before the test patients were scored,", 1),
+    ("With three to five items per construct and 27 respondents",
+     "With three to five items in each of the other constructs and 27 respondents", 1),
+    ("HF_Lung_V1, a Taiwanese corpus", "HF_Lung_V1 (Hsu et al., 2021), a Taiwanese corpus", 1),
+    ("through its R package jmv,", "through its R package jmv, running in R 4.6 (R Core Team, 2025),", 1),
+    ("so that every lobe is sampled from both the front and the back of the chest",
+     "so that each upper lobe is sampled from both the front and the back of the chest", 1),
+    ("revised as enclosure version 2.0", "revised as version 2.0", 1),
+    ("organizes", "organises", 1),
+    ("standardized", "standardised", 2),
+    ("specialization", "specialisation", 1),
+]))
 doc.save(OUT)
 
 import re
