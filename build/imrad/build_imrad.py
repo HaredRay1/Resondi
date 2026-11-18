@@ -85,6 +85,8 @@ FIGDIR = os.path.join(HERE, "..", "..", "figures") + os.sep
 
 
 _N = {"fig": 0, "tab": 0}
+COL_W = 3.0     # inches: one column of the two-column layout (6.25 in of text width, 0.25 in gap)
+WIDE = []       # (first, last) elements of each figure or table set across the full width
 
 
 def FIG(num, caption, fname, width_in=6.0, note=None):
@@ -95,33 +97,48 @@ def FIG(num, caption, fname, width_in=6.0, note=None):
         num = _N["fig"]
     from docx.shared import Inches as _In
     from PIL import Image as _Img
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(14); p.paragraph_format.space_after = Pt(4)
-    p.paragraph_format.line_spacing = 1.0
-    path = FIGDIR + fname
-    im = _Img.open(path)
-    p.add_run().add_picture(path, width=_In(width_in),
-                            height=_In(width_in * im.height / im.width))
-    c = doc.add_paragraph(); c.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    c.paragraph_format.space_after = Pt(4); c.paragraph_format.line_spacing = 1.0
+    # 18 Nov 2026 (user: copy the AlagaVax paper's format): caption above the figure, "Figure N." in bold and
+    # the title in italics on one line; a figure wider than a column spans the page (two_column.py).
+    wide = width_in > COL_W
+    if not wide:
+        width_in = min(width_in, COL_W)
+    c = doc.add_paragraph(); c.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    c.paragraph_format.space_before = Pt(10); c.paragraph_format.space_after = Pt(4)
+    c.paragraph_format.line_spacing = 1.0
     r = c.add_run(f"Figure {num}. "); r.bold = True
     r.font.size, r.font.name = Pt(10.5), FONT
     r = c.add_run(caption); r.italic = True
     r.font.size, r.font.name = Pt(10.5), FONT
+    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p.paragraph_format.space_after = Pt(4)
+    p.paragraph_format.line_spacing = 1.0
+    c.paragraph_format.keep_with_next = True          # caption, picture and note stay on one page
     if note:
-        para(note, after=10, before=2, first=0, align=WD_ALIGN_PARAGRAPH.CENTER,
-             size=9.5, italic=True, color=GREY, spacing=1.0)
+        p.paragraph_format.keep_with_next = True
+    path = FIGDIR + fname
+    im = _Img.open(path)
+    p.add_run().add_picture(path, width=_In(width_in),
+                            height=_In(width_in * im.height / im.width))
+    if note:
+        last = para(note, after=10, before=2, first=0, align=WD_ALIGN_PARAGRAPH.CENTER,
+                    size=9.5, italic=True, color=GREY, spacing=1.0)
     else:
-        para("", after=8, first=0, spacing=1.0)
+        last = para("", after=8, first=0, spacing=1.0)
+    if wide:
+        WIDE.append((c._p, last._p))
 
 
 def TBL(num, caption, rows, widths, note=None):
     _N["tab"] += 1
     num = _N["tab"]
-    para(f"Table {num}", after=0, before=14, first=0,
-         align=WD_ALIGN_PARAGRAPH.LEFT, bold=True, spacing=1.0)
-    para(caption, after=6, first=0, align=WD_ALIGN_PARAGRAPH.LEFT,
-         italic=True, spacing=1.0)
+    # 18 Nov 2026: "Table N." bold and the title in italics on one line, as in the AlagaVax paper; every table
+    # spans the full page width (two_column.py).
+    cap = para("", after=6, before=12, first=0, align=WD_ALIGN_PARAGRAPH.LEFT, spacing=1.0)
+    r = cap.add_run(f"Table {num}. "); r.bold = True
+    r.font.size, r.font.name = Pt(10.5), FONT
+    r = cap.add_run(caption); r.italic = True
+    r.font.size, r.font.name = Pt(10.5), FONT
+    cap.paragraph_format.keep_with_next = True
     t = doc.add_table(rows=len(rows), cols=len(rows[0]))
     t.style = "Table Grid"
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -141,10 +158,11 @@ def TBL(num, caption, rows, widths, note=None):
         for j, w in enumerate(widths):
             row.cells[j].width = Inches(w)
     if note:
-        para(note, after=8, before=4, first=0, align=WD_ALIGN_PARAGRAPH.LEFT,
-             size=10, italic=True, color=GREY, spacing=1.0)
+        last = para(note, after=8, before=4, first=0, align=WD_ALIGN_PARAGRAPH.LEFT,
+                    size=10, italic=True, color=GREY, spacing=1.0)
     else:
-        para("", after=4, first=0, spacing=1.0)
+        last = para("", after=4, first=0, spacing=1.0)
+    WIDE.append((cap._p, last._p))
 
 
 
@@ -167,8 +185,7 @@ para("Consultants: Kenneth Wilson O. Lim, MD, FPCP, FPCCP · Sonia A. Ulanday, M
      after=16, first=0, align=WD_ALIGN_PARAGRAPH.CENTER, size=11, spacing=1.2)
 
 # ═══════════════════════════════════════════════════ ABSTRACT
-H1("Abstract")
-para("A conventional stethoscope keeps no record, so a heart or lung sound cannot be "
+ABS = para("A conventional stethoscope keeps no record, so a heart or lung sound cannot be "
      "reviewed by a second clinician or compared with the same site at a later visit. "
      "This study developed Resondi, a low-cost smart stethoscope that records lung "
      "sounds at seven guided sites and heart sounds at five, files each recording by "
@@ -189,11 +206,16 @@ para("A conventional stethoscope keeps no record, so a heart or lung sound canno
      "Resondi application, but none has been tested against labelled recordings from "
      "the device. Resondi is a working acquisition platform; validating its models on "
      "clinician-labelled Filipino recordings is the next step.", first=0, spacing=1.6)
-para("Keywords: auscultation, lung sounds, heart sounds, smart stethoscope, convolutional neural "
-     "network, feature fusion, primary care, Philippines", first=0, italic=True, spacing=1.6)
+# 18 Nov 2026 (user: copy the AlagaVax format): "Abstract –" and "Keywords –" run in, bold italic.
+_r = ABS.add_run("Abstract – "); _r.bold = _r.italic = True; _r.font.name = FONT
+ABS.runs[0]._r.addprevious(_r._r)
+KW = para("", first=0, spacing=1.6)
+_r = KW.add_run("Keywords – "); _r.bold = _r.italic = True; _r.font.name = FONT
+_r = KW.add_run("auscultation, lung sounds, heart sounds, smart stethoscope, convolutional neural network, "
+                "feature fusion, primary care, Philippines"); _r.italic = True; _r.font.name = FONT
 
 # ═══════════════════════════════════════════════════ INTRODUCTION
-H1("Introduction")
+H1("I. Introduction")
 
 para("Heart and lung disease are among the leading causes of mortality in the "
      "Philippines. Philippine Statistics Authority figures for 2024 place ischaemic heart "
@@ -247,62 +269,11 @@ para("This study developed and evaluated Resondi, a low-cost smart stethoscope t
      "replace clinical judgement, and to make a respiratory examination comparable "
      "between visits.")
 
-H2("The Research Gap")
-para("The literature establishes two things firmly. Convolutional neural networks "
-     "classify lung sounds at a standard that compares favourably with human listeners: "
-     "Kim et al. (2021), training on 1,918 recordings from actual patients, reported 86.5 "
-     "percent accuracy in detecting abnormal lung sounds and 85.7 percent in "
-     "distinguishing crackles, wheezes and rhonchi, outperforming medical students, "
-     "interns and several residents tested on the same recordings. Acharya and Basu "
-     "(2020) reported comparable results from a CNN-RNN model operating on "
-     "mel-spectrograms. Separately, digital stethoscopes built on MEMS microphones and "
-     "Bluetooth Low Energy have been shown to capture and transmit usable respiratory "
-     "audio to a mobile application (Baraeinejad et al., 2023).", first=0)
-
-para("What the literature does not establish is that either result survives contact with "
-     "the conditions of primary care. Reported classification performance is obtained on "
-     "curated benchmark corpora such as the ICBHI 2017 database (Rocha et al., 2019), "
-     "whose recordings were collected by researchers using research-grade equipment under "
-     "controlled conditions. Recordings taken on deployed devices by non-specialist "
-     "operators differ from these in ways that bear directly on classification: ambient "
-     "noise, inconsistent chest-piece placement, variation in operator technique, and "
-     "differences between recording devices have all been identified as degrading "
-     "AI-supported analysis (Komaryshyn & Kogut, 2026). The performance figures above are "
-     "therefore properties of a "
-     "model evaluated on clean audio, not predictions about what that model will do with "
-     "audio captured in a barangay health station.", first=0)
-
-para("Acquisition is the uncontrolled variable, and it is the one that existing systems "
-     "leave to the operator. A device that records faithfully does not, by recording "
-     "faithfully, ensure that the chest piece was in the right place, that the patient "
-     "was breathing appropriately, or that the resulting audio is of sufficient quality to "
-     "classify at all. Where acquisition is unguided and unassessed, a classifier of any "
-     "accuracy inherits the variance of the recording, and the published accuracy figure "
-     "ceases to describe the deployed system. This matters most precisely where "
-     "auscultation matters most: Arts et al. (2020) found unaided auscultation pooled at "
-     "37 percent sensitivity against 89 percent specificity across thirty-four studies, "
-     "and attributed much of that weakness to variation in how clinicians listen and "
-     "describe what they hear.", first=0)
-
-para("Two further gaps follow from the same point. Digital recording makes longitudinal "
-     "comparison possible in principle, but a change in lung sound between visits is "
-     "interpretable only if both recordings were taken at the same anatomical location "
-     "under the same conditions, and only if a professional reviews the comparison rather "
-     "than accepting a model output as a finding. And although respiratory rehabilitation "
-     "has an established evidence base, it reaches only about 2.7 percent of chronic "
-     "obstructive pulmonary disease patients worldwide, and where delivered is tracked "
-     "through symptom questionnaires and functional tests rather than through any direct "
-     "acoustic measure of the lung.", first=0)
-
-para("The gap this study addresses is therefore not the absence of an accurate classifier "
-     "but the absence of a system that controls the conditions under which a classifier "
-     "receives its input, and that keeps a professional in the decision path afterwards. "
-     "Resondi was developed to standardise acquisition through guided placement at fixed "
-     "anatomical locations, to assess recording quality before analysis rather than after, "
-     "to classify under that constraint, to make successive recordings at the same "
-     "location comparable, and to route every result to a practitioner for confirmation. "
-     "The study reports what that system achieves and, equally, what it does not yet "
-     "establish.", first=0)
+# 18 Nov 2026: alignment statement, as in the AlagaVax paper.
+para("The study contributes to United Nations Sustainable Development Goal 3, Good Health and "
+     "Well-Being, by supporting the examination of heart and lung sounds at the primary level of care, "
+     "and to Goal 9, Industry, Innovation and Infrastructure, through a locally built recording device "
+     "and platform (United Nations, 2015).")
 
 H2("Objectives of the Study")
 para("The study set out to achieve the following:", first=0, after=6)
@@ -375,8 +346,66 @@ para("This study covers lung and heart sounds, at different stages. Lung sounds 
      "measured. A nine-site "
      "protocol remains planned and is discussed under planned extensions.", first=0)
 
+# 18 Nov 2026: the literature becomes its own section, as in the AlagaVax paper.
+H1("II. Review of Related Literature")
+para("The literature establishes two things firmly. Convolutional neural networks "
+     "classify lung sounds at a standard that compares favourably with human listeners: "
+     "Kim et al. (2021), training on 1,918 recordings from actual patients, reported 86.5 "
+     "percent accuracy in detecting abnormal lung sounds and 85.7 percent in "
+     "distinguishing crackles, wheezes and rhonchi, outperforming medical students, "
+     "interns and several residents tested on the same recordings. Acharya and Basu "
+     "(2020) reported comparable results from a CNN-RNN model operating on "
+     "mel-spectrograms. Separately, digital stethoscopes built on MEMS microphones and "
+     "Bluetooth Low Energy have been shown to capture and transmit usable respiratory "
+     "audio to a mobile application (Baraeinejad et al., 2023).", first=0)
+
+para("What the literature does not establish is that either result survives contact with "
+     "the conditions of primary care. Reported classification performance is obtained on "
+     "curated benchmark corpora such as the ICBHI 2017 database (Rocha et al., 2019), "
+     "whose recordings were collected by researchers using research-grade equipment under "
+     "controlled conditions. Recordings taken on deployed devices by non-specialist "
+     "operators differ from these in ways that bear directly on classification: ambient "
+     "noise, inconsistent chest-piece placement, variation in operator technique, and "
+     "differences between recording devices have all been identified as degrading "
+     "AI-supported analysis (Komaryshyn & Kogut, 2026). The performance figures above are "
+     "therefore properties of a "
+     "model evaluated on clean audio, not predictions about what that model will do with "
+     "audio captured in a barangay health station.", first=0)
+
+para("Acquisition is the uncontrolled variable, and it is the one that existing systems "
+     "leave to the operator. A device that records faithfully does not, by recording "
+     "faithfully, ensure that the chest piece was in the right place, that the patient "
+     "was breathing appropriately, or that the resulting audio is of sufficient quality to "
+     "classify at all. Where acquisition is unguided and unassessed, a classifier of any "
+     "accuracy inherits the variance of the recording, and the published accuracy figure "
+     "ceases to describe the deployed system. This matters most precisely where "
+     "auscultation matters most: Arts et al. (2020) found unaided auscultation pooled at "
+     "37 percent sensitivity against 89 percent specificity across thirty-four studies, "
+     "and attributed much of that weakness to variation in how clinicians listen and "
+     "describe what they hear.", first=0)
+
+para("Two further gaps follow from the same point. Digital recording makes longitudinal "
+     "comparison possible in principle, but a change in lung sound between visits is "
+     "interpretable only if both recordings were taken at the same anatomical location "
+     "under the same conditions, and only if a professional reviews the comparison rather "
+     "than accepting a model output as a finding. And although respiratory rehabilitation "
+     "has an established evidence base, it reaches only about 2.7 percent of chronic "
+     "obstructive pulmonary disease patients worldwide, and where delivered is tracked "
+     "through symptom questionnaires and functional tests rather than through any direct "
+     "acoustic measure of the lung.", first=0)
+
+para("The gap this study addresses is therefore not the absence of an accurate classifier "
+     "but the absence of a system that controls the conditions under which a classifier "
+     "receives its input, and that keeps a professional in the decision path afterwards. "
+     "Resondi was developed to standardise acquisition through guided placement at fixed "
+     "anatomical locations, to assess recording quality before analysis rather than after, "
+     "to classify under that constraint, to make successive recordings at the same "
+     "location comparable, and to route every result to a practitioner for confirmation. "
+     "The study reports what that system achieves and, equally, what it does not yet "
+     "establish.", first=0)
+
 # ═══════════════════════════════════════════════════ METHODOLOGY
-H1("Methodology")
+H1("III. Materials and Methods")
 
 H2("Research Design")
 para("The study employed a developmental\u2013descriptive research design in two phases. "
@@ -472,7 +501,7 @@ para("Heart Mode uses the same device and recording settings with a separate gui
      "site is recorded for 15 seconds with the diaphragm on bare skin and the patient at "
      "rest, and the recording is saved with its site, mode and time.", first=0)
 FIG(3, "The Five Cardiac Sites Recorded in Heart Mode",
-    "h1_heart_sites.png", 5.2,
+    "h1_heart_sites.png", 3.0,
     note="Numbered in recording order, from the base of the heart to the apex. Erb's point "
          "(3) is filed for the practitioner and is not part of the planned classifier input.")
 
@@ -898,7 +927,7 @@ para("The study was reviewed before any data were collected. The school's "
 
 
 # ═══════════════════════════════════════════════════ RESULTS
-H1("Results")
+H1("IV. Results and Discussion")
 
 para("The results are reported by research question, in the order the questions were "
      "set. Research Questions 1, 5 and 9 are answered from the field evaluation, which"
@@ -977,6 +1006,35 @@ para("The platform's user interface is a web application in English and Filipino
      "deletes its analyses, plans, reviews and submissions; and an approved recording "
      "can be exported as a PDF report.", first=0)
 
+# 18 Nov 2026 (user: "in theirs, they have the app ui in the results and discussion"): the application's
+# screens, captured from the live app at phone size; names, ages and file names masked (build/app_ui/).
+para("Figure 11 shows the screens a patient uses. The welcome screen states, before sign-in, that the analysis is"
+     " a screening aid produced by a model that has not completed clinical validation. The dashboard offers the "
+     "two modes, Lung Auscultation and Heart Auscultation, each with its own placement guide. A full examination "
+     "is chosen as the standard seven lung sites or the full cardiopulmonary set of twelve sites, and the guides "
+     "number each site on a body diagram, from the trachea through the six lung fields and from the aortic area "
+     "to the mitral area, with the landmark and what to listen for at each.", first=0)
+FIG(11, "Patient Screens of the Resondi Application", "ui1_patient.png", 6.3,
+    note="Captured from the live application at phone size; the patient's name is masked.")
+para("Figure 12 shows how recordings enter the platform and are kept. The transfer page walks the user through "
+     "joining the device's RESONDI_WIFI network, downloading the recordings from the device page at "
+     "192.168.4.1 and uploading them once the phone is back online. The history lists every recording by site and "
+     "shows whether it has been sent to a practitioner; each recording opens to its audio and its sound analysis; "
+     "and the trend view plots a recording score from 0 to 100 over time, which the screen itself describes as a "
+     "tracking summary of the model's classification, not a medical assessment of lung function.", first=0)
+FIG(12, "Recording Transfer, History, Result and Trend Screens", "ui2_records.png", 6.3,
+    note="Captured from the live application at phone size; the recording's file name is masked.")
+para("Figure 13 shows the practitioner and administrator side. A verified practitioner sees the recordings "
+     "waiting for review and the patients assigned to them; a patient's record shows the profile and every "
+     "recording with its analysis, labelled as a model score rather than an accuracy and, for recordings scored by"
+     " the withdrawn first model, marked as such. The practitioner approves, disapproves or requests further "
+     "review of each recommended breathing exercise before the patient can start it. The administrator manages "
+     "accounts, verifies practitioners' credentials and reviews an activity log, and is stated on screen not to "
+     "act as a medical practitioner.", first=0)
+FIG(13, "Practitioner and Administrator Screens", "ui3_practitioner.png", 6.3,
+    note="Captured from the live application at phone size; account and patient names and the patient's age are "
+         "masked.")
+
 H2("Research Question 4: Specifications and Performance of the Sound Analysis System")
 para("The analysis system preprocesses audio to 16 kHz mono and cuts it into 1-second "
      "windows, each band-limited to 100 to 3,900 Hz and levelled before its features "
@@ -1050,22 +1108,22 @@ TBL(3, "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)"
     "patient-level bootstrap intervals.")
 para("The supporting analyses agreed. Across the five folds the fusion network's "
      "balanced accuracy was higher in every fold, by a mean of 5.8 points (paired "
-     "t(4) = 4.75, p = 0.009; Figure 12). Of the 126 patients, 69 had more of their cycles "
+     "t(4) = 4.75, p = 0.009; Figure 15). Of the 126 patients, 69 had more of their cycles "
      "classified correctly by the fusion network, 39 fewer, and 18 the same (Wilcoxon "
-     "signed-rank p = 0.009; Figure 13). Cycle by cycle, the fusion network alone was "
+     "signed-rank p = 0.009; Figure 16). Cycle by cycle, the fusion network alone was "
      "right on 1,277 cycles and the MFCC network alone on 831 (McNemar p < 0.001), though "
      "this last test treats cycles as independent and overstates the certainty; the "
-     "patient-level analyses are the ones to rely on. Figure 14 shows where each model's "
+     "patient-level analyses are the ones to rely on. Figure 17 shows where each model's "
      "errors fall.", first=0)
 FIG(13, "Balanced Accuracy of the Two Architectures in Each of the Five Folds",
-    "j1_cv_folds.png", 5.6,
+    "j1_cv_folds.png", 3.0,
     note="Produced in jamovi (jmv, paired-samples t-test, descriptives plot). Points are "
          "fold means with 95% confidence intervals.")
 FIG(14, "Share of Each Patient's Cycles Classified Correctly, by Architecture",
-    "j2_cv_patients.png", 5.6,
+    "j2_cv_patients.png", 3.0,
     note="Produced in jamovi (jmv, paired-samples comparison of 126 patients).")
 FIG(15, "True Class Against Predicted Class in Cross-Validation",
-    "j3_cv_confusion.png", 6.05,
+    "j3_cv_confusion.png", 3.0,
     note="Produced in jamovi (jmv, contingency tables, row percentages). Each bar group is "
          "one true class; bars show how its cycles were classified. The two panels have "
          "different vertical scales.")
@@ -1104,7 +1162,7 @@ para("Table 5 gives the heart-sound results on the 189 CirCor test patients, non
      "2.5–3.6), against 35.4 for the untrained baseline, which often locked onto half "
      "or double the true rate. The error had almost no bias (+0.1 beats per minute), "
      "but its 95 percent limits of agreement were −13.7 to +14.0, because a few "
-     "recordings were read badly wrong; Figure 15 shows that these were mostly fast "
+     "recordings were read badly wrong; Figure 18 shows that these were mostly fast "
      "rates read too low and slow rates read too high. Reference rates ranged from 49 "
      "to 171 beats per minute, median 103, as expected in children.", first=0)
 para("The murmur detector did not reach its pre-specified target. On the validation "
@@ -1135,7 +1193,7 @@ TBL(5, "Heart-Sound Models on 189 CirCor Test Patients",
     "site is; the 14 patients labelled unknown are excluded and reported in the text. "
     "Neither model has been tested on Resondi device recordings.")
 FIG(17, "Estimated Against Reference Heart Rate on 631 CirCor Test Recordings",
-    "r6_heart_rate.png", 4.4,
+    "r6_heart_rate.png", 3.0,
     note="Each point is one recording. The dashed line is perfect agreement and the shaded "
          "band is within 5 beats per minute. Teal points are more than 10 beats per minute "
          "off. Reference rates come from the dataset's annotated S1 boundaries.")
@@ -1185,7 +1243,7 @@ TBL(6, "Accuracy of the Lung Fusion Network and the Heart-Sound Models",
 
 # ═══════════════════════════════════════════════════ DISCUSSION
 H2("Research Question 5: Response Time")
-para("Figure 16 gives the mean time of each stage in the field system: device "
+para("Figure 19 gives the mean time of each stage in the field system: device "
      "connection 4.55 seconds, sound recording 15.00 seconds, recording-quality "
      "assessment 144.68 seconds, signal preprocessing 20.91 seconds and "
      "classification output 3.97 seconds.", first=0)
@@ -1225,7 +1283,7 @@ para("The fusion network ran without error on all 45 stored lung recordings, at 
      "median of 2.0 seconds per recording including fetching the audio. On the 26 unique "
      "recordings made with the Resondi device, it chose Healthy for 16, Wheezing with "
      "Crackles for 6, Wheezing for 3 and Crackles for 1. The score of the chosen class "
-     "ranged from 31 to 66 percent, with a median of 41 percent (Figure 17). On the same "
+     "ranged from 31 to 66 percent, with a median of 41 percent (Figure 20). On the same "
      "device files, the Edge Impulse build that the fusion network replaced had given top "
      "scores of only 27 to 34 percent (median 30 percent), close to the 25 percent of four "
      "equally likely classes. The fusion network therefore separates the classes more "
@@ -1359,7 +1417,7 @@ for n, txt in enumerate([
     p = para(f"{n}. {txt}", first=0, after=4, spacing=1.6)
     p.paragraph_format.left_indent = Inches(0.35)
 
-H1("Discussion")
+H2("Discussion")
 
 para("The results separate cleanly into two groups. Signal acquisition, recording "
      "clarity, and operation across ambient conditions support the conclusion that the "
@@ -1458,7 +1516,7 @@ para("The fusion network has since been put into the Resondi application. Becaus
      "and feature extraction rewritten in JavaScript. The rewritten features gave the same "
      "top class as the Python originals on 600 of 600 validation windows. Run on 26 "
      "recordings already made with the Resondi device, the deployed fusion network gave "
-     "top-class scores of 31 to 66 percent (median 41; Figure 17), against 27 to 34 "
+     "top-class scores of 31 to 66 percent (median 41; Figure 20), against 27 to 34 "
      "percent for the "
      "Edge Impulse build it replaced. That shows it is more decisive on device audio, not "
      "that it is more often right: none of those recordings has a reference label.",
@@ -1499,7 +1557,7 @@ para("Two extensions are planned and were not implemented in the work reported h
 para("The acquisition protocol extends from seven sites to nine. The two additional "
      "sites are an interscapular pair at T3–T4, beside the spine, which sample the "
      "posterior upper lobes; the tracheal reference and the six fields already recorded "
-     "are retained. Figure 18 shows the nine sites on the body and Table 7 gives their "
+     "are retained. Figure 21 shows the nine sites on the body and Table 7 gives their "
      "landmarks.", first=0)
 
 FIG(15, "Planned Nine-Site Acquisition Protocol",
@@ -1644,7 +1702,7 @@ for lim in [
     p = para(lim, first=0, after=6, spacing=1.6)
     p.paragraph_format.left_indent = Inches(0.35)
 
-H2("Conclusion")
+H1("V. Conclusion")
 para("Resondi acquires, organises, and processes lung sound recordings at seven "
      "standardised sites and heart sound recordings at five, operates across the range of ambient conditions "
      "found in Philippine primary care, and produces a signal measurably stronger than "
@@ -1669,7 +1727,16 @@ para("The system does not replace clinical judgement and is not designed to. Eve
      "it, and no result is returned to a patient unreviewed. On the evidence reported "
      "here, that arrangement is not a precaution but a requirement.")
 
-H2("Recommendations")
+# 18 Nov 2026: acknowledgement, as in the AlagaVax paper; names as on the title page credits.
+H1("Acknowledgement")
+para("The researcher thanks the research advisers, John Lemuel J. Noche and Genelyn O. Bautista; the "
+     "qualified scientist, Bemsor T. Caabay, MSc; the consultants, Kenneth Wilson O. Lim, MD, Sonia A. "
+     "Ulanday, MD, and Riza Cornelle C. De La Bajan, MD, for their clinical guidance; fellow Team Wheezards "
+     "members Hared Ray A. Cabrera and Jarred Paul G. Llacuna; the health workers, patients and other "
+     "respondents who took part in the field evaluation and the acceptance survey; and Puerto Princesa City "
+     "National Science High School.")
+
+H1("Recommendations")
 for rec in [
     "Score the fusion network against reference labels on recordings from the Resondi "
     "device, beginning with the "
@@ -1710,6 +1777,8 @@ for rec in [
 # ═══════════════════════════════════════════════════ REFERENCES
 H1("References")
 REFS = [
+ "United Nations. (2015). Transforming our world: The 2030 Agenda for Sustainable Development "
+ "(A/RES/70/1). https://sdgs.un.org/2030agenda",
  "3M. (2025). Littmann CORE digital stethoscope (Model 8480) [Product listing]. "
  "https://mdmaxx.com/products/3m-8480-littmann-core-digital-stethoscope",
  "Arts, L., Lim, E. H. T., van de Ven, P. M., Heunks, L., & Tuinman, P. R. (2020). The "
@@ -1778,7 +1847,11 @@ OUT = os.path.normpath(os.path.join(HERE, "..", "..", "imrad", "Resondi-IMRaD-He
 import os as _os, sys as _sys  # house style: Times New Roman 11, justified, consistent indents (14 Nov)
 _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
 import house_style  # noqa: E402
-print("  house style:", house_style.apply(doc, line_spacing=2.0))  # double spacing (user, 14 Nov)
+# 18 Nov 2026 (user): the AlagaVax paper's layout, single-spaced in two columns, replaces the double spacing of
+# 14 Nov for the IMRaD (the research plan stays double-spaced).
+print("  house style:", house_style.apply(doc, line_spacing=1.0))
+import two_column  # noqa: E402
+print("  two columns:", two_column.apply(doc, KW._p, WIDE))
 # Review of 16 Nov 2026 (user: "review it further"): internal contradictions and small errors.
 import review_fixes  # noqa: E402
 print("  review fixes:", review_fixes.apply(doc, [

@@ -92,19 +92,28 @@ def imrad_headings():
           "Conventional Stethoscope Versus Resondi", "End-User Acceptance", "Preferences for Instructional Support",
           "Longitudinal Monitoring and Rehabilitation Support"]
     # (text to find, level, entry shown); a text ending in ":" is matched as the start of a line (long headings wrap)
-    wanted = ([("ABSTRACT", 0, None), ("INTRODUCTION", 0, None), ("The Research Gap", 1, None),
+    # 18 Nov 2026: the AlagaVax-style headings (I. INTRODUCTION ... V. CONCLUSION); in two columns a long heading
+    # may wrap, so every entry is matched as the start of a line.
+    wanted = ([("Abstract –", 0, "Abstract"), ("I. INTRODUCTION", 0, "I. Introduction"),
                ("Objectives of the Study", 1, None), ("Research Questions", 1, None),
-               ("Scope and Delimitation", 1, None), ("METHODOLOGY", 0, None), ("RESULTS", 0, None)]
+               ("Scope and Delimitation", 1, None),
+               ("II. REVIEW OF RELATED", 0, "II. Review of Related Literature"),
+               ("III. MATERIALS AND METHODS", 0, "III. Materials and Methods"),
+               ("IV. RESULTS AND", 0, "IV. Results and Discussion")]
               + [(f"Research Question {k}:", 1, f"Research Question {k}: {t}") for k, t in enumerate(rq, 1)]
-              + [("Results by Objective", 1, None), ("DISCUSSION", 0, None), ("Limitations", 1, None),
-                 ("Conclusion", 1, None), ("Recommendations", 1, None), ("REFERENCES", 0, None)])
+              + [("Results by Objective", 1, None), ("Discussion", 1, None), ("Limitations", 1, None),
+                 ("V. CONCLUSION", 0, "V. Conclusion"), ("ACKNOWLEDGEMENT", 0, "Acknowledgement"),
+                 ("RECOMMENDATIONS", 0, "Recommendations"), ("REFERENCES", 0, "References")])
     out, start = [], 0
     for name, lvl, shown in wanted:
         for i in range(start, len(d)):
             lines = [s.strip() for s in d[i].get_text().splitlines()]
-            hit = any(s.startswith(name) for s in lines) if name.endswith(":") else name in lines
+            hit = (any(s.startswith(name) for s in lines) if name.endswith((":", "–")) or lvl == 0
+                   else name in lines)
             if hit:
-                printed = next((s for s in reversed(lines) if s.isdigit()), None)
+                # the printed page number: digits in the footer band only (two columns scramble the line order)
+                ph = d[i].rect.height
+                printed = next((w[4] for w in d[i].get_text("words") if w[1] > ph * 0.9 and w[4].isdigit()), None)
                 assert printed == str(i + 1), (name, i + 1, printed)  # the footer number matches the PDF page
                 out.append((shown or (name.title() if lvl == 0 else name), lvl, i + 1))
                 start = i

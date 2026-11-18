@@ -53,8 +53,9 @@ SCHOOL = "Puerto Princesa City National Science High School, Palawan, Philippine
 def imrad_abstract():
     d = docx.Document(IMRAD_DOCX)
     ps = [p.text.strip() for p in d.paragraphs]
-    i = ps.index("ABSTRACT")
-    return ps[i + 1]
+    # Since 18 Nov the IMRaD runs the label in: "Abstract – A conventional stethoscope ..."
+    t = next(x for x in ps if x.startswith("Abstract –"))
+    return t[len("Abstract –"):].strip()
 
 
 def divider(doc, text):

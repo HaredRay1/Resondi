@@ -45,18 +45,20 @@ Keep it current: any Claude Code session that changes the project's state update
 
 ## 2. The papers (folder `Ahnyccas papers/`)
 
+**18 Nov: the IMRaD copies the format of the RSTF team paper *AlagaVax* (user).** Two columns, single-spaced, with the title, credits, abstract ("Abstract –" run in) and keywords in one column; every table and every figure wider than a column spans the page (`build/style/two_column.py`); captions above, "Figure N." bold with an italic title. Sections: I. Introduction, II. Review of Related Literature (the former Research Gap), III. Materials and Methods, IV. Results and Discussion, V. Conclusion, Acknowledgement, Recommendations, References. New: an SDG 3/9 statement, an acknowledgement (credits only), and three app-screen figures in Research Question 3 (Figures 11-13, `figures/ui1_patient.png`, `ui2_records.png`, `ui3_practitioner.png`, made by `build/app_ui/make_ui_figures.py` from raw screenshots in `Resondi-private/app-screens-raw/`, names, age and file name masked). Later figures renumbered 14-21. IMRaD now 37 pages; compiled PDF 203. The research plan is unchanged (still double-spaced).
+
 | File | What it is |
 |---|---|
-| `Resondi-IMRaD-Heart-and-Lung-FINAL` (.docx, .pdf) | **The IMRaD paper, 61 pages**, covering lung and heart. Title: *Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System*. The introduction lists the 11 research questions; the Results answer them in order, one heading each, then give "Results by Objective" for the nine objectives. It has a 250-word abstract. |
+| `Resondi-IMRaD-Heart-and-Lung-FINAL` (.docx, .pdf) | **The IMRaD paper, 37 pages, two columns**, covering lung and heart. Title: *Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System*. The introduction lists the 11 research questions; the Results answer them in order, one heading each, then give "Results by Objective" for the nine objectives. It has a 250-word abstract. |
 | `Resondi-Research-Plan-Heart-and-Lung-FINAL` (.docx, .pdf) | **The research plan, 72 pages**, revised from Ahnycca's original. Sections: A Rationale, B Research Questions (numbered 1–11), C Hypotheses, Goals and Expected Outcomes, D Procedures, E Risk and Safety, F Data Analysis, G Results and Discussion, H Bibliography. Its 46 changes from the original are listed in `research-plan/…Revision-Log…`. |
-| `Resondi-Compiled-RSTF-FINAL.pdf` | **The full submission, 227 pages**, with bookmarks. Order: title page, checklist and contents; I. Research Plan; II. ISEF Forms (the signed set, the 14 Nov AI disclosure, and last year's paper *SmartSteth* (2025) after Form 7); III. ISEF Abstract; IV. the IMRaD; V. Project Data Book (the scanned logbook, 13 pages, added 15 Nov; 20 Jul to 28 Aug, the dates both papers now use; the signed Form 1A says 17 Jul to 20 Aug); VI. SRC Evaluation. **It contains phone numbers and e-mail addresses from the ISEF forms. Do not share it.** |
+| `Resondi-Compiled-RSTF-FINAL.pdf` | **The full submission, 203 pages**, with bookmarks. Order: title page, checklist and contents; I. Research Plan; II. ISEF Forms (the signed set, the 14 Nov AI disclosure, and last year's paper *SmartSteth* (2025) after Form 7); III. ISEF Abstract; IV. the IMRaD; V. Project Data Book (the scanned logbook, 13 pages, added 15 Nov; 20 Jul to 28 Aug, the dates both papers now use; the signed Form 1A says 17 Jul to 20 Aug); VI. SRC Evaluation. **It contains phone numbers and e-mail addresses from the ISEF forms. Do not share it.** |
 | `Resondi-AI-Usage-Disclosure-2026-11-14` | What AI did and did not do in the project. Ahnycca still has to read it and correct it. |
 | `Resondi-Missing-Items-Research-Plan-and-IMRaD` | **The plain-language to-do list** (section 6 below). |
 
 **Format of both papers** (set 14–15 November at Ahnycca's request):
 
 - **Text:** Times New Roman 11 pt, justified, with a 0.5-inch first-line indent.
-- **Spacing:** double line spacing (2.0), with the original space between paragraphs kept, and widow/orphan
+- **Spacing (research plan; the IMRaD is single-spaced in two columns since 18 Nov):** double line spacing (2.0), with the original space between paragraphs kept, and widow/orphan
   control on.
 - **Kept single-spaced:** tables, pictures and the plan's Procedures flowchart.
 - **References:** APA 7, flush left, with a 0.5-inch hanging indent. Every reference has a full citation. The one
