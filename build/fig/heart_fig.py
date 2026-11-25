@@ -93,7 +93,7 @@ def chest(ax, app=False):
             fontsize=6.7, family=SERIF, color=GREY, style="italic",
             linespacing=1.3)
 
-    ax.text(0, 2.10, "HEART MODE  ·  anterior  ·  A to M", ha="center",
+    ax.text(0, 2.16, "HEART MODE  ·  anterior  ·  A to M", ha="center",
             fontsize=9.0, family=SERIF, color=PRIMARY, fontweight="bold")
     ax.text(0, 0.455,
             "The rose bar is the sternal angle, the landmark\n"

@@ -20,7 +20,7 @@ def wrap_to(ax, text, max_units, pt):
         lines.append(cur)
     return "\n".join(lines)
 
-OUT = _BUILD + "/imradfig/"
+OUT = _os.path.join(_BUILD, "..", "figures") + "/"
 
 RULES = [
  ("1", "All four zones Healthy",
@@ -43,9 +43,9 @@ def d5_rules():
     fig, ax = canvas(PX, PY)
 
     # the four zones the rules read
-    ax.text(150, 905, "PER-ZONE INPUT", fontsize=7.6,
-            color=SECONDARY, fontweight="bold", family=SERIF, va="center")
     zx, zy, zw, zh = 60, 740, 128, 112
+    ax.text(zx + zw + 7, 890, "PER-ZONE INPUT", fontsize=6.8, ha="center",
+            color=SECONDARY, fontweight="bold", family=SERIF, va="center")
     for i, (lab, name) in enumerate([("UL", "upper left"), ("UR", "upper right"),
                                      ("LL", "lower left"), ("LR", "lower right")]):
         x = zx + (i % 2) * (zw + 14)
@@ -98,35 +98,30 @@ def d5_rules():
 
 
 def p2_fusion():
-    PX, PY = 1900, 660
+    """The network as trained (model-rebuild/scripts/fusion.py, fdc3). Until 25 Nov 2026 this drew the plan's
+    mel-spectrogram version, captioned "Planned", under a figure titled "as Built". Used by both papers."""
+    PX, PY = 1900, 640
     fig, ax = canvas(PX, PY)
-    views = [("Mel-spectrogram", "energy over time", "crackles — transient"),
-             ("MFCC", "spectral envelope", "overall timbre"),
-             ("Chromagram", "pitch classes", "wheezes — tonal")]
-    bw, bh, vgap = 300, 124, 66
-    y0 = 480
-    box(ax, 60, 280, 200, 150, "Recording", "preprocessed", fill=LIGHT, lw=2.2)
-
-    for i, (t, s, why) in enumerate(views):
+    views = [("Spectrogram", "log power, 0–4 kHz"),
+             ("MFCC", "13 coefficients"),
+             ("Chromagram", "12 pitch classes")]
+    bh, vgap, y0, mid = 116, 40, 440, 342
+    box(ax, 24, mid - 75, 222, 150, "Recording", "16 kHz mono", fill=LIGHT, lw=2.2, ts=7.9)
+    box(ax, 292, mid - 75, 222, 150, "Window", "1 second", lw=1.8, ts=7.9)
+    arrow(ax, (250, mid), (288, mid))
+    for i, (t, sub) in enumerate(views):
         y = y0 - i * (bh + vgap)
-        box(ax, 350, y, bw, bh, t, s, ts=7.9, ss=6.2)
-        ax.text(350 + bw / 2, y - 22, why, ha="center", fontsize=5.9,
-                color=GREY, style="italic", family=SERIF)
-        arrow(ax, (264, 355), (346, y + bh / 2), rad=0.0, lw=1.8)
-        box(ax, 730, y, 250, bh, "CNN branch", "conv · pool", ts=7.9, ss=6.2)
-        arrow(ax, (654, y + bh / 2), (726, y + bh / 2))
-        arrow(ax, (984, y + bh / 2), (1186, 355), rad=0.0, lw=1.8)
-
-    box(ax, 1190, 280, 250, 150, "Concatenate", "fused vector",
-        fill=LIGHT, lw=2.2)
-    arrow(ax, (1444, 355), (1512, 355))
-    box(ax, 1516, 280, 230, 150, "Softmax", "four classes",
-        fill=LIGHT, lw=2.2)
-
-    caption(ax, PX, "Feature-level fusion: three representations of one "
-                    "recording, combined before a single decision. "
-                    "Planned — not implemented at the time of evaluation.",
-            y=30)
+        c = y + bh / 2
+        arrow(ax, (518, mid), (586, c), lw=1.8)
+        box(ax, 590, y, 310, bh, t, sub, ts=7.9, ss=6.2)
+        arrow(ax, (904, c), (946, c))
+        box(ax, 950, y, 250, bh, "CNN branch", "64 units", ts=7.9, ss=6.2)
+        arrow(ax, (1204, c), (1290, mid), lw=1.8)
+    box(ax, 1294, mid - 75, 250, 150, "Concatenate", "3 × 64 units", fill=LIGHT, lw=2.2, ts=7.9)
+    arrow(ax, (1548, mid), (1588, mid))
+    box(ax, 1592, mid - 75, 284, 150, "Dense, softmax", "four sound classes", fill=LIGHT, lw=2.2, ts=7.9)
+    caption(ax, PX, "Three representations of one window are combined before a single decision;\n"
+                    "window scores are then averaged over the breathing cycle or recording.", y=24)
     save(fig, OUT + "p2_fusion.png")
 
 

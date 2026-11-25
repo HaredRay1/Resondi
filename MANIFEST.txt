@@ -1,4 +1,4 @@
-Every file in the Resondi folder on 15 November 2026, written by tools/make_manifest.py. A folder with more than 100 files of its own is one line (folder/*). Not listed: .git, __pycache__, node_modules.
+Every file in the Resondi folder on 25 November 2026, written by tools/make_manifest.py. A folder with more than 100 files of its own is one line (folder/*). Not listed: .git, __pycache__, node_modules.
 
 .gitignore
 CLAUDE-CHAT-BRIEF.md
@@ -7,17 +7,11 @@ HANDOFF-2026-11-10-model.md
 MANIFEST.txt
 README.md
 START-HERE-PROMPTS.md
-Ahnyccas papers/README.md
-Ahnyccas papers/Resondi-AI-Usage-Disclosure-2026-11-14.docx
-Ahnyccas papers/Resondi-AI-Usage-Disclosure-2026-11-14.pdf
 Ahnyccas papers/Resondi-Compiled-RSTF-FINAL.pdf
 Ahnyccas papers/Resondi-IMRaD-Heart-and-Lung-FINAL.docx
 Ahnyccas papers/Resondi-IMRaD-Heart-and-Lung-FINAL.pdf
-Ahnyccas papers/Resondi-Missing-Items-Research-Plan-and-IMRaD.docx
-Ahnyccas papers/Resondi-Missing-Items-Research-Plan-and-IMRaD.pdf
 Ahnyccas papers/Resondi-Research-Plan-Heart-and-Lung-FINAL.docx
 Ahnyccas papers/Resondi-Research-Plan-Heart-and-Lung-FINAL.pdf
-Ahnyccas papers/Resondi-Title-Page-and-Contents-FINAL.pdf
 app-changes/DeviceTransfer.jsx
 app-changes/fusion-model-v2-and-device-transfer.md
 app-changes/heart-models-v1.md
@@ -27,6 +21,7 @@ app-changes/seven-sites.md
 assess/Resondi_Concept_Note_PSC_XI_Assessment.docx
 build/accept/build_guide.py
 build/ai_disclosure/build_ai_disclosure.py
+build/app_ui/make_ui_figures.py
 build/chapters/build_chapters.py
 build/chapters/ch1.py
 build/chapters/ch2.py
@@ -43,13 +38,16 @@ build/cue/build_cue.py
 build/deckfigs/build.py
 build/deckfigs/build_rose_bmc_backup.py
 build/deckfigs/Figure-08-Business-Model-Canvas.html
+build/dev2/compose_exploded.py
 build/dev2/compose_podium.py
 build/dev2/device_fig.py
 build/dev2/encode_video.py
+build/dev2/label_render.py
 build/dev2/make_video.ps1
 build/dev2/probe_iso.png
 build/dev2/render.py
 build/dev2/render_blend.py
+build/dev2/render_layers.py
 build/dev2/render_podium.py
 build/dev2/render_spin_video.py
 build/dev2/Resondi-Device-Components.png
@@ -58,12 +56,26 @@ build/dev2/specs.docx
 build/dev2/out/podium_full.png
 build/dev2/out/podium_mask.png
 build/dev2/out/video.log
+build/dev2/out/layers/battery.png
+build/dev2/out/layers/board.png
+build/dev2/out/layers/body.png
+build/dev2/out/layers/buttons.png
+build/dev2/out/layers/buttons_top.png
+build/dev2/out/layers/cover.png
+build/dev2/out/layers/layers.json
+build/dev2/out/layers/lcd.png
+build/dev2/out/layers/lcd_top.png
+build/dev2/out/layers/leds.png
+build/dev2/out/layers/mic.png
+build/dev2/out/layers/screws.png
+build/dev2/out/layers/sensor.png
 build/dev2/out/video/* (200 files: .png 200)
 build/fig/anat.py
 build/fig/app_assets.py
 build/fig/app_heart.png
 build/fig/app_lung_anterior.png
 build/fig/app_lung_posterior.png
+build/fig/bom_v2.py
 build/fig/diagrams.py
 build/fig/fig1.py
 build/fig/fig1_value_proposition.png
@@ -176,6 +188,8 @@ build/srcfix/build_srcfix.py
 build/srcfix/install_2026_11_06.py
 build/stats/build_jamovi_guide.py
 build/style/house_style.py
+build/style/review_fixes.py
+build/style/two_column.py
 chapters/Resondi-Chapter-1-Revised.docx
 chapters/Resondi-Chapter-1-Revised.pdf
 chapters/Resondi-Chapter-2-Revised.docx
@@ -260,11 +274,17 @@ figures/r3_response.png
 figures/r4_agreement.png
 figures/r5_device.png
 figures/r6_heart_rate.png
+figures/Resondi-Cost-Breakdown.png
+figures/Resondi-Device-3D-Labelled.png
 figures/Resondi-Device-3D.png
 figures/Resondi-Device-Components.png
 figures/Resondi-Device-Podium.jpg
 figures/Resondi-Device-Podium.png
 figures/Resondi-Device-Video.mp4
+figures/Resondi-Exploded-View-Dark.png
+figures/Resondi-Exploded-View.mp4
+figures/Resondi-Exploded-View.png
+figures/Resondi-Hardware-Block-Paper.png
 figures/Resondi-Hardware-Block-VER2.png
 figures/Resondi-Research-Paradigm.png
 figures/slide02a_mortality.png
@@ -273,6 +293,9 @@ figures/slide05_method.png
 figures/slide_backup_year2.png
 figures/slide_payback.png
 figures/slide_results.png
+figures/ui1_patient.png
+figures/ui2_records.png
+figures/ui3_practitioner.png
 figures/paperfix/Figure-4.4-Response-Time.png
 figures/paperfix/Figure-4.6-Classification-Agreement.png
 figures/paperfix/Figure-4.7-Signal-Strength.png
@@ -477,6 +500,7 @@ model-rebuild/resondi_model/data.py
 model-rebuild/resondi_model/dsp.py
 model-rebuild/resondi_model/metrics.py
 model-rebuild/resondi_model/model.py
+model-rebuild/results/accuracy-summary-lung-heart.md
 model-rebuild/results/cv-paired.txt
 model-rebuild/results/cv-results.json
 model-rebuild/results/cv-results.md
@@ -762,6 +786,12 @@ model-rebuild/work-exp/parity/validation.mfcc.bin
 model-rebuild/work-exp/parity/validation.ortweb.probs.bin
 model-rebuild/work-exp/parity/validation.raw.bin
 model-rebuild/work-exp/parity/validation.spec.bin
+papers-support/README.md
+papers-support/Resondi-AI-Usage-Disclosure-2026-11-25.docx
+papers-support/Resondi-AI-Usage-Disclosure-2026-11-25.pdf
+papers-support/Resondi-Missing-Items-Research-Plan-and-IMRaD.docx
+papers-support/Resondi-Missing-Items-Research-Plan-and-IMRaD.pdf
+papers-support/Resondi-Title-Page-and-Contents-FINAL.pdf
 pricing/subscription-tiers-spec.md
 research-plan/README.md
 research-plan/Resondi-Research-Plan-Revised-Heart-and-Lung-2026-11-13.docx

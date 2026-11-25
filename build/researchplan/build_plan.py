@@ -13,6 +13,7 @@ import os
 import re
 
 import docx
+from docx.enum.table import WD_ALIGN_VERTICAL, WD_TABLE_ALIGNMENT
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_COLOR_INDEX
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.oxml import parse_xml
@@ -106,15 +107,28 @@ def new_para(after_el, text, template, align=None, bold=None, italic=None, size=
 
 
 def caption(after_el, label, title, template):
-    """APA 7: bold label line, italic title line, both above the table or figure."""
-    a = new_para(after_el, label, template, align=WD_ALIGN_PARAGRAPH.LEFT, bold=True, keep_next=True)
+    """The style of page 9 of the 83-page paper, as in the IMRaD (user, 25 Nov 2026): centred above; a table has
+    "Table N." in bold over its title in italics, a figure has both on one line."""
+    if label.startswith("Figure"):
+        a = new_para(after_el, label + ". ", template, align=WD_ALIGN_PARAGRAPH.CENTER, bold=True, keep_next=True)
+        write_runs(a, title, first_rPr(template), bold=False, italic=True)
+        a.paragraph_format.space_before, a.paragraph_format.space_after = Pt(10), Pt(4)
+        _flat(a)
+        return a
+    a = new_para(after_el, label + ".", template, align=WD_ALIGN_PARAGRAPH.CENTER, bold=True, keep_next=True)
     a.paragraph_format.space_before = Pt(10)
     a.paragraph_format.space_after = Pt(0)
-    a.paragraph_format.first_line_indent = Inches(0)
-    b = new_para(a._p, title, template, align=WD_ALIGN_PARAGRAPH.LEFT, italic=True, keep_next=True)
+    b = new_para(a._p, title, template, align=WD_ALIGN_PARAGRAPH.CENTER, italic=True, keep_next=True)
     b.paragraph_format.space_after = Pt(4)
-    b.paragraph_format.first_line_indent = Inches(0)
+    _flat(a)
+    _flat(b)
     return b
+
+
+def _flat(p):
+    """Clear the template's indents: they pushed pictures off-centre and past the right margin (found 25 Nov 2026)."""
+    pf = p.paragraph_format
+    pf.left_indent = pf.right_indent = pf.first_line_indent = Inches(0)
 
 
 def note(after_el, text, template):
@@ -125,40 +139,61 @@ def note(after_el, text, template):
     write_runs(p, text, size=9.5)
     p.paragraph_format.first_line_indent = Inches(0)
     p.paragraph_format.space_after = Pt(10)
+    p.paragraph_format.keep_together = True
+    # a table or figure keeps its note on the same page
+    if after_el.tag == qn("w:tbl"):
+        for q in list(after_el.iter(qn("w:tr")))[-1].iter(qn("w:p")):
+            Paragraph(q, None).paragraph_format.keep_with_next = True
     return p
 
 
 def table(after_el, rows, widths=None, bold_last=False):
+    """Heavy rule above and below, one rule under the bold heads, no other lines (a total row is bold). The table
+    stays on one page; columns of short values are centred, columns of sentences are set left."""
     t = D.add_table(rows=len(rows), cols=len(rows[0]))
     after_el.addnext(t._tbl)
-    tblPr = t._tbl.tblPr
-    tblPr.append(parse_xml(
-        f'<w:tblBorders {nsdecls("w")}><w:top w:val="single" w:sz="8" w:space="0" w:color="000000"/>'
-        f'<w:bottom w:val="single" w:sz="8" w:space="0" w:color="000000"/></w:tblBorders>'))
+    t.alignment = WD_TABLE_ALIGNMENT.CENTER
+    if widths and sum(widths) > 6.4:
+        widths = [w * 6.4 / sum(widths) for w in widths]
+    whole = sum(max(len(str(v)) / (w * 14) for v, w in zip(r, widths or [1] * len(r))) for r in rows) < 24   # about lines
+    t._tbl.tblPr.append(parse_xml(
+        f'<w:tblBorders {nsdecls("w")}><w:top w:val="single" w:sz="12" w:space="0" w:color="000000"/>'
+        f'<w:bottom w:val="single" w:sz="12" w:space="0" w:color="000000"/></w:tblBorders>'))
+    if widths:
+        for col, w in zip(t.columns, widths):
+            col.width = Inches(w)
+    end = len(rows) - 1
+    short = [j > 0 and max(len(str(r[j])) for r in rows[1:]) <= 26 for j in range(len(rows[0]))]
     for i, row in enumerate(rows):
+        trPr = t.rows[i]._tr.get_or_add_trPr()
+        trPr.append(parse_xml(f'<w:cantSplit {nsdecls("w")}/>'))
+        if i == 0:
+            trPr.append(parse_xml(f'<w:tblHeader {nsdecls("w")}/>'))
         for j, val in enumerate(row):
             c = t.cell(i, j)
             para = c.paragraphs[0]
-            write_runs(para, str(val), size=9.5, bold=True if (i == 0 or (bold_last and i == len(rows) - 1)) else None)
+            write_runs(para, str(val), size=9.5, bold=True if (i == 0 or (bold_last and i == end)) else None)
             for r in para.runs:
                 r.font.name = "Times New Roman"
+            para.alignment = WD_ALIGN_PARAGRAPH.CENTER if short[j] else WD_ALIGN_PARAGRAPH.LEFT
             pf = para.paragraph_format
-            pf.space_before, pf.space_after, pf.first_line_indent = Pt(1), Pt(1), Inches(0)
+            pf.space_before, pf.space_after, pf.first_line_indent = Pt(2), Pt(2), Inches(0)
             pf.line_spacing = 1.0
+            pf.keep_with_next = i < end if whole else (i < 2 or i == end - 1)
             if i == 0:
                 c._tc.get_or_add_tcPr().append(parse_xml(
-                    f'<w:tcBorders {nsdecls("w")}><w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tcBorders>'))
-            if bold_last and i == len(rows) - 1:
-                c._tc.get_or_add_tcPr().append(parse_xml(
-                    f'<w:tcBorders {nsdecls("w")}><w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/></w:tcBorders>'))
+                    f'<w:tcBorders {nsdecls("w")}><w:bottom w:val="single" w:sz="8" w:space="0" w:color="000000"/></w:tcBorders>'))
             if widths:
                 c.width = Inches(widths[j])
+            if i == 0 or (bold_last and i == end):
+                c.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
     return t
 
 
 def figure(after_el, path, width, template):
     p = new_para(after_el, "", template, align=WD_ALIGN_PARAGRAPH.CENTER, keep_next=True)
-    p.paragraph_format.first_line_indent = Inches(0)
+    _flat(p)
+    p.paragraph_format.line_spacing = 1.0
     p.add_run().add_picture(path, width=Inches(width))
     return p
 
@@ -235,12 +270,13 @@ log("Materials ¶1", "TinkerCAD …; Python with Edge-Impulse …; BLE/API integ
 
 set_text(P[56],
          "For the physical device, the materials will include an acoustic stethoscope chest piece; an INMP441 digital MEMS "
-         "microphone connected over the I²S interface, which delivers 16-bit samples directly so that no separate "
-         "preamplifier is needed; an ESP32 microcontroller (240 MHz, with built-in 2.4 GHz Wi-Fi); a 32 GB microSD card "
+         "microphone connected over the I²S interface, which outputs 24-bit digital samples, stored as 16-bit, so that no "
+         "separate preamplifier is needed; an ESP32 microcontroller (240 MHz, with built-in 2.4 GHz Wi-Fi); a 32 GB microSD card "
          "for storage; a 10,000 mAh rechargeable lithium-ion battery with charging and protection circuitry; a 20 × 4 I²C "
          "liquid-crystal display; two push buttons; status LEDs; silicone; connecting wires; and resistors. The casing "
          "will be 3D printed in PLA filament by fused deposition modelling. The specification is summarized in Table 1, "
-         "the hardware architecture in Figure 1, and the device design in Figure 2.")
+         "the hardware architecture in Figure 1, the device design in Figure 2, and the itemized cost of materials in "
+         "Table 8.")
 log("Materials ¶2", "MEMS microphone, microphone preamplifier module, … BLE-capable communication, … LED display … silicon",
     "INMP441 on I²S (no preamplifier), ESP32 with Wi-Fi, 32 GB microSD, 10,000 mAh battery, 20 × 4 LCD, two buttons, silicone",
     "The VER 2.0 device has a digital I²S microphone, no preamplifier, no Bluetooth and an LCD. 'Silicon' corrected to 'silicone'.")
@@ -256,11 +292,11 @@ t1 = table(c._p, [
     ["Connectivity", "Own Wi-Fi access point (RESONDI_WIFI); local web interface at http://192.168.4.1; works without internet"],
     ["Power", "10,000 mAh rechargeable lithium-ion battery with charging and protection circuit"],
     ["Enclosure", "PLA, fused deposition modelling; 173 × 80 × 70 mm"],
-    ["Cost", "Bill of materials ₱2,775; fully loaded unit cost ₱4,000"],
+    ["Cost", "Bill of materials ₱2,775 (Table 8); fully loaded unit cost ₱4,000"],
 ], widths=[1.6, 4.6])
 n = note(t1._tbl, "Values are from the VER 2.0 specification sheet and bill of materials.", BODY)
 c = caption(n._p, "Figure 1", "Hardware Architecture of the Resondi Smart Stethoscope", BODY)
-f = figure(c._p, os.path.join(FIG, "Resondi-Hardware-Block-VER2.png"), 6.0, BODY)
+f = figure(c._p, os.path.join(FIG, "Resondi-Hardware-Block-Paper.png"), 6.3, BODY)  # build/fig/fig2_device_v2.py --paper
 n = note(f._p, "Recordings cross from the device to the platform on the microSD card or, since 14 November 2026, by "
          "a phone that downloads them over the device's Wi-Fi and uploads them through the application; the automatic "
          "gateway between them is not yet built.", BODY)
@@ -335,8 +371,8 @@ set_text(P[108], P[108].text.rstrip() + " The enclosure will be printed in PLA b
          "measure 173 × 80 × 70 mm.")
 log("Fabrication", "(no dimensions)", "Adds PLA, FDM and 173 × 80 × 70 mm", "Matches the specification sheet.")
 set_text(P[111],
-         "The INMP441 digital MEMS microphone will be connected to the ESP32 through the I²S interface, which delivers "
-         "16-bit samples directly and removes the need for an analogue preamplifier. A 20 × 4 I²C liquid-crystal display "
+         "The INMP441 digital MEMS microphone will be connected to the ESP32 through the I²S interface. Its output "
+         "is already digital (24-bit samples, stored as 16-bit), which removes the need for an analogue preamplifier. A 20 × 4 I²C liquid-crystal display "
          "will show device status and recording prompts, and two push buttons will start and confirm recordings. The "
          "rechargeable battery will use an appropriate charging and protection circuit.")
 log("System integration", "The microphone and preamplifier will be connected… Where included, the OLED display…",
@@ -427,7 +463,7 @@ t4 = table(c._p, [
 ], widths=[1.6, 4.6])
 n = note(t4._tbl, "Settings are those of the training scripts in the project repository (model-rebuild).", BODY)
 c = caption(n._p, "Figure 4", "Planned Three-Branch Feature-Fusion Classifier", BODY)
-f = figure(c._p, os.path.join(RFIG, "fig4_fusion.png"), 6.2, BODY)
+f = figure(c._p, os.path.join(FIG, "p2_fusion.png"), 6.3, BODY)  # build/imradfig/diagrams2.py, as in the IMRaD
 note(f._p, "Adapted from Tariq et al. (2022), who fused three CNN architectures on one representation at a time; here "
      "the three representations are fused. The MFCC branch alone is the baseline against which fusion is judged.", BODY)
 
@@ -481,7 +517,7 @@ t5 = table(c._p, [
     ["Validation", "30", "158", "551", "264", "138", "44", "997 (14.5%)"],
     ["Testing", "31", "164", "555", "268", "120", "108", "1,051 (15.2%)"],
     ["Total", "126", "920", "3,642", "1,864", "886", "506", "6,898"],
-], widths=[0.85, 0.65, 0.8, 0.7, 0.75, 0.75, 0.95, 1.05], bold_last=True)
+], widths=[0.8, 0.7, 0.85, 0.65, 0.72, 0.75, 0.8, 1.13], bold_last=True)
 n = note(t5._tbl, "Recordings by device (training / validation / testing): AKG C417L 420 / 107 / 119; Littmann Classic II "
          "SE 58 / 14 / 15; Littmann 3200 42 / 12 / 6; Meditron 78 / 25 / 24.", DBODY)
 c = caption(n._p, "Figure 5", "Class Composition of Each Subset", DBODY)
@@ -621,7 +657,7 @@ para("This section answers the eleven research questions in order. The earlier f
      "lung-sound classifier is reported on the held-out test patients, compared across feature representations, "
      "confirmed by cross-validation with a paediatric corpus, set beside the original model and the reference study, and "
      "followed by the heart-sound models. The three hypotheses are tested under Research Questions 6 to 8, and the "
-     "severity score is reported under Research Question 11, whose planned monitoring rule depends on it. Table 21, at "
+     "severity score is reported under Research Question 11, whose planned monitoring rule depends on it. Table 22, at "
      "the end of the results, summarizes the answer to every question.")
 
 h2("Research Question 1: Quality of the Recordings")
@@ -655,10 +691,32 @@ h2("Research Question 2: Specifications of the Smart Stethoscope")
 para("Research Question 2 asked for the specifications of the smart stethoscope. In design, it is a handheld unit that "
      "joins an acoustic chest piece to a digital microphone in a 3D-printed PLA enclosure of 173 by 80 by 70 mm, with a "
      "20 by 4 character display and two buttons, used to record at seven standardized lung sites and five cardiac sites "
-     "(Figure 2; sites in Figures 3 and 13). Its components are an ESP32 microcontroller with built-in Wi-Fi, an INMP441 digital MEMS microphone "
+     "(Figure 2; sites in Figures 3 and 15). Its components are an ESP32 microcontroller with built-in Wi-Fi, an INMP441 digital MEMS microphone "
      "on the I2S interface, a 32 GB microSD card, and a 10,000 mAh battery; it records 15-second, 16 kHz, 16-bit mono WAV "
      "files and serves its own Wi-Fi network and web page, so it works without internet (Table 1 and Figure 1). Its cost "
-     "is a bill of materials of 2,775 pesos and a fully loaded unit cost of 4,000 pesos (Table 1).")
+     "is a bill of materials of 2,775 pesos and a fully loaded unit cost of 4,000 pesos (Table 1). Figure 6 takes the "
+     "device apart into the parts of that bill of materials.")
+# 25 Nov 2026 (user: the cost section in the plan as well). Items and prices: build/fig/bom_v2.py, as in the IMRaD.
+import sys as _sys0  # noqa: E402
+_sys0.path.insert(0, os.path.join(HERE, "..", "fig"))
+import bom_v2  # noqa: E402
+_pc = {k: f"{v / bom_v2.TOTAL * 100:.1f}" for k, v in bom_v2.CATS.items()}
+fig("Figure 6", "Exploded View of the Version 2.0 Device and Its Parts", os.path.join(FIG, "Resondi-Exploded-View.png"), 6.0,
+    "Outer parts are rendered from the team's 3D model, whose proportions differ from the 173 × 80 × 70 mm enclosure. "
+    "The internal parts are drawn from the bill of materials; their position inside the enclosure is illustrative.")
+h3("Cost of Materials")
+para("Table 8 and Figure 7 present the cost of materials of one version 2.0 unit, a total of ₱2,775.00. The parts that "
+     f"capture the sound, the stethoscope set and the microphone, take the largest share at {_pc['Acoustic sensing']} "
+     f"percent, followed by the power supply at {_pc['Power supply']} percent and the display and controls at "
+     f"{_pc['Display and controls']} percent; the microcontroller that runs the device is {_pc['Microcontroller']} "
+     "percent. Prices are preliminary Philippine-market estimates and vary with supplier and shipping. The total leaves "
+     "out the battery protection circuit and the charging module, which the final design needs: the fully loaded unit "
+     "cost of ₱4,000 adds ₱625 for battery protection, charging, and a production allowance and ₱600 for assembly, "
+     "calibration, and packaging.")
+tab("Table 8", "Cost of Materials of One Version 2.0 Device", bom_v2.table_rows(), [2.6, 0.9, 1.1, 1.1],
+    "Prices in Philippine pesos. The total is the ₱2,775 bill of materials in Table 1.", bold_last=True)
+fig("Figure 7", "Cost Breakdown of the Version 2.0 Device", os.path.join(FIG, "Resondi-Cost-Breakdown.png"), 3.3,
+    "Percentages are rounded to one decimal place.")
 h2("Research Question 3: Specifications of the Monitoring Platform")
 para("Research Question 3 asked for the specifications of the monitoring platform. Its user interface is a web "
      "application in English and Filipino with separate Lung and Heart modes, each of which guides the user through its "
@@ -681,9 +739,9 @@ para("Research Question 4 asked for the specifications of the sound analysis sys
      "own CNN branch, and the fusion architecture concatenates the three branch outputs into a dense layer with a softmax "
      "over the four sound classes (Figure 4). The configuration adopted is that fusion network trained on ICBHI 2017 and "
      "SPRSound, which reached 40.0 percent balanced accuracy in cross-validation, against 34.0 percent for the "
-     "single-branch MFCC design (Table 15), and which has run in the application since 13 November 2026. Heart sounds are "
+     "single-branch MFCC design (Table 16), and which has run in the application since 13 November 2026. Heart sounds are "
      "analysed by two separate models, a segmentation model that times S1 and S2 and gives the heart rate, and a murmur "
-     "model (Table 17).")
+     "model (Table 18).")
 
 para("The subsections below report how the lung-sound models were developed and tested, and how the heart-sound "
      "models performed.")
@@ -691,7 +749,7 @@ para("The subsections below report how the lung-sound models were developed and 
 h3("Model Development on the Validation Subset")
 vs = sorted([r for r in S["validation_summary"] if r["seeds"] >= 2], key=lambda r: -r["bal_mean"])
 NAMES = {"late3": "Late fusion of three views", "single_mfcc": "MFCC (fusion study)", "single_spec": "Spectrogram",
-         "mfcc_twodet": "MFCC, two yes/no detectors", "baseline": "MFCC (deployed design)", "mfcc_spec": "MFCC + augmentation",
+         "mfcc_twodet": "MFCC, two yes/no detectors", "baseline": "MFCC (first deployed design)", "mfcc_spec": "MFCC + augmentation",
          "mfe_twodet": "Mel energies, two detectors", "single_chroma": "Chromagram", "mfe_floor72": "Mel energies, −72 dB floor",
          "mfe_aug": "Mel energies + augmentation", "mfe": "Mel energies (MFE)", "mfe_mixup": "Mel energies + mixup",
          "mfe_floor72_aug": "Mel energies, −72 dB + augmentation", "mfe2k": "Mel energies, 50–2,000 Hz",
@@ -699,7 +757,7 @@ NAMES = {"late3": "Late fusion of three views", "single_mfcc": "MFCC (fusion stu
 best = vs[0]
 para(f"{len(vs)} model configurations were trained with three random seeds each (two for one configuration) and "
      f"compared on the 30 validation "
-     f"patients only (Table 8 and Figure 6). The single-branch MFCC network reached {vs[[r['recipe'] for r in vs].index('single_mfcc')]['bal_mean']*100:.1f} "
+     f"patients only (Table 9 and Figure 8). The single-branch MFCC network reached {vs[[r['recipe'] for r in vs].index('single_mfcc')]['bal_mean']*100:.1f} "
      f"percent balanced accuracy. Mel filterbank energies alone performed worse (31.4–37.9 percent), and restricting them "
      f"to 50–2,000 Hz lowered performance further. Splitting the four-way decision into two yes/no detectors, for crackles "
      f"and for wheezes, raised the mel-energy model by about 5 points but did not improve the MFCC model. The best "
@@ -708,13 +766,14 @@ para(f"{len(vs)} model configurations were trained with three random seeds each 
      f"than the spread between seeds. Because three seeds per configuration are too few for a valid inferential "
      f"comparison, and because repeated testing on the validation subset would inflate false positives, these figures were "
      f"used only to choose models and are reported descriptively.")
-tab("Table 8", "Validation Balanced Accuracy of the Model Configurations", [["Configuration", "Seeds", "Balanced accuracy, mean ± SD (%)", "Macro-F1"]] +
+tab("Table 9", "Validation Balanced Accuracy of the Model Configurations", [["Configuration", "Seeds", "Balanced accuracy, mean ± SD (%)", "Macro-F1"]] +
     [[NAMES.get(r["recipe"], r["recipe"]), str(r["seeds"]), f"{r['bal_mean']*100:.1f} ± {r['bal_sd']*100:.1f}", f"{r['f1_mean']:.3f}"] for r in vs],
     [2.6, 0.6, 2.0, 0.9], "Cycle-level scores on the 30 validation patients; chance is 25 percent. Validation scores are "
     "optimistic: they were used to choose the configuration, seed, and training epoch. The jointly trained "
-    "three-branch (46.9) and two-branch (43.9) fusion networks are reported in Table 11.")
-fig("Figure 6", "Validation Balanced Accuracy by Configuration", os.path.join(STATS, "fig_validation_models.png"), 5.6,
-    "Bars show the mean over three seeds; whiskers show one standard deviation. Rose bars are fusion models.")
+    "three-branch (46.9) and two-branch (43.9) fusion networks are reported in Table 12.")
+fig("Figure 8", "Validation Balanced Accuracy by Configuration", os.path.join(STATS, "fig_validation_models.png"), 5.6,
+    "Bars show the mean over three seeds (two for Mel energies alone); whiskers show one standard deviation. The "
+    "rose bar is the fusion model, dark bars are MFCC models, and grey bars are the other representations.")
 
 h3("Classification Performance on the Test Subset")
 cm = T["confusion"]
@@ -724,13 +783,13 @@ para(f"The configuration chosen on 11 November (the single-branch MFCC network, 
      f"patients ({T['n']:,} respiratory cycles). Its balanced accuracy was {pc(T['balanced_accuracy'])} percent (95% "
      f"patient-level bootstrap CI {ci('balanced_accuracy')}), plain accuracy {pc(T['accuracy'])} percent against a "
      f"majority-class baseline of {pc(T['majority_baseline'])} percent, macro-F1 {T['macro_f1']:.3f}, and Cohen's kappa "
-     f"{T['kappa']:.3f} (95% CI {ci('kappa', scale=1)}), which is slight agreement (Table 9). The ICBHI score was "
+     f"{T['kappa']:.3f} (95% CI {ci('kappa', scale=1)}), which is slight agreement (Table 10). The ICBHI score was "
      f"{pc(T['icbhi_score'])} percent (sensitivity {pc(T['icbhi_se'])}, specificity {pc(T['icbhi_sp'])}). The model detected "
      f"crackles well (recall {pc(T['recall'][0])} percent) but missed most wheezes ({pc(T['recall'][2])} percent) and "
-     f"labelled most healthy cycles as abnormal (Healthy recall {pc(T['recall'][1])} percent; Table 10 and Figure 7). The "
+     f"labelled most healthy cycles as abnormal (Healthy recall {pc(T['recall'][1])} percent; Table 11 and Figure 9). The "
      f"12-point drop from validation to test shows how much choosing among many runs on 30 patients flattered the "
      f"chosen model.")
-tab("Table 9", "Test-Set Classification Performance (31 Patients, 1,051 Cycles)", [
+tab("Table 10", "Test-Set Classification Performance (31 Patients, 1,051 Cycles)", [
     ["Measure", "Value", "95% CI"],
     ["Balanced accuracy", f"{pc(T['balanced_accuracy'])}%", ci("balanced_accuracy") + "%"],
     ["Accuracy", f"{pc(T['accuracy'])}%", ci("accuracy") + "%"],
@@ -741,11 +800,11 @@ tab("Table 9", "Test-Set Classification Performance (31 Patients, 1,051 Cycles)"
     ["Chance (four balanced classes)", "25.0%", "—"],
 ], [2.2, 2.4, 1.6], f"Confidence intervals from {S['bootstrap_valid_draws']:,} patient-level bootstrap resamples. The model "
    "was chosen on validation before the test patients were read, and the test subset was scored once.")
-tab("Table 10", "Per-Class Test Performance", [["Class", "Cycles", "Recall (sensitivity)", "Specificity", "Precision", "F1"]] +
+tab("Table 11", "Per-Class Test Performance", [["Class", "Cycles", "Recall (sensitivity)", "Specificity", "Precision", "F1"]] +
     [[LBL, f"{sup[i]:,}", f"{pc(T['recall'][i])}%", f"{pc(T['specificity'][i])}%", f"{pc(T['precision'][i])}%", f"{T['f1'][i]:.3f}"]
      for i, LBL in enumerate(["Crackles", "Healthy", "Wheezing", "Wheezing with Crackles"])],
     [1.9, 0.7, 1.2, 0.9, 0.9, 0.7])
-fig("Figure 7", "Test-Set Confusion Matrix", os.path.join(STATS, "fig_confusion_test.png"), 4.2,
+fig("Figure 9", "Test-Set Confusion Matrix", os.path.join(STATS, "fig_confusion_test.png"), 4.2,
     "Cell counts with row percentages; the diagonal is the recall of each class.")
 
 h3("Feature-Fusion Model Compared With the Individual Models")
@@ -785,7 +844,7 @@ para("The fusion design is adapted from the reference study (Tariq et al., 2022)
      "test scores was used to choose a model.")
 para(f"On the test subset, late fusion reached a balanced accuracy of {pc(lt['balanced_accuracy'])} percent (95% "
      f"patient-level bootstrap CI {FC['late3'][0]*100:.1f}–{FC['late3'][1]*100:.1f}), macro-F1 {lt['macro_f1']:.3f}, and "
-     f"Cohen's kappa {lt['kappa']:.3f} (Table 11 and Figure 8). The MFCC model alone, the representation used by the "
+     f"Cohen's kappa {lt['kappa']:.3f} (Table 12 and Figure 10). The MFCC model alone, the representation used by the "
      f"deployed classifier, reached {pc(sm['balanced_accuracy'])} percent, the spectrogram model "
      f"{pc(FM['single_spec']['balanced_accuracy'])} percent, and the chromagram model "
      f"{pc(FM['single_chroma']['balanced_accuracy'])} percent. The jointly trained three-branch feature-fusion network reached "
@@ -797,25 +856,25 @@ para(f"On the test subset, late fusion reached a balanced accuracy of {pc(lt['ba
      f"{pfmt(FMC['single_mfcc']['p_holm'])}. Late fusion therefore classified more cycles correctly than the MFCC model, "
      "mostly healthy ones, yet scored lower on balanced accuracy, because it recognised fewer cycles of the smaller "
      "abnormal classes; balanced accuracy, not the cycle count, is the primary measure.")
-tab("Table 11", "Test-Set Performance of the Individual and Fusion Models (31 Patients, 1,051 Cycles)",
+tab("Table 12", "Test-Set Performance of the Individual and Fusion Models (31 Patients, 1,051 Cycles)",
     [["Model", "Validation BA (%)", "Test BA, 95% CI (%)", "Macro-F1", "Kappa", "ICBHI score (%)", "vs late fusion: b / c, p (Holm)"]] +
     [[FN[r], f"{VAL[r]['bal_mean']*100:.1f}" if r in VAL else "—",
       f"{pc(FM[r]['balanced_accuracy'])} ({FC[r][0]*100:.1f}–{FC[r][1]*100:.1f})", f"{FM[r]['macro_f1']:.3f}",
       f"{FM[r]['kappa']:.3f}", pc(FM[r]['icbhi_score']),
       (f"{FMC[r]['b']} / {FMC[r]['c']}, {pfmt(FMC[r]['p_holm']).replace('= ', '')}" if r in FMC else "primary")] for r in FORD],
-    [1.9, 0.75, 1.15, 0.6, 0.55, 0.7, 1.15],
+    [1.25, 0.8, 1.35, 0.6, 0.6, 0.6, 1.2],
     "BA = balanced accuracy (mean per-class recall); chance is 25 percent. Validation BA is the mean of three seeds; "
     "each test score uses the seed chosen on validation. b = cycles that late fusion classified correctly and the other "
     "model did not; c = the reverse. McNemar's exact test, Holm-corrected across the five comparisons. Every test run is "
     "logged in model-rebuild/results/final-test-log.csv.")
-fig("Figure 8", "Test Balanced Accuracy of the Deployed, Individual, and Fusion Models",
+fig("Figure 10", "Test Balanced Accuracy of the Deployed, Individual, and Fusion Models",
     os.path.join(STATS, "fig_fusion_test.png"), 6.2,
     "Whiskers are 95 percent patient-level bootstrap confidence intervals; the dashed line marks chance. Grey bars are "
     "single-representation models, pale bars jointly trained fusion, and the rose bar the primary late-fusion model.")
 _cls = ["Crackles", "Healthy", "Wheezing", "Wheezing with Crackles"]
 _top = {i: max(FORD, key=lambda r: FM[r]["recall"][i]) for i in range(4)}
-para("The representations failed in different places, which is the condition under which fusion can help (Table 12 and "
-     f"Figure 9). The MFCC model found most crackles (recall {pc(sm['recall'][0])} percent) but labelled most healthy "
+para("The representations failed in different places, which is the condition under which fusion can help (Table 13 and "
+     f"Figure 11). The MFCC model found most crackles (recall {pc(sm['recall'][0])} percent) but labelled most healthy "
      f"cycles as abnormal (Healthy recall {pc(sm['recall'][1])} percent). The spectrogram model recognised more healthy "
      f"cycles ({pc(FM['single_spec']['recall'][1])} percent) but few wheezes ({pc(FM['single_spec']['recall'][2])} percent). "
      f"The chromagram model, which keeps only pitch-class information, had the highest recall for wheezes "
@@ -827,23 +886,23 @@ para("The representations failed in different places, which is the condition und
      f"sounds for fewer false alarms on healthy breaths, and the combined class was largely lost. No configuration detected "
      f"the combined Wheezing with Crackles class reliably; the best recall for it was "
      f"{max(FM[r]['recall'][3] for r in FORD)*100:.1f} percent ({FN[_top[3]]}).")
-tab("Table 12", "Per-Class Test Recall of the Individual and Fusion Models",
+tab("Table 13", "Per-Class Test Recall of the Individual and Fusion Models",
     [["Model", "Crackles", "Healthy", "Wheezing", "Wheezing with Crackles", "Specificity for Healthy"]] +
     [[FN[r]] + [f"{x*100:.1f}%" for x in FM[r]["recall"]] + [f"{FM[r]['icbhi_sp']*100:.1f}%"] for r in FORD],
     [2.2, 0.8, 0.8, 0.8, 1.2, 1.0],
     "Recall is the share of each class's test cycles classified correctly. The class sizes are Crackles 268, Healthy "
     "555, Wheezing 120, and Wheezing with Crackles 108 cycles.")
-fig("Figure 9", "Per-Class Test Recall by Model", os.path.join(STATS, "fig_fusion_recall.png"), 6.2,
+fig("Figure 11", "Per-Class Test Recall by Model", os.path.join(STATS, "fig_fusion_recall.png"), 6.2,
     "Bars show recall for each class. The representations make different errors; no configuration detects the combined class reliably.")
 if "sprs" in FZ["sets"]:
     FS = FZ["sets"]["sprs"]
     para(f"As an external check, the same models were applied to the held-out SPRSound test set ({FS['patients']} "
-         f"children, {FS['cycles']:,} annotated events; Table 13). These recordings come from a different stethoscope, a "
+         f"children, {FS['cycles']:,} annotated events; Table 14). These recordings come from a different stethoscope, a "
          f"different age group, and a different hospital, and none of these children were used in training. Late fusion "
          f"reached {pc(FS['metrics']['late3']['balanced_accuracy'])} percent balanced accuracy and the MFCC model "
          f"{pc(FS['metrics']['single_mfcc']['balanced_accuracy'])} percent, so the ranking of the configurations should "
          f"be read as specific to the ICBHI recording conditions until it is confirmed on other data.")
-    tab("Table 13", "External Check on the SPRSound Test Set (Children, Models Trained on ICBHI Only)",
+    tab("Table 14", "External Check on the SPRSound Test Set (Children, Models Trained on ICBHI Only)",
         [["Model", "Balanced accuracy, 95% CI (%)", "Macro-F1", "Crackles", "Healthy", "Wheezing", "W + C"]] +
         [[FN[r], f"{pc(FS['metrics'][r]['balanced_accuracy'])} ({FS['ci'][r][0]*100:.1f}–{FS['ci'][r][1]*100:.1f})",
           f"{FS['metrics'][r]['macro_f1']:.3f}"] + [f"{x*100:.0f}%" for x in FS["metrics"][r]["recall"]] for r in FORD],
@@ -866,9 +925,9 @@ para("Because every model trained on ICBHI alone failed on the SPRSound children
      "were scored.")
 para("On the 31 ICBHI test patients the primary model reached 39.4 percent balanced accuracy (95 percent CI 28.4–44.6; "
      "macro-F1 0.38), the best pre-specified test result of the study, and 57.2 percent (46.7–63.4) on the 230 SPRSound "
-     "test children (Table 14). Healthy recall rose to 52 percent, against about 30 percent for the MFCC models, so far "
+     "test children (Table 15). Healthy recall rose to 52 percent, against about 30 percent for the MFCC models, so far "
      "fewer healthy breaths were flagged as abnormal. Wheezing remained weak at 24 percent.")
-tab("Table 14", "Test Results of the Second Round, Trained on ICBHI and SPRSound",
+tab("Table 15", "Test Results of the Second Round, Trained on ICBHI and SPRSound",
     [["Model", "ICBHI test, 31 adults", "SPRSound test, 230 children", "Role"],
      ["Three-branch feature fusion, seed 33", "39.4% (28.4–44.6)", "57.2% (46.7–63.4)", "Primary"],
      ["MFCC alone, seed 22", "36.7%", "51.3%", "Comparison"],
@@ -889,16 +948,16 @@ para("Thirty-one test patients give wide intervals, and the test patients had no
      "never seen them.")
 para(f"The fusion network reached {cvf['pooled_balanced']*100:.1f} percent balanced accuracy (95 percent CI "
      f"{cvf['ci95'][0]*100:.1f}–{cvf['ci95'][1]*100:.1f}) against {cvm['pooled_balanced']*100:.1f} percent "
-     f"({cvm['ci95'][0]*100:.1f}–{cvm['ci95'][1]*100:.1f}) for the MFCC network (Table 15). In a paired patient "
+     f"({cvm['ci95'][0]*100:.1f}–{cvm['ci95'][1]*100:.1f}) for the MFCC network (Table 16). In a paired patient "
      "bootstrap of 5,000 resamples the difference was 5.9 points (95 percent CI 1.0 to 10.3; one-sided p = 0.008), and the "
      "fusion network scored higher on 14 of the 15 seed-and-fold comparisons, the other being a tie. The supporting "
      "analyses, run in jamovi, agreed: the fusion network was higher in every fold (paired t(4) = 4.75, p = .009; "
-     "Figure 10); 69 of the 126 patients had more of their cycles classified correctly by it, 39 fewer and 18 the same "
-     "(Wilcoxon signed-rank p = .009; Figure 11); and recall rose for every class (Figure 12). On the SPRSound test "
+     "Figure 12); 69 of the 126 patients had more of their cycles classified correctly by it, 39 fewer and 18 the same "
+     "(Wilcoxon signed-rank p = .009; Figure 13); and recall rose for every class (Figure 14). On the SPRSound test "
      f"children the fold models averaged {cvf['sprs_test_mean']*100:.0f} percent. The single test reading (39.4 percent) "
      "and the cross-validation (40.0 percent) agree closely, so about 40 percent is the study's best estimate.")
 _rc = lambda r: [f"{r['recall'][k]*100:.0f}%" for k in ("Crackles", "Healthy", "Wheezing", "Wheezing with Crackles")]
-tab("Table 15", "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)",
+tab("Table 16", "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)",
     [["Measure", "MFCC network, ICBHI only", "Fusion network, ICBHI + SPRSound"],
      ["Balanced accuracy (95% CI)", f"{cvm['pooled_balanced']*100:.1f}% ({cvm['ci95'][0]*100:.1f}–{cvm['ci95'][1]*100:.1f})",
       f"{cvf['pooled_balanced']*100:.1f}% ({cvf['ci95'][0]*100:.1f}–{cvf['ci95'][1]*100:.1f})"],
@@ -911,12 +970,12 @@ tab("Table 15", "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898
     [2.4, 1.9, 2.0],
     "The fusion network is the average of three training seeds. Intervals are patient-level bootstrap intervals. "
     "W + C = Wheezing with Crackles.")
-fig("Figure 10", "Balanced Accuracy of the Two Designs in Each of the Five Folds", os.path.join(FIG, "j1_cv_folds.png"), 4.6,
+fig("Figure 12", "Balanced Accuracy of the Two Designs in Each of the Five Folds", os.path.join(FIG, "j1_cv_folds.png"), 4.6,
     "Produced in jamovi (jmv 2.8, paired-samples t-test, descriptives plot). Points are fold means with 95% confidence "
     "intervals.")
-fig("Figure 11", "Share of Each Patient's Cycles Classified Correctly, by Design", os.path.join(FIG, "j2_cv_patients.png"), 4.6,
+fig("Figure 13", "Share of Each Patient's Cycles Classified Correctly, by Design", os.path.join(FIG, "j2_cv_patients.png"), 4.6,
     "Produced in jamovi (jmv 2.8, paired samples, 126 patients).")
-fig("Figure 12", "True Class Against Predicted Class in Cross-Validation", os.path.join(FIG, "j3_cv_confusion.png"), 5.4,
+fig("Figure 14", "True Class Against Predicted Class in Cross-Validation", os.path.join(FIG, "j3_cv_confusion.png"), 5.4,
     "Produced in jamovi (jmv 2.8, contingency tables, row percentages). The two panels have different vertical scales.")
 para("On 13 November 2026 this fusion network replaced the Edge Impulse model in the Resondi application. Because Edge "
      "Impulse provides no chromagram processing, it runs in the browser as an exported ONNX model, the three seeds "
@@ -927,7 +986,7 @@ para("On 13 November 2026 this fusion network replaced the Edge Impulse model in
      "often right: none of those recordings has a reference label, so its accuracy on the device remains untested.")
 
 h3("Comparison With the Original Model and the Reference Study")
-para("Table 16 places the models of this study beside the original Resondi model and the reference study. The original "
+para("Table 17 places the models of this study beside the original Resondi model and the reference study. The original "
      "model was reported at 71.1 percent test accuracy and 83.4 to 83.7 percent validation accuracy, but those figures "
      "came from five-second clips cut at a one-second stride from the same patients and split at random, so near-identical "
      "audio appeared in both training and testing, and every clip carried the patient's diagnosis rather than a label of "
@@ -949,7 +1008,7 @@ para("The reference study reported a weighted accuracy of 99.1 percent for FDC-F
      "accuracy on the test patients and 40.0 percent in cross-validation across all 126. The gap shows how strongly the evaluation protocol and the task, rather than the "
      "architecture, determine the number that is reported. The finding the two studies share is that spectrogram, MFCC, "
      "and chromagram representations each carry usable information about lung sounds.")
-tab("Table 16", "Original Model, Deployed Models, and Fusion Models Compared", [
+tab("Table 17", "Original Model, Deployed Models, and Fusion Models Compared", [
     ["Model", "Labels", "Evaluation", "Result", "Comparable?"],
     ["Original Resondi model (withdrawn)", "Patient diagnosis on every clip", "Random split of overlapping 5-s clips",
      "71.1% test; 83.4–83.7% validation accuracy", "No: leaked"],
@@ -983,11 +1042,11 @@ tab("Table 16", "Original Model, Deployed Models, and Fusion Models Compared", [
 
 h3("Heart Sound Component: Models Tested on CirCor")
 para("Heart Mode is implemented on the device and in the application: it guides the operator through the aortic, "
-     "pulmonic, tricuspid and mitral areas and Erb's point, in order from the base of the heart to the apex (Figure 13), "
+     "pulmonic, tricuspid and mitral areas and Erb's point, in order from the base of the heart to the apex (Figure 15), "
      "records 15 seconds at each site in the same 16 kHz WAV format as lung recordings, and files each recording by site "
      "for practitioner review. No heart recording is passed to the lung classifier; heart recordings are analysed by "
      "the separate heart-sound models described below, which now run in the application.")
-fig("Figure 13", "The Five Cardiac Sites Recorded in Heart Mode", os.path.join(FIG, "h1_heart_sites.png"), 3.8,
+fig("Figure 15", "The Five Cardiac Sites Recorded in Heart Mode", os.path.join(FIG, "h1_heart_sites.png"), 3.8,
     "Numbered in recording order. Erb's point (3) is filed for the practitioner and has no counterpart in the CirCor "
     "dataset, so it is not part of the classifier input.")
 para("Two heart-sound models were trained and tested on the CirCor DigiScope public release (Table 3: 3,163 recordings "
@@ -1003,11 +1062,11 @@ para("Two heart-sound models were trained and tested on the CirCor DigiScope pub
      "Unknown were left out of training and are reported separately. As the analysis plan specifies, the murmur "
      "threshold was fixed on the validation patients, before any test patient was scored, as the highest one reaching "
      "the pre-specified minimum sensitivity of 80 percent.")
-para("Table 17 gives the results on the 189 test patients. The segmentation model found 96.8 percent of reference S1 "
+para("Table 18 gives the results on the 189 test patients. The segmentation model found 96.8 percent of reference S1 "
      "sounds and 97.3 percent of S2 sounds within 100 ms, with mean onset errors of 15 and 12 ms. Heart rate was within "
      "5 beats per minute of the reference on 85 percent of 631 recordings and within 10 on 96 percent, a mean absolute "
      "error of 3.0 beats per minute (95 percent CI 2.5–3.6) against 35.4 for an untrained autocorrelation baseline "
-     "(Figure 14). The error had almost no bias (+0.1 beats per minute), but its 95 percent limits of agreement were "
+     "(Figure 16). The error had almost no bias (+0.1 beats per minute), but its 95 percent limits of agreement were "
      "−13.7 to +14.0, because a few recordings, mostly at very fast or very slow rates, were read badly wrong.")
 para("The murmur model did not reach its pre-specified sensitivity on the test patients. The threshold that gave 80.6 "
      "percent sensitivity on validation found 24 of the 36 test patients with a murmur, 66.7 percent (95 percent CI "
@@ -1026,7 +1085,7 @@ para("Both models were then placed in the Resondi application, exported to ONNX 
      "their limits (a screening aid, tested on public recordings of children and not on the device, and a missing "
      "flag does not rule a murmur out), and passed to the reviewing cardiac practitioner with the case. These checks "
      "show that the application computes what was tested, not how the models perform on the Resondi microphone.")
-tab("Table 17", "Heart-Sound Models on 189 CirCor Test Patients", [
+tab("Table 18", "Heart-Sound Models on 189 CirCor Test Patients", [
     ["Model", "Measure", "Result (95% CI)"],
     ["Segmentation", "S1 found within 100 ms; detections that are real", "96.8%; 95.7%"],
     ["Segmentation", "S2 found within 100 ms; detections that are real", "97.3%; 96.5%"],
@@ -1041,7 +1100,7 @@ tab("Table 17", "Heart-Sound Models on 189 CirCor Test Patients", [
 ], [1.7, 2.4, 2.2], "CirCor recordings: children and adolescents in Brazil, recorded with an electronic stethoscope. "
    "Murmur measures are per patient; the 14 patients labelled Unknown are excluded and reported in the text. Neither "
    "model has been tested on Resondi device recordings. Scripts: model-rebuild/scripts/heart_seg.py and heart_murmur.py.")
-fig("Figure 14", "Estimated Against Reference Heart Rate on 631 CirCor Test Recordings",
+fig("Figure 16", "Estimated Against Reference Heart Rate on 631 CirCor Test Recordings",
     os.path.join(FIG, "r6_heart_rate.png"), 3.9,
     "Each point is one recording. The dashed line is perfect agreement and the shaded band is within 5 beats per minute; "
     "teal points are more than 10 beats per minute off. Reference rates come from the dataset's annotated S1 boundaries.")
@@ -1075,21 +1134,21 @@ para("Table 7 gives the time of each stage in the field system: device connectio
 h2("Research Question 6: Clean Versus Noise-Contaminated Recordings (Hypothesis 1)")
 n20, n10, n5 = S["noise_20dB"], S["noise_10dB"], S["noise_5dB"]
 para(f"To test Hypothesis 1, Gaussian noise was added to every test window at signal-to-noise ratios of 20, 10, and 5 dB "
-     f"and the same cycles were classified again. Performance fell to chance at every level (Table 18 and Figure 15): at "
+     f"and the same cycles were classified again. Performance fell to chance at every level (Table 19 and Figure 17): at "
      f"20 dB, balanced accuracy dropped from {pc(T['balanced_accuracy'])} to {pc(n20['metrics']['balanced_accuracy'])} percent. "
      f"McNemar's exact test showed that more cycles changed from correct to incorrect than the reverse at each level "
      f"(20 dB: b = {n20['mcnemar']['b']}, c = {n20['mcnemar']['c']}, odds ratio {n20['mcnemar']['odds_ratio']:.2f}, "
      f"Holm-adjusted p {pfmt(n20['mcnemar']['p_holm'])}). The null hypothesis of no difference was therefore rejected: the "
      f"classifier is not robust to added noise, even at a level milder than the ward and community conditions measured in "
      f"the field.")
-tab("Table 18", "Effect of Added Noise on the Same Test Cycles", [["Condition", "Accuracy", "Balanced accuracy", "b", "c", "Odds ratio", "p (Holm)"],
+tab("Table 19", "Effect of Added Noise on the Same Test Cycles", [["Condition", "Accuracy", "Balanced accuracy", "b", "c", "Odds ratio", "p (Holm)"],
     ["Clean", f"{pc(T['accuracy'])}%", f"{pc(T['balanced_accuracy'])}%", "—", "—", "—", "—"]] +
     [[f"{s} dB SNR", f"{pc(S[f'noise_{s}dB']['metrics']['accuracy'])}%", f"{pc(S[f'noise_{s}dB']['metrics']['balanced_accuracy'])}%",
       str(S[f"noise_{s}dB"]["mcnemar"]["b"]), str(S[f"noise_{s}dB"]["mcnemar"]["c"]), f"{S[f'noise_{s}dB']['mcnemar']['odds_ratio']:.2f}",
       pfmt(S[f"noise_{s}dB"]["mcnemar"]["p_holm"])] for s in (20, 10, 5)],
     [1.2, 0.9, 1.2, 0.5, 0.5, 0.9, 0.9], "b = cycles correct when clean and wrong when noisy; c = the reverse. "
     "McNemar's exact binomial test, Holm-corrected across the three noise levels.")
-fig("Figure 15", "Test-Set Performance Under Added Noise", os.path.join(STATS, "fig_noise_test.png"), 4.6,
+fig("Figure 17", "Test-Set Performance Under Added Noise", os.path.join(STATS, "fig_noise_test.png"), 4.6,
     "The dashed line marks chance (25 percent).")
 
 h2("Research Question 7: Reference-Dataset Versus Device Recordings (Hypothesis 2)")
@@ -1153,7 +1212,7 @@ h3("Respiratory-Sound Severity Score")
 cal_, sv = S["calibration"], S["severity_test"]
 co = cal_["coef"]
 para(f"The severity algorithm was calibrated on the {cal_['n_recordings']} validation recordings by ordinary least squares "
-     f"(Table 19). All three abnormal-class confidence scores were significant predictors, but the fit was weak "
+     f"(Table 20). All three abnormal-class confidence scores were significant predictors, but the fit was weak "
      f"(R² = {cal_['r2_fit']:.3f}), and the wheezing and crackles terms were strongly collinear (VIF {cal_['vif'][0]:.1f} and "
      f"{cal_['vif'][1]:.1f}), so the individual coefficients are unstable. On the {sv['n_recordings']} test recordings, "
      f"whose reference severity averaged {sv['ref_mean']:.1f} ± {sv['ref_sd']:.1f} percent, the uncalibrated estimator "
@@ -1161,10 +1220,10 @@ para(f"The severity algorithm was calibrated on the {cal_['n_recordings']} valid
      f"{sv['direct']['mae']:.1f}, R² {sv['direct']['r2']:.2f}). Calibration removed most of the bias but explained almost "
      f"none of the variation (RMSE {sv['calibrated_ols']['rmse']:.1f}, MAE {sv['calibrated_ols']['mae']:.1f}, R² "
      f"{sv['calibrated_ols']['r2']:.3f}; {cal_['clipped_test']} predictions clipped), and the beta-regression sensitivity "
-     f"analysis gave the same picture (RMSE {sv['beta_regression']['rmse']:.1f}, R² {sv['beta_regression']['r2']:.3f}; Figure 16). "
+     f"analysis gave the same picture (RMSE {sv['beta_regression']['rmse']:.1f}, R² {sv['beta_regression']['r2']:.3f}; Figure 18). "
      f"Because RMSE equalled roughly 43 points on a 0–100 scale, a change in severity between visits would have to exceed "
      f"about 43 points before the longitudinal analysis could count it as real.")
-tab("Table 19", "Severity Calibration and Accuracy", [
+tab("Table 20", "Severity Calibration and Accuracy", [
     ["", "Estimate", "SE", "p", "VIF"],
     ["Intercept", f"{co['intercept']:.1f}", f"{cal_['se'][0]:.1f}", pfmt(cal_['p'][0]), "—"],
     ["p(Wheezing)", f"{co['p(W)']:.1f}", f"{cal_['se'][1]:.1f}", pfmt(cal_['p'][1]), f"{cal_['vif'][0]:.1f}"],
@@ -1176,18 +1235,18 @@ tab("Table 19", "Severity Calibration and Accuracy", [
     ["Beta regression (sensitivity)", f"{sv['beta_regression']['rmse']:.1f}", f"{sv['beta_regression']['mae']:.1f}", f"{sv['beta_regression']['r2']:.3f}", f"{sv['beta_regression']['bias']:+.1f}"],
 ], [2.3, 1.0, 1.0, 1.0, 0.9], f"Calibration fitted on {cal_['n_recordings']} validation recordings (R² = {cal_['r2_fit']:.3f}, "
    f"df = {cal_['df']}); errors are in percentage points on the 0–100 severity scale.")
-fig("Figure 16", "Predicted Against Reference Severity (Test Recordings)", os.path.join(STATS, "fig_severity_test.png"), 4.0,
+fig("Figure 18", "Predicted Against Reference Severity (Test Recordings)", os.path.join(STATS, "fig_severity_test.png"), 4.0,
     "The dashed line marks perfect agreement.")
 kw = S["kruskal"]
 g = kw["groups"]
 sig = [d for d in kw["dscf"] if d["p"] < 0.05]
 para(f"A Kruskal–Wallis test found that predicted severity differed across the reference recording categories, "
-     f"H({kw['df']}) = {kw['H']:.2f}, p {pfmt(kw['p'])}, but the effect was small (ε² = {kw['epsilon_sq']:.3f}; Table 20). "
+     f"H({kw['df']}) = {kw['H']:.2f}, p {pfmt(kw['p'])}, but the effect was small (ε² = {kw['epsilon_sq']:.3f}; Table 21). "
      f"Dwass–Steel–Critchlow–Fligner comparisons located the difference only between Crackles and Wheezing with Crackles "
      f"recordings (p {pfmt(sig[0]['p']) if sig else '> .05'}); healthy recordings received a median predicted severity of "
      f"{g['Healthy']['median']:.1f} percent, close to that of abnormal recordings, which reflects the model's tendency to "
      f"label healthy breaths as abnormal.")
-tab("Table 20", "Predicted Severity by Reference Recording Category (Test Recordings)",
+tab("Table 21", "Predicted Severity by Reference Recording Category (Test Recordings)",
     [["Category", "n", "Median (%)", "IQR (%)"]] +
     [[k_, str(v_["n"]), f"{v_['median']:.1f}", f"{v_['iqr'][0]:.1f}–{v_['iqr'][1]:.1f}"] for k_, v_ in g.items()] +
     [["Pairwise (DSCF)", "W", "p", ""]] + [[d["pair"], f"{d['W']:.2f}", pfmt(d["p"]).replace("= ", ""), ""] for d in kw["dscf"]],
@@ -1196,27 +1255,27 @@ tab("Table 20", "Predicted Severity by Reference Recording Category (Test Record
     "Wheezing with Crackles.")
 
 h2("Summary of Answers to the Research Questions")
-para("Table 21 gives the answer to each research question, the evidence behind it, and how complete it is. Of the eleven "
+para("Table 22 gives the answer to each research question, the evidence behind it, and how complete it is. Of the eleven "
      "questions, five are answered (Questions 1 to 5), one hypothesis was tested and rejected (Question 6), three are "
      "answered in part (Questions 8, 9, and 11), and two cannot yet be answered with the data collected (Questions 7 and "
      "10).")
-tab("Table 21", "Answers to the Research Questions", [
+tab("Table 22", "Answers to the Research Questions", [
     ["Research question", "Answer", "Status and where reported"],
     ["1. Recording quality: signal, clarity, noise", "Signal 45 dB against 32 dB for a conventional stethoscope; 68% good, "
      "25% acceptable, 7% poor; recorded at 24, 35, and 42 dB ambient noise", "Answered descriptively; no formal "
      "signal-to-noise ratio (Table 7)"],
     ["2. Smart stethoscope: design, components, cost", "Handheld PLA unit, 173 × 80 × 70 mm; ESP32, INMP441 MEMS "
-     "microphone, microSD, own Wi-Fi; bill of materials ₱2,775, unit cost ₱4,000", "Answered (Table 1, Figures 1–3)"],
+     "microphone, microSD, own Wi-Fi; bill of materials ₱2,775, unit cost ₱4,000", "Answered (Tables 1 and 8; Figures 1–3, 6, and 7)"],
     ["3. Platform: interface, architecture, access, data", "Bilingual web app with guided Lung and Heart modes; device, "
      "phone transfer, and platform tiers; patient, practitioner, and administrator roles with case-level access; "
      "recordings stored by site with versioned analyses", "Answered (this section)"],
     ["4. Analysis system: preprocessing, features, branches, fusion", "1-s band-limited windows; MFCC, spectrogram, "
      "chromagram; one CNN branch each; concatenation fusion, 40.0% balanced accuracy in cross-validation; separate "
-     "heart models", "Answered (Table 4, Figure 4, Tables 11–15 and 17)"],
+     "heart models", "Answered (Table 4, Figure 4, Tables 12–16 and 18)"],
     ["5. Response time", "Connection 4.55 s; recording 15.00 s; quality check 144.68 s; preprocessing 20.91 s; "
      "classification 3.97 s", "Answered; the quality check limits use (Table 7)"],
     ["6. Clean vs noise-contaminated (Hypothesis 1)", "Balanced accuracy fell from 35.0% to about 25% at 20, 10, and 5 dB "
-     "signal-to-noise ratio; McNemar Holm-adjusted p < .001 at each level", "H₀ rejected (Table 18, Figure 15)"],
+     "signal-to-noise ratio; McNemar Holm-adjusted p < .001 at each level", "H₀ rejected (Table 19, Figure 17)"],
     ["7. Reference vs device recordings (Hypothesis 2)", "No device recordings with clinician labels exist; on unlabelled "
      "device recordings the models are less decisive", "Not yet testable; needs labelled device recordings"],
     ["8. Conventional stethoscope vs Resondi quality (Hypothesis 3)", "Resondi signal about 13 dB stronger; paired raw "
@@ -1233,10 +1292,10 @@ tab("Table 21", "Answers to the Research Questions", [
    "are addressed; not yet answered, the data needed have not been collected.")
 
 h2("Summary of the Model Results")
-para("Table 22 brings together the results of the models now running in the platform: the lung fusion network and the "
+para("Table 23 brings together the results of the models now running in the platform: the lung fusion network and the "
      "two heart-sound models. Every figure comes from public datasets on patients the models never heard in training; "
      "none comes from Resondi device recordings.")
-tab("Table 22", "Accuracy of the Lung Fusion Network and the Heart-Sound Models", [
+tab("Table 23", "Accuracy of the Lung Fusion Network and the Heart-Sound Models", [
     ["Model", "Test", "Measure", "Result (95% CI)"],
     ["Lung fusion network (MFCC, spectrogram, chromagram; ICBHI + SPRSound)", "Five-fold cross-validation, 126 ICBHI "
      "adults", "Balanced accuracy; accuracy; macro F1", "40.0% (35.9–43.5); 43.0%; 0.37"],
@@ -1254,7 +1313,7 @@ tab("Table 22", "Accuracy of the Lung Fusion Network and the Heart-Sound Models"
     ["Murmur detection", "175 CirCor test patients", "Sensitivity (target 80%)", "66.7% (50.0–81.8)"],
     ["Murmur detection", "175 CirCor test patients", "Specificity; AUROC", "97.1% (93.9–99.3); 0.96"],
 ], [1.75, 1.65, 1.6, 1.3], "Chance for the four lung classes is 25 percent balanced accuracy. The lung rows come "
-   "from Tables 14 and 15 and the text around them, and the heart rows from Table 17. The murmur detector missed its pre-specified 80 percent sensitivity. "
+   "from Tables 15 and 16 and the text around them, and the heart rows from Table 18. The murmur detector missed its pre-specified 80 percent sensitivity. "
    "None of these models has been tested on labelled Resondi device recordings.")
 
 h2("Discussion")
@@ -1393,6 +1452,14 @@ log("Heart-sound models in the application (14 Nov)", "Models tested on CirCor; 
     "plan put first, and that every heart result there is marked as a screening aid. Rationale and limitations updated.",
     "Requested by the user on 14 Nov. Numbers from model-rebuild/results/heart-app-path-check.md and heart-js-parity.json; "
     "app change in app-changes/heart-models-v1.md.")
+log("Cost of materials, parts figure, table style, figure corrections (25 Nov)",
+    "Cost given as one total; no itemized list. INMP441 described as delivering 16-bit samples. Figure 1 carried a funding "
+    "line; Figure 4 had text outside its boxes; pictures sat off-centre; tables split across pages; page 20 blank.",
+    "Research Question 2 has the parts figure (Figure 6), the itemized cost (Table 8) and the cost chart (Figure 7); Tables 8 "
+    "to 22 became 9 to 23 and Figures 6 to 16 became 8 to 18. INMP441: 24-bit output, stored as 16-bit. Figure 1 redrawn with "
+    "the phone transfer and without the funding line; Figure 4 redrawn as built; Figure 8 shows all 14 configurations from a "
+    "zero baseline; tables in the IMRaD's three-line style, each on one page.",
+    "Requested by the user on 25 Nov. Items and prices from build/fig/bom_v2.py.")
 log("Second training round, cross-validation, deployment (13 Nov)", "Fusion reported as not adopted (ICBHI-only round)",
     "New section 'Adding the Paediatric Corpus, and Cross-Validation': Table 17 (ICBHI + SPRSound test, 39.4% / 57.2%), "
     "Table 18 (5-fold CV, 40.0% vs 34.0%, +5.9 points, p = 0.008), Figures 12-14 made with jamovi (jmv), and the 13 Nov "
@@ -1521,6 +1588,9 @@ for el in list(hdr._element):
         hdr._element.remove(el)
 hdr._element.append(x0)
 hdr._element.append(x1)
+_h2 = Paragraph(x1, hdr)          # the logo covered the S of SCIENCE (centred line); start it under the school's name
+_h2.alignment = WD_ALIGN_PARAGRAPH.LEFT
+_h2.paragraph_format.left_indent, _h2.paragraph_format.right_indent = Pt(2136 / 20), Pt(0)
 ftr = sec.footer
 ftr.is_linked_to_previous = False
 for el in list(ftr._element):
@@ -1578,6 +1648,27 @@ import os as _os, sys as _sys  # house style: Times New Roman 11, justified, con
 _sys.path.insert(0, _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "style"))
 import house_style  # noqa: E402
 print("  house style:", house_style.apply(D, line_spacing=2.0))  # double spacing (user, 14 Nov)
+# 25 Nov: empty paragraphs before a section that starts a new page spilled onto a page of their own (page 20).
+_n = 0
+for _p in D.paragraphs:
+    if _p.paragraph_format.page_break_before:
+        _q = _p._p.getprevious()
+        while _q is not None and _q.tag in (qn("w:bookmarkStart"), qn("w:bookmarkEnd")):
+            _q = _q.getprevious()
+        while (_q is not None and _q.tag == qn("w:p") and not "".join(x.text or "" for x in _q.iter(qn("w:t"))).strip()
+               and _q.find(".//" + qn("w:drawing")) is None and _q.find(qn("w:pPr") + "/" + qn("w:sectPr")) is None):
+            _prev = _q.getprevious()
+            while _prev is not None and _prev.tag in (qn("w:bookmarkStart"), qn("w:bookmarkEnd")):
+                _prev = _prev.getprevious()
+            _q.getparent().remove(_q)
+            _q, _n = _prev, _n + 1
+print("  empty paragraphs before section starts removed:", _n)
+_h = 0
+for _p in D.paragraphs:                      # the alternative hypotheses line up with the null ones above them
+    if _p.text.startswith("H₁:"):
+        _p.paragraph_format.left_indent, _p.paragraph_format.first_line_indent = Inches(0.5), Inches(0)
+        _h += 1
+print("  alternative hypotheses aligned:", _h)
 # Submission copy (user, 15 Nov: "make sure it's ready to pass"): no highlighted text may remain, including
 # highlights carried over from the original document.
 _hl = 0
@@ -1632,6 +1723,24 @@ print("  review fixes:", review_fixes.apply(D, [
 ]))
 print("  flowchart arrow:", review_fixes.insert_after(D, "Research Dashboard and Data-Export Testing",
                                                       "End User Acceptance Testing", "▼"))
+for _p in D.paragraphs:                      # space between the flowchart and the paragraph after it
+    if _p.text.strip() == "End User Acceptance Testing" and _p.alignment == WD_ALIGN_PARAGRAPH.CENTER:
+        _p.paragraph_format.space_after = Pt(20)
+# captions and the notes under tables and figures are single-spaced; the text stays double-spaced (25 Nov)
+_c = 0
+for _p in D.paragraphs:
+    if re.match(r"(Table|Figure) \d+\.", _p.text) or _p.text.startswith("Note. ") or (
+            _p.runs and _p._p.getprevious() is not None and _p._p.getprevious().tag == qn("w:p")
+            and re.fullmatch(r"Table \d+\.", "".join(x.text or "" for x in _p._p.getprevious().iter(qn("w:t"))).strip())):
+        _p.paragraph_format.line_spacing = 1.0
+        if _p.text.startswith("Note. "):
+            _p.paragraph_format.space_after = Pt(14)
+        _c += 1
+    if _p.text.rstrip().endswith(":"):          # an equation stays with the line that introduces it
+        _nx = _p._p.getnext()
+        if _nx is not None and _nx.find(".//" + qn("w:drawing")) is not None:
+            _p.paragraph_format.keep_with_next = True
+print("  captions and notes single-spaced:", _c)
 D.save(OUT)
 print("wrote", OUT)
 

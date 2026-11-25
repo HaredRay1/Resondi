@@ -500,7 +500,7 @@ para("The device pairs a conventional acoustic chest piece and silicone tubing w
      "character LCD for device status, and a 10,000 mAh power bank. The assembly is housed "
      "in a 3D-printed polylactic acid casing. All results reported here were obtained with "
      "that build.", first=0)
-para("The device has since been revised as enclosure version 2.0, which was not used in "
+para("The device has since been revised as enclosure version 2.0 (Figure 1), which was not used in "
      "this evaluation: the INMP441 digital microphone is read over I²S with no analogue "
      "preamplifier, and Bluetooth is replaced by a Wi-Fi access "
      "point through which a browser connects to the device directly. Whether the revised "
@@ -521,7 +521,7 @@ p = para("The MAX4466 was selected for unit-to-unit consistency of frequency "
          "in transducer response between devices would introduce drift into precisely "
          "the measurement the system exists to make.", first=0)
 
-p = para("The microcontroller samples the preamplified acoustic signal, writes the "
+p = para("In the field build (Figure 2), the microcontroller samples the preamplified acoustic signal, writes the "
          "recording to MicroSD together with its metadata (anatomical site, timestamp, "
          "and duration) in WAV format, and advertises over Bluetooth Low Energy. Two "
          "storage paths "
@@ -534,7 +534,7 @@ para("Recordings were stored as 16-bit, 16 kHz mono WAV files of 15 seconds and 
      "application they did not overlap, with segment scores averaged over each breathing "
      "cycle or recording.", first=0)
 
-FIG(2, "Hardware Architecture of the Device",
+FIG(2, "Hardware Architecture of the Field Build",
     "d1_hardware.png", 6.05)
 
 H2("Auscultation Protocol")
@@ -564,7 +564,7 @@ FIG(3, "The Seven Standardised Sites Recorded by the Evaluated Build",
     "d2_seven_sites.png", 4.9)
 
 para("Heart Mode uses the same device and recording settings with a separate guided "
-     "sequence of five sites, recorded from the base of the heart to the apex: the aortic "
+     "sequence of five sites (Figure 4), recorded from the base of the heart to the apex: the aortic "
      "area (second intercostal space, right sternal border), the pulmonic area (second "
      "intercostal space, left sternal border), Erb's point (third intercostal space, left "
      "sternal border), the tricuspid area (fourth intercostal space, left lower sternal "
@@ -583,7 +583,7 @@ H2("Signal Processing and Model Architecture")
 para("Each raw WAV recording is resampled to 16 kHz to provide a consistent rate for "
      "processing, then passes through noise reduction to suppress background "
      "interference, amplitude normalisation to standardise level, and segmentation into "
-     "fixed-length segments. Each segment is divided into short frames, transformed by "
+     "fixed-length segments (Figure 5). Each segment is divided into short frames, transformed by "
      "Short-Time Fourier Transform, passed through a mel-scale filterbank, and reduced "
      "by a discrete cosine transform to mel-frequency cepstral coefficients (MFCCs), "
      "which form the input to the classifier. The parameters are given below.", first=0)
@@ -592,7 +592,7 @@ FIG(4, "Audio Preprocessing Applied to Every Recording",
     "d3_preprocess.png", 6.05)
 
 p = para("The classifier is a convolutional neural network taking the MFCC sequence as "
-         "its single input. Convolutional layers extract local patterns from the "
+         "its single input (Figure 6). Convolutional layers extract local patterns from the "
          "coefficients over time, pooling layers reduce feature dimensionality, the result "
          "is flattened, and a softmax output layer "
          "returns class probabilities over four categories: normal, wheezing, crackles, "
@@ -632,7 +632,7 @@ para("Twenty percent of the training data was held out for validation. No metada
 FIG(5, "Classification Model Architecture",
     "d4_classifier.png", 6.05)
 
-p = para("A rule-based interpretation layer operates above the classifier. Per-zone "
+p = para("A rule-based interpretation layer operates above the classifier (Figure 7). Per-zone "
          "classifications are mapped by six explicit rules to a literature-supported "
          "possibility \u2014 for example, all zones healthy, a bilateral upper-zone wheeze "
          "component, or crackles in one or both lower zones \u2014 each accompanied by its "
@@ -718,16 +718,14 @@ para("Two architectures are reported. The first keeps the original design: 13 MF
      "filters. An eight-bit Edge Impulse build of this network replaced the original "
      "model in the Resondi application on 10 November 2026, and was itself replaced by "
      "the fusion network on 13 November 2026. The second is a three-branch "
-     "feature-fusion network after Tariq et al. (2022). The same window is represented "
+     "feature-fusion network after Tariq et al. (2022), shown in Figure 8. The same window is represented "
      "three ways: as 13 MFCCs, as a log-power spectrogram from 0 to 4 kHz (129 bins, "
      "20 ms frames), and as a 12-bin chromagram from 50 to 4,000 Hz (64 ms frames). Each "
      "representation passes through its own convolutional branch; the three 64-unit "
      "outputs are concatenated and passed to a dense layer and a four-class softmax "
      "output, about 190,000 parameters in total.", first=0)
 FIG(7, "The Three-Branch Feature-Fusion Classifier as Built",
-    "p2_fusion.png", 6.05,
-    note="The diagram was drawn when this design was planned. The built version uses a "
-         "log-power spectrogram in the first branch.")
+    "p2_fusion.png", 6.05)
 para("Because ICBHI 2017 contains only adult European patients, a second training "
      "corpus was added: SPRSound, the SJTU Paediatric Respiratory Sound Database "
      "(Zhang et al., 2022), recorded from children aged one month to 18 years at "
@@ -1023,17 +1021,17 @@ para("Mean signal strength measured approximately 45 dB for Resondi against "
 
 H3("Recording Clarity")
 FIG(7, "Distribution of Recording Clarity Ratings",
-    "r1_clarity.png", 5.7)
+    "r1_clarity.png", 4.3)
 
 H3("Ambient Noise Conditions")
 FIG(8, "Ambient Noise Levels Across Three Recording Environments",
-    "r2_noise.png", 5.7)
+    "r2_noise.png", 4.3)
 
 para("These results answer Research Question 1 descriptively. In signal quality, "
      "Resondi recorded about 13 dB more than a conventional stethoscope; in clarity, "
-     "93 percent of recordings were rated good or acceptable; and in noise level, "
+     "93 percent of recordings were rated good or acceptable (Figure 9); and in noise level, "
      "recordings were made at ambient levels of 24, 35 and 42 dB, the last in a "
-     "community setting.", first=0)
+     "community setting (Figure 10).", first=0)
 
 H2("Research Question 2: Specifications of the Smart Stethoscope")
 para("In its current version 2.0 design, the Resondi smart stethoscope is a handheld unit that joins an "
@@ -1146,7 +1144,7 @@ para("The analysis system preprocesses audio to 16 kHz mono and cuts it into 1-s
 H3("Classification Agreement")
 para("Of fifteen recordings compared against reference labels, six produced matching "
      "classifications, an agreement of 40 percent with a 95 percent Wilson score interval "
-     "of 19.8 to 64.3 percent. That interval contains both the 25 percent agreement "
+     "of 19.8 to 64.3 percent (Figure 16). That interval contains both the 25 percent agreement "
      "expected by chance across four categories and a usefully performing classifier, and "
      "the present sample cannot distinguish between them. An exact binomial test against "
      "chance returned p = 0.148; eight of fifteen agreements would have been required to "
@@ -1156,7 +1154,7 @@ para("Of fifteen recordings compared against reference labels, six produced matc
      "not scored against these reference labels.", first=0)
 
 FIG(10, "Classification Agreement Against Reference Labels, with the 95% "
-        "Wilson Interval", "r4_agreement.png", 5.7)
+        "Wilson Interval", "r4_agreement.png", 4.6)
 
 H3("Rebuilt Classifier: Pre-Specified Test")
 para("Table 3 gives the rebuilt models' scores on the 31 ICBHI test patients, none of "
@@ -1720,7 +1718,7 @@ para("Department of Health facility registry figures record approximately 26,504
      "can presently serve are narrower: about 3,518 rural health units and "
      "municipal or city health centres that have a resident clinician able to perform the practitioner review the platform depends "
      "on. Nursing and medical schools form a second group, for which the system functions "
-     "as a teaching instrument rather than a clinical one.", first=0)
+     "as a teaching instrument rather than a clinical one. Table 10 gives the role of each group.", first=0)
 
 TBL(3, "Intended Users and Their Role in the System",
     [["Group", "Role", "What the system provides"],

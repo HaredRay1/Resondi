@@ -2,8 +2,14 @@
 
 Replaces figB_device.png, which drew the earlier build (preamplifier, BLE, tubing).
 Solid lines exist today; the dashed path is what the ₱38,000 line builds.
+
+    python build/fig/fig2_device_v2.py          -> figures/Resondi-Hardware-Block-VER2.png (concept note)
+    python build/fig/fig2_device_v2.py --paper  -> figures/Resondi-Hardware-Block-Paper.png (research plan Figure 1:
+                                                   no funding line, and the phone transfer added on 14 Nov 2026)
 """
 import os
+import sys
+PAPER = "--paper" in sys.argv
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -13,7 +19,7 @@ NAVY, LIGHT, PALE = "#8E2A52", "#FBE9F0", "#FDF4F8"
 GREY, TEXT = "#6F6F6F", "#262626"
 SERIF = "serif"
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "figures",
-                   "Resondi-Hardware-Block-VER2.png")
+                   "Resondi-Hardware-Block-Paper.png" if PAPER else "Resondi-Hardware-Block-VER2.png")
 
 
 def box(x, y, w, h, label, sub=None, fc="white", ec=NAVY, lw=1.2, ls="solid", fs=7.5, subfs=6.6):
@@ -52,11 +58,11 @@ band(3.10, 0.42, 7.02, 3.46, "RESONDI DEVICE (BUILT)")
 band(7.17, 0.42, 10.05, 3.46, "BEYOND THE DEVICE")
 
 box(0.27, 2.45, 1.20, 0.85, "Chest piece", "diaphragm")
-box(1.65, 2.45, 1.18, 0.85, "Printed mount", "acoustic coupling")
+box(1.65, 2.45, 1.18, 0.85, "Printed mount", "acoustic coupling", fs=7.0 if PAPER else 7.5)
 arrow((1.47, 2.87), (1.65, 2.87))
 arrow((2.83, 2.87), (3.25, 2.87))
 
-box(3.25, 2.45, 1.45, 0.85, "MEMS microphone", "INMP441, digital")
+box(3.25, 2.45, 1.45, 0.85, "MEMS microphone", "INMP441, digital", fs=6.6 if PAPER else 7.5)
 box(4.92, 2.45, 1.98, 0.85, "Controls", "Heart and Lungs buttons\ntwo status LEDs")
 
 box(3.25, 1.45, 2.25, 0.72, "ESP32 microcontroller", "dual-core, up to 240 MHz", fc=LIGHT, lw=1.7)
@@ -86,12 +92,17 @@ ax.text(9.32, 0.86, "built: records,\nAI, review", ha="center", va="center", fon
 arrow((8.50, 1.81), (8.72, 1.81), ls=(0, (3, 2)))
 
 arrow((6.90, 0.88), (8.72, 0.88))
-ax.text(7.81, 0.95, "memory card, carried", ha="center", va="bottom", fontsize=6.6,
+ax.text(7.81, 0.95, "memory card" if PAPER else "memory card, carried", ha="center", va="bottom", fontsize=6.6,
         family=SERIF, color=GREY, style="italic")
-ax.text(7.81, 0.81, "by a person, today", ha="center", va="top", fontsize=6.6, family=SERIF, color=GREY,
+ax.text(7.81, 0.81, "carried by a person" if PAPER else "by a person, today", ha="center", va="top", fontsize=6.6, family=SERIF, color=GREY,
         style="italic")
 
-ax.text(W / 2, 0.14, "Solid lines work today. The dashed path is the link the ₱38,000 mobile "
+if PAPER:
+    arrow((9.32, 2.45), (9.32, 2.17))
+    ax.text(9.24, 2.31, "downloaded, then uploaded", ha="right", va="center", fontsize=6.6, family=SERIF, color=GREY,
+            style="italic")
+ax.text(W / 2, 0.14, "Solid lines work today. The dashed path, the automatic gateway, is not built." if PAPER else
+        "Solid lines work today. The dashed path is the link the ₱38,000 mobile "
         "application line builds.", ha="center", fontsize=7.8, family=SERIF, color=GREY, style="italic")
 
 fig.savefig(OUT, dpi=240, bbox_inches="tight", pad_inches=0.06, facecolor="white")

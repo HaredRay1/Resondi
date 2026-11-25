@@ -11,35 +11,36 @@ def d1_hardware():
     fig, ax = canvas(PX, PY)
     TOP, BH = 300, 132                       # one row of boxes
     group(ax, 40, 268, 540, 196, "ACOUSTIC")
-    group(ax, 628, 120, 700, 344, "ELECTRONIC")
+    group(ax, 628, 120, 586, 344, "ELECTRONIC")
     group(ax, 1376, 150, 488, 314, "TRANSMISSION")
 
     box(ax, 72, TOP, 222, BH, "Chest piece", "diaphragm")
     box(ax, 330, TOP, 222, BH, "Tubing", "silicone")
     arrow(ax, (296, TOP + BH / 2), (326, TOP + BH / 2))
 
-    box(ax, 660, TOP, 240, BH, "Microphone", "MEMS + preamp")
+    box(ax, 660, TOP, 240, BH, "Microphone", "electret +\nMAX4466")
     arrow(ax, (554, TOP + BH / 2), (656, TOP + BH / 2))
     box(ax, 942, TOP, 240, BH, "ESP32", "microcontroller",
         fill=LIGHT, lw=2.3)
     arrow(ax, (902, TOP + BH / 2), (938, TOP + BH / 2))
 
-    box(ax, 660, 150, 240, 96, "OLED", "device status", ts=7.6, ss=6.1)
-    box(ax, 942, 150, 240, 96, "Li-ion cell", "charge + protect", ts=7.6, ss=6.1)
-    for x0 in (780, 1062):
-        ax.plot([x0, x0], [246, TOP], color=RULE, lw=1.5, zorder=1)
+    # 25 Nov 2026: the field build has a 20 x 4 LCD and a power bank (it was drawn with an OLED and a Li-ion cell)
+    box(ax, 660, 150, 240, 96, "Power bank", "10,000 mAh", ts=7.6, ss=6.1)
+    box(ax, 942, 150, 240, 96, "20 × 4 LCD", "device status", ts=7.6, ss=6.1)
+    ax.plot([1062, 1062], [246, TOP], color=MID, lw=1.5, zorder=1)                     # LCD to ESP32
+    ax.plot([900, 921, 921, 942], [198, 198, 318, 318], color=MID, lw=1.5, zorder=1)   # power to ESP32
 
     box(ax, 1404, 322, 212, 112, "BLE", "live transfer")
     box(ax, 1404, 180, 212, 112, "MicroSD", "offline buffer")
     arrow(ax, (1184, TOP + 80), (1400, 386), rad=-0.10)
     arrow(ax, (1184, TOP + 40), (1400, 244), rad=0.10)
 
-    box(ax, 1652, 252, 196, 140, "Mobile\ngateway", fill=LIGHT, lw=2.3, ts=8.2)
+    box(ax, 1652, 252, 196, 140, "Mobile\napplication", fill=LIGHT, lw=2.3, ts=8.2)
     arrow(ax, (1618, 378), (1650, 350), rad=-0.10)
     arrow(ax, (1618, 236), (1650, 292), rad=0.10)
 
-    caption(ax, PX, "Dual storage: BLE where a phone is present, MicroSD where "
-                    "connectivity is not", y=40)
+    caption(ax, PX, "Field build used in the evaluation. BLE is used where a phone is present, "
+                    "MicroSD where it is not", y=40)
     save(fig, OUT + "d1_hardware.png")
 
 

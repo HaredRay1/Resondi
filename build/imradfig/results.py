@@ -22,7 +22,7 @@ def clarity():
     ax.set_yticks(y); ax.set_yticklabels(cats, fontsize=10.5, color=INK)
     ax.set_xlim(0, 78); ax.set_xticks([])
     strip(ax, keep=())
-    ax.text(0, 1.22, "93% of recordings were usable for classification",
+    ax.text(0, 1.22, "93% of recordings were rated good or acceptable",
             transform=ax.transAxes, fontsize=9.5, color=GREY, style="italic")
     save(fig, OUT + "r1_clarity.png")
 
@@ -37,8 +37,8 @@ def noise():
     y = np.arange(len(cats))[::-1]
     ax.barh(y, vals, height=0.54, color=PRIMARY, zorder=3)
     for yy, v in zip(y, vals):
-        ax.text(v + 0.5, yy, f"{v} dB", va="center", ha="left",
-                fontsize=10.5, color=INK, fontweight="bold")
+        ax.text(v - 0.8, yy, f"{v} dB", va="center", ha="right",       # inside: 42 dB ran into the 45 dB line
+                fontsize=10.5, color=SURFACE, fontweight="bold", zorder=5)
     ax.axvline(signal, color=GREY, lw=1.1, ls="--", zorder=2)
     ax.text(signal + 0.6, y[0], f"device\nsignal\n{signal} dB", fontsize=8.5,
             color=GREY, style="italic", va="center", linespacing=1.2)
@@ -47,8 +47,7 @@ def noise():
     ax.set_xlabel("Ambient noise (dB)", fontsize=9.5, color=GREY, labelpad=6)
     strip(ax, keep=(), grid="x")
     ax.set_xticks([0, 10, 20, 30, 40, 50]); ax.tick_params(labelsize=9)
-    ax.text(0, 1.20, "Capture remained possible in all three settings; margin to the "
-            "signal falls from 21 dB to 3 dB",
+    ax.text(0, 1.20, "The margin below the 45 dB signal falls from 21 dB to 3 dB",
             transform=ax.transAxes, fontsize=9.5, color=GREY, style="italic")
     save(fig, OUT + "r2_noise.png")
 
@@ -109,8 +108,7 @@ def agreement():
     ax.set_xticks([0, 25, 50, 75, 100])
     ax.set_xticklabels(["0", "25", "50", "75", "100%"], fontsize=9)
     strip(ax, keep=())
-    ax.text(0, 1.16, "95% Wilson interval spans 44 points — it contains "
-            "chance and a usable classifier",
+    ax.text(0, 1.16, "The 95% Wilson interval contains the 25% chance level",
             transform=ax.transAxes, fontsize=9.5, color=GREY, style="italic")
     save(fig, OUT + "r4_agreement.png")
 
@@ -151,7 +149,7 @@ def device():
     ax.text(30.5, len(rows), "previous build\n27–34%", ha="center",
             va="top", fontsize=8.3, color=GREY, style="italic", linespacing=1.15)
     ax.axvline(25, color=TEAL, lw=1.6, ls=(0, (4, 2.5)), zorder=2)
-    ax.text(24.6, -0.55, "chance\n25%", ha="right", va="bottom", fontsize=8.3,
+    ax.text(25.4, -0.62, "chance 25%", ha="left", va="bottom", fontsize=8.3,
             color=TEAL, linespacing=1.15)
     ax.axvline(med, color=PRIMARY, lw=1.0, ls=":", zorder=2)
     ax.text(med + 0.5, -0.55, f"median {med:.0f}%", ha="left", va="bottom",
@@ -170,8 +168,7 @@ def device():
     ax.set_xlabel("Score of the top class, per recording", fontsize=9.5,
                   color=GREY, labelpad=6)
     strip(ax, keep=(), grid="x")
-    ax.text(0, 1.06, "26 device recordings, grouped by the class the network chose; "
-            "no reference labels exist",
+    ax.text(0, 1.06, "26 device recordings, by the class chosen; no reference labels",
             transform=ax.transAxes, fontsize=9.5, color=GREY, style="italic")
     save(fig, OUT + "r5_device.png")
 

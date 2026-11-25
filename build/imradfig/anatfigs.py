@@ -26,17 +26,23 @@ def d2_seven_sites():
 
 
 def p1_nine_sites():
-    # NOTE: lung_fig.posterior now draws the seven-site scheme (sites 5 and 6
-    # only), so rerunning this would NOT reproduce the nine-site figure in
-    # figures/p1_nine_sites.png. Keep that PNG; restore the interscapular pair
-    # in a dedicated posterior panel before regenerating it.
     fig = plt.figure(figsize=(6.0, 3.6), dpi=300)
     gs = GridSpec(1, 2, wspace=0.02, left=0.01, right=0.99,
                   top=0.99, bottom=0.01)
     anterior(fig.add_subplot(gs[0, 0]))
-    posterior(fig.add_subplot(gs[0, 1]))
+    posterior(fig.add_subplot(gs[0, 1]), nine=True)
     save(fig, OUT + "p1_nine_sites.png")
+
+
+def h1_heart_sites():
+    from heart_fig import chest
+    fig = plt.figure(figsize=(5.0, 5.2))
+    chest(fig.add_axes([0.02, 0.02, 0.96, 0.96]), app=True)
+    fig.savefig(OUT + "h1_heart_sites.png", dpi=300, bbox_inches="tight", pad_inches=0.10, facecolor="white")
+    plt.close(fig)
 
 
 if __name__ == "__main__":
     d2_seven_sites()
+    p1_nine_sites()
+    h1_heart_sites()

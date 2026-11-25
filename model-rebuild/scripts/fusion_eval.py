@@ -242,7 +242,8 @@ def figures(result):
     for i, v in enumerate(vals):
         ax.text(i, hi[i] * 100 + 1.2, f"{v * 100:.1f}", ha="center", fontsize=8, color=DEEP)
     ax.axhline(25, ls="--", color=MUTED, lw=1)
-    ax.text(len(vals) - 0.5, 25.6, "chance 25%", ha="right", fontsize=7.5, color=MUTED)
+    ax.set_xlim(-0.6, len(vals) + 0.15)
+    ax.text(len(vals) + 0.15, 25.8, "chance 25%", ha="right", fontsize=7.5, color=DEEP)
     ax.set_xticks(x, labels, fontsize=7.5)
     ax.set_ylabel("Test balanced accuracy (%)", color=DEEP)
     ax.set_ylim(0, max(hi) * 100 + 8)

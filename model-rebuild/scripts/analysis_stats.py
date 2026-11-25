@@ -366,6 +366,41 @@ def main():
 
 
 # ------------------------------------------------------------------ figures (rose theme)
+def validation_figure(R):
+    """Plan figure "Validation Balanced Accuracy by Configuration": every row of its table, under the same names."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    DEEP, ROSE, MUTED = "#8E2A52", "#E91E76", "#9E8892"
+    plt.rcParams.update({"text.color": DEEP, "axes.labelcolor": DEEP, "xtick.color": DEEP, "ytick.color": DEEP,
+                         "axes.edgecolor": MUTED})
+    rows = [r for r in R["validation_summary"] if r["seeds"] >= 2]
+    names = {"late3": "Late fusion of three views", "single_mfcc": "MFCC (fusion study)", "single_spec": "Spectrogram",
+             "mfcc_twodet": "MFCC, two yes/no detectors", "baseline": "MFCC (first deployed design)",
+             "mfcc_spec": "MFCC + augmentation", "mfe_twodet": "Mel energies, two detectors",
+             "single_chroma": "Chromagram", "mfe_floor72": "Mel energies, −72 dB floor",
+             "mfe_aug": "Mel energies + augmentation", "mfe": "Mel energies (MFE)", "mfe_mixup": "Mel energies + mixup",
+             "mfe_floor72_aug": "Mel energies, −72 dB + augmentation", "mfe2k": "Mel energies, 50–2,000 Hz",
+             "fdc3": "Three-branch fusion", "fdc2_nochroma": "Fusion without chromagram"}
+    rows.sort(key=lambda r: r["bal_mean"])
+    fig, ax = plt.subplots(figsize=(6.4, 0.32 * len(rows) + 0.9), dpi=200)
+    y = np.arange(len(rows))
+    cols = [ROSE if r["recipe"] in ("late3", "fdc3", "fdc2_nochroma") else (DEEP if "mfcc" in r["recipe"] or r["recipe"] == "baseline" else MUTED) for r in rows]
+    ax.barh(y, [r["bal_mean"] * 100 for r in rows], xerr=[r["bal_sd"] * 100 for r in rows], color=cols,
+            error_kw={"ecolor": "#3A2230", "lw": 0.8, "capsize": 2})
+    ax.set_yticks(y, [names.get(r["recipe"], r["recipe"]) for r in rows], fontsize=8)
+    ax.axvline(25, color=MUTED, ls="--", lw=0.8)
+    ax.text(25.5, len(rows) - 0.35, "chance 25%", color=MUTED, fontsize=7, va="bottom")
+    ax.set_ylim(-0.6, len(rows) + 0.1)
+    ax.set_xlim(0, 55)
+    ax.set_xlabel("Validation balanced accuracy, mean ± SD over seeds (%)")
+    for s in ("top", "right"):
+        ax.spines[s].set_visible(False)
+    fig.tight_layout()
+    fig.savefig(os.path.join(OUT, "fig_validation_models.png"), facecolor="white")
+    plt.close(fig)
+
+
 def figures(R, rec_te):
     import matplotlib
     matplotlib.use("Agg")
@@ -396,28 +431,7 @@ def figures(R, rec_te):
     plt.close(fig)
 
     # validation comparison
-    rows = [r for r in R["validation_summary"] if r["seeds"] >= 3]
-    names = {"baseline": "MFCC (11 Nov)", "mfcc_spec": "MFCC + aug.", "mfcc_twodet": "MFCC two-detector",
-             "mfe": "MFE", "mfe2k": "MFE 50-2000 Hz", "mfe_aug": "MFE + aug.", "mfe_twodet": "MFE two-detector",
-             "mfe_floor72": "MFE -72 dB", "mfe_floor72_aug": "MFE -72 dB + aug.", "mfe_mixup": "MFE + mixup",
-             "single_mfcc": "MFCC (fusion run)", "single_spec": "Spectrogram", "single_chroma": "Chromagram",
-             "late3": "Late fusion (3 views)", "fdc3": "Three-branch fusion", "fdc2_nochroma": "Fusion, no chroma"}
-    rows.sort(key=lambda r: r["bal_mean"])
-    fig, ax = plt.subplots(figsize=(6.4, 0.32 * len(rows) + 0.9), dpi=200)
-    y = np.arange(len(rows))
-    cols = [ROSE if r["recipe"] in ("late3", "fdc3", "fdc2_nochroma") else (DEEP if "mfcc" in r["recipe"] or r["recipe"] == "baseline" else MUTED) for r in rows]
-    ax.barh(y, [r["bal_mean"] * 100 for r in rows], xerr=[r["bal_sd"] * 100 for r in rows], color=cols,
-            error_kw={"ecolor": "#3A2230", "lw": 0.8, "capsize": 2})
-    ax.set_yticks(y, [names.get(r["recipe"], r["recipe"]) for r in rows], fontsize=8)
-    ax.axvline(25, color=MUTED, ls="--", lw=0.8)
-    ax.text(25.3, -0.9, "chance 25%", color=MUTED, fontsize=7)
-    ax.set_xlim(20, 55)
-    ax.set_xlabel("Validation balanced accuracy, mean ± SD over 3 seeds (%)")
-    for s in ("top", "right"):
-        ax.spines[s].set_visible(False)
-    fig.tight_layout()
-    fig.savefig(os.path.join(OUT, "fig_validation_models.png"), facecolor="white")
-    plt.close(fig)
+    validation_figure(R)
 
     # severity scatter
     ref = np.array([r["ref"] for r in rec_te])

@@ -101,7 +101,7 @@ def anterior(ax, app=False):
         point(ax, x, y, t, fc=SECONDARY if t == "Tc" else PRIMARY,
               r=0.062 if t == "Tc" else 0.058, fs=6.2 if t == "Tc" else 7.4)
 
-    ax.text(0, 2.10, "LUNG MODE  ·  anterior  ·  Tc to 4", ha="center", fontsize=9.0,
+    ax.text(0, 2.16, "LUNG MODE  ·  anterior  ·  Tc to 4", ha="center", fontsize=9.0,
             family=SERIF, color=PRIMARY, fontweight="bold")
     ax.text(-MCL, 0.76, "midclavicular", ha="center", va="top", fontsize=6.5,
             family=SERIF, color=GREY, style="italic")
@@ -113,7 +113,11 @@ def anterior(ax, app=False):
             style="italic", linespacing=1.5)
 
 
-def posterior(ax, app=False):
+POST9 = [("5", 0.130, 1.465), ("6", -0.130, 1.465), ("7", 0.300, LOW_Y), ("8", -0.300, LOW_Y)]
+
+
+def posterior(ax, app=False, nine=False):
+    """nine=True draws the planned nine-site scheme (interscapular pair added)."""
     stage(ax, xlim=(-0.86, 0.86))
     body(ax); lungs_posterior(ax)
     # spine with vertebral bodies
@@ -141,17 +145,21 @@ def posterior(ax, app=False):
                 zorder=3.5)
     orient(ax, "L", "R")
 
-    pos = {t: (x, y) for t, x, y in POST}
+    sites = POST9 if nine else POST
+    pos = {t: (x, y) for t, x, y in sites}
     seq(ax, pos["5"], pos["6"], rad=-0.30)
-    for t, x, y in POST:
+    if nine:
+        seq(ax, pos["6"], pos["7"], rad=-0.22)
+        seq(ax, pos["7"], pos["8"], rad=-0.30)
+    for t, x, y in sites:
         point(ax, x, y, t)
 
-    for y, lab in ((LOW_Y, "T8–T10"),):
+    for y, lab in (((1.465, "T3–T4"),) if nine else ()) + ((LOW_Y, "T8–T10"),):
         ax.plot([-0.74, -0.68], [y, y], color=GREY, lw=0.8, zorder=2)
         ax.text(-0.76, y, lab, ha="right", va="center", fontsize=6.9,
                 family=SERIF, color=GREY, style="italic")
 
-    ax.text(0, 2.10, "LUNG MODE  ·  posterior  ·  5 and 6", ha="center", fontsize=9.0,
+    ax.text(0, 2.16, "LUNG MODE  ·  posterior  ·  " + ("5 to 8" if nine else "5 and 6"), ha="center", fontsize=9.0,
             family=SERIF, color=PRIMARY, fontweight="bold")
     ax.text(0, 0.47,
             "Most of the lung surface is reached from the back.\nThe oblique fissure divides the upper lobe above\nfrom the lower lobe below.",

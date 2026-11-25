@@ -186,7 +186,7 @@ item("B", "Unsigned letters", "The 4 November letters to the five cardiologists 
 item("B", "Form 1A dates", "Both papers now give the logbook's experimentation dates, 20 July to 28 August 2026 (changed 15 Nov at your request). The signed Student Checklist (Form 1A) still says 17 July to 20 August. Do not edit the signed form; if the fair asks, the logbook is the day-by-day record.", None, "Form 1A (signed)")
 item("B", "Logbook procedures", "The review form left logbook item 6 (\"accurate and detailed description of "
      "procedures\") unticked. Make sure every procedure is written in the logbook with its date.")
-item("B", "Read the AI Usage Disclosure", "The new disclosure (14 November) was written by AI from the project "
+item("B", "Read the AI Usage Disclosure", "The new disclosure (25 November) was written by AI from the project "
      "records. Read it, correct anything it gets wrong about your own work, and put it in your own ISEF form set too.")
 item("B", "Form 7 attachment", "Your SmartSteth (2025) paper is attached after Form 7. Form 7 also mentions last year's "
      "research plan; if the fair wants it and you have it, send it and it is added after the paper.")
@@ -208,6 +208,11 @@ item("B", "Check four sentences filled on 15 November", "The last four [[TO FILL
      "stethoscope's sound was captured (Procedures, signal acquisition); (4) survey respondents were prospective users, "
      "such as health workers, or patients, with no further rule such as an age limit (Procedures, end-user "
      "acceptance).", "Your field-test notes, logbook and Edge Impulse project.")
+item("B", "Check the cost table and the two device diagrams", "Both papers now itemize the 2,775 pesos (IMRaD Table 2, "
+     "research plan Table 8). The list is the VER 2.0 bill of materials with the 300-peso PLA casing. Check the parts and "
+     "prices against what you bought. Also check the exploded view (the places of the inside parts were not recorded, so "
+     "they are illustrative) and IMRaD Figure 2, which shows the field build the text describes: electret microphone on a "
+     "MAX4466 board, 20 x 4 LCD, 10,000 mAh power bank, BLE and MicroSD.", "Your receipts and the device itself.")
 para("Information to collect", bold=True, after=4, before=4)
 item("B", "Repeat the acceptance survey", "The 27 survey answers were about the old version. Run the survey again on "
      "the new version, and add questions on durability, functionality, and the four instructional-support topics "
