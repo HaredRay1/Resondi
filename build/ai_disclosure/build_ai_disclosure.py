@@ -113,7 +113,7 @@ bullets([
 para("Added in November 2026 (produced with AI)", bold=True, after=2, before=4)
 bullets([
     "Analysis of the original model: AI found the data leakage and demonstrated its effect on the same network "
-    "(IMRaD Table 4).",
+    "(IMRaD Table 5).",
     "The rebuilt lung-sound classifier: per-cycle sound labels instead of diagnoses, a patient-wise split, MFCC and "
     "three-branch feature-fusion networks, the public SPRSound paediatric corpus, and five-fold cross-validation "
     "(Python and PyTorch on this computer; one retraining in the team's Edge Impulse project).",

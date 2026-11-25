@@ -9,7 +9,7 @@ import os
 from docx import Document
 from docx.shared import Pt, Inches, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.table import WD_TABLE_ALIGNMENT, WD_ALIGN_VERTICAL
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 
@@ -61,16 +61,18 @@ def para(text="", *, after=10, before=0, first=0.5, align=WD_ALIGN_PARAGRAPH.JUS
 
 
 def H1(t):
-    para(t.upper(), after=10, before=18, first=0, align=WD_ALIGN_PARAGRAPH.CENTER,
+    _h = para(t.upper(), after=10, before=18, first=0, align=WD_ALIGN_PARAGRAPH.CENTER,
          size=12, bold=True, spacing=2.0)
+    _h.paragraph_format.keep_together = True               # a heading never splits between columns
 
 
 def H2(t):
-    para(t, after=8, before=12, first=0, size=12, bold=True, spacing=2.0)
+    para(t, after=8, before=12, first=0, size=12, bold=True, spacing=2.0).paragraph_format.keep_together = True
 
 
 def H3(t):
-    para(t, after=6, before=8, first=0, size=12, bold=True, italic=True, spacing=2.0)
+    para(t, after=6, before=8, first=0, size=12, bold=True, italic=True,
+         spacing=2.0).paragraph_format.keep_together = True
 
 
 def FILL(p, text):
@@ -89,81 +91,153 @@ COL_W = 3.0     # inches: one column of the two-column layout (6.25 in of text w
 WIDE = []       # (first, last) elements of each figure or table set across the full width
 
 
-def FIG(num, caption, fname, width_in=6.0, note=None):
-    """Centred figure with a numbered caption beneath it. Numbers are assigned in order;
-    the num argument is ignored except for the lettered companion figure "1b"."""
-    if num != "1b":
-        _N["fig"] += 1
-        num = _N["fig"]
-    from docx.shared import Inches as _In
+TEXT_W = 6.25   # inches of text width
+
+
+def _cell_margins(tbl, v=0):
+    pr = tbl._tbl.tblPr
+    m = OxmlElement("w:tblCellMar")
+    for side in ("left", "right"):
+        e = OxmlElement(f"w:{side}"); e.set(qn("w:w"), str(v)); e.set(qn("w:type"), "dxa"); m.append(e)
+    pr.append(m)
+
+
+def _widths(tbl, widths):
+    """Set the column grid and the table width: Word lays a fixed table out from these, not from the cell widths."""
+    for col, w in zip(tbl.columns, widths):
+        col.width = Inches(w)
+    tw = tbl._tbl.tblPr.find(qn("w:tblW"))
+    if tw is None:
+        tw = OxmlElement("w:tblW"); tbl._tbl.tblPr.append(tw)
+    tw.set(qn("w:type"), "dxa"); tw.set(qn("w:w"), str(int(sum(widths) * 1440)))
+
+
+def _no_split(row, header=False):
+    pr = row._tr.get_or_add_trPr()
+    pr.append(OxmlElement("w:cantSplit"))
+    if header:
+        pr.append(OxmlElement("w:tblHeader"))
+
+
+def _cap_runs(p, label, caption):
+    for text, bold, italic in ((label, True, False), (caption, False, True)):
+        if text:
+            r = p.add_run(text)
+            r.bold, r.italic = bold, italic
+            r.font.size, r.font.name = Pt(10.5), FONT
+
+
+def FIG(num, caption, fname, width_in=6.0, note=None, span=False):
+    """Numbered figure: caption above the picture, note beneath. Numbers are assigned in order (num is ignored).
+    Caption, picture and note sit in one borderless table row that may not split: keep-with-next alone left captions
+    on the page before their pictures in the two-column layout (found 25 Nov 2026)."""
+    _N["fig"] += 1
+    num = _N["fig"]
     from PIL import Image as _Img
-    # 18 Nov 2026 (user: copy the AlagaVax paper's format): caption above the figure, "Figure N." in bold and
-    # the title in italics on one line; a figure wider than a column spans the page (two_column.py).
-    wide = width_in > COL_W
-    if not wide:
-        width_in = min(width_in, COL_W)
-    c = doc.add_paragraph(); c.alignment = WD_ALIGN_PARAGRAPH.LEFT
-    c.paragraph_format.space_before = Pt(10); c.paragraph_format.space_after = Pt(4)
-    c.paragraph_format.line_spacing = 1.0
-    r = c.add_run(f"Figure {num}. "); r.bold = True
-    r.font.size, r.font.name = Pt(10.5), FONT
-    r = c.add_run(caption); r.italic = True
-    r.font.size, r.font.name = Pt(10.5), FONT
-    p = doc.add_paragraph(); p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_after = Pt(4)
-    p.paragraph_format.line_spacing = 1.0
-    c.paragraph_format.keep_with_next = True          # caption, picture and note stay on one page
-    if note:
-        p.paragraph_format.keep_with_next = True
+    wide = span or width_in > COL_W                         # span: a small picture set across both columns
+    width_in = min(width_in, TEXT_W - 0.05)
+    t = doc.add_table(rows=1, cols=1)
+    t.alignment, t.autofit = WD_TABLE_ALIGNMENT.CENTER, False
+    _cell_margins(t)
+    _no_split(t.rows[0])
+    cell = t.cell(0, 0)
+    cell.width = Inches(TEXT_W if wide else COL_W)
+    _widths(t, [TEXT_W if wide else COL_W])
+    c = cell.paragraphs[0]
+    p = cell.add_paragraph()
+    for q, before, after in ((c, 8, 4), (p, 0, 4)):
+        q.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        q.paragraph_format.space_before, q.paragraph_format.space_after = Pt(before), Pt(after)
+        q.paragraph_format.line_spacing = 1.0
+    _cap_runs(c, f"Figure {num}. ", caption)
     path = FIGDIR + fname
     im = _Img.open(path)
-    p.add_run().add_picture(path, width=_In(width_in),
-                            height=_In(width_in * im.height / im.width))
+    p.add_run().add_picture(path, width=Inches(width_in), height=Inches(width_in * im.height / im.width))
     if note:
-        last = para(note, after=10, before=2, first=0, align=WD_ALIGN_PARAGRAPH.CENTER,
-                    size=9.5, italic=True, color=GREY, spacing=1.0)
-    else:
-        last = para("", after=8, first=0, spacing=1.0)
+        n = cell.add_paragraph()
+        n.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        n.paragraph_format.space_after, n.paragraph_format.line_spacing = Pt(4), 1.0
+        r = n.add_run(note); r.italic = True
+        r.font.size, r.font.name, r.font.color.rgb = Pt(9.5), FONT, GREY
+    last = para("", after=0, first=0, spacing=1.0)          # Word needs a paragraph between two tables
     if wide:
-        WIDE.append((c._p, last._p))
+        WIDE.append((t._tbl, last._p))
 
 
-def TBL(num, caption, rows, widths, note=None):
+def _rule(cell, side, size):
+    pr = cell._tc.get_or_add_tcPr()
+    b = pr.find(qn("w:tcBorders"))
+    if b is None:
+        b = OxmlElement("w:tcBorders")
+        va = pr.find(qn("w:vAlign"))                        # schema order: tcW, ..., tcBorders, ..., vAlign
+        if va is not None:
+            va.addprevious(b)
+        else:
+            pr.append(b)
+    e = OxmlElement(f"w:{side}")
+    for k, v in (("val", "single"), ("sz", str(size)), ("space", "0"), ("color", "000000")):
+        e.set(qn(f"w:{k}"), v)
+    if side == "top":
+        b.insert(0, e)
+    else:
+        b.append(e)
+
+
+def TBL(num, caption, rows, widths, note=None, total=False):
+    """Numbered table in the style of page 9 of the 83-page paper (user, 25 Nov 2026): "Table N." bold and the title
+    in italics, both centred above; a heavy rule above and below the table and one under the bold, centred heads;
+    no other lines; first column left, the rest centred. total=True makes the last row a bold total."""
     _N["tab"] += 1
     num = _N["tab"]
-    # 18 Nov 2026: "Table N." bold and the title in italics on one line, as in the AlagaVax paper; every table
-    # spans the full page width (two_column.py).
-    cap = para("", after=6, before=12, first=0, align=WD_ALIGN_PARAGRAPH.LEFT, spacing=1.0)
-    r = cap.add_run(f"Table {num}. "); r.bold = True
-    r.font.size, r.font.name = Pt(10.5), FONT
-    r = cap.add_run(caption); r.italic = True
-    r.font.size, r.font.name = Pt(10.5), FONT
-    cap.paragraph_format.keep_with_next = True
-    t = doc.add_table(rows=len(rows), cols=len(rows[0]))
-    t.style = "Table Grid"
+    # Caption, table and note sit in one borderless cell that may not split: Word ignores keep-with-next between
+    # the sections of the two-column layout and left table heads alone at the foot of a page (25 Nov 2026).
+    wide = sum(widths) > COL_W + 0.01
+    outer = doc.add_table(rows=1, cols=1)
+    outer.alignment, outer.autofit = WD_TABLE_ALIGNMENT.CENTER, False
+    _cell_margins(outer)
+    _widths(outer, [TEXT_W if wide else COL_W])
+    _no_split(outer.rows[0])
+    box = outer.cell(0, 0)
+    box.width = Inches(TEXT_W if wide else COL_W)
+
+    def line(q, before, after, align=WD_ALIGN_PARAGRAPH.CENTER):
+        q.alignment = align
+        q.paragraph_format.space_before, q.paragraph_format.space_after = Pt(before), Pt(after)
+        q.paragraph_format.line_spacing = 1.0
+        return q
+
+    _cap_runs(line(box.paragraphs[0], 8, 0), f"Table {num}.", "")
+    _cap_runs(line(box.add_paragraph(), 0, 5), "", caption)
+    t = box.add_table(rows=len(rows), cols=len(rows[0]))
     t.alignment = WD_TABLE_ALIGNMENT.CENTER
     t.autofit = False
+    _cell_margins(t, 40)
+    _widths(t, widths)
+    end = len(rows) - 1
     for i, row in enumerate(rows):
+        _no_split(t.rows[i])
         for j, val in enumerate(row):
             cell = t.cell(i, j)
             cell.width = Inches(widths[j])
-            p = cell.paragraphs[0]
-            p.paragraph_format.space_after = Pt(2)
-            p.paragraph_format.space_before = Pt(2)
-            p.paragraph_format.line_spacing = 1.0
+            cell.vertical_alignment = WD_ALIGN_VERTICAL.CENTER
+            p = line(cell.paragraphs[0], 3, 3,
+                     WD_ALIGN_PARAGRAPH.LEFT if j == 0 and i > 0 else WD_ALIGN_PARAGRAPH.CENTER)
             r = p.add_run(str(val))
-            r.bold = (i == 0)
+            r.bold = (i == 0) or (total and i == end)
             r.font.size, r.font.name = Pt(10.5), FONT
-    for row in t.rows:
-        for j, w in enumerate(widths):
-            row.cells[j].width = Inches(w)
+            if i == 0:
+                _rule(cell, "top", 12)
+                _rule(cell, "bottom", 8)
+            if i == end:
+                _rule(cell, "bottom", 12)
+    # python-docx leaves the paragraph Word needs after a nested table; it holds the note
+    n = line(box.paragraphs[-1], 4, 4, WD_ALIGN_PARAGRAPH.LEFT)
     if note:
-        last = para(note, after=8, before=4, first=0, align=WD_ALIGN_PARAGRAPH.LEFT,
-                    size=10, italic=True, color=GREY, spacing=1.0)
-    else:
-        last = para("", after=4, first=0, spacing=1.0)
-    WIDE.append((cap._p, last._p))
-
+        r = n.add_run(note); r.italic = True
+        r.font.size, r.font.name, r.font.color.rgb = Pt(10), FONT, GREY
+    last = para("", after=2, first=0, spacing=1.0)
+    if wide:
+        WIDE.append((outer._tbl, last._p))
 
 
 # ═══════════════════════════════════════════════════ TITLE
@@ -435,7 +509,7 @@ para("The device has since been revised as enclosure version 2.0, which was not 
 # 16 Nov 2026 (user): the labelled figure of the old prototype was replaced with the version 2.0 3D model,
 # labelled by build/dev2/label_render.py.
 FIG(1, "The Resondi Smart Stethoscope, Version 2.0, with Components Identified",
-    "Resondi-Device-3D-Labelled.png", 6.3,
+    "Resondi-Device-3D-Labelled.png", 4.7,
     note="Rendered from the team's 3D model, which measures about 160 × 100 × 60 mm; the "
          "fabricated enclosure measures 173 × 80 × 70 mm, and colours are illustrative. The "
          "results in this paper were obtained with the earlier field build, which used an "
@@ -487,7 +561,7 @@ para("Each site is recorded with the patient breathing through an "
      "with the patient seated and the arms brought forward.")
 
 FIG(3, "The Seven Standardised Sites Recorded by the Evaluated Build",
-    "d2_seven_sites.png", 6.0)
+    "d2_seven_sites.png", 4.9)
 
 para("Heart Mode uses the same device and recording settings with a separate guided "
      "sequence of five sites, recorded from the base of the heart to the apex: the aortic "
@@ -974,6 +1048,29 @@ para("In its current version 2.0 design, the Resondi smart stethoscope is a hand
      "two parts: it used an electret microphone on a MAX4466 amplifier board and "
      "communicated over Bluetooth Low Energy.", first=0)
 
+# 25 Nov 2026 (user: show the budget as page 9 of the 83-page paper does, and break the device down into its parts).
+import sys as _sys0
+_sys0.path.insert(0, os.path.join(HERE, "..", "fig"))
+import bom_v2  # noqa: E402
+_pc = {k: f"{v / bom_v2.TOTAL * 100:.1f}" for k, v in bom_v2.CATS.items()}
+para("Figure 11 takes the device apart into the parts of its bill of materials.", first=0)
+FIG(11, "Exploded View of the Version 2.0 Device and Its Parts", "Resondi-Exploded-View.png", 6.1,
+    note="Outer parts are rendered from the team's 3D model, whose proportions differ from the 173 by 80 by 70 mm "
+         "enclosure. The internal parts are drawn from the bill of materials; their position inside the enclosure "
+         "is illustrative.")
+H3("Cost of Materials")
+para("Table 2 and Figure 12 present the cost of materials of one version 2.0 unit, a total of ₱2,775.00. The parts "
+     f"that capture the sound, the stethoscope set and the microphone, take the largest share at {_pc['Acoustic sensing']} "
+     f"percent, followed by the power supply at {_pc['Power supply']} percent and the display and controls at "
+     f"{_pc['Display and controls']} percent; the microcontroller that runs the device is {_pc['Microcontroller']} percent. "
+     "Prices are preliminary Philippine-market estimates and vary with supplier and shipping. The total leaves out a "
+     "battery protection circuit and a charging module, which the final design needs: the fully loaded unit cost of "
+     "₱4,000 adds ₱625 for battery protection, charging and a production allowance and ₱600 for assembly, "
+     "calibration and packaging.", first=0)
+FIG(12, "Cost Breakdown of the Version 2.0 Device", "Resondi-Cost-Breakdown.png", 3.0,
+    note="Percentages are rounded to one decimal place.")
+TBL(2, "Cost of Materials of One Version 2.0 Device", bom_v2.table_rows(), [1.20, 0.68, 0.52, 0.60], total=True)
+
 H3("Heart Mode")
 para("Heart Mode was implemented on the device and in the application. It guides the "
      "operator through the five cardiac sites in order, records 15 seconds at each in the "
@@ -1008,7 +1105,7 @@ para("The platform's user interface is a web application in English and Filipino
 
 # 18 Nov 2026 (user: "in theirs, they have the app ui in the results and discussion"): the application's
 # screens, captured from the live app at phone size; names, ages and file names masked (build/app_ui/).
-para("Figure 11 shows the screens a patient uses. The welcome screen states, before sign-in, that the analysis is"
+para("Figure 13 shows the screens a patient uses. The welcome screen states, before sign-in, that the analysis is"
      " a screening aid produced by a model that has not completed clinical validation. The dashboard offers the "
      "two modes, Lung Auscultation and Heart Auscultation, each with its own placement guide. A full examination "
      "is chosen as the standard seven lung sites or the full cardiopulmonary set of twelve sites, and the guides "
@@ -1016,7 +1113,7 @@ para("Figure 11 shows the screens a patient uses. The welcome screen states, bef
      "to the mitral area, with the landmark and what to listen for at each.", first=0)
 FIG(11, "Patient Screens of the Resondi Application", "ui1_patient.png", 6.3,
     note="Captured from the live application at phone size; the patient's name is masked.")
-para("Figure 12 shows how recordings enter the platform and are kept. The transfer page walks the user through "
+para("Figure 14 shows how recordings enter the platform and are kept. The transfer page walks the user through "
      "joining the device's RESONDI_WIFI network, downloading the recordings from the device page at "
      "192.168.4.1 and uploading them once the phone is back online. The history lists every recording by site and "
      "shows whether it has been sent to a practitioner; each recording opens to its audio and its sound analysis; "
@@ -1024,7 +1121,7 @@ para("Figure 12 shows how recordings enter the platform and are kept. The transf
      "tracking summary of the model's classification, not a medical assessment of lung function.", first=0)
 FIG(12, "Recording Transfer, History, Result and Trend Screens", "ui2_records.png", 6.3,
     note="Captured from the live application at phone size; the recording's file name is masked.")
-para("Figure 13 shows the practitioner and administrator side. A verified practitioner sees the recordings "
+para("Figure 15 shows the practitioner and administrator side. A verified practitioner sees the recordings "
      "waiting for review and the patients assigned to them; a patient's record shows the profile and every "
      "recording with its analysis, labelled as a model score rather than an accuracy and, for recordings scored by"
      " the withdrawn first model, marked as such. The practitioner approves, disapproves or requests further "
@@ -1062,7 +1159,7 @@ FIG(10, "Classification Agreement Against Reference Labels, with the 95% "
         "Wilson Interval", "r4_agreement.png", 5.7)
 
 H3("Rebuilt Classifier: Pre-Specified Test")
-para("Table 2 gives the rebuilt models' scores on the 31 ICBHI test patients, none of "
+para("Table 3 gives the rebuilt models' scores on the 31 ICBHI test patients, none of "
      "whom contributed to training. Every model scored above the 25 percent expected by "
      "chance, but on ICBHI data alone no change of architecture moved balanced accuracy "
      "clearly beyond the mid-thirties, and every confidence interval overlapped. The "
@@ -1085,12 +1182,12 @@ TBL(2, "Balanced Accuracy of the Rebuilt Models on the 31 ICBHI Test Patients",
 H3("Rebuilt Classifier: Cross-Validation Across All 126 Patients")
 para("Because 31 test patients give wide intervals, the two architectures were also "
      "compared by five-fold cross-validation, in which each of the 126 ICBHI patients and "
-     "6,898 cycles was classified once by a model that had not seen that patient. Table 3 "
+     "6,898 cycles was classified once by a model that had not seen that patient. Table 4 "
      "gives the result. The fusion network trained with SPRSound reached 40.0 percent "
      "balanced accuracy against 34.0 percent for the app's MFCC design. The paired "
      "difference was 5.9 percentage points (95 percent CI 1.0 to 10.3; one-sided "
      "p = 0.008), and the fusion network scored higher on 14 of the 15 seed-and-fold "
-     "comparisons, the fifteenth being a tie. It improved recall on every class (Table 3). "
+     "comparisons, the fifteenth being a tie. It improved recall on every class (Table 4). "
      "On the 230 SPRSound test children, the fold models averaged 56 percent.", first=0)
 TBL(3, "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)",
     [["Measure", "MFCC network, ICBHI only", "Fusion network, ICBHI + SPRSound"],
@@ -1108,12 +1205,12 @@ TBL(3, "Five-Fold Cross-Validation Across All 126 ICBHI Patients (6,898 Cycles)"
     "patient-level bootstrap intervals.")
 para("The supporting analyses agreed. Across the five folds the fusion network's "
      "balanced accuracy was higher in every fold, by a mean of 5.8 points (paired "
-     "t(4) = 4.75, p = 0.009; Figure 15). Of the 126 patients, 69 had more of their cycles "
+     "t(4) = 4.75, p = 0.009; Figure 17). Of the 126 patients, 69 had more of their cycles "
      "classified correctly by the fusion network, 39 fewer, and 18 the same (Wilcoxon "
-     "signed-rank p = 0.009; Figure 16). Cycle by cycle, the fusion network alone was "
+     "signed-rank p = 0.009; Figure 18). Cycle by cycle, the fusion network alone was "
      "right on 1,277 cycles and the MFCC network alone on 831 (McNemar p < 0.001), though "
      "this last test treats cycles as independent and overstates the certainty; the "
-     "patient-level analyses are the ones to rely on. Figure 17 shows where each model's "
+     "patient-level analyses are the ones to rely on. Figure 19 shows where each model's "
      "errors fall.", first=0)
 FIG(13, "Balanced Accuracy of the Two Architectures in Each of the Five Folds",
     "j1_cv_folds.png", 3.0,
@@ -1130,7 +1227,7 @@ FIG(15, "True Class Against Predicted Class in Cross-Validation",
 
 
 H3("Rebuilt Classifier: Effect of a Leaky Division")
-para("Table 4 shows what the same fusion network scores when the division of the data "
+para("Table 5 shows what the same fusion network scores when the division of the data "
      "leaks. Trained and tested on patients it had never heard, it reached 39.0 percent "
      "balanced accuracy. When the cycles were divided at random, so that 119 of 119 test "
      "patients also had breaths in training, the score rose to 58.2 percent. When the "
@@ -1152,7 +1249,7 @@ TBL(4, "The Same Fusion Network Scored on an Honest and on Leaky Divisions of IC
     "the flaw and must not be quoted as the model's accuracy.")
 
 H3("Heart-Sound Models on CirCor Test Patients")
-para("Table 5 gives the heart-sound results on the 189 CirCor test patients, none of "
+para("Table 6 gives the heart-sound results on the 189 CirCor test patients, none of "
      "whom contributed to training, to the decoding setting or to the murmur "
      "threshold. The timing model found 96.8 percent of reference S1 sounds and 97.3 "
      "percent of S2 sounds within 100 ms, with a mean onset error of 15 and 12 ms, and"
@@ -1162,7 +1259,7 @@ para("Table 5 gives the heart-sound results on the 189 CirCor test patients, non
      "2.5–3.6), against 35.4 for the untrained baseline, which often locked onto half "
      "or double the true rate. The error had almost no bias (+0.1 beats per minute), "
      "but its 95 percent limits of agreement were −13.7 to +14.0, because a few "
-     "recordings were read badly wrong; Figure 18 shows that these were mostly fast "
+     "recordings were read badly wrong; Figure 20 shows that these were mostly fast "
      "rates read too low and slow rates read too high. Reference rates ranged from 49 "
      "to 171 beats per minute, median 103, as expected in children.", first=0)
 para("The murmur detector did not reach its pre-specified target. On the validation "
@@ -1175,6 +1272,15 @@ para("The murmur detector did not reach its pre-specified target. On the validat
      "murmur status the dataset marks unknown, it flagged 2. The 12 missed murmurs are"
      " the result to weigh: a screening flag that misses one murmur in three cannot be"
      " used to rule a murmur out.", first=0)
+para("Placed in the application, the models gave the same results through the device's"
+     " 16 kHz audio path as through the original one. On the 631 test recordings, the "
+     "heart-rate error was 3.03 beats per minute against 3.01, and the murmur flag was"
+     " the same on 99.7 percent of recordings, so the extra resampling costs nothing "
+     "measurable. The JavaScript code gave the same heart rate and murmur flag as the "
+     "Python reference on 25 of 25 recordings, and in the browser on 8 of 8, where an "
+     "analysis took under a second once the models, about 2 MB, had downloaded. These "
+     "checks show that the application computes what was tested; they say nothing "
+     "about how the models perform on the Resondi microphone.", first=0)
 TBL(5, "Heart-Sound Models on 189 CirCor Test Patients",
     [["Model", "Measure", "Result (95% CI)"],
      ["Heart-sound timing", "S1 found within 100 ms; detections that are real", "96.8%; 95.7%"],
@@ -1193,22 +1299,13 @@ TBL(5, "Heart-Sound Models on 189 CirCor Test Patients",
     "site is; the 14 patients labelled unknown are excluded and reported in the text. "
     "Neither model has been tested on Resondi device recordings.")
 FIG(17, "Estimated Against Reference Heart Rate on 631 CirCor Test Recordings",
-    "r6_heart_rate.png", 3.0,
+    "r6_heart_rate.png", 2.2, span=True,
     note="Each point is one recording. The dashed line is perfect agreement and the shaded "
          "band is within 5 beats per minute. Teal points are more than 10 beats per minute "
          "off. Reference rates come from the dataset's annotated S1 boundaries.")
-para("Placed in the application, the models gave the same results through the device's"
-     " 16 kHz audio path as through the original one. On the 631 test recordings, the "
-     "heart-rate error was 3.03 beats per minute against 3.01, and the murmur flag was"
-     " the same on 99.7 percent of recordings, so the extra resampling costs nothing "
-     "measurable. The JavaScript code gave the same heart rate and murmur flag as the "
-     "Python reference on 25 of 25 recordings, and in the browser on 8 of 8, where an "
-     "analysis took under a second once the models, about 2 MB, had downloaded. These "
-     "checks show that the application computes what was tested; they say nothing "
-     "about how the models perform on the Resondi microphone.", first=0)
 
 H3("Summary of the Model Results")
-para("Table 6 brings together the results of the models now running in the application: "
+para("Table 7 brings together the results of the models now running in the application: "
      "the lung fusion network and the two heart-sound models. Every figure comes from "
      "public datasets on patients the models never heard in training; none comes from "
      "Resondi device recordings.", first=0)
@@ -1237,13 +1334,13 @@ TBL(6, "Accuracy of the Lung Fusion Network and the Heart-Sound Models",
       "97.1% (93.9–99.3); 0.96"]],
     [1.75, 1.6, 1.5, 1.25],
     "Chance for the four lung classes is 25 percent balanced accuracy. The lung rows "
-    "come from Tables 2 and 3 and the text around them, and the heart rows from Table 5. The murmur detector missed its "
+    "come from Tables 3 and 4 and the text around them, and the heart rows from Table 6. The murmur detector missed its "
     "pre-specified 80 percent sensitivity. None of these models has been tested on "
     "labelled Resondi device recordings.")
 
 # ═══════════════════════════════════════════════════ DISCUSSION
 H2("Research Question 5: Response Time")
-para("Figure 19 gives the mean time of each stage in the field system: device "
+para("Figure 21 gives the mean time of each stage in the field system: device "
      "connection 4.55 seconds, sound recording 15.00 seconds, recording-quality "
      "assessment 144.68 seconds, signal preprocessing 20.91 seconds and "
      "classification output 3.97 seconds.", first=0)
@@ -1283,7 +1380,7 @@ para("The fusion network ran without error on all 45 stored lung recordings, at 
      "median of 2.0 seconds per recording including fetching the audio. On the 26 unique "
      "recordings made with the Resondi device, it chose Healthy for 16, Wheezing with "
      "Crackles for 6, Wheezing for 3 and Crackles for 1. The score of the chosen class "
-     "ranged from 31 to 66 percent, with a median of 41 percent (Figure 20). On the same "
+     "ranged from 31 to 66 percent, with a median of 41 percent (Figure 22). On the same "
      "device files, the Edge Impulse build that the fusion network replaced had given top "
      "scores of only 27 to 34 percent (median 30 percent), close to the 25 percent of four "
      "equally likely classes. The fusion network therefore separates the classes more "
@@ -1504,7 +1601,7 @@ para("These figures should not be compared with the 95 to 99 percent reported by
      "patient's diagnosis rather than the sound of each breath, and divide recordings "
      "at random, so that a patient's audio appears in both training and testing, which is "
      "the same flaw found in this study's original model.", first=0)
-para("Table 4 measures the size of that effect on this study's own network. The same model "
+para("Table 5 measures the size of that effect on this study's own network. The same model "
      "that scores 39.0 percent on unseen patients scores 58.2 percent once their other "
      "breaths are in training, and 78.5 percent on the breaths it was trained on, within "
      "the 71 to 84 percent the original model reported. The original model's division was "
@@ -1516,7 +1613,7 @@ para("The fusion network has since been put into the Resondi application. Becaus
      "and feature extraction rewritten in JavaScript. The rewritten features gave the same "
      "top class as the Python originals on 600 of 600 validation windows. Run on 26 "
      "recordings already made with the Resondi device, the deployed fusion network gave "
-     "top-class scores of 31 to 66 percent (median 41; Figure 20), against 27 to 34 "
+     "top-class scores of 31 to 66 percent (median 41; Figure 22), against 27 to 34 "
      "percent for the "
      "Edge Impulse build it replaced. That shows it is more decisive on device audio, not "
      "that it is more often right: none of those recordings has a reference label.",
@@ -1557,11 +1654,11 @@ para("Two extensions are planned and were not implemented in the work reported h
 para("The acquisition protocol extends from seven sites to nine. The two additional "
      "sites are an interscapular pair at T3–T4, beside the spine, which sample the "
      "posterior upper lobes; the tracheal reference and the six fields already recorded "
-     "are retained. Figure 21 shows the nine sites on the body and Table 7 gives their "
+     "are retained. Figure 23 shows the nine sites on the body and Table 8 gives their "
      "landmarks.", first=0)
 
 FIG(15, "Planned Nine-Site Acquisition Protocol",
-    "p1_nine_sites.png", 5.9)
+    "p1_nine_sites.png", 4.6)
 
 TBL(4, "Planned Nine-Site Acquisition Protocol",
     [["Site", "Surface landmark", "Region sampled"],
@@ -1591,7 +1688,7 @@ para("The second, and the one that matters most, is a local dataset: recordings 
      "Filipino patients made on the Resondi device at the seven standardised sites, with "
      "each breathing cycle labelled independently by two clinicians who have not seen the "
      "model's output, collected with ethics approval and consent. The planned study "
-     "separates the effect of each change, as Table 8 shows. Its first three rows have "
+     "separates the effect of each change, as Table 9 shows. Its first three rows have "
      "now been run on public data; the fourth cannot be run on any public dataset.",
      first=0)
 
@@ -1867,7 +1964,7 @@ print("  review fixes:", review_fixes.apply(doc, [
     ("That use is set out in the evaluation plan below.",
      "That is how it is used in this study, in the noise test of Research Question 6.", 1),
     ("Wheezing remains the weakest single class.",
-     "Wheezing with Crackles remains the weakest class (26 percent recall in cross-validation; Table 3).", 1),
+     "Wheezing with Crackles remains the weakest class (26 percent recall in cross-validation; Table 4).", 1),
     ("Each cycle was cut into non-overlapping one-second windows at 16 kHz,",
      "Each cycle was cut into one-second windows at 16 kHz, overlapping by half in training and not overlapping "
      "in testing,", 1),

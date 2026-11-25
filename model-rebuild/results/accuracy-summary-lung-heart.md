@@ -36,11 +36,11 @@ detector (3 seeds).
 | | AUROC | 0.96 (0.92–0.99) | `heart-murmur.md` |
 | | Cohen's kappa | 0.70 (0.54–0.82) | `heart-murmur.md` |
 
-Through the app's audio path (16 kHz in, as from the device) the heart results are unchanged: heart rate error
+Through the app's audio path (16 kHz in, as from the device) the heart results are almost unchanged: heart rate error
 3.03 BPM, murmur sensitivity 69.4%, specificity 97.1% (`heart-app-path-check.md`).
 
 ## Do not quote
 
 - 71.1% / 83%: the withdrawn model's leaked scores.
-- The leaky rows of IMRaD Table 4 (58.2%, 52.5%, 78.5%).
+- The leaky rows of IMRaD Table 5 (58.2%, 52.5%, 78.5%).
 - The murmur detector as "80%": 80% was the target, 66.7% the result.

@@ -45,13 +45,15 @@ Keep it current: any Claude Code session that changes the project's state update
 
 ## 2. The papers (folder `Ahnyccas papers/`)
 
+**25 Nov: cost section, exploded view and new table style in the IMRaD (user).** Research Question 2 has the parts figure (Figure 11), the cost table (Table 2) and the pie chart (Figure 12), laid out like page 9 of the 83-page paper. The cost items are in `build/fig/bom_v2.py`: the VER 2.0 BOM with the PLA casing (300) instead of PETG (400), which adds up to exactly 2,775; the file stops if it does not. Every IMRaD table is now three-line (heavy rule above and below, one under the heads), with "Table N." and its title centred above. Figures and tables each sit in one borderless row that may not split, because Word ignores keep-with-next in the two-column layout: the 18 Nov version had three captions on the page before their pictures. Later numbers moved: the leakage demonstration is IMRaD **Table 5** (was 4), heart models Table 6, model summary Table 7; app screens Figures 13-15, heart rate Figure 20, device run Figure 22. IMRaD 39 pages, compiled PDF 205. Exploded view: `build/dev2/render_layers.py` (Blender, about 20 minutes) then `compose_exploded.py [--video]` -> `figures/Resondi-Exploded-View.png` (paper), `-Dark.png` (1080 x 1920) and `.mp4`; internal parts and their positions are illustrative (not recorded), never present them as the real layout. The research plan is unchanged. Open: IMRaD Figure 2 shows an OLED and Li-ion cell while its text gives the field build an LCD and a power bank; the 83-page paper's cost pie does not add up (2,344.47 against its table's 2,094.47) and lists a MAX9814 where the team said MAX4466; the AI disclosure stops at 14 Nov.
+
 **18 Nov: the IMRaD copies the format of the RSTF team paper *AlagaVax* (user).** Two columns, single-spaced, with the title, credits, abstract ("Abstract –" run in) and keywords in one column; every table and every figure wider than a column spans the page (`build/style/two_column.py`); captions above, "Figure N." bold with an italic title. Sections: I. Introduction, II. Review of Related Literature (the former Research Gap), III. Materials and Methods, IV. Results and Discussion, V. Conclusion, Acknowledgement, Recommendations, References. New: an SDG 3/9 statement, an acknowledgement (credits only), and three app-screen figures in Research Question 3 (Figures 11-13, `figures/ui1_patient.png`, `ui2_records.png`, `ui3_practitioner.png`, made by `build/app_ui/make_ui_figures.py` from raw screenshots in `Resondi-private/app-screens-raw/`, names, age and file name masked). Later figures renumbered 14-21. IMRaD now 37 pages; compiled PDF 203. The research plan is unchanged (still double-spaced).
 
 | File | What it is |
 |---|---|
-| `Resondi-IMRaD-Heart-and-Lung-FINAL` (.docx, .pdf) | **The IMRaD paper, 37 pages, two columns**, covering lung and heart. Title: *Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System*. The introduction lists the 11 research questions; the Results answer them in order, one heading each, then give "Results by Objective" for the nine objectives. It has a 250-word abstract. |
+| `Resondi-IMRaD-Heart-and-Lung-FINAL` (.docx, .pdf) | **The IMRaD paper, 39 pages, two columns**, covering lung and heart. Title: *Resondi: An IoT-Based AI-Assisted Auscultation Instrument for Cardiopulmonary Monitoring, Longitudinal Tracking, and Rehabilitation-Support System*. The introduction lists the 11 research questions; the Results answer them in order, one heading each, then give "Results by Objective" for the nine objectives. It has a 250-word abstract. |
 | `Resondi-Research-Plan-Heart-and-Lung-FINAL` (.docx, .pdf) | **The research plan, 72 pages**, revised from Ahnycca's original. Sections: A Rationale, B Research Questions (numbered 1–11), C Hypotheses, Goals and Expected Outcomes, D Procedures, E Risk and Safety, F Data Analysis, G Results and Discussion, H Bibliography. Its 46 changes from the original are listed in `research-plan/…Revision-Log…`. |
-| `Resondi-Compiled-RSTF-FINAL.pdf` | **The full submission, 203 pages**, with bookmarks. Order: title page, checklist and contents; I. Research Plan; II. ISEF Forms (the signed set, the 14 Nov AI disclosure, and last year's paper *SmartSteth* (2025) after Form 7); III. ISEF Abstract; IV. the IMRaD; V. Project Data Book (the scanned logbook, 13 pages, added 15 Nov; 20 Jul to 28 Aug, the dates both papers now use; the signed Form 1A says 17 Jul to 20 Aug); VI. SRC Evaluation. **It contains phone numbers and e-mail addresses from the ISEF forms. Do not share it.** |
+| `Resondi-Compiled-RSTF-FINAL.pdf` | **The full submission, 205 pages**, with bookmarks. Order: title page, checklist and contents; I. Research Plan; II. ISEF Forms (the signed set, the 14 Nov AI disclosure, and last year's paper *SmartSteth* (2025) after Form 7); III. ISEF Abstract; IV. the IMRaD; V. Project Data Book (the scanned logbook, 13 pages, added 15 Nov; 20 Jul to 28 Aug, the dates both papers now use; the signed Form 1A says 17 Jul to 20 Aug); VI. SRC Evaluation. **It contains phone numbers and e-mail addresses from the ISEF forms. Do not share it.** |
 | `Resondi-AI-Usage-Disclosure-2026-11-14` | What AI did and did not do in the project. Ahnycca still has to read it and correct it. |
 | `Resondi-Missing-Items-Research-Plan-and-IMRaD` | **The plain-language to-do list** (section 6 below). |
 
@@ -100,7 +102,7 @@ script and rebuilds.
    - This used the MFCC model of 11 November.
 7. **Reference recordings versus device recordings (Hypothesis 2): not testable yet.**
    - No device recordings with clinician labels exist.
-   - Figure 17 shows how the models score unlabelled device recordings. That is not accuracy.
+   - Figure 22 shows how the models score unlabelled device recordings. That is not accuracy.
 8. **Conventional stethoscope versus Resondi (Hypothesis 3): not tested inferentially.** The paired raw
    measurements were not kept, so only the descriptive 13 dB margin is reported.
 9. **Acceptance.**
@@ -127,11 +129,11 @@ script and rebuilds.
 | Same fusion design, one pre-specified test (31 patients) | 39.4% (CI 28.4–44.6); children 57.2% | Agrees with the cross-validation |
 
 - **The fusion gain is real:** +5.9 points over MFCC (95% CI +1.0 to +10.3, p = 0.008), on the same 126 patients.
-- **IMRaD Table 4, the leakage demonstration:** 39.0% patient-wise, 58.2% when patients are shared, 52.5% when
+- **IMRaD Table 5, the leakage demonstration:** 39.0% patient-wise, 58.2% when patients are shared, 52.5% when
   windows are shared, and 78.5% on the training data. It shows why the study splits the data by patient. **The
   leaky rows are never accuracy.**
 
-**Heart models** (CirCor DigiScope, patient-wise split, 189 test patients; IMRaD Table 5 and Figure 15):
+**Heart models** (CirCor DigiScope, patient-wise split, 189 test patients; IMRaD Table 6 and Figure 20):
 
 - First and second heart sounds found: 96.8% and 97.3%.
 - **Heart rate: mean error 3.0 beats per minute** (CI 2.5–3.6); 85% of patients were within 5 beats per minute.
@@ -159,7 +161,7 @@ the murmur result as 80%.
 `[[TO FILL]]` marker, CONFIRM note or highlight may be added back to either paper; anything unknown is written as
 "not recorded". The research plan's last two yellow highlights were removed (its builder now strips all highlights
 before saving). One-page table of the lung fusion and heart model results:
-`model-rebuild/results/accuracy-summary-lung-heart.md`; the same table is now **IMRaD Table 6** and **research plan
+`model-rebuild/results/accuracy-summary-lung-heart.md`; the same table is now **IMRaD Table 7** and **research plan
 Table 22**. The IMRaD's later tables became 7 (nine-site protocol), 8 (architecture vs data) and 9 (intended users);
 it is now 61 pages. **16 Nov:** Figure 1 of the IMRaD and Figure 2 of the plan are now a labelled render of the version 2.0 device (`figures/Resondi-Device-3D-Labelled.png`, `build/dev2/label_render.py`), replacing the old labelled prototype figure; and a full review fixed 16 IMRaD and 20 plan errors through `build/style/review_fixes.py` (examination time now 17 min for the quality check over seven lung sites, no kappa claim for the field test, no file paths, ONNX deployment stated, flowchart arrow restored). **`Ahnyccas papers/` holds only the two papers (Word + PDF) and the compiled PDF**; the AI
 disclosure, the to-do list, the title page and the folder README are in `papers-support/`.
