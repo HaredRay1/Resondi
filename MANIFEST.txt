@@ -1,4 +1,4 @@
-Every file in the Resondi folder on 25 November 2026, written by tools/make_manifest.py. A folder with more than 100 files of its own is one line (folder/*). Not listed: .git, __pycache__, node_modules.
+Every file in the Resondi folder on 26 November 2026, written by tools/make_manifest.py. A folder with more than 100 files of its own is one line (folder/*). Not listed: .git, __pycache__, node_modules.
 
 .gitignore
 CLAUDE-CHAT-BRIEF.md
@@ -97,6 +97,7 @@ build/fig/guide2.py
 build/fig/guide3.py
 build/fig/heart_fig.py
 build/fig/lung_fig.py
+build/fig/old_paper_cost_chart.py
 build/fig/ref_heart_sequence.png
 build/fig/ref_lung_sequence.png
 build/fig/sites.py
@@ -241,6 +242,7 @@ figures/_t_d5_rules.png
 figures/_t_d6.png
 figures/_t_p1_nine_sites.png
 figures/_t_p2_fusion.png
+figures/Ausculta-Cost-Breakdown-Corrected.png
 figures/d1_hardware.png
 figures/d2_seven_sites.png
 figures/d2_six_sites.png
