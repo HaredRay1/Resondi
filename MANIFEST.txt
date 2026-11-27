@@ -1,4 +1,4 @@
-Every file in the Resondi folder on 26 November 2026, written by tools/make_manifest.py. A folder with more than 100 files of its own is one line (folder/*). Not listed: .git, __pycache__, node_modules.
+Every file in the Resondi folder on 27 November 2026, written by tools/make_manifest.py. A folder with more than 100 files of its own is one line (folder/*). Not listed: .git, __pycache__, node_modules.
 
 .gitignore
 CLAUDE-CHAT-BRIEF.md
@@ -18,6 +18,7 @@ app-changes/heart-models-v1.md
 app-changes/HeartAnalysisCard.jsx
 app-changes/model-4-class-labels.md
 app-changes/seven-sites.md
+app-changes/unslop-redesign-2026-11-27.md
 assess/Resondi_Concept_Note_PSC_XI_Assessment.docx
 build/accept/build_guide.py
 build/ai_disclosure/build_ai_disclosure.py
