@@ -37,7 +37,7 @@ IMRAD = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.pdf")
 IMRAD_DOCX = os.path.join(PAPERS, "Resondi-IMRaD-Heart-and-Lung-FINAL.docx")
 ISEF = os.path.join(SRC, "ISEF-Forms-2027.pdf")
 REVIEW = os.path.join(SRC, "Review-and-Recommendation-Form-RIM-I-signed.pdf")
-AI_DISCLOSURE = os.path.join(ROOT, "papers-support", "Resondi-AI-Usage-Disclosure-2026-11-25.pdf")
+AI_DISCLOSURE = os.path.join(ROOT, "papers-support", "Resondi-AI-Usage-Disclosure-2026-11-27.pdf")
 LOGBOOK = os.path.join(SRC, "Logbook-scan-2026-11-15.pdf")  # the team's scanned logbook (user, 15 Nov)
 PRIOR = os.path.join(SRC, "SmartSteth-FINAL-compile.pdf")  # Form 7 attachment, from build/compile/prior_project.py
 
@@ -215,7 +215,7 @@ def main():
     insert(PLAN)
     add_section("II. ISEF FORMS", "II. ISEF Forms")
     # The signed forms, with the 29 Aug 2026 AI-disclosure attachment (pages after Form 2A) replaced by the
-    # updated disclosure of 25 Nov 2026. The signed form pages themselves are not touched.
+    # updated disclosure of 27 Nov 2026. The signed form pages themselves are not touched.
     isef = fitz.open(ISEF)
     texts = [" ".join(pg.get_text().split()) for pg in isef]
     a = next(i for i, t in enumerate(texts) if t.startswith("AI Usage Disclosure"))
@@ -232,7 +232,7 @@ def main():
     n_prior = insert(PRIOR)
     if f7 + 1 < isef.page_count:
         out.insert_pdf(isef, from_page=f7 + 1, to_page=isef.page_count - 1)
-    print(f"  ISEF forms: replaced old AI disclosure pages {a + 1}-{b + 1} with the 25 Nov update; "
+    print(f"  ISEF forms: replaced old AI disclosure pages {a + 1}-{b + 1} with the 27 Nov update; "
           f"SmartSteth ({n_prior} pages) after Form 7 (forms page {f7 + 1})")
     add_section("III. ISEF ABSTRACT", "III. ISEF Abstract")
     size = abstract_page(out, imrad_abstract())

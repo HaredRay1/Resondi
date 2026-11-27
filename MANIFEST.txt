@@ -504,6 +504,7 @@ model-rebuild/resondi_model/dsp.py
 model-rebuild/resondi_model/metrics.py
 model-rebuild/resondi_model/model.py
 model-rebuild/results/accuracy-summary-lung-heart.md
+model-rebuild/results/all-models-per-class.md
 model-rebuild/results/cv-paired.txt
 model-rebuild/results/cv-results.json
 model-rebuild/results/cv-results.md
@@ -790,8 +791,8 @@ model-rebuild/work-exp/parity/validation.ortweb.probs.bin
 model-rebuild/work-exp/parity/validation.raw.bin
 model-rebuild/work-exp/parity/validation.spec.bin
 papers-support/README.md
-papers-support/Resondi-AI-Usage-Disclosure-2026-11-25.docx
-papers-support/Resondi-AI-Usage-Disclosure-2026-11-25.pdf
+papers-support/Resondi-AI-Usage-Disclosure-2026-11-27.docx
+papers-support/Resondi-AI-Usage-Disclosure-2026-11-27.pdf
 papers-support/Resondi-Missing-Items-Research-Plan-and-IMRaD.docx
 papers-support/Resondi-Missing-Items-Research-Plan-and-IMRaD.pdf
 papers-support/Resondi-Title-Page-and-Contents-FINAL.pdf

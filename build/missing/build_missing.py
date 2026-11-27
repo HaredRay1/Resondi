@@ -186,7 +186,7 @@ item("B", "Unsigned letters", "The 4 November letters to the five cardiologists 
 item("B", "Form 1A dates", "Both papers now give the logbook's experimentation dates, 20 July to 28 August 2026 (changed 15 Nov at your request). The signed Student Checklist (Form 1A) still says 17 July to 20 August. Do not edit the signed form; if the fair asks, the logbook is the day-by-day record.", None, "Form 1A (signed)")
 item("B", "Logbook procedures", "The review form left logbook item 6 (\"accurate and detailed description of "
      "procedures\") unticked. Make sure every procedure is written in the logbook with its date.")
-item("B", "Read the AI Usage Disclosure", "The new disclosure (25 November) was written by AI from the project "
+item("B", "Read the AI Usage Disclosure", "The new disclosure (27 November) was written by AI from the project "
      "records. Read it, correct anything it gets wrong about your own work, and put it in your own ISEF form set too.")
 item("B", "Form 7 attachment", "Your SmartSteth (2025) paper is attached after Form 7. Form 7 also mentions last year's "
      "research plan; if the fair wants it and you have it, send it and it is added after the paper.")

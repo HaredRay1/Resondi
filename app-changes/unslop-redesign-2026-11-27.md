@@ -40,3 +40,10 @@ background keeps its pink tint (user's choice).
 
 Sources of every file before and after, and the scripts used, are in
 `Downloads\Resondi-private\app-unslop\` (orig/, new/), outside the shared folder.
+
+## Second round (27 Nov 2026, PUBLISHED 14:01 UTC, commit `a2387d65`)
+- `src/components/AudioPlayer.jsx`: the player decodes the recording in the browser and draws its real waveform
+  (64 bars, the loudest sample of each slice); the played part is in the accent. If the audio cannot be decoded it
+  falls back to the plain line.
+- `src/components/practitioner/SessionReviewCard.jsx`: Approve / Disapprove / Request review are one neutral
+  segmented choice; the chosen one fills with the accent (it had three colours). Times without seconds.
