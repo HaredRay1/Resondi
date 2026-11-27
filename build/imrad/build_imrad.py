@@ -865,7 +865,7 @@ para("Before analysis, each recording was assessed where technically possible fo
      "against expert clinical judgement across adult and pediatric presentations. Reference labels were "
      "stored separately from model predictions.", first=0)
 
-para("Six procedures were carried out with the completed prototype.", first=0, after=6)
+para("Seven procedures were carried out with the completed prototype.", first=0, after=6)
 
 p = para("Signal acquisition. Mean signal strength produced by the device was compared "
          "against that of a conventional acoustic stethoscope recorded under the same "
@@ -1410,12 +1410,21 @@ para("Performance expectancy and effort expectancy each returned a weighted mean
      "conditions returned 3.84 (SD = 0.61) and social influence 3.63 (SD = 1.21), "
      "likewise interpreted as Agree.")
 
-para("One physician also rated the prototype on the study's instrument validation form"
-     " on 29 August 2026, giving the highest rating, 5 of 5, for general relevance, "
-     "functionality, performance and usability, accessibility, and reliability, and "
-     "rated it 4 of 5 for clinical relevance, clinical appropriateness and information"
-     " clarity, and 3 of 5 for patient safety and clinical usefulness. This is one "
-     "expert's judgement, not an end-user result.")
+# 27 Nov 2026: corrected from the signed validation forms (the text had said 5 of 5).
+para("Two physicians also rated the prototype on the study's instrument validation form. "
+     "On 29 August 2026 the first rated general relevance, functionality, performance and "
+     "usability, and accessibility 4 of 5 and reliability 3 of 5, and, as a practitioner, "
+     "clinical relevance, clinical appropriateness and information clarity 4 of 5 and patient "
+     "safety and clinical usefulness 3 of 5. On 31 August 2026 the second rated accessibility "
+     "4 of 5, general relevance and performance and usability 3 of 5, and functionality and "
+     "reliability 2 of 5, and, as a practitioner, information clarity 4 of 5, clinical "
+     "relevance and clinical appropriateness 3 of 5, and patient safety and clinical "
+     "usefulness 2 of 5. On a separate expert form, the first physician judged the "
+     "conventional stethoscope better for the clarity of lung sounds, ease of use and overall "
+     "practicality, and Resondi better for identifying auscultation areas and for keeping "
+     "sounds accessible for monitoring; he recommended better audio capture and judged that "
+     "Resondi can serve as a supplementary tool for lung auscultation. These are expert "
+     "judgements, not end-user results.")
 
 para("Internal consistency varied across constructs. Effort expectancy reached "
      "acceptable reliability (\u03b1 = 0.76). Facilitating conditions (\u03b1 = 0.59) and "
@@ -1440,7 +1449,7 @@ para("The study's full report states that the three patients recorded at the pri
 para("Mapped to the five aspects named in Research Question 9, effort expectancy is "
      "the closest measure of user-friendliness and usability (4.09) and performance "
      "expectancy of perceived usefulness for community-based monitoring (4.09). "
-     "Functionality was rated only by the physician validator (5 of 5), and durability"
+     "Functionality was rated only by the two physician validators (4 and 2 of 5), and durability"
      " was not measured, so the answer to Research Question 9 is partial. These ratings are of the earlier version; acceptance of the current "
      "version, with the rebuilt classifier and the heart-sound models, has not yet been "
      "surveyed.", first=0)

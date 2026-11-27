@@ -1177,9 +1177,10 @@ para("Twenty-seven respondents (13 patients, 13 general respondents, and one hea
      "Agree. Research Question 9 named five aspects, but the questionnaire measured these four constructs, so the answer "
      "is partial: effort expectancy is the closest measure of user-friendliness and usability (4.09), and performance "
      "expectancy of perceived usefulness for community-based monitoring (4.09), while durability was not measured. "
-     "Functionality was rated only by one physician, on the study's instrument validation form on 29 August 2026: 5 of 5 "
-     "for functionality, as for relevance, usability, accessibility and reliability, and 3 of 5 for patient safety and "
-     "clinical usefulness. That is one expert's judgement, not an end-user result. Only effort expectancy reached acceptable internal consistency (alpha = 0.76), so the "
+     "Functionality was rated only by two physicians on the study's instrument validation form, 4 of 5 on 29 August "
+     "and 2 of 5 on 31 August 2026; their other ratings ranged from 2 to 4 of 5, and one judged the conventional "
+     "stethoscope clearer while finding Resondi useful as a supplementary tool. Those are expert judgements, not "
+     "end-user results. Only effort expectancy reached acceptable internal consistency (alpha = 0.76), so the "
      "construct scores are descriptive. Acceptance of the current version, with the rebuilt lung-sound classifier "
      "and the heart-sound models, has not yet been surveyed.")
 h2("Research Question 10: Preferences for Instructional Support")
@@ -1281,7 +1282,7 @@ tab("Table 22", "Answers to the Research Questions", [
     ["8. Conventional stethoscope vs Resondi quality (Hypothesis 3)", "Resondi signal about 13 dB stronger; paired raw "
      "measurements were not kept", "Answered in part, descriptively; not tested inferentially"],
     ["9. Acceptance", "Overall 3.95 of 5 (Agree); effort expectancy 4.09, performance expectancy 4.09, facilitating "
-     "conditions 3.84, social influence 3.63", "Answered in part, for the earlier version; durability not measured; functionality rated by one physician "
+     "conditions 3.84, social influence 3.63", "Answered in part, for the earlier version; durability not measured; functionality rated by two physicians "
      "only; current version not yet surveyed"],
     ["10. Instructional-support preferences", "Not measured; 44% unsure whether training and technical support is "
      "available", "Not yet answered; needs a short survey"],
@@ -1421,7 +1422,8 @@ log("Bibliography: four references completed (14 Nov)",
     "Checked 14 Nov against the PLOS ONE article page and the Crossref records for the DOIs. Shkarupylo et al. (2024) is still "
     "unresolved and stays marked for the team.")
 log("Research Question 9: physician validation (14 Nov)", "Durability and functionality not measured as such",
-    "Functionality rated by one physician on the instrument validation form (29 Aug 2026; 5 of 5); durability still "
+    "Functionality rated by two physicians on the instrument validation form (29 and 31 Aug 2026; 4 and 2 of 5, "
+    "corrected on 27 Nov from the signed forms, which the text had read as 5 of 5); durability still "
     "not measured", "From the team's Survey Validation form, supplied by the user on 14 Nov.")
 log("Acceptance survey version (14 Nov)", "The acceptance results did not say which version of the system was "
     "rated", "The 27 respondents rated the earlier version, which ran the original classification model; the "
