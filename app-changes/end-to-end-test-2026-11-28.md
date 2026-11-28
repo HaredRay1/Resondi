@@ -47,3 +47,27 @@ recording (patient 74417, aortic site, infant, murmur absent). No real patient d
 - Notifications: one per reviewed recording, correct wording (times wrong, item 14).
 - Approved exercises show "Start Exercise"; the disapproved one shows the practitioner's note and "Your
   practitioner has not approved these exercises"; the further-review one has no Start button.
+
+## Fixes (28 Nov 2026, user: "fix everything except 7 and 9") — SAVED in the editor, NOT published
+Restore point before the fixes: checkpoint `6b0ab5a2b5fb58e2a2b9fe56` (security limits).
+- 1, 11: heart recordings say "Heart Sound Analysis" / "Recommended Heart Exercises" (patient page and
+  practitioner card), in English and Filipino. `SessionDetail.jsx`, `SessionReviewCard.jsx`.
+- 2: the heart exam's upload hint says "heart recording" (`SiteRecorder.jsx` takes `mode`; `HeartExam.jsx`).
+- 3: `assessSeverity` prompt now forbids mentioning any medication, treatment, condition, test, habit or symptom not
+  in the data given. (The test account's medical history may have mentioned medication; the rule holds either way.)
+  Backend: live when saved.
+- 4: "Log out" on the Verification Pending page (`PractitionerPending.jsx`).
+- 6: not a bug: the button is the full rose (#E91E76) in dark mode; the screenshot caught the cards fading in.
+- 8: "1 Minute" / "1 Breath" in the singular (English).
+- 10: Quick Record saves the file's real length (`readDurationSeconds`, now exported from `SiteRecorder.jsx`).
+- 12: reviews are signed with the practitioner's verified profile name (`submitPractitionerReview`; backend,
+  live). Reviews written before the fix keep the username.
+- 13: the overall note shows once ("Practitioner's note"), not copied onto every exercise; the practitioner's
+  reviewed card shows it too.
+- 14: notification and admin-activity times treat stored times as UTC (`src/lib/dates.js`): 9:56 PM, not 1:56 PM.
+- 15: no "Run again" on a heart recording once it has been sent (`HeartAnalysisCard` `canRerun`).
+- 16: exercise minutes come from the plan's own text when it states a time (heart and lung); heart exercises show
+  no "Breaths".
+Checked in Chrome on the preview (test patient): heart page headings, no re-run, exercise figures, note shown once;
+notification times; lung "1 Minute" and "2 minutes -> 2 Minutes". Not re-checked live: 3 and 12 (need a new
+analysis and a new review), 4 (needs a pending account), 10 (needs a new upload).
