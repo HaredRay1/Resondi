@@ -25,7 +25,7 @@ recording (patient 74417, aortic site, infant, murmur absent). No real patient d
 3. AI observations invented "your current use of respiratory medications" (none entered): the assessSeverity
    prompt should forbid mentioning anything not in the given data.
 4. "Verification Pending" page has no way to log out.
-5. A new account showed 5 notifications (not yet checked what they are).
+5. ~~A new account showed 5 notifications~~ Not a bug: the test patient account was used before; they are review notifications from 9 Nov.
 6. Dark mode: the record buttons look dim.
 7. Password-reset email still branded "AUSCULTA" (old logo and tagline), greets by username.
 8. Exercise cards say "1 Minutes".
@@ -33,5 +33,17 @@ recording (patient 74417, aortic site, infant, murmur absent). No real patient d
 10. Quick Record import saves the length as 0 s (the file is 9 s); players show 0:00 / 0:00 until loaded.
 11. Heart recording's exercise section headed "Recommended Respiratory Exercises".
 12. Review decisions are signed with the account's username, not the practitioner's profile name.
-13. The overall "Note for the patient about this plan" did not appear on the reviewed card.
-Not yet checked: what the patient sees after the review (needs the patient account signed in again).
+13. The overall "Note for the patient about this plan" reaches the patient, but (a) it is copied onto every exercise
+    that has no note of its own, (b) the patient sees it labelled "Your comment / explanation", and (c) the
+    practitioner's reviewed card does not show it.
+14. Notification times are 8 hours off: they show the review at 1:56 PM (UTC shown as local time); the review
+    happened at 9:56 PM Philippine time, as the practitioner's and patient's cards say.
+15. "Run again" is still offered on a heart recording after it was sent and reviewed (the lung page blocks re-runs).
+16. Heart exercise cards show breathing-template figures that contradict the plan: "Gentle Walking, 5 minutes"
+    shows "1 Minutes, 9 Breaths"; "Light Jogging in Place, 3 rounds x 40 s" shows "2 Minutes, 10 Breaths".
+
+## Patient side after the review (checked)
+- History: lung recording "Approved", heart recording "Requires Further Review".
+- Notifications: one per reviewed recording, correct wording (times wrong, item 14).
+- Approved exercises show "Start Exercise"; the disapproved one shows the practitioner's note and "Your
+  practitioner has not approved these exercises"; the further-review one has no Start button.
