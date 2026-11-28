@@ -61,3 +61,16 @@ Checkpoint `6b0a9d56ed95d5e40911124a`, commit `341180d7`, https://resondi.base44
 in a browser on desktop and phone: no script errors, five tiles, no floating bar, the hero card switching Lung /
 Heart. The camera guide needs a signed-in account, so it was not opened by Claude; a team member should try it.
 The two security limits (admin password attempts, AI calls) were NOT applied; they wait for the user's yes.
+
+## Security limits ADDED (28 Nov 2026, user: "add the security limits")
+Backend functions take effect when saved, so both limits are live:
+- `base44/functions/verifyAdminAccess/entry.ts`: after **5 wrong admin passwords in 15 minutes** the account gets
+  429 (`too_many_attempts`) until the window passes. Counted from the AuditLog rows the function already writes
+  (newest 20); nothing new is stored. Limitation: it is per account, so many accounts could still each try 5.
+- `base44/functions/assessSeverity/entry.ts`: at most **40 AI calls per user per clock hour**; over the cap it
+  answers 429 and the app (SessionDetail.jsx) falls back to its rule-based severity, as it already did on any error.
+- New entity `UsageCounter` (key = user:action:hour, count), admin-only rules; written by the function's service role.
+- `src/pages/onboarding/RoleSelection.jsx`: a 429 shows "Too many wrong attempts. Try again in 15 minutes."
+  (English and Filipino). SAVED in the editor, checkpoint `6b0ab5a2b5fb58e2a2b9fe56`; **not yet published**
+  (the publish waits for the user's word). Until then a locked-out admin sees the ordinary wrong-password message.
+- Not tested by calling the functions (they need a signed-in account); the code is saved and the build passed.

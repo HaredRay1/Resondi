@@ -22,9 +22,11 @@ practitioner review (confirm, change, repeat); English and Filipino; light and d
 | 28 Nov 09:22 UTC | `6b0a9d56ed95d5e40911124a` | welcome + camera guide (published) |
 | 28 Nov 10:43 UTC | `6b0ab05ce9546a130c909430` | Tibok + sign-up (published) |
 | 28 Nov 10:56 UTC | `6b0ab34d0feca7058636b40e` | dark mode (published, current) |
+| 28 Nov | `6b0ab5a2b5fb58e2a2b9fe56` | security limits + lockout message (saved, not published) |
 
 ## Open
-- [ ] Security: limit admin password attempts and paid AI calls (waiting for a yes)
+- [x] Security limits live 28 Nov: 5 admin password tries per 15 min; 40 AI calls per user per hour
+- [ ] Publish the lockout message (checkpoint `6b0ab5a2b5fb58e2a2b9fe56`)
 - [ ] Try the camera guide on a phone; it was never checked against physician-marked sites
 - [ ] A Filipino speaker reads the new Filipino text
 - [ ] IMRaD app figures 13-15 show the old look

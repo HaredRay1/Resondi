@@ -20,7 +20,8 @@ tags: [todo]
 - [ ] Collect the cardiologist's answer sheet
 
 ## App
-- [ ] Security limits: admin password attempts, paid AI calls
+- [x] Security limits: admin password attempts, paid AI calls (live 28 Nov)
+- [ ] Publish the lockout message
 - [ ] Try the camera guide on a phone
 
 ## Future work
