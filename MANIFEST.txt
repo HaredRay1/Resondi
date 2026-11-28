@@ -1,4 +1,4 @@
-Every file in the Resondi folder on 27 November 2026, written by tools/make_manifest.py. A folder with more than 100 files of its own is one line (folder/*). Not listed: .git, __pycache__, node_modules.
+Every file in the Resondi folder on 28 November 2026, written by tools/make_manifest.py. A folder with more than 100 files of its own is one line (folder/*). Not listed: .git, __pycache__, node_modules.
 
 .gitignore
 CLAUDE-CHAT-BRIEF.md
@@ -810,6 +810,8 @@ research-plan/old-lung-only/Resondi-Research-Plan-Revision-Log-Lung-Only-2026-11
 research-plan/old-lung-only/Resondi-Research-Plan-Revision-Log-Lung-Only-2026-11-13.pdf
 research-plan/original/plan.txt
 research-plan/original/Resondi-Research-Plan-Revised.docx
+script-rstf/README.md
+script-rstf/revised_script-2026-11-28.html
 source-material/agreement_analysis_CATEGORIES.txt
 source-material/agreement_analysis_TEMPLATE.csv
 source-material/Hypothesis_2_design_and_analysis.md
