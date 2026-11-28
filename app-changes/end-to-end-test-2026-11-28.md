@@ -71,3 +71,8 @@ Restore point before the fixes: checkpoint `6b0ab5a2b5fb58e2a2b9fe56` (security 
 Checked in Chrome on the preview (test patient): heart page headings, no re-run, exercise figures, note shown once;
 notification times; lung "1 Minute" and "2 minutes -> 2 Minutes". Not re-checked live: 3 and 12 (need a new
 analysis and a new review), 4 (needs a pending account), 10 (needs a new upload).
+
+## Published 28 Nov 2026, 14:44 UTC (user: "1" = publish)
+Checkpoint `6b0ae8bf2f74aad6b72e82be`, commit `fb95cc85`. Includes the security lockout message
+(RoleSelection) saved earlier. The test data (2 recordings, the test practitioner) is still in the app; the user
+has not decided whether to delete it.
