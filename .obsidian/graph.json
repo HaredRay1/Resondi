@@ -1,0 +1,29 @@
+{
+  "search": "-path:history -path:build",
+  "colorGroups": [
+    {
+      "query": "path:notes",
+      "color": {
+        "a": 1,
+        "rgb": 15277686
+      }
+    },
+    {
+      "query": "path:app-changes",
+      "color": {
+        "a": 1,
+        "rgb": 9316946
+      }
+    },
+    {
+      "query": "path:model-rebuild",
+      "color": {
+        "a": 1,
+        "rgb": 1014646
+      }
+    }
+  ],
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": true
+}

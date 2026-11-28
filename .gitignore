@@ -21,3 +21,8 @@ HF_Lung_V1/
 
 # Compiled fair submission: contains the ISEF forms' phone numbers and e-mails (user wants it in Ahnyccas papers, not on GitHub)
 Ahnyccas papers/Resondi-Compiled-RSTF-FINAL.pdf
+
+# Obsidian: per-device window layout and cache
+.obsidian/workspace*.json
+.obsidian/cache/
+.trash/

@@ -1,0 +1,23 @@
+{
+  "userIgnoreFilters": [
+    "build/",
+    "history/",
+    "HF_Lung_V1/",
+    "data/",
+    "src/",
+    "deck_fix/",
+    "chapters/original/",
+    "model-rebuild/data/",
+    "model-rebuild/deploy/",
+    "model-rebuild/work/",
+    "model-rebuild/export/",
+    "node_modules/",
+    "MANIFEST.txt"
+  ],
+  "newFileLocation": "folder",
+  "newFileFolderPath": "notes/Inbox",
+  "attachmentFolderPath": "notes/Attachments",
+  "alwaysUpdateLinks": true,
+  "useMarkdownLinks": false,
+  "showUnsupportedFiles": false
+}

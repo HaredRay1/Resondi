@@ -1,0 +1,108 @@
+{
+  "nodes": [
+    {
+      "id": "dev",
+      "type": "text",
+      "x": -560,
+      "y": -60,
+      "width": 260,
+      "height": 150,
+      "color": "6",
+      "text": "## Device\nESP32 + INMP441\nRecords 15 s WAV to microSD\nOwn Wi-Fi page 192.168.4.1\n[[Device]]"
+    },
+    {
+      "id": "gw",
+      "type": "text",
+      "x": -200,
+      "y": -60,
+      "width": 240,
+      "height": 150,
+      "color": "1",
+      "text": "## Link\nmicroSD by hand, or phone Wi-Fi transfer\n**Automatic gateway: not built**"
+    },
+    {
+      "id": "app",
+      "type": "text",
+      "x": 140,
+      "y": -60,
+      "width": 260,
+      "height": 150,
+      "color": "6",
+      "text": "## Platform\nBase44 app, EN + FIL\nFiles recordings by site\n[[App]]"
+    },
+    {
+      "id": "lung",
+      "type": "text",
+      "x": 480,
+      "y": -200,
+      "width": 260,
+      "height": 130,
+      "color": "4",
+      "text": "## Lung model\nFusion network, 4 classes\n40.0% balanced (CV)\n[[Lung models]]"
+    },
+    {
+      "id": "heart",
+      "type": "text",
+      "x": 480,
+      "y": 20,
+      "width": 260,
+      "height": 130,
+      "color": "4",
+      "text": "## Heart models\nHeart rate 3.0 BPM error\nMurmur sens. 66.7%\n[[Heart models]]"
+    },
+    {
+      "id": "prac",
+      "type": "text",
+      "x": 820,
+      "y": -60,
+      "width": 240,
+      "height": 150,
+      "color": "5",
+      "text": "## Practitioner\nConfirms, changes or repeats every result\nNot a diagnosis"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "dev",
+      "fromSide": "right",
+      "toNode": "gw",
+      "toSide": "left"
+    },
+    {
+      "id": "e2",
+      "fromNode": "gw",
+      "fromSide": "right",
+      "toNode": "app",
+      "toSide": "left"
+    },
+    {
+      "id": "e3",
+      "fromNode": "app",
+      "fromSide": "right",
+      "toNode": "lung",
+      "toSide": "left"
+    },
+    {
+      "id": "e4",
+      "fromNode": "app",
+      "fromSide": "right",
+      "toNode": "heart",
+      "toSide": "left"
+    },
+    {
+      "id": "e5",
+      "fromNode": "lung",
+      "fromSide": "right",
+      "toNode": "prac",
+      "toSide": "left"
+    },
+    {
+      "id": "e6",
+      "fromNode": "heart",
+      "fromSide": "right",
+      "toNode": "prac",
+      "toSide": "left"
+    }
+  ]
+}

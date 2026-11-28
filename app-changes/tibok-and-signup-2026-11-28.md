@@ -1,4 +1,4 @@
-# Tibok the mascot and the step-by-step sign-up (28 Nov 2026, SAVED in the editor, NOT published)
+# Tibok the mascot, the step-by-step sign-up and dark mode (28 Nov 2026, PUBLISHED)
 
 User: "keep designing the app like a senior designer, add animations ... I really like maya's mobile app when the
 user is signing up ... add a stethoscope with eyes, like those apps with animals that say 'Hi! Name'".
@@ -23,3 +23,24 @@ user is signing up ... add a stethoscope with eyes, like those apps with animals
   celebration (they need a real sign-up), the signed-in screens.
 - Restore point before these changes: checkpoint `6b0a9d56ed95d5e40911124a` (the version published 28 Nov 09:22 UTC).
 - Filipino text is Claude's; have a Filipino speaker read it.
+
+## Published 28 Nov 2026, 10:43 UTC
+Checkpoint `6b0ab05ce9546a130c909430`, commit `a993bb9a` (user: "publish").
+
+## Dark mode (PUBLISHED 28 Nov 2026, 10:56 UTC)
+User: "add a dark mode feature then publish it". Checkpoint `6b0ab34d0feca7058636b40e`, commit `c3b38250`.
+- `src/lib/theme.js` (choice kept on the device in `resondi_theme`: light, dark or system; the app opens light
+  unless the person chose otherwise, so screens nobody has checked in dark do not change for anyone by default),
+  `src/components/ThemeToggle.jsx` (moon / sun button that turns as it swaps), `src/main.jsx` (theme set before
+  the first render).
+- Toggle on the welcome page (beside the language switch) and in the signed-in app's top bar (`AppShell.jsx`; the
+  header's tint now follows the theme).
+- Colours: `html.dark` block at the end of `src/unslop.css` (plum-tinted dark neutrals, rose accent unchanged,
+  shadcn tokens for inputs, dialogs and toasts, and overrides for Tailwind white/gray utilities); the welcome
+  page's tiles and buttons use variables with dark values.
+- Checked in Chrome on the editor preview: the welcome page in dark mode, top and tiles, no console errors.
+  Signed-in screens in dark mode were not seen; a team member should look through them.
+- Note: a first publish call at 10:56 re-published the previous checkpoint by mistake; it was corrected seconds
+  later with the dark-mode checkpoint.
+- The published site could not be opened from this PC's Edge on 28 Nov: Microsoft Family Safety now asks for
+  permission for resondi.base44.app. Claude did not try to get around it.
