@@ -1,6 +1,6 @@
-# Welcome page redesign and security check (28 Nov 2026)
+# Welcome page redesign, camera guide and security check (28 Nov 2026)
 
-## Welcome page (SAVED in the editor, NOT published)
+## Welcome page (PUBLISHED 28 Nov 2026 09:22 UTC)
 User asked for a new home screen for new users "like Maya's mobile app" with animations, instead of the
 chest diagram. Reference: the Maya app's Google Play screenshots (not its website). Borrowed the structure,
 not the brand: segmented dark tab bar (Lung | Heart) with a sliding pill, one dark "card" as the hero (an
@@ -39,7 +39,7 @@ English and Filipino (the Filipino should be read by a Filipino speaker).
 7. Proof (user B cannot read user A's record): not done; needs two test accounts.
 `src/lib/authBypass.js` exists but `AUTH_BYPASS = false`; leave it false.
 
-## Later the same day (saved, NOT published)
+## Later the same day (PUBLISHED with the welcome page)
 - Welcome page: the floating Sign In / Register bar was removed (user did not like it); tiles are one per row on
   phones and the two small tiles pair up on wider screens (a small tile had sat alone in half a row).
 - **Camera-guided placement prototype** (user request): new page `src/pages/CameraGuide.jsx`, route
@@ -55,3 +55,9 @@ English and Filipino (the Filipino should be read by a Filipino speaker).
   checkpoint `6b0a999badd28a49c8f03865`.
 - Validation the team would need before any claim: physician marks sites with stickers on volunteers of
   different ages and builds; measure the marker-to-sticker distance in mm per site; report mean and worst.
+
+## Published 28 Nov 2026, 09:22 UTC (user: "publish it")
+Checkpoint `6b0a9d56ed95d5e40911124a`, commit `341180d7`, https://resondi.base44.app. Live welcome page checked
+in a browser on desktop and phone: no script errors, five tiles, no floating bar, the hero card switching Lung /
+Heart. The camera guide needs a signed-in account, so it was not opened by Claude; a team member should try it.
+The two security limits (admin password attempts, AI calls) were NOT applied; they wait for the user's yes.

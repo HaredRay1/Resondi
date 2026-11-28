@@ -19,6 +19,7 @@ app-changes/HeartAnalysisCard.jsx
 app-changes/model-4-class-labels.md
 app-changes/seven-sites.md
 app-changes/unslop-redesign-2026-11-27.md
+app-changes/welcome-and-security-2026-11-28.md
 assess/Resondi_Concept_Note_PSC_XI_Assessment.docx
 build/accept/build_guide.py
 build/ai_disclosure/build_ai_disclosure.py
